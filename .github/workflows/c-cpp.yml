@@ -1,4 +1,4 @@
-name: Build C++ Project
+name: Build and Release C++ Project
 
 on:
   push:
@@ -24,3 +24,39 @@ jobs:
     # Step 3: Build the project
     - name: Build Solution
       run: msbuild TFDInternal.sln /p:Configuration=Debug
+
+    # Step 4: Archive build artifacts (optional)
+    - name: Archive Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-artifacts
+        path: x64\Debug
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the code (required for versioning or tag creation)
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Create a release
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      with:
+        tag_name: v1.0.0 # Replace with your versioning logic
+        release_name: Release v1.0.0
+        body: |
+          Release notes for this version.
+        draft: false
+        prerelease: false
+
+    # Step 3: Upload build artifacts to the release
+    - name: Upload Release Assets
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: x64\Debug\TFDInternal.dll
+        asset_name: TFDInternal.dll
+        asset_content_type: application/octet-stream
