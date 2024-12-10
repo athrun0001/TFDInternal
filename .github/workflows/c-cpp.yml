@@ -52,7 +52,7 @@ jobs:
         draft: false
         prerelease: false
       env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
     # Step 3: Upload build artifacts to the release
     - name: Upload Release Assets
@@ -63,4 +63,4 @@ jobs:
         asset_name: TFDInternal.dll
         asset_content_type: application/octet-stream
       env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
