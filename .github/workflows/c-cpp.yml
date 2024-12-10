@@ -1,23 +1,26 @@
-name: C/C++ CI
+name: Build C++ Project
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+    # Step 1: Check out the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up MSBuild environment
+    - name: Set up MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    # Step 3: Build the project
+    - name: Build Solution
+      run: msbuild TFDInternal.sln /p:Configuration=Debug
