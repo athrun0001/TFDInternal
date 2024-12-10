@@ -32,17 +32,13 @@ jobs:
         name: build-artifacts
         path: x64\Debug
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
     # Step 1: Check out the code (required for versioning or tag creation)
     - name: Checkout code
       uses: actions/checkout@v3
 
     # Step 2: Create a release
     - name: Create GitHub Release
+      id: create_release
       uses: actions/create-release@v1
       with:
         tag_name: v1.0.0 # Replace with your versioning logic
