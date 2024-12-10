@@ -35,15 +35,9 @@ jobs:
         name: build-artifacts
         path: x64\Debug
         
-    - name: List Files in Output Directory
-      run: dir x64\Debug
-
     # Step 1: Check out the code (required for versioning or tag creation)
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: List Files in Output Directory
-      run: dir x64\Debug
+    #- name: Checkout code
+    #  uses: actions/checkout@v3
 
     # Step 2: Create a release
     - name: Create GitHub Release
