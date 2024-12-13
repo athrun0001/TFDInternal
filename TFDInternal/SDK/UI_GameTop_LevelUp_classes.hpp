@@ -40,15 +40,15 @@ public:
 	class UM1WidgetSwitcher*                      UI_LevelImageSwitcher;                             // 0x07D8(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
 
 public:
-	void UI_Deco_TitleLine_Event_0(class UUI_Deco_TitleLine_01_C* UI_Deco_TitleLine);
-	void SequenceEvent__ENTRYPOINTUI_GameTop_LevelUp();
 	void PlaySkillAnim();
 	void PlayCloseAnim();
+	void UI_Deco_TitleLine_Event_0(class UUI_Deco_TitleLine_01_C* UI_Deco_TitleLine);
 	void OnEventWidgetOpen(EM1WidgetAnimDirection InDirection);
-	class UWidgetAnimation* GetEndAnimation();
-	void ExecuteUbergraph_UI_GameTop_LevelUp(int32 EntryPoint);
+	void SequenceEvent__ENTRYPOINTUI_GameTop_LevelUp();
 	void BP_UpdateAppearanceByLevel(bool bIsMaxLevel);
+	class UWidgetAnimation* GetEndAnimation();
 	void BP_PlayChangedListOpenAnim();
+	void ExecuteUbergraph_UI_GameTop_LevelUp(int32 EntryPoint);
 	void BP_playakSound(class UAkAudioEvent* AkEvent);
 
 public:

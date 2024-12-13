@@ -50,18 +50,18 @@ public:
 	bool                                          Is_Stop;                                           // 0x0954(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
-	void UpdateBG();
-	void ShowDimmedUI(bool bShow);
 	void SetUIDefault(bool IsStop);
 	void PreConstruct(bool IsDesignTime);
 	void ExecuteUbergraph_UI_Mission_CheckPointTime_Item(int32 EntryPoint);
+	void UpdateBG();
 	void Construct();
+	void ShowDimmedUI(bool bShow);
+	void BP_ChangeDimmedUI(const bool InDimmed);
 	void ChangeButtonUI(EM1ButtonUIType InType);
+	void BP_ChangeButtonUI(EM1ButtonUIType InType);
 	void Change_Selected_UI(bool InSelected);
 	void BP_UpdatePlayerList();
 	void BP_Selected(bool InSelected);
-	void BP_ChangeDimmedUI(const bool InDimmed);
-	void BP_ChangeButtonUI(EM1ButtonUIType InType);
 
 public:
 	static class UClass* StaticClass()

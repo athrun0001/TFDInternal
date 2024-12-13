@@ -10,9 +10,9 @@
 
 #include "Basic.hpp"
 
+#include "SplineAOEShapeType_structs.hpp"
 #include "Engine_structs.hpp"
 #include "CoreUObject_structs.hpp"
-#include "SplineAOEShapeType_structs.hpp"
 #include "GameplayTags_structs.hpp"
 #include "M1_structs.hpp"
 #include "M1_classes.hpp"
@@ -58,11 +58,11 @@ public:
 	void ReserveFinish();
 	void OnPeriod();
 	void OnFinish();
-	bool OnEvaluateCondition();
 	void OnEndOverlap(class AActor* OverlapActor);
 	void OnBeginOverlap(class AActor* OverlapActor);
 	void OnAddedCollision(class UShapeComponent* AddedShapeComp);
 	void NetMulticastSpawnDecalVFX(const struct FTransform& InTransfrom);
+	bool OnEvaluateCondition();
 	void InvokePeriodStatusEffect(class AActor* Target);
 	bool HasPeriod();
 	void ExecuteUbergraph_SplineAOEBase(int32 EntryPoint);

@@ -10,12 +10,12 @@
 
 #include "Basic.hpp"
 
+#include "PhysicsCore_structs.hpp"
 #include "Engine_structs.hpp"
 #include "M1Data_structs.hpp"
 #include "M1_structs.hpp"
 #include "M1_classes.hpp"
 #include "AkAudio_structs.hpp"
-#include "PhysicsCore_structs.hpp"
 
 
 namespace SDK

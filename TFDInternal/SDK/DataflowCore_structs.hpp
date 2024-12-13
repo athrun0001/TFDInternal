@@ -16,18 +16,12 @@
 namespace SDK
 {
 
-// ScriptStruct DataflowCore.DataflowSelection
-// 0x0020 (0x0020 - 0x0000)
-struct alignas(0x08) FDataflowSelection
+// ScriptStruct DataflowCore.DataflowConnection
+// 0x0040 (0x0040 - 0x0000)
+struct alignas(0x08) FDataflowConnection
 {
 public:
-	uint8                                         Pad_0[0x20];                                       // 0x0000(0x0020)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct DataflowCore.DataflowTransformSelection
-// 0x0000 (0x0020 - 0x0020)
-struct FDataflowTransformSelection final : public FDataflowSelection
-{
+	uint8                                         Pad_0[0x40];                                       // 0x0000(0x0040)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct DataflowCore.DataflowNode
@@ -38,14 +32,6 @@ public:
 	uint8                                         Pad_0[0xC8];                                       // 0x0000(0x00C8)(Fixing Size After Last Property [ Dumper-7 ])
 	bool                                          bActive;                                           // 0x00C8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_C9[0x1F];                                      // 0x00C9(0x001F)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct DataflowCore.DataflowConnection
-// 0x0040 (0x0040 - 0x0000)
-struct alignas(0x08) FDataflowConnection
-{
-public:
-	uint8                                         Pad_0[0x40];                                       // 0x0000(0x0040)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct DataflowCore.DataflowInput
@@ -62,6 +48,20 @@ struct FDataflowOutput final : public FDataflowConnection
 {
 public:
 	uint8                                         Pad_40[0x28];                                      // 0x0040(0x0028)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct DataflowCore.DataflowSelection
+// 0x0020 (0x0020 - 0x0000)
+struct alignas(0x08) FDataflowSelection
+{
+public:
+	uint8                                         Pad_0[0x20];                                       // 0x0000(0x0020)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct DataflowCore.DataflowTransformSelection
+// 0x0000 (0x0020 - 0x0020)
+struct FDataflowTransformSelection final : public FDataflowSelection
+{
 };
 
 // ScriptStruct DataflowCore.DataflowVertexSelection

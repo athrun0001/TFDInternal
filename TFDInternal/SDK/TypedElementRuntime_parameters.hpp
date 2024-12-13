@@ -11,8 +11,8 @@
 #include "Basic.hpp"
 
 #include "TypedElementFramework_structs.hpp"
-#include "CoreUObject_structs.hpp"
 #include "TypedElementRuntime_structs.hpp"
+#include "CoreUObject_structs.hpp"
 
 
 namespace SDK::Params

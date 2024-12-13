@@ -77,26 +77,6 @@ void UUI_GameHP_Player_C::BP_UpdatePartyState(const bool bIsPartyMember)
 }
 
 
-// Function UI_GameHP_Player.UI_GameHP_Player_C.BP_SetSquadIndex
-// (Event, Public, BlueprintEvent)
-// Parameters:
-// int32                                   InIndex                                                (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_GameHP_Player_C::BP_SetSquadIndex(int32 InIndex)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_GameHP_Player_C", "BP_SetSquadIndex");
-
-	Params::UI_GameHP_Player_C_BP_SetSquadIndex Parms{};
-
-	Parms.InIndex = InIndex;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_GameHP_Player.UI_GameHP_Player_C.BP_UpdateDBNOUI
 // (Event, Public, BlueprintEvent)
 // Parameters:
@@ -114,26 +94,6 @@ void UUI_GameHP_Player_C::BP_UpdateDBNOUI(const float DBNORatio, const float Int
 
 	Parms.DBNORatio = DBNORatio;
 	Parms.InteractionRatio = InteractionRatio;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_GameHP_Player.UI_GameHP_Player_C.BP_SetDBNOInteractionTime
-// (Event, Public, BlueprintEvent)
-// Parameters:
-// float                                   InteractionDuration                                    (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_GameHP_Player_C::BP_SetDBNOInteractionTime(float InteractionDuration)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_GameHP_Player_C", "BP_SetDBNOInteractionTime");
-
-	Params::UI_GameHP_Player_C_BP_SetDBNOInteractionTime Parms{};
-
-	Parms.InteractionDuration = InteractionDuration;
 
 	UObject::ProcessEvent(Func, &Parms);
 }
@@ -178,6 +138,46 @@ void UUI_GameHP_Player_C::BP_SetVisibleDBNOInteractionUI(const bool bVisible)
 	Params::UI_GameHP_Player_C_BP_SetVisibleDBNOInteractionUI Parms{};
 
 	Parms.bVisible = bVisible;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_GameHP_Player.UI_GameHP_Player_C.BP_SetSquadIndex
+// (Event, Public, BlueprintEvent)
+// Parameters:
+// int32                                   InIndex                                                (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_GameHP_Player_C::BP_SetSquadIndex(int32 InIndex)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_GameHP_Player_C", "BP_SetSquadIndex");
+
+	Params::UI_GameHP_Player_C_BP_SetSquadIndex Parms{};
+
+	Parms.InIndex = InIndex;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_GameHP_Player.UI_GameHP_Player_C.BP_SetDBNOInteractionTime
+// (Event, Public, BlueprintEvent)
+// Parameters:
+// float                                   InteractionDuration                                    (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_GameHP_Player_C::BP_SetDBNOInteractionTime(float InteractionDuration)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_GameHP_Player_C", "BP_SetDBNOInteractionTime");
+
+	Params::UI_GameHP_Player_C_BP_SetDBNOInteractionTime Parms{};
+
+	Parms.InteractionDuration = InteractionDuration;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

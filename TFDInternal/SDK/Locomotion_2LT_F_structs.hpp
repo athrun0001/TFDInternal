@@ -18,7 +18,7 @@ namespace SDK
 
 // ScriptStruct Locomotion_2LT_F.Locomotion_2LT_F_C.AnimBlueprintGeneratedConstantData
 // 0x0000 (0x0298 - 0x0298)
-struct Locomotion_2LT_F::FAnimBlueprintGeneratedConstantData final : public Locomotion::FAnimBlueprintGeneratedConstantData
+struct Locomotion_2LT_F::FAnimBlueprintGeneratedConstantData : public Locomotion::FAnimBlueprintGeneratedConstantData
 {
 };
 

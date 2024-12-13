@@ -401,6 +401,26 @@ void USkill_Wire_C::GetOwnerCapsuleComp(class UCapsuleComponent** Return)
 }
 
 
+// Function Skill_Wire.Skill_Wire_C.GetDestLocation
+// (Public, HasOutParams, BlueprintCallable, BlueprintEvent, BlueprintPure)
+// Parameters:
+// struct FVector                          ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+struct FVector USkill_Wire_C::GetDestLocation()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Skill_Wire_C", "GetDestLocation");
+
+	Params::Skill_Wire_C_GetDestLocation Parms{};
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	return Parms.ReturnValue;
+}
+
+
 // Function Skill_Wire.Skill_Wire_C.ExecuteUbergraph_Skill_Wire
 // (Final, UbergraphFunction, HasDefaults)
 // Parameters:
@@ -454,26 +474,6 @@ void USkill_Wire_C::ClearMovement()
 		Func = Class->GetFunction("Skill_Wire_C", "ClearMovement");
 
 	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function Skill_Wire.Skill_Wire_C.GetDestLocation
-// (Public, HasOutParams, BlueprintCallable, BlueprintEvent, BlueprintPure)
-// Parameters:
-// struct FVector                          ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-struct FVector USkill_Wire_C::GetDestLocation()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Skill_Wire_C", "GetDestLocation");
-
-	Params::Skill_Wire_C_GetDestLocation Parms{};
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	return Parms.ReturnValue;
 }
 
 

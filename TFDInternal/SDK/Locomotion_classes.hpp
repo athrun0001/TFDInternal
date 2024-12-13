@@ -10,12 +10,12 @@
 
 #include "Basic.hpp"
 
-#include "AnimGraphRuntime_structs.hpp"
-#include "Engine_structs.hpp"
-#include "Locomotion_structs.hpp"
 #include "AnimationWarpingRuntime_structs.hpp"
+#include "Engine_structs.hpp"
 #include "M1_structs.hpp"
 #include "M1_classes.hpp"
+#include "Locomotion_structs.hpp"
+#include "AnimGraphRuntime_structs.hpp"
 
 
 namespace SDK
@@ -186,6 +186,7 @@ public:
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_65AFBFE243EF0F7F205E2CA1625599D5();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_5697533E43E5DFA3C950C0B8CBF953CF();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_494777FB409D12D3E9688FAC46AFC835();
+	void EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_4493892A496BF91BB06913BFD7170CA3();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_3319593F410F82EB051771A9EE2CEDD7();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_30D34C2D4BB47EEE55DBC69B126E8C97();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_1DA365E94B956F802CED7E95385B811F();
@@ -193,10 +194,9 @@ public:
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_0C9F309748BD162A17FE6886105BA852();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_0020D1864BF4D6D7C898FA8EE8E6EFF1();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_BlendSpacePlayer_0DC123FE4FED828A22CDB99DAF40B074();
-	void EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_4493892A496BF91BB06913BFD7170CA3();
+	void BlueprintUpdateAnimation(float DeltaTimeX);
 	void BlueprintLinkedAnimationLayersInitialized();
 	void AnimGraph(struct FPoseLink* AnimGraph_0);
-	void BlueprintUpdateAnimation(float DeltaTimeX);
 
 public:
 	static class UClass* StaticClass()

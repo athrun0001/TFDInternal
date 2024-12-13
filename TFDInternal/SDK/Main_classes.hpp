@@ -10,9 +10,9 @@
 
 #include "Basic.hpp"
 
-#include "AnimGraphRuntime_structs.hpp"
 #include "Engine_structs.hpp"
 #include "Main_structs.hpp"
+#include "AnimGraphRuntime_structs.hpp"
 #include "M1_classes.hpp"
 
 
@@ -21,8 +21,7 @@ namespace SDK
 
 // AnimBlueprintGeneratedClass Main.Main_C
 // 0x2850 (0x2CC0 - 0x0470)
-#pragma pack(push, 0x1)
-class alignas(0x10) UMain_C : public UM1AnimInstance
+class UMain_C final : public UM1AnimInstance
 {
 public:
 	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0470(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
@@ -149,7 +148,6 @@ public:
 		return GetDefaultObjImpl<UMain_C>();
 	}
 };
-#pragma pack(pop)
 
 }
 

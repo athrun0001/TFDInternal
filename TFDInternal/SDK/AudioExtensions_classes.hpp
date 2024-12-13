@@ -17,33 +17,18 @@
 namespace SDK
 {
 
-// Class AudioExtensions.AudioParameterControllerInterface
+// Class AudioExtensions.OcclusionPluginSourceSettingsBase
 // 0x0000 (0x0028 - 0x0028)
-class IAudioParameterControllerInterface : public IInterface
+class UOcclusionPluginSourceSettingsBase final : public UObject
 {
-public:
-	void ResetParameters();
-	void SetBoolArrayParameter(class FName InName, const TArray<bool>& InValue);
-	void SetBoolParameter(class FName InName, bool InBool);
-	void SetFloatArrayParameter(class FName InName, const TArray<float>& InValue);
-	void SetFloatParameter(class FName InName, float InFloat);
-	void SetIntArrayParameter(class FName InName, const TArray<int32>& InValue);
-	void SetIntParameter(class FName InName, int32 InInt);
-	void SetObjectArrayParameter(class FName InName, const TArray<class UObject*>& InValue);
-	void SetObjectParameter(class FName InName, class UObject* InValue);
-	void SetParameters_Blueprint(const TArray<struct FAudioParameter>& InParameters);
-	void SetStringArrayParameter(class FName InName, const TArray<class FString>& InValue);
-	void SetStringParameter(class FName InName, const class FString& InValue);
-	void SetTriggerParameter(class FName InName);
-
 public:
 	static class UClass* StaticClass()
 	{
-		return StaticClassImpl<"AudioParameterControllerInterface">();
+		return StaticClassImpl<"OcclusionPluginSourceSettingsBase">();
 	}
-	static class IAudioParameterControllerInterface* GetDefaultObj()
+	static class UOcclusionPluginSourceSettingsBase* GetDefaultObj()
 	{
-		return GetDefaultObjImpl<IAudioParameterControllerInterface>();
+		return GetDefaultObjImpl<UOcclusionPluginSourceSettingsBase>();
 	}
 };
 
@@ -77,21 +62,6 @@ public:
 	}
 };
 
-// Class AudioExtensions.SourceDataOverridePluginSourceSettingsBase
-// 0x0000 (0x0028 - 0x0028)
-class USourceDataOverridePluginSourceSettingsBase final : public UObject
-{
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"SourceDataOverridePluginSourceSettingsBase">();
-	}
-	static class USourceDataOverridePluginSourceSettingsBase* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<USourceDataOverridePluginSourceSettingsBase>();
-	}
-};
-
 // Class AudioExtensions.SoundfieldEncodingSettingsBase
 // 0x0000 (0x0028 - 0x0028)
 class USoundfieldEncodingSettingsBase : public UObject
@@ -122,18 +92,18 @@ public:
 	}
 };
 
-// Class AudioExtensions.OcclusionPluginSourceSettingsBase
+// Class AudioExtensions.SourceDataOverridePluginSourceSettingsBase
 // 0x0000 (0x0028 - 0x0028)
-class UOcclusionPluginSourceSettingsBase final : public UObject
+class USourceDataOverridePluginSourceSettingsBase final : public UObject
 {
 public:
 	static class UClass* StaticClass()
 	{
-		return StaticClassImpl<"OcclusionPluginSourceSettingsBase">();
+		return StaticClassImpl<"SourceDataOverridePluginSourceSettingsBase">();
 	}
-	static class UOcclusionPluginSourceSettingsBase* GetDefaultObj()
+	static class USourceDataOverridePluginSourceSettingsBase* GetDefaultObj()
 	{
-		return GetDefaultObjImpl<UOcclusionPluginSourceSettingsBase>();
+		return GetDefaultObjImpl<USourceDataOverridePluginSourceSettingsBase>();
 	}
 };
 
@@ -149,6 +119,36 @@ public:
 	static class UReverbPluginSourceSettingsBase* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<UReverbPluginSourceSettingsBase>();
+	}
+};
+
+// Class AudioExtensions.AudioParameterControllerInterface
+// 0x0000 (0x0028 - 0x0028)
+class IAudioParameterControllerInterface : public IInterface
+{
+public:
+	void ResetParameters();
+	void SetBoolArrayParameter(class FName InName, const TArray<bool>& InValue);
+	void SetBoolParameter(class FName InName, bool InBool);
+	void SetFloatArrayParameter(class FName InName, const TArray<float>& InValue);
+	void SetFloatParameter(class FName InName, float InFloat);
+	void SetIntArrayParameter(class FName InName, const TArray<int32>& InValue);
+	void SetIntParameter(class FName InName, int32 InInt);
+	void SetObjectArrayParameter(class FName InName, const TArray<class UObject*>& InValue);
+	void SetObjectParameter(class FName InName, class UObject* InValue);
+	void SetParameters_Blueprint(const TArray<struct FAudioParameter>& InParameters);
+	void SetStringArrayParameter(class FName InName, const TArray<class FString>& InValue);
+	void SetStringParameter(class FName InName, const class FString& InValue);
+	void SetTriggerParameter(class FName InName);
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"AudioParameterControllerInterface">();
+	}
+	static class IAudioParameterControllerInterface* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<IAudioParameterControllerInterface>();
 	}
 };
 

@@ -11,81 +11,15 @@
 #include "Basic.hpp"
 
 #include "MovieScene_structs.hpp"
-#include "AnimationCore_structs.hpp"
 #include "CoreUObject_structs.hpp"
 #include "CoreUObject_classes.hpp"
+#include "AnimationCore_structs.hpp"
 #include "Engine_classes.hpp"
 #include "Constraints_structs.hpp"
 
 
 namespace SDK
 {
-
-// Class Constraints.TickableConstraint
-// 0x0050 (0x0078 - 0x0028)
-class UTickableConstraint : public UObject
-{
-public:
-	struct FConstraintTickFunction                ConstraintTick;                                    // 0x0028(0x0048)(NativeAccessSpecifierPublic)
-	bool                                          Active;                                            // 0x0070(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_71[0x7];                                       // 0x0071(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"TickableConstraint">();
-	}
-	static class UTickableConstraint* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UTickableConstraint>();
-	}
-};
-
-// Class Constraints.TickableTransformConstraint
-// 0x0020 (0x0098 - 0x0078)
-class UTickableTransformConstraint : public UTickableConstraint
-{
-public:
-	class UTransformableHandle*                   ParentTRSHandle;                                   // 0x0078(0x0008)(BlueprintVisible, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UTransformableHandle*                   ChildTRSHandle;                                    // 0x0080(0x0008)(BlueprintVisible, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bMaintainOffset;                                   // 0x0088(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_89[0x3];                                       // 0x0089(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         Weight;                                            // 0x008C(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bDynamicOffset;                                    // 0x0090(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	ETransformConstraintType                      Type;                                              // 0x0091(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
-	uint8                                         Pad_92[0x6];                                       // 0x0092(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"TickableTransformConstraint">();
-	}
-	static class UTickableTransformConstraint* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UTickableTransformConstraint>();
-	}
-};
-
-// Class Constraints.TickableTranslationConstraint
-// 0x0018 (0x00B0 - 0x0098)
-class UTickableTranslationConstraint final : public UTickableTransformConstraint
-{
-public:
-	uint8                                         Pad_98[0x4];                                       // 0x0098(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FVector                                OffsetTranslation;                                 // 0x009C(0x000C)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
-	struct FFilterOptionPerAxis                   AxisFilter;                                        // 0x00A8(0x0003)(BlueprintVisible, NoDestructor, Protected, NativeAccessSpecifierProtected)
-	uint8                                         Pad_AB[0x5];                                       // 0x00AB(0x0005)(Fixing Struct Size After Last Property [ Dumper-7 ])
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"TickableTranslationConstraint">();
-	}
-	static class UTickableTranslationConstraint* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UTickableTranslationConstraint>();
-	}
-};
 
 // Class Constraints.TransformableHandle
 // 0x0030 (0x0058 - 0x0028)
@@ -106,6 +40,25 @@ public:
 	}
 };
 
+// Class Constraints.TransformableComponentHandle
+// 0x0010 (0x0068 - 0x0058)
+class UTransformableComponentHandle final : public UTransformableHandle
+{
+public:
+	TWeakObjectPtr<class USceneComponent>         Component;                                         // 0x0058(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   SocketName;                                        // 0x0060(0x0008)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"TransformableComponentHandle">();
+	}
+	static class UTransformableComponentHandle* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UTransformableComponentHandle>();
+	}
+};
+
 // Class Constraints.ConstraintsActor
 // 0x0008 (0x0250 - 0x0248)
 class AConstraintsActor final : public AActor
@@ -121,6 +74,26 @@ public:
 	static class AConstraintsActor* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<AConstraintsActor>();
+	}
+};
+
+// Class Constraints.TickableConstraint
+// 0x0050 (0x0078 - 0x0028)
+class UTickableConstraint : public UObject
+{
+public:
+	struct FConstraintTickFunction                ConstraintTick;                                    // 0x0028(0x0048)(NativeAccessSpecifierPublic)
+	bool                                          Active;                                            // 0x0070(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_71[0x7];                                       // 0x0071(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"TickableConstraint">();
+	}
+	static class UTickableConstraint* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UTickableConstraint>();
 	}
 };
 
@@ -170,22 +143,49 @@ public:
 	}
 };
 
-// Class Constraints.TransformableComponentHandle
-// 0x0010 (0x0068 - 0x0058)
-class UTransformableComponentHandle final : public UTransformableHandle
+// Class Constraints.TickableTransformConstraint
+// 0x0020 (0x0098 - 0x0078)
+class UTickableTransformConstraint : public UTickableConstraint
 {
 public:
-	TWeakObjectPtr<class USceneComponent>         Component;                                         // 0x0058(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, InstancedReference, IsPlainOldData, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   SocketName;                                        // 0x0060(0x0008)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UTransformableHandle*                   ParentTRSHandle;                                   // 0x0078(0x0008)(BlueprintVisible, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UTransformableHandle*                   ChildTRSHandle;                                    // 0x0080(0x0008)(BlueprintVisible, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bMaintainOffset;                                   // 0x0088(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_89[0x3];                                       // 0x0089(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         Weight;                                            // 0x008C(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bDynamicOffset;                                    // 0x0090(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	ETransformConstraintType                      Type;                                              // 0x0091(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	uint8                                         Pad_92[0x6];                                       // 0x0092(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
 
 public:
 	static class UClass* StaticClass()
 	{
-		return StaticClassImpl<"TransformableComponentHandle">();
+		return StaticClassImpl<"TickableTransformConstraint">();
 	}
-	static class UTransformableComponentHandle* GetDefaultObj()
+	static class UTickableTransformConstraint* GetDefaultObj()
 	{
-		return GetDefaultObjImpl<UTransformableComponentHandle>();
+		return GetDefaultObjImpl<UTickableTransformConstraint>();
+	}
+};
+
+// Class Constraints.TickableTranslationConstraint
+// 0x0018 (0x00B0 - 0x0098)
+class UTickableTranslationConstraint final : public UTickableTransformConstraint
+{
+public:
+	uint8                                         Pad_98[0x4];                                       // 0x0098(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FVector                                OffsetTranslation;                                 // 0x009C(0x000C)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	struct FFilterOptionPerAxis                   AxisFilter;                                        // 0x00A8(0x0003)(BlueprintVisible, NoDestructor, Protected, NativeAccessSpecifierProtected)
+	uint8                                         Pad_AB[0x5];                                       // 0x00AB(0x0005)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"TickableTranslationConstraint">();
+	}
+	static class UTickableTranslationConstraint* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UTickableTranslationConstraint>();
 	}
 };
 

@@ -17,6 +17,46 @@
 namespace SDK
 {
 
+// Function UI_ItemIcon_Perk_Node.UI_ItemIcon_Perk_Node_C.SetSize
+// (Public, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// struct FVector2D                        Size                                                   (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_ItemIcon_Perk_Node_C::SetSize(const struct FVector2D& Size)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ItemIcon_Perk_Node_C", "SetSize");
+
+	Params::UI_ItemIcon_Perk_Node_C_SetSize Parms{};
+
+	Parms.Size = std::move(Size);
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_ItemIcon_Perk_Node.UI_ItemIcon_Perk_Node_C.SetMax
+// (Public, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// bool                                    Max                                                    (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_ItemIcon_Perk_Node_C::SetMax(bool Max)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ItemIcon_Perk_Node_C", "SetMax");
+
+	Params::UI_ItemIcon_Perk_Node_C_SetMax Parms{};
+
+	Parms.Max = Max;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
 // Function UI_ItemIcon_Perk_Node.UI_ItemIcon_Perk_Node_C.SetFill
 // (Public, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -151,6 +191,26 @@ void UUI_ItemIcon_Perk_Node_C::Construct()
 }
 
 
+// Function UI_ItemIcon_Perk_Node.UI_ItemIcon_Perk_Node_C.BP_ShowGlowingEffect
+// (Event, Public, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// bool                                    bShow                                                  (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_ItemIcon_Perk_Node_C::BP_ShowGlowingEffect(const bool bShow)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ItemIcon_Perk_Node_C", "BP_ShowGlowingEffect");
+
+	Params::UI_ItemIcon_Perk_Node_C_BP_ShowGlowingEffect Parms{};
+
+	Parms.bShow = bShow;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
 // Function UI_ItemIcon_Perk_Node.UI_ItemIcon_Perk_Node_C.BP_TurnOn
 // (Event, Public, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -182,66 +242,6 @@ void UUI_ItemIcon_Perk_Node_C::BP_TurnOff()
 		Func = Class->GetFunction("UI_ItemIcon_Perk_Node_C", "BP_TurnOff");
 
 	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function UI_ItemIcon_Perk_Node.UI_ItemIcon_Perk_Node_C.BP_ShowGlowingEffect
-// (Event, Public, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// bool                                    bShow                                                  (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_ItemIcon_Perk_Node_C::BP_ShowGlowingEffect(const bool bShow)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ItemIcon_Perk_Node_C", "BP_ShowGlowingEffect");
-
-	Params::UI_ItemIcon_Perk_Node_C_BP_ShowGlowingEffect Parms{};
-
-	Parms.bShow = bShow;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_ItemIcon_Perk_Node.UI_ItemIcon_Perk_Node_C.SetSize
-// (Public, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// struct FVector2D                        Size                                                   (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_ItemIcon_Perk_Node_C::SetSize(const struct FVector2D& Size)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ItemIcon_Perk_Node_C", "SetSize");
-
-	Params::UI_ItemIcon_Perk_Node_C_SetSize Parms{};
-
-	Parms.Size = std::move(Size);
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_ItemIcon_Perk_Node.UI_ItemIcon_Perk_Node_C.SetMax
-// (Public, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// bool                                    Max                                                    (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_ItemIcon_Perk_Node_C::SetMax(bool Max)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ItemIcon_Perk_Node_C", "SetMax");
-
-	Params::UI_ItemIcon_Perk_Node_C_SetMax Parms{};
-
-	Parms.Max = Max;
-
-	UObject::ProcessEvent(Func, &Parms);
 }
 
 }

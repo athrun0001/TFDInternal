@@ -44,9 +44,9 @@ public:
 	double                                        KawaiiAlpha;                                       // 0x2A50(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
-	void AnimGraph(const struct FPoseLink& InPose, struct FPoseLink* AnimGraph_0);
 	void ExecuteUbergraph_BP_Sec_PC_001_A_VAR_BODY_000(int32 EntryPoint);
 	void BlueprintThreadSafeUpdateAnimation(float DeltaTime);
+	void AnimGraph(const struct FPoseLink& InPose, struct FPoseLink* AnimGraph_0);
 
 public:
 	static class UClass* StaticClass()

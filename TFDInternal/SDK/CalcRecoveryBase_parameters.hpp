@@ -18,6 +18,15 @@
 namespace SDK::Params
 {
 
+// Function CalcRecoveryBase.CalcRecoveryBase_C.DoCalculation
+// 0x0148 (0x0148 - 0x0000)
+struct CalcRecoveryBase_C_DoCalculation final
+{
+public:
+	struct FM1AbilityOpCalcParam                  Param;                                             // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, NoDestructor)
+	struct FM1CalcDamageInfo                      DamageInfo;                                        // 0x0008(0x0140)(BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, ContainsInstancedReference)
+};
+
 // Function CalcRecoveryBase.CalcRecoveryBase_C.SetRecoveryOutModifier
 // 0x0170 (0x0170 - 0x0000)
 struct CalcRecoveryBase_C_SetRecoveryOutModifier final
@@ -45,15 +54,6 @@ public:
 	TArray<struct FFormatArgumentData>            K2Node_MakeArray_Array;                            // 0x0310(0x0010)(ReferenceParm)
 	class FText                                   CallFunc_Format_ReturnValue;                       // 0x0320(0x0018)()
 	class FString                                 CallFunc_Conv_TextToString_ReturnValue;            // 0x0338(0x0010)(ZeroConstructor, HasGetValueTypeHash)
-};
-
-// Function CalcRecoveryBase.CalcRecoveryBase_C.DoCalculation
-// 0x0148 (0x0148 - 0x0000)
-struct CalcRecoveryBase_C_DoCalculation final
-{
-public:
-	struct FM1AbilityOpCalcParam                  Param;                                             // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, NoDestructor)
-	struct FM1CalcDamageInfo                      DamageInfo;                                        // 0x0008(0x0140)(BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, ContainsInstancedReference)
 };
 
 // Function CalcRecoveryBase.CalcRecoveryBase_C.DetermineRecoveryCoefficient

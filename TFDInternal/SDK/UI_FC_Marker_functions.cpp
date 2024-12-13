@@ -51,20 +51,6 @@ void UUI_FC_Marker_C::ExecuteUbergraph_UI_FC_Marker(int32 EntryPoint)
 }
 
 
-// Function UI_FC_Marker.UI_FC_Marker_C.Construct
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
-
-void UUI_FC_Marker_C::Construct()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_FC_Marker_C", "Construct");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function UI_FC_Marker.UI_FC_Marker_C.BP_PlayMarkerAnim
 // (Event, Protected, BlueprintCallable, BlueprintEvent)
 
@@ -74,6 +60,20 @@ void UUI_FC_Marker_C::BP_PlayMarkerAnim()
 
 	if (Func == nullptr)
 		Func = Class->GetFunction("UI_FC_Marker_C", "BP_PlayMarkerAnim");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function UI_FC_Marker.UI_FC_Marker_C.Construct
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+
+void UUI_FC_Marker_C::Construct()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_FC_Marker_C", "Construct");
 
 	UObject::ProcessEvent(Func, nullptr);
 }

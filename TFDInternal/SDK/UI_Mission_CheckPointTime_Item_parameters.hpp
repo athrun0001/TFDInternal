@@ -18,26 +18,6 @@
 namespace SDK::Params
 {
 
-// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.UpdateBG
-// 0x0001 (0x0001 - 0x0000)
-struct UI_Mission_CheckPointTime_Item_C_UpdateBG final
-{
-public:
-	bool                                          CallFunc_Not_PreBool_ReturnValue;                  // 0x0000(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.ShowDimmedUI
-// 0x0005 (0x0005 - 0x0000)
-struct UI_Mission_CheckPointTime_Item_C_ShowDimmedUI final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          Temp_bool_Variable;                                // 0x0001(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	ESlateVisibility                              Temp_byte_Variable;                                // 0x0002(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	ESlateVisibility                              Temp_byte_Variable_1;                              // 0x0003(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	ESlateVisibility                              K2Node_Select_Default;                             // 0x0004(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.SetUIDefault
 // 0x00B8 (0x00B8 - 0x0000)
 struct UI_Mission_CheckPointTime_Item_C_SetUIDefault final
@@ -96,6 +76,34 @@ public:
 	bool                                          K2Node_DynamicCast_bSuccess;                       // 0x0048(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
+// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.UpdateBG
+// 0x0001 (0x0001 - 0x0000)
+struct UI_Mission_CheckPointTime_Item_C_UpdateBG final
+{
+public:
+	bool                                          CallFunc_Not_PreBool_ReturnValue;                  // 0x0000(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.ShowDimmedUI
+// 0x0005 (0x0005 - 0x0000)
+struct UI_Mission_CheckPointTime_Item_C_ShowDimmedUI final
+{
+public:
+	bool                                          bShow;                                             // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          Temp_bool_Variable;                                // 0x0001(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	ESlateVisibility                              Temp_byte_Variable;                                // 0x0002(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	ESlateVisibility                              Temp_byte_Variable_1;                              // 0x0003(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	ESlateVisibility                              K2Node_Select_Default;                             // 0x0004(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.BP_ChangeDimmedUI
+// 0x0001 (0x0001 - 0x0000)
+struct UI_Mission_CheckPointTime_Item_C_BP_ChangeDimmedUI final
+{
+public:
+	bool                                          InDimmed;                                          // 0x0000(0x0001)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
 // Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.ChangeButtonUI
 // 0x0018 (0x0018 - 0x0000)
 struct UI_Mission_CheckPointTime_Item_C_ChangeButtonUI final
@@ -106,6 +114,14 @@ public:
 	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
 	class UUMGSequencePlayer*                     CallFunc_PlayAnimation_ReturnValue;                // 0x0008(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 	class UUMGSequencePlayer*                     CallFunc_PlayAnimation_ReturnValue_1;              // 0x0010(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.BP_ChangeButtonUI
+// 0x0001 (0x0001 - 0x0000)
+struct UI_Mission_CheckPointTime_Item_C_BP_ChangeButtonUI final
+{
+public:
+	EM1ButtonUIType                               InType;                                            // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.Change Selected UI
@@ -127,22 +143,6 @@ struct UI_Mission_CheckPointTime_Item_C_BP_Selected final
 {
 public:
 	bool                                          InSelected;                                        // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.BP_ChangeDimmedUI
-// 0x0001 (0x0001 - 0x0000)
-struct UI_Mission_CheckPointTime_Item_C_BP_ChangeDimmedUI final
-{
-public:
-	bool                                          InDimmed;                                          // 0x0000(0x0001)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.BP_ChangeButtonUI
-// 0x0001 (0x0001 - 0x0000)
-struct UI_Mission_CheckPointTime_Item_C_BP_ChangeButtonUI final
-{
-public:
-	EM1ButtonUIType                               InType;                                            // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 }

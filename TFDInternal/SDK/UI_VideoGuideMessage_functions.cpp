@@ -57,26 +57,6 @@ void UUI_VideoGuideMessage_C::OnEventWidgetClose(EM1WidgetAnimDirection InDirect
 }
 
 
-// Function UI_VideoGuideMessage.UI_VideoGuideMessage_C.ExecuteUbergraph_UI_VideoGuideMessage
-// (Final, UbergraphFunction)
-// Parameters:
-// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_VideoGuideMessage_C::ExecuteUbergraph_UI_VideoGuideMessage(int32 EntryPoint)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_VideoGuideMessage_C", "ExecuteUbergraph_UI_VideoGuideMessage");
-
-	Params::UI_VideoGuideMessage_C_ExecuteUbergraph_UI_VideoGuideMessage Parms{};
-
-	Parms.EntryPoint = EntryPoint;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_VideoGuideMessage.UI_VideoGuideMessage_C.Construct
 // (BlueprintCosmetic, Event, Public, BlueprintEvent)
 
@@ -106,6 +86,26 @@ void UUI_VideoGuideMessage_C::BP_ShowTitle(bool bShow)
 	Params::UI_VideoGuideMessage_C_BP_ShowTitle Parms{};
 
 	Parms.bShow = bShow;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_VideoGuideMessage.UI_VideoGuideMessage_C.ExecuteUbergraph_UI_VideoGuideMessage
+// (Final, UbergraphFunction)
+// Parameters:
+// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_VideoGuideMessage_C::ExecuteUbergraph_UI_VideoGuideMessage(int32 EntryPoint)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_VideoGuideMessage_C", "ExecuteUbergraph_UI_VideoGuideMessage");
+
+	Params::UI_VideoGuideMessage_C_ExecuteUbergraph_UI_VideoGuideMessage Parms{};
+
+	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

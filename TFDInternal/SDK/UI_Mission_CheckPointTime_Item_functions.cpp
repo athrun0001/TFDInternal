@@ -17,40 +17,6 @@
 namespace SDK
 {
 
-// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.UpdateBG
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_Mission_CheckPointTime_Item_C::UpdateBG()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Mission_CheckPointTime_Item_C", "UpdateBG");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.ShowDimmedUI
-// (Public, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// bool                                    bShow                                                  (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Mission_CheckPointTime_Item_C::ShowDimmedUI(bool bShow)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Mission_CheckPointTime_Item_C", "ShowDimmedUI");
-
-	Params::UI_Mission_CheckPointTime_Item_C_ShowDimmedUI Parms{};
-
-	Parms.bShow = bShow;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.SetUIDefault
 // (Public, HasDefaults, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -111,6 +77,20 @@ void UUI_Mission_CheckPointTime_Item_C::ExecuteUbergraph_UI_Mission_CheckPointTi
 }
 
 
+// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.UpdateBG
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_Mission_CheckPointTime_Item_C::UpdateBG()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Mission_CheckPointTime_Item_C", "UpdateBG");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.Construct
 // (BlueprintCosmetic, Event, Public, BlueprintEvent)
 
@@ -122,6 +102,46 @@ void UUI_Mission_CheckPointTime_Item_C::Construct()
 		Func = Class->GetFunction("UI_Mission_CheckPointTime_Item_C", "Construct");
 
 	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.ShowDimmedUI
+// (Public, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// bool                                    bShow                                                  (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_Mission_CheckPointTime_Item_C::ShowDimmedUI(bool bShow)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Mission_CheckPointTime_Item_C", "ShowDimmedUI");
+
+	Params::UI_Mission_CheckPointTime_Item_C_ShowDimmedUI Parms{};
+
+	Parms.bShow = bShow;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.BP_ChangeDimmedUI
+// (Event, Public, BlueprintEvent)
+// Parameters:
+// bool                                    InDimmed                                               (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_Mission_CheckPointTime_Item_C::BP_ChangeDimmedUI(const bool InDimmed)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Mission_CheckPointTime_Item_C", "BP_ChangeDimmedUI");
+
+	Params::UI_Mission_CheckPointTime_Item_C_BP_ChangeDimmedUI Parms{};
+
+	Parms.InDimmed = InDimmed;
+
+	UObject::ProcessEvent(Func, &Parms);
 }
 
 
@@ -138,6 +158,26 @@ void UUI_Mission_CheckPointTime_Item_C::ChangeButtonUI(EM1ButtonUIType InType)
 		Func = Class->GetFunction("UI_Mission_CheckPointTime_Item_C", "ChangeButtonUI");
 
 	Params::UI_Mission_CheckPointTime_Item_C_ChangeButtonUI Parms{};
+
+	Parms.InType = InType;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.BP_ChangeButtonUI
+// (Event, Public, BlueprintEvent)
+// Parameters:
+// EM1ButtonUIType                         InType                                                 (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_Mission_CheckPointTime_Item_C::BP_ChangeButtonUI(EM1ButtonUIType InType)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Mission_CheckPointTime_Item_C", "BP_ChangeButtonUI");
+
+	Params::UI_Mission_CheckPointTime_Item_C_BP_ChangeButtonUI Parms{};
 
 	Parms.InType = InType;
 
@@ -194,46 +234,6 @@ void UUI_Mission_CheckPointTime_Item_C::BP_Selected(bool InSelected)
 	Params::UI_Mission_CheckPointTime_Item_C_BP_Selected Parms{};
 
 	Parms.InSelected = InSelected;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.BP_ChangeDimmedUI
-// (Event, Public, BlueprintEvent)
-// Parameters:
-// bool                                    InDimmed                                               (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Mission_CheckPointTime_Item_C::BP_ChangeDimmedUI(const bool InDimmed)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Mission_CheckPointTime_Item_C", "BP_ChangeDimmedUI");
-
-	Params::UI_Mission_CheckPointTime_Item_C_BP_ChangeDimmedUI Parms{};
-
-	Parms.InDimmed = InDimmed;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_Mission_CheckPointTime_Item.UI_Mission_CheckPointTime_Item_C.BP_ChangeButtonUI
-// (Event, Public, BlueprintEvent)
-// Parameters:
-// EM1ButtonUIType                         InType                                                 (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Mission_CheckPointTime_Item_C::BP_ChangeButtonUI(EM1ButtonUIType InType)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Mission_CheckPointTime_Item_C", "BP_ChangeButtonUI");
-
-	Params::UI_Mission_CheckPointTime_Item_C_BP_ChangeButtonUI Parms{};
-
-	Parms.InType = InType;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

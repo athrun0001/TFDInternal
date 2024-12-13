@@ -18,12 +18,12 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass BP_PlayerControllerInGame.BP_PlayerControllerInGame_C
-// 0x0018 (0x0DA8 - 0x0D90)
+// 0x0018 (0x0DB0 - 0x0D98)
 class ABP_PlayerControllerInGame_C final : public AM1PlayerControllerInGame
 {
 public:
-	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0D90(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
-	TArray<class FString>                         HugeArray;                                         // 0x0D98(0x0010)(Edit, BlueprintVisible, DisableEditOnInstance)
+	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0D98(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
+	TArray<class FString>                         HugeArray;                                         // 0x0DA0(0x0010)(Edit, BlueprintVisible, DisableEditOnInstance)
 
 public:
 	void SendLargeArray(const TArray<class FString>& InArray);

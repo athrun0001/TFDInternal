@@ -527,7 +527,7 @@ public:
 	}
 	UnderlayingType GetDistanceToInMeters(const FVector& Other) const
 	{
-		return GetDistanceTo(Other) * 0.01;
+		return GetDistanceTo(Other) * static_cast<UnderlayingType>(0.01);
 	}
 	FVector GetNormalized() const
 	{

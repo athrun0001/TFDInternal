@@ -99,20 +99,6 @@ void UUI_GameCenter_DamegeIndicator_Arrow1_C::PlayAnimations_2(double DeltaTime)
 }
 
 
-// Function UI_GameCenter_DamegeIndicator_Arrow1.UI_GameCenter_DamegeIndicator_Arrow1_C.Construct
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
-
-void UUI_GameCenter_DamegeIndicator_Arrow1_C::Construct()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_GameCenter_DamegeIndicator_Arrow1_C", "Construct");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function UI_GameCenter_DamegeIndicator_Arrow1.UI_GameCenter_DamegeIndicator_Arrow1_C.PlayAnimations
 // (Public, BlueprintCallable, BlueprintEvent)
 
@@ -122,20 +108,6 @@ void UUI_GameCenter_DamegeIndicator_Arrow1_C::PlayAnimations()
 
 	if (Func == nullptr)
 		Func = Class->GetFunction("UI_GameCenter_DamegeIndicator_Arrow1_C", "PlayAnimations");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function UI_GameCenter_DamegeIndicator_Arrow1.UI_GameCenter_DamegeIndicator_Arrow1_C.BP_Init
-// (Event, Protected, BlueprintEvent)
-
-void UUI_GameCenter_DamegeIndicator_Arrow1_C::BP_Init()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_GameCenter_DamegeIndicator_Arrow1_C", "BP_Init");
 
 	UObject::ProcessEvent(Func, nullptr);
 }
@@ -158,6 +130,34 @@ void UUI_GameCenter_DamegeIndicator_Arrow1_C::ExecuteUbergraph_UI_GameCenter_Dam
 	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_GameCenter_DamegeIndicator_Arrow1.UI_GameCenter_DamegeIndicator_Arrow1_C.Construct
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+
+void UUI_GameCenter_DamegeIndicator_Arrow1_C::Construct()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_GameCenter_DamegeIndicator_Arrow1_C", "Construct");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function UI_GameCenter_DamegeIndicator_Arrow1.UI_GameCenter_DamegeIndicator_Arrow1_C.BP_Init
+// (Event, Protected, BlueprintEvent)
+
+void UUI_GameCenter_DamegeIndicator_Arrow1_C::BP_Init()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_GameCenter_DamegeIndicator_Arrow1_C", "BP_Init");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 }

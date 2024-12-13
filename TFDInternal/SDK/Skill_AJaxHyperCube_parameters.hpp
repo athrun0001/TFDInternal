@@ -34,6 +34,31 @@ public:
 	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
 };
 
+// Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.OnBlendOut_6BD88B004E57299C75FE6DB6B89DE81C
+// 0x0040 (0x0040 - 0x0000)
+struct Skill_AJaxHyperCube_C_OnBlendOut_6BD88B004E57299C75FE6DB6B89DE81C final
+{
+public:
+	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
+};
+
+// Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.OnAbilityEvent_1F6E028A4095C5034DD575915DFF51D5
+// 0x0040 (0x0040 - 0x0000)
+struct Skill_AJaxHyperCube_C_OnAbilityEvent_1F6E028A4095C5034DD575915DFF51D5 final
+{
+public:
+	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
+};
+
+// Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.GetSkillMontage
+// 0x0010 (0x0010 - 0x0000)
+struct Skill_AJaxHyperCube_C_GetSkillMontage final
+{
+public:
+	class UAnimMontage*                           SkillMontage;                                      // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	bool                                          CallFunc_IsStrengthenedSkill_ReturnValue;          // 0x0008(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
 // Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.ExecuteUbergraph_Skill_AJaxHyperCube
 // 0x04B0 (0x04B0 - 0x0000)
 struct Skill_AJaxHyperCube_C_ExecuteUbergraph_Skill_AJaxHyperCube final
@@ -122,31 +147,6 @@ struct Skill_AJaxHyperCube_C_BP_OnDeactivated final
 {
 public:
 	bool                                          bCancelled;                                        // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.OnBlendOut_6BD88B004E57299C75FE6DB6B89DE81C
-// 0x0040 (0x0040 - 0x0000)
-struct Skill_AJaxHyperCube_C_OnBlendOut_6BD88B004E57299C75FE6DB6B89DE81C final
-{
-public:
-	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
-};
-
-// Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.OnAbilityEvent_1F6E028A4095C5034DD575915DFF51D5
-// 0x0040 (0x0040 - 0x0000)
-struct Skill_AJaxHyperCube_C_OnAbilityEvent_1F6E028A4095C5034DD575915DFF51D5 final
-{
-public:
-	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
-};
-
-// Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.GetSkillMontage
-// 0x0010 (0x0010 - 0x0000)
-struct Skill_AJaxHyperCube_C_GetSkillMontage final
-{
-public:
-	class UAnimMontage*                           SkillMontage;                                      // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	bool                                          CallFunc_IsStrengthenedSkill_ReturnValue;          // 0x0008(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.BP_MakePreloadAssetList

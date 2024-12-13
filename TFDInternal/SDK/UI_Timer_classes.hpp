@@ -35,9 +35,9 @@ public:
 	bool                                          SetUI_RemainingTime;                               // 0x0783(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
+	void ExecuteUbergraph_UI_Timer(int32 EntryPoint);
 	void SetUI_IconBrush(bool IsIcon);
 	void PreConstruct(bool IsDesignTime);
-	void ExecuteUbergraph_UI_Timer(int32 EntryPoint);
 
 public:
 	static class UClass* StaticClass()

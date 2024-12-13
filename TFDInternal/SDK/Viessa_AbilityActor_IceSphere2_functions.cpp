@@ -57,30 +57,6 @@ void AViessa_AbilityActor_IceSphere2_C::TickUpdateRedetection(double DeltaSecond
 }
 
 
-// Function Viessa_AbilityActor_IceSphere2.Viessa_AbilityActor_IceSphere2_C.RotateTarget
-// (Public, HasOutParams, HasDefaults, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// double                                  DeltaSeconds                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-// bool                                    FinishedRotation                                       (Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void AViessa_AbilityActor_IceSphere2_C::RotateTarget(double DeltaSeconds, bool* FinishedRotation)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Viessa_AbilityActor_IceSphere2_C", "RotateTarget");
-
-	Params::Viessa_AbilityActor_IceSphere2_C_RotateTarget Parms{};
-
-	Parms.DeltaSeconds = DeltaSeconds;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	if (FinishedRotation != nullptr)
-		*FinishedRotation = Parms.FinishedRotation;
-}
-
-
 // Function Viessa_AbilityActor_IceSphere2.Viessa_AbilityActor_IceSphere2_C.ReceiveTick
 // (Event, Public, BlueprintEvent)
 // Parameters:
@@ -415,6 +391,44 @@ void AViessa_AbilityActor_IceSphere2_C::BP_OnPostSpawnAbilityActor()
 }
 
 
+// Function Viessa_AbilityActor_IceSphere2.Viessa_AbilityActor_IceSphere2_C.RotateTarget
+// (Public, HasOutParams, HasDefaults, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// double                                  DeltaSeconds                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// bool                                    FinishedRotation                                       (Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void AViessa_AbilityActor_IceSphere2_C::RotateTarget(double DeltaSeconds, bool* FinishedRotation)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Viessa_AbilityActor_IceSphere2_C", "RotateTarget");
+
+	Params::Viessa_AbilityActor_IceSphere2_C_RotateTarget Parms{};
+
+	Parms.DeltaSeconds = DeltaSeconds;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	if (FinishedRotation != nullptr)
+		*FinishedRotation = Parms.FinishedRotation;
+}
+
+
+// Function Viessa_AbilityActor_IceSphere2.Viessa_AbilityActor_IceSphere2_C.AddIceSphereControls
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void AViessa_AbilityActor_IceSphere2_C::AddIceSphereControls()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Viessa_AbilityActor_IceSphere2_C", "AddIceSphereControls");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function Viessa_AbilityActor_IceSphere2.Viessa_AbilityActor_IceSphere2_C.AddSkeletalMeshControl
 // (Protected, HasDefaults, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -438,20 +452,6 @@ void AViessa_AbilityActor_IceSphere2_C::AddSkeletalMeshControl(class USkeletalMe
 	Parms.bIsCosmetic = bIsCosmetic;
 
 	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function Viessa_AbilityActor_IceSphere2.Viessa_AbilityActor_IceSphere2_C.AddIceSphereControls
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void AViessa_AbilityActor_IceSphere2_C::AddIceSphereControls()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Viessa_AbilityActor_IceSphere2_C", "AddIceSphereControls");
-
-	UObject::ProcessEvent(Func, nullptr);
 }
 
 }

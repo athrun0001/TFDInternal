@@ -16,6 +16,14 @@
 namespace SDK::Params
 {
 
+// Function UI_GuideMessage_Meta.UI_GuideMessage_Meta_C.BP_ShowTitle
+// 0x0001 (0x0001 - 0x0000)
+struct UI_GuideMessage_Meta_C_BP_ShowTitle final
+{
+public:
+	bool                                          bShow;                                             // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
 // Function UI_GuideMessage_Meta.UI_GuideMessage_Meta_C.ExecuteUbergraph_UI_GuideMessage_Meta
 // 0x0018 (0x0018 - 0x0000)
 struct UI_GuideMessage_Meta_C_ExecuteUbergraph_UI_GuideMessage_Meta final
@@ -28,14 +36,6 @@ public:
 	bool                                          K2Node_Event_bShow;                                // 0x0007(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	class UUMGSequencePlayer*                     CallFunc_PlayAnimation_ReturnValue;                // 0x0008(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 	ESlateVisibility                              K2Node_Select_Default;                             // 0x0010(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_GuideMessage_Meta.UI_GuideMessage_Meta_C.BP_ShowTitle
-// 0x0001 (0x0001 - 0x0000)
-struct UI_GuideMessage_Meta_C_BP_ShowTitle final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 }

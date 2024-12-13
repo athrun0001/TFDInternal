@@ -33,10 +33,10 @@ public:
 public:
 	void SpawnHitArea();
 	void Spawn_AOE();
+	void BP_OnPostSpawnAbilityActor();
 	void FindRandomLocation2D(struct FVector* OutLocation2D);
 	void FindFloorAtLocation(const struct FVector& InLocation2D, struct FVector* OutLocation);
 	void ExecuteUbergraph_NormalMonster_AOE_Spawner(int32 EntryPoint);
-	void BP_OnPostSpawnAbilityActor();
 
 public:
 	static class UClass* StaticClass()

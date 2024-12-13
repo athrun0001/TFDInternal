@@ -31,9 +31,9 @@ public:
 	bool                                          ForSkillMovie;                                     // 0x08F8(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
+	void SetUIForSkillMovie();
 	void PreConstruct(bool IsDesignTime);
 	void ExecuteUbergraph_UI_WidgetContainer(int32 EntryPoint);
-	void SetUIForSkillMovie();
 
 public:
 	static class UClass* StaticClass()

@@ -109,14 +109,6 @@ public:
 	bool                                          bIsPartyMember;                                    // 0x0000(0x0001)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function UI_GameHP_Player.UI_GameHP_Player_C.BP_SetSquadIndex
-// 0x0004 (0x0004 - 0x0000)
-struct UI_GameHP_Player_C_BP_SetSquadIndex final
-{
-public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_GameHP_Player.UI_GameHP_Player_C.BP_UpdateDBNOUI
 // 0x0008 (0x0008 - 0x0000)
 struct UI_GameHP_Player_C_BP_UpdateDBNOUI final
@@ -124,14 +116,6 @@ struct UI_GameHP_Player_C_BP_UpdateDBNOUI final
 public:
 	float                                         DBNORatio;                                         // 0x0000(0x0004)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	float                                         InteractionRatio;                                  // 0x0004(0x0004)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_GameHP_Player.UI_GameHP_Player_C.BP_SetDBNOInteractionTime
-// 0x0004 (0x0004 - 0x0000)
-struct UI_GameHP_Player_C_BP_SetDBNOInteractionTime final
-{
-public:
-	float                                         InteractionDuration;                               // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_GameHP_Player.UI_GameHP_Player_C.BP_SetVisibleDBNOUI
@@ -150,6 +134,22 @@ struct UI_GameHP_Player_C_BP_SetVisibleDBNOInteractionUI final
 {
 public:
 	bool                                          bVisible;                                          // 0x0000(0x0001)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_GameHP_Player.UI_GameHP_Player_C.BP_SetSquadIndex
+// 0x0004 (0x0004 - 0x0000)
+struct UI_GameHP_Player_C_BP_SetSquadIndex final
+{
+public:
+	int32                                         InIndex;                                           // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_GameHP_Player.UI_GameHP_Player_C.BP_SetDBNOInteractionTime
+// 0x0004 (0x0004 - 0x0000)
+struct UI_GameHP_Player_C_BP_SetDBNOInteractionTime final
+{
+public:
+	float                                         InteractionDuration;                               // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_GameHP_Player.UI_GameHP_Player_C.BP_OnDBNORescueStateChanged

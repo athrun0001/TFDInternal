@@ -10,8 +10,8 @@
 
 #include "Basic.hpp"
 
-#include "PropertyPath_structs.hpp"
 #include "CoreUObject_classes.hpp"
+#include "PropertyPath_structs.hpp"
 
 
 namespace SDK

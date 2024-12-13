@@ -17,20 +17,6 @@
 namespace SDK
 {
 
-// Function BP_SimpleTaskActor.BP_SimpleTaskActor_C.ReceiveBeginPlay
-// (Event, Protected, BlueprintEvent)
-
-void ABP_SimpleTaskActor_C::ReceiveBeginPlay()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("BP_SimpleTaskActor_C", "ReceiveBeginPlay");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function BP_SimpleTaskActor.BP_SimpleTaskActor_C.ExecuteUbergraph_BP_SimpleTaskActor
 // (Final, UbergraphFunction)
 // Parameters:
@@ -48,6 +34,20 @@ void ABP_SimpleTaskActor_C::ExecuteUbergraph_BP_SimpleTaskActor(int32 EntryPoint
 	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function BP_SimpleTaskActor.BP_SimpleTaskActor_C.ReceiveBeginPlay
+// (Event, Protected, BlueprintEvent)
+
+void ABP_SimpleTaskActor_C::ReceiveBeginPlay()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BP_SimpleTaskActor_C", "ReceiveBeginPlay");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 }

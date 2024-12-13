@@ -17,40 +17,6 @@
 namespace SDK
 {
 
-// Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.UI_Deco_TitleLine_Event_0
-// (BlueprintCallable, BlueprintEvent)
-// Parameters:
-// class UUI_Deco_TitleLine_01_C*          UI_Deco_TitleLine                                      (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
-
-void UUI_GameTop_LevelUp_C::UI_Deco_TitleLine_Event_0(class UUI_Deco_TitleLine_01_C* UI_Deco_TitleLine)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_GameTop_LevelUp_C", "UI_Deco_TitleLine_Event_0");
-
-	Params::UI_GameTop_LevelUp_C_UI_Deco_TitleLine_Event_0 Parms{};
-
-	Parms.UI_Deco_TitleLine = UI_Deco_TitleLine;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.SequenceEvent__ENTRYPOINTUI_GameTop_LevelUp
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_GameTop_LevelUp_C::SequenceEvent__ENTRYPOINTUI_GameTop_LevelUp()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_GameTop_LevelUp_C", "SequenceEvent__ENTRYPOINTUI_GameTop_LevelUp");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.PlaySkillAnim
 // (Public, HasDefaults, BlueprintCallable, BlueprintEvent)
 
@@ -79,6 +45,26 @@ void UUI_GameTop_LevelUp_C::PlayCloseAnim()
 }
 
 
+// Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.UI_Deco_TitleLine_Event_0
+// (BlueprintCallable, BlueprintEvent)
+// Parameters:
+// class UUI_Deco_TitleLine_01_C*          UI_Deco_TitleLine                                      (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
+
+void UUI_GameTop_LevelUp_C::UI_Deco_TitleLine_Event_0(class UUI_Deco_TitleLine_01_C* UI_Deco_TitleLine)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_GameTop_LevelUp_C", "UI_Deco_TitleLine_Event_0");
+
+	Params::UI_GameTop_LevelUp_C_UI_Deco_TitleLine_Event_0 Parms{};
+
+	Parms.UI_Deco_TitleLine = UI_Deco_TitleLine;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
 // Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.OnEventWidgetOpen
 // (Event, Protected, BlueprintEvent)
 // Parameters:
@@ -94,6 +80,40 @@ void UUI_GameTop_LevelUp_C::OnEventWidgetOpen(EM1WidgetAnimDirection InDirection
 	Params::UI_GameTop_LevelUp_C_OnEventWidgetOpen Parms{};
 
 	Parms.InDirection = InDirection;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.SequenceEvent__ENTRYPOINTUI_GameTop_LevelUp
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_GameTop_LevelUp_C::SequenceEvent__ENTRYPOINTUI_GameTop_LevelUp()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_GameTop_LevelUp_C", "SequenceEvent__ENTRYPOINTUI_GameTop_LevelUp");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.BP_UpdateAppearanceByLevel
+// (Event, Protected, BlueprintEvent)
+// Parameters:
+// bool                                    bIsMaxLevel                                            (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_GameTop_LevelUp_C::BP_UpdateAppearanceByLevel(bool bIsMaxLevel)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_GameTop_LevelUp_C", "BP_UpdateAppearanceByLevel");
+
+	Params::UI_GameTop_LevelUp_C_BP_UpdateAppearanceByLevel Parms{};
+
+	Parms.bIsMaxLevel = bIsMaxLevel;
 
 	UObject::ProcessEvent(Func, &Parms);
 }
@@ -119,6 +139,20 @@ class UWidgetAnimation* UUI_GameTop_LevelUp_C::GetEndAnimation()
 }
 
 
+// Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.BP_PlayChangedListOpenAnim
+// (Event, Public, BlueprintEvent)
+
+void UUI_GameTop_LevelUp_C::BP_PlayChangedListOpenAnim()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_GameTop_LevelUp_C", "BP_PlayChangedListOpenAnim");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.ExecuteUbergraph_UI_GameTop_LevelUp
 // (Final, UbergraphFunction, HasDefaults)
 // Parameters:
@@ -136,40 +170,6 @@ void UUI_GameTop_LevelUp_C::ExecuteUbergraph_UI_GameTop_LevelUp(int32 EntryPoint
 	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.BP_UpdateAppearanceByLevel
-// (Event, Protected, BlueprintEvent)
-// Parameters:
-// bool                                    bIsMaxLevel                                            (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_GameTop_LevelUp_C::BP_UpdateAppearanceByLevel(bool bIsMaxLevel)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_GameTop_LevelUp_C", "BP_UpdateAppearanceByLevel");
-
-	Params::UI_GameTop_LevelUp_C_BP_UpdateAppearanceByLevel Parms{};
-
-	Parms.bIsMaxLevel = bIsMaxLevel;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.BP_PlayChangedListOpenAnim
-// (Event, Public, BlueprintEvent)
-
-void UUI_GameTop_LevelUp_C::BP_PlayChangedListOpenAnim()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_GameTop_LevelUp_C", "BP_PlayChangedListOpenAnim");
-
-	UObject::ProcessEvent(Func, nullptr);
 }
 
 

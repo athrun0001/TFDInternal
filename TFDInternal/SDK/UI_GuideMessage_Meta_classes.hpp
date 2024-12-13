@@ -31,9 +31,9 @@ public:
 	class UUI_PopupTitleBG_C*                     UI_PopupTitleBG_1;                                 // 0x0768(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
 
 public:
+	void BP_ShowTitle(bool bShow);
 	void ExecuteUbergraph_UI_GuideMessage_Meta(int32 EntryPoint);
 	void Construct();
-	void BP_ShowTitle(bool bShow);
 
 public:
 	static class UClass* StaticClass()

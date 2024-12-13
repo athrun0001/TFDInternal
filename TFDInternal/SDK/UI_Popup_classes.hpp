@@ -31,11 +31,11 @@ public:
 	class UUI_PopupTitleBG_C*                     UI_PopupTitleBG;                                   // 0x07D0(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
 
 public:
-	void SequenceEvent__ENTRYPOINTUI_Popup();
 	void OnEventWidgetOpen(EM1WidgetAnimDirection InDirection);
 	void OnEventWidgetClose(EM1WidgetAnimDirection InDirection);
 	void ExecuteUbergraph_UI_Popup(int32 EntryPoint);
 	void BP_SetButtonCountImpl(int32 InCount);
+	void SequenceEvent__ENTRYPOINTUI_Popup();
 	void BP_playakEvent(class UAkAudioEvent* AkEvent);
 
 public:

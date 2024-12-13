@@ -17,6 +17,40 @@
 namespace SDK
 {
 
+// Function UI_Button_Tooltip_PlayerName.UI_Button_Tooltip_PlayerName_C.ExecuteUbergraph_UI_Button_Tooltip_PlayerName
+// (Final, UbergraphFunction, HasDefaults)
+// Parameters:
+// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_Button_Tooltip_PlayerName_C::ExecuteUbergraph_UI_Button_Tooltip_PlayerName(int32 EntryPoint)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Button_Tooltip_PlayerName_C", "ExecuteUbergraph_UI_Button_Tooltip_PlayerName");
+
+	Params::UI_Button_Tooltip_PlayerName_C_ExecuteUbergraph_UI_Button_Tooltip_PlayerName Parms{};
+
+	Parms.EntryPoint = EntryPoint;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_Button_Tooltip_PlayerName.UI_Button_Tooltip_PlayerName_C.Construct
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+
+void UUI_Button_Tooltip_PlayerName_C::Construct()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Button_Tooltip_PlayerName_C", "Construct");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UI_Button_Tooltip_PlayerName.UI_Button_Tooltip_PlayerName_C.SetDataImpl
 // (Event, Protected, BlueprintEvent)
 // Parameters:
@@ -54,40 +88,6 @@ void UUI_Button_Tooltip_PlayerName_C::OnEventWidgetOpen(EM1WidgetAnimDirection I
 	Parms.InDirection = InDirection;
 
 	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_Button_Tooltip_PlayerName.UI_Button_Tooltip_PlayerName_C.ExecuteUbergraph_UI_Button_Tooltip_PlayerName
-// (Final, UbergraphFunction, HasDefaults)
-// Parameters:
-// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Button_Tooltip_PlayerName_C::ExecuteUbergraph_UI_Button_Tooltip_PlayerName(int32 EntryPoint)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Button_Tooltip_PlayerName_C", "ExecuteUbergraph_UI_Button_Tooltip_PlayerName");
-
-	Params::UI_Button_Tooltip_PlayerName_C_ExecuteUbergraph_UI_Button_Tooltip_PlayerName Parms{};
-
-	Parms.EntryPoint = EntryPoint;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_Button_Tooltip_PlayerName.UI_Button_Tooltip_PlayerName_C.Construct
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
-
-void UUI_Button_Tooltip_PlayerName_C::Construct()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Button_Tooltip_PlayerName_C", "Construct");
-
-	UObject::ProcessEvent(Func, nullptr);
 }
 
 }

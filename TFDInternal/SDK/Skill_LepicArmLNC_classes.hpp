@@ -25,11 +25,11 @@ public:
 	struct FPointerToUberGraphFrame               UberGraphFrame_Skill_LepicArmLNC_C;                // 0x0360(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
 
 public:
+	void OnFunctionalTest();
+	void OnActivatedAltWeapon();
 	void OnAbilityEvent_3A13A6C94180B2DA4F4077885B102387(const struct FM1AbilityEvent& Event);
 	void ExecuteUbergraph_Skill_LepicArmLNC(int32 EntryPoint);
 	void BP_OnDeactivated(bool bCancelled);
-	void OnFunctionalTest();
-	void OnActivatedAltWeapon();
 	void BP_OnActivated();
 
 public:

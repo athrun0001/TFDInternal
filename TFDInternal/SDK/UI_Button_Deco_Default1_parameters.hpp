@@ -16,6 +16,14 @@
 namespace SDK::Params
 {
 
+// Function UI_Button_Deco_Default1.UI_Button_Deco_Default1_C.BP_ChangeButtonUI
+// 0x0001 (0x0001 - 0x0000)
+struct UI_Button_Deco_Default1_C_BP_ChangeButtonUI final
+{
+public:
+	EM1ButtonUIType                               InType;                                            // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
 // Function UI_Button_Deco_Default1.UI_Button_Deco_Default1_C.ExecuteUbergraph_UI_Button_Deco_Default1
 // 0x0020 (0x0020 - 0x0000)
 struct UI_Button_Deco_Default1_C_ExecuteUbergraph_UI_Button_Deco_Default1 final
@@ -37,14 +45,6 @@ struct UI_Button_Deco_Default1_C_BP_Selected final
 {
 public:
 	bool                                          InSelected;                                        // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_Button_Deco_Default1.UI_Button_Deco_Default1_C.BP_ChangeButtonUI
-// 0x0001 (0x0001 - 0x0000)
-struct UI_Button_Deco_Default1_C_BP_ChangeButtonUI final
-{
-public:
-	EM1ButtonUIType                               InType;                                            // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 }

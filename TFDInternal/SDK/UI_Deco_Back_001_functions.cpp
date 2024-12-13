@@ -26,8 +26,9 @@ namespace SDK
 // struct FLinearColor                     BgColor_0                                              (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 // double                                  BgOpacity_0                                            (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 // bool                                    White_Gradient_0                                       (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// bool                                    BG_Embossing_0                                         (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
-void UUI_Deco_Back_001_C::SetUIStyleDecoBack001(bool BgOFF, bool DotOFF_0, bool OutlineOFF_0, const struct FLinearColor& BgColor_0, double BgOpacity_0, bool White_Gradient_0)
+void UUI_Deco_Back_001_C::SetUIStyleDecoBack001(bool BgOFF, bool DotOFF_0, bool OutlineOFF_0, const struct FLinearColor& BgColor_0, double BgOpacity_0, bool White_Gradient_0, bool BG_Embossing_0)
 {
 	static class UFunction* Func = nullptr;
 
@@ -42,6 +43,7 @@ void UUI_Deco_Back_001_C::SetUIStyleDecoBack001(bool BgOFF, bool DotOFF_0, bool 
 	Parms.BgColor_0 = std::move(BgColor_0);
 	Parms.BgOpacity_0 = BgOpacity_0;
 	Parms.White_Gradient_0 = White_Gradient_0;
+	Parms.BG_Embossing_0 = BG_Embossing_0;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

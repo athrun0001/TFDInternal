@@ -28,9 +28,9 @@ public:
 	EM1StatRefType                                GiveRecoveryCoefficientStatRefType;                // 0x00F9(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
+	void DoCalculation(struct FM1AbilityOpCalcParam& Param, struct FM1CalcDamageInfo& DamageInfo) const;
 	void SetRecoveryOutModifier(struct FM1AbilityOpCalcParam& Param, struct FM1CalcDamageInfo& DamageInfo, struct FM1AbilityOpExecCalcOutput& Output) const;
 	void Execute(const struct FM1AbilityOpCalcParam& Param, struct FM1AbilityOpExecCalcOutput& Output) const;
-	void DoCalculation(struct FM1AbilityOpCalcParam& Param, struct FM1CalcDamageInfo& DamageInfo) const;
 	void DetermineRecoveryCoefficient(struct FM1AbilityOpCalcParam& Param, struct FM1CalcDamageInfo& DamageInfo, EM1StatType StatType, bool* UseRecoveryCoefficient, EM1StatType* TakeRecoveryCoefficient, EM1StatType* GiveRecoveryCoefficient) const;
 	void ApplySkillATK(struct FM1AbilityOpCalcParam& Param, struct FM1CalcDamageInfo& DamageInfo, EM1ElementalDamageChannel ElementalChannel, EM1SkillArcheType ArcheType, const struct FM1ScaledInteger& AddPower, const struct FM1ScaledInteger& AddAttack, bool IsHittingPC) const;
 	void ApplyRecoveryCoefficient(bool UseRecoveryCoefficient, struct FM1AbilityOpCalcParam& Param, struct FM1CalcDamageInfo& DamageInfo, EM1StatType GiveRecoveryCoefficientStatType, EM1StatType TakeRecoveryCoefficientStatType) const;

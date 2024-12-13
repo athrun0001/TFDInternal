@@ -26,10 +26,10 @@ public:
 	class UImage*                                 Image_64;                                          // 0x0738(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
 
 public:
+	void SequenceEvent__ENTRYPOINTUI_ToastMessage_MidLine();
 	void ExecuteUbergraph_UI_ToastMessage_MidLine(int32 EntryPoint);
 	void Construct();
 	void BP_playakEvent(class UAkAudioEvent* AkEvent);
-	void SequenceEvent__ENTRYPOINTUI_ToastMessage_MidLine();
 
 public:
 	static class UClass* StaticClass()

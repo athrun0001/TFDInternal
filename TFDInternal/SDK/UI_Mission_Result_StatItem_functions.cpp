@@ -17,6 +17,26 @@
 namespace SDK
 {
 
+// Function UI_Mission_Result_StatItem.UI_Mission_Result_StatItem_C.PreConstruct
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+// Parameters:
+// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_Mission_Result_StatItem_C::PreConstruct(bool IsDesignTime)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Mission_Result_StatItem_C", "PreConstruct");
+
+	Params::UI_Mission_Result_StatItem_C_PreConstruct Parms{};
+
+	Parms.IsDesignTime = IsDesignTime;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
 // Function UI_Mission_Result_StatItem.UI_Mission_Result_StatItem_C.UI View
 // (Public, BlueprintCallable, BlueprintEvent)
 
@@ -46,26 +66,6 @@ void UUI_Mission_Result_StatItem_C::SetDataImpl(class UM1UIData* InData)
 	Params::UI_Mission_Result_StatItem_C_SetDataImpl Parms{};
 
 	Parms.InData = InData;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_Mission_Result_StatItem.UI_Mission_Result_StatItem_C.PreConstruct
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
-// Parameters:
-// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Mission_Result_StatItem_C::PreConstruct(bool IsDesignTime)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Mission_Result_StatItem_C", "PreConstruct");
-
-	Params::UI_Mission_Result_StatItem_C_PreConstruct Parms{};
-
-	Parms.IsDesignTime = IsDesignTime;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

@@ -10,8 +10,8 @@
 
 #include "Basic.hpp"
 
-#include "TypedElementRuntime_structs.hpp"
 #include "CoreUObject_classes.hpp"
+#include "TypedElementRuntime_structs.hpp"
 
 
 namespace SDK

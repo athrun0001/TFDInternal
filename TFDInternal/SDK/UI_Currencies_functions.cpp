@@ -17,20 +17,6 @@
 namespace SDK
 {
 
-// Function UI_Currencies.UI_Currencies_C.SetCurrencyPanelSize
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_Currencies_C::SetCurrencyPanelSize()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Currencies_C", "SetCurrencyPanelSize");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function UI_Currencies.UI_Currencies_C.PreConstruct
 // (BlueprintCosmetic, Event, Public, BlueprintEvent)
 // Parameters:
@@ -68,6 +54,20 @@ void UUI_Currencies_C::ExecuteUbergraph_UI_Currencies(int32 EntryPoint)
 	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_Currencies.UI_Currencies_C.SetCurrencyPanelSize
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_Currencies_C::SetCurrencyPanelSize()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Currencies_C", "SetCurrencyPanelSize");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 }

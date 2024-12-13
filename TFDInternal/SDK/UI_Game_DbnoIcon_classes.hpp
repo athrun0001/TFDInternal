@@ -33,9 +33,9 @@ public:
 	double                                        ProgressPlaybackSpeed;                             // 0x0748(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
+	void SetProgressRatio(const float InRatio);
 	void UpdateProgress(double Ratio);
 	void StartProgress(const float InPlayTime);
-	void SetProgressRatio(const float InRatio);
 	void ResetProgress();
 	void PreConstruct(bool IsDesignTime);
 	void ImageRevers();

@@ -28,12 +28,12 @@ public:
 	class UCanvasPanel*                           Panel_Marker;                                      // 0x0770(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
 
 public:
-	void Tick(const struct FGeometry& MyGeometry, float InDeltaTime);
-	void SetUIState(bool IsDim);
-	void PreConstruct(bool IsDesignTime);
-	void ExecuteUbergraph_UI_BaseMission_Marker(int32 EntryPoint);
-	void Construct();
 	void BP_UpdateVisibility(bool bIsVisible);
+	void Construct();
+	void SetUIState(bool IsDim);
+	void ExecuteUbergraph_UI_BaseMission_Marker(int32 EntryPoint);
+	void PreConstruct(bool IsDesignTime);
+	void Tick(const struct FGeometry& MyGeometry, float InDeltaTime);
 
 public:
 	static class UClass* StaticClass()

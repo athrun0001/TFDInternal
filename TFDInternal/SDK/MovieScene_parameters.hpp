@@ -17,6 +17,15 @@
 namespace SDK::Params
 {
 
+// Function MovieScene.MovieSceneEasingFunction.OnEvaluate
+// 0x0008 (0x0008 - 0x0000)
+struct MovieSceneEasingFunction_OnEvaluate final
+{
+public:
+	float                                         Interp;                                            // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         ReturnValue;                                       // 0x0004(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function MovieScene.MovieSceneSequence.FindBindingByTag
 // 0x0020 (0x0020 - 0x0000)
 struct MovieSceneSequence_FindBindingByTag final
@@ -506,15 +515,6 @@ struct MovieSceneSequencePlayer_IsReversed final
 {
 public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MovieScene.MovieSceneEasingFunction.OnEvaluate
-// 0x0008 (0x0008 - 0x0000)
-struct MovieSceneEasingFunction_OnEvaluate final
-{
-public:
-	float                                         Interp;                                            // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         ReturnValue;                                       // 0x0004(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function MovieScene.MovieSceneCustomClockSource.OnRequestCurrentTime

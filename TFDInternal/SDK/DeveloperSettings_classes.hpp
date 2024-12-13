@@ -17,24 +17,6 @@
 namespace SDK
 {
 
-// Class DeveloperSettings.PlatformSettings
-// 0x0018 (0x0040 - 0x0028)
-class UPlatformSettings : public UObject
-{
-public:
-	uint8                                         Pad_28[0x18];                                      // 0x0028(0x0018)(Fixing Struct Size After Last Property [ Dumper-7 ])
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"PlatformSettings">();
-	}
-	static class UPlatformSettings* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UPlatformSettings>();
-	}
-};
-
 // Class DeveloperSettings.DeveloperSettings
 // 0x0010 (0x0038 - 0x0028)
 class UDeveloperSettings : public UObject
@@ -65,6 +47,24 @@ public:
 	static class UDeveloperSettingsBackedByCVars* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<UDeveloperSettingsBackedByCVars>();
+	}
+};
+
+// Class DeveloperSettings.PlatformSettings
+// 0x0018 (0x0040 - 0x0028)
+class UPlatformSettings : public UObject
+{
+public:
+	uint8                                         Pad_28[0x18];                                      // 0x0028(0x0018)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"PlatformSettings">();
+	}
+	static class UPlatformSettings* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UPlatformSettings>();
 	}
 };
 

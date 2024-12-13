@@ -44,14 +44,6 @@ public:
 	ESlateVisibility                              K2Node_Select_Default;                             // 0x0004(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function UI_KeySymbol_02.UI_KeySymbol_02_C.ResetProgress
-// 0x0008 (0x0008 - 0x0000)
-struct UI_KeySymbol_02_C_ResetProgress final
-{
-public:
-	class UMaterialInstanceDynamic*               CallFunc_GetDynamicMaterial_ReturnValue;           // 0x0000(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_KeySymbol_02.UI_KeySymbol_02_C.SetPlayTime
 // 0x0020 (0x0020 - 0x0000)
 struct UI_KeySymbol_02_C_SetPlayTime final
@@ -64,20 +56,20 @@ public:
 	double                                        CallFunc_Divide_DoubleDouble_A_ImplicitCast;       // 0x0018(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
+// Function UI_KeySymbol_02.UI_KeySymbol_02_C.ResetProgress
+// 0x0008 (0x0008 - 0x0000)
+struct UI_KeySymbol_02_C_ResetProgress final
+{
+public:
+	class UMaterialInstanceDynamic*               CallFunc_GetDynamicMaterial_ReturnValue;           // 0x0000(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+};
+
 // Function UI_KeySymbol_02.UI_KeySymbol_02_C.PreConstruct
 // 0x0001 (0x0001 - 0x0000)
 struct UI_KeySymbol_02_C_PreConstruct final
 {
 public:
 	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_KeySymbol_02.UI_KeySymbol_02_C.BP_SetProgressUI
-// 0x0001 (0x0001 - 0x0000)
-struct UI_KeySymbol_02_C_BP_SetProgressUI final
-{
-public:
-	bool                                          bUseProgress;                                      // 0x0000(0x0001)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_KeySymbol_02.UI_KeySymbol_02_C.ExecuteUbergraph_UI_KeySymbol_02
@@ -124,12 +116,12 @@ public:
 	double                                        CallFunc_Divide_DoubleDouble_A_ImplicitCast;       // 0x0090(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function UI_KeySymbol_02.UI_KeySymbol_02_C.BP_ChangeButtonUI
+// Function UI_KeySymbol_02.UI_KeySymbol_02_C.BP_SetProgressUI
 // 0x0001 (0x0001 - 0x0000)
-struct UI_KeySymbol_02_C_BP_ChangeButtonUI final
+struct UI_KeySymbol_02_C_BP_SetProgressUI final
 {
 public:
-	EM1ButtonUIType                               InType;                                            // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          bUseProgress;                                      // 0x0000(0x0001)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_KeySymbol_02.UI_KeySymbol_02_C.BP_ChangeProgressUI
@@ -148,6 +140,14 @@ struct UI_KeySymbol_02_C_BP_ChangeDimmedUI final
 {
 public:
 	bool                                          InDimmed;                                          // 0x0000(0x0001)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_KeySymbol_02.UI_KeySymbol_02_C.BP_ChangeButtonUI
+// 0x0001 (0x0001 - 0x0000)
+struct UI_KeySymbol_02_C_BP_ChangeButtonUI final
+{
+public:
+	EM1ButtonUIType                               InType;                                            // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 }

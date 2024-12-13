@@ -14,6 +14,14 @@
 namespace SDK::Params
 {
 
+// Function UI_Game_DbnoIcon.UI_Game_DbnoIcon_C.SetProgressRatio
+// 0x0004 (0x0004 - 0x0000)
+struct UI_Game_DbnoIcon_C_SetProgressRatio final
+{
+public:
+	float                                         InRatio;                                           // 0x0000(0x0004)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
 // Function UI_Game_DbnoIcon.UI_Game_DbnoIcon_C.UpdateProgress
 // 0x0030 (0x0030 - 0x0000)
 struct UI_Game_DbnoIcon_C_UpdateProgress final
@@ -35,14 +43,6 @@ struct UI_Game_DbnoIcon_C_StartProgress final
 {
 public:
 	float                                         InPlayTime;                                        // 0x0000(0x0004)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_Game_DbnoIcon.UI_Game_DbnoIcon_C.SetProgressRatio
-// 0x0004 (0x0004 - 0x0000)
-struct UI_Game_DbnoIcon_C_SetProgressRatio final
-{
-public:
-	float                                         InRatio;                                           // 0x0000(0x0004)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_Game_DbnoIcon.UI_Game_DbnoIcon_C.PreConstruct

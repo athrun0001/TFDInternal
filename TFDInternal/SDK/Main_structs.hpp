@@ -10,8 +10,8 @@
 
 #include "Basic.hpp"
 
-#include "AnimGraphRuntime_structs.hpp"
 #include "Engine_structs.hpp"
+#include "AnimGraphRuntime_structs.hpp"
 
 
 namespace SDK
@@ -29,7 +29,7 @@ public:
 
 // ScriptStruct Main.Main_C.AnimBlueprintGeneratedConstantData
 // 0x01E7 (0x01E8 - 0x0001)
-struct Main::FAnimBlueprintGeneratedConstantData : public FAnimBlueprintConstantData
+struct Main::FAnimBlueprintGeneratedConstantData final : public FAnimBlueprintConstantData
 {
 public:
 	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])

@@ -17,6 +17,29 @@
 namespace SDK
 {
 
+// Function MovieScene.MovieSceneEasingFunction.OnEvaluate
+// (Event, Protected, BlueprintCallable, BlueprintEvent, BlueprintPure, Const)
+// Parameters:
+// float                                   Interp                                                 (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+// float                                   ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+float IMovieSceneEasingFunction::OnEvaluate(float Interp) const
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("MovieSceneEasingFunction", "OnEvaluate");
+
+	Params::MovieSceneEasingFunction_OnEvaluate Parms{};
+
+	Parms.Interp = Interp;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	return Parms.ReturnValue;
+}
+
+
 // Function MovieScene.MovieSceneSequence.FindBindingByTag
 // (Final, RequiredAPI, Native, Public, BlueprintCallable, BlueprintPure, Const)
 // Parameters:
@@ -1711,29 +1734,6 @@ bool UMovieSceneSequencePlayer::IsReversed() const
 	UObject::ProcessEvent(Func, &Parms);
 
 	Func->FunctionFlags = Flgs;
-
-	return Parms.ReturnValue;
-}
-
-
-// Function MovieScene.MovieSceneEasingFunction.OnEvaluate
-// (Event, Protected, BlueprintCallable, BlueprintEvent, BlueprintPure, Const)
-// Parameters:
-// float                                   Interp                                                 (Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-// float                                   ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-
-float IMovieSceneEasingFunction::OnEvaluate(float Interp) const
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("MovieSceneEasingFunction", "OnEvaluate");
-
-	Params::MovieSceneEasingFunction_OnEvaluate Parms{};
-
-	Parms.Interp = Interp;
-
-	UObject::ProcessEvent(Func, &Parms);
 
 	return Parms.ReturnValue;
 }

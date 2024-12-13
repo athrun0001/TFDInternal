@@ -45,6 +45,34 @@ void UUI_Chatting_C::ShowMiminalWidgets()
 }
 
 
+// Function UI_Chatting.UI_Chatting_C.ShowMaximalWidgets
+// (Private, BlueprintCallable, BlueprintEvent)
+
+void UUI_Chatting_C::ShowMaximalWidgets()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Chatting_C", "ShowMaximalWidgets");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function UI_Chatting.UI_Chatting_C.SetMinBGOpacity
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_Chatting_C::SetMinBGOpacity()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Chatting_C", "SetMinBGOpacity");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UI_Chatting.UI_Chatting_C.PlayTextInputAkEvent
 // (Public, HasDefaults, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -98,20 +126,6 @@ void UUI_Chatting_C::OnRefreshCooltimeText()
 
 	if (Func == nullptr)
 		Func = Class->GetFunction("UI_Chatting_C", "OnRefreshCooltimeText");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function UI_Chatting.UI_Chatting_C.ShowMaximalWidgets
-// (Private, BlueprintCallable, BlueprintEvent)
-
-void UUI_Chatting_C::ShowMaximalWidgets()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Chatting_C", "ShowMaximalWidgets");
 
 	UObject::ProcessEvent(Func, nullptr);
 }
@@ -173,20 +187,6 @@ void UUI_Chatting_C::OnAddedToFocusPath(const struct FFocusEvent& InFocusEvent)
 	Parms.InFocusEvent = std::move(InFocusEvent);
 
 	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_Chatting.UI_Chatting_C.SetMinBGOpacity
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_Chatting_C::SetMinBGOpacity()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Chatting_C", "SetMinBGOpacity");
-
-	UObject::ProcessEvent(Func, nullptr);
 }
 
 
@@ -258,6 +258,20 @@ void UUI_Chatting_C::ExecuteUbergraph_UI_Chatting(int32 EntryPoint)
 }
 
 
+// Function UI_Chatting.UI_Chatting_C.Construct
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+
+void UUI_Chatting_C::Construct()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Chatting_C", "Construct");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UI_Chatting.UI_Chatting_C.ChangeUIState
 // (Public, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -320,15 +334,15 @@ void UUI_Chatting_C::BP_OnRefreshChattingCooltime(int32 RemainCooltime)
 }
 
 
-// Function UI_Chatting.UI_Chatting_C.Construct
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+// Function UI_Chatting.UI_Chatting_C.BP_OnDeactivateChat
+// (Event, Protected, BlueprintEvent)
 
-void UUI_Chatting_C::Construct()
+void UUI_Chatting_C::BP_OnDeactivateChat()
 {
 	static class UFunction* Func = nullptr;
 
 	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Chatting_C", "Construct");
+		Func = Class->GetFunction("UI_Chatting_C", "BP_OnDeactivateChat");
 
 	UObject::ProcessEvent(Func, nullptr);
 }
@@ -377,20 +391,6 @@ void UUI_Chatting_C::BP_NofityDirectMessage()
 
 	if (Func == nullptr)
 		Func = Class->GetFunction("UI_Chatting_C", "BP_NofityDirectMessage");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function UI_Chatting.UI_Chatting_C.BP_OnDeactivateChat
-// (Event, Protected, BlueprintEvent)
-
-void UUI_Chatting_C::BP_OnDeactivateChat()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Chatting_C", "BP_OnDeactivateChat");
 
 	UObject::ProcessEvent(Func, nullptr);
 }

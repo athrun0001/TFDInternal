@@ -17,7 +17,7 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass MOB_CMN_1003_A001_VulgusFollower.MOB_CMN_1003_A001_VulgusFollower_C
-// 0x0000 (0x0F20 - 0x0F20)
+// 0x0000 (0x0F30 - 0x0F30)
 class AMOB_CMN_1003_A001_VulgusFollower_C final : public ANormalMonsterBase_C
 {
 public:

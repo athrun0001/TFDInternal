@@ -10,37 +10,24 @@
 
 #include "Basic.hpp"
 
-#include "Engine_structs.hpp"
-#include "M1_classes.hpp"
+#include "BR_classes.hpp"
 
 
 namespace SDK
 {
 
-// BlueprintGeneratedClass Invasion_EnergyEmitter.Invasion_EnergyEmitter_C
-// 0x0030 (0x04A8 - 0x0478)
-class AInvasion_EnergyEmitter_C final : public AM1Weapon
+// AnimBlueprintGeneratedClass Invasion_EnergyEmitter.Invasion_EnergyEmitter_C
+// 0x0000 (0x1CD0 - 0x1CD0)
+class UInvasion_EnergyEmitter_C final : public UBR_C
 {
-public:
-	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0478(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
-	class UM1WeaponFireLoopComponent*             M1WeaponFireLoop;                                  // 0x0480(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class UNiagaraComponent*                      NS_Item_PickupWeapon_Indicator_01;                 // 0x0488(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class UM1WeaponChargeComponent*               M1WeaponCharge;                                    // 0x0490(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class UM1WeaponMagazineReloadComponent*       M1WeaponMagazineReload;                            // 0x0498(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-	class UM1WeaponInstantHitComponent*           M1WeaponInstantHit;                                // 0x04A0(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
-
-public:
-	void ReserveDestroy(float LifeSpan);
-	void ExecuteUbergraph_Invasion_EnergyEmitter(int32 EntryPoint);
-
 public:
 	static class UClass* StaticClass()
 	{
 		return StaticBPGeneratedClassImpl<"Invasion_EnergyEmitter_C">();
 	}
-	static class AInvasion_EnergyEmitter_C* GetDefaultObj()
+	static class UInvasion_EnergyEmitter_C* GetDefaultObj()
 	{
-		return GetDefaultObjImpl<AInvasion_EnergyEmitter_C>();
+		return GetDefaultObjImpl<UInvasion_EnergyEmitter_C>();
 	}
 };
 

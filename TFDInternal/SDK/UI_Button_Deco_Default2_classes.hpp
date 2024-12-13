@@ -34,9 +34,9 @@ public:
 
 public:
 	void ExecuteUbergraph_UI_Button_Deco_Default2(int32 EntryPoint);
+	void BP_ChangeButtonUI(EM1ButtonUIType InType);
 	void Construct();
 	void BP_Selected(bool InSelected);
-	void BP_ChangeButtonUI(EM1ButtonUIType InType);
 
 public:
 	static class UClass* StaticClass()

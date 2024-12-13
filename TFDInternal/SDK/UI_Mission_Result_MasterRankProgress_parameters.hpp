@@ -17,15 +17,12 @@
 namespace SDK::Params
 {
 
-// Function UI_Mission_Result_MasterRankProgress.UI_Mission_Result_MasterRankProgress_C.ExecuteUbergraph_UI_Mission_Result_MasterRankProgress
-// 0x0010 (0x0010 - 0x0000)
-struct UI_Mission_Result_MasterRankProgress_C_ExecuteUbergraph_UI_Mission_Result_MasterRankProgress final
+// Function UI_Mission_Result_MasterRankProgress.UI_Mission_Result_MasterRankProgress_C.PreConstruct
+// 0x0001 (0x0001 - 0x0000)
+struct UI_Mission_Result_MasterRankProgress_C_PreConstruct final
 {
 public:
-	int32                                         EntryPoint;                                        // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          K2Node_Event_IsDesignTime;                         // 0x0004(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class UUMGSequencePlayer*                     CallFunc_PlayUIAnimation_ReturnValue;              // 0x0008(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_Mission_Result_MasterRankProgress.UI_Mission_Result_MasterRankProgress_C.UIMax Level
@@ -36,6 +33,17 @@ public:
 	bool                                          Max_Level;                                         // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
 	struct FSlateColor                            K2Node_MakeStruct_SlateColor;                      // 0x0004(0x0014)()
+};
+
+// Function UI_Mission_Result_MasterRankProgress.UI_Mission_Result_MasterRankProgress_C.ExecuteUbergraph_UI_Mission_Result_MasterRankProgress
+// 0x0010 (0x0010 - 0x0000)
+struct UI_Mission_Result_MasterRankProgress_C_ExecuteUbergraph_UI_Mission_Result_MasterRankProgress final
+{
+public:
+	int32                                         EntryPoint;                                        // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          K2Node_Event_IsDesignTime;                         // 0x0004(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class UUMGSequencePlayer*                     CallFunc_PlayUIAnimation_ReturnValue;              // 0x0008(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_Mission_Result_MasterRankProgress.UI_Mission_Result_MasterRankProgress_C.BP_ShowExpText
@@ -53,17 +61,6 @@ public:
 	class UUI_Mission_Result_ExpValueNotice_C*    Temp_object_Variable_1;                            // 0x0020(0x0008)(ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
 	class UUI_Mission_Result_ExpValueNotice_C*    Temp_object_Variable_2;                            // 0x0028(0x0008)(ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
 	class UUI_Mission_Result_ExpValueNotice_C*    K2Node_Select_Default;                             // 0x0030(0x0008)(ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_Mission_Result_MasterRankProgress.UI_Mission_Result_MasterRankProgress_C.BP_SetLevel
-// 0x0038 (0x0038 - 0x0000)
-struct UI_Mission_Result_MasterRankProgress_C_BP_SetLevel final
-{
-public:
-	int32                                         InLevel;                                           // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	int32                                         CallFunc_Add_IntInt_ReturnValue;                   // 0x0004(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	class FText                                   CallFunc_Conv_IntToText_ReturnValue;               // 0x0008(0x0018)()
-	class FText                                   CallFunc_Conv_IntToText_ReturnValue_1;             // 0x0020(0x0018)()
 };
 
 // Function UI_Mission_Result_MasterRankProgress.UI_Mission_Result_MasterRankProgress_C.BP_SetExpProgressValue
@@ -102,12 +99,15 @@ public:
 	class UUI_Mission_Result_ExpValueNotice_C*    K2Node_Select_Default;                             // 0x0040(0x0008)(ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function UI_Mission_Result_MasterRankProgress.UI_Mission_Result_MasterRankProgress_C.PreConstruct
-// 0x0001 (0x0001 - 0x0000)
-struct UI_Mission_Result_MasterRankProgress_C_PreConstruct final
+// Function UI_Mission_Result_MasterRankProgress.UI_Mission_Result_MasterRankProgress_C.BP_SetLevel
+// 0x0038 (0x0038 - 0x0000)
+struct UI_Mission_Result_MasterRankProgress_C_BP_SetLevel final
 {
 public:
-	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	int32                                         InLevel;                                           // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	int32                                         CallFunc_Add_IntInt_ReturnValue;                   // 0x0004(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	class FText                                   CallFunc_Conv_IntToText_ReturnValue;               // 0x0008(0x0018)()
+	class FText                                   CallFunc_Conv_IntToText_ReturnValue_1;             // 0x0020(0x0018)()
 };
 
 }

@@ -51,20 +51,6 @@ void UUI_KeySymbol_02_C::UISetKeyColor()
 }
 
 
-// Function UI_KeySymbol_02.UI_KeySymbol_02_C.SequenceEvent_0
-// (BlueprintCallable, BlueprintEvent)
-
-void UUI_KeySymbol_02_C::SequenceEvent_0()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_KeySymbol_02_C", "SequenceEvent_0");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function UI_KeySymbol_02.UI_KeySymbol_02_C.SetVisibleProgressUI
 // (Public, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -82,20 +68,6 @@ void UUI_KeySymbol_02_C::SetVisibleProgressUI(bool InVisible)
 	Parms.InVisible = InVisible;
 
 	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_KeySymbol_02.UI_KeySymbol_02_C.ResetProgress
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_KeySymbol_02_C::ResetProgress()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_KeySymbol_02_C", "ResetProgress");
-
-	UObject::ProcessEvent(Func, nullptr);
 }
 
 
@@ -119,6 +91,48 @@ void UUI_KeySymbol_02_C::SetPlayTime(double InPlayTime)
 }
 
 
+// Function UI_KeySymbol_02.UI_KeySymbol_02_C.SequenceEvent__ENTRYPOINTUI_KeySymbol_02
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_KeySymbol_02_C::SequenceEvent__ENTRYPOINTUI_KeySymbol_02()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_KeySymbol_02_C", "SequenceEvent__ENTRYPOINTUI_KeySymbol_02");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function UI_KeySymbol_02.UI_KeySymbol_02_C.SequenceEvent_0
+// (BlueprintCallable, BlueprintEvent)
+
+void UUI_KeySymbol_02_C::SequenceEvent_0()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_KeySymbol_02_C", "SequenceEvent_0");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function UI_KeySymbol_02.UI_KeySymbol_02_C.ResetProgress
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_KeySymbol_02_C::ResetProgress()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_KeySymbol_02_C", "ResetProgress");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UI_KeySymbol_02.UI_KeySymbol_02_C.PreConstruct
 // (BlueprintCosmetic, Event, Public, BlueprintEvent)
 // Parameters:
@@ -134,40 +148,6 @@ void UUI_KeySymbol_02_C::PreConstruct(bool IsDesignTime)
 	Params::UI_KeySymbol_02_C_PreConstruct Parms{};
 
 	Parms.IsDesignTime = IsDesignTime;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_KeySymbol_02.UI_KeySymbol_02_C.SequenceEvent__ENTRYPOINTUI_KeySymbol_02
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_KeySymbol_02_C::SequenceEvent__ENTRYPOINTUI_KeySymbol_02()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_KeySymbol_02_C", "SequenceEvent__ENTRYPOINTUI_KeySymbol_02");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function UI_KeySymbol_02.UI_KeySymbol_02_C.BP_SetProgressUI
-// (Event, Public, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// bool                                    bUseProgress                                           (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_KeySymbol_02_C::BP_SetProgressUI(const bool bUseProgress)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_KeySymbol_02_C", "BP_SetProgressUI");
-
-	Params::UI_KeySymbol_02_C_BP_SetProgressUI Parms{};
-
-	Parms.bUseProgress = bUseProgress;
 
 	UObject::ProcessEvent(Func, &Parms);
 }
@@ -193,21 +173,21 @@ void UUI_KeySymbol_02_C::ExecuteUbergraph_UI_KeySymbol_02(int32 EntryPoint)
 }
 
 
-// Function UI_KeySymbol_02.UI_KeySymbol_02_C.BP_ChangeButtonUI
-// (Event, Protected, BlueprintEvent)
+// Function UI_KeySymbol_02.UI_KeySymbol_02_C.BP_SetProgressUI
+// (Event, Public, BlueprintCallable, BlueprintEvent)
 // Parameters:
-// EM1ButtonUIType                         InType                                                 (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// bool                                    bUseProgress                                           (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
-void UUI_KeySymbol_02_C::BP_ChangeButtonUI(EM1ButtonUIType InType)
+void UUI_KeySymbol_02_C::BP_SetProgressUI(const bool bUseProgress)
 {
 	static class UFunction* Func = nullptr;
 
 	if (Func == nullptr)
-		Func = Class->GetFunction("UI_KeySymbol_02_C", "BP_ChangeButtonUI");
+		Func = Class->GetFunction("UI_KeySymbol_02_C", "BP_SetProgressUI");
 
-	Params::UI_KeySymbol_02_C_BP_ChangeButtonUI Parms{};
+	Params::UI_KeySymbol_02_C_BP_SetProgressUI Parms{};
 
-	Parms.InType = InType;
+	Parms.bUseProgress = bUseProgress;
 
 	UObject::ProcessEvent(Func, &Parms);
 }
@@ -250,6 +230,26 @@ void UUI_KeySymbol_02_C::BP_ChangeDimmedUI(const bool InDimmed)
 	Params::UI_KeySymbol_02_C_BP_ChangeDimmedUI Parms{};
 
 	Parms.InDimmed = InDimmed;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_KeySymbol_02.UI_KeySymbol_02_C.BP_ChangeButtonUI
+// (Event, Protected, BlueprintEvent)
+// Parameters:
+// EM1ButtonUIType                         InType                                                 (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_KeySymbol_02_C::BP_ChangeButtonUI(EM1ButtonUIType InType)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_KeySymbol_02_C", "BP_ChangeButtonUI");
+
+	Params::UI_KeySymbol_02_C_BP_ChangeButtonUI Parms{};
+
+	Parms.InType = InType;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

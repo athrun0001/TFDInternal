@@ -13,18 +13,18 @@
 #include "M1Actor_structs.hpp"
 #include "M1Data_structs.hpp"
 #include "M1_structs.hpp"
-#include "GameplayTags_structs.hpp"
-#include "PhysicsCore_structs.hpp"
 #include "CoreUObject_structs.hpp"
+#include "GameplayTags_structs.hpp"
 #include "Engine_structs.hpp"
+#include "PhysicsCore_structs.hpp"
 #include "AIModule_structs.hpp"
 #include "AkAudio_structs.hpp"
 #include "InputCore_structs.hpp"
+#include "Slate_structs.hpp"
 #include "UMG_structs.hpp"
 #include "SlateCore_structs.hpp"
 #include "GameplayCameras_structs.hpp"
 #include "Niagara_structs.hpp"
-#include "Slate_structs.hpp"
 
 
 namespace SDK::Params
@@ -2016,16 +2016,6 @@ struct M1UICustomizeDetailsBase_BP_ShowDescImpl final
 {
 public:
 	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UICustomizeDetailsBase.OnMouseWheelOnSlot
-// 0x0080 (0x0080 - 0x0000)
-struct M1UICustomizeDetailsBase_OnMouseWheelOnSlot final
-{
-public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function M1.M1UICustomizeSkinDetails.BP_ShowDesc
@@ -8205,23 +8195,6 @@ public:
 	TArray<class USceneComponent*>                InChangedMeshComponent;                            // 0x0000(0x0010)(Parm, ZeroConstructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPerkDetails.BP_SetPreviewVisibility
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIPerkDetails_BP_SetPreviewVisibility final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1TypeListView.OnEntryInitialized
-// 0x0010 (0x0010 - 0x0000)
-struct M1TypeListView_OnEntryInitialized final
-{
-public:
-	class UObject*                                Item;                                              // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UUserWidget*                            Widget;                                            // 0x0008(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1Localization.GetLocalizedString
 // 0x0020 (0x0020 - 0x0000)
 struct M1Localization_GetLocalizedString final
@@ -8284,86 +8257,227 @@ public:
 	TArray<class FName>                           ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPopup.Create
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIPopup_Create final
+// Function M1.M1UIPaintExtract.OnCancelButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPaintExtract_OnCancelButtonClicked final
 {
 public:
-	class UObject*                                WorldContextObject;                                // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   InRowName;                                         // 0x0008(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UM1UIPopup*                             ReturnValue;                                       // 0x0010(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPopup.BP_SetButtonCountImpl
+// Function M1.M1UIPaintExtract.OnExtractButtonHoldComplete
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPaintExtract_OnExtractButtonHoldComplete final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPaintExtract.OnLeftButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPaintExtract_OnLeftButtonClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPaintExtract.OnRightButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPaintExtract_OnRightButtonClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPaintExtract.OnShowPaintGroupButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPaintExtract_OnShowPaintGroupButtonClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPaintExtract.OnShowProbabilityClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPaintExtract_OnShowProbabilityClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.BP_ShowEntries
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPanelEntries_BP_ShowEntries final
+{
+public:
+	TArray<class UM1UIWidget*>                    InWidgets;                                         // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.OnButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelEntries_OnButtonClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.OnButtonDimmedClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelEntries_OnButtonDimmedClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.OnButtonPressed
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelEntries_OnButtonPressed final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.OnButtonReleased
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelEntries_OnButtonReleased final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.OnCreateEntryTooltipWidgetImpl
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelEntries_OnCreateEntryTooltipWidgetImpl final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.OnMouseHovered
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelEntries_OnMouseHovered final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.OnMouseUnhovered
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelEntries_OnMouseUnhovered final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.OnMouseWheelOnAnySlot
+// 0x0080 (0x0080 - 0x0000)
+struct M1UIPanelEntries_OnMouseWheelOnAnySlot final
+{
+public:
+	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPanelEntries.OnRemoveEntryTooltipWidgetImpl
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelEntries_OnRemoveEntryTooltipWidgetImpl final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.OnRightMouseButtonUp
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelEntries_OnRightMouseButtonUp final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.SetEntryPadding
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelEntries_SetEntryPadding final
+{
+public:
+	struct FVector2D                              InPaddingSize;                                     // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.SetEntrySize
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelEntries_SetEntrySize final
+{
+public:
+	struct FVector2D                              InEntrySize;                                       // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.SetWidgetEntryClass
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelEntries_SetWidgetEntryClass final
+{
+public:
+	TSubclassOf<class UM1UIWidget>                InWidgetClass;                                     // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.ShowEntries
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIPanelEntries_ShowEntries final
+{
+public:
+	TArray<class UM1UIData*>                      InEntries;                                         // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	bool                                          bKeepScrollOffset;                                 // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPanelEntries.GetChildAt
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPanelEntries_GetChildAt final
+{
+public:
+	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class UUserWidget*                            ReturnValue;                                       // 0x0008(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.GetChildrenCount
 // 0x0004 (0x0004 - 0x0000)
-struct M1UIPopup_BP_SetButtonCountImpl final
+struct M1UIPanelEntries_GetChildrenCount final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.GetValidEntryWidget
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPanelEntries_GetValidEntryWidget final
+{
+public:
+	const class UM1UIData*                        InUIData;                                          // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            ReturnValue;                                       // 0x0008(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.GetValidEntryWidgets
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPanelEntries_GetValidEntryWidgets final
+{
+public:
+	TArray<class UM1UIWidget*>                    ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelEntries.IsUsingMulticondition
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIPanelEntries_IsUsingMulticondition final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelRadialMenuEntries.BP_SetEntriesCount
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIPanelRadialMenuEntries_BP_SetEntriesCount final
 {
 public:
 	int32                                         InCount;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopup.CallBack_Cancel
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopup_CallBack_Cancel final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopup.CallBack_Confirm
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopup_CallBack_Confirm final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopup.SetTextByUIKeyToContent
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPopup_SetTextByUIKeyToContent final
-{
-public:
-	class FString                                 InMessage;                                         // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopup.SetTextMessageParameter
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPopup_SetTextMessageParameter final
-{
-public:
-	TArray<class FString>                         InParm;                                            // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopup.SetTextMessageToContent
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIPopup_SetTextMessageToContent final
-{
-public:
-	class FText                                   InMessage;                                         // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopup.SetTitle
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPopup_SetTitle final
-{
-public:
-	class FString                                 InMessage;                                         // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopup.ShowConfirmOnly
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIPopup_ShowConfirmOnly final
-{
-public:
-	bool                                          InConfirmOnly;                                     // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIParticleImage.StartFXWith
-// 0x0030 (0x0030 - 0x0000)
-struct M1UIParticleImage_StartFXWith final
-{
-public:
-	TSoftObjectPtr<class UFXSystemAsset>          InFx;                                              // 0x0000(0x0030)(Parm, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1SocialMotionInteractionPoint.CanInteract
@@ -8588,22 +8702,6 @@ public:
 	TArray<class AActor*>                         ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPopupWithButtons.CallBack_MiddleButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupWithButtons_CallBack_MiddleButtonClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupWithButtons.CallBack_MiddleButtonHoldCompleted
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupWithButtons_CallBack_MiddleButtonHoldCompleted final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1AbilityAsync_WaitAbilityEvent.WaitAbilityEventFromTargetQuery
 // 0x0040 (0x0040 - 0x0000)
 struct M1AbilityAsync_WaitAbilityEvent_WaitAbilityEventFromTargetQuery final
@@ -8631,12 +8729,36 @@ public:
 	class UM1AbilityAsync_WaitAbilityEvent*       ReturnValue;                                       // 0x0038(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPlatformUserInfo.OnConfirmButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPlatformUserInfo_OnConfirmButtonClicked final
+// Function M1.M1UIActorWidget.BP_UpdateVisibility
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIActorWidget_BP_UpdateVisibility final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsVisible;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIActorWidget.GetOwnerActor
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIActorWidget_GetOwnerActor final
+{
+public:
+	class AActor*                                 ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIActorWidget.IsDisplayingEciveMarker
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIActorWidget_IsDisplayingEciveMarker final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPinPointActorWidget.BP_SetSquadIndex
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIPinPointActorWidget_BP_SetSquadIndex final
+{
+public:
+	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1AbilityAsync_WaitDamageEvent.WaitGetDamageEventToActor
@@ -8997,71 +9119,6 @@ public:
 // Function M1.M1CustomizePreviewAnimInstance.IsPlayingSocialMotion
 // 0x0001 (0x0001 - 0x0000)
 struct M1CustomizePreviewAnimInstance_IsPlayingSocialMotion final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemLevelUpgrade.BP_OnPhaseChanged
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIItemLevelUpgrade_BP_OnPhaseChanged final
-{
-public:
-	EM1LevelUpgradePhase                          InNewPhase;                                        // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LevelUpgradePhase                          InPrevPhase;                                       // 0x0001(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemLevelUpgrade.OnCancelClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemLevelUpgrade_OnCancelClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemLevelUpgrade.OnGuideClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemLevelUpgrade_OnGuideClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemLevelUpgrade.OnMaterialItemClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemLevelUpgrade_OnMaterialItemClicked final
-{
-public:
-	class UM1UIWidget*                            InClickedWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemLevelUpgrade.OnResultPopupConfirmed
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemLevelUpgrade_OnResultPopupConfirmed final
-{
-public:
-	class UM1UIWidget*                            InConfirmButtonWidget;                             // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemLevelUpgrade.OnSelectedTargetItemClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemLevelUpgrade_OnSelectedTargetItemClicked final
-{
-public:
-	class UM1UIWidget*                            InClickedWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemLevelUpgrade.OnTargetItemClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemLevelUpgrade_OnTargetItemClicked final
-{
-public:
-	class UM1UIWidget*                            InClickedWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemLevelUpgrade.BP_IsAnyAnimationPlaying
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIItemLevelUpgrade_BP_IsAnyAnimationPlaying final
 {
 public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -11656,6 +11713,24 @@ public:
 	class FString                                 ReturnValue;                                       // 0x0008(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIItemReactorInfoSkillSlot.BP_SetArcheType
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIItemReactorInfoSkillSlot_BP_SetArcheType final
+{
+public:
+	EM1SkillArcheType                             InArcheType;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsAfffected;                                      // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemReactorInfoSkillSlot.BP_SetElemantalType
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIItemReactorInfoSkillSlot_BP_SetElemantalType final
+{
+public:
+	EM1ElementalDamageChannel                     InElementalType;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsAfffected;                                      // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1Character.Auth_ExcludeGame
 // 0x0010 (0x0010 - 0x0000)
 struct M1Character_Auth_ExcludeGame final
@@ -12079,30 +12154,6 @@ struct M1UIDataTaskAssassination_GetMonsterKillInfo final
 {
 public:
 	TArray<struct FM1MonsterKillInfoUI>           ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIActorWidget.BP_UpdateVisibility
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIActorWidget_BP_UpdateVisibility final
-{
-public:
-	bool                                          bIsVisible;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIActorWidget.GetOwnerActor
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIActorWidget_GetOwnerActor final
-{
-public:
-	class AActor*                                 ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIActorWidget.IsDisplayingEciveMarker
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIActorWidget_IsDisplayingEciveMarker final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1ActionPermissionComponent.GetRadius
@@ -13769,173 +13820,6 @@ public:
 	class UM1SocialMotionControlComponent*        ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPanelEntries.BP_ShowEntries
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPanelEntries_BP_ShowEntries final
-{
-public:
-	TArray<class UM1UIWidget*>                    InWidgets;                                         // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.OnButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelEntries_OnButtonClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.OnButtonDimmedClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelEntries_OnButtonDimmedClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.OnButtonPressed
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelEntries_OnButtonPressed final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.OnButtonReleased
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelEntries_OnButtonReleased final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.OnCreateEntryTooltipWidgetImpl
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelEntries_OnCreateEntryTooltipWidgetImpl final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.OnMouseHovered
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelEntries_OnMouseHovered final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.OnMouseUnhovered
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelEntries_OnMouseUnhovered final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.OnMouseWheelOnAnySlot
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIPanelEntries_OnMouseWheelOnAnySlot final
-{
-public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPanelEntries.OnRemoveEntryTooltipWidgetImpl
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelEntries_OnRemoveEntryTooltipWidgetImpl final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.OnRightMouseButtonUp
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelEntries_OnRightMouseButtonUp final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.SetEntryPadding
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelEntries_SetEntryPadding final
-{
-public:
-	struct FVector2D                              InPaddingSize;                                     // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.SetEntrySize
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelEntries_SetEntrySize final
-{
-public:
-	struct FVector2D                              InEntrySize;                                       // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.SetWidgetEntryClass
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelEntries_SetWidgetEntryClass final
-{
-public:
-	TSubclassOf<class UM1UIWidget>                InWidgetClass;                                     // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.ShowEntries
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIPanelEntries_ShowEntries final
-{
-public:
-	TArray<class UM1UIData*>                      InEntries;                                         // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-	bool                                          bKeepScrollOffset;                                 // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPanelEntries.GetChildAt
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPanelEntries_GetChildAt final
-{
-public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class UUserWidget*                            ReturnValue;                                       // 0x0008(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.GetChildrenCount
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIPanelEntries_GetChildrenCount final
-{
-public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.GetValidEntryWidget
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPanelEntries_GetValidEntryWidget final
-{
-public:
-	const class UM1UIData*                        InUIData;                                          // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UM1UIWidget*                            ReturnValue;                                       // 0x0008(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.GetValidEntryWidgets
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPanelEntries_GetValidEntryWidgets final
-{
-public:
-	TArray<class UM1UIWidget*>                    ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelEntries.IsUsingMulticondition
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIPanelEntries_IsUsingMulticondition final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UICustomizeWeaponSkinSlots.BP_GetPaintSlots
 // 0x0010 (0x0010 - 0x0000)
 struct M1UICustomizeWeaponSkinSlots_BP_GetPaintSlots final
@@ -14219,30 +14103,6 @@ public:
 	TArray<struct FHitResult>                     HitResults;                                        // 0x0020(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRSideChild.BP_SetOpacityToOne
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIRSideChild_BP_SetOpacityToOne final
-{
-public:
-	bool                                          bVisible;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInvasionDungeonScore.BP_ChangeActiveTimeAttack
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIInvasionDungeonScore_BP_ChangeActiveTimeAttack final
-{
-public:
-	int32                                         InUniqueId;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInvasionDungeonScore.BP_GetTimeAttackItems
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIInvasionDungeonScore_BP_GetTimeAttackItems final
-{
-public:
-	TArray<class UM1UIInvasionDungeonScoreItem*>  ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIDataString.GetValue
 // 0x0010 (0x0010 - 0x0000)
 struct M1UIDataString_GetValue final
@@ -14282,6 +14142,38 @@ struct M1LocoAnimInstance_InitializeRandomIdleAnims final
 public:
 	struct FAnimUpdateContext                     InContext;                                         // 0x0000(0x0010)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
 	struct FAnimNodeReference                     Node;                                              // 0x0010(0x0010)(Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataMasteryRankCondition.CanLevelUp
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIDataMasteryRankCondition_CanLevelUp final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataMasteryRankCondition.GetExp
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIDataMasteryRankCondition_GetExp final
+{
+public:
+	int64                                         ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataMasteryRankCondition.GetLevel
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIDataMasteryRankCondition_GetLevel final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataMasteryRankCondition.GetRequiredExp
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIDataMasteryRankCondition_GetRequiredExp final
+{
+public:
+	int64                                         ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1AIPerceptionComponent.OnPeceptionActorForgotten
@@ -14711,12 +14603,44 @@ public:
 	class FString                                 ItemNameOrTemplatId;                               // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMatchingText.BP_SetVisibility
+// Function M1.M1UIMasteryRankBenefitSlot.BP_SetBenefitType
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMatchingText_BP_SetVisibility final
+struct M1UIMasteryRankBenefitSlot_BP_SetBenefitType final
 {
 public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MasteryRankBenefitType                     InBenefitType;                                     // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMasteryRankUpPage.OnCancelClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMasteryRankUpPage_OnCancelClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMasteryRankUpPage.OnGuideClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMasteryRankUpPage_OnGuideClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMasteryRankUpPage.OnHoldCompleteRankUp
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMasteryRankUpPage_OnHoldCompleteRankUp final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMasteryRankUpPage.OnNotifyMasteryRankUppable
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIMasteryRankUpPage_OnNotifyMasteryRankUppable final
+{
+public:
+	int32                                         InLevel;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1PrivateOnlineServicePreset.ClientReceiveApplyPreset
@@ -14789,6 +14713,142 @@ struct M1PrivateOnlineServicePreset_ServerRequestSavePreset final
 {
 public:
 	int32                                         InPresetIndex;                                     // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.BP_ApplyCustomizingSettings
+// 0x0440 (0x0440 - 0x0000)
+struct M1UIButton_BP_ApplyCustomizingSettings final
+{
+public:
+	struct FM1TypedUITheme_Button                 InThemeInfo;                                       // 0x0000(0x0440)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.BP_ChangeButtonUI
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_BP_ChangeButtonUI final
+{
+public:
+	EM1ButtonUIType                               InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.BP_ChangeDimmedUI
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_BP_ChangeDimmedUI final
+{
+public:
+	bool                                          InDimmed;                                          // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.BP_DisplayAsSelected
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_BP_DisplayAsSelected final
+{
+public:
+	bool                                          bSelected;                                         // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.BP_OnHoldCompletionProgressUpdated
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIButton_BP_OnHoldCompletionProgressUpdated final
+{
+public:
+	float                                         InProgress;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.BP_ShowNewIcon
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_BP_ShowNewIcon final
+{
+public:
+	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.Button_Default_OnFocusLost
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIButton_Button_Default_OnFocusLost final
+{
+public:
+	struct FFocusEvent                            InFocusEvent;                                      // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.Button_Default_OnFocusReceived
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIButton_Button_Default_OnFocusReceived final
+{
+public:
+	struct FFocusEvent                            InFocusEvent;                                      // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.SetDimmed
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_SetDimmed final
+{
+public:
+	bool                                          InDimmed;                                          // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.SetIconImage
+// 0x0030 (0x0030 - 0x0000)
+struct M1UIButton_SetIconImage final
+{
+public:
+	TSoftObjectPtr<class UTexture2D>              InTexture2D;                                       // 0x0000(0x0030)(Parm, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.SetIconImageColor
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIButton_SetIconImageColor final
+{
+public:
+	struct FLinearColor                           InLinearColor;                                     // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.SetText
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIButton_SetText final
+{
+public:
+	class FString                                 InText;                                            // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.SetTextVisibility
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_SetTextVisibility final
+{
+public:
+	ESlateVisibility                              InVisibility;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.IsButtonHovered
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_IsButtonHovered final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.IsDefault
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_IsDefault final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.IsDimmed
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_IsDimmed final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton.IsPressed
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_IsPressed final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1AkComponentBase.OnPostEventCallBack
@@ -16146,12 +16206,45 @@ public:
 	int32                                         Value;                                             // 0x0008(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIChildMissionGuide.GetEndAnimation
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIChildMissionGuide_GetEndAnimation final
+// Function M1.M1UIMissionGuide.BP_PlayFieldContentsFailAnim
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionGuide_BP_PlayFieldContentsFailAnim final
 {
 public:
-	class UWidgetAnimation*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MissionSubType                             InSubType;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionGuide.BP_PlayFieldContentsStartAnim
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionGuide_BP_PlayFieldContentsStartAnim final
+{
+public:
+	EM1MissionSubType                             InSubType;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionGuide.BP_PlayFieldContentsSuccessAnim
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionGuide_BP_PlayFieldContentsSuccessAnim final
+{
+public:
+	EM1MissionSubType                             InSubType;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionGuide.BP_PlayMissionStartAnim
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMissionGuide_BP_PlayMissionStartAnim final
+{
+public:
+	class FName                                   InMissionName;                                     // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   InMissionTypeName;                                 // 0x0008(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionGuide.GetChildMissionWidgets
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMissionGuide_GetChildMissionWidgets final
+{
+public:
+	TArray<class UM1UIChildMissionGuide*>         ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataWorldMission.GetMapName
@@ -16186,70 +16279,6 @@ public:
 	EM1CharacterGender                            ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPopupContent.ChangeTextMessageParameter
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPopupContent_ChangeTextMessageParameter final
-{
-public:
-	TArray<class FString>                         InParam;                                           // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupContent.SetTextByUIKey
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPopupContent_SetTextByUIKey final
-{
-public:
-	class FString                                 InMessage;                                         // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupContent.SetTextMessage
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIPopupContent_SetTextMessage final
-{
-public:
-	class FText                                   InMessage;                                         // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupContent.SetTextMessageParameter
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPopupContent_SetTextMessageParameter final
-{
-public:
-	TArray<class FString>                         InParam;                                           // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionInfo.BP_SetMissionRewardByGradeTextByCategory
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionInfo_BP_SetMissionRewardByGradeTextByCategory final
-{
-public:
-	EM1MissionCategory                            InCategory;                                        // 0x0000(0x0001)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionInfo.BP_SetMissionWaveType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionInfo_BP_SetMissionWaveType final
-{
-public:
-	bool                                          bHasWave;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionInfo.OnTooltipToggleLinkedContents
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionInfo_OnTooltipToggleLinkedContents final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionInfo.OnTooltipToggleVoidVaultKey
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionInfo_OnTooltipToggleVoidVaultKey final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1LaboratoryController.NetMulticastDespawnMonsters
 // 0x0010 (0x0010 - 0x0000)
 struct M1LaboratoryController_NetMulticastDespawnMonsters final
@@ -16274,12 +16303,44 @@ public:
 	bool                                          bOn;                                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionWaveGuide.GetChildMissionWidgets
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionWaveGuide_GetChildMissionWidgets final
+// Function M1.M1UIMiniGameTimingRing_Gameplay.AddRingWidget
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIMiniGameTimingRing_Gameplay_AddRingWidget final
 {
 public:
-	TArray<class UM1UIChildMissionGuide*>         ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	int32                                         InRingIndex;                                       // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMiniGameTimingRing_Gameplay.BP_PlayAnim_ShowNeedleAndRange
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMiniGameTimingRing_Gameplay_BP_PlayAnim_ShowNeedleAndRange final
+{
+public:
+	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMiniGameTimingRing_Gameplay.OnKeyPressed_SelectedStopNeedle
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMiniGameTimingRing_Gameplay_OnKeyPressed_SelectedStopNeedle final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMiniGameTimingRing_Gameplay.OnKeyPressed_StopNeedleCandidate
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMiniGameTimingRing_Gameplay_OnKeyPressed_StopNeedleCandidate final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMiniGameTimingRing_Gameplay.Start
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIMiniGameTimingRing_Gameplay_Start final
+{
+public:
+	float                                         InDelay;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1AnimInstance.LinkAnimClassLayersWithLinkedInstances
@@ -17233,6 +17294,96 @@ public:
 	class FString                                 Detail;                                            // 0x0008(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIWeaponBook.OnEventCancelClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWeaponBook_OnEventCancelClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWeaponBook.OnEventDetachAllBegin
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWeaponBook_OnEventDetachAllBegin final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWeaponBook.OnEventDetachAllCancel
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWeaponBook_OnEventDetachAllCancel final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWeaponBook.OnEventDetachAllDone
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWeaponBook_OnEventDetachAllDone final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWeaponBook.OnEventOpenRuneBoard
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWeaponBook_OnEventOpenRuneBoard final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWeaponBook.OnEventResearchDetailsClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWeaponBook_OnEventResearchDetailsClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWeaponBook.OnEventTabSelected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWeaponBook_OnEventTabSelected final
+{
+public:
+	int32                                         InTabIndex;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSelected;                                         // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIWeaponBook.OnGuideClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWeaponBook_OnGuideClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWeaponBook.OnItemSlotClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWeaponBook_OnItemSlotClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWeaponBook.OnItemSlotCursorEntered
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWeaponBook_OnItemSlotCursorEntered final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWeaponBook.OnItemSlotCursorLeft
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWeaponBook_OnItemSlotCursorLeft final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1TileView.SetEntrySpacing
 // 0x0004 (0x0004 - 0x0000)
 struct M1TileView_SetEntrySpacing final
@@ -17543,142 +17694,6 @@ public:
 	bool                                          bIsWeapon;                                         // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIButton.BP_ApplyCustomizingSettings
-// 0x0440 (0x0440 - 0x0000)
-struct M1UIButton_BP_ApplyCustomizingSettings final
-{
-public:
-	struct FM1TypedUITheme_Button                 InThemeInfo;                                       // 0x0000(0x0440)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.BP_ChangeButtonUI
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_BP_ChangeButtonUI final
-{
-public:
-	EM1ButtonUIType                               InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.BP_ChangeDimmedUI
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_BP_ChangeDimmedUI final
-{
-public:
-	bool                                          InDimmed;                                          // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.BP_DisplayAsSelected
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_BP_DisplayAsSelected final
-{
-public:
-	bool                                          bSelected;                                         // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.BP_OnHoldCompletionProgressUpdated
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIButton_BP_OnHoldCompletionProgressUpdated final
-{
-public:
-	float                                         InProgress;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.BP_ShowNewIcon
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_BP_ShowNewIcon final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.Button_Default_OnFocusLost
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIButton_Button_Default_OnFocusLost final
-{
-public:
-	struct FFocusEvent                            InFocusEvent;                                      // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.Button_Default_OnFocusReceived
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIButton_Button_Default_OnFocusReceived final
-{
-public:
-	struct FFocusEvent                            InFocusEvent;                                      // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.SetDimmed
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_SetDimmed final
-{
-public:
-	bool                                          InDimmed;                                          // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.SetIconImage
-// 0x0030 (0x0030 - 0x0000)
-struct M1UIButton_SetIconImage final
-{
-public:
-	TSoftObjectPtr<class UTexture2D>              InTexture2D;                                       // 0x0000(0x0030)(Parm, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.SetIconImageColor
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIButton_SetIconImageColor final
-{
-public:
-	struct FLinearColor                           InLinearColor;                                     // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.SetText
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIButton_SetText final
-{
-public:
-	class FString                                 InText;                                            // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.SetTextVisibility
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_SetTextVisibility final
-{
-public:
-	ESlateVisibility                              InVisibility;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.IsButtonHovered
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_IsButtonHovered final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.IsDefault
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_IsDefault final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.IsDimmed
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_IsDimmed final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton.IsPressed
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_IsPressed final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIButtonItem.BP_DisplayAsPreviewItem
 // 0x0001 (0x0001 - 0x0000)
 struct M1UIButtonItem_BP_DisplayAsPreviewItem final
@@ -17903,6 +17918,80 @@ public:
 	bool                                          InNewIconVisible;                                  // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIPopup.Create
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIPopup_Create final
+{
+public:
+	class UObject*                                WorldContextObject;                                // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   InRowName;                                         // 0x0008(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIPopup*                             ReturnValue;                                       // 0x0010(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopup.BP_SetButtonCountImpl
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIPopup_BP_SetButtonCountImpl final
+{
+public:
+	int32                                         InCount;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopup.CallBack_Cancel
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopup_CallBack_Cancel final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopup.CallBack_Confirm
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopup_CallBack_Confirm final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopup.SetTextByUIKeyToContent
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPopup_SetTextByUIKeyToContent final
+{
+public:
+	class FString                                 InMessage;                                         // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopup.SetTextMessageParameter
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPopup_SetTextMessageParameter final
+{
+public:
+	TArray<class FString>                         InParm;                                            // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopup.SetTextMessageToContent
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIPopup_SetTextMessageToContent final
+{
+public:
+	class FText                                   InMessage;                                         // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopup.SetTitle
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPopup_SetTitle final
+{
+public:
+	class FString                                 InMessage;                                         // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopup.ShowConfirmOnly
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIPopup_ShowConfirmOnly final
+{
+public:
+	bool                                          InConfirmOnly;                                     // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1SkillComponent.OnRepSkills
 // 0x0010 (0x0010 - 0x0000)
 struct M1SkillComponent_OnRepSkills final
@@ -17997,6 +18086,136 @@ struct M1MissionTaskServiceWave_ServerSelectMissionWaveProgress final
 {
 public:
 	EM1MissionWavePlayerProgressState             InState;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMatchingBase.OnCancelMatchClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMatchingBase_OnCancelMatchClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMatchingBase.UpdateMatchingStatus
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMatchingBase_UpdateMatchingStatus final
+{
+public:
+	bool                                          bMatch;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.BP_OnChangedMissionInfoForHardInstanceDungeon
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceContentInfo_BP_OnChangedMissionInfoForHardInstanceDungeon final
+{
+public:
+	const class UM1UIDataMissionInfo*             InUIData;                                          // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.BP_OnChangedRandomMatch
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInstanceContentInfo_BP_OnChangedRandomMatch final
+{
+public:
+	bool                                          bRandomMatch;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.BP_SetContentLayout
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInstanceContentInfo_BP_SetContentLayout final
+{
+public:
+	EM1InstanaceContentType                       InContentType;                                     // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.BP_SetTextureBG
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceContentInfo_BP_SetTextureBG final
+{
+public:
+	class UTexture2D*                             InTexture2D;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.BP_SetToggleRandomMatchVisibility
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInstanceContentInfo_BP_SetToggleRandomMatchVisibility final
+{
+public:
+	ESlateVisibility                              InVisibility;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.OnCancelClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceContentInfo_OnCancelClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.OnConfirmCancelClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceContentInfo_OnConfirmCancelClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.OnDimmedPressed_PrivateStartButton
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceContentInfo_OnDimmedPressed_PrivateStartButton final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.OnDimmedPressed_PublicStartButton
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceContentInfo_OnDimmedPressed_PublicStartButton final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.OnHoldCompleted_PrivateStartButton
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceContentInfo_OnHoldCompleted_PrivateStartButton final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.OnHoldCompleted_PublicStartButton
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceContentInfo_OnHoldCompleted_PublicStartButton final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.OnNotifyUIDataChanged
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceContentInfo_OnNotifyUIDataChanged final
+{
+public:
+	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.OnPageChanged
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceContentInfo_OnPageChanged final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceContentInfo.OnToggleValueChanged_RandomMatch
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIInstanceContentInfo_OnToggleValueChanged_RandomMatch final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bValue;                                            // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function M1.M1SocialSystem.OnReceiveEventBlockMessage
@@ -20224,6 +20443,14 @@ public:
 	bool                                          bNewValue;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1CheatExtensionInstanceDungeon.SetRandomMatch
+// 0x0001 (0x0001 - 0x0000)
+struct M1CheatExtensionInstanceDungeon_SetRandomMatch final
+{
+public:
+	bool                                          bValue;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1CheatExtensionMirrorAnim.UseMirroring
 // 0x0001 (0x0001 - 0x0000)
 struct M1CheatExtensionMirrorAnim_UseMirroring final
@@ -21037,6 +21264,322 @@ public:
 	class AM1RotatableUpperBody*                  ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIInventory.BP_EmphasizeMasteryInfo
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInventory_BP_EmphasizeMasteryInfo final
+{
+public:
+	bool                                          InbEmphasize;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.BP_PlayMoveAnimation
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIInventory_BP_PlayMoveAnimation final
+{
+public:
+	EM1InventoryAnimDirection                     InDir;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bOpen;                                             // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.BP_PlayToggleBookmarkSound
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInventory_BP_PlayToggleBookmarkSound final
+{
+public:
+	bool                                          bAddBookmark;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.BP_SetCharacterInfo
+// 0x0040 (0x0040 - 0x0000)
+struct M1UIInventory_BP_SetCharacterInfo final
+{
+public:
+	class FString                                 InCharName;                                        // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InLevel;                                           // 0x0010(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         InCurExp;                                          // 0x0018(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         InMaxExp;                                          // 0x0020(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsMaxLevel;                                        // 0x0028(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ElementalDamageChannel                     InElementalType;                                   // 0x0029(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2A[0x6];                                       // 0x002A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	class UTexture2D*                             InIconPath;                                        // 0x0030(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1CharacterGrade                             InGrade;                                           // 0x0038(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIInventory.BP_SetCharacterRuneNewMark
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInventory_BP_SetCharacterRuneNewMark final
+{
+public:
+	bool                                          bNewMark;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.BP_SetIsCreator
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInventory_BP_SetIsCreator final
+{
+public:
+	bool                                          InbCreator;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.BP_SetMasteryInfo
+// 0x0050 (0x0050 - 0x0000)
+struct M1UIInventory_BP_SetMasteryInfo final
+{
+public:
+	int32                                         InRank;                                            // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         InCurExp;                                          // 0x0008(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         InMaxExp;                                          // 0x0010(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsMaxLevel;                                        // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TSoftObjectPtr<class UTexture2D>              InIconPath;                                        // 0x0020(0x0030)(ConstParm, Parm, OutParm, ReferenceParm, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.BP_SetPlatformIcon
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIInventory_BP_SetPlatformIcon final
+{
+public:
+	EM1LoginPlatformTypes                         InLocalPlatformType;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         InPlayerPlatformType;                              // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.BP_SetPlatformOnlineId
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIInventory_BP_SetPlatformOnlineId final
+{
+public:
+	class FString                                 InOnlineId;                                        // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.BP_SetPlayerTitle
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIInventory_BP_SetPlayerTitle final
+{
+public:
+	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.BP_SetTitleButtonNewMark
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInventory_BP_SetTitleButtonNewMark final
+{
+public:
+	bool                                          bNewMark;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.BP_SetWeaponBookNewMark
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInventory_BP_SetWeaponBookNewMark final
+{
+public:
+	bool                                          bNewMark;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnAchievementTitleClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnAchievementTitleClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnBoostInfoClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnBoostInfoClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnCancelClick
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnCancelClick final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnCharacterRuneClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnCharacterRuneClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnEquipmentSlotClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnEquipmentSlotClicked final
+{
+public:
+	class UM1UIWidget*                            InSelectedEquipmentSlot;                           // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnEquipmentSlotCursorEntered
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnEquipmentSlotCursorEntered final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnEquipmentSlotCursorLeft
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnEquipmentSlotCursorLeft final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnFellowMainClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnFellowMainClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnGuideClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnGuideClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnMasteryRankBeneftisClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnMasteryRankBeneftisClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnOpenCustomizeByEquipmentSlot
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnOpenCustomizeByEquipmentSlot final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnOpenMoreInformation
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnOpenMoreInformation final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnOpenPageAbove
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnOpenPageAbove final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnOpenPageLeft
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnOpenPageLeft final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnOpenPageRight
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnOpenPageRight final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnOpenRunesByEquipmentSlot
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnOpenRunesByEquipmentSlot final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnPresetClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnPresetClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnRemoveBookmarkHoldComplete
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnRemoveBookmarkHoldComplete final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnSeasonReinforceClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnSeasonReinforceClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnSetBookmarkClick
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnSetBookmarkClick final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnUnequipItem
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnUnequipItem final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OnWeaponBookClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OnWeaponBookClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.OpenMoreInformation
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_OpenMoreInformation final
+{
+public:
+	class UM1UIData*                              InUIData;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.SetUIEnvironment
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInventory_SetUIEnvironment final
+{
+public:
+	EM1InventoryTab                               InTab;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInventory.GetAnimationEndTime
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInventory_GetAnimationEndTime final
+{
+public:
+	EM1InventoryAnimDirection                     InDirection;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         ReturnValue;                                       // 0x0004(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1PushAwayCollisionProvider.BP_GetPushAwayCollsionRadius
 // 0x0004 (0x0004 - 0x0000)
 struct M1PushAwayCollisionProvider_BP_GetPushAwayCollsionRadius final
@@ -21506,22 +22049,6 @@ public:
 	bool                                          InBCheckUnlock;                                    // 0x0049(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_4A[0x6];                                       // 0x004A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<struct FM1TemplateId>                  InMapModifier;                                     // 0x0050(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemLevelIcon.BP_ShowGlowingEffect
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIItemLevelIcon_BP_ShowGlowingEffect final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemLevelIcon.BP_TurnOn
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIItemLevelIcon_BP_TurnOn final
-{
-public:
-	bool                                          bIsMaxLevel;                                       // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.AM1SequenceDialogueEventActor.SetVisibilityOfMainWidget
@@ -22465,20 +22992,20 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UICodexResearchConditionIcon.BP_SetTimePercentRatio
+// 0x0004 (0x0004 - 0x0000)
+struct M1UICodexResearchConditionIcon_BP_SetTimePercentRatio final
+{
+public:
+	float                                         InRatio;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1UIMissionTaskGoal.BP_ShowWidget
 // 0x0001 (0x0001 - 0x0000)
 struct M1UIMissionTaskGoal_BP_ShowWidget final
 {
 public:
 	bool                                          bInShow;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionTaskGoalCollectionReturnHudCenter.BP_UpdateCollectionReturnState
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionTaskGoalCollectionReturnHudCenter_BP_UpdateCollectionReturnState final
-{
-public:
-	bool                                          bInFullyCollected;                                 // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1MissionActor.GetMissionRowHandle
@@ -22495,30 +23022,6 @@ struct M1PartyControlComponent_OnButtonHoldCompleted_PartyInviteNotifyToast fina
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMenuRotator.CallBack_MoveToLeft
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMenuRotator_CallBack_MoveToLeft final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMenuRotator.CallBack_MoveToRight
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMenuRotator_CallBack_MoveToRight final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMenuRotator.MoveToIndex
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIMenuRotator_MoveToIndex final
-{
-public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1HUD.CloseBackgroundLoadingUI
@@ -22722,6 +23225,110 @@ public:
 	struct FNavDataConfig                         NavDataConfig;                                     // 0x0000(0x0088)(ConstParm, Parm, OutParm, ReferenceParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	bool                                          ReturnValue;                                       // 0x0088(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_89[0x7];                                       // 0x0089(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIMissionResult.BP_PlayOpenAnim
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionResult_BP_PlayOpenAnim final
+{
+public:
+	EM1MissionResultOpenAnimType                  InAnimType;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResult.OnClickedKeyContextButton_Close
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionResult_OnClickedKeyContextButton_Close final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResult.OnClickedKeyContextButton_ShowRewareded
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionResult_OnClickedKeyContextButton_ShowRewareded final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResult.OnClickedKeyContextButton_ShowStatistics
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionResult_OnClickedKeyContextButton_ShowStatistics final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResult.OnCompleted_RestartAlone
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionResult_OnCompleted_RestartAlone final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResult.OnCompleted_RestartTogether
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionResult_OnCompleted_RestartTogether final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResult.OnDimmedClicked_RestartAlone
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionResult_OnDimmedClicked_RestartAlone final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResult.OnDimmedClicked_RestartTogether
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionResult_OnDimmedClicked_RestartTogether final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResult.OnPressed_RestartAlone
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionResult_OnPressed_RestartAlone final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResult.OnPressed_RestartTogether
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionResult_OnPressed_RestartTogether final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResult.OnReleased_RestartAlone
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionResult_OnReleased_RestartAlone final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResult.OnReleased_RestartTogether
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionResult_OnReleased_RestartTogether final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResult.GetRemainTimeToAutoExit
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIMissionResult_GetRemainTimeToAutoExit final
+{
+public:
+	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1DestructibleStaticMeshComponent.BeginApplyRadiusDamage
@@ -23480,6 +24087,22 @@ public:
 	TArray<class FString>                         ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIMissionTaskGoal_Supply.BP_SetTargetCount
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionTaskGoal_Supply_BP_SetTargetCount final
+{
+public:
+	bool                                          bMany;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTaskGoal_Supply.BP_GetTargetListItems
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMissionTaskGoal_Supply_BP_GetTargetListItems final
+{
+public:
+	TArray<class UWidget*>                        ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1DropContainerVoidVaultStabilizer.ServerTryRequestOpenVoidVault
 // 0x0010 (0x0010 - 0x0000)
 struct M1DropContainerVoidVaultStabilizer_ServerTryRequestOpenVoidVault final
@@ -23649,14 +24272,6 @@ public:
 	class AController*                            InController;                                      // 0x0008(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionWaveSelectedPlayer.BP_SetPlatformIcon
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionWaveSelectedPlayer_BP_SetPlatformIcon final
-{
-public:
-	const class AM1PlayerState*                   InPlayerState;                                     // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1MonsterAnimInstance.DisableAimOffset
 // 0x0001 (0x0001 - 0x0000)
 struct M1MonsterAnimInstance_DisableAimOffset final
@@ -23772,20 +24387,37 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRequiredVoidVaultEntryWidget.BP_SetIsOwned
+// Function M1.M1UIMissionSubTypeInfoVoidFragment.BP_SetVoidFragmentActivationInfo
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIRequiredVoidVaultEntryWidget_BP_SetIsOwned final
+struct M1UIMissionSubTypeInfoVoidFragment_BP_SetVoidFragmentActivationInfo final
 {
 public:
-	bool                                          bOwned;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ElementalDamageChannel                     InChannel;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionSubTypeInfoVoidFusion.BP_SetVoidFusionActivationInfo
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionSubTypeInfoVoidFusion_BP_SetVoidFusionActivationInfo final
+// Function M1.M1UIRequiredVoidPieceEntryWidget.BP_SetAmount
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRequiredVoidPieceEntryWidget_BP_SetAmount final
 {
 public:
-	TArray<class FString>                         InNamedMonsterStringIds;                           // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+	int32                                         InOwnedCount;                                      // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InRequiredCount;                                   // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UILocalMapResource.PlayBattleZoneAnimation
+// 0x0004 (0x0004 - 0x0000)
+struct M1UILocalMapResource_PlayBattleZoneAnimation final
+{
+public:
+	struct FM1TemplateId                          InBattleZoneId;                                    // 0x0000(0x0004)(Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataOptionIndividual.GetIndividualStringId
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIDataOptionIndividual_GetIndividualStringId final
+{
+public:
+	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIOptionIndividual.BP_ShowKeySymbol
@@ -23794,22 +24426,6 @@ struct M1UIOptionIndividual_BP_ShowKeySymbol final
 {
 public:
 	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionIndividual_SelectBase.Callback_OnSelectionChangedByLeft
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionIndividual_SelectBase_Callback_OnSelectionChangedByLeft final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionIndividual_SelectBase.Callback_OnSelectionChangedByRight
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionIndividual_SelectBase_Callback_OnSelectionChangedByRight final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1FeatureTesterStatListItem.OnStatTextCommited
@@ -23838,36 +24454,60 @@ public:
 	EM1MissionTargetType                          InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPrologueCharacterInfo.OnCancelClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPrologueCharacterInfo_OnCancelClicked final
+// Function M1.M1UIMissionTargetDestructionInfo.BP_SetImmuned
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionTargetDestructionInfo_BP_SetImmuned final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bImmuned;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPrologueCharacterInfo.OnConfirmClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPrologueCharacterInfo_OnConfirmClicked final
+// Function M1.M1UIMissionTargetDestructionInfo.OnTargetImmuned
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionTargetDestructionInfo_OnTargetImmuned final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bImmuned;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPrologueCharacterInfo.OnCursorLostFocus
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPrologueCharacterInfo_OnCursorLostFocus final
+// Function M1.M1UIMissionTargetMultiCollectionInfo.BP_SetCollectionRatio
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIMissionTargetMultiCollectionInfo_BP_SetCollectionRatio final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Duration;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPrologueCharacterInfo.OnCursorReceivedFocus
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPrologueCharacterInfo_OnCursorReceivedFocus final
+// Function M1.M1UIMissionTargetMultiCollectionInfo.BP_SetState
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionTargetMultiCollectionInfo_BP_SetState final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MissionTargetMultiCollectionState          CollectionState;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTargetMultiCollectionInfo.BP_SetTimerDuration
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIMissionTargetMultiCollectionInfo_BP_SetTimerDuration final
+{
+public:
+	float                                         Duration;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIProgressIcon.SetProgressRatio
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIProgressIcon_SetProgressRatio final
+{
+public:
+	float                                         InRatio;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIProgressIcon.StartProgress
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIProgressIcon_StartProgress final
+{
+public:
+	float                                         InPlayTime;                                        // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1FeatureTesterSpawnPanel.OnDisableAISkillCheckStateChanged
@@ -23926,28 +24566,44 @@ public:
 	class FText                                   Text;                                              // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionIndividual_Toggle.BP_UpdateButtonUI
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIOptionIndividual_Toggle_BP_UpdateButtonUI final
+// Function M1.M1UIOptionIndividual_GamepadInput.BP_MarkDuplicateKey
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIOptionIndividual_GamepadInput_BP_MarkDuplicateKey final
 {
 public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bMark;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionIndividual_Toggle.Callback_ToggleCurrentIndex
+// Function M1.M1UIOptionIndividual_GamepadInput.OnHoveredOrUnhoveredInputKeySelector
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionIndividual_Toggle_Callback_ToggleCurrentIndex final
+struct M1UIOptionIndividual_GamepadInput_OnHoveredOrUnhoveredInputKeySelector final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionIndividual_Button.Callback_Button
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionIndividual_Button_Callback_Button final
+// Function M1.M1UIOptionIndividual_GamepadInput.OnMainKeySelected
+// 0x0020 (0x0020 - 0x0000)
+struct M1UIOptionIndividual_GamepadInput_OnMainKeySelected final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FInputChord                            SelectedKey;                                       // 0x0000(0x0020)(Parm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionInputKeySelectorWrapper_DirectInput.EnableHitTest
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIOptionInputKeySelectorWrapper_DirectInput_EnableHitTest final
+{
+public:
+	bool                                          bEnable;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionInputKeySelectorWrapper_DirectInput.OnKeySelected
+// 0x0020 (0x0020 - 0x0000)
+struct M1UIOptionInputKeySelectorWrapper_DirectInput_OnKeySelected final
+{
+public:
+	struct FInputChord                            SelectedKey;                                       // 0x0000(0x0020)(Parm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1FeatureTesterAutoExecSequenceCreateNew.OnCommandChanged
@@ -24006,36 +24662,36 @@ public:
 	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIDataCharacterCount.GetAllCharacterCount
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIDataCharacterCount_GetAllCharacterCount final
+// Function M1.M1UIPopupContent.ChangeTextMessageParameter
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPopupContent_ChangeTextMessageParameter final
 {
 public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class FString>                         InParam;                                           // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataCharacterCount.GetCharacterCapacity
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIDataCharacterCount_GetCharacterCapacity final
+// Function M1.M1UIPopupContent.SetTextByUIKey
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPopupContent_SetTextByUIKey final
 {
 public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 InMessage;                                         // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataCharacterCount.GetMaxLevelCharacterCount
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIDataCharacterCount_GetMaxLevelCharacterCount final
+// Function M1.M1UIPopupContent.SetTextMessage
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIPopupContent_SetTextMessage final
 {
 public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FText                                   InMessage;                                         // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataCharacterCount.GetOwnedCharacterCount
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIDataCharacterCount_GetOwnedCharacterCount final
+// Function M1.M1UIPopupContent.SetTextMessageParameter
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPopupContent_SetTextMessageParameter final
 {
 public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class FString>                         InParam;                                           // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1FeatureTesterAutoExecHotkeyPanel.OnCreateNew
@@ -24172,12 +24828,12 @@ public:
 	struct FM1PinPointInfo                        InInfo;                                            // 0x0000(0x0020)(ConstParm, Parm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UINpcNameTag.OnNotifyMasteryRankUppable
-// 0x0004 (0x0004 - 0x0000)
-struct M1UINpcNameTag_OnNotifyMasteryRankUppable final
+// Function M1.M1UINpcServiceUnlockConditions.BP_ShowServiceName
+// 0x0001 (0x0001 - 0x0000)
+struct M1UINpcServiceUnlockConditions_BP_ShowServiceName final
 {
 public:
-	int32                                         InRank;                                            // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1InGameEOSNetworkTransportComponent.ClientNotifyDisconnectReason
@@ -24232,14 +24888,6 @@ public:
 	class UAnimMontage*                           InMontage;                                         // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionRewardCurrency.SetMissionReward
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionRewardCurrency_SetMissionReward final
-{
-public:
-	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1FieldInteractableActor.GetEciveActionType
 // 0x0001 (0x0001 - 0x0000)
 struct M1FieldInteractableActor_GetEciveActionType final
@@ -24264,38 +24912,20 @@ public:
 	class AActor*                                 InActor;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPopupContentEnterCoupon.BP_PlayFailAnim
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPopupContentEnterCoupon_BP_PlayFailAnim final
+// Function M1.M1UIPopupContentAccountWithdrawalData.GetPopup
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupContentAccountWithdrawalData_GetPopup final
 {
 public:
-	class FString                                 InFailedMessageString;                             // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIPopup*                             ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPopupContentEnterCoupon.OnCouponTextChanged
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIPopupContentEnterCoupon_OnCouponTextChanged final
+// Function M1.M1UIPopupContentAccountWithdrawalData.IsGuestAccount
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIPopupContentAccountWithdrawalData_IsGuestAccount final
 {
 public:
-	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupContentEnterCoupon.OnCouponTextCommitted
-// 0x0020 (0x0020 - 0x0000)
-struct M1UIPopupContentEnterCoupon_OnCouponTextCommitted final
-{
-public:
-	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	ETextCommit                                   InCommitMethod;                                    // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPopupContentEnterCoupon.OnReceiveEnterCouponResult
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIPopupContentEnterCoupon_OnReceiveEnterCouponResult final
-{
-public:
-	int32                                         InResponseCode;                                    // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1FieldInteractableActorMiniGame.GetMiniGameDifficulty
@@ -24393,6 +25023,26 @@ struct M1FieldObjectSpawner_OnDestroyedFieldObject final
 {
 public:
 	class AActor*                                 InDestroyedFieldObject;                            // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOption.SelectContentTabByIndex
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOption_SelectContentTabByIndex final
+{
+public:
+	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSelectionChanged;                                 // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIOption.OnLoggedInEvent
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIOption_OnLoggedInEvent final
+{
+public:
+	const class UM1Account*                       InAccountInfo;                                     // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShouldDoPrologue;                                 // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function M1.M1FieldObjectSpawnPoint.OnDestroyedFieldObject
@@ -24858,44 +25508,20 @@ public:
 	struct FM1AbilityEvent                        AbilityEvent;                                      // 0x0000(0x0040)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPremiumPurchase.OnCancelClicked
+// Function M1.M1UIPopupSlotExpansion.OnClicked_Cancel
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPremiumPurchase_OnCancelClicked final
+struct M1UIPopupSlotExpansion_OnClicked_Cancel final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPremiumPurchase.OnClickedPremiumPurchase
+// Function M1.M1UIPopupSlotExpansion.OnHoldCompleted_Buy
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPremiumPurchase_OnClickedPremiumPurchase final
+struct M1UIPopupSlotExpansion_OnHoldCompleted_Buy final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPremiumPurchase.OnClickedPremiumPurchase_LevelUp
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPremiumPurchase_OnClickedPremiumPurchase_LevelUp final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPremiumPurchase.GetBundleUnitCount
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIPremiumPurchase_GetBundleUnitCount final
-{
-public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPremiumPurchase.GetSeasonStringId
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPremiumPurchase_GetSeasonStringId final
-{
-public:
-	class FName                                   ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1FunctionalTestTriggerBase.GetControllingM1Player
@@ -25407,28 +26033,12 @@ public:
 	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPerkEnchantInfo.BP_OnPhaseChanged
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIPerkEnchantInfo_BP_OnPhaseChanged final
-{
-public:
-	EM1PerkEnchantPhase                           InNewPhase;                                        // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPerkEnchantInfo.OnEnchantButtonHoldCompleted
+// Function M1.M1UIPerkEnchantItemSelect.OnItemClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPerkEnchantInfo_OnEnchantButtonHoldCompleted final
+struct M1UIPerkEnchantItemSelect_OnItemClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPerkEnchantInfo.GetResultEnchantLevel
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIPerkEnchantInfo_GetResultEnchantLevel final
-{
-public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1GameKeyMapping.ApplyAxisMapping
@@ -25697,28 +26307,14 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMultiConditionDropDown_Search.BP_SetKeywordsButtonVisibility
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMultiConditionDropDown_Search_BP_SetKeywordsButtonVisibility final
+// Function M1.M1UIWarehouse.OnTabButtonSelected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWarehouse_OnTabButtonSelected final
 {
 public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMultiConditionDropDown_Search.OnTextChanged_Search
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIMultiConditionDropDown_Search_OnTextChanged_Search final
-{
-public:
-	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWayPointActorWidget.OnActorWidgetVisibilityChanged
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIWayPointActorWidget_OnActorWidgetVisibilityChanged final
-{
-public:
-	ESlateVisibility                              InVisiblity;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSelectionChanged;                                 // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function M1.M1GameOptimizationSubsystem.Get
@@ -26061,20 +26657,22 @@ public:
 	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemProficiencyInfo.BP_UpdateAppearanceByProficiency
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIItemProficiencyInfo_BP_UpdateAppearanceByProficiency final
-{
-public:
-	bool                                          bMaxLevel;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1GoalInterface.GetTargetPointOffset
 // 0x000C (0x000C - 0x0000)
 struct M1GoalInterface_GetTargetPointOffset final
 {
 public:
 	struct FVector                                ReturnValue;                                       // 0x0000(0x000C)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemResources.BP_SetRankStatus
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemResources_BP_SetRankStatus final
+{
+public:
+	int32                                         InCount;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bEnough;                                           // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function M1.M1GravityControlVolume.OnPlayerEntered
@@ -26114,12 +26712,12 @@ public:
 	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UITabButtonQuest.GetQuestType
+// Function M1.M1UIQuantityControl.ShowKeySymbol
 // 0x0001 (0x0001 - 0x0000)
-struct M1UITabButtonQuest_GetQuestType final
+struct M1UIQuantityControl_ShowKeySymbol final
 {
 public:
-	EM1QuestType                                  ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIEquipmentItemDetails.BP_SetDamageAdvantageType
@@ -26153,16 +26751,6 @@ struct M1UIEquipmentItemDetails_BP_SetRoundsType final
 {
 public:
 	EM1RoundsType                                 InRoundType;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIEquipmentItemDetails.OnMouseWheelOnSlot
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIEquipmentItemDetails_OnMouseWheelOnSlot final
-{
-public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function M1.M1GroupSocialMotion.OnDeactivateFollow
@@ -26451,16 +27039,6 @@ public:
 	struct FM1TemplateId                          InRewardGroupTid;                                  // 0x0000(0x0004)(Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMasteryLimitNotice.SetNoticeText
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMasteryLimitNotice_SetNoticeText final
-{
-public:
-	EM1MasteryLimitActionType                     InAction;                                          // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         InMasteryLimit;                                    // 0x0004(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1InteractionInvokerComponent.BP_SetCanInteractWith
 // 0x0010 (0x0010 - 0x0000)
 struct M1InteractionInvokerComponent_BP_SetCanInteractWith final
@@ -26523,49 +27101,28 @@ public:
 	class FName                                   ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionTaskGoal_Explosion.BP_ExplodedTarget
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionTaskGoal_Explosion_BP_ExplodedTarget final
-{
-public:
-	int32                                         Index_0;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bExploded;                                         // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIMissionTaskGoal_Explosion.BP_SetInfoString
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionTaskGoal_Explosion_BP_SetInfoString final
-{
-public:
-	class FString                                 InString;                                          // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionTaskGoal_Explosion.BP_SetTargetCount
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIMissionTaskGoal_Explosion_BP_SetTargetCount final
-{
-public:
-	int32                                         Count;                                             // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionTaskGoal_Explosion.BP_SetTargetInfo
-// 0x0028 (0x0028 - 0x0000)
-struct M1UIMissionTaskGoal_Explosion_BP_SetTargetInfo final
-{
-public:
-	int32                                         Index_0;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 StringId;                                          // 0x0008(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 SymbolStringId;                                    // 0x0018(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1PublicOnlineServiceComponent.OnAccountAddedEvent
 // 0x0008 (0x0008 - 0x0000)
 struct M1PublicOnlineServiceComponent_OnAccountAddedEvent final
 {
 public:
 	int64                                         InAccountUid;                                      // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UILaboratoryOptionToggle.BP_UpdateButtonUI
+// 0x0001 (0x0001 - 0x0000)
+struct M1UILaboratoryOptionToggle_BP_UpdateButtonUI final
+{
+public:
+	bool                                          InbToggleOn;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UILaboratoryOptionToggle.OnToggleClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UILaboratoryOptionToggle_OnToggleClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1ListView.IsScrolledToBottom
@@ -26668,25 +27225,17 @@ public:
 	struct FM1DropItemInfo                        Item;                                              // 0x0000(0x0030)(ConstParm, Parm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIFocusGoalItemList.OnClickedDeselectFocusGoalItem
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIFocusGoalItemList_OnClickedDeselectFocusGoalItem final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1UIFocusGoalItemList.OnEventSlotClicked
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIFocusGoalItemList_OnEventSlotClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIFocusGoalItemList.OnEventSlotCursorEntered
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIFocusGoalItemList_OnEventSlotCursorEntered final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIFocusGoalItemList.OnEventSlotCursorLeft
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIFocusGoalItemList_OnEventSlotCursorLeft final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -26812,70 +27361,12 @@ public:
 	int32                                         InButtonIndex;                                     // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInstanceDungeonScore.BP_SetAddScore
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIInstanceDungeonScore_BP_SetAddScore final
-{
-public:
-	class FText                                   InAddScoreText;                                    // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceDungeonScore.OnAddedMissionScore
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIInstanceDungeonScore_OnAddedMissionScore final
-{
-public:
-	int32                                         InScore;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceDungeonScore.OnInitMissionTotalScore
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIInstanceDungeonScore_OnInitMissionTotalScore final
-{
-public:
-	int32                                         InTotalScore;                                      // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceDungeonScore.OnPlayerStateReady
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceDungeonScore_OnPlayerStateReady final
-{
-public:
-	class AM1PlayerState*                         InPlayerState;                                     // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1TrapSettingHelper.GetMovementComponentNames
 // 0x0010 (0x0010 - 0x0000)
 struct M1TrapSettingHelper_GetMovementComponentNames final
 {
 public:
 	TArray<class FName>                           ReturnValue;                                       // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReturnParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataGroupQuest.GetTitleText
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIDataGroupQuest_GetTitleText final
-{
-public:
-	class FText                                   ReturnValue;                                       // 0x0000(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataGroupQuest.GetUIDataListOfMainRewards
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIDataGroupQuest_GetUIDataListOfMainRewards final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<class UM1UIData*>                      ReturnValue;                                       // 0x0008(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataGroupQuest.GetUIDataListOfQuests
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIDataGroupQuest_GetUIDataListOfQuests final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<class UM1UIData*>                      ReturnValue;                                       // 0x0008(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1TaskEvent.RunOnAuthorityImpl
@@ -26902,116 +27393,234 @@ public:
 	EM1TaskEventState                             ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPanelItems.BP_EnablePanelItems
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIPanelItems_BP_EnablePanelItems final
-{
-public:
-	bool                                          InbEnabled;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelItems.BP_ItemCountUpdated
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPanelItems_BP_ItemCountUpdated final
-{
-public:
-	TArray<class FString>                         InParams;                                          // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelItems.OnToggleBookmarkFilter
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPanelItems_OnToggleBookmarkFilter final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bToggleValue;                                      // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPanelItems.OnToggleLimitedSkinFilter
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPanelItems_OnToggleLimitedSkinFilter final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bToggleValue;                                      // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPanelItems.OnToggleOwnedSkinFilter
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPanelItems_OnToggleOwnedSkinFilter final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bToggleValue;                                      // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPanelItemsRune.OnEventDragDetected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPanelItemsRune_OnEventDragDetected final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelItemsRune.OnEventDragWidgetDroppedOnRuneInPanel
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIPanelItemsRune_OnEventDragWidgetDroppedOnRuneInPanel final
-{
-public:
-	class UM1UIWidget*                            InDroppedSlot;                                     // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UM1UIWidget*                            InDraggedSlot;                                     // 0x0008(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UM1UIDataItemInfo_Rune*                 InDraggedRune;                                     // 0x0010(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMonsterInfoPanel.OnAdditionalSpawnedMonstersInfo
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIGameMonsterInfoPanel_OnAdditionalSpawnedMonstersInfo final
-{
-public:
-	struct FM1SpawnedMonstersAdditionalInfo       InInfo;                                            // 0x0000(0x0010)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMonsterInfoPanel.OnFocusedCharacterChanged
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMonsterInfoPanel_OnFocusedCharacterChanged final
-{
-public:
-	class AM1Character*                           InFocusedCharacter;                                // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPerkEnchantMain.OnCancelClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPerkEnchantMain_OnCancelClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPanelRadialMenuEntries.BP_SetEntriesCount
+// Function M1.M1TypePanelWidget.OnEventUserScrolled
 // 0x0004 (0x0004 - 0x0000)
-struct M1UIPanelRadialMenuEntries_BP_SetEntriesCount final
+struct M1TypePanelWidget_OnEventUserScrolled final
 {
 public:
-	int32                                         InCount;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         InOffset;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInDun_SelectFixedMODPopup.OnFixedMODButtonsClicked
+// Function M1.M1UIDataPaintExtract.GetChartBigIcon
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIInDun_SelectFixedMODPopup_OnFixedMODButtonsClicked final
+struct M1UIDataPaintExtract_GetChartBigIcon final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UTexture2D*                             ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInDun_SelectFixedMODPopup.BP_GetFixedMODButtons
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIInDun_SelectFixedMODPopup_BP_GetFixedMODButtons final
+// Function M1.M1UIDataPaintExtract.GetChartName
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIDataPaintExtract_GetChartName final
 {
 public:
-	TArray<class UM1UIWidget*>                    ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	class FText                                   ReturnValue;                                       // 0x0000(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataPaintExtract.GetSelectedDataTemplateId
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIDataPaintExtract_GetSelectedDataTemplateId final
+{
+public:
+	struct FM1TemplateId                          ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataPaintExtract.IsLimited
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIDataPaintExtract_IsLimited final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UICharacterInfoBase.BP_NotifyTagAdded
+// 0x0008 (0x0008 - 0x0000)
+struct M1UICharacterInfoBase_BP_NotifyTagAdded final
+{
+public:
+	struct FGameplayTag                           Tag;                                               // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UICharacterInfoBase.BP_NotifyTagRemoved
+// 0x0008 (0x0008 - 0x0000)
+struct M1UICharacterInfoBase_BP_NotifyTagRemoved final
+{
+public:
+	struct FGameplayTag                           Tag;                                               // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UICharacterInfoBase.CustomUpdate
+// 0x0004 (0x0004 - 0x0000)
+struct M1UICharacterInfoBase_CustomUpdate final
+{
+public:
+	float                                         InDeltaTime;                                       // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UICharacterInfoBase.InitWidget
+// 0x0008 (0x0008 - 0x0000)
+struct M1UICharacterInfoBase_InitWidget final
+{
+public:
+	class AM1Character*                           Owner;                                             // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UICharacterInfoBase.GetInfoOwner
+// 0x0008 (0x0008 - 0x0000)
+struct M1UICharacterInfoBase_GetInfoOwner final
+{
+public:
+	class AM1Character*                           ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMonsterInfo.BP_ChangedEliteSkills
+// 0x0020 (0x0020 - 0x0000)
+struct M1UIMonsterInfo_BP_ChangedEliteSkills final
+{
+public:
+	class FString                                 SkillNames;                                        // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class UTexture2D*>                     InIcons;                                           // 0x0010(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMonsterInfo.BP_ChangedMonsterLifeTime
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIMonsterInfo_BP_ChangedMonsterLifeTime final
+{
+public:
+	float                                         InLifeTime;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMonsterInfo.BP_SetFocusUIVisibility
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMonsterInfo_BP_SetFocusUIVisibility final
+{
+public:
+	bool                                          bVisible;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMonsterInfo.BP_SetSpawnedByMission
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIMonsterInfo_BP_SetSpawnedByMission final
+{
+public:
+	bool                                          InByMission;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bHidden;                                           // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMonsterInfo.BP_UpdateWeakAdvantageIcon
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMonsterInfo_BP_UpdateWeakAdvantageIcon final
+{
+public:
+	class UTexture2D*                             WeakAdvantageIcon;                                 // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMonsterInfo.BP_UpdateWeakElementalIcons
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMonsterInfo_BP_UpdateWeakElementalIcons final
+{
+public:
+	TArray<class UTexture2D*>                     WeakElementalIcons;                                // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMonsterInfo.GetPhasedHP
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMonsterInfo_GetPhasedHP final
+{
+public:
+	struct FM1ScaledInteger                       CurrentHp;                                         // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         OutRatio;                                          // 0x0008(0x0004)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          ReturnValue;                                       // 0x000C(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIMonsterInfo.OnChangedMissionDerivMonsterLifeTime
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIMonsterInfo_OnChangedMissionDerivMonsterLifeTime final
+{
+public:
+	float                                         InLifeTime;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMonsterInfo.OnChangedMissionDerivMonsterName
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMonsterInfo_OnChangedMissionDerivMonsterName final
+{
+public:
+	class FString                                 InName;                                            // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMonsterInfo.OnDeathOrDespawnedOrDestroyed
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMonsterInfo_OnDeathOrDespawnedOrDestroyed final
+{
+public:
+	class AActor*                                 InActor;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMonsterInfo.IsFocused
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMonsterInfo_IsFocused final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIBossMonsterInfo.BP_InitBossMonsterWidget
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIBossMonsterInfo_BP_InitBossMonsterWidget final
+{
+public:
+	bool                                          bUseBerserkMode;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIBossMonsterInfo.BP_OnBerserkGaugeChanged
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIBossMonsterInfo_BP_OnBerserkGaugeChanged final
+{
+public:
+	float                                         GaugeRatio;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIBossMonsterInfo.BP_OnRageGaugeChanged
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIBossMonsterInfo_BP_OnRageGaugeChanged final
+{
+public:
+	float                                         GaugeRatio;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIBossMonsterInfo.BP_PlayFocusAnim
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIBossMonsterInfo_BP_PlayFocusAnim final
+{
+public:
+	bool                                          bInForwardAnim;                                    // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIBossMonsterInfo.BP_PlayNameAnim
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIBossMonsterInfo_BP_PlayNameAnim final
+{
+public:
+	bool                                          bInForwardAnim;                                    // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPerkDetails.BP_SetPreviewVisibility
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIPerkDetails_BP_SetPreviewVisibility final
+{
+public:
+	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1TypeListView.OnEntryInitialized
+// 0x0010 (0x0010 - 0x0000)
+struct M1TypeListView_OnEntryInitialized final
+{
+public:
+	class UObject*                                Item;                                              // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UUserWidget*                            Widget;                                            // 0x0008(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1MissionResult.OnMissionActivated
@@ -27070,50 +27679,35 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPlayerInteraction.BP_ChangedPartyState
+// Function M1.M1UIPixelHitTestImage.CanHit
+// 0x000C (0x000C - 0x0000)
+struct M1UIPixelHitTestImage_CanHit final
+{
+public:
+	struct FVector2D                              InAbsolutePosition;                                // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          ReturnValue;                                       // 0x0008(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPerkDetailsStatEntry.BP_ChangeCompareValueColor
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIPlayerInteraction_BP_ChangedPartyState final
+struct M1UIPerkDetailsStatEntry_BP_ChangeCompareValueColor final
 {
 public:
-	bool                                          bPartyMember;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsPositive;                                       // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPlayerInteraction.BP_SetPlatformIcon
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIPlayerInteraction_BP_SetPlatformIcon final
-{
-public:
-	EM1LoginPlatformTypes                         InLocalPlatformType;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LoginPlatformTypes                         InPlayerPlatformType;                              // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPlayerInteraction.BP_UpdateAwayFromGameplay
+// Function M1.M1UIPerkDetailsStatEntry.BP_SwitchPanelTo
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIPlayerInteraction_BP_UpdateAwayFromGameplay final
+struct M1UIPerkDetailsStatEntry_BP_SwitchPanelTo final
 {
 public:
-	bool                                          bAway;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1SkillInfoTextFormatType                    InFormatType;                                      // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPlayerInteraction.OnHoldCompleted_BeginInteraction
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPlayerInteraction_OnHoldCompleted_BeginInteraction final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPerkEnchantItemSelect.OnItemClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPerkEnchantItemSelect_OnItemClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInformation_Stats.OnStatItemVisibilityChanged
+// Function M1.M1UIStatGroupItemSlotWrapper.OnStatVisibilityChanged
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIInformation_Stats_OnStatItemVisibilityChanged final
+struct M1UIStatGroupItemSlotWrapper_OnStatVisibilityChanged final
 {
 public:
 	ESlateVisibility                              InVisibility;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -27142,6 +27736,30 @@ public:
 	uint8                                         Pad_BC[0x4];                                       // 0x00BC(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
+// Function M1.M1UIPopupWithButtons.CallBack_MiddleButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupWithButtons_CallBack_MiddleButtonClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupWithButtons.CallBack_MiddleButtonHoldCompleted
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupWithButtons_CallBack_MiddleButtonHoldCompleted final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPlatformUserInfo.OnConfirmButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPlatformUserInfo_OnConfirmButtonClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1MissionSubTaskActorDestruction.OnDropSuppliesDestroyed
 // 0x0008 (0x0008 - 0x0000)
 struct M1MissionSubTaskActorDestruction_OnDropSuppliesDestroyed final
@@ -27156,6 +27774,90 @@ struct M1MissionSubTaskActorDestruction_OnMissionTargetActorDestroyed final
 {
 public:
 	class AActor*                                 InActor;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeyButton.OnEventStartHold
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIKeyButton_OnEventStartHold final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeyButton.OnEventStopHold
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIKeyButton_OnEventStopHold final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeyButton.OnPressed_FromSystemKey
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIKeyButton_OnPressed_FromSystemKey final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeyButton.OnReleased_FromSystemKey
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIKeyButton_OnReleased_FromSystemKey final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeyButton.SetBattleKeyType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIKeyButton_SetBattleKeyType final
+{
+public:
+	EM1BattleKey                                  InKey;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeyButton.SetKeyType
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIKeyButton_SetKeyType final
+{
+public:
+	EM1SystemKey                                  InKey;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bReleaseOnly;                                      // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeyButton.GetBattleKeyType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIKeyButton_GetBattleKeyType final
+{
+public:
+	EM1BattleKey                                  ReturnValue;                                       // 0x0000(0x0001)(ConstParm, Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeyButton.GetKeyType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIKeyButton_GetKeyType final
+{
+public:
+	EM1SystemKey                                  ReturnValue;                                       // 0x0000(0x0001)(ConstParm, Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeyButtonCurrency.BP_SetAmountColor
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIKeyButtonCurrency_BP_SetAmountColor final
+{
+public:
+	bool                                          bEnough;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeyButtonCurrency.SetCurrency
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIKeyButtonCurrency_SetCurrency final
+{
+public:
+	EM1CurrencyType                               InType;                                            // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         InAmount;                                          // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         InGainAmount;                                      // 0x0010(0x0008)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1MissionSubTaskActorOccupation.GetOccupationRadius
@@ -27293,14 +27995,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UICodexMain.OnContenxtButton_ShowFocusGoalList
-// 0x0008 (0x0008 - 0x0000)
-struct M1UICodexMain_OnContenxtButton_ShowFocusGoalList final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UICodexMain.OnGuideClicked
 // 0x0008 (0x0008 - 0x0000)
 struct M1UICodexMain_OnGuideClicked final
@@ -27359,6 +28053,30 @@ struct M1NavigationChecker_NetMultiValidateNavMesh final
 {
 public:
 	TArray<uint32>                                ValidNavAreas;                                     // 0x0000(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRSideChild.BP_SetOpacityToOne
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRSideChild_BP_SetOpacityToOne final
+{
+public:
+	bool                                          bVisible;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInvasionDungeonScore.BP_ChangeActiveTimeAttack
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIInvasionDungeonScore_BP_ChangeActiveTimeAttack final
+{
+public:
+	int32                                         InUniqueId;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInvasionDungeonScore.BP_GetTimeAttackItems
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIInvasionDungeonScore_BP_GetTimeAttackItems final
+{
+public:
+	TArray<class UM1UIInvasionDungeonScoreItem*>  ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1NavigationTestingActor.BP_DrawActualPathForDebug
@@ -27720,12 +28438,36 @@ public:
 	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIVideoGuideMessage.OnButtonEvent_HoldCompleted
+// Function M1.M1UIMetaGameGuideMessage.OnCancelClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIVideoGuideMessage_OnButtonEvent_HoldCompleted final
+struct M1UIMetaGameGuideMessage_OnCancelClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMetaGameGuideMessage.OnConfirmClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMetaGameGuideMessage_OnConfirmClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMetaGameGuideMessage.SetAlignmentType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMetaGameGuideMessage_SetAlignmentType final
+{
+public:
+	EM1AlignmentType                              InAlignmentType;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMetaGameGuideMessage.SetPositionType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMetaGameGuideMessage_SetPositionType final
+{
+public:
+	EM1PositionType                               InPositionType;                                    // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1MissionTargetExplosion.BP_GetAllNiagaraComponents
@@ -27907,22 +28649,6 @@ public:
 	TSoftObjectPtr<class UNiagaraSystem>          InSoftObjectPtr;                                   // 0x0000(0x0030)(ConstParm, Parm, OutParm, ReferenceParm, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInDun_FixedMODInfo.OnTooltipToggleLinkedContents
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInDun_FixedMODInfo_OnTooltipToggleLinkedContents final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInDun_FixedMODInfo.OnTooltipToggleVoidVaultKey
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInDun_FixedMODInfo_OnTooltipToggleVoidVaultKey final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1MissionTargetSupply.NetMulticastActivateStolenFx
 // 0x0001 (0x0001 - 0x0000)
 struct M1MissionTargetSupply_NetMulticastActivateStolenFx final
@@ -27963,33 +28689,6 @@ struct M1UIAchievementCategoryListPanel_OnEntryItemClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemTraceSlot.BP_SetDisplayAsTracableNow
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIItemTraceSlot_BP_SetDisplayAsTracableNow final
-{
-public:
-	bool                                          bIsTracable;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemTraceSlot.BP_SetSelectedFocusGoalItem
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIItemTraceSlot_BP_SetSelectedFocusGoalItem final
-{
-public:
-	bool                                          bCanBeFocusGoalItem;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bSelected;                                         // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemTraceSlot.BP_SetSourceTypedIcon
-// 0x0003 (0x0003 - 0x0000)
-struct M1UIItemTraceSlot_BP_SetSourceTypedIcon final
-{
-public:
-	EM1ItemListSourceType                         InObjectType;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          InRepeatable;                                      // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsInvasionContent;                                 // 0x0002(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICharacterDetail.BP_UpdateByCapacityIncreaseCount
@@ -28059,38 +28758,6 @@ public:
 // Function M1.M1UICashShopDetailInfo_ItemSelector.OnEntryClicked
 // 0x0008 (0x0008 - 0x0000)
 struct M1UICashShopDetailInfo_ItemSelector_OnEntryClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIJunkFilterIndividual.BP_ShowKeySymbol
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIJunkFilterIndividual_BP_ShowKeySymbol final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIJunkFilterIndividual_Select.BP_SetCurrentIndex
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIJunkFilterIndividual_Select_BP_SetCurrentIndex final
-{
-public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIJunkFilterIndividual_Select.Callback_OnSelectionChangedByLeft
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIJunkFilterIndividual_Select_Callback_OnSelectionChangedByLeft final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIJunkFilterIndividual_Select.Callback_OnSelectionChangedByRight
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIJunkFilterIndividual_Select_Callback_OnSelectionChangedByRight final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -28252,75 +28919,6 @@ public:
 	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIGameplayDebugViewer.ToggleGameplayDebugViewer
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIGameplayDebugViewer_ToggleGameplayDebugViewer final
-{
-public:
-	class UObject*                                InWorldContext;                                    // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UM1UIGameplayDebugViewer*               ReturnValue;                                       // 0x0008(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameplayDebugViewer.OnComboBoxActorSelectionChanged
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIGameplayDebugViewer_OnComboBoxActorSelectionChanged final
-{
-public:
-	class FString                                 InSelectedItem;                                    // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	ESelectInfo                                   InSelectionType;                                   // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIGameplayDebugViewer.OnComboBoxComponentClassSelectionChanged
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIGameplayDebugViewer_OnComboBoxComponentClassSelectionChanged final
-{
-public:
-	class FString                                 InSelectedItem;                                    // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	ESelectInfo                                   InSelectionType;                                   // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIGameplayDebugViewer.OnComboBoxPropertySelectionChanged
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIGameplayDebugViewer_OnComboBoxPropertySelectionChanged final
-{
-public:
-	class FString                                 InSelectedItem;                                    // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	ESelectInfo                                   InSelectionType;                                   // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIGameplayDebugViewer.OnComboxBoxActorClassSelected
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIGameplayDebugViewer_OnComboxBoxActorClassSelected final
-{
-public:
-	class FString                                 InSelectedItem;                                    // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	ESelectInfo                                   InSelectionType;                                   // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIGameplayDebugViewer.OnEditableTextBoxCommittedForPropertySearch
-// 0x0020 (0x0020 - 0x0000)
-struct M1UIGameplayDebugViewer_OnEditableTextBoxCommittedForPropertySearch final
-{
-public:
-	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	ETextCommit                                   InCommitMethod;                                    // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIGameplayDebugViewer.OnTextCommitted
-// 0x0020 (0x0020 - 0x0000)
-struct M1UIGameplayDebugViewer_OnTextCommitted final
-{
-public:
-	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	ETextCommit                                   InCommitMethod;                                    // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
 // Function M1.M1MissionTaskActorDestruction.OnDestructionTargetActorDestroyed
 // 0x0008 (0x0008 - 0x0000)
 struct M1MissionTaskActorDestruction_OnDestructionTargetActorDestroyed final
@@ -28339,12 +28937,14 @@ public:
 	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIGameRadarLayer.BP_GetStepsWidgets
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIGameRadarLayer_BP_GetStepsWidgets final
+// Function M1.M1UIGameRadarArea.UpdatePanel
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameRadarArea_UpdatePanel final
 {
 public:
-	TArray<class UWidget*>                        ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	bool                                          Invalid;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         InWarningLevel;                                    // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1MissionTaskDestructionIronHeartSplineActor.DetachVoidErosion
@@ -28379,15 +28979,6 @@ struct M1TextBlock_SetWrapTextWidth final
 {
 public:
 	int32                                         InWrapTextAt;                                      // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInclusiveItemDetails.BP_GetTypedItemDetails
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIInclusiveItemDetails_BP_GetTypedItemDetails final
-{
-public:
-	class UM1UIData*                              InUIData;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UM1UIWidget*                            ReturnValue;                                       // 0x0008(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1MissionTaskActorDestructionVulgusPost.OnMissionTargetDeactivated
@@ -28501,23 +29092,69 @@ public:
 	struct FVector2D                              ScreenPos;                                         // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemLevelUpgradeItemStat.BP_UpdateDps
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIItemLevelUpgradeItemStat_BP_UpdateDps final
+// Function M1.M1UIItemLevelUpgrade.BP_OnPhaseChanged
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIItemLevelUpgrade_BP_OnPhaseChanged final
 {
 public:
-	class FText                                   InDpsText;                                         // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	EM1LevelUpgradePhase                          InNewPhase;                                        // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LevelUpgradePhase                          InPrevPhase;                                       // 0x0001(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemLevelUpgradeItemStat.BP_UpdateDpsOffset
-// 0x0020 (0x0020 - 0x0000)
-struct M1UIItemLevelUpgradeItemStat_BP_UpdateDpsOffset final
+// Function M1.M1UIItemLevelUpgrade.OnCancelClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemLevelUpgrade_OnCancelClicked final
 {
 public:
-	class FText                                   InOffsetText;                                      // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bIsZero;                                           // 0x0018(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bIsPositive;                                       // 0x0019(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1A[0x6];                                       // 0x001A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemLevelUpgrade.OnGuideClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemLevelUpgrade_OnGuideClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemLevelUpgrade.OnMaterialItemClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemLevelUpgrade_OnMaterialItemClicked final
+{
+public:
+	class UM1UIWidget*                            InClickedWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemLevelUpgrade.OnResultPopupConfirmed
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemLevelUpgrade_OnResultPopupConfirmed final
+{
+public:
+	class UM1UIWidget*                            InConfirmButtonWidget;                             // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemLevelUpgrade.OnSelectedTargetItemClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemLevelUpgrade_OnSelectedTargetItemClicked final
+{
+public:
+	class UM1UIWidget*                            InClickedWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemLevelUpgrade.OnTargetItemClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemLevelUpgrade_OnTargetItemClicked final
+{
+public:
+	class UM1UIWidget*                            InClickedWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemLevelUpgrade.BP_IsAnyAnimationPlaying
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIItemLevelUpgrade_BP_IsAnyAnimationPlaying final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1MissionTaskActorDynamicGoalActor_Assassination.OnTargetMonsterDead
@@ -28683,224 +29320,12 @@ public:
 	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIMasteryRankUpPage.OnCancelClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMasteryRankUpPage_OnCancelClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMasteryRankUpPage.OnGuideClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMasteryRankUpPage_OnGuideClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMasteryRankUpPage.OnHoldCompleteRankUp
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMasteryRankUpPage_OnHoldCompleteRankUp final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMasteryRankUpPage.OnNotifyMasteryRankUppable
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIMasteryRankUpPage_OnNotifyMasteryRankUppable final
-{
-public:
-	int32                                         InLevel;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.BP_SetVisibility
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGameMainMenu_BP_SetVisibility final
-{
-public:
-	EM1MapType                                    InMapType;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.ContextButtons_Cancel
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_ContextButtons_Cancel final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.Logout
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_Logout final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnCancelMatchAndReturnToCity
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnCancelMatchAndReturnToCity final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnChallengeAndEventTabButtonSelected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnChallengeAndEventTabButtonSelected final
-{
-public:
-	int32                                         InTabIndex;                                        // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bSelectionChanged;                                 // 0x0004(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIGameMainMenu.OnChallengeEntryClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnChallengeEntryClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnCreatedEventTooltip
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnCreatedEventTooltip final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventClickedOpenEventPage
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventClickedOpenEventPage final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventClickGameOption
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventClickGameOption final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventClickInventory
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventClickInventory final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventClickLogOut
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventClickLogOut final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventClickMap
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventClickMap final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventClickMissionResult
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventClickMissionResult final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventClickMoveAlbion
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventClickMoveAlbion final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventClickQuit
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventClickQuit final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventClickRequestSupport
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventClickRequestSupport final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventClickStopMission
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventClickStopMission final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventClickTerms
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventClickTerms final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventClickToyEvent
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventClickToyEvent final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventReceivedFocus
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnEventReceivedFocus final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.OnEventScreenShotModeToggleValueChanged
+// Function M1.M1UIGameGuide.BP_ShowTip
 // 0x0010 (0x0010 - 0x0000)
-struct M1UIGameMainMenu_OnEventScreenShotModeToggleValueChanged final
+struct M1UIGameGuide_BP_ShowTip final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Value;                                             // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIGameMainMenu.OnTryRequestReturnToCity
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_OnTryRequestReturnToCity final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameMainMenu.QuitGame
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameMainMenu_QuitGame final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 InTip;                                             // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1MissionTaskActorOccupation.GetOccupationRadius
@@ -28911,46 +29336,6 @@ public:
 	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataMasteryRankCondition.CanLevelUp
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIDataMasteryRankCondition_CanLevelUp final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataMasteryRankCondition.GetExp
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIDataMasteryRankCondition_GetExp final
-{
-public:
-	int64                                         ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataMasteryRankCondition.GetLevel
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIDataMasteryRankCondition_GetLevel final
-{
-public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataMasteryRankCondition.GetRequiredExp
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIDataMasteryRankCondition_GetRequiredExp final
-{
-public:
-	int64                                         ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMonsterInfo_Marker.BP_ChangeMonsterMarker
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMonsterInfo_Marker_BP_ChangeMonsterMarker final
-{
-public:
-	EM1MissionDerivativeMarkerType                InNewMarkerType;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1MissionTaskActorResearchBlock.OnTargetMonsterDestroyed
 // 0x0008 (0x0008 - 0x0000)
 struct M1MissionTaskActorResearchBlock_OnTargetMonsterDestroyed final
@@ -28959,12 +29344,36 @@ public:
 	class AActor*                                 InActor;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMetaBackground.BP_ApplyCustomizingSettings
-// 0x00F0 (0x00F0 - 0x0000)
-struct M1UIMetaBackground_BP_ApplyCustomizingSettings final
+// Function M1.M1UIMenuRotator.CallBack_MoveToLeft
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMenuRotator_CallBack_MoveToLeft final
 {
 public:
-	struct FM1TypedUITheme_Brush                  InThemeInfo;                                       // 0x0000(0x00F0)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMenuRotator.CallBack_MoveToRight
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMenuRotator_CallBack_MoveToRight final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMenuRotator.MoveToIndex
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIMenuRotator_MoveToIndex final
+{
+public:
+	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIChildMissionGuide.GetEndAnimation
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIChildMissionGuide_GetEndAnimation final
+{
+public:
+	class UWidgetAnimation*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIAllyPlayerNavigationIcon.BP_SetSquadIndex
@@ -28975,12 +29384,20 @@ public:
 	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIToggle.BP_TurnOnGreenColor
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIToggle_BP_TurnOnGreenColor final
+// Function M1.M1UIInDun_SelectDifficultyPopup.OnDifficultyListItemClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInDun_SelectDifficultyPopup_OnDifficultyListItemClicked final
 {
 public:
-	bool                                          bTurnOn;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionWaveGuide.GetChildMissionWidgets
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMissionWaveGuide_GetChildMissionWidgets final
+{
+public:
+	TArray<class UM1UIChildMissionGuide*>         ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIAllyNavigation.OnActorDestroyed
@@ -29009,28 +29426,28 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIStatGroupItemSlotTooltip.BP_SetRandomOptionOnlyValue
+// Function M1.M1UIStatGroupItemSlot.BP_SetBuffValue
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIStatGroupItemSlot_BP_SetBuffValue final
+{
+public:
+	float                                         InValue;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIStatGroupItemSlot.BP_SetRandomOptionOnlyValue
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIStatGroupItemSlotTooltip_BP_SetRandomOptionOnlyValue final
+struct M1UIStatGroupItemSlot_BP_SetRandomOptionOnlyValue final
 {
 public:
 	bool                                          bIsRandomOptionOnly;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIStatGroupItemSlotTooltip.BP_SetStatColor
+// Function M1.M1UIStatGroupItemSlot.BP_SetStatColor
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIStatGroupItemSlotTooltip_BP_SetStatColor final
+struct M1UIStatGroupItemSlot_BP_SetStatColor final
 {
 public:
 	EM1UIStatColor                                InColorType;                                       // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionPreTaskInfo.BP_RelatedTaskActorActivated
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionPreTaskInfo_BP_RelatedTaskActorActivated final
-{
-public:
-	bool                                          bInActivated;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataBattlePassDetail.GetAlertRemainSeconds
@@ -29250,29 +29667,47 @@ public:
 	TSubclassOf<class UM1RepTestComponent>        InClass;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameStatusEffect_NoticePanel.BP_OnAddedStatusEffectNotice
+// Function M1.M1UIGameStatusEffectIcon.BP_UpdateElapsedProgressRatio
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIGameStatusEffectIcon_BP_UpdateElapsedProgressRatio final
+{
+public:
+	float                                         InRatio;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameStatusEffectIcon.BP_UpdateElapsedProgressSeconds
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIGameStatusEffectIcon_BP_UpdateElapsedProgressSeconds final
+{
+public:
+	float                                         InSecond;                                          // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameStatusEffectIcon.BP_UpdateIcon
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIGameStatusEffectIcon_BP_UpdateIcon final
+{
+public:
+	class UTexture2D*                             Icon;                                              // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FGameplayTag                           InStatusEffectIdTag;                               // 0x0008(0x0008)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          InbInfiniteDuration;                               // 0x0010(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIGameStatusEffectIcon.BP_UpdateIconSize
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIGameStatusEffect_NoticePanel_BP_OnAddedStatusEffectNotice final
+struct M1UIGameStatusEffectIcon_BP_UpdateIconSize final
 {
 public:
-	const class UM1UIWidget*                      InNoticeWidget;                                    // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector2D                              InSize;                                            // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameStatusEffect_NoticePanel.OnActivatedStatusEffect
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIGameStatusEffect_NoticePanel_OnActivatedStatusEffect final
+// Function M1.M1UIGameStatusEffectIcon.BP_UpdateStackCount
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIGameStatusEffectIcon_BP_UpdateStackCount final
 {
 public:
-	const class UM1StatusEffect*                  InStatusEffect;                                    // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   InStatusEffectDataRowName;                         // 0x0008(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameStatusEffect_NoticePanel.OnOuterWidgetVisibilityChanged
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGameStatusEffect_NoticePanel_OnOuterWidgetVisibilityChanged final
-{
-public:
-	ESlateVisibility                              InVisibility;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InCount;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1MissionTaskComponentDestructionIronHeart.OnSubTaskEnded
@@ -29340,38 +29775,6 @@ struct M1MissionOccupationActor_GetOccupationState final
 {
 public:
 	EM1MissionTaskOccupationState                 ReturnValue;                                       // 0x0000(0x0001)(ConstParm, Parm, OutParm, ZeroConstructor, ReturnParm, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGame_CharacterLevel.BP_SetCharacterLevelExp
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIGame_CharacterLevel_BP_SetCharacterLevelExp final
-{
-public:
-	float                                         InRatio;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGame_CharacterLevel.BP_SetMasteryExp
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIGame_CharacterLevel_BP_SetMasteryExp final
-{
-public:
-	float                                         InRatio;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGame_CharacterLevel.BP_UpdateAppearanceByCharacterLevel
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGame_CharacterLevel_BP_UpdateAppearanceByCharacterLevel final
-{
-public:
-	bool                                          bIsMax;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGame_CharacterLevel.BP_UpdateAppearanceByMasteryRank
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGame_CharacterLevel_BP_UpdateAppearanceByMasteryRank final
-{
-public:
-	bool                                          bIsMax;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1MissionTaskComponentSupply.OnCollectorDestroyed
@@ -29515,16 +29918,6 @@ public:
 	bool                                          bInStop;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameContentSelector.OnTabButtonSelected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_OnTabButtonSelected final
-{
-public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bSelectionChanged;                                 // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
 // Function M1.M1MonsterCrowdLeaderComponent.OnFollowerDestroyed
 // 0x0008 (0x0008 - 0x0000)
 struct M1MonsterCrowdLeaderComponent_OnFollowerDestroyed final
@@ -29595,9 +29988,89 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionSpecTypeBase.OnConfirmOption
+// Function M1.M1UIOptionGamepadReset.BP_UpdateControllerImage
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIOptionGamepadReset_BP_UpdateControllerImage final
+{
+public:
+	EM1GamepadPlatform                            InPlatform;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionGamepadReset.OnClickedDefaultPreset
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionSpecTypeBase_OnConfirmOption final
+struct M1UIOptionGamepadReset_OnClickedDefaultPreset final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionGamepadReset.OnClickedLeftHandedPreset
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionGamepadReset_OnClickedLeftHandedPreset final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionPage.CancelRevertOptionInCurrentPage
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionPage_CancelRevertOptionInCurrentPage final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionPage.ConfirmRevertOptionInCurrentPage
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionPage_ConfirmRevertOptionInCurrentPage final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionPage.OnApplyClick
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionPage_OnApplyClick final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionPage.OnCancelClick
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionPage_OnCancelClick final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionPage.OnEventHoveredOptionInPage
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionPage_OnEventHoveredOptionInPage final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionPage.OnEventUnhoveredOptionInPage
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionPage_OnEventUnhoveredOptionInPage final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionPage.OnResetClick
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionPage_OnResetClick final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionPage.ResetOptionInCurrentPage
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionPage_ResetOptionInCurrentPage final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -29659,65 +30132,49 @@ public:
 	uint8                                         Pad_BC[0x4];                                       // 0x00BC(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIPaintExtract.OnCancelButtonClicked
+// Function M1.M1UIPageControlWithButtons.OnLeftButtonClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPaintExtract_OnCancelButtonClicked final
+struct M1UIPageControlWithButtons_OnLeftButtonClicked final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InUIWidget;                                        // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPaintExtract.OnExtractButtonHoldComplete
+// Function M1.M1UIPageControlWithButtons.OnRightButtonClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPaintExtract_OnExtractButtonHoldComplete final
+struct M1UIPageControlWithButtons_OnRightButtonClicked final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InUIWidget;                                        // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPaintExtract.OnLeftButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPaintExtract_OnLeftButtonClicked final
+// Function M1.M1UIPageControlWithButtons.OnSetMaxPageNumber_BP
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIPageControlWithButtons_OnSetMaxPageNumber_BP final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InMaxPageNumber;                                   // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPaintExtract.OnRightButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPaintExtract_OnRightButtonClicked final
+// Function M1.M1UIPageControlWithButtons.OnUpdatePageNumber_BP
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIPageControlWithButtons_OnUpdatePageNumber_BP final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         PageNumber;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPaintExtract.OnShowPaintGroupButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPaintExtract_OnShowPaintGroupButtonClicked final
+// Function M1.M1UIPageControlWithButtons.ShowPageNumber_BP
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIPageControlWithButtons_ShowPageNumber_BP final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPaintExtract.OnShowProbabilityClicked
+// Function M1.M1UIOptionSpecTypeBase.OnConfirmOption
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPaintExtract_OnShowProbabilityClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionSubclass.OnEventHoveredOptionInSubclass
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionSubclass_OnEventHoveredOptionInSubclass final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionSubclass.OnEventUnhoveredOptionInSubclass
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionSubclass_OnEventUnhoveredOptionInSubclass final
+struct M1UIOptionSpecTypeBase_OnConfirmOption final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -29815,60 +30272,20 @@ public:
 	uint32                                        InObjectUniqueID;                                  // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIButton_NpcMenu.BP_SetAsHoldButton
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_NpcMenu_BP_SetAsHoldButton final
+// Function M1.M1UINpc.OnServiceClosed
+// 0x0008 (0x0008 - 0x0000)
+struct M1UINpc_OnServiceClosed final
 {
 public:
-	bool                                          InIsHoldButton;                                    // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIButton_NpcMenu.BP_SetIsInvaded
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_NpcMenu_BP_SetIsInvaded final
+// Function M1.M1UINpc.OnServiceSelected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UINpc_OnServiceSelected final
 {
 public:
-	bool                                          InIsInvaded;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton_NpcMenu.BP_SetQuestType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_NpcMenu_BP_SetQuestType final
-{
-public:
-	EM1QuestType                                  InQuestType;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton_NpcMenu.BP_ShowAsLocked
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_NpcMenu_BP_ShowAsLocked final
-{
-public:
-	bool                                          InIsLocked;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton_NpcMenu.BP_ShowQuestTrackerIcon
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_NpcMenu_BP_ShowQuestTrackerIcon final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton_NpcMenu.BP_UpdateNewIcon
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_NpcMenu_BP_UpdateNewIcon final
-{
-public:
-	bool                                          InNewIconVisible;                                  // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIButton_NpcMenu.IsLocked
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIButton_NpcMenu_IsLocked final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1NavLinkProxy.OnLinkedActorDestroyed
@@ -29879,15 +30296,6 @@ public:
 	class AActor*                                 InLinkedActor;                                     // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRequiredVoidPieceEntryWidget.BP_SetAmount
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRequiredVoidPieceEntryWidget_BP_SetAmount final
-{
-public:
-	int32                                         InOwnedCount;                                      // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         InRequiredCount;                                   // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIBoostDetailsEntry.BP_SetIcon
 // 0x0001 (0x0001 - 0x0000)
 struct M1UIBoostDetailsEntry_BP_SetIcon final
@@ -29896,78 +30304,54 @@ public:
 	EM1BuffSubItemType                            InBoostType;                                       // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIVoidVesselRewardDetail.OnMouseWheelOnSlot
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIVoidVesselRewardDetail_OnMouseWheelOnSlot final
-{
-public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIMissionTaskGoal_Defense.BP_SetTargetCount
+// Function M1.M1UIDataWeaponBookEntry.IsLocked
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionTaskGoal_Defense_BP_SetTargetCount final
+struct M1UIDataWeaponBookEntry_IsLocked final
 {
 public:
-	bool                                          bMany;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionTaskGoal_Defense.BP_GetTargetListItems
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionTaskGoal_Defense_BP_GetTargetListItems final
-{
-public:
-	TArray<class UWidget*>                        ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionTargetMultiCollectionInfo.BP_SetCollectionRatio
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIMissionTargetMultiCollectionInfo_BP_SetCollectionRatio final
-{
-public:
-	float                                         Duration;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionTargetMultiCollectionInfo.BP_SetState
+// Function M1.M1UIVoidVesselRemainTimeBasedRewardInfo.BP_SetCanAcquireReward
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionTargetMultiCollectionInfo_BP_SetState final
+struct M1UIVoidVesselRemainTimeBasedRewardInfo_BP_SetCanAcquireReward final
 {
 public:
-	EM1MissionTargetMultiCollectionState          CollectionState;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bCanAcquire;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionTargetMultiCollectionInfo.BP_SetTimerDuration
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIMissionTargetMultiCollectionInfo_BP_SetTimerDuration final
-{
-public:
-	float                                         Duration;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionIndividual_DirectInput.OnHoveredOrUnhoveredInputKeySelector
+// Function M1.M1UIVoidVesselRemainTimeBasedRewardInfo.SetHoveredRewardItemRemainTime
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionIndividual_DirectInput_OnHoveredOrUnhoveredInputKeySelector final
+struct M1UIVoidVesselRemainTimeBasedRewardInfo_SetHoveredRewardItemRemainTime final
+{
+public:
+	struct FTimespan                              InRemainTime;                                      // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTargetExplosionInfo.BP_SetUIState
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionTargetExplosionInfo_BP_SetUIState final
+{
+public:
+	bool                                          bDim;                                              // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionIndividual_DropDown.Callback_OnSelectionChanged
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIOptionIndividual_DropDown_Callback_OnSelectionChanged final
+{
+public:
+	class FString                                 InSelectedParam;                                   // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	ESelectInfo                                   InSelectInfo;                                      // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIOptionDetail_KeyButton.Callback_HoldCompletedKeyButton
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionDetail_KeyButton_Callback_HoldCompletedKeyButton final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionIndividual_DirectInput.OnMainKeySelected
-// 0x0020 (0x0020 - 0x0000)
-struct M1UIOptionIndividual_DirectInput_OnMainKeySelected final
-{
-public:
-	struct FInputChord                            SelectedKey;                                       // 0x0000(0x0020)(Parm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionIndividual_DirectInput.OnSubKeySelected
-// 0x0020 (0x0020 - 0x0000)
-struct M1UIOptionIndividual_DirectInput_OnSubKeySelected final
-{
-public:
-	struct FInputChord                            SelectedKey;                                       // 0x0000(0x0020)(Parm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICashShop.BP_SetWidgetEntryClass
@@ -30028,81 +30412,33 @@ public:
 	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIOptionPage.CancelRevertOptionInCurrentPage
+// Function M1.M1UIOptionIndividual_ButtonDesc.Callback_Button
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionPage_CancelRevertOptionInCurrentPage final
+struct M1UIOptionIndividual_ButtonDesc_Callback_Button final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionPage.ConfirmRevertOptionInCurrentPage
+// Function M1.M1UIOptionIndividual_DirectInput.OnHoveredOrUnhoveredInputKeySelector
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionPage_ConfirmRevertOptionInCurrentPage final
+struct M1UIOptionIndividual_DirectInput_OnHoveredOrUnhoveredInputKeySelector final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionPage.OnApplyClick
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionPage_OnApplyClick final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionPage.OnCancelClick
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionPage_OnCancelClick final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionPage.OnEventHoveredOptionInPage
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionPage_OnEventHoveredOptionInPage final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionPage.OnEventUnhoveredOptionInPage
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionPage_OnEventUnhoveredOptionInPage final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionPage.OnResetClick
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionPage_OnResetClick final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionPage.ResetOptionInCurrentPage
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionPage_ResetOptionInCurrentPage final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionInputKeySelectorWrapper_DirectInput.EnableHitTest
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIOptionInputKeySelectorWrapper_DirectInput_EnableHitTest final
-{
-public:
-	bool                                          bEnable;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionInputKeySelectorWrapper_DirectInput.OnKeySelected
+// Function M1.M1UIOptionIndividual_DirectInput.OnMainKeySelected
 // 0x0020 (0x0020 - 0x0000)
-struct M1UIOptionInputKeySelectorWrapper_DirectInput_OnKeySelected final
+struct M1UIOptionIndividual_DirectInput_OnMainKeySelected final
+{
+public:
+	struct FInputChord                            SelectedKey;                                       // 0x0000(0x0020)(Parm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionIndividual_DirectInput.OnSubKeySelected
+// 0x0020 (0x0020 - 0x0000)
+struct M1UIOptionIndividual_DirectInput_OnSubKeySelected final
 {
 public:
 	struct FInputChord                            SelectedKey;                                       // 0x0000(0x0020)(Parm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -30116,127 +30452,74 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIQuantityControl.ShowKeySymbol
+// Function M1.M1UIPurchaseResultPopup.OnConfirmButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPurchaseResultPopup_OnConfirmButtonClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPurchaseResultPopup.OnMoveToCharactersClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPurchaseResultPopup_OnMoveToCharactersClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPurchaseResultPopup.SetContextButtonDimmed
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIQuantityControl_ShowKeySymbol final
+struct M1UIPurchaseResultPopup_SetContextButtonDimmed final
 {
 public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bDimmed;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIQuestPage.OnClickedCancel
+// Function M1.M1UIPreviewStageCameraControl.OnMouseMovedOnCustomize
+// 0x0080 (0x0080 - 0x0000)
+struct M1UIPreviewStageCameraControl_OnMouseMovedOnCustomize final
+{
+public:
+	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPreviewStageCameraControl.OnMouseWheelOnCustomize
+// 0x0080 (0x0080 - 0x0000)
+struct M1UIPreviewStageCameraControl_OnMouseWheelOnCustomize final
+{
+public:
+	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPreviewStageCameraControl.OnResetClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIQuestPage_OnClickedCancel final
+struct M1UIPreviewStageCameraControl_OnResetClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIQuestPage.OnQuestAcceptButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIQuestPage_OnQuestAcceptButtonClicked final
+// Function M1.M1UIPreviewStageCameraControl.OnTouchGestureOnCustomize
+// 0x0080 (0x0080 - 0x0000)
+struct M1UIPreviewStageCameraControl_OnTouchGestureOnCustomize final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FPointerEvent                          InGestureInputEvent;                               // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIQuestPage.OnQuestRejectButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIQuestPage_OnQuestRejectButtonClicked final
+// Function M1.M1UIQuestList.BP_ChangedFilterType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIQuestList_BP_ChangedFilterType final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIQuestPage.OnSlotHovered
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIQuestPage_OnSlotHovered final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIQuestPage.GetUIDataQuest
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIQuestPage_GetUIDataQuest final
-{
-public:
-	class UObject*                                InOuter;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UM1UIDataQuest*                         ReturnValue;                                       // 0x0008(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIQuest.OnClickedKeyContextButton_Cancel
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIQuest_OnClickedKeyContextButton_Cancel final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIQuest.OnClickedKeyContextButton_GameGuide
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIQuest_OnClickedKeyContextButton_GameGuide final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIQuest.OnClickedKeyContextButton_OpenGroupQuestList
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIQuest_OnClickedKeyContextButton_OpenGroupQuestList final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIQuest.OnClickedKeyContextButton_TrackQuest
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIQuest_OnClickedKeyContextButton_TrackQuest final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIQuest.OnEventCursorEnteredSlot_QuestList
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIQuest_OnEventCursorEnteredSlot_QuestList final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIQuest.OnEventEntryClick_QuestList
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIQuest_OnEventEntryClick_QuestList final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIQuest.OnEventSubTabSelected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIQuest_OnEventSubTabSelected final
-{
-public:
-	int32                                         InTabIndex;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bSelected;                                         // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIQuest.OnSetTrackingQuest
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIQuest_OnSetTrackingQuest final
-{
-public:
-	struct FM1TemplateId                          InQuestTemplateId;                                 // 0x0000(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIQuest.OnUnsetTrackingQuest
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIQuest_OnUnsetTrackingQuest final
-{
-public:
-	struct FM1TemplateId                          InQuestTemplateId;                                 // 0x0000(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1QuestType                                  InQuestType;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataRadialMenuEntry.CanDoRadialMenuAction
@@ -30461,12 +30744,68 @@ public:
 	class UM1UIWidget*                            InTooltipWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPanelRuneSockets.GetDummyRuneSockets
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPanelRuneSockets_GetDummyRuneSockets final
+// Function M1.M1UIPanelItems.BP_EnablePanelItems
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIPanelItems_BP_EnablePanelItems final
 {
 public:
-	TArray<class UM1UIRuneSocket*>                ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	bool                                          InbEnabled;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelItems.BP_ItemCountUpdated
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPanelItems_BP_ItemCountUpdated final
+{
+public:
+	TArray<class FString>                         InParams;                                          // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelItems.OnToggleBookmarkFilter
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPanelItems_OnToggleBookmarkFilter final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bToggleValue;                                      // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPanelItems.OnToggleLimitedSkinFilter
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPanelItems_OnToggleLimitedSkinFilter final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bToggleValue;                                      // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPanelItems.OnToggleOwnedSkinFilter
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPanelItems_OnToggleOwnedSkinFilter final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bToggleValue;                                      // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPanelItemsRune.OnEventDragDetected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPanelItemsRune_OnEventDragDetected final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPanelItemsRune.OnEventDragWidgetDroppedOnRuneInPanel
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIPanelItemsRune_OnEventDragWidgetDroppedOnRuneInPanel final
+{
+public:
+	class UM1UIWidget*                            InDroppedSlot;                                     // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InDraggedSlot;                                     // 0x0008(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIDataItemInfo_Rune*                 InDraggedRune;                                     // 0x0010(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataItemLevelUpgradeResult.GetTargetItemLevel
@@ -30501,20 +30840,60 @@ public:
 	EM1ItemTierType                               ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UINpcServiceUnlockCondition.BP_MarkAsCompleted
+// Function M1.M1UIButton_NpcMenu.BP_SetAsHoldButton
 // 0x0001 (0x0001 - 0x0000)
-struct M1UINpcServiceUnlockCondition_BP_MarkAsCompleted final
+struct M1UIButton_NpcMenu_BP_SetAsHoldButton final
 {
 public:
-	bool                                          bIsCompleted;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          InIsHoldButton;                                    // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UINpcServiceUnlockCondition.SetConditionText
-// 0x0018 (0x0018 - 0x0000)
-struct M1UINpcServiceUnlockCondition_SetConditionText final
+// Function M1.M1UIButton_NpcMenu.BP_SetIsInvaded
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_NpcMenu_BP_SetIsInvaded final
 {
 public:
-	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          InIsInvaded;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton_NpcMenu.BP_SetQuestType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_NpcMenu_BP_SetQuestType final
+{
+public:
+	EM1QuestType                                  InQuestType;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton_NpcMenu.BP_ShowAsLocked
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_NpcMenu_BP_ShowAsLocked final
+{
+public:
+	bool                                          InIsLocked;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton_NpcMenu.BP_ShowQuestTrackerIcon
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_NpcMenu_BP_ShowQuestTrackerIcon final
+{
+public:
+	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton_NpcMenu.BP_UpdateNewIcon
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_NpcMenu_BP_UpdateNewIcon final
+{
+public:
+	bool                                          InNewIconVisible;                                  // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIButton_NpcMenu.IsLocked
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIButton_NpcMenu_IsLocked final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataTaskDynamicGoal_Assassination.GetAssassinationSpecificStringId
@@ -30533,20 +30912,20 @@ public:
 	TArray<struct FM1MonsterKillInfoUI>           ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionDetail_KeyButton.Callback_HoldCompletedKeyButton
+// Function M1.M1UIPopupContentRecommendSpecs.OpenCharacterRune
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionDetail_KeyButton_Callback_HoldCompletedKeyButton final
+struct M1UIPopupContentRecommendSpecs_OpenCharacterRune final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPopupMoviePlayer.PlayMovie
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIPopupMoviePlayer_PlayMovie final
+// Function M1.M1UIPopupContentRecommendSpecs.BP_GetStatGroupItemArray
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPopupContentRecommendSpecs_BP_GetStatGroupItemArray final
 {
 public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class UM1UIVoidBattleStatGroupItemSlot*> ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1NXLogComponent.RollingFile
@@ -30557,42 +30936,20 @@ public:
 	bool                                          bCrash;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPreviewStageCameraControl.OnMouseMovedOnCustomize
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIPreviewStageCameraControl_OnMouseMovedOnCustomize final
+// Function M1.M1UIDataPresetLoadoutSlot.GetLoadoutSlotName
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIDataPresetLoadoutSlot_GetLoadoutSlotName final
 {
 public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPreviewStageCameraControl.OnMouseWheelOnCustomize
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIPreviewStageCameraControl_OnMouseWheelOnCustomize final
+// Function M1.M1UIPopupMoviePlayer.PlayMovie
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIPopupMoviePlayer_PlayMovie final
 {
 public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPreviewStageCameraControl.OnResetClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPreviewStageCameraControl_OnResetClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPreviewStageCameraControl.OnTouchGestureOnCustomize
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIPreviewStageCameraControl_OnTouchGestureOnCustomize final
-{
-public:
-	struct FPointerEvent                          InGestureInputEvent;                               // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1OnewayBlockingComponent.OnDetectingVolumeBeginOverlap
@@ -30622,6 +30979,14 @@ public:
 	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
+// Function M1.M1UIMailboxNarrativeMail.OnEventClickMail
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailboxNarrativeMail_OnEventClickMail final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1UIConsumableItemResearchInfo.BP_SetRankStatus
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIConsumableItemResearchInfo_BP_SetRankStatus final
@@ -30630,14 +30995,6 @@ public:
 	int32                                         InRank;                                            // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	bool                                          bEnough;                                           // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIMailboxNarrativeMail.OnEventClickMail
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMailboxNarrativeMail_OnEventClickMail final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataMasteryRankInfo.IsValidData
@@ -30730,44 +31087,20 @@ public:
 	bool                                          bMoving;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPerkEnchantMaterialSelect.BP_ShowEnchantLevelExcessPanel
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIPerkEnchantMaterialSelect_BP_ShowEnchantLevelExcessPanel final
+// Function M1.M1UIMissionTaskGoal_DataCollection.BP_SetMissionTaskInfo
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionTaskGoal_DataCollection_BP_SetMissionTaskInfo final
 {
 public:
-	bool                                          bShouldShow;                                       // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPerkEnchantMaterialSelect.OnEnchantButtonHoldComplete
+// Function M1.M1UIPerkEnchantMain.OnCancelClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPerkEnchantMaterialSelect_OnEnchantButtonHoldComplete final
+struct M1UIPerkEnchantMain_OnCancelClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPerkEnchantMaterialSelect.OnItemClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPerkEnchantMaterialSelect_OnItemClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPerkEnchantMaterialSelect.OnMaterialClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPerkEnchantMaterialSelect_OnMaterialClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UICustomizeItemDetails.BP_SetTier
-// 0x0008 (0x0008 - 0x0000)
-struct M1UICustomizeItemDetails_BP_SetTier final
-{
-public:
-	const class UM1UIDataItemInfo*                InInfo;                                            // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICustomizeItemDetails.BP_ShowAttackType
@@ -30794,20 +31127,69 @@ public:
 	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UILoadingScreen.BP_SetProgressTextVisibility
+// Function M1.M1UIPlayerInteraction.BP_ChangedPartyState
 // 0x0001 (0x0001 - 0x0000)
-struct M1UILoadingScreen_BP_SetProgressTextVisibility final
+struct M1UIPlayerInteraction_BP_ChangedPartyState final
 {
 public:
-	bool                                          bVisible;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bPartyMember;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UILoadingScreen.LoadingTick
-// 0x0004 (0x0004 - 0x0000)
-struct M1UILoadingScreen_LoadingTick final
+// Function M1.M1UIPlayerInteraction.BP_SetPlatformIcon
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIPlayerInteraction_BP_SetPlatformIcon final
 {
 public:
-	float                                         InDeltaTime;                                       // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         InLocalPlatformType;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         InPlayerPlatformType;                              // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPlayerInteraction.BP_UpdateAwayFromGameplay
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIPlayerInteraction_BP_UpdateAwayFromGameplay final
+{
+public:
+	bool                                          bAway;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPlayerInteraction.OnHoldCompleted_BeginInteraction
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPlayerInteraction_OnHoldCompleted_BeginInteraction final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionInformation.BP_PlayCloseAnim
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionInformation_BP_PlayCloseAnim final
+{
+public:
+	class UWidgetAnimation*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionInformation.BP_SetMissionLegionCategory
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMissionInformation_BP_SetMissionLegionCategory final
+{
+public:
+	TArray<EM1LegionCategory>                     InLegionCategory;                                  // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionInformation.BP_SetMissionPlayTimeGuide
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionInformation_BP_SetMissionPlayTimeGuide final
+{
+public:
+	class FName                                   PlayTimeGuideStringId;                             // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionInformation.BP_SetMissionWaveType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionInformation_BP_SetMissionWaveType final
+{
+public:
+	bool                                          bHasWave;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICodexItemPanelBase.OnListViewTooltipContextButton_Info
@@ -30876,112 +31258,6 @@ public:
 	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UILogin.BP_ShowHintText
-// 0x0001 (0x0001 - 0x0000)
-struct M1UILogin_BP_ShowHintText final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILogin.Callback_LoginButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILogin_Callback_LoginButtonClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILogin.CallBack_TextChanged
-// 0x0018 (0x0018 - 0x0000)
-struct M1UILogin_CallBack_TextChanged final
-{
-public:
-	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILogin.CallBack_TextCommitted
-// 0x0020 (0x0020 - 0x0000)
-struct M1UILogin_CallBack_TextCommitted final
-{
-public:
-	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	ETextCommit                                   InCommitMethod;                                    // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UILogin.GetEndAnimation
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILogin_GetEndAnimation final
-{
-public:
-	class UWidgetAnimation*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILogin.OnClickStartButton
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILogin_OnClickStartButton final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILogin.OnHoldCompleted_BoostingAccount
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILogin_OnHoldCompleted_BoostingAccount final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILogin.OnHoldCompleted_NormalAccount
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILogin_OnHoldCompleted_NormalAccount final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILogin.OnOptionClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILogin_OnOptionClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILogin.OpenExitPopup
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILogin_OpenExitPopup final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILogin.QuitGame
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILogin_QuitGame final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILogin.RequestGetAccountInfo
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILogin_RequestGetAccountInfo final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILogin.RequestJoinLastField
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILogin_RequestJoinLastField final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIComponentsTest.CallBack_AddWidgetToViewport
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIComponentsTest_CallBack_AddWidgetToViewport final
@@ -30998,6 +31274,30 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UILocalMapBattleZone.BP_SetInvasionEffect
+// 0x0001 (0x0001 - 0x0000)
+struct M1UILocalMapBattleZone_BP_SetInvasionEffect final
+{
+public:
+	bool                                          bInvaded;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UILocalMapBattleZone.GetBattleZoneId
+// 0x0004 (0x0004 - 0x0000)
+struct M1UILocalMapBattleZone_GetBattleZoneId final
+{
+public:
+	struct FM1TemplateId                          ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UILocalMapBattleZone.GetHitTestImage
+// 0x0008 (0x0008 - 0x0000)
+struct M1UILocalMapBattleZone_GetHitTestImage final
+{
+public:
+	class UM1UIPixelHitTestImage*                 ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1UIDataTooltip2.CreateUIData2
 // 0x0030 (0x0030 - 0x0000)
 struct M1UIDataTooltip2_CreateUIData2 final
@@ -31009,12 +31309,52 @@ public:
 	class UM1UIDataTooltip2*                      ReturnValue;                                       // 0x0028(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionTaskGoal_Desturction.BP_GetTargetListItems
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionTaskGoal_Desturction_BP_GetTargetListItems final
+// Function M1.M1UIRequiredVoidVaultEntryWidget.BP_SetIsOwned
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRequiredVoidVaultEntryWidget_BP_SetIsOwned final
 {
 public:
-	TArray<class UWidget*>                        ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	bool                                          bOwned;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTask.OnDynamicGoalAdded
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionTask_OnDynamicGoalAdded final
+{
+public:
+	const class AM1MissionTaskActorDynamicGoalActor* InDynamicGoal;                                     // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTask.OnDynamicGoalRemoved
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionTask_OnDynamicGoalRemoved final
+{
+public:
+	const class AM1MissionTaskActorDynamicGoalActor* InDynamicGoal;                                     // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTask.OnTaskActivated
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionTask_OnTaskActivated final
+{
+public:
+	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTask.OnTaskFailed
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionTask_OnTaskFailed final
+{
+public:
+	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTask.OnTaskSucceeded
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionTask_OnTaskSucceeded final
+{
+public:
+	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1OutOfPlayableAreaComponent.OnBeginOverlap
@@ -31147,33 +31487,17 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionIndividual_Slider.Callback_OnKeyReleased
+// Function M1.M1UIOptionIndividual_SelectBase.Callback_OnSelectionChangedByLeft
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionIndividual_Slider_Callback_OnKeyReleased final
+struct M1UIOptionIndividual_SelectBase_Callback_OnSelectionChangedByLeft final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionIndividual_Slider.Callback_OnValueChanged
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIOptionIndividual_Slider_Callback_OnValueChanged final
-{
-public:
-	float                                         InValue;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionIndividual_Slider.Callback_OnValueChangedByLeft
+// Function M1.M1UIOptionIndividual_SelectBase.Callback_OnSelectionChangedByRight
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionIndividual_Slider_Callback_OnValueChangedByLeft final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionIndividual_Slider.Callback_OnValueChangedByRight
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionIndividual_Slider_Callback_OnValueChangedByRight final
+struct M1UIOptionIndividual_SelectBase_Callback_OnSelectionChangedByRight final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -31195,23 +31519,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRotationDropSlot.BP_SetAccessoryDetails
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIRotationDropSlot_BP_SetAccessoryDetails final
-{
-public:
-	EM1EquipmentCategoryType                      InCategoryType;                                    // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRotationDropSlot.BP_SetReactorDetails
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIRotationDropSlot_BP_SetReactorDetails final
-{
-public:
-	EM1ElementalDamageChannel                     InElementalType;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1SkillArcheType                             InArcheType;                                       // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1Summons.Auth_ExtendLifeTime
 // 0x0004 (0x0004 - 0x0000)
 struct M1Summons_Auth_ExtendLifeTime final
@@ -31220,47 +31527,25 @@ public:
 	float                                         InTime;                                            // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRuneBoardPreview_Character.OnDragEnteredToRune
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIRuneBoardPreview_Character_OnDragEnteredToRune final
+// Function M1.M1UIRuneBoardCharacterSkillItem.BP_OnSkillDetailChanged
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRuneBoardCharacterSkillItem_BP_OnSkillDetailChanged final
 {
 public:
-	const class UM1UIRune*                        InRuneWidget;                                      // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	const class UUserWidget*                      InDraggedRuneIcon;                                 // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	const class UM1UIDataItemInfo_Rune*           InRuneData;                                        // 0x0010(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsChanged;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRuneBoardPreview_Character.OnDragEnteredToSocket
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIRuneBoardPreview_Character_OnDragEnteredToSocket final
+// Function M1.M1UIRuneBoardCharacterSkillItem.BP_OnSkillRedirected
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRuneBoardCharacterSkillItem_BP_OnSkillRedirected final
 {
 public:
-	const class UUserWidget*                      InDraggedRuneIcon;                                 // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	const class UM1UIDataRuneSocket*              InRuneSocketData;                                  // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsChanged;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRuneBoardPreview_Character.OnDragLeftFromRune
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIRuneBoardPreview_Character_OnDragLeftFromRune final
-{
-public:
-	const class UM1UIRune*                        InRuneWidget;                                      // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	const class UUserWidget*                      InDraggedRuneIcon;                                 // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	const class UM1UIDataItemInfo_Rune*           InRuneData;                                        // 0x0010(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneBoardPreview_Character.OnDragLeftFromSocket
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIRuneBoardPreview_Character_OnDragLeftFromSocket final
-{
-public:
-	const class UUserWidget*                      InDraggedRuneIcon;                                 // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	const class UM1UIDataRuneSocket*              InRuneSocketData;                                  // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneBoardPreview_Character.OnRuneAttached
+// Function M1.M1UIRuneBoardCharacterSkillItem.OnRuneAttached
 // 0x0020 (0x0020 - 0x0000)
-struct M1UIRuneBoardPreview_Character_OnRuneAttached final
+struct M1UIRuneBoardCharacterSkillItem_OnRuneAttached final
 {
 public:
 	const class UM1UIDataItemInfo_Rune*           InAttachedRuneData;                                // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -31270,9 +31555,9 @@ public:
 	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIRuneBoardPreview_Character.OnRuneDetached
+// Function M1.M1UIRuneBoardCharacterSkillItem.OnRuneDetached
 // 0x0018 (0x0018 - 0x0000)
-struct M1UIRuneBoardPreview_Character_OnRuneDetached final
+struct M1UIRuneBoardCharacterSkillItem_OnRuneDetached final
 {
 public:
 	const class UM1UIDataItemInfo_Rune*           InDetachedRuneData;                                // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -31281,21 +31566,20 @@ public:
 	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIRuneBoardPreview_Character.OnRuneDragAttachFailed
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRuneBoardPreview_Character_OnRuneDragAttachFailed final
+// Function M1.M1UIOptionIndividual_ButtonToggle.BP_GetButtons
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIOptionIndividual_ButtonToggle_BP_GetButtons final
 {
 public:
-	const class UM1UIDataItemInfo_Rune*           InDraggedRuneData;                                 // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class UM1UIButton*>                    ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRuneBoardPreview_Character.OnRuneDragCancelled
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIRuneBoardPreview_Character_OnRuneDragCancelled final
+// Function M1.M1UIOptionIndividual_ButtonToggle.Callback_ButtonToggle
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionIndividual_ButtonToggle_Callback_ButtonToggle final
 {
 public:
-	const class UUserWidget*                      InDraggedRuneIcon;                                 // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	const class UM1UIDataRuneSocket*              InRuneSocketData;                                  // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1PickDropOperation.OnContextWidgetRemovedFromFocusPath
@@ -31385,20 +31669,102 @@ public:
 	struct FM1LaboratorySpawnSetting              InSpawnSetting;                                    // 0x0008(0x0028)(ConstParm, Parm, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionResultScoreStat.BP_SetTextColor
+// Function M1.M1UIMissionTimeAttackButton.BP_SetColor
 // 0x0004 (0x0004 - 0x0000)
-struct M1UIMissionResultScoreStat_BP_SetTextColor final
+struct M1UIMissionTimeAttackButton_BP_SetColor final
 {
 public:
-	int32                                         InColorIndex;                                      // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InUniqueId;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionWaveRewards.UpdateMissionWaveRewards
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionWaveRewards_UpdateMissionWaveRewards final
+// Function M1.M1UIMissionResultExp.BP_MasteryRankExpAcquiredType
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMissionResultExp_BP_MasteryRankExpAcquiredType final
 {
 public:
-	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<EM1UIMissionResultExpType>             InAcquiredType;                                    // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResultExp.BP_SetCharacterIcon
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMissionResultExp_BP_SetCharacterIcon final
+{
+public:
+	class UTexture2D*                             InIcon;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1CharacterGrade                             InGrade;                                           // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIMissionResultExp.BP_SetExpProgressValue
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionResultExp_BP_SetExpProgressValue final
+{
+public:
+	EM1UIMissionResultExpType                     InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         InProgressValue;                                   // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResultExp.BP_SetItemIcon
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMissionResultExp_BP_SetItemIcon final
+{
+public:
+	class UTexture2D*                             InIcon;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemTierType                               InTier;                                            // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIMissionResultExp.BP_SetLevel
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIMissionResultExp_BP_SetLevel final
+{
+public:
+	int32                                         InLevel;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResultExp.BP_SetNameText
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIMissionResultExp_BP_SetNameText final
+{
+public:
+	class FText                                   InName;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResultExp.BP_ShowExpText
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMissionResultExp_BP_ShowExpText final
+{
+public:
+	EM1UIMissionResultExpType                     InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         InExp;                                             // 0x0008(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionRewardItem.BP_SetReactorDetails
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIMissionRewardItem_BP_SetReactorDetails final
+{
+public:
+	EM1ElementalDamageChannel                     InElementalType;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1SkillArcheType                             InArcheType;                                       // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionRewardItem.BP_SetRuneDetails
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionRewardItem_BP_SetRuneDetails final
+{
+public:
+	EM1RuneClassType                              InClassType;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionRewardItem.BP_SetWeaponDetails
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIMissionRewardItem_BP_SetWeaponDetails final
+{
+public:
+	class UTexture2D*                             InTexture;                                         // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 InText;                                            // 0x0008(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICustomizeWeaponSkinInven.OnClickedPaintApply
@@ -31602,30 +31968,28 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionRewardItem.BP_SetReactorDetails
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIMissionRewardItem_BP_SetReactorDetails final
-{
-public:
-	EM1ElementalDamageChannel                     InElementalType;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1SkillArcheType                             InArcheType;                                       // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionRewardItem.BP_SetRuneDetails
+// Function M1.M1UIMissionRetriableTask.BP_SetMessageType
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionRewardItem_BP_SetRuneDetails final
+struct M1UIMissionRetriableTask_BP_SetMessageType final
 {
 public:
-	EM1RuneClassType                              InClassType;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1UIMissionTaskMessageType                   InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionRewardItem.BP_SetWeaponDetails
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIMissionRewardItem_BP_SetWeaponDetails final
+// Function M1.M1UIMissionRetriableTask.OnBeginMissionRetriableTask
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionRetriableTask_OnBeginMissionRetriableTask final
 {
 public:
-	class UTexture2D*                             InTexture;                                         // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 InText;                                            // 0x0008(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionRetriableTask.OnEventMissionLastChance
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionRetriableTask_OnEventMissionLastChance final
+{
+public:
+	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1PlayerRespawnVolume.FindClosestRespawnPointFrom
@@ -31704,12 +32068,36 @@ public:
 	class AActor*                                 InOtherActor;                                      // 0x0008(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInvasionDungeonInfo.OnTimerTick
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInvasionDungeonInfo_OnTimerTick final
+// Function M1.M1UIDataInvasionDungeonReward.GetIconPath
+// 0x0030 (0x0030 - 0x0000)
+struct M1UIDataInvasionDungeonReward_GetIconPath final
 {
 public:
-	double                                        InSecond;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TSoftObjectPtr<class UTexture2D>              ReturnValue;                                       // 0x0000(0x0030)(Parm, OutParm, ReturnParm, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataInvasionDungeonReward.GetSeasonExp
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIDataInvasionDungeonReward_GetSeasonExp final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataInvasionDungeonReward.GetTimeAttackSec
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIDataInvasionDungeonReward_GetTimeAttackSec final
+{
+public:
+	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataInvasionDungeonReward.getUniqueID
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIDataInvasionDungeonReward_GetUniqueID final
+{
+public:
+	int64                                         ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1PlayerVFXComponent.OnCustomizingPlayerInfoUpdated
@@ -31858,6 +32246,38 @@ struct M1PrivateOnlineServiceBattlePass_ServerRequestCheatBattlePassChangeLevel 
 public:
 	struct FM1TemplateId                          InBattlePassTid;                                   // 0x0000(0x0004)(Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	int32                                         InLevel;                                           // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGame_Interaction.BP_ShowExclusiveInteractionMarkToOtherPlayers
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGame_Interaction_BP_ShowExclusiveInteractionMarkToOtherPlayers final
+{
+public:
+	bool                                          bInShow;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGame_Interaction.OnHoldBegin_Interaction
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGame_Interaction_OnHoldBegin_Interaction final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGame_Interaction.OnHoldCanceled_Interaction
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGame_Interaction_OnHoldCanceled_Interaction final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGame_Interaction.OnHoldCompleted_BeginInteraction
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGame_Interaction_OnHoldCompleted_BeginInteraction final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1PrivateOnlineServiceComponent.ChangePlayer
@@ -32017,19 +32437,19 @@ public:
 };
 
 // Function M1.M1PrivateOnlineServiceComponent.ClientOnNotifyFocusGoalCompleted
-// 0x0010 (0x0010 - 0x0000)
+// 0x0018 (0x0018 - 0x0000)
 struct M1PrivateOnlineServiceComponent_ClientOnNotifyFocusGoalCompleted final
 {
 public:
-	struct FM1FocusGoalCompleteNoti               InNoti;                                            // 0x0000(0x0010)(ConstParm, Parm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
+	struct FM1FocusGoalCompleteNoti               InNoti;                                            // 0x0000(0x0018)(ConstParm, Parm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1PrivateOnlineServiceComponent.ClientOnNotifyFocusGoalProgressed
-// 0x0018 (0x0018 - 0x0000)
+// 0x0020 (0x0020 - 0x0000)
 struct M1PrivateOnlineServiceComponent_ClientOnNotifyFocusGoalProgressed final
 {
 public:
-	struct FM1FocusGoalProgressNoti               InNoti;                                            // 0x0000(0x0018)(ConstParm, Parm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
+	struct FM1FocusGoalProgressNoti               InNoti;                                            // 0x0000(0x0020)(ConstParm, Parm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1PrivateOnlineServiceComponent.ClientOnNotifyRequestSupport
@@ -32788,17 +33208,18 @@ public:
 };
 
 // Function M1.M1PrivateOnlineServiceComponent.ClientRequestSelectFocusGoalItem
-// 0x0014 (0x0014 - 0x0000)
+// 0x0018 (0x0018 - 0x0000)
 struct M1PrivateOnlineServiceComponent_ClientRequestSelectFocusGoalItem final
 {
 public:
 	EM1FocusGoalSourceType                        InFocusGoalSourceType;                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1TemplateId                          InSourceTid;                                       // 0x0004(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          InItemTid;                                         // 0x0008(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bSelect;                                           // 0x000C(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	EM1FocusGoalReason                            InReason;                                          // 0x0010(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          InSourceTid1;                                      // 0x0004(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          InSourceTid2;                                      // 0x0008(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          InItemTid;                                         // 0x000C(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSelect;                                           // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x3];                                       // 0x0011(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	EM1FocusGoalReason                            InReason;                                          // 0x0014(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1PrivateOnlineServiceComponent.ClientSetDebugCooldownEndTime
@@ -33256,16 +33677,17 @@ public:
 };
 
 // Function M1.M1PrivateOnlineServiceComponent.ServerRequestSelectFocusGoalItem
-// 0x0010 (0x0010 - 0x0000)
+// 0x0014 (0x0014 - 0x0000)
 struct M1PrivateOnlineServiceComponent_ServerRequestSelectFocusGoalItem final
 {
 public:
 	EM1FocusGoalSourceType                        InFocusGoalSourceType;                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1TemplateId                          InSourceTid;                                       // 0x0004(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          InItemTid;                                         // 0x0008(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bSelect;                                           // 0x000C(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	struct FM1TemplateId                          InSourceTid1;                                      // 0x0004(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          InSourceTid2;                                      // 0x0008(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          InItemTid;                                         // 0x000C(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSelect;                                           // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x3];                                       // 0x0011(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function M1.M1PrivateOnlineServiceComponent.ServerRequestSelectLoadoutSlot
@@ -33629,139 +34051,6 @@ public:
 	struct FM1TemplateId                          InQuestTemplateId;                                 // 0x0000(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UICharacterInfoBase.BP_NotifyTagAdded
-// 0x0008 (0x0008 - 0x0000)
-struct M1UICharacterInfoBase_BP_NotifyTagAdded final
-{
-public:
-	struct FGameplayTag                           Tag;                                               // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UICharacterInfoBase.BP_NotifyTagRemoved
-// 0x0008 (0x0008 - 0x0000)
-struct M1UICharacterInfoBase_BP_NotifyTagRemoved final
-{
-public:
-	struct FGameplayTag                           Tag;                                               // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UICharacterInfoBase.CustomUpdate
-// 0x0004 (0x0004 - 0x0000)
-struct M1UICharacterInfoBase_CustomUpdate final
-{
-public:
-	float                                         InDeltaTime;                                       // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UICharacterInfoBase.InitWidget
-// 0x0008 (0x0008 - 0x0000)
-struct M1UICharacterInfoBase_InitWidget final
-{
-public:
-	class AM1Character*                           Owner;                                             // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UICharacterInfoBase.GetInfoOwner
-// 0x0008 (0x0008 - 0x0000)
-struct M1UICharacterInfoBase_GetInfoOwner final
-{
-public:
-	class AM1Character*                           ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMonsterInfo.BP_ChangedEliteSkills
-// 0x0020 (0x0020 - 0x0000)
-struct M1UIMonsterInfo_BP_ChangedEliteSkills final
-{
-public:
-	class FString                                 SkillNames;                                        // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<class UTexture2D*>                     InIcons;                                           // 0x0010(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMonsterInfo.BP_ChangedMonsterLifeTime
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIMonsterInfo_BP_ChangedMonsterLifeTime final
-{
-public:
-	float                                         InLifeTime;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMonsterInfo.BP_SetFocusUIVisibility
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMonsterInfo_BP_SetFocusUIVisibility final
-{
-public:
-	bool                                          bVisible;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMonsterInfo.BP_SetSpawnedByMission
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIMonsterInfo_BP_SetSpawnedByMission final
-{
-public:
-	bool                                          InByMission;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bHidden;                                           // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMonsterInfo.BP_UpdateWeakAdvantageIcon
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMonsterInfo_BP_UpdateWeakAdvantageIcon final
-{
-public:
-	class UTexture2D*                             WeakAdvantageIcon;                                 // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMonsterInfo.BP_UpdateWeakElementalIcons
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMonsterInfo_BP_UpdateWeakElementalIcons final
-{
-public:
-	TArray<class UTexture2D*>                     WeakElementalIcons;                                // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMonsterInfo.GetPhasedHP
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMonsterInfo_GetPhasedHP final
-{
-public:
-	struct FM1ScaledInteger                       CurrentHp;                                         // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         OutRatio;                                          // 0x0008(0x0004)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          ReturnValue;                                       // 0x000C(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIMonsterInfo.OnChangedMissionDerivMonsterLifeTime
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIMonsterInfo_OnChangedMissionDerivMonsterLifeTime final
-{
-public:
-	float                                         InLifeTime;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMonsterInfo.OnChangedMissionDerivMonsterName
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMonsterInfo_OnChangedMissionDerivMonsterName final
-{
-public:
-	class FString                                 InName;                                            // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMonsterInfo.OnDeathOrDespawnedOrDestroyed
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMonsterInfo_OnDeathOrDespawnedOrDestroyed final
-{
-public:
-	class AActor*                                 InActor;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMonsterInfo.IsFocused
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMonsterInfo_IsFocused final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1PrivateOnlineServiceResearch.ClientReceiveResearchBookmark
 // 0x0018 (0x0018 - 0x0000)
 struct M1PrivateOnlineServiceResearch_ClientReceiveResearchBookmark final
@@ -33859,14 +34148,6 @@ struct M1PrivateOnlineServiceResearch_ServerRequestUnsetResearchBookmark final
 {
 public:
 	struct FM1TemplateId                          InResearchTemplateId;                              // 0x0000(0x0004)(Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameGuide.BP_ShowTip
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIGameGuide_BP_ShowTip final
-{
-public:
-	class FString                                 InTip;                                             // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1PrivateOnlineServiceSeason.ClientOnNotifySeasonLevelExpChanged
@@ -34108,6 +34389,22 @@ public:
 	struct FProgressBarStyle                      ReturnValue;                                       // 0x0000(0x0260)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIMonsterPartsInfo.BP_UpdatePartsFocused
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMonsterPartsInfo_BP_UpdatePartsFocused final
+{
+public:
+	bool                                          bFocused;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMonsterPartsInfo.BP_UpdatePartsHP
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIMonsterPartsInfo_BP_UpdatePartsHP final
+{
+public:
+	float                                         HPRate;                                            // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1UIDataResearchInfo.GetActionType
 // 0x0001 (0x0001 - 0x0000)
 struct M1UIDataResearchInfo_GetActionType final
@@ -34291,6 +34588,30 @@ public:
 	class USceneComponent*                        ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIInformation.OnCancelClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInformation_OnCancelClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInformation.OnOpenPageBelowClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInformation_OnOpenPageBelowClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInformation.BP_GetStatGroupItems
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIInformation_BP_GetStatGroupItems final
+{
+public:
+	TArray<class UM1UIStatGroupItem*>             ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1QueryServiceComponent.ClientQueryServicePrint
 // 0x0050 (0x0050 - 0x0000)
 struct M1QueryServiceComponent_ClientQueryServicePrint final
@@ -34318,14 +34639,6 @@ struct M1QueryServiceComponent_GetMyTags_ForDebug final
 {
 public:
 	struct FGameplayTagContainer                  ReturnValue;                                       // 0x0000(0x0020)(ConstParm, Parm, OutParm, ReturnParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInDun_SelectDifficultyPopup.OnDifficultyListItemClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInDun_SelectDifficultyPopup_OnDifficultyListItemClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataRuneLoadout.GetCostOfAttachedRuens
@@ -34507,30 +34820,6 @@ public:
 	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIStatGroupItemSlot.BP_SetBuffValue
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIStatGroupItemSlot_BP_SetBuffValue final
-{
-public:
-	float                                         InValue;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIStatGroupItemSlot.BP_SetRandomOptionOnlyValue
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIStatGroupItemSlot_BP_SetRandomOptionOnlyValue final
-{
-public:
-	bool                                          bIsRandomOptionOnly;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIStatGroupItemSlot.BP_SetStatColor
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIStatGroupItemSlot_BP_SetStatColor final
-{
-public:
-	EM1UIStatColor                                InColorType;                                       // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UICharacterTicket.SetTicketInfo
 // 0x0010 (0x0010 - 0x0000)
 struct M1UICharacterTicket_SetTicketInfo final
@@ -34607,14 +34896,6 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UILaboratoryOptionQuantity.OnButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILaboratoryOptionQuantity_OnButtonClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIButtonCharacter.BP_SetIconBGImage
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIButtonCharacter_BP_SetIconBGImage final
@@ -34639,12 +34920,12 @@ public:
 	int32                                         InCharacterResetCount;                             // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInvasionDungeonScoreItem.BP_SetState
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIInvasionDungeonScoreItem_BP_SetState final
+// Function M1.M1UIInvasionDungeonInfo.OnTimerTick
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInvasionDungeonInfo_OnTimerTick final
 {
 public:
-	EM1InvasionDungeonScoreState                  InState;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	double                                        InSecond;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1RichTextBlockLinkDecorator.OnClickLinkText
@@ -34658,12 +34939,12 @@ public:
 	class FString                                 AdditionalInfo;                                    // 0x0030(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInDun_BasicReward.ShowRandomMatchRewards
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIInDun_BasicReward_ShowRandomMatchRewards final
+// Function M1.M1UIHPBar.GetDummyHP
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIHPBar_GetDummyHP final
 {
 public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1RotatableUpperBody.LookAt
@@ -34682,20 +34963,44 @@ public:
 	struct FVector                                ReturnValue;                                       // 0x0000(0x000C)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMetaGameGuidePanel.BP_ShowDimmedBackground
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMetaGameGuidePanel_BP_ShowDimmedBackground final
+// Function M1.M1UIInDun_FixedMODScoreItem.BP_GetProbabilityTBs
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIInDun_FixedMODScoreItem_BP_GetProbabilityTBs final
 {
 public:
-	bool                                          InVisible;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class UM1OverflowTextBlock*>           ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMetaGameGuidePanel.BP_ShowHightlightFrame
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMetaGameGuidePanel_BP_ShowHightlightFrame final
+// Function M1.M1UIInDun_FixedMODScoreItem.BP_GetScoreTBs
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIInDun_FixedMODScoreItem_BP_GetScoreTBs final
 {
 public:
-	bool                                          InVisible;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class UM1OverflowTextBlock*>           ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInDun_FixedMODScoreItem.OnTooltipToggleLinkedContents
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInDun_FixedMODScoreItem_OnTooltipToggleLinkedContents final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInDun_FixedMODScoreItem.OnTooltipToggleVoidVaultKey
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInDun_FixedMODScoreItem_OnTooltipToggleVoidVaultKey final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInDun_BasicReward.ShowRandomMatchRewards
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInDun_BasicReward_ShowRandomMatchRewards final
+{
+public:
+	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICashShopDetailInfo_Customizing.OnEntryClicked
@@ -34733,78 +35038,6 @@ public:
 // Function M1.M1UICashShopDetailInfo_Customizing.OnPreviewEvoltionClicked
 // 0x0008 (0x0008 - 0x0000)
 struct M1UICashShopDetailInfo_Customizing_OnPreviewEvoltionClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupTrace.OnClicked_Back
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupTrace_OnClicked_Back final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupTrace.OnClicked_Close
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupTrace_OnClicked_Close final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupTrace.OnClicked_FocusGoalItemSetting
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupTrace_OnClicked_FocusGoalItemSetting final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupTrace.OnHierarchySlotClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupTrace_OnHierarchySlotClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupTrace.OnTooltipToggleLinkedContents
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupTrace_OnTooltipToggleLinkedContents final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupTrace.OnTooltipToggleVoidVaultKey
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupTrace_OnTooltipToggleVoidVaultKey final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupTrace.OnTraceSlotClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupTrace_OnTraceSlotClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupTrace.OnTraceSlotHovered
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupTrace_OnTraceSlotHovered final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupTrace.OnTraceSlotUnhovered
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupTrace_OnTraceSlotUnhovered final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -34851,69 +35084,24 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIKeyButton.OnEventStartHold
+// Function M1.M1UIJunkFilter.OnTabSelected
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIKeyButton_OnEventStartHold final
+struct M1UIJunkFilter_OnTabSelected final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InTabIndex;                                        // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsSelectedTabChanged;                             // 0x0004(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIKeyButton.OnEventStopHold
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIKeyButton_OnEventStopHold final
+// Function M1.M1UIJunkFilter.BP_GetIndividualWidgets
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIJunkFilter_BP_GetIndividualWidgets final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeyButton.OnPressed_FromSystemKey
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIKeyButton_OnPressed_FromSystemKey final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeyButton.OnReleased_FromSystemKey
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIKeyButton_OnReleased_FromSystemKey final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeyButton.SetBattleKeyType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIKeyButton_SetBattleKeyType final
-{
-public:
-	EM1BattleKey                                  InKey;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeyButton.SetKeyType
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIKeyButton_SetKeyType final
-{
-public:
-	EM1SystemKey                                  InKey;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bReleaseOnly;                                      // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeyButton.GetBattleKeyType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIKeyButton_GetBattleKeyType final
-{
-public:
-	EM1BattleKey                                  ReturnValue;                                       // 0x0000(0x0001)(ConstParm, Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeyButton.GetKeyType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIKeyButton_GetKeyType final
-{
-public:
-	EM1SystemKey                                  ReturnValue;                                       // 0x0000(0x0001)(ConstParm, Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1JunkFilterTabType                          InTabType;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class UM1UIJunkFilterIndividual*>      ReturnValue;                                       // 0x0008(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIFellowList.OnClicked_ShowHideList
@@ -34992,28 +35180,22 @@ public:
 	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataMapInfo.GetLevelName
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIDataMapInfo_GetLevelName final
-{
-public:
-	class FText                                   ReturnValue;                                       // 0x0000(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataMapInfo.GetTemplateId
+// Function M1.M1UIGameRadarIcon.BP_UpdateHeightPanel
 // 0x0004 (0x0004 - 0x0000)
-struct M1UIDataMapInfo_GetTemplateId final
+struct M1UIGameRadarIcon_BP_UpdateHeightPanel final
 {
 public:
-	struct FM1TemplateId                          ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InUpOrDown;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataMapInfo.GetTemplateIdAsString
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIDataMapInfo_GetTemplateIdAsString final
+// Function M1.M1UIGameRadarIcon.BP_UpdateIcon
+// 0x0003 (0x0003 - 0x0000)
+struct M1UIGameRadarIcon_BP_UpdateIcon final
 {
 public:
-	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RadarEntityType                            InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemTierType                               InItemTier;                                        // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ImportanceType                             InItemImportanceType;                              // 0x0002(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1SeasonReinforceComponent.OnChangedSeasonReinforceSlot
@@ -35022,6 +35204,14 @@ struct M1SeasonReinforceComponent_OnChangedSeasonReinforceSlot final
 {
 public:
 	EM1SeasonReinforceSlotChangeType              InChangeType;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemProficiencyInfo.BP_UpdateAppearanceByProficiency
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIItemProficiencyInfo_BP_UpdateAppearanceByProficiency final
+{
+public:
+	bool                                          bMaxLevel;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1SequencerBlueprintFunctionLibrary.ActivateSkill
@@ -35110,21 +35300,20 @@ public:
 	TArray<class FName>                           ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemLevelUpgradeInfo.BP_OnPhaseChanged
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIItemLevelUpgradeInfo_BP_OnPhaseChanged final
+// Function M1.M1UIItemLevelIcon.BP_ShowGlowingEffect
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIItemLevelIcon_BP_ShowGlowingEffect final
 {
 public:
-	EM1LevelUpgradePhase                          InNewPhase;                                        // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LevelUpgradePhase                          InPrevPhase;                                       // 0x0001(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemLevelUpgradeInfo.OnUpgradeButtonHoldCompleted
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemLevelUpgradeInfo_OnUpgradeButtonHoldCompleted final
+// Function M1.M1UIItemLevelIcon.BP_TurnOn
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIItemLevelIcon_BP_TurnOn final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsMaxLevel;                                       // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIEventAttendancePanel.GetPanelItems
@@ -35621,86 +35810,52 @@ public:
 	EM1MouseCursorState                           InState;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameObjectivePanel.BP_GetWidgetsByPriority
-// 0x0050 (0x0050 - 0x0000)
-struct M1UIGameObjectivePanel_BP_GetWidgetsByPriority final
-{
-public:
-	TMap<EM1GameObjectiveDisplayByPriority, class UM1UIWidget*> ReturnValue;                                       // 0x0000(0x0050)(ExportObject, Parm, OutParm, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameObjectivePanel.OnMissionTaskActivated
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameObjectivePanel_OnMissionTaskActivated final
-{
-public:
-	const class AM1MissionTaskActor*              InActor;                                           // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameObjectivePanel.OnQuestInfoActivated
+// Function M1.M1WeaponSprayPatternComponent.GetCurrentSpreadSize
 // 0x0004 (0x0004 - 0x0000)
-struct M1UIGameObjectivePanel_OnQuestInfoActivated final
+struct M1WeaponSprayPatternComponent_GetCurrentSpreadSize final
 {
 public:
-	struct FM1TemplateId                          InQuestTemplateId;                                 // 0x0000(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInformationOnEquipments.OnChangeWeaponClicked
+// Function M1.M1UIGameMonsterInfoPanel.OnAdditionalSpawnedMonstersInfo
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIGameMonsterInfoPanel_OnAdditionalSpawnedMonstersInfo final
+{
+public:
+	struct FM1SpawnedMonstersAdditionalInfo       InInfo;                                            // 0x0000(0x0010)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMonsterInfoPanel.OnFocusedCharacterChanged
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIInformationOnEquipments_OnChangeWeaponClicked final
+struct M1UIGameMonsterInfoPanel_OnFocusedCharacterChanged final
+{
+public:
+	class AM1Character*                           InFocusedCharacter;                                // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIToggle.BP_TurnOnGreenColor
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIToggle_BP_TurnOnGreenColor final
+{
+public:
+	bool                                          bTurnOn;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInDun_SelectFixedMODPopup.OnFixedMODButtonsClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInDun_SelectFixedMODPopup_OnFixedMODButtonsClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInformationOnEquipments.OnCreateEquipmentTooltipWidget
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInformationOnEquipments_OnCreateEquipmentTooltipWidget final
+// Function M1.M1UIInDun_SelectFixedMODPopup.BP_GetFixedMODButtons
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIInDun_SelectFixedMODPopup_BP_GetFixedMODButtons final
 {
 public:
-	class UM1UIWidget*                            InTooltipWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInformationOnEquipments.OnEventCursorEnteredSlot
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInformationOnEquipments_OnEventCursorEnteredSlot final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInformationOnEquipments.OnEventCursorLeftSlot
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInformationOnEquipments_OnEventCursorLeftSlot final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInformationOnEquipments.OnMouseWheelOnSlot
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIInformationOnEquipments_OnMouseWheelOnSlot final
-{
-public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIInformationOnEquipments.OnSelectNextSlot
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInformationOnEquipments_OnSelectNextSlot final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInformationOnEquipments.OnSelectPrevSlot
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInformationOnEquipments_OnSelectPrevSlot final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class UM1UIWidget*>                    ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICustomizeFellowSkinInven.OnEquipCustomizedFellowSkinPaint
@@ -35843,6 +35998,14 @@ public:
 	ESlateVisibility                              InVisibility;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIInformation_Stats.OnStatItemVisibilityChanged
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInformation_Stats_OnStatItemVisibilityChanged final
+{
+public:
+	ESlateVisibility                              InVisibility;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1UIGameTop_BattlePassLevelUp.BP_GetAnimation
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIGameTop_BattlePassLevelUp_BP_GetAnimation final
@@ -35851,46 +36014,20 @@ public:
 	class UWidgetAnimation*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGame_ForcedExitTime.Callback_DimmedPressedRestartAlone
+// Function M1.M1UIGameStatusEffects.OnAddedStatusEffect
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIGame_ForcedExitTime_Callback_DimmedPressedRestartAlone final
+struct M1UIGameStatusEffects_OnAddedStatusEffect final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class UM1StatusEffect*                  InStatusEffect;                                    // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGame_ForcedExitTime.Callback_RestartAlone
+// Function M1.M1UIGameStatusEffects.OnRemovedStatusEffect
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIGame_ForcedExitTime_Callback_RestartAlone final
+struct M1UIGameStatusEffects_OnRemovedStatusEffect final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGame_ForcedExitTime.Callback_TeleportToCity
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGame_ForcedExitTime_Callback_TeleportToCity final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGame_ForcedExitTime.OnCancelMatchAndReturnToCity
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGame_ForcedExitTime_OnCancelMatchAndReturnToCity final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1TimeDilationComponent.NetMulticast_ChangeTimeDilation
-// 0x0018 (0x0018 - 0x0000)
-struct M1TimeDilationComponent_NetMulticast_ChangeTimeDilation final
-{
-public:
-	TArray<TWeakObjectPtr<class AActor>>          InAdditionalActors;                                // 0x0000(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, UObjectWrapper, NativeAccessSpecifierPublic)
-	float                                         SlowRate;                                          // 0x0010(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	const class UM1StatusEffect*                  InStatusEffect;                                    // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIGame_DeathCount.BP_PlayLastCountLoopAnim
@@ -35917,60 +36054,30 @@ public:
 	bool                                          InbShow;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1TimeDilationComponent.NetMulticast_ChangeTimeDilation
+// 0x0018 (0x0018 - 0x0000)
+struct M1TimeDilationComponent_NetMulticast_ChangeTimeDilation final
+{
+public:
+	TArray<TWeakObjectPtr<class AActor>>          InAdditionalActors;                                // 0x0000(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, UObjectWrapper, NativeAccessSpecifierPublic)
+	float                                         SlowRate;                                          // 0x0010(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIGameTop_MasteryRankUp_Possible.GetEndAnimation
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameTop_MasteryRankUp_Possible_GetEndAnimation final
+{
+public:
+	class UWidgetAnimation*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1MonsterSpawnGroupBasedRule.OnPreparePooling
 // 0x0008 (0x0008 - 0x0000)
 struct M1MonsterSpawnGroupBasedRule_OnPreparePooling final
 {
 public:
 	class AActor*                                 InActor;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameContentSelector_Inven.OnPressedKey_CloseBattlePass
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_Inven_OnPressedKey_CloseBattlePass final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameContentSelector_Inven.OnPressedKey_CloseCashShop
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_Inven_OnPressedKey_CloseCashShop final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameContentSelector_Inven.OnPressedKey_CloseCharacterList
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_Inven_OnPressedKey_CloseCharacterList final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameContentSelector_Inven.OnPressedKey_CloseConsumable
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_Inven_OnPressedKey_CloseConsumable final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameContentSelector_Inven.OnPressedKey_CloseInventory
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_Inven_OnPressedKey_CloseInventory final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameContentSelector_Inven.OnPressedKey_SwitchToMap
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_Inven_OnPressedKey_SwitchToMap final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1SpicaRPCHelperComponent.ServerAllianceCall
@@ -36081,108 +36188,6 @@ public:
 	struct FM1AbilityOperation                    Operation;                                         // 0x0010(0x0198)(ConstParm, Parm, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UITabControl.BP_ApplyCustomizingSettings
-// 0x00F0 (0x00F0 - 0x0000)
-struct M1UITabControl_BP_ApplyCustomizingSettings final
-{
-public:
-	struct FM1TypedUITheme_Brush                  InThemeInfo;                                       // 0x0000(0x00F0)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UITabControl.BP_OnGetTabControlContent
-// 0x0008 (0x0008 - 0x0000)
-struct M1UITabControl_BP_OnGetTabControlContent final
-{
-public:
-	class UM1UITabControlContent*                 ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UITabControl.CreateOrRemoveButtons
-// 0x0001 (0x0001 - 0x0000)
-struct M1UITabControl_CreateOrRemoveButtons final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UITabControl.OnSelectLeftTabToCurrent
-// 0x0008 (0x0008 - 0x0000)
-struct M1UITabControl_OnSelectLeftTabToCurrent final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UITabControl.OnSelectRightTabToCurrent
-// 0x0008 (0x0008 - 0x0000)
-struct M1UITabControl_OnSelectRightTabToCurrent final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UITabControl.RecreateButtons
-// 0x0001 (0x0001 - 0x0000)
-struct M1UITabControl_RecreateButtons final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UITabControl.SetTabItems
-// 0x0018 (0x0018 - 0x0000)
-struct M1UITabControl_SetTabItems final
-{
-public:
-	TArray<struct FM1TabItem>                     InTabItems;                                        // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bRecreateButton;                                   // 0x0010(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UITabControl.TabButtons_OnClick
-// 0x0008 (0x0008 - 0x0000)
-struct M1UITabControl_TabButtons_OnClick final
-{
-public:
-	class UM1UIWidget*                            InButton;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPageControl.OnEventHoveredOnSlot
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPageControl_OnEventHoveredOnSlot final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPageControl.OnEventMouseWheelOnSlot
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIPageControl_OnEventMouseWheelOnSlot final
-{
-public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPageControl.OnEventTouchGestureOnSlot
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIPageControl_OnEventTouchGestureOnSlot final
-{
-public:
-	struct FPointerEvent                          InGestureInputEvent;                               // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPageControl.OnEventUnhoveredOnSlot
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPageControl_OnEventUnhoveredOnSlot final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1StateCondition_BlueprintBase.UpdateCondition
 // 0x0010 (0x0010 - 0x0000)
 struct M1StateCondition_BlueprintBase_UpdateCondition final
@@ -36203,76 +36208,36 @@ public:
 	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UINotificationLayer.OnCatchNotification
+// Function M1.M1UIMissionWaveSelectedPlayer.BP_SetPlatformIcon
 // 0x0008 (0x0008 - 0x0000)
-struct M1UINotificationLayer_OnCatchNotification final
+struct M1UIMissionWaveSelectedPlayer_BP_SetPlatformIcon final
 {
 public:
-	class UM1Notification*                        InParam;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class AM1PlayerState*                   InPlayerState;                                     // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionSubTypeInfoVoidFragment.BP_SetVoidFragmentActivationInfo
+// Function M1.M1UIMultiConditionDropDown_Search.BP_SetKeywordsButtonVisibility
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionSubTypeInfoVoidFragment_BP_SetVoidFragmentActivationInfo final
+struct M1UIMultiConditionDropDown_Search_BP_SetKeywordsButtonVisibility final
 {
 public:
-	EM1ElementalDamageChannel                     InChannel;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionTargetDestructionInfo.BP_SetImmuned
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionTargetDestructionInfo_BP_SetImmuned final
+// Function M1.M1UIMultiConditionDropDown_Search.OnTextChanged_Search
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIMultiConditionDropDown_Search_OnTextChanged_Search final
 {
 public:
-	bool                                          bImmuned;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionTargetDestructionInfo.OnTargetImmuned
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionTargetDestructionInfo_OnTargetImmuned final
-{
-public:
-	bool                                          bImmuned;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionTask.OnDynamicGoalAdded
+// Function M1.M1UIMissionWaveRewards.UpdateMissionWaveRewards
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionTask_OnDynamicGoalAdded final
+struct M1UIMissionWaveRewards_UpdateMissionWaveRewards final
 {
 public:
-	const class AM1MissionTaskActorDynamicGoalActor* InDynamicGoal;                                     // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionTask.OnDynamicGoalRemoved
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionTask_OnDynamicGoalRemoved final
-{
-public:
-	const class AM1MissionTaskActorDynamicGoalActor* InDynamicGoal;                                     // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionTask.OnTaskActivated
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionTask_OnTaskActivated final
-{
-public:
-	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionTask.OnTaskFailed
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionTask_OnTaskFailed final
-{
-public:
-	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionTask.OnTaskSucceeded
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionTask_OnTaskSucceeded final
-{
-public:
-	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1StatusEffect.Auth_ModifyRemainingTime
@@ -36415,12 +36380,12 @@ public:
 	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIDataOptionIndividual.GetIndividualStringId
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIDataOptionIndividual_GetIndividualStringId final
+// Function M1.M1UIOptionDetail_Controller.Callback_HoldCompletedKeyButton
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionDetail_Controller_Callback_HoldCompletedKeyButton final
 {
 public:
-	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1StatusEffectComponent.Auth_CancelStatusEffectByTags
@@ -36544,116 +36509,158 @@ public:
 	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIOptionIndividual_GamepadInput.BP_MarkDuplicateKey
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIOptionIndividual_GamepadInput_BP_MarkDuplicateKey final
-{
-public:
-	bool                                          bMark;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionIndividual_GamepadInput.OnHoveredOrUnhoveredInputKeySelector
+// Function M1.M1UIOptionIndividual_Slider.Callback_OnKeyReleased
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionIndividual_GamepadInput_OnHoveredOrUnhoveredInputKeySelector final
+struct M1UIOptionIndividual_Slider_Callback_OnKeyReleased final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionIndividual_GamepadInput.OnMainKeySelected
-// 0x0020 (0x0020 - 0x0000)
-struct M1UIOptionIndividual_GamepadInput_OnMainKeySelected final
-{
-public:
-	struct FInputChord                            SelectedKey;                                       // 0x0000(0x0020)(Parm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionIndividual_ButtonToggle.BP_GetButtons
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIOptionIndividual_ButtonToggle_BP_GetButtons final
-{
-public:
-	TArray<class UM1UIButton*>                    ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionIndividual_ButtonToggle.Callback_ButtonToggle
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionIndividual_ButtonToggle_Callback_ButtonToggle final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIProgressIcon.SetProgressRatio
+// Function M1.M1UIOptionIndividual_Slider.Callback_OnValueChanged
 // 0x0004 (0x0004 - 0x0000)
-struct M1UIProgressIcon_SetProgressRatio final
+struct M1UIOptionIndividual_Slider_Callback_OnValueChanged final
 {
 public:
-	float                                         InRatio;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         InValue;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIProgressIcon.StartProgress
+// Function M1.M1UIOptionIndividual_Slider.Callback_OnValueChangedByLeft
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionIndividual_Slider_Callback_OnValueChangedByLeft final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionIndividual_Slider.Callback_OnValueChangedByRight
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIOptionIndividual_Slider_Callback_OnValueChangedByRight final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIOptionIndividual_Toggle.BP_UpdateButtonUI
 // 0x0004 (0x0004 - 0x0000)
-struct M1UIProgressIcon_StartProgress final
+struct M1UIOptionIndividual_Toggle_BP_UpdateButtonUI final
 {
 public:
-	float                                         InPlayTime;                                        // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPrologueCharacterSelect.OnCursorFocused
+// Function M1.M1UIOptionIndividual_Toggle.Callback_ToggleCurrentIndex
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPrologueCharacterSelect_OnCursorFocused final
+struct M1UIOptionIndividual_Toggle_Callback_ToggleCurrentIndex final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPrologueCharacterSelect.OnSelectAjax
+// Function M1.M1UIPrologueCharacterInfo.OnCancelClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPrologueCharacterSelect_OnSelectAjax final
+struct M1UIPrologueCharacterInfo_OnCancelClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPrologueCharacterSelect.OnSelectLepic
+// Function M1.M1UIPrologueCharacterInfo.OnConfirmClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPrologueCharacterSelect_OnSelectLepic final
+struct M1UIPrologueCharacterInfo_OnConfirmClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPrologueCharacterSelect.OnSelectViessa
+// Function M1.M1UIPrologueCharacterInfo.OnCursorLostFocus
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPrologueCharacterSelect_OnSelectViessa final
+struct M1UIPrologueCharacterInfo_OnCursorLostFocus final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIQuestInfo.BP_ShowCharacterIconPanel
+// Function M1.M1UIPrologueCharacterInfo.OnCursorReceivedFocus
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPrologueCharacterInfo_OnCursorReceivedFocus final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuantityChangeUnit.BP_InitImpl
+// 0x000C (0x000C - 0x0000)
+struct M1UIQuantityChangeUnit_BP_InitImpl final
+{
+public:
+	struct FM1UnitOfChange                        InChangeInfo;                                      // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
+	bool                                          bPlus;                                             // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIQuantityChangeUnit.OnChangeButtonPressed
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuantityChangeUnit_OnChangeButtonPressed final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuantityChangeUnit.OnChangeButtonReleased
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuantityChangeUnit_OnChangeButtonReleased final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UITabButtonQuest.GetQuestType
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIQuestInfo_BP_ShowCharacterIconPanel final
+struct M1UITabButtonQuest_GetQuestType final
 {
 public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1QuestType                                  ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIQuestInfo.OnItemTooltipWidgetCreated
+// Function M1.M1UIMasteryRankBenefit.OnCancelClick
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIQuestInfo_OnItemTooltipWidgetCreated final
+struct M1UIMasteryRankBenefit_OnCancelClick final
 {
 public:
-	class UM1UIWidget*                            InTooltipWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIQuestInfo.OnItemTooltipWidgetRemoved
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIQuestInfo_OnItemTooltipWidgetRemoved final
+// Function M1.M1UIDataCharacterCount.GetAllCharacterCount
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIDataCharacterCount_GetAllCharacterCount final
 {
 public:
-	class UM1UIWidget*                            InTooltipWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataCharacterCount.GetCharacterCapacity
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIDataCharacterCount_GetCharacterCapacity final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataCharacterCount.GetMaxLevelCharacterCount
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIDataCharacterCount_GetMaxLevelCharacterCount final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataCharacterCount.GetOwnedCharacterCount
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIDataCharacterCount_GetOwnedCharacterCount final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1TaskEvent_EntryPoint.BP_ActivateEntryPoint
@@ -36664,72 +36671,258 @@ public:
 	bool                                          bPlayActivateAnimation;                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPerkCustomHUD.GetPerkAbility
+// Function M1.M1UIParticleImage.StartFXWith
+// 0x0030 (0x0030 - 0x0000)
+struct M1UIParticleImage_StartFXWith final
+{
+public:
+	TSoftObjectPtr<class UFXSystemAsset>          InFx;                                              // 0x0000(0x0030)(Parm, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UINpcMenu.OnEventCursorEntered
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPerkCustomHUD_GetPerkAbility final
+struct M1UINpcMenu_OnEventCursorEntered final
 {
 public:
-	const class UM1PerkAbility*                   ReturnValue;                                       // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UINpcServiceUnlockConditions.BP_ShowServiceName
-// 0x0001 (0x0001 - 0x0000)
-struct M1UINpcServiceUnlockConditions_BP_ShowServiceName final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOption.SelectContentTabByIndex
+// Function M1.M1UINpcMenu.OnPressedBack
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOption_SelectContentTabByIndex final
+struct M1UINpcMenu_OnPressedBack final
 {
 public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bSelectionChanged;                                 // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOption.OnLoggedInEvent
+// Function M1.M1UINpcMenu.OnSlotClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UINpcMenu_OnSlotClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UINpcNameTag.OnNotifyMasteryRankUppable
+// 0x0004 (0x0004 - 0x0000)
+struct M1UINpcNameTag_OnNotifyMasteryRankUppable final
+{
+public:
+	int32                                         InRank;                                            // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_BlockCancel
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_BlockCancel final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_BlockRequest
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_BlockRequest final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_Bookmark
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_Bookmark final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_CSP
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_CSP final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_DirectMessage
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_DirectMessage final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_FriendAccept
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_FriendAccept final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_FriendCancel
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_FriendCancel final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_FriendDelete
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_FriendDelete final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_FriendRequest
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_FriendRequest final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyExile
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_PartyExile final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyInvite
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_PartyInvite final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyInviteAccept
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_PartyInviteAccept final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyInviteReject
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_PartyInviteReject final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyJoin
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_PartyJoin final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyJoinAccept
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_PartyJoinAccept final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyJoinReject
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_PartyJoinReject final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyLeave
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_PartyLeave final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyMasterDevolve
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_PartyMasterDevolve final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PlatformUserProfile
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_PlatformUserProfile final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.OnButtonClicked_Report
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupAccountInfo_OnButtonClicked_Report final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupAccountInfo.SetButton
 // 0x0010 (0x0010 - 0x0000)
-struct M1UIOption_OnLoggedInEvent final
+struct M1UIPopupAccountInfo_SetButton final
 {
 public:
-	const class UM1Account*                       InAccountInfo;                                     // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bShouldDoPrologue;                                 // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIButton*                            InButtonWidget;                                    // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1AccountInfoPopupButtonType                 InButtonType;                                      // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIOptionImageEntryWidget.BP_SetTexture
-// 0x0030 (0x0030 - 0x0000)
-struct M1UIOptionImageEntryWidget_BP_SetTexture final
-{
-public:
-	TSoftObjectPtr<class UTexture2D>              InTexture;                                         // 0x0000(0x0030)(ConstParm, Parm, OutParm, ReferenceParm, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionImageEntryWidget.BP_SetUIKey
+// Function M1.M1UIPopupAccountInfo.BP_GetUIButton
 // 0x0010 (0x0010 - 0x0000)
-struct M1UIOptionImageEntryWidget_BP_SetUIKey final
+struct M1UIPopupAccountInfo_BP_GetUIButton final
 {
 public:
-	class FString                                 InKey;                                             // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1AccountInfoPopupButtonType                 InButtonType;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class UM1UIButton*                            ReturnValue;                                       // 0x0008(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPopupContentAccountWithdrawalData.GetPopup
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupContentAccountWithdrawalData_GetPopup final
+// Function M1.M1UIPopupContentEnterCoupon.BP_PlayFailAnim
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPopupContentEnterCoupon_BP_PlayFailAnim final
 {
 public:
-	class UM1UIPopup*                             ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 InFailedMessageString;                             // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPopupContentAccountWithdrawalData.IsGuestAccount
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIPopupContentAccountWithdrawalData_IsGuestAccount final
+// Function M1.M1UIPopupContentEnterCoupon.OnCouponTextChanged
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIPopupContentEnterCoupon_OnCouponTextChanged final
 {
 public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupContentEnterCoupon.OnCouponTextCommitted
+// 0x0020 (0x0020 - 0x0000)
+struct M1UIPopupContentEnterCoupon_OnCouponTextCommitted final
+{
+public:
+	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	ETextCommit                                   InCommitMethod;                                    // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPopupContentEnterCoupon.OnReceiveEnterCouponResult
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIPopupContentEnterCoupon_OnReceiveEnterCouponResult final
+{
+public:
+	int32                                         InResponseCode;                                    // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1TeleportHandlerComponent.ClientCancelPretendTeleportTo
@@ -36847,22 +37040,6 @@ public:
 	TDelegate<void(float DeltaSeconds)>           ScriptDelegate;                                    // 0x0008(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPopupSlotExpansion.OnClicked_Cancel
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupSlotExpansion_OnClicked_Cancel final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupSlotExpansion.OnHoldCompleted_Buy
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupSlotExpansion_OnHoldCompleted_Buy final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1TickDamageVolume.GetTickDamagePercent
 // 0x0008 (0x0008 - 0x0000)
 struct M1TickDamageVolume_GetTickDamagePercent final
@@ -36871,80 +37048,44 @@ public:
 	struct FM1ScaledInteger                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPreset.OnClickedChangeName
+// Function M1.M1UIPremiumPurchase.OnCancelClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPreset_OnClickedChangeName final
+struct M1UIPremiumPurchase_OnCancelClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPreset.OnClickedSave
+// Function M1.M1UIPremiumPurchase.OnClickedPremiumPurchase
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPreset_OnClickedSave final
+struct M1UIPremiumPurchase_OnClickedPremiumPurchase final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPreset.OnEventCancelClicked
+// Function M1.M1UIPremiumPurchase.OnClickedPremiumPurchase_LevelUp
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPreset_OnEventCancelClicked final
+struct M1UIPremiumPurchase_OnClickedPremiumPurchase_LevelUp final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPreset.OnEventPresetApply
+// Function M1.M1UIPremiumPurchase.GetBundleUnitCount
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIPremiumPurchase_GetBundleUnitCount final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPremiumPurchase.GetSeasonStringId
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPreset_OnEventPresetApply final
+struct M1UIPremiumPurchase_GetSeasonStringId final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPreset.OnEventPresetDelete
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPreset_OnEventPresetDelete final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPreset.OnEventTabButtonSelected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPreset_OnEventTabButtonSelected final
-{
-public:
-	int32                                         InTabIndex;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bSelectionChanged;                                 // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPreset.OnEventTabControlPageSelected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPreset_OnEventTabControlPageSelected final
-{
-public:
-	int32                                         InPageIndex;                                       // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bPageChanged;                                      // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPreset.BP_GetEquipmentSlots
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPreset_BP_GetEquipmentSlots final
-{
-public:
-	TArray<class UM1UIEquipmentSlot*>             ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPreset.BP_GetLoadoutSlots
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPreset_BP_GetLoadoutSlots final
-{
-public:
-	TArray<class UM1UIPresetLoadoutSlot*>         ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	class FName                                   ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1ToyFunnelSystem.OnLevelSequenceActorEndPlay
@@ -36965,6 +37106,265 @@ public:
 	const class AM1MissionTaskActor*              InMissionTaskActor;                                // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIMailbox.OnClickedKeyContextButton_Cancel
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnClickedKeyContextButton_Cancel final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnClickedTooltipContextButton_ReceiveAttachment
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnClickedTooltipContextButton_ReceiveAttachment final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnCreateAttachmentTooltipWidget
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnCreateAttachmentTooltipWidget final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnEventCursorEnterd_LostItem
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnEventCursorEnterd_LostItem final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnEventEntryClick_Attachment
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnEventEntryClick_Attachment final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnEventEntryClick_LostItem
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnEventEntryClick_LostItem final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnEventEntryClick_Mail
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnEventEntryClick_Mail final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnHoldBeginContextButton
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnHoldBeginContextButton final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnHoldCancelContextButton
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnHoldCancelContextButton final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnHoldCompleteContextButton_DeleteAllReadMail
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnHoldCompleteContextButton_DeleteAllReadMail final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnHoldCompleteContextButton_DeleteCurrentMail
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnHoldCompleteContextButton_DeleteCurrentMail final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnHoldCompleteContextButton_ReceiveAttachmentAll
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnHoldCompleteContextButton_ReceiveAttachmentAll final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnRemoveAttachmentTooltipWidget
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnRemoveAttachmentTooltipWidget final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.OnTabButtonSelected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_OnTabButtonSelected final
+{
+public:
+	int32                                         InTabIndex;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSelectionChanged;                                 // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIMailbox.RefreshMailboxList
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMailbox_RefreshMailboxList final
+{
+public:
+	EM1MailType                                   InMailType;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailbox.RefreshMailboxMailDetail
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailbox_RefreshMailboxMailDetail final
+{
+public:
+	int64                                         InMailId;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1Weapon.NetMulticastSetWeaponActionState
+// 0x0001 (0x0001 - 0x0000)
+struct M1Weapon_NetMulticastSetWeaponActionState final
+{
+public:
+	EM1WeaponActionState                          ActionState;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1Weapon.ReserveDestroy
+// 0x0004 (0x0004 - 0x0000)
+struct M1Weapon_ReserveDestroy final
+{
+public:
+	float                                         LifeSpan;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1Weapon.ServerSetWeaponActionState
+// 0x0001 (0x0001 - 0x0000)
+struct M1Weapon_ServerSetWeaponActionState final
+{
+public:
+	EM1WeaponActionState                          ActionState;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1Weapon.BP_GetEquipAnim
+// 0x0010 (0x0010 - 0x0000)
+struct M1Weapon_BP_GetEquipAnim final
+{
+public:
+	class FName                                   InSourceSlotName;                                  // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UAnimSequenceBase*                      ReturnValue;                                       // 0x0008(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1Weapon.BP_GetUnEquipAnim
+// 0x0010 (0x0010 - 0x0000)
+struct M1Weapon_BP_GetUnEquipAnim final
+{
+public:
+	class FName                                   InTargetSlotName;                                  // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UAnimSequenceBase*                      ReturnValue;                                       // 0x0008(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1Weapon.ClientDirectionValidationInfo
+// 0x0040 (0x0040 - 0x0000)
+struct M1Weapon_ClientDirectionValidationInfo final
+{
+public:
+	struct FVector                                FireLoc;                                           // 0x0000(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector_NetQuantizeNormal              FireDir;                                           // 0x000C(0x000C)(Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                HitLoc;                                            // 0x0018(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                ServerActorLocation;                               // 0x0024(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                CameraRightVector;                                 // 0x0030(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Validationsize;                                    // 0x003C(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1Weapon.ClientLocationValidationInfo
+// 0x001C (0x001C - 0x0000)
+struct M1Weapon_ClientLocationValidationInfo final
+{
+public:
+	struct FVector                                ClientLoc;                                         // 0x0000(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                ServerLoc;                                         // 0x000C(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Validationsize;                                    // 0x0018(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1Weapon.GetAltWeaponAbility
+// 0x0008 (0x0008 - 0x0000)
+struct M1Weapon_GetAltWeaponAbility final
+{
+public:
+	class UM1SkillAbility*                        ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1Weapon.GetDroppedWithContainer
+// 0x0008 (0x0008 - 0x0000)
+struct M1Weapon_GetDroppedWithContainer final
+{
+public:
+	class AM1DropContainer*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1Weapon.GetPerkAbility
+// 0x0008 (0x0008 - 0x0000)
+struct M1Weapon_GetPerkAbility final
+{
+public:
+	class UM1WeaponPerkAbility*                   ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1Weapon.IsZoomedOrOwnWay
+// 0x0001 (0x0001 - 0x0000)
+struct M1Weapon_IsZoomedOrOwnWay final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailboxPostMail.OnCreateAttachmentTooltipWidgetImpl
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailboxPostMail_OnCreateAttachmentTooltipWidgetImpl final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailboxPostMail.OnEventClickAttachementInMail
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailboxPostMail_OnEventClickAttachementInMail final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailboxPostMail.OnEventClickMail
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailboxPostMail_OnEventClickMail final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMailboxPostMail.OnRemoveAttachmentTooltipWidgetImpl
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMailboxPostMail_OnRemoveAttachmentTooltipWidgetImpl final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1TrapSection_Loop.OnSupportCollisionBeginOverlap
 // 0x00C0 (0x00C0 - 0x0000)
 struct M1TrapSection_Loop_OnSupportCollisionBeginOverlap final
@@ -36978,6 +37378,16 @@ public:
 	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
 	struct FHitResult                             SweepResult;                                       // 0x0020(0x009C)(ConstParm, Parm, OutParm, ReferenceParm, IsPlainOldData, NoDestructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
 	uint8                                         Pad_BC[0x4];                                       // 0x00BC(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIMasteryLimitNotice.SetNoticeText
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMasteryLimitNotice_SetNoticeText final
+{
+public:
+	EM1MasteryLimitActionType                     InAction;                                          // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         InMasteryLimit;                                    // 0x0004(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1TriggerActionComponent.OnBeginOverlap
@@ -37180,122 +37590,6 @@ public:
 	struct FM1ScaledInteger                       ReturnValue;                                       // 0x0010(0x0008)(Parm, OutParm, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1WeaponInstantHitComponent.BP_FireInternal
-// 0x0014 (0x0014 - 0x0000)
-struct M1WeaponInstantHitComponent_BP_FireInternal final
-{
-public:
-	float                                         FireTime;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                FireLoc;                                           // 0x0004(0x000C)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         WeaponRange;                                       // 0x0010(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WeaponInstantHitComponent.HitScanForBP
-// 0x0020 (0x0020 - 0x0000)
-struct M1WeaponInstantHitComponent_HitScanForBP final
-{
-public:
-	struct FVector                                FireLoc;                                           // 0x0000(0x000C)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                AimLoc;                                            // 0x000C(0x000C)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         WeaponRange;                                       // 0x0018(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         FireTime;                                          // 0x001C(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WeaponInstantHitComponent.NetMulticastSimulateInstantHit
-// 0x0018 (0x0018 - 0x0000)
-struct M1WeaponInstantHitComponent_NetMulticastSimulateInstantHit final
-{
-public:
-	struct FVector                                FireLoc;                                           // 0x0000(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector_NetQuantizeNormal              FireDir;                                           // 0x000C(0x000C)(Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WeaponInstantHitComponent.NetMulticastSimulateInstantHits
-// 0x0020 (0x0020 - 0x0000)
-struct M1WeaponInstantHitComponent_NetMulticastSimulateInstantHits final
-{
-public:
-	struct FVector                                FireLoc;                                           // 0x0000(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FVector_NetQuantizeNormal>      NetFireDirs;                                       // 0x0010(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WeaponInstantHitComponent.NetMulticastSimulateInstantShellHits
-// 0x0030 (0x0030 - 0x0000)
-struct M1WeaponInstantHitComponent_NetMulticastSimulateInstantShellHits final
-{
-public:
-	struct FVector                                FireLoc;                                           // 0x0000(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FVector_NetQuantizeNormal>      NetHitDirs;                                        // 0x0010(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-	TArray<struct FVector_NetQuantize>            NetMissLocs;                                       // 0x0020(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WeaponInstantHitComponent.NetMulticastSimulateMissHit
-// 0x0018 (0x0018 - 0x0000)
-struct M1WeaponInstantHitComponent_NetMulticastSimulateMissHit final
-{
-public:
-	struct FVector                                FireLoc;                                           // 0x0000(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                AimLoc;                                            // 0x000C(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WeaponInstantHitComponent.ServerInstantHits
-// 0x0058 (0x0058 - 0x0000)
-struct M1WeaponInstantHitComponent_ServerInstantHits final
-{
-public:
-	TArray<struct FHitResult>                     HitResults;                                        // 0x0000(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-	struct FVector                                FireLoc;                                           // 0x0010(0x000C)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FVector_NetQuantizeNormal>      NetFireDirs;                                       // 0x0020(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-	float                                         FireTime;                                          // 0x0030(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         BurstIndex;                                        // 0x0034(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1InstantHitShellInfo                 ShellInfo;                                         // 0x0038(0x0020)(ConstParm, Parm, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WeaponInstantHitComponent.ServerInstantShellHits
-// 0x0058 (0x0058 - 0x0000)
-struct M1WeaponInstantHitComponent_ServerInstantShellHits final
-{
-public:
-	float                                         FireTime;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                FireLoc;                                           // 0x0004(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         BurstIndex;                                        // 0x0010(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FVector_NetQuantizeNormal>      NetHitDirs;                                        // 0x0018(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-	struct FM1InstantHitShellInfo                 ShellInfo;                                         // 0x0028(0x0020)(ConstParm, Parm, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-	TArray<struct FVector_NetQuantize>            NetMissLocs;                                       // 0x0048(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WeaponInstantHitComponent.ServerMissHit
-// 0x0020 (0x0020 - 0x0000)
-struct M1WeaponInstantHitComponent_ServerMissHit final
-{
-public:
-	float                                         FireTime;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                FireLoc;                                           // 0x0004(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                AimLoc;                                            // 0x0010(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         BurstIndex;                                        // 0x001C(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WeaponInstantHitComponent.BP_FilterHitResults
-// 0x0020 (0x0020 - 0x0000)
-struct M1WeaponInstantHitComponent_BP_FilterHitResults final
-{
-public:
-	TArray<struct FHitResult>                     HitResults;                                        // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-	TArray<struct FHitResult>                     ReturnValue;                                       // 0x0010(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WeaponInstantHitComponent.BP_GetTargetingRule
-// 0x000C (0x000C - 0x0000)
-struct M1WeaponInstantHitComponent_BP_GetTargetingRule final
-{
-public:
-	struct FM1AbilityCollisionTargetingRule       ReturnValue;                                       // 0x0000(0x000C)(Parm, OutParm, ReturnParm, NoDestructor, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIAboveMainButUnderStandaloneLayer.OnSystemKeyPressedChatting
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIAboveMainButUnderStandaloneLayer_OnSystemKeyPressedChatting final
@@ -37318,6 +37612,43 @@ struct M1UIAccessorySetOptionStat_BP_SetDimmed final
 {
 public:
 	bool                                          bDimmed;                                           // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTaskGoal_Explosion.BP_ExplodedTarget
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionTaskGoal_Explosion_BP_ExplodedTarget final
+{
+public:
+	int32                                         Index_0;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bExploded;                                         // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIMissionTaskGoal_Explosion.BP_SetInfoString
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMissionTaskGoal_Explosion_BP_SetInfoString final
+{
+public:
+	class FString                                 InString;                                          // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTaskGoal_Explosion.BP_SetTargetCount
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIMissionTaskGoal_Explosion_BP_SetTargetCount final
+{
+public:
+	int32                                         Count;                                             // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTaskGoal_Explosion.BP_SetTargetInfo
+// 0x0028 (0x0028 - 0x0000)
+struct M1UIMissionTaskGoal_Explosion_BP_SetTargetInfo final
+{
+public:
+	int32                                         Index_0;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 StringId;                                          // 0x0008(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 SymbolStringId;                                    // 0x0018(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIAchievementListPanel.OnClicked_Category
@@ -37400,44 +37731,36 @@ public:
 	class UM1UIData*                              InUIData;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMiniGameTimingRing_Gameplay.AddRingWidget
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIMiniGameTimingRing_Gameplay_AddRingWidget final
-{
-public:
-	int32                                         InRingIndex;                                       // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMiniGameTimingRing_Gameplay.BP_PlayAnim_ShowNeedleAndRange
+// Function M1.M1UIMiniGameTimingRing.BP_SetObjectImage
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMiniGameTimingRing_Gameplay_BP_PlayAnim_ShowNeedleAndRange final
+struct M1UIMiniGameTimingRing_BP_SetObjectImage final
 {
 public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MiniGameDifficulty                         InDifficulty;                                      // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMiniGameTimingRing_Gameplay.OnKeyPressed_SelectedStopNeedle
+// Function M1.M1UIMiniGameTimingRing.BP_ShowResult
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMiniGameTimingRing_BP_ShowResult final
+{
+public:
+	EM1MiniGameResult                             InResult;                                          // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMiniGameTimingRing.Finish
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMiniGameTimingRing_Finish final
+{
+public:
+	EM1MiniGameResult                             InResult;                                          // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMiniGameTimingRing.OnButtonHoldCompleted_Cancel
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMiniGameTimingRing_Gameplay_OnKeyPressed_SelectedStopNeedle final
+struct M1UIMiniGameTimingRing_OnButtonHoldCompleted_Cancel final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMiniGameTimingRing_Gameplay.OnKeyPressed_StopNeedleCandidate
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMiniGameTimingRing_Gameplay_OnKeyPressed_StopNeedleCandidate final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMiniGameTimingRing_Gameplay.Start
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIMiniGameTimingRing_Gameplay_Start final
-{
-public:
-	float                                         InDelay;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIActionIcon.BP_ChangedCooldownRatio
@@ -37514,12 +37837,28 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPinPointActorWidget.BP_SetSquadIndex
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIPinPointActorWidget_BP_SetSquadIndex final
+// Function M1.M1UIPerkEnchantInfo.BP_OnPhaseChanged
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIPerkEnchantInfo_BP_OnPhaseChanged final
 {
 public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1PerkEnchantPhase                           InNewPhase;                                        // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPerkEnchantInfo.OnEnchantButtonHoldCompleted
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPerkEnchantInfo_OnEnchantButtonHoldCompleted final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPerkEnchantInfo.GetResultEnchantLevel
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIPerkEnchantInfo_GetResultEnchantLevel final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIAnnounce.BP_SetAnnouncementType
@@ -37578,17 +37917,9 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UILaboratoryOptionToggle.BP_UpdateButtonUI
-// 0x0001 (0x0001 - 0x0000)
-struct M1UILaboratoryOptionToggle_BP_UpdateButtonUI final
-{
-public:
-	bool                                          InbToggleOn;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILaboratoryOptionToggle.OnToggleClicked
+// Function M1.M1UILaboratoryOptionQuantity.OnButtonClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UILaboratoryOptionToggle_OnToggleClicked final
+struct M1UILaboratoryOptionQuantity_OnButtonClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -37646,32 +37977,131 @@ public:
 	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1WireDestination.OnTrrigerBeginOverlap
-// 0x00C0 (0x00C0 - 0x0000)
-struct M1WireDestination_OnTrrigerBeginOverlap final
-{
-public:
-	class UPrimitiveComponent*                    OverlappedComponent;                               // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class AActor*                                 OtherActor;                                        // 0x0008(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UPrimitiveComponent*                    OtherComp;                                         // 0x0010(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         OtherBodyIndex;                                    // 0x0018(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bFromSweep;                                        // 0x001C(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FHitResult                             SweepResult;                                       // 0x0020(0x009C)(ConstParm, Parm, OutParm, ReferenceParm, IsPlainOldData, NoDestructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
-	uint8                                         Pad_BC[0x4];                                       // 0x00BC(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1WireDestination.GetPullingDestLocation
-// 0x000C (0x000C - 0x0000)
-struct M1WireDestination_GetPullingDestLocation final
-{
-public:
-	struct FVector                                ReturnValue;                                       // 0x0000(0x000C)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireDestination.IsOwnerOverlapped
+// Function M1.M1WireCaster.ClientCancelWire
 // 0x0001 (0x0001 - 0x0000)
-struct M1WireDestination_IsOwnerOverlapped final
+struct M1WireCaster_ClientCancelWire final
+{
+public:
+	bool                                          bImmediately;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireCaster.NetMulticast_FireWireHook
+// 0x00B8 (0x00B8 - 0x0000)
+struct M1WireCaster_NetMulticast_FireWireHook final
+{
+public:
+	struct FHitResult                             InHit;                                             // 0x0000(0x009C)(ConstParm, Parm, ReferenceParm, IsPlainOldData, NoDestructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	struct FVector                                InDestOffest;                                      // 0x009C(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                InTerrainOffset;                                   // 0x00A8(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bAllowedAir;                                       // 0x00B4(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_B5[0x3];                                       // 0x00B5(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1WireCaster.OnFinishedDeboneWireAction
+// 0x0001 (0x0001 - 0x0000)
+struct M1WireCaster_OnFinishedDeboneWireAction final
+{
+public:
+	bool                                          bCanceled;                                         // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireCaster.OnOwnerMovementModeChanged
+// 0x0010 (0x0010 - 0x0000)
+struct M1WireCaster_OnOwnerMovementModeChanged final
+{
+public:
+	class ACharacter*                             Character;                                         // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EMovementMode                                 PrevMovementMode;                                  // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         PrevCustomMode;                                    // 0x0009(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_A[0x6];                                        // 0x000A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1WireCaster.OnRepWireState
+// 0x0001 (0x0001 - 0x0000)
+struct M1WireCaster_OnRepWireState final
+{
+public:
+	EM1WireState                                  PrevState;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireCaster.ServerCancelWire
+// 0x0001 (0x0001 - 0x0000)
+struct M1WireCaster_ServerCancelWire final
+{
+public:
+	bool                                          bImmediately;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireCaster.ServerStartWireAction
+// 0x00B8 (0x00B8 - 0x0000)
+struct M1WireCaster_ServerStartWireAction final
+{
+public:
+	struct FHitResult                             InHit;                                             // 0x0000(0x009C)(ConstParm, Parm, ReferenceParm, IsPlainOldData, NoDestructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	float                                         InAimPitch;                                        // 0x009C(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                InDestOffest;                                      // 0x00A0(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                InTerrainOffset;                                   // 0x00AC(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireCaster.ServerTerrainOffsetLog
+// 0x0010 (0x0010 - 0x0000)
+struct M1WireCaster_ServerTerrainOffsetLog final
+{
+public:
+	class FString                                 Log;                                               // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireCaster.GetDebonePartsComponent
+// 0x0008 (0x0008 - 0x0000)
+struct M1WireCaster_GetDebonePartsComponent final
+{
+public:
+	class UM1MonsterPartsComponent*               ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireCaster.GetDestinationType
+// 0x0001 (0x0001 - 0x0000)
+struct M1WireCaster_GetDestinationType final
+{
+public:
+	EM1WireDestinationType                        ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireCaster.GetDestPoint
+// 0x0008 (0x0008 - 0x0000)
+struct M1WireCaster_GetDestPoint final
+{
+public:
+	class AM1WireDestination*                     ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireCaster.GetPullingSpeed
+// 0x0004 (0x0004 - 0x0000)
+struct M1WireCaster_GetPullingSpeed final
+{
+public:
+	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireCaster.GetWireHitInfo
+// 0x009C (0x009C - 0x0000)
+struct M1WireCaster_GetWireHitInfo final
+{
+public:
+	struct FHitResult                             ReturnValue;                                       // 0x0000(0x009C)(Parm, OutParm, ReturnParm, IsPlainOldData, NoDestructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireCaster.IsActive
+// 0x0001 (0x0001 - 0x0000)
+struct M1WireCaster_IsActive final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireCaster.IsValidLandingSpot
+// 0x0001 (0x0001 - 0x0000)
+struct M1WireCaster_IsValidLandingSpot final
 {
 public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -37717,12 +38147,28 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UILocalMapResource.PlayBattleZoneAnimation
-// 0x0004 (0x0004 - 0x0000)
-struct M1UILocalMapResource_PlayBattleZoneAnimation final
+// Function M1.M1UILobby.GoToLogin
+// 0x0008 (0x0008 - 0x0000)
+struct M1UILobby_GoToLogin final
 {
 public:
-	struct FM1TemplateId                          InBattleZoneId;                                    // 0x0000(0x0004)(Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UILobby.OnDataPatchStateChanged
+// 0x0001 (0x0001 - 0x0000)
+struct M1UILobby_OnDataPatchStateChanged final
+{
+public:
+	EM1UIDataPatchState                           InPatchState;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UILobby.OnWidgetPageChanged
+// 0x0008 (0x0008 - 0x0000)
+struct M1UILobby_OnWidgetPageChanged final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIBattlePassSeasonPageBuy.GetBattlePassType
@@ -37867,6 +38313,14 @@ struct M1UIButtonSelectCharacter_BP_SetIsOwned final
 {
 public:
 	bool                                          bOwned;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionSubTypeInfoVoidFusion.BP_SetVoidFusionActivationInfo
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMissionSubTypeInfoVoidFusion_BP_SetVoidFusionActivationInfo final
+{
+public:
+	TArray<class FString>                         InNamedMonsterStringIds;                           // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICashMailBox.OnCancelClicked
@@ -38035,16 +38489,6 @@ public:
 	bool                                          bExpired;                                          // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionIndividual_DropDown.Callback_OnSelectionChanged
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIOptionIndividual_DropDown_Callback_OnSelectionChanged final
-{
-public:
-	class FString                                 InSelectedParam;                                   // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	ESelectInfo                                   InSelectInfo;                                      // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
 // Function M1.M1UICashShopItem_Currency.BP_SetCurrencyIcon
 // 0x0001 (0x0001 - 0x0000)
 struct M1UICashShopItem_Currency_BP_SetCurrencyIcon final
@@ -38159,9 +38603,9 @@ public:
 	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionIndividual_ButtonDesc.Callback_Button
+// Function M1.M1UIOptionIndividual_Button.Callback_Button
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionIndividual_ButtonDesc_Callback_Button final
+struct M1UIOptionIndividual_Button_Callback_Button final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -38189,6 +38633,14 @@ struct M1UICashShopDetailInfo_Character_OnInfoClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTaskGoal_DesturctionIronHeart.BP_SetTaskState
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionTaskGoal_DesturctionIronHeart_BP_SetTaskState final
+{
+public:
+	EM1MissionTaskDestructionIronHeartState       InTaskState;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICashShopDetailInfo_Equipment.BP_SetMasteryRankLimit
@@ -38295,6 +38747,14 @@ struct M1UICashShopDetailInfo_Bundle_OnSubBundleItemUnhovered final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionTaskGoalCollectionReturnHudCenter.BP_UpdateCollectionReturnState
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionTaskGoalCollectionReturnHudCenter_BP_UpdateCollectionReturnState final
+{
+public:
+	bool                                          bInFullyCollected;                                 // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICashShopPurchaseButton.BP_ShowExcludedOwnPriceAmount
@@ -38466,30 +38926,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionWaveCheckPoint.BP_SetTimerHighlight
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionWaveCheckPoint_BP_SetTimerHighlight final
-{
-public:
-	bool                                          bInSet;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionWaveCheckPoint.OnClicked_MissionWaveContinue
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionWaveCheckPoint_OnClicked_MissionWaveContinue final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionWaveCheckPoint.OnClicked_MissionWaveStop
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionWaveCheckPoint_OnClicked_MissionWaveStop final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UISkillDetailInfo.BP_SetArcheType
 // 0x0001 (0x0001 - 0x0000)
 struct M1UISkillDetailInfo_BP_SetArcheType final
@@ -38538,16 +38974,6 @@ public:
 	EM1SkillType                                  InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UISkillDetailInfo.OnMouseWheelOnSlot
-// 0x0080 (0x0080 - 0x0000)
-struct M1UISkillDetailInfo_OnMouseWheelOnSlot final
-{
-public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
 // Function M1.M1UISkillDetailSlot.BP_SetDiffStatValue
 // 0x0002 (0x0002 - 0x0000)
 struct M1UISkillDetailSlot_BP_SetDiffStatValue final
@@ -38557,108 +38983,12 @@ public:
 	bool                                          bIsPositiveEffect;                                 // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionResult.BP_PlayOpenAnim
+// Function M1.M1UIMissionPreTaskContext.BP_OnPreTaskUpdated
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionResult_BP_PlayOpenAnim final
+struct M1UIMissionPreTaskContext_BP_OnPreTaskUpdated final
 {
 public:
-	EM1MissionResultOpenAnimType                  InAnimType;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResult.OnClickedKeyContextButton_Close
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionResult_OnClickedKeyContextButton_Close final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResult.OnClickedKeyContextButton_ShowRewareded
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionResult_OnClickedKeyContextButton_ShowRewareded final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResult.OnClickedKeyContextButton_ShowStatistics
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionResult_OnClickedKeyContextButton_ShowStatistics final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResult.OnCompleted_RestartAlone
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionResult_OnCompleted_RestartAlone final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResult.OnCompleted_RestartTogether
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionResult_OnCompleted_RestartTogether final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResult.OnDimmedClicked_RestartAlone
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionResult_OnDimmedClicked_RestartAlone final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResult.OnDimmedClicked_RestartTogether
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionResult_OnDimmedClicked_RestartTogether final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResult.OnPressed_RestartAlone
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionResult_OnPressed_RestartAlone final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResult.OnPressed_RestartTogether
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionResult_OnPressed_RestartTogether final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResult.OnReleased_RestartAlone
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionResult_OnReleased_RestartAlone final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResult.OnReleased_RestartTogether
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionResult_OnReleased_RestartTogether final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResult.GetRemainTimeToAutoExit
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIMissionResult_GetRemainTimeToAutoExit final
-{
-public:
-	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bInRelatedTaskActorActivated;                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIChatting.BP_OnChattingTabChanged
@@ -38798,20 +39128,28 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionRewards.SetMissionRewards
+// Function M1.M1UIDataMissionResultStatistics.GetStringKey
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIDataMissionResultStatistics_GetStringKey final
+{
+public:
+	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataMissionResultStatistics.GetStringValue
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIDataMissionResultStatistics_GetStringValue final
+{
+public:
+	class FText                                   ReturnValue;                                       // 0x0000(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionRewardCurrency.SetMissionReward
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionRewards_SetMissionRewards final
+struct M1UIMissionRewardCurrency_SetMissionReward final
 {
 public:
 	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionRewards.SetMissionRewardsByGrade
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionRewards_SetMissionRewardsByGrade final
-{
-public:
-	class UM1UIDataMissionInfo*                   InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICodexAccPanel.OnContenxtButton_Cancel
@@ -38864,152 +39202,6 @@ public:
 	int32                                         InTabIndex;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	bool                                          bSelected;                                         // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIMatchingBase.OnCancelMatchClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMatchingBase_OnCancelMatchClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMatchingBase.UpdateMatchingStatus
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMatchingBase_UpdateMatchingStatus final
-{
-public:
-	bool                                          bMatch;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.BP_OnChangedMissionInfoForHardInstanceDungeon
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceContentInfo_BP_OnChangedMissionInfoForHardInstanceDungeon final
-{
-public:
-	const class UM1UIDataMissionInfo*             InUIData;                                          // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.BP_OnChangedRandomMatch
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIInstanceContentInfo_BP_OnChangedRandomMatch final
-{
-public:
-	bool                                          bRandomMatch;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.BP_SetContentLayout
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIInstanceContentInfo_BP_SetContentLayout final
-{
-public:
-	EM1InstanaceContentType                       InContentType;                                     // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.BP_SetTextureBG
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceContentInfo_BP_SetTextureBG final
-{
-public:
-	class UTexture2D*                             InTexture2D;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.BP_SetToggleRandomMatchVisibility
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIInstanceContentInfo_BP_SetToggleRandomMatchVisibility final
-{
-public:
-	ESlateVisibility                              InVisibility;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.OnCancelClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceContentInfo_OnCancelClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.OnConfirmCancelClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceContentInfo_OnConfirmCancelClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.OnDimmedPressed_PrivateStartButton
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceContentInfo_OnDimmedPressed_PrivateStartButton final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.OnDimmedPressed_PublicStartButton
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceContentInfo_OnDimmedPressed_PublicStartButton final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.OnHoldCompleted_PrivateStartButton
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceContentInfo_OnHoldCompleted_PrivateStartButton final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.OnHoldCompleted_PublicStartButton
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceContentInfo_OnHoldCompleted_PublicStartButton final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.OnNotifyUIDataChanged
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceContentInfo_OnNotifyUIDataChanged final
-{
-public:
-	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.OnPageChanged
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceContentInfo_OnPageChanged final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceContentInfo.OnToggleValueChanged_RandomMatch
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIInstanceContentInfo_OnToggleValueChanged_RandomMatch final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bValue;                                            // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIInstanceDungeonInfo_Normal.OnClickDifficulty
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceDungeonInfo_Normal_OnClickDifficulty final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInstanceDungeonInfo_Normal.OnShowDifficultyButtonTooltip
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInstanceDungeonInfo_Normal_OnShowDifficultyButtonTooltip final
-{
-public:
-	class UM1UIWidget*                            InTooltipWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICodexResearchSlot.BP_SetNotAcquired
@@ -39078,12 +39270,52 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataInvasionDungeonAbility.GetStringId
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIDataInvasionDungeonAbility_GetStringId final
+// Function M1.M1UIInstanceDungeonScore.BP_SetAddScore
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIInstanceDungeonScore_BP_SetAddScore final
 {
 public:
-	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FText                                   InAddScoreText;                                    // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceDungeonScore.OnAddedMissionScore
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIInstanceDungeonScore_OnAddedMissionScore final
+{
+public:
+	int32                                         InScore;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceDungeonScore.OnInitMissionTotalScore
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIInstanceDungeonScore_OnInitMissionTotalScore final
+{
+public:
+	int32                                         InTotalScore;                                      // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceDungeonScore.OnPlayerStateReady
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceDungeonScore_OnPlayerStateReady final
+{
+public:
+	class AM1PlayerState*                         InPlayerState;                                     // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIShopRegionalTerms.OnShowCommercialTransReg
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIShopRegionalTerms_OnShowCommercialTransReg final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIShopRegionalTerms.OnShowMoneySettlementReg
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIShopRegionalTerms_OnShowMoneySettlementReg final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIConsumableDecomposeMain.OnBackButtonEvent
@@ -39166,6 +39398,38 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIGame_ForcedExitTime.Callback_DimmedPressedRestartAlone
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGame_ForcedExitTime_Callback_DimmedPressedRestartAlone final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGame_ForcedExitTime.Callback_RestartAlone
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGame_ForcedExitTime_Callback_RestartAlone final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGame_ForcedExitTime.Callback_TeleportToCity
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGame_ForcedExitTime_Callback_TeleportToCity final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGame_ForcedExitTime.OnCancelMatchAndReturnToCity
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGame_ForcedExitTime_OnCancelMatchAndReturnToCity final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1UIConsumableDecomposeInfo.BP_IsDecomposeAnimPlaying
 // 0x0001 (0x0001 - 0x0000)
 struct M1UIConsumableDecomposeInfo_BP_IsDecomposeAnimPlaying final
@@ -39228,53 +39492,6 @@ struct M1UIConsumableItemDetails_BP_SetItemTier final
 {
 public:
 	EM1ItemTierType                               InItemTier;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIConsumableItemDetails.OnMouseWheelEvent
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIConsumableItemDetails_OnMouseWheelEvent final
-{
-public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIGame_ReceivedItem.BP_PlayTierAnim
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGame_ReceivedItem_BP_PlayTierAnim final
-{
-public:
-	EM1ItemTierType                               InTier;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGame_ReceivedItem.BP_SetImportanceType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGame_ReceivedItem_BP_SetImportanceType final
-{
-public:
-	EM1ImportanceType                             InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGame_ReceivedItem.BP_SetItemIconType
-// 0x0006 (0x0006 - 0x0000)
-struct M1UIGame_ReceivedItem_BP_SetItemIconType final
-{
-public:
-	EM1ItemType                                   InItemType;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1CurrencyType                               InCurrecyType;                                     // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1EquipmentCategoryType                      InEquipCategory;                                   // 0x0002(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1EquipItemClassType                         InWeaponClassType;                                 // 0x0003(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ConsumableItemCategoryType                 InConsumableCategory;                              // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1RuneClassType                              InRuneClassType;                                   // 0x0005(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGame_ReceivedItem.BP_SetVisibleQuantityOrLevel
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGame_ReceivedItem_BP_SetVisibleQuantityOrLevel final
-{
-public:
-	bool                                          bIsVisible;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIContextButtons.AddButton
@@ -39359,17 +39576,9 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UISocial_UsersList.OnClickedBtnLeaveParty
+// Function M1.M1UISocial_RecentList.OnEntryClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UISocial_UsersList_OnClickedBtnLeaveParty final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISocial_UsersList.OnEntrySelected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISocial_UsersList_OnEntrySelected final
+struct M1UISocial_RecentList_OnEntryClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -39383,6 +39592,32 @@ public:
 	EM1CreditType                                 InCreditType;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<class FString>                         InStrings;                                         // 0x0008(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataGroupQuest.GetTitleText
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIDataGroupQuest_GetTitleText final
+{
+public:
+	class FText                                   ReturnValue;                                       // 0x0000(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataGroupQuest.GetUIDataListOfMainRewards
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIDataGroupQuest_GetUIDataListOfMainRewards final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class UM1UIData*>                      ReturnValue;                                       // 0x0008(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataGroupQuest.GetUIDataListOfQuests
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIDataGroupQuest_GetUIDataListOfQuests final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class UM1UIData*>                      ReturnValue;                                       // 0x0008(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICSPChannelSlot.BP_SetChannelIcon
@@ -39542,46 +39777,6 @@ struct M1UICurrencyButton_SetAmountColor final
 {
 public:
 	bool                                          bEnough;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIBossMonsterInfo.BP_InitBossMonsterWidget
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIBossMonsterInfo_BP_InitBossMonsterWidget final
-{
-public:
-	bool                                          bUseBerserkMode;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIBossMonsterInfo.BP_OnBerserkGaugeChanged
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIBossMonsterInfo_BP_OnBerserkGaugeChanged final
-{
-public:
-	float                                         GaugeRatio;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIBossMonsterInfo.BP_OnRageGaugeChanged
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIBossMonsterInfo_BP_OnRageGaugeChanged final
-{
-public:
-	float                                         GaugeRatio;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIBossMonsterInfo.BP_PlayFocusAnim
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIBossMonsterInfo_BP_PlayFocusAnim final
-{
-public:
-	bool                                          bInForwardAnim;                                    // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIBossMonsterInfo.BP_PlayNameAnim
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIBossMonsterInfo_BP_PlayNameAnim final
-{
-public:
-	bool                                          bInForwardAnim;                                    // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICustomizeCharacterPaintInven.OnClickedPaintApply
@@ -39893,14 +40088,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UITaskTargetListItem_Supply.ChangeProgressBarTintColor
-// 0x0014 (0x0014 - 0x0000)
-struct M1UITaskTargetListItem_Supply_ChangeProgressBarTintColor final
-{
-public:
-	struct FSlateColor                            InColor;                                           // 0x0000(0x0014)(Parm, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UICustomizeEvolutionDetails.BP_ShowCondtionsPanel
 // 0x0001 (0x0001 - 0x0000)
 struct M1UICustomizeEvolutionDetails_BP_ShowCondtionsPanel final
@@ -39976,12 +40163,62 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIStatGroupItemSlotWrapper.OnStatVisibilityChanged
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIStatGroupItemSlotWrapper_OnStatVisibilityChanged final
+// Function M1.M1UIInformationOnEquipments.OnChangeWeaponClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInformationOnEquipments_OnChangeWeaponClicked final
 {
 public:
-	ESlateVisibility                              InVisibility;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInformationOnEquipments.OnCreateEquipmentTooltipWidget
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInformationOnEquipments_OnCreateEquipmentTooltipWidget final
+{
+public:
+	class UM1UIWidget*                            InTooltipWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInformationOnEquipments.OnEventCursorEnteredSlot
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInformationOnEquipments_OnEventCursorEnteredSlot final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInformationOnEquipments.OnEventCursorLeftSlot
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInformationOnEquipments_OnEventCursorLeftSlot final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInformationOnEquipments.OnMouseWheelOnSlot
+// 0x0080 (0x0080 - 0x0000)
+struct M1UIInformationOnEquipments_OnMouseWheelOnSlot final
+{
+public:
+	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIInformationOnEquipments.OnSelectNextSlot
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInformationOnEquipments_OnSelectNextSlot final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInformationOnEquipments.OnSelectPrevSlot
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInformationOnEquipments_OnSelectPrevSlot final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICustomizeItemButton.BP_SetBGTexture
@@ -40008,12 +40245,29 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIUserReportTypeEntry.SetTitleAndDescription
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIUserReportTypeEntry_SetTitleAndDescription final
+// Function M1.M1UIUserInfo.BP_ApplyCustomizingSettings
+// 0x0028 (0x0028 - 0x0000)
+struct M1UIUserInfo_BP_ApplyCustomizingSettings final
 {
 public:
-	class FName                                   InStringId;                                        // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TypedUICustomizing                  InNamecardInfo;                                    // 0x0000(0x0028)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIUserInfo.BP_SetMasteryInfo
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIUserInfo_BP_SetMasteryInfo final
+{
+public:
+	bool                                          bMaxLevel;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIUserInfo.BP_SetPlatformIcon
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIUserInfo_BP_SetPlatformIcon final
+{
+public:
+	EM1LoginPlatformTypes                         InLocalPlatformType;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         InPlayerPlatformType;                              // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UICustomizeItemSlot.BP_SetNewIcon
@@ -40080,97 +40334,20 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIKeyButtonCurrency.BP_SetAmountColor
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIKeyButtonCurrency_BP_SetAmountColor final
-{
-public:
-	bool                                          bEnough;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeyButtonCurrency.SetCurrency
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIKeyButtonCurrency_SetCurrency final
-{
-public:
-	EM1CurrencyType                               InType;                                            // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         InAmount;                                          // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         InGainAmount;                                      // 0x0010(0x0008)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeySymbol.BP_ChangeProgressUI
+// Function M1.M1UILaboratory.OnApplyHoldCompleted
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIKeySymbol_BP_ChangeProgressUI final
+struct M1UILaboratory_OnApplyHoldCompleted final
 {
 public:
-	bool                                          InStart;                                           // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         InDuration;                                        // 0x0004(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIKeySymbol.BP_SetProgressUI
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIKeySymbol_BP_SetProgressUI final
-{
-public:
-	bool                                          bUseProgress;                                      // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeySymbol.ChangeButtonUI
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIKeySymbol_ChangeButtonUI final
-{
-public:
-	EM1ButtonUIType                               InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeySymbol.ChangeDimmedUI
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIKeySymbol_ChangeDimmedUI final
-{
-public:
-	bool                                          InDimmed;                                          // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeySymbol.SetBattleKeyType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIKeySymbol_SetBattleKeyType final
-{
-public:
-	EM1BattleKey                                  InKey;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeySymbol.SetFKeyType
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIKeySymbol_SetFKeyType final
-{
-public:
-	struct FKey                                   InKey;                                             // 0x0000(0x0018)(ConstParm, Parm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeySymbol.SetKeyType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIKeySymbol_SetKeyType final
-{
-public:
-	EM1SystemKey                                  InKey;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeySymbol.ShowKeySymbol
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIKeySymbol_ShowKeySymbol final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIKeySymbolDual.BP_SetPlusImage
+// Function M1.M1UILaboratory.OnCancelClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIKeySymbolDual_BP_SetPlusImage final
+struct M1UILaboratory_OnCancelClicked final
 {
 public:
-	class UTexture2D*                             InTexture;                                         // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIWeaponCustomizePanel.BP_UpdateWeaponBookCount
@@ -40272,6 +40449,22 @@ struct M1UIDamageTrackingIconLayer_StopTrackDamage final
 {
 public:
 	class UM1DamageTrackingInfo*                  InInfo;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIVoidBattle_BossPartsLabel.OnSetAdvantageType_BP
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIVoidBattle_BossPartsLabel_OnSetAdvantageType_BP final
+{
+public:
+	EM1DamageAdvantageType                        InAdvantageType;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIVoidBattle_BossPartsLabel.OnSetPartsNameUIKey_BP
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIVoidBattle_BossPartsLabel_OnSetPartsNameUIKey_BP final
+{
+public:
+	class FString                                 InUIKey;                                           // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataNumeric.GetValue
@@ -40547,14 +40740,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemReactorInfo.BP_SetConditionUI
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIItemReactorInfo_BP_SetConditionUI final
-{
-public:
-	bool                                          bIsSatisfied;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIDataCharacterInfo.GetCharacterBigIcon
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIDataCharacterInfo_GetCharacterBigIcon final
@@ -40711,38 +40896,6 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMetaGameGuideMessage.OnCancelClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMetaGameGuideMessage_OnCancelClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMetaGameGuideMessage.OnConfirmClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMetaGameGuideMessage_OnConfirmClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMetaGameGuideMessage.SetAlignmentType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMetaGameGuideMessage_SetAlignmentType final
-{
-public:
-	EM1AlignmentType                              InAlignmentType;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMetaGameGuideMessage.SetPositionType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMetaGameGuideMessage_SetPositionType final
-{
-public:
-	EM1PositionType                               InPositionType;                                    // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1SkillTooltipCalc.Calculate
 // 0x0018 (0x0018 - 0x0000)
 struct M1SkillTooltipCalc_Calculate final
@@ -40773,20 +40926,52 @@ public:
 	struct FM1ScaledInteger                       ReturnValue;                                       // 0x0018(0x0008)(Parm, OutParm, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIHelp.OnCancelAction
+// Function M1.M1UIVideoGuideMessage.OnButtonEvent_HoldCompleted
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIHelp_OnCancelAction final
+struct M1UIVideoGuideMessage_OnButtonEvent_HoldCompleted final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIHelp.SelectWidgetIndex
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIHelp_SelectWidgetIndex final
+// Function M1.M1UIHUDMissionTaskGoals.OnOnMissionDeactivated
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIHUDMissionTaskGoals_OnOnMissionDeactivated final
 {
 public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1MissionEventParam                   Param;                                             // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIHUDMissionTaskGoals.OnTaskActivated
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIHUDMissionTaskGoals_OnTaskActivated final
+{
+public:
+	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIHUDMissionTaskGoals.OnTaskDeactivated
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIHUDMissionTaskGoals_OnTaskDeactivated final
+{
+public:
+	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInDun_FixedMODInfo.OnTooltipToggleLinkedContents
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInDun_FixedMODInfo_OnTooltipToggleLinkedContents final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInDun_FixedMODInfo.OnTooltipToggleVoidVaultKey
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInDun_FixedMODInfo_OnTooltipToggleVoidVaultKey final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataCustomizeWeapon.GetWeaponStringId
@@ -40795,6 +40980,46 @@ struct M1UIDataCustomizeWeapon_GetWeaponStringId final
 {
 public:
 	class FName                                   ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataWorldDifficulty.GetStringId
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIDataWorldDifficulty_GetStringId final
+{
+public:
+	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataWorldDifficulty.GetTemplateIdAsInt32
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIDataWorldDifficulty_GetTemplateIdAsInt32 final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataWorldDifficulty.GetUnlockQuestConditionStringId
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIDataWorldDifficulty_GetUnlockQuestConditionStringId final
+{
+public:
+	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataWorldDifficulty.HasUnlockCondition
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIDataWorldDifficulty_HasUnlockCondition final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataWorldDifficulty.IsCurrentLevel
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIDataWorldDifficulty_IsCurrentLevel final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataCustomizeEvolutionLevel.GetStatus
@@ -40811,6 +41036,48 @@ struct M1UIDataCustomizeEvolutionLevel_HasNextEvolution final
 {
 public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemStat.BP_SetDiffRatio
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemStat_BP_SetDiffRatio final
+{
+public:
+	float                                         InOwnRatio;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         InToCompareRatio;                                  // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemStat.BP_SetDiffStatValue
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIItemStat_BP_SetDiffStatValue final
+{
+public:
+	bool                                          bIsZero;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bPositiveNum;                                      // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemStat.BP_SetEffectiveSkilll
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIItemStat_BP_SetEffectiveSkilll final
+{
+public:
+	bool                                          bIsEffective;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemStat.SetItemSingleStat
+// 0x0038 (0x0038 - 0x0000)
+struct M1UIItemStat_SetItemSingleStat final
+{
+public:
+	struct FM1ItemStatForUI                       InStat;                                            // 0x0000(0x0038)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemStat.GetStatType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIItemStat_GetStatType final
+{
+public:
+	EM1StatType                                   ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataEliteMonsterAbility.GetDescription
@@ -40837,28 +41104,31 @@ public:
 	class FText                                   ReturnValue;                                       // 0x0000(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIJournalMain.OnClicked_Achievement
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIJournalMain_OnClicked_Achievement final
+// Function M1.M1UIItemTraceSlot.BP_SetDisplayAsTracableNow
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIItemTraceSlot_BP_SetDisplayAsTracableNow final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsTracable;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIJournalMain.OnClicked_Record
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIJournalMain_OnClicked_Record final
+// Function M1.M1UIItemTraceSlot.BP_SetSelectedFocusGoalItem
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIItemTraceSlot_BP_SetSelectedFocusGoalItem final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bCanBeFocusGoalItem;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSelected;                                         // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIJournalMain.OnContenxtButton_Cancel
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIJournalMain_OnContenxtButton_Cancel final
+// Function M1.M1UIItemTraceSlot.BP_SetSourceTypedIcon
+// 0x0003 (0x0003 - 0x0000)
+struct M1UIItemTraceSlot_BP_SetSourceTypedIcon final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemListSourceType                         InObjectType;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          InRepeatable;                                      // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsInvasionContent;                                 // 0x0002(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataChallengeEventQuest.GetRemainTime
@@ -40909,60 +41179,60 @@ public:
 	class UTexture2D*                             InTexture;                                         // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIWorldMapObjectDescriptionItem_Mission.BP_SetMissionIconUIData
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWorldMapObjectDescriptionItem_Mission_BP_SetMissionIconUIData final
-{
-public:
-	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWorldMapObjectDescriptionItem_Mission.BP_SetMissionLegionCategory
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIWorldMapObjectDescriptionItem_Mission_BP_SetMissionLegionCategory final
-{
-public:
-	TArray<EM1LegionCategory>                     InLegionCategory;                                  // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWorldMapObjectDescriptionItem_Mission.BP_SetMissionPlayTimeGuide
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWorldMapObjectDescriptionItem_Mission_BP_SetMissionPlayTimeGuide final
-{
-public:
-	class FName                                   PlayTimeGuideStringId;                             // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWorldMapObjectDescriptionItem_Mission.BP_SetMissionRewardByGradeTextByCategory
+// Function M1.M1UIJunkFilterIndividual.BP_ShowKeySymbol
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIWorldMapObjectDescriptionItem_Mission_BP_SetMissionRewardByGradeTextByCategory final
+struct M1UIJunkFilterIndividual_BP_ShowKeySymbol final
 {
 public:
-	EM1MissionCategory                            InCategory;                                        // 0x0000(0x0001)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIWorldMapObjectDescriptionItem_Mission.BP_SetMissionWaveType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIWorldMapObjectDescriptionItem_Mission_BP_SetMissionWaveType final
-{
-public:
-	bool                                          bHasWave;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIJunkFilterIndividual_Toggle.BP_UpdateButtonUI
+// Function M1.M1UIJunkFilterIndividual_Select.BP_SetCurrentIndex
 // 0x0004 (0x0004 - 0x0000)
-struct M1UIJunkFilterIndividual_Toggle_BP_UpdateButtonUI final
+struct M1UIJunkFilterIndividual_Select_BP_SetCurrentIndex final
 {
 public:
 	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIJunkFilterIndividual_Toggle.Callback_ToggleCurrentIndex
+// Function M1.M1UIJunkFilterIndividual_Select.Callback_OnSelectionChangedByLeft
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIJunkFilterIndividual_Toggle_Callback_ToggleCurrentIndex final
+struct M1UIJunkFilterIndividual_Select_Callback_OnSelectionChangedByLeft final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIJunkFilterIndividual_Select.Callback_OnSelectionChangedByRight
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIJunkFilterIndividual_Select_Callback_OnSelectionChangedByRight final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIReactorEnchant.OnContenxtButton_Cancel
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIReactorEnchant_OnContenxtButton_Cancel final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIReactorEnchant.OnGuideClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIReactorEnchant_OnGuideClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIReactorEnchant.OnItemList_Clicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIReactorEnchant_OnItemList_Clicked final
+{
+public:
+	class UM1UIWidget*                            InClickedWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataItemInfo_Reactor.GetArcheType
@@ -41043,6 +41313,75 @@ struct M1UIDataItemInfo_Title_IsEquipped final
 {
 public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameplayDebugViewer.ToggleGameplayDebugViewer
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIGameplayDebugViewer_ToggleGameplayDebugViewer final
+{
+public:
+	class UObject*                                InWorldContext;                                    // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIGameplayDebugViewer*               ReturnValue;                                       // 0x0008(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameplayDebugViewer.OnComboBoxActorSelectionChanged
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIGameplayDebugViewer_OnComboBoxActorSelectionChanged final
+{
+public:
+	class FString                                 InSelectedItem;                                    // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	ESelectInfo                                   InSelectionType;                                   // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIGameplayDebugViewer.OnComboBoxComponentClassSelectionChanged
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIGameplayDebugViewer_OnComboBoxComponentClassSelectionChanged final
+{
+public:
+	class FString                                 InSelectedItem;                                    // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	ESelectInfo                                   InSelectionType;                                   // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIGameplayDebugViewer.OnComboBoxPropertySelectionChanged
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIGameplayDebugViewer_OnComboBoxPropertySelectionChanged final
+{
+public:
+	class FString                                 InSelectedItem;                                    // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	ESelectInfo                                   InSelectionType;                                   // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIGameplayDebugViewer.OnComboxBoxActorClassSelected
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIGameplayDebugViewer_OnComboxBoxActorClassSelected final
+{
+public:
+	class FString                                 InSelectedItem;                                    // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	ESelectInfo                                   InSelectionType;                                   // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIGameplayDebugViewer.OnEditableTextBoxCommittedForPropertySearch
+// 0x0020 (0x0020 - 0x0000)
+struct M1UIGameplayDebugViewer_OnEditableTextBoxCommittedForPropertySearch final
+{
+public:
+	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	ETextCommit                                   InCommitMethod;                                    // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIGameplayDebugViewer.OnTextCommitted
+// 0x0020 (0x0020 - 0x0000)
+struct M1UIGameplayDebugViewer_OnTextCommitted final
+{
+public:
+	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	ETextCommit                                   InCommitMethod;                                    // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function M1.M1UIDataMail.GetContent
@@ -41133,17 +41472,9 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRecordListPanel.OnClicked_Category
+// Function M1.M1UIRecordCategoryListPanel.OnEntryItemClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIRecordListPanel_OnClicked_Category final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRecordListPanel.OnEntryItemClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRecordListPanel_OnEntryItemClicked final
+struct M1UIRecordCategoryListPanel_OnEntryItemClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -41210,14 +41541,69 @@ public:
 	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIGameRadarArea.UpdatePanel
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameRadarArea_UpdatePanel final
+// Function M1.M1UIGamePlayerListSlot.BP_MarkedRestart
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGamePlayerListSlot_BP_MarkedRestart final
 {
 public:
-	bool                                          Invalid;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         InWarningLevel;                                    // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bMarked;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGamePlayerListSlot.BP_OnChangedPlayerDBNOState
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGamePlayerListSlot_BP_OnChangedPlayerDBNOState final
+{
+public:
+	bool                                          bDBNO;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGamePlayerListSlot.BP_SetPlatformIcon
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIGamePlayerListSlot_BP_SetPlatformIcon final
+{
+public:
+	EM1LoginPlatformTypes                         InLocalPlatformType;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         InPlayerPlatformType;                              // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGamePlayerListSlot.BP_SetSquadIndex
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIGamePlayerListSlot_BP_SetSquadIndex final
+{
+public:
+	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGamePlayerListSlot.BP_UpdateAppearanceByLevel
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGamePlayerListSlot_BP_UpdateAppearanceByLevel final
+{
+public:
+	bool                                          bIsMaxLevel;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGamePlayerListSlot.BP_UpdateAwayFromGameplay
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGamePlayerListSlot_BP_UpdateAwayFromGameplay final
+{
+public:
+	bool                                          bAway;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGamePlayerListSlot.BP_UpdateIsSameParty
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGamePlayerListSlot_BP_UpdateIsSameParty final
+{
+public:
+	bool                                          bIsSamePartyWithLocalPlayer;                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGamePlayerListSlot.BP_UpdatePartyLeader
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGamePlayerListSlot_BP_UpdatePartyLeader final
+{
+public:
+	bool                                          bIsPartyLeader;                                    // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataMissionInfo.GetUIDataItemRewards
@@ -41342,6 +41728,14 @@ struct M1UIDataMissionInfo_IsActivated final
 {
 public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameRadarLayer.BP_GetStepsWidgets
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIGameRadarLayer_BP_GetStepsWidgets final
+{
+public:
+	TArray<class UWidget*>                        ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataMissionResultExp.GetBoostItemExp
@@ -41784,74 +42178,13 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemInformation.BP_SetRuneSettingVisible
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIItemInformation_BP_SetRuneSettingVisible final
+// Function M1.M1UIInclusiveItemDetails.BP_GetTypedItemDetails
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIInclusiveItemDetails_BP_GetTypedItemDetails final
 {
 public:
-	bool                                          InbVisible;                                        // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemInformation.OnCancelClick
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemInformation_OnCancelClick final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemInformation.OnMouseMoved
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIItemInformation_OnMouseMoved final
-{
-public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIItemInformation.OnResetItemPreviewRotationClick
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemInformation_OnResetItemPreviewRotationClick final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemInformation.OnRightMouseButtonUpOnPreviewActor
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemInformation_OnRightMouseButtonUpOnPreviewActor final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemInformation.OnShowCustomizingClick
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemInformation_OnShowCustomizingClick final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemInformation.OnTabButtonSelected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemInformation_OnTabButtonSelected final
-{
-public:
-	int32                                         InSelectedIndex;                                   // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bIsSelectionChanged;                               // 0x0004(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIItemInformation.OnTouchGestureOnPreviewActor
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIItemInformation_OnTouchGestureOnPreviewActor final
-{
-public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class UM1UIData*                              InUIData;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            ReturnValue;                                       // 0x0008(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataTaskExtermination.GetCurrentKillCount
@@ -41878,14 +42211,23 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemResources.BP_SetRankStatus
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIItemResources_BP_SetRankStatus final
+// Function M1.M1UIItemLevelUpgradeItemStat.BP_UpdateDps
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIItemLevelUpgradeItemStat_BP_UpdateDps final
 {
 public:
-	int32                                         InCount;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bEnough;                                           // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class FText                                   InDpsText;                                         // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemLevelUpgradeItemStat.BP_UpdateDpsOffset
+// 0x0020 (0x0020 - 0x0000)
+struct M1UIItemLevelUpgradeItemStat_BP_UpdateDpsOffset final
+{
+public:
+	class FText                                   InOffsetText;                                      // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bIsZero;                                           // 0x0018(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsPositive;                                       // 0x0019(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1A[0x6];                                       // 0x001A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function M1.M1UIEquipments.BP_ShowHighlightOnRuneBoardButton
@@ -42061,52 +42403,20 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRune.BP_ChangeSelectionMarkerType
+// Function M1.M1UIRotationShopItemSlot.BP_ShowBottomPanel
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIRune_BP_ChangeSelectionMarkerType final
+struct M1UIRotationShopItemSlot_BP_ShowBottomPanel final
 {
 public:
-	bool                                          bIsWarning;                                        // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ShopItemBottomPanelType                    InType;                                            // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRune.BP_MarkAsSelectedRune
+// Function M1.M1UIRotationShopItemSlot.BP_ShowIsOwned
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIRune_BP_MarkAsSelectedRune final
+struct M1UIRotationShopItemSlot_BP_ShowIsOwned final
 {
 public:
-	bool                                          InbSelected;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRune.BP_ShowSelectionDecoration
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIRune_BP_ShowSelectionDecoration final
-{
-public:
-	bool                                          InbShow;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRune.OnEventDragDetected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRune_OnEventDragDetected final
-{
-public:
-	class UM1UIWidget*                            InDraggedWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRune.OnEventEnteredPickedRuneCancelled
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRune_OnEventEnteredPickedRuneCancelled final
-{
-public:
-	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRune.OnEventEnteredPickedRuneDrop
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRune_OnEventEnteredPickedRuneDrop final
-{
-public:
-	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          InOwned;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataTaskDestructionIronHeart.GetOccupationPlayerCount
@@ -42334,12 +42644,68 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRuneCompose_Result.CallBack_Confirm
+// Function M1.M1UIRuneCompose_Inform.BP_UpdateCompletedPageNum
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIRuneCompose_Inform_BP_UpdateCompletedPageNum final
+{
+public:
+	int32                                         InPageNum;                                         // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneCompose_Inform.BP_UpdateRequiredCurrency
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRuneCompose_Inform_BP_UpdateRequiredCurrency final
+{
+public:
+	bool                                          bEnough;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneCompose_Inform.OnHoldCompleted_ComposeRune
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIRuneCompose_Result_CallBack_Confirm final
+struct M1UIRuneCompose_Inform_OnHoldCompleted_ComposeRune final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneCompose_Inform.OnMaterialSlotClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRuneCompose_Inform_OnMaterialSlotClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneCompose_Inform.OnMaterialSlotMouseHovered
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRuneCompose_Inform_OnMaterialSlotMouseHovered final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneCompose_Inform.OnMaterialSlotMouseUnhovered
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRuneCompose_Inform_OnMaterialSlotMouseUnhovered final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneCompose_Inform.BP_GetMaterialSlots
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIRuneCompose_Inform_BP_GetMaterialSlots final
+{
+public:
+	TArray<class UM1UIRune*>                      ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneCompose_Inform.BP_IsComposeSequencePlaying
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRuneCompose_Inform_BP_IsComposeSequencePlaying final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataRandomOption.GetOptionTier
@@ -42372,6 +42738,194 @@ struct M1UIDataRandomOption_IsLocked final
 {
 public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.BP_SetVisibility
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGameMainMenu_BP_SetVisibility final
+{
+public:
+	EM1MapType                                    InMapType;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.ContextButtons_Cancel
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_ContextButtons_Cancel final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.Logout
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_Logout final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnCancelMatchAndReturnToCity
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnCancelMatchAndReturnToCity final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnChallengeAndEventTabButtonSelected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnChallengeAndEventTabButtonSelected final
+{
+public:
+	int32                                         InTabIndex;                                        // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSelectionChanged;                                 // 0x0004(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIGameMainMenu.OnChallengeEntryClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnChallengeEntryClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnCreatedEventTooltip
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnCreatedEventTooltip final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventClickedOpenEventPage
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventClickedOpenEventPage final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventClickGameOption
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventClickGameOption final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventClickInventory
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventClickInventory final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventClickLogOut
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventClickLogOut final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventClickMap
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventClickMap final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventClickMissionResult
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventClickMissionResult final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventClickMoveAlbion
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventClickMoveAlbion final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventClickQuit
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventClickQuit final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventClickRequestSupport
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventClickRequestSupport final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventClickStopMission
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventClickStopMission final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventClickTerms
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventClickTerms final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventClickToyEvent
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventClickToyEvent final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventReceivedFocus
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnEventReceivedFocus final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.OnEventScreenShotModeToggleValueChanged
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIGameMainMenu_OnEventScreenShotModeToggleValueChanged final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Value;                                             // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIGameMainMenu.OnTryRequestReturnToCity
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_OnTryRequestReturnToCity final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameMainMenu.QuitGame
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameMainMenu_QuitGame final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataExpectedRandomOption.ContainsBannedStatGroup
@@ -42508,20 +43062,12 @@ public:
 	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMonsterPartsInfo.BP_UpdatePartsFocused
+// Function M1.M1UIMonsterInfo_Marker.BP_ChangeMonsterMarker
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMonsterPartsInfo_BP_UpdatePartsFocused final
+struct M1UIMonsterInfo_Marker_BP_ChangeMonsterMarker final
 {
 public:
-	bool                                          bFocused;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMonsterPartsInfo.BP_UpdatePartsHP
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIMonsterPartsInfo_BP_UpdatePartsHP final
-{
-public:
-	float                                         HPRate;                                            // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MissionDerivativeMarkerType                InNewMarkerType;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataRuneBoardPreview_Weapon.GetInitialWeaponIndex
@@ -43044,30 +43590,6 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInformation.OnCancelClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInformation_OnCancelClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInformation.OnOpenPageBelowClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInformation_OnOpenPageBelowClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInformation.BP_GetStatGroupItems
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIInformation_BP_GetStatGroupItems final
-{
-public:
-	TArray<class UM1UIStatGroupItem*>             ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIDataSimpleIcon.GetIcon
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIDataSimpleIcon_GetIcon final
@@ -43084,28 +43606,70 @@ public:
 	class FText                                   ReturnValue;                                       // 0x0000(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataRuneBoard.GetRuneClassType
+// Function M1.M1UIRuneIcon.BP_OnDragDetected
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIDataRuneBoard_GetRuneClassType final
+struct M1UIRuneIcon_BP_OnDragDetected final
 {
 public:
-	EM1RuneClassType                              ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          InbDragDetected;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataRuneBoard_Weapon.GetEquipItemClassType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIDataRuneBoard_Weapon_GetEquipItemClassType final
+// Function M1.M1UIRuneIcon.BP_SetCapacityIncrement
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIRuneIcon_BP_SetCapacityIncrement final
 {
 public:
-	EM1EquipItemClassType                         ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InValue;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataRuneBoard_Weapon.GetWeaponTier
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIDataRuneBoard_Weapon_GetWeaponTier final
+// Function M1.M1UIRuneIcon.BP_SetCost
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIRuneIcon_BP_SetCost final
 {
 public:
-	EM1ItemTierType                               ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InValue;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneIcon.BP_SetEnchantLevel
+// 0x000C (0x000C - 0x0000)
+struct M1UIRuneIcon_BP_SetEnchantLevel final
+{
+public:
+	int32                                         EnchantLevel;                                      // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EnchantMaxLevel;                                   // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Targetlevel;                                       // 0x0008(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneIcon.BP_SetRuneBgEffect
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRuneIcon_BP_SetRuneBgEffect final
+{
+public:
+	bool                                          bSet;                                              // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneIcon.BP_SetRuneMatchCondition
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRuneIcon_BP_SetRuneMatchCondition final
+{
+public:
+	EM1RuneSocketTypeMatchCondition               InCondition;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneIcon.OnEventPickCancelled
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRuneIcon_OnEventPickCancelled final
+{
+public:
+	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneIcon.OnEventPickDrop
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRuneIcon_OnEventPickDrop final
+{
+public:
+	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataSkillHUD.GetSkillAbility
@@ -43124,20 +43688,20 @@ public:
 	const class AActor*                           ReturnValue;                                       // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIVoidBattleStatGroupItemSlot.BP_SetImageUp
+// Function M1.M1UIStatGroupItemSlotTooltip.BP_SetRandomOptionOnlyValue
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIVoidBattleStatGroupItemSlot_BP_SetImageUp final
+struct M1UIStatGroupItemSlotTooltip_BP_SetRandomOptionOnlyValue final
 {
 public:
-	bool                                          bVisible;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsRandomOptionOnly;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIVoidBattleStatGroupItemSlot.BP_SetStatColor
+// Function M1.M1UIStatGroupItemSlotTooltip.BP_SetStatColor
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIVoidBattleStatGroupItemSlot_BP_SetStatColor final
+struct M1UIStatGroupItemSlotTooltip_BP_SetStatColor final
 {
 public:
-	EM1UIVoidBattleStatColor                      InColorType;                                       // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1UIStatColor                                InColorType;                                       // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataStatusEffectInfo.Create
@@ -43248,167 +43812,71 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameStatusEffectIcon.BP_UpdateElapsedProgressRatio
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIGameStatusEffectIcon_BP_UpdateElapsedProgressRatio final
+// Function M1.M1UIGameSessionTest.BP_AlreadyLoggedIn
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGameSessionTest_BP_AlreadyLoggedIn final
 {
 public:
-	float                                         InRatio;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          InLoggedIn;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameStatusEffectIcon.BP_UpdateElapsedProgressSeconds
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIGameStatusEffectIcon_BP_UpdateElapsedProgressSeconds final
+// Function M1.M1UIGameSessionTest.BP_CurrentLoginIPSet
+// 0x0020 (0x0020 - 0x0000)
+struct M1UIGameSessionTest_BP_CurrentLoginIPSet final
 {
 public:
-	float                                         InSecond;                                          // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 InIP;                                              // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 InPort;                                            // 0x0010(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameStatusEffectIcon.BP_UpdateIcon
+// Function M1.M1UIGameSessionTest.BP_TestLoginServerAddressSet
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGameSessionTest_BP_TestLoginServerAddressSet final
+{
+public:
+	bool                                          InSet;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameSessionTest.OnSelectionChanged_BattleZone
 // 0x0018 (0x0018 - 0x0000)
-struct M1UIGameStatusEffectIcon_BP_UpdateIcon final
+struct M1UIGameSessionTest_OnSelectionChanged_BattleZone final
 {
 public:
-	class UTexture2D*                             Icon;                                              // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FGameplayTag                           InStatusEffectIdTag;                               // 0x0008(0x0008)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          InbInfiniteDuration;                               // 0x0010(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 InSelectedItem;                                    // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	ESelectInfo                                   InSelectionType;                                   // 0x0010(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIGameStatusEffectIcon.BP_UpdateIconSize
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameStatusEffectIcon_BP_UpdateIconSize final
+// Function M1.M1UIGameSessionTest.OnSelectionChanged_MapData
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIGameSessionTest_OnSelectionChanged_MapData final
 {
 public:
-	struct FVector2D                              InSize;                                            // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 InSelectedItem;                                    // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	ESelectInfo                                   InSelectionType;                                   // 0x0010(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIGameStatusEffectIcon.BP_UpdateStackCount
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIGameStatusEffectIcon_BP_UpdateStackCount final
+// Function M1.M1UIGameSessionTest.RequestJoinGame
+// 0x0028 (0x0028 - 0x0000)
+struct M1UIGameSessionTest_RequestJoinGame final
 {
 public:
-	int32                                         InCount;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 InStartLocationId;                                 // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InDifficultyLevel;                                 // 0x0010(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          InCheckUnlock;                                     // 0x0014(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          InPrivateField;                                    // 0x0015(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_16[0x2];                                       // 0x0016(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 InOptions;                                         // 0x0018(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UISeasonReward.BP_ChangeGoodsBuyButtonState
-// 0x0001 (0x0001 - 0x0000)
-struct M1UISeasonReward_BP_ChangeGoodsBuyButtonState final
+// Function M1.M1UIGameSessionTest.SetTemporaryLoginIP
+// 0x0020 (0x0020 - 0x0000)
+struct M1UIGameSessionTest_SetTemporaryLoginIP final
 {
 public:
-	EM1SeasonRewardButtonState                    InState;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.BP_ShowDetailView
-// 0x0001 (0x0001 - 0x0000)
-struct M1UISeasonReward_BP_ShowDetailView final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.OnCancelClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_OnCancelClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.OnCursorEnteredSlot
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_OnCursorEnteredSlot final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.OnDetailViewButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_OnDetailViewButtonClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.OnEntryClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_OnEntryClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.OnEntryRightMouseButtonUp
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_OnEntryRightMouseButtonUp final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.OnGoodsBuyButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_OnGoodsBuyButtonClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.OnGoToBounsClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_OnGoToBounsClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.OnGoToGeneralClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_OnGoToGeneralClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.OnPageBuyClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_OnPageBuyClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.OnPanelChangedPageNumber
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_OnPanelChangedPageNumber final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.OnPanelCreateEntryTooltipWidget
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_OnPanelCreateEntryTooltipWidget final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.OnPremiumUpgradeButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_OnPremiumUpgradeButtonClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UISeasonReward.UpdateFromGoodsInfo
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISeasonReward_UpdateFromGoodsInfo final
-{
-public:
-	class UM1UIDataShopGoodsInfo_BattlePass*      InBattlePassGoodsInfo;                             // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 InIP;                                              // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 InPort;                                            // 0x0010(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataVoidVesselRewardGroup.GetItemInfoUIDatas
@@ -43436,6 +43904,31 @@ public:
 	class FName                                   ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIGameStatusEffect_NoticePanel.BP_OnAddedStatusEffectNotice
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameStatusEffect_NoticePanel_BP_OnAddedStatusEffectNotice final
+{
+public:
+	const class UM1UIWidget*                      InNoticeWidget;                                    // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameStatusEffect_NoticePanel.OnActivatedStatusEffect
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIGameStatusEffect_NoticePanel_OnActivatedStatusEffect final
+{
+public:
+	const class UM1StatusEffect*                  InStatusEffect;                                    // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   InStatusEffectDataRowName;                         // 0x0008(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameStatusEffect_NoticePanel.OnOuterWidgetVisibilityChanged
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGameStatusEffect_NoticePanel_OnOuterWidgetVisibilityChanged final
+{
+public:
+	ESlateVisibility                              InVisibility;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1UIDataVoidVesselContainer.GetRemainTime
 // 0x0004 (0x0004 - 0x0000)
 struct M1UIDataVoidVesselContainer_GetRemainTime final
@@ -43460,12 +43953,60 @@ public:
 	class UM1UIDataItemInfo*                      ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGame_EpicMonsterWarning.GetNumberOfSquadMember
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIGame_EpicMonsterWarning_GetNumberOfSquadMember final
+// Function M1.M1UIGameTop_LevelUp.BP_UpdateAppearanceByLevel
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGameTop_LevelUp_BP_UpdateAppearanceByLevel final
 {
 public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsMaxLevel;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameTop_LevelUp.GetEndAnimation
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameTop_LevelUp_GetEndAnimation final
+{
+public:
+	class UWidgetAnimation*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameTop_LevelUp.HasNewSkill
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGameTop_LevelUp_HasNewSkill final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGame_CharacterLevel.BP_SetCharacterLevelExp
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIGame_CharacterLevel_BP_SetCharacterLevelExp final
+{
+public:
+	float                                         InRatio;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGame_CharacterLevel.BP_SetMasteryExp
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIGame_CharacterLevel_BP_SetMasteryExp final
+{
+public:
+	float                                         InRatio;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGame_CharacterLevel.BP_UpdateAppearanceByCharacterLevel
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGame_CharacterLevel_BP_UpdateAppearanceByCharacterLevel final
+{
+public:
+	bool                                          bIsMax;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGame_CharacterLevel.BP_UpdateAppearanceByMasteryRank
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIGame_CharacterLevel_BP_UpdateAppearanceByMasteryRank final
+{
+public:
+	bool                                          bIsMax;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataMapDifficultySkillInfo.GetIcon
@@ -43569,60 +44110,14 @@ public:
 	bool                                          bActive;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameContentSelector_World.OnPressedKey_CloseCodex
+// Function M1.M1UIGameContentSelector.OnTabButtonSelected
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_World_OnPressedKey_CloseCodex final
+struct M1UIGameContentSelector_OnTabButtonSelected final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameContentSelector_World.OnPressedKey_CloseJournal
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_World_OnPressedKey_CloseJournal final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameContentSelector_World.OnPressedKey_CloseLocalMap
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_World_OnPressedKey_CloseLocalMap final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameContentSelector_World.OnPressedKey_CloseQuest
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_World_OnPressedKey_CloseQuest final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameContentSelector_World.OnPressedKey_CloseSocial
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_World_OnPressedKey_CloseSocial final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameContentSelector_World.OnPressedKey_CloseWorldMap
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_World_OnPressedKey_CloseWorldMap final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameContentSelector_World.OnPressedKey_SwitchToInven
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameContentSelector_World_OnPressedKey_SwitchToInven final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSelectionChanged;                                 // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function M1.M1UIEquipmentInventory.BP_PlayEquipUnEquipSound
@@ -44331,69 +44826,132 @@ public:
 	const class AM1MissionTaskActor*              InActor;                                           // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGamePlayerListSlot.BP_MarkedRestart
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGamePlayerListSlot_BP_MarkedRestart final
+// Function M1.M1UIGameContentSelector_Inven.OnPressedKey_CloseBattlePass
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_Inven_OnPressedKey_CloseBattlePass final
 {
 public:
-	bool                                          bMarked;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGamePlayerListSlot.BP_OnChangedPlayerDBNOState
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGamePlayerListSlot_BP_OnChangedPlayerDBNOState final
+// Function M1.M1UIGameContentSelector_Inven.OnPressedKey_CloseCashShop
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_Inven_OnPressedKey_CloseCashShop final
 {
 public:
-	bool                                          bDBNO;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGamePlayerListSlot.BP_SetPlatformIcon
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIGamePlayerListSlot_BP_SetPlatformIcon final
+// Function M1.M1UIGameContentSelector_Inven.OnPressedKey_CloseCharacterList
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_Inven_OnPressedKey_CloseCharacterList final
 {
 public:
-	EM1LoginPlatformTypes                         InLocalPlatformType;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LoginPlatformTypes                         InPlayerPlatformType;                              // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGamePlayerListSlot.BP_SetSquadIndex
+// Function M1.M1UIGameContentSelector_Inven.OnPressedKey_CloseConsumable
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_Inven_OnPressedKey_CloseConsumable final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameContentSelector_Inven.OnPressedKey_CloseInventory
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_Inven_OnPressedKey_CloseInventory final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameContentSelector_Inven.OnPressedKey_SwitchToMap
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_Inven_OnPressedKey_SwitchToMap final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameContentSelector_World.OnPressedKey_CloseCodex
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_World_OnPressedKey_CloseCodex final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameContentSelector_World.OnPressedKey_CloseJournal
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_World_OnPressedKey_CloseJournal final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameContentSelector_World.OnPressedKey_CloseLocalMap
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_World_OnPressedKey_CloseLocalMap final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameContentSelector_World.OnPressedKey_CloseQuest
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_World_OnPressedKey_CloseQuest final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameContentSelector_World.OnPressedKey_CloseSocial
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_World_OnPressedKey_CloseSocial final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameContentSelector_World.OnPressedKey_CloseWorldMap
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_World_OnPressedKey_CloseWorldMap final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameContentSelector_World.OnPressedKey_SwitchToInven
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameContentSelector_World_OnPressedKey_SwitchToInven final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameObjectivePanel.BP_GetWidgetsByPriority
+// 0x0050 (0x0050 - 0x0000)
+struct M1UIGameObjectivePanel_BP_GetWidgetsByPriority final
+{
+public:
+	TMap<EM1GameObjectiveDisplayByPriority, class UM1UIWidget*> ReturnValue;                                       // 0x0000(0x0050)(ExportObject, Parm, OutParm, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameObjectivePanel.OnMissionTaskActivated
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIGameObjectivePanel_OnMissionTaskActivated final
+{
+public:
+	const class AM1MissionTaskActor*              InActor;                                           // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIGameObjectivePanel.OnQuestInfoActivated
 // 0x0004 (0x0004 - 0x0000)
-struct M1UIGamePlayerListSlot_BP_SetSquadIndex final
+struct M1UIGameObjectivePanel_OnQuestInfoActivated final
 {
 public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGamePlayerListSlot.BP_UpdateAppearanceByLevel
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGamePlayerListSlot_BP_UpdateAppearanceByLevel final
-{
-public:
-	bool                                          bIsMaxLevel;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGamePlayerListSlot.BP_UpdateAwayFromGameplay
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGamePlayerListSlot_BP_UpdateAwayFromGameplay final
-{
-public:
-	bool                                          bAway;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGamePlayerListSlot.BP_UpdateIsSameParty
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGamePlayerListSlot_BP_UpdateIsSameParty final
-{
-public:
-	bool                                          bIsSamePartyWithLocalPlayer;                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGamePlayerListSlot.BP_UpdatePartyLeader
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGamePlayerListSlot_BP_UpdatePartyLeader final
-{
-public:
-	bool                                          bIsPartyLeader;                                    // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          InQuestTemplateId;                                 // 0x0000(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIGameRadar.OnActorDestroyed
@@ -44422,97 +44980,28 @@ public:
 	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIGameRadarIcon.BP_SetSquadIndex
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIGameRadarIcon_BP_SetSquadIndex final
-{
-public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameRadarIcon.BP_UpdateHeightPanel
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIGameRadarIcon_BP_UpdateHeightPanel final
-{
-public:
-	int32                                         InUpOrDown;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameRadarIcon.BP_UpdateIcon
-// 0x0003 (0x0003 - 0x0000)
-struct M1UIGameRadarIcon_BP_UpdateIcon final
-{
-public:
-	EM1RadarEntityType                            InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ItemTierType                               InItemTier;                                        // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ImportanceType                             InItemImportanceType;                              // 0x0002(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameSessionTest.BP_AlreadyLoggedIn
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGameSessionTest_BP_AlreadyLoggedIn final
-{
-public:
-	bool                                          InLoggedIn;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameSessionTest.BP_CurrentLoginIPSet
-// 0x0020 (0x0020 - 0x0000)
-struct M1UIGameSessionTest_BP_CurrentLoginIPSet final
-{
-public:
-	class FString                                 InIP;                                              // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 InPort;                                            // 0x0010(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameSessionTest.BP_TestLoginServerAddressSet
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIGameSessionTest_BP_TestLoginServerAddressSet final
-{
-public:
-	bool                                          InSet;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameSessionTest.OnSelectionChanged_BattleZone
+// Function M1.M1UIDataMapInfo.GetLevelName
 // 0x0018 (0x0018 - 0x0000)
-struct M1UIGameSessionTest_OnSelectionChanged_BattleZone final
+struct M1UIDataMapInfo_GetLevelName final
 {
 public:
-	class FString                                 InSelectedItem;                                    // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	ESelectInfo                                   InSelectionType;                                   // 0x0010(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class FText                                   ReturnValue;                                       // 0x0000(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameSessionTest.OnSelectionChanged_MapData
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIGameSessionTest_OnSelectionChanged_MapData final
+// Function M1.M1UIDataMapInfo.GetTemplateId
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIDataMapInfo_GetTemplateId final
 {
 public:
-	class FString                                 InSelectedItem;                                    // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	ESelectInfo                                   InSelectionType;                                   // 0x0010(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	struct FM1TemplateId                          ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameSessionTest.RequestJoinGame
-// 0x0028 (0x0028 - 0x0000)
-struct M1UIGameSessionTest_RequestJoinGame final
+// Function M1.M1UIDataMapInfo.GetTemplateIdAsString
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIDataMapInfo_GetTemplateIdAsString final
 {
 public:
-	class FString                                 InStartLocationId;                                 // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         InDifficultyLevel;                                 // 0x0010(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          InCheckUnlock;                                     // 0x0014(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          InPrivateField;                                    // 0x0015(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_16[0x2];                                       // 0x0016(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 InOptions;                                         // 0x0018(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameSessionTest.SetTemporaryLoginIP
-// 0x0020 (0x0020 - 0x0000)
-struct M1UIGameSessionTest_SetTemporaryLoginIP final
-{
-public:
-	class FString                                 InIP;                                              // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 InPort;                                            // 0x0010(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIGameStartMenu.BP_ShowCharacterList
@@ -44683,84 +45172,49 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameStatusEffects.OnAddedStatusEffect
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameStatusEffects_OnAddedStatusEffect final
+// Function M1.M1UIGame_EpicMonsterWarning.GetNumberOfSquadMember
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIGame_EpicMonsterWarning_GetNumberOfSquadMember final
 {
 public:
-	const class UM1StatusEffect*                  InStatusEffect;                                    // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameStatusEffects.OnRemovedStatusEffect
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameStatusEffects_OnRemovedStatusEffect final
-{
-public:
-	const class UM1StatusEffect*                  InStatusEffect;                                    // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameTop_LevelUp.BP_UpdateAppearanceByLevel
+// Function M1.M1UIGame_ReceivedItem.BP_PlayTierAnim
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIGameTop_LevelUp_BP_UpdateAppearanceByLevel final
+struct M1UIGame_ReceivedItem_BP_PlayTierAnim final
 {
 public:
-	bool                                          bIsMaxLevel;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemTierType                               InTier;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameTop_LevelUp.GetEndAnimation
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameTop_LevelUp_GetEndAnimation final
-{
-public:
-	class UWidgetAnimation*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGameTop_LevelUp.HasNewSkill
+// Function M1.M1UIGame_ReceivedItem.BP_SetImportanceType
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIGameTop_LevelUp_HasNewSkill final
+struct M1UIGame_ReceivedItem_BP_SetImportanceType final
 {
 public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ImportanceType                             InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGameTop_MasteryRankUp_Possible.GetEndAnimation
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGameTop_MasteryRankUp_Possible_GetEndAnimation final
+// Function M1.M1UIGame_ReceivedItem.BP_SetItemIconType
+// 0x0006 (0x0006 - 0x0000)
+struct M1UIGame_ReceivedItem_BP_SetItemIconType final
 {
 public:
-	class UWidgetAnimation*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemType                                   InItemType;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1CurrencyType                               InCurrecyType;                                     // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1EquipmentCategoryType                      InEquipCategory;                                   // 0x0002(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1EquipItemClassType                         InWeaponClassType;                                 // 0x0003(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ConsumableItemCategoryType                 InConsumableCategory;                              // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RuneClassType                              InRuneClassType;                                   // 0x0005(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIGame_Interaction.BP_ShowExclusiveInteractionMarkToOtherPlayers
+// Function M1.M1UIGame_ReceivedItem.BP_SetVisibleQuantityOrLevel
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIGame_Interaction_BP_ShowExclusiveInteractionMarkToOtherPlayers final
+struct M1UIGame_ReceivedItem_BP_SetVisibleQuantityOrLevel final
 {
 public:
-	bool                                          bInShow;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGame_Interaction.OnHoldBegin_Interaction
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGame_Interaction_OnHoldBegin_Interaction final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGame_Interaction.OnHoldCanceled_Interaction
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGame_Interaction_OnHoldCanceled_Interaction final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIGame_Interaction.OnHoldCompleted_BeginInteraction
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIGame_Interaction_OnHoldCompleted_BeginInteraction final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsVisible;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIGroupQuestListItem.BP_SetBackgroundImageBy
@@ -44787,84 +45241,68 @@ public:
 	bool                                          bIsLocked;                                         // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1WeaponPerkAbility.MakeWeaponParams
-// 0x0010 (0x0010 - 0x0000)
-struct M1WeaponPerkAbility_MakeWeaponParams final
+// Function M1.M1WeaponReloadComponent.ServerEndReload
+// 0x0001 (0x0001 - 0x0000)
+struct M1WeaponReloadComponent_ServerEndReload final
 {
 public:
-	TArray<struct FM1AbilityParamData>            ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, NativeAccessSpecifierPublic)
+	bool                                          ByInterrupt;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1WeaponPerkAbility.GetPerkWeapon
-// 0x0008 (0x0008 - 0x0000)
-struct M1WeaponPerkAbility_GetPerkWeapon final
-{
-public:
-	class AM1Weapon*                              ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIHPBar.GetDummyHP
+// Function M1.M1WeaponReloadComponent.ServerStartReload
 // 0x0004 (0x0004 - 0x0000)
-struct M1UIHPBar_GetDummyHP final
+struct M1WeaponReloadComponent_ServerStartReload final
 {
 public:
-	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         InPlayRate;                                        // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIHUDMissionTaskGoals.OnOnMissionDeactivated
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIHUDMissionTaskGoals_OnOnMissionDeactivated final
+// Function M1.M1UIMetaGameGuidePanel.BP_ShowDimmedBackground
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMetaGameGuidePanel_BP_ShowDimmedBackground final
 {
 public:
-	struct FM1MissionEventParam                   Param;                                             // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	bool                                          InVisible;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIHUDMissionTaskGoals.OnTaskActivated
+// Function M1.M1UIMetaGameGuidePanel.BP_ShowHightlightFrame
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMetaGameGuidePanel_BP_ShowHightlightFrame final
+{
+public:
+	bool                                          InVisible;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIHelp.OnCancelAction
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIHUDMissionTaskGoals_OnTaskActivated final
-{
-public:
-	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIHUDMissionTaskGoals.OnTaskDeactivated
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIHUDMissionTaskGoals_OnTaskDeactivated final
-{
-public:
-	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInDun_FixedMODScoreItem.BP_GetProbabilityTBs
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIInDun_FixedMODScoreItem_BP_GetProbabilityTBs final
-{
-public:
-	TArray<class UM1OverflowTextBlock*>           ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInDun_FixedMODScoreItem.BP_GetScoreTBs
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIInDun_FixedMODScoreItem_BP_GetScoreTBs final
-{
-public:
-	TArray<class UM1OverflowTextBlock*>           ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInDun_FixedMODScoreItem.OnTooltipToggleLinkedContents
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInDun_FixedMODScoreItem_OnTooltipToggleLinkedContents final
+struct M1UIHelp_OnCancelAction final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInDun_FixedMODScoreItem.OnTooltipToggleVoidVaultKey
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInDun_FixedMODScoreItem_OnTooltipToggleVoidVaultKey final
+// Function M1.M1UIHelp.SelectWidgetIndex
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIHelp_SelectWidgetIndex final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIVoidBattleStatGroupItemSlot.BP_SetImageUp
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIVoidBattleStatGroupItemSlot_BP_SetImageUp final
+{
+public:
+	bool                                          bVisible;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIVoidBattleStatGroupItemSlot.BP_SetStatColor
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIVoidBattleStatGroupItemSlot_BP_SetStatColor final
+{
+public:
+	EM1UIVoidBattleStatColor                      InColorType;                                       // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIInstanceDungeonInfo_Hard.OnClickDifficulty
@@ -44903,6 +45341,22 @@ public:
 	class UM1UIWidget*                            InTooltipWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIInstanceDungeonInfo_Normal.OnClickDifficulty
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceDungeonInfo_Normal_OnClickDifficulty final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIInstanceDungeonInfo_Normal.OnShowDifficultyButtonTooltip
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIInstanceDungeonInfo_Normal_OnShowDifficultyButtonTooltip final
+{
+public:
+	class UM1UIWidget*                            InTooltipWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1UIInstanceDungeonSelector.OnShowDifficultyButtonTooltip
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIInstanceDungeonSelector_OnShowDifficultyButtonTooltip final
@@ -44911,129 +45365,38 @@ public:
 	class UM1UIWidget*                            InTooltipWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataInvasionDungeonReward.GetIconPath
-// 0x0030 (0x0030 - 0x0000)
-struct M1UIDataInvasionDungeonReward_GetIconPath final
+// Function M1.M1UIDataInvasionDungeonAbility.GetStringId
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIDataInvasionDungeonAbility_GetStringId final
 {
 public:
-	TSoftObjectPtr<class UTexture2D>              ReturnValue;                                       // 0x0000(0x0030)(Parm, OutParm, ReturnParm, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataInvasionDungeonReward.GetSeasonExp
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIDataInvasionDungeonReward_GetSeasonExp final
+// Function M1.M1UIResearchFeatured.OnMouseWheelOnSlot
+// 0x0080 (0x0080 - 0x0000)
+struct M1UIResearchFeatured_OnMouseWheelOnSlot final
 {
 public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIDataInvasionDungeonReward.GetTimeAttackSec
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIDataInvasionDungeonReward_GetTimeAttackSec final
-{
-public:
-	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataInvasionDungeonReward.getUniqueID
+// Function M1.M1UIResearchFeatured.OnSlotClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIDataInvasionDungeonReward_GetUniqueID final
-{
-public:
-	int64                                         ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIResearchItemSlot.BP_SetBookmark
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIResearchItemSlot_BP_SetBookmark final
-{
-public:
-	bool                                          bBookmark;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIResearchItemSlot.BP_SetFinalOwned
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIResearchItemSlot_BP_SetFinalOwned final
-{
-public:
-	bool                                          bOwned;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIResearchItemSlot.BP_SetHoldStatus
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIResearchItemSlot_BP_SetHoldStatus final
-{
-public:
-	bool                                          bHold;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bExceedMax;                                        // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIResearchItemSlot.BP_SetItemTier
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIResearchItemSlot_BP_SetItemTier final
-{
-public:
-	EM1ItemTierType                               InTierType;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIResearchItemSlot.BP_SetNewMark
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIResearchItemSlot_BP_SetNewMark final
-{
-public:
-	bool                                          bNew;                                              // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIResearchItemSlot.BP_SetOwnedCount
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIResearchItemSlot_BP_SetOwnedCount final
-{
-public:
-	int32                                         InCount;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bVisible;                                          // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIResearchItemSlot.BP_SetPerk
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIResearchItemSlot_BP_SetPerk final
-{
-public:
-	bool                                          bPerkExist;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIResearchItemSlot.BP_SetRankStatus
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIResearchItemSlot_BP_SetRankStatus final
-{
-public:
-	int32                                         InCount;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bEnough;                                           // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIResearchItemSlot.OnEventTimerTick
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIResearchItemSlot_OnEventTimerTick final
-{
-public:
-	double                                        InSecond;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIResearchItemSlot.OnMaterialItemClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIResearchItemSlot_OnMaterialItemClicked final
+struct M1UIResearchFeatured_OnSlotClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIResearchFeaturedSlot.BP_SetSlotBG
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIResearchFeaturedSlot_BP_SetSlotBG final
+// Function M1.M1UIInvasionDungeonScoreItem.BP_SetState
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIInvasionDungeonScoreItem_BP_SetState final
 {
 public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1InvasionDungeonScoreState                  InState;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIInvasionProgress.BP_SetState
@@ -45060,322 +45423,6 @@ public:
 	double                                        InSecond;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInventory.BP_EmphasizeMasteryInfo
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIInventory_BP_EmphasizeMasteryInfo final
-{
-public:
-	bool                                          InbEmphasize;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.BP_PlayMoveAnimation
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIInventory_BP_PlayMoveAnimation final
-{
-public:
-	EM1InventoryAnimDirection                     InDir;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bOpen;                                             // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.BP_PlayToggleBookmarkSound
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIInventory_BP_PlayToggleBookmarkSound final
-{
-public:
-	bool                                          bAddBookmark;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.BP_SetCharacterInfo
-// 0x0040 (0x0040 - 0x0000)
-struct M1UIInventory_BP_SetCharacterInfo final
-{
-public:
-	class FString                                 InCharName;                                        // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         InLevel;                                           // 0x0010(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         InCurExp;                                          // 0x0018(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         InMaxExp;                                          // 0x0020(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsMaxLevel;                                        // 0x0028(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ElementalDamageChannel                     InElementalType;                                   // 0x0029(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2A[0x6];                                       // 0x002A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	class UTexture2D*                             InIconPath;                                        // 0x0030(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1CharacterGrade                             InGrade;                                           // 0x0038(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIInventory.BP_SetCharacterRuneNewMark
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIInventory_BP_SetCharacterRuneNewMark final
-{
-public:
-	bool                                          bNewMark;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.BP_SetIsCreator
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIInventory_BP_SetIsCreator final
-{
-public:
-	bool                                          InbCreator;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.BP_SetMasteryInfo
-// 0x0050 (0x0050 - 0x0000)
-struct M1UIInventory_BP_SetMasteryInfo final
-{
-public:
-	int32                                         InRank;                                            // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         InCurExp;                                          // 0x0008(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         InMaxExp;                                          // 0x0010(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsMaxLevel;                                        // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TSoftObjectPtr<class UTexture2D>              InIconPath;                                        // 0x0020(0x0030)(ConstParm, Parm, OutParm, ReferenceParm, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.BP_SetPlatformIcon
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIInventory_BP_SetPlatformIcon final
-{
-public:
-	EM1LoginPlatformTypes                         InLocalPlatformType;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LoginPlatformTypes                         InPlayerPlatformType;                              // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.BP_SetPlatformOnlineId
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIInventory_BP_SetPlatformOnlineId final
-{
-public:
-	class FString                                 InOnlineId;                                        // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.BP_SetPlayerTitle
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIInventory_BP_SetPlayerTitle final
-{
-public:
-	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.BP_SetTitleButtonNewMark
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIInventory_BP_SetTitleButtonNewMark final
-{
-public:
-	bool                                          bNewMark;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.BP_SetWeaponBookNewMark
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIInventory_BP_SetWeaponBookNewMark final
-{
-public:
-	bool                                          bNewMark;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnAchievementTitleClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnAchievementTitleClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnBoostInfoClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnBoostInfoClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnCancelClick
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnCancelClick final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnCharacterRuneClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnCharacterRuneClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnEquipmentSlotClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnEquipmentSlotClicked final
-{
-public:
-	class UM1UIWidget*                            InSelectedEquipmentSlot;                           // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnEquipmentSlotCursorEntered
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnEquipmentSlotCursorEntered final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnEquipmentSlotCursorLeft
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnEquipmentSlotCursorLeft final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnFellowMainClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnFellowMainClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnGuideClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnGuideClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnMasteryRankBeneftisClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnMasteryRankBeneftisClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnOpenCustomizeByEquipmentSlot
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnOpenCustomizeByEquipmentSlot final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnOpenMoreInformation
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnOpenMoreInformation final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnOpenPageAbove
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnOpenPageAbove final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnOpenPageLeft
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnOpenPageLeft final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnOpenPageRight
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnOpenPageRight final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnOpenRunesByEquipmentSlot
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnOpenRunesByEquipmentSlot final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnPresetClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnPresetClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnRemoveBookmarkHoldComplete
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnRemoveBookmarkHoldComplete final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnSeasonReinforceClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnSeasonReinforceClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnSetBookmarkClick
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnSetBookmarkClick final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnUnequipItem
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnUnequipItem final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OnWeaponBookClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OnWeaponBookClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.OpenMoreInformation
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_OpenMoreInformation final
-{
-public:
-	class UM1UIData*                              InUIData;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.SetUIEnvironment
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIInventory_SetUIEnvironment final
-{
-public:
-	EM1InventoryTab                               InTab;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIInventory.GetAnimationEndTime
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIInventory_GetAnimationEndTime final
-{
-public:
-	EM1InventoryAnimDirection                     InDirection;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         ReturnValue;                                       // 0x0004(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIItemOptionSlot.BP_SetOptionTier
 // 0x0001 (0x0001 - 0x0000)
 struct M1UIItemOptionSlot_BP_SetOptionTier final
@@ -45384,22 +45431,12 @@ public:
 	EM1ItemOptionTierType                         InOptionTier;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemReactorInfoSkillSlot.BP_SetArcheType
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIItemReactorInfoSkillSlot_BP_SetArcheType final
+// Function M1.M1UIItemReactorInfo.BP_SetConditionUI
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIItemReactorInfo_BP_SetConditionUI final
 {
 public:
-	EM1SkillArcheType                             InArcheType;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bIsAfffected;                                      // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIItemReactorInfoSkillSlot.BP_SetElemantalType
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIItemReactorInfoSkillSlot_BP_SetElemantalType final
-{
-public:
-	EM1ElementalDamageChannel                     InElementalType;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bIsAfffected;                                      // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsSatisfied;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIItemIcon.BP_OnDragDetected
@@ -45486,46 +45523,187 @@ public:
 	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemStat.BP_SetDiffRatio
+// Function M1.M1UIItemInformation.BP_SetRuneSettingVisible
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIItemInformation_BP_SetRuneSettingVisible final
+{
+public:
+	bool                                          InbVisible;                                        // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemInformation.OnCancelClick
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIItemStat_BP_SetDiffRatio final
+struct M1UIItemInformation_OnCancelClick final
 {
 public:
-	float                                         InOwnRatio;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         InToCompareRatio;                                  // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemStat.BP_SetDiffStatValue
+// Function M1.M1UIItemInformation.OnMouseMoved
+// 0x0080 (0x0080 - 0x0000)
+struct M1UIItemInformation_OnMouseMoved final
+{
+public:
+	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIItemInformation.OnResetItemPreviewRotationClick
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemInformation_OnResetItemPreviewRotationClick final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemInformation.OnRightMouseButtonUpOnPreviewActor
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemInformation_OnRightMouseButtonUpOnPreviewActor final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemInformation.OnShowCustomizingClick
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemInformation_OnShowCustomizingClick final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIItemInformation.OnTabButtonSelected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemInformation_OnTabButtonSelected final
+{
+public:
+	int32                                         InSelectedIndex;                                   // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsSelectionChanged;                               // 0x0004(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIItemInformation.OnTouchGestureOnPreviewActor
+// 0x0080 (0x0080 - 0x0000)
+struct M1UIItemInformation_OnTouchGestureOnPreviewActor final
+{
+public:
+	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIItemLevelUpgradeInfo.BP_OnPhaseChanged
 // 0x0002 (0x0002 - 0x0000)
-struct M1UIItemStat_BP_SetDiffStatValue final
+struct M1UIItemLevelUpgradeInfo_BP_OnPhaseChanged final
 {
 public:
-	bool                                          bIsZero;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bPositiveNum;                                      // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LevelUpgradePhase                          InNewPhase;                                        // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LevelUpgradePhase                          InPrevPhase;                                       // 0x0001(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemStat.BP_SetEffectiveSkilll
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIItemStat_BP_SetEffectiveSkilll final
+// Function M1.M1UIItemLevelUpgradeInfo.OnUpgradeButtonHoldCompleted
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIItemLevelUpgradeInfo_OnUpgradeButtonHoldCompleted final
 {
 public:
-	bool                                          bIsEffective;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemStat.SetItemSingleStat
-// 0x0038 (0x0038 - 0x0000)
-struct M1UIItemStat_SetItemSingleStat final
+// Function M1.M1UIPopupTrace.OnClicked_Back
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupTrace_OnClicked_Back final
 {
 public:
-	struct FM1ItemStatForUI                       InStat;                                            // 0x0000(0x0038)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIItemStat.GetStatType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIItemStat_GetStatType final
+// Function M1.M1UIPopupTrace.OnClicked_Close
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupTrace_OnClicked_Close final
 {
 public:
-	EM1StatType                                   ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupTrace.OnClicked_FocusGoalItemSetting
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupTrace_OnClicked_FocusGoalItemSetting final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupTrace.OnHierarchySlotClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupTrace_OnHierarchySlotClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupTrace.OnTooltipToggleLinkedContents
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupTrace_OnTooltipToggleLinkedContents final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupTrace.OnTooltipToggleVoidVaultKey
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupTrace_OnTooltipToggleVoidVaultKey final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupTrace.OnTraceSlotClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupTrace_OnTraceSlotClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupTrace.OnTraceSlotHovered
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupTrace_OnTraceSlotHovered final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPopupTrace.OnTraceSlotUnhovered
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPopupTrace_OnTraceSlotUnhovered final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIJournalMain.OnClicked_Achievement
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIJournalMain_OnClicked_Achievement final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIJournalMain.OnClicked_Record
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIJournalMain_OnClicked_Record final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIJournalMain.OnContenxtButton_Cancel
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIJournalMain_OnContenxtButton_Cancel final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIJunkFilterIndividual_Slider.Callback_OnKeyReleased
@@ -45560,40 +45738,94 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIJunkFilter.OnTabSelected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIJunkFilter_OnTabSelected final
+// Function M1.M1UIJunkFilterIndividual_Toggle.BP_UpdateButtonUI
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIJunkFilterIndividual_Toggle_BP_UpdateButtonUI final
 {
 public:
-	int32                                         InTabIndex;                                        // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bIsSelectedTabChanged;                             // 0x0004(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIJunkFilter.BP_GetIndividualWidgets
+// Function M1.M1UIJunkFilterIndividual_Toggle.Callback_ToggleCurrentIndex
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIJunkFilterIndividual_Toggle_Callback_ToggleCurrentIndex final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeySymbol.BP_ChangeProgressUI
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIKeySymbol_BP_ChangeProgressUI final
+{
+public:
+	bool                                          InStart;                                           // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         InDuration;                                        // 0x0004(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeySymbol.BP_SetProgressUI
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIKeySymbol_BP_SetProgressUI final
+{
+public:
+	bool                                          bUseProgress;                                      // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeySymbol.ChangeButtonUI
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIKeySymbol_ChangeButtonUI final
+{
+public:
+	EM1ButtonUIType                               InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeySymbol.ChangeDimmedUI
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIKeySymbol_ChangeDimmedUI final
+{
+public:
+	bool                                          InDimmed;                                          // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeySymbol.SetBattleKeyType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIKeySymbol_SetBattleKeyType final
+{
+public:
+	EM1BattleKey                                  InKey;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeySymbol.SetFKeyType
 // 0x0018 (0x0018 - 0x0000)
-struct M1UIJunkFilter_BP_GetIndividualWidgets final
+struct M1UIKeySymbol_SetFKeyType final
 {
 public:
-	EM1JunkFilterTabType                          InTabType;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<class UM1UIJunkFilterIndividual*>      ReturnValue;                                       // 0x0008(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	struct FKey                                   InKey;                                             // 0x0000(0x0018)(ConstParm, Parm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UILaboratory.OnApplyHoldCompleted
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILaboratory_OnApplyHoldCompleted final
+// Function M1.M1UIKeySymbol.SetKeyType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIKeySymbol_SetKeyType final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1SystemKey                                  InKey;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UILaboratory.OnCancelClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILaboratory_OnCancelClicked final
+// Function M1.M1UIKeySymbol.ShowKeySymbol
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIKeySymbol_ShowKeySymbol final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIKeySymbolDual.BP_SetPlusImage
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIKeySymbolDual_BP_SetPlusImage final
+{
+public:
+	class UTexture2D*                             InTexture;                                         // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UILaboratoryOptionTabControl.OnTabSelected
@@ -45606,28 +45838,20 @@ public:
 	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UILobby.GoToLogin
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILobby_GoToLogin final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILobby.OnDataPatchStateChanged
+// Function M1.M1UILoadingScreen.BP_SetProgressTextVisibility
 // 0x0001 (0x0001 - 0x0000)
-struct M1UILobby_OnDataPatchStateChanged final
+struct M1UILoadingScreen_BP_SetProgressTextVisibility final
 {
 public:
-	EM1UIDataPatchState                           InPatchState;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bVisible;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UILobby.OnWidgetPageChanged
-// 0x0008 (0x0008 - 0x0000)
-struct M1UILobby_OnWidgetPageChanged final
+// Function M1.M1UILoadingScreen.LoadingTick
+// 0x0004 (0x0004 - 0x0000)
+struct M1UILoadingScreen_LoadingTick final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         InDeltaTime;                                       // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UILocalMap.BlockInput
@@ -45882,158 +46106,110 @@ public:
 	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UILocalMapBattleZone.BP_SetInvasionEffect
+// Function M1.M1UILogin.BP_ShowHintText
 // 0x0001 (0x0001 - 0x0000)
-struct M1UILocalMapBattleZone_BP_SetInvasionEffect final
+struct M1UILogin_BP_ShowHintText final
 {
 public:
-	bool                                          bInvaded;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UILocalMapBattleZone.GetBattleZoneId
-// 0x0004 (0x0004 - 0x0000)
-struct M1UILocalMapBattleZone_GetBattleZoneId final
-{
-public:
-	struct FM1TemplateId                          ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UILocalMapBattleZone.GetHitTestImage
+// Function M1.M1UILogin.Callback_LoginButtonClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UILocalMapBattleZone_GetHitTestImage final
-{
-public:
-	class UM1UIPixelHitTestImage*                 ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMailbox.OnClickedKeyContextButton_Cancel
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnClickedKeyContextButton_Cancel final
+struct M1UILogin_Callback_LoginButtonClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMailbox.OnClickedTooltipContextButton_ReceiveAttachment
+// Function M1.M1UILogin.CallBack_TextChanged
+// 0x0018 (0x0018 - 0x0000)
+struct M1UILogin_CallBack_TextChanged final
+{
+public:
+	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UILogin.CallBack_TextCommitted
+// 0x0020 (0x0020 - 0x0000)
+struct M1UILogin_CallBack_TextCommitted final
+{
+public:
+	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	ETextCommit                                   InCommitMethod;                                    // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UILogin.GetEndAnimation
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnClickedTooltipContextButton_ReceiveAttachment final
+struct M1UILogin_GetEndAnimation final
+{
+public:
+	class UWidgetAnimation*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UILogin.OnClickStartButton
+// 0x0008 (0x0008 - 0x0000)
+struct M1UILogin_OnClickStartButton final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMailbox.OnCreateAttachmentTooltipWidget
+// Function M1.M1UILogin.OnHoldCompleted_BoostingAccount
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnCreateAttachmentTooltipWidget final
+struct M1UILogin_OnHoldCompleted_BoostingAccount final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMailbox.OnEventCursorEnterd_LostItem
+// Function M1.M1UILogin.OnHoldCompleted_NormalAccount
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnEventCursorEnterd_LostItem final
+struct M1UILogin_OnHoldCompleted_NormalAccount final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMailbox.OnEventEntryClick_Attachment
+// Function M1.M1UILogin.OnOptionClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnEventEntryClick_Attachment final
+struct M1UILogin_OnOptionClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMailbox.OnEventEntryClick_LostItem
+// Function M1.M1UILogin.OpenExitPopup
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnEventEntryClick_LostItem final
+struct M1UILogin_OpenExitPopup final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMailbox.OnEventEntryClick_Mail
+// Function M1.M1UILogin.QuitGame
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnEventEntryClick_Mail final
+struct M1UILogin_QuitGame final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMailbox.OnHoldBeginContextButton
+// Function M1.M1UILogin.RequestGetAccountInfo
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnHoldBeginContextButton final
+struct M1UILogin_RequestGetAccountInfo final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMailbox.OnHoldCancelContextButton
+// Function M1.M1UILogin.RequestJoinLastField
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnHoldCancelContextButton final
+struct M1UILogin_RequestJoinLastField final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMailbox.OnHoldCompleteContextButton_DeleteAllReadMail
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnHoldCompleteContextButton_DeleteAllReadMail final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMailbox.OnHoldCompleteContextButton_DeleteCurrentMail
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnHoldCompleteContextButton_DeleteCurrentMail final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMailbox.OnHoldCompleteContextButton_ReceiveAttachmentAll
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnHoldCompleteContextButton_ReceiveAttachmentAll final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMailbox.OnRemoveAttachmentTooltipWidget
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnRemoveAttachmentTooltipWidget final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMailbox.OnTabButtonSelected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_OnTabButtonSelected final
-{
-public:
-	int32                                         InTabIndex;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bSelectionChanged;                                 // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIMailbox.RefreshMailboxList
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMailbox_RefreshMailboxList final
-{
-public:
-	EM1MailType                                   InMailType;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMailbox.RefreshMailboxMailDetail
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMailbox_RefreshMailboxMailDetail final
-{
-public:
-	int64                                         InMailId;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIMailboxCashMail.OnCreateAttachmentTooltipWidgetImpl
@@ -46060,41 +46236,9 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMailboxPostMail.OnCreateAttachmentTooltipWidgetImpl
+// Function M1.M1UISocial_BlockList.OnEntrySelected
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMailboxPostMail_OnCreateAttachmentTooltipWidgetImpl final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMailboxPostMail.OnEventClickAttachementInMail
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMailboxPostMail_OnEventClickAttachementInMail final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMailboxPostMail.OnEventClickMail
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMailboxPostMail_OnEventClickMail final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMailboxPostMail.OnRemoveAttachmentTooltipWidgetImpl
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMailboxPostMail_OnRemoveAttachmentTooltipWidgetImpl final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMasteryRankBenefit.OnCancelClick
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMasteryRankBenefit_OnCancelClick final
+struct M1UISocial_BlockList_OnEntrySelected final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -46108,250 +46252,116 @@ public:
 	int32                                         InPageNum;                                         // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMasteryRankBenefitSlot.BP_SetBenefitType
+// Function M1.M1UIMatchingText.BP_SetVisibility
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMasteryRankBenefitSlot_BP_SetBenefitType final
+struct M1UIMatchingText_BP_SetVisibility final
 {
 public:
-	EM1MasteryRankBenefitType                     InBenefitType;                                     // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMiniGameTimingRing.BP_SetObjectImage
+// Function M1.M1UIMetaBackground.BP_ApplyCustomizingSettings
+// 0x00F0 (0x00F0 - 0x0000)
+struct M1UIMetaBackground_BP_ApplyCustomizingSettings final
+{
+public:
+	struct FM1TypedUITheme_Brush                  InThemeInfo;                                       // 0x0000(0x00F0)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionInfo.BP_SetMissionRewardByGradeTextByCategory
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMiniGameTimingRing_BP_SetObjectImage final
+struct M1UIMissionInfo_BP_SetMissionRewardByGradeTextByCategory final
 {
 public:
-	EM1MiniGameDifficulty                         InDifficulty;                                      // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MissionCategory                            InCategory;                                        // 0x0000(0x0001)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMiniGameTimingRing.BP_ShowResult
+// Function M1.M1UIMissionInfo.BP_SetMissionWaveType
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMiniGameTimingRing_BP_ShowResult final
-{
-public:
-	EM1MiniGameResult                             InResult;                                          // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMiniGameTimingRing.Finish
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMiniGameTimingRing_Finish final
-{
-public:
-	EM1MiniGameResult                             InResult;                                          // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMiniGameTimingRing.OnButtonHoldCompleted_Cancel
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMiniGameTimingRing_OnButtonHoldCompleted_Cancel final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionGuide.BP_PlayFieldContentsFailAnim
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionGuide_BP_PlayFieldContentsFailAnim final
-{
-public:
-	EM1MissionSubType                             InSubType;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionGuide.BP_PlayFieldContentsStartAnim
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionGuide_BP_PlayFieldContentsStartAnim final
-{
-public:
-	EM1MissionSubType                             InSubType;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionGuide.BP_PlayFieldContentsSuccessAnim
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionGuide_BP_PlayFieldContentsSuccessAnim final
-{
-public:
-	EM1MissionSubType                             InSubType;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionGuide.BP_PlayMissionStartAnim
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionGuide_BP_PlayMissionStartAnim final
-{
-public:
-	class FName                                   InMissionName;                                     // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   InMissionTypeName;                                 // 0x0008(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionGuide.GetChildMissionWidgets
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionGuide_GetChildMissionWidgets final
-{
-public:
-	TArray<class UM1UIChildMissionGuide*>         ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionInformation.BP_PlayCloseAnim
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionInformation_BP_PlayCloseAnim final
-{
-public:
-	class UWidgetAnimation*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionInformation.BP_SetMissionLegionCategory
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionInformation_BP_SetMissionLegionCategory final
-{
-public:
-	TArray<EM1LegionCategory>                     InLegionCategory;                                  // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionInformation.BP_SetMissionPlayTimeGuide
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionInformation_BP_SetMissionPlayTimeGuide final
-{
-public:
-	class FName                                   PlayTimeGuideStringId;                             // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionInformation.BP_SetMissionWaveType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionInformation_BP_SetMissionWaveType final
+struct M1UIMissionInfo_BP_SetMissionWaveType final
 {
 public:
 	bool                                          bHasWave;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionPreTaskContext.BP_OnPreTaskUpdated
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionPreTaskContext_BP_OnPreTaskUpdated final
-{
-public:
-	bool                                          bInRelatedTaskActorActivated;                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResultExp.BP_MasteryRankExpAcquiredType
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionResultExp_BP_MasteryRankExpAcquiredType final
-{
-public:
-	TArray<EM1UIMissionResultExpType>             InAcquiredType;                                    // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResultExp.BP_SetCharacterIcon
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionResultExp_BP_SetCharacterIcon final
-{
-public:
-	class UTexture2D*                             InIcon;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1CharacterGrade                             InGrade;                                           // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIMissionResultExp.BP_SetExpProgressValue
+// Function M1.M1UIMissionInfo.OnTooltipToggleLinkedContents
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionResultExp_BP_SetExpProgressValue final
+struct M1UIMissionInfo_OnTooltipToggleLinkedContents final
 {
 public:
-	EM1UIMissionResultExpType                     InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         InProgressValue;                                   // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionResultExp.BP_SetItemIcon
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionResultExp_BP_SetItemIcon final
+// Function M1.M1UIMissionInfo.OnTooltipToggleVoidVaultKey
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionInfo_OnTooltipToggleVoidVaultKey final
 {
 public:
-	class UTexture2D*                             InIcon;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ItemTierType                               InTier;                                            // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionResultExp.BP_SetLevel
+// Function M1.M1Toast.Create
+// 0x0028 (0x0028 - 0x0000)
+struct M1Toast_Create final
+{
+public:
+	class UObject*                                WorldContextObject;                                // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   InName;                                            // 0x0008(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class FString>                         InParam;                                           // 0x0010(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+	class UM1Toast*                               ReturnValue;                                       // 0x0020(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionPreTaskInfo.BP_RelatedTaskActorActivated
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionPreTaskInfo_BP_RelatedTaskActorActivated final
+{
+public:
+	bool                                          bInActivated;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionResultScoreStat.BP_SetTextColor
 // 0x0004 (0x0004 - 0x0000)
-struct M1UIMissionResultExp_BP_SetLevel final
+struct M1UIMissionResultScoreStat_BP_SetTextColor final
 {
 public:
-	int32                                         InLevel;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         InColorIndex;                                      // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionResultExp.BP_SetNameText
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIMissionResultExp_BP_SetNameText final
-{
-public:
-	class FText                                   InName;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionResultExp.BP_ShowExpText
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionResultExp_BP_ShowExpText final
-{
-public:
-	EM1UIMissionResultExpType                     InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         InExp;                                             // 0x0008(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataMissionResultStatistics.GetStringKey
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIDataMissionResultStatistics_GetStringKey final
-{
-public:
-	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataMissionResultStatistics.GetStringValue
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIDataMissionResultStatistics_GetStringValue final
-{
-public:
-	class FText                                   ReturnValue;                                       // 0x0000(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionRetriableTask.BP_SetMessageType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionRetriableTask_BP_SetMessageType final
-{
-public:
-	EM1UIMissionTaskMessageType                   InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionRetriableTask.OnBeginMissionRetriableTask
+// Function M1.M1UIMissionRewards.SetMissionRewards
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionRetriableTask_OnBeginMissionRetriableTask final
+struct M1UIMissionRewards_SetMissionRewards final
 {
 public:
-	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionRetriableTask.OnEventMissionLastChance
+// Function M1.M1UIMissionRewards.SetMissionRewardsByGrade
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionRetriableTask_OnEventMissionLastChance final
+struct M1UIMissionRewards_SetMissionRewardsByGrade final
 {
 public:
-	const class AM1MissionTaskActor*              InTaskActor;                                       // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIDataMissionInfo*                   InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionTargetExplosionInfo.BP_SetUIState
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionTargetExplosionInfo_BP_SetUIState final
+// Function M1.M1UIMissionTaskGoal_Desturction.BP_GetTargetListItems
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIMissionTaskGoal_Desturction_BP_GetTargetListItems final
 {
 public:
-	bool                                          bDim;                                              // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class UWidget*>                        ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionTaskGoal_Supply.BP_SetTargetCount
+// Function M1.M1UIMissionTaskGoal_Defense.BP_SetTargetCount
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionTaskGoal_Supply_BP_SetTargetCount final
+struct M1UIMissionTaskGoal_Defense_BP_SetTargetCount final
 {
 public:
 	bool                                          bMany;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionTaskGoal_Supply.BP_GetTargetListItems
+// Function M1.M1UIMissionTaskGoal_Defense.BP_GetTargetListItems
 // 0x0010 (0x0010 - 0x0000)
-struct M1UIMissionTaskGoal_Supply_BP_GetTargetListItems final
+struct M1UIMissionTaskGoal_Defense_BP_GetTargetListItems final
 {
 public:
 	TArray<class UWidget*>                        ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
@@ -46365,46 +46375,68 @@ public:
 	class UM1UIDataTaskSteal*                     InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionTaskGoal_DataCollection.BP_SetMissionTaskInfo
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIMissionTaskGoal_DataCollection_BP_SetMissionTaskInfo final
-{
-public:
-	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIMissionTaskGoal_DesturctionIronHeart.BP_SetTaskState
+// Function M1.M1UIWorldMapObjectIcon.BP_SetAsDimmed
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIMissionTaskGoal_DesturctionIronHeart_BP_SetTaskState final
+struct M1UIWorldMapObjectIcon_BP_SetAsDimmed final
 {
 public:
-	EM1MissionTaskDestructionIronHeartState       InTaskState;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSet;                                              // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIInvasionTimeAttackRewardsToolTip.OnMouseWheelEvent
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIInvasionTimeAttackRewardsToolTip_OnMouseWheelEvent final
+// Function M1.M1UIWorldMapObjectIcon.MinimizeIcon
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIWorldMapObjectIcon_MinimizeIcon final
 {
 public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	bool                                          bSet;                                              // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIMissionTimeAttackButton.BP_SetColor
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIMissionTimeAttackButton_BP_SetColor final
+// Function M1.M1UIWorldMapObjectIcon.ShowFlicker
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIWorldMapObjectIcon_ShowFlicker final
 {
 public:
-	int32                                         InUniqueId;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSet;                                              // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIWorldMapObjectWrapper.GetMapObjectIconWidget
+// Function M1.M1UIWorldMapObjectIcon.IsIconMinimized
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIWorldMapObjectIcon_IsIconMinimized final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWorldMapObjectIcon.IsIconVisible
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIWorldMapObjectIcon_IsIconVisible final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionWaveCheckPoint.BP_SetTimerHighlight
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIMissionWaveCheckPoint_BP_SetTimerHighlight final
+{
+public:
+	bool                                          bInSet;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionWaveCheckPoint.OnClicked_MissionWaveContinue
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIWorldMapObjectWrapper_GetMapObjectIconWidget final
+struct M1UIMissionWaveCheckPoint_OnClicked_MissionWaveContinue final
 {
 public:
-	class UM1UIWorldMapObject*                    ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIMissionWaveCheckPoint.OnClicked_MissionWaveStop
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIMissionWaveCheckPoint_OnClicked_MissionWaveStop final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIMultiCondition.BP_ShowFilter
@@ -46439,70 +46471,52 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UINpc.OnServiceClosed
+// Function M1.M1UIRecordPanel.OnClickedEntry_RecordCategorySlot
 // 0x0008 (0x0008 - 0x0000)
-struct M1UINpc_OnServiceClosed final
+struct M1UIRecordPanel_OnClickedEntry_RecordCategorySlot final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIData*                              InUIData;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UINpc.OnServiceSelected
+// Function M1.M1UINotificationLayer.OnCatchNotification
 // 0x0008 (0x0008 - 0x0000)
-struct M1UINpc_OnServiceSelected final
+struct M1UINotificationLayer_OnCatchNotification final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1Notification*                        InParam;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIResearchFeatured.OnMouseWheelOnSlot
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIResearchFeatured_OnMouseWheelOnSlot final
+// Function M1.M1UINpcServiceUnlockCondition.BP_MarkAsCompleted
+// 0x0001 (0x0001 - 0x0000)
+struct M1UINpcServiceUnlockCondition_BP_MarkAsCompleted final
 {
 public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	bool                                          bIsCompleted;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIResearchFeatured.OnSlotClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIResearchFeatured_OnSlotClicked final
+// Function M1.M1UINpcServiceUnlockCondition.SetConditionText
+// 0x0018 (0x0018 - 0x0000)
+struct M1UINpcServiceUnlockCondition_SetConditionText final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UINpcMenu.OnEventCursorEntered
-// 0x0008 (0x0008 - 0x0000)
-struct M1UINpcMenu_OnEventCursorEntered final
+// Function M1.M1UIOptionImageEntryWidget.BP_SetTexture
+// 0x0030 (0x0030 - 0x0000)
+struct M1UIOptionImageEntryWidget_BP_SetTexture final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TSoftObjectPtr<class UTexture2D>              InTexture;                                         // 0x0000(0x0030)(ConstParm, Parm, OutParm, ReferenceParm, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UINpcMenu.OnPressedBack
-// 0x0008 (0x0008 - 0x0000)
-struct M1UINpcMenu_OnPressedBack final
+// Function M1.M1UIOptionImageEntryWidget.BP_SetUIKey
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIOptionImageEntryWidget_BP_SetUIKey final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UINpcMenu.OnSlotClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UINpcMenu_OnSlotClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionDetail_Controller.Callback_HoldCompletedKeyButton
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionDetail_Controller_Callback_HoldCompletedKeyButton final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 InKey;                                             // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIOptionSpecGamepadAxis.OnCancelOption
@@ -46577,108 +46591,138 @@ public:
 	bool                                          bMark;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionGamepadReset.BP_UpdateControllerImage
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIOptionGamepadReset_BP_UpdateControllerImage final
-{
-public:
-	EM1GamepadPlatform                            InPlatform;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIOptionGamepadReset.OnClickedDefaultPreset
+// Function M1.M1UIOptionSubclass.OnEventHoveredOptionInSubclass
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionGamepadReset_OnClickedDefaultPreset final
+struct M1UIOptionSubclass_OnEventHoveredOptionInSubclass final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIOptionGamepadReset.OnClickedLeftHandedPreset
+// Function M1.M1UIOptionSubclass.OnEventUnhoveredOptionInSubclass
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIOptionGamepadReset_OnClickedLeftHandedPreset final
+struct M1UIOptionSubclass_OnEventUnhoveredOptionInSubclass final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPageControlWithButtons.OnLeftButtonClicked
+// Function M1.M1UITabControl.BP_ApplyCustomizingSettings
+// 0x00F0 (0x00F0 - 0x0000)
+struct M1UITabControl_BP_ApplyCustomizingSettings final
+{
+public:
+	struct FM1TypedUITheme_Brush                  InThemeInfo;                                       // 0x0000(0x00F0)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UITabControl.BP_OnGetTabControlContent
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPageControlWithButtons_OnLeftButtonClicked final
+struct M1UITabControl_BP_OnGetTabControlContent final
 {
 public:
-	class UM1UIWidget*                            InUIWidget;                                        // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UITabControlContent*                 ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPageControlWithButtons.OnRightButtonClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPageControlWithButtons_OnRightButtonClicked final
-{
-public:
-	class UM1UIWidget*                            InUIWidget;                                        // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPageControlWithButtons.OnSetMaxPageNumber_BP
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIPageControlWithButtons_OnSetMaxPageNumber_BP final
-{
-public:
-	int32                                         InMaxPageNumber;                                   // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPageControlWithButtons.OnUpdatePageNumber_BP
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIPageControlWithButtons_OnUpdatePageNumber_BP final
-{
-public:
-	int32                                         PageNumber;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPageControlWithButtons.ShowPageNumber_BP
+// Function M1.M1UITabControl.CreateOrRemoveButtons
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIPageControlWithButtons_ShowPageNumber_BP final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataPaintExtract.GetChartBigIcon
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIDataPaintExtract_GetChartBigIcon final
-{
-public:
-	class UTexture2D*                             ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataPaintExtract.GetChartName
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIDataPaintExtract_GetChartName final
-{
-public:
-	class FText                                   ReturnValue;                                       // 0x0000(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataPaintExtract.GetSelectedDataTemplateId
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIDataPaintExtract_GetSelectedDataTemplateId final
-{
-public:
-	struct FM1TemplateId                          ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataPaintExtract.IsLimited
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIDataPaintExtract_IsLimited final
+struct M1UITabControl_CreateOrRemoveButtons final
 {
 public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1WeaponPreview.GetMeshComponent
+// Function M1.M1UITabControl.OnSelectLeftTabToCurrent
 // 0x0008 (0x0008 - 0x0000)
-struct M1WeaponPreview_GetMeshComponent final
+struct M1UITabControl_OnSelectLeftTabToCurrent final
 {
 public:
-	class USkeletalMeshComponent*                 ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UITabControl.OnSelectRightTabToCurrent
+// 0x0008 (0x0008 - 0x0000)
+struct M1UITabControl_OnSelectRightTabToCurrent final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UITabControl.RecreateButtons
+// 0x0001 (0x0001 - 0x0000)
+struct M1UITabControl_RecreateButtons final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UITabControl.SetTabItems
+// 0x0018 (0x0018 - 0x0000)
+struct M1UITabControl_SetTabItems final
+{
+public:
+	TArray<struct FM1TabItem>                     InTabItems;                                        // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bRecreateButton;                                   // 0x0010(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UITabControl.TabButtons_OnClick
+// 0x0008 (0x0008 - 0x0000)
+struct M1UITabControl_TabButtons_OnClick final
+{
+public:
+	class UM1UIWidget*                            InButton;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPageControl.OnEventHoveredOnSlot
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPageControl_OnEventHoveredOnSlot final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPageControl.OnEventMouseWheelOnSlot
+// 0x0080 (0x0080 - 0x0000)
+struct M1UIPageControl_OnEventMouseWheelOnSlot final
+{
+public:
+	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPageControl.OnEventTouchGestureOnSlot
+// 0x0080 (0x0080 - 0x0000)
+struct M1UIPageControl_OnEventTouchGestureOnSlot final
+{
+public:
+	struct FPointerEvent                          InGestureInputEvent;                               // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPageControl.OnEventUnhoveredOnSlot
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPageControl_OnEventUnhoveredOnSlot final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WeaponPerkAbility.MakeWeaponParams
+// 0x0010 (0x0010 - 0x0000)
+struct M1WeaponPerkAbility_MakeWeaponParams final
+{
+public:
+	TArray<struct FM1AbilityParamData>            ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WeaponPerkAbility.GetPerkWeapon
+// 0x0008 (0x0008 - 0x0000)
+struct M1WeaponPerkAbility_GetPerkWeapon final
+{
+public:
+	class AM1Weapon*                              ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIPanelCharacters.BP_SetDirectListOn
@@ -46705,282 +46749,124 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1TypePanelWidget.OnEventUserScrolled
-// 0x0004 (0x0004 - 0x0000)
-struct M1TypePanelWidget_OnEventUserScrolled final
+// Function M1.M1UIPanelRuneSockets.GetDummyRuneSockets
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPanelRuneSockets_GetDummyRuneSockets final
 {
 public:
-	float                                         InOffset;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class UM1UIRuneSocket*>                ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataRuneSocketTypeAdd.GetLevel
+// Function M1.M1UIRuneSocket.BP_OnDragEnterRune
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRuneSocket_BP_OnDragEnterRune final
+{
+public:
+	EM1RuneSocketTypeMatchCondition               InCondition;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneSocket.ChangeButtonUI
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRuneSocket_ChangeButtonUI final
+{
+public:
+	EM1ButtonUIType                               InButtonState;                                     // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneSocket.ChangeDimmedUI
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRuneSocket_ChangeDimmedUI final
+{
+public:
+	bool                                          InDimmed;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneSocket.OnEventDragDetected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRuneSocket_OnEventDragDetected final
+{
+public:
+	class UM1UIWidget*                            InDraggedWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneSocket.OnEventEnteredPickedRuneCancelled
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRuneSocket_OnEventEnteredPickedRuneCancelled final
+{
+public:
+	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneSocket.OnEventEnteredPickedRuneDrop
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRuneSocket_OnEventEnteredPickedRuneDrop final
+{
+public:
+	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneSocket.GetCapacityIncrement
 // 0x0004 (0x0004 - 0x0000)
-struct M1UIDataRuneSocketTypeAdd_GetLevel final
+struct M1UIRuneSocket_GetCapacityIncrement final
 {
 public:
 	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataRuneSocketTypeAdd.GetMaxLevel
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIDataRuneSocketTypeAdd_GetMaxLevel final
+// Function M1.M1UIRuneSocket.GetCost
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRuneSocket_GetCost final
 {
 public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataRuneSocketTypeAdd.GetOwnerGrade
+// Function M1.M1UIRuneSocket.GetRuneSubClassType
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIDataRuneSocketTypeAdd_GetOwnerGrade final
+struct M1UIRuneSocket_GetRuneSubClassType final
 {
 public:
-	EM1CharacterGrade                             ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RuneSubClassType                           ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataRuneSocketTypeAdd.GetOwnerIcon
+// Function M1.M1UIPerkCustomHUD.GetPerkAbility
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIDataRuneSocketTypeAdd_GetOwnerIcon final
+struct M1UIPerkCustomHUD_GetPerkAbility final
 {
 public:
-	class UTexture2D*                             ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class UM1PerkAbility*                   ReturnValue;                                       // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataRuneSocketTypeAdd.GetOwnerStringId
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIDataRuneSocketTypeAdd_GetOwnerStringId final
-{
-public:
-	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataRuneSocketTypeAdd.GetOwnerTier
+// Function M1.M1UIPerkEnchantMaterialSelect.BP_ShowEnchantLevelExcessPanel
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIDataRuneSocketTypeAdd_GetOwnerTier final
+struct M1UIPerkEnchantMaterialSelect_BP_ShowEnchantLevelExcessPanel final
 {
 public:
-	EM1ItemTierType                               ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShouldShow;                                       // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataRuneSocketTypeAdd.GetOwnerTierText
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIDataRuneSocketTypeAdd_GetOwnerTierText final
-{
-public:
-	class FText                                   ReturnValue;                                       // 0x0000(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataRuneSocketTypeAdd.GetRuneSocketOwnerType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIDataRuneSocketTypeAdd_GetRuneSocketOwnerType final
-{
-public:
-	EM1RuneSocketOwnerType                        ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPerkDetailsStatEntry.BP_ChangeCompareValueColor
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIPerkDetailsStatEntry_BP_ChangeCompareValueColor final
-{
-public:
-	bool                                          bIsPositive;                                       // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPerkDetailsStatEntry.BP_SwitchPanelTo
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIPerkDetailsStatEntry_BP_SwitchPanelTo final
-{
-public:
-	EM1SkillInfoTextFormatType                    InFormatType;                                      // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPixelHitTestImage.CanHit
-// 0x000C (0x000C - 0x0000)
-struct M1UIPixelHitTestImage_CanHit final
-{
-public:
-	struct FVector2D                              InAbsolutePosition;                                // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          ReturnValue;                                       // 0x0008(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_BlockCancel
+// Function M1.M1UIPerkEnchantMaterialSelect.OnEnchantButtonHoldComplete
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_BlockCancel final
+struct M1UIPerkEnchantMaterialSelect_OnEnchantButtonHoldComplete final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_BlockRequest
+// Function M1.M1UIPerkEnchantMaterialSelect.OnItemClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_BlockRequest final
+struct M1UIPerkEnchantMaterialSelect_OnItemClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_Bookmark
+// Function M1.M1UIPerkEnchantMaterialSelect.OnMaterialClicked
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_Bookmark final
+struct M1UIPerkEnchantMaterialSelect_OnMaterialClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_CSP
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_CSP final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_DirectMessage
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_DirectMessage final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_FriendAccept
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_FriendAccept final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_FriendCancel
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_FriendCancel final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_FriendDelete
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_FriendDelete final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_FriendRequest
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_FriendRequest final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyExile
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_PartyExile final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyInvite
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_PartyInvite final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyInviteAccept
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_PartyInviteAccept final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyInviteReject
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_PartyInviteReject final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyJoin
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_PartyJoin final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyJoinAccept
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_PartyJoinAccept final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyJoinReject
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_PartyJoinReject final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyLeave
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_PartyLeave final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PartyMasterDevolve
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_PartyMasterDevolve final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_PlatformUserProfile
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_PlatformUserProfile final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.OnButtonClicked_Report
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupAccountInfo_OnButtonClicked_Report final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupAccountInfo.SetButton
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPopupAccountInfo_SetButton final
-{
-public:
-	class UM1UIButton*                            InButtonWidget;                                    // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1AccountInfoPopupButtonType                 InButtonType;                                      // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIPopupAccountInfo.BP_GetUIButton
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPopupAccountInfo_BP_GetUIButton final
-{
-public:
-	EM1AccountInfoPopupButtonType                 InButtonType;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class UM1UIButton*                            ReturnValue;                                       // 0x0008(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIPopupContentForOptions.OnEventButtonFocused
@@ -46997,22 +46883,6 @@ struct M1UIPopupContentForOptions_OnEventButtonSelected final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupContentRecommendSpecs.OpenCharacterRune
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIPopupContentRecommendSpecs_OpenCharacterRune final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPopupContentRecommendSpecs.BP_GetStatGroupItemArray
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIPopupContentRecommendSpecs_BP_GetStatGroupItemArray final
-{
-public:
-	TArray<class UM1UIVoidBattleStatGroupItemSlot*> ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataPresetEntry.GetCharacterGrade
@@ -47087,78 +46957,250 @@ public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIDataPresetLoadoutSlot.GetLoadoutSlotName
+// Function M1.M1UIShopPage.OnCancelClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIShopPage_OnCancelClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIShopPage.OnEventCursorEntered
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIShopPage_OnEventCursorEntered final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIShopPage.OnEventCursorLost
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIShopPage_OnEventCursorLost final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIShopPage_Buy.OnEventCursorClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIShopPage_Buy_OnEventCursorClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIShopPage_Buy.ReceiveBuyItem
 // 0x0010 (0x0010 - 0x0000)
-struct M1UIDataPresetLoadoutSlot_GetLoadoutSlotName final
+struct M1UIShopPage_Buy_ReceiveBuyItem final
 {
 public:
-	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1ItemServiceBuyItemResult            InBuyItemResult;                                   // 0x0000(0x0010)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIShopPurchase.BP_SetQuantityControl
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIShopPurchase_BP_SetQuantityControl final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIShopPurchase.BP_ShowWarningTerm
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIShopPurchase_BP_ShowWarningTerm final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIPurchaseResultPopup.OnConfirmButtonClicked
+// Function M1.M1UIShopPage_Buy.RequestBuyAddEvent
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPurchaseResultPopup_OnConfirmButtonClicked final
+struct M1UIShopPage_Buy_RequestBuyAddEvent final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPurchaseResultPopup.OnMoveToCharactersClicked
+// Function M1.M1UIShopPage_Buy.RequestBuyNoEvent
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIPurchaseResultPopup_OnMoveToCharactersClicked final
+struct M1UIShopPage_Buy_RequestBuyNoEvent final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIPurchaseResultPopup.SetContextButtonDimmed
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIPurchaseResultPopup_SetContextButtonDimmed final
-{
-public:
-	bool                                          bDimmed;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIQuantityChangeUnit.BP_InitImpl
-// 0x000C (0x000C - 0x0000)
-struct M1UIQuantityChangeUnit_BP_InitImpl final
-{
-public:
-	struct FM1UnitOfChange                        InChangeInfo;                                      // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
-	bool                                          bPlus;                                             // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIQuantityChangeUnit.OnChangeButtonPressed
+// Function M1.M1UIShopPage_Buy.RequestCharge
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIQuantityChangeUnit_OnChangeButtonPressed final
+struct M1UIShopPage_Buy_RequestCharge final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIQuantityChangeUnit.OnChangeButtonReleased
+// Function M1.M1UIPreset.OnClickedChangeName
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIQuantityChangeUnit_OnChangeButtonReleased final
+struct M1UIPreset_OnClickedChangeName final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPreset.OnClickedSave
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPreset_OnClickedSave final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPreset.OnEventCancelClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPreset_OnEventCancelClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPreset.OnEventPresetApply
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPreset_OnEventPresetApply final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPreset.OnEventPresetDelete
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPreset_OnEventPresetDelete final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPreset.OnEventTabButtonSelected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPreset_OnEventTabButtonSelected final
+{
+public:
+	int32                                         InTabIndex;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSelectionChanged;                                 // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPreset.OnEventTabControlPageSelected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPreset_OnEventTabControlPageSelected final
+{
+public:
+	int32                                         InPageIndex;                                       // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bPageChanged;                                      // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIPreset.BP_GetEquipmentSlots
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPreset_BP_GetEquipmentSlots final
+{
+public:
+	TArray<class UM1UIEquipmentSlot*>             ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPreset.BP_GetLoadoutSlots
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIPreset_BP_GetLoadoutSlots final
+{
+public:
+	TArray<class UM1UIPresetLoadoutSlot*>         ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPrologueCharacterSelect.OnCursorFocused
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPrologueCharacterSelect_OnCursorFocused final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPrologueCharacterSelect.OnSelectAjax
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPrologueCharacterSelect_OnSelectAjax final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPrologueCharacterSelect.OnSelectLepic
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPrologueCharacterSelect_OnSelectLepic final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIPrologueCharacterSelect.OnSelectViessa
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIPrologueCharacterSelect_OnSelectViessa final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuest.OnClickedKeyContextButton_Cancel
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuest_OnClickedKeyContextButton_Cancel final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuest.OnClickedKeyContextButton_GameGuide
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuest_OnClickedKeyContextButton_GameGuide final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuest.OnClickedKeyContextButton_OpenGroupQuestList
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuest_OnClickedKeyContextButton_OpenGroupQuestList final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuest.OnClickedKeyContextButton_TrackQuest
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuest_OnClickedKeyContextButton_TrackQuest final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuest.OnEventCursorEnteredSlot_QuestList
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuest_OnEventCursorEnteredSlot_QuestList final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuest.OnEventEntryClick_QuestList
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuest_OnEventEntryClick_QuestList final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuest.OnEventSubTabSelected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuest_OnEventSubTabSelected final
+{
+public:
+	int32                                         InTabIndex;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bSelected;                                         // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIQuest.OnSetTrackingQuest
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIQuest_OnSetTrackingQuest final
+{
+public:
+	struct FM1TemplateId                          InQuestTemplateId;                                 // 0x0000(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuest.OnUnsetTrackingQuest
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIQuest_OnUnsetTrackingQuest final
+{
+public:
+	struct FM1TemplateId                          InQuestTemplateId;                                 // 0x0000(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIQuestIcon.BP_SetQuestIconType
@@ -47178,12 +47220,28 @@ public:
 	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIQuestList.BP_ChangedFilterType
+// Function M1.M1UIQuestInfo.BP_ShowCharacterIconPanel
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIQuestList_BP_ChangedFilterType final
+struct M1UIQuestInfo_BP_ShowCharacterIconPanel final
 {
 public:
-	EM1QuestType                                  InQuestType;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuestInfo.OnItemTooltipWidgetCreated
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuestInfo_OnItemTooltipWidgetCreated final
+{
+public:
+	class UM1UIWidget*                            InTooltipWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuestInfo.OnItemTooltipWidgetRemoved
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuestInfo_OnItemTooltipWidgetRemoved final
+{
+public:
+	class UM1UIWidget*                            InTooltipWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIQuestListItem.BP_GetIsWidgetAnimatiomPlaying
@@ -47209,6 +47267,47 @@ struct M1UIQuestListItem_BP_UpdateTracker final
 public:
 	bool                                          bIsSet;                                            // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	bool                                          bShouldPlayAnim;                                   // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuestPage.OnClickedCancel
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuestPage_OnClickedCancel final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuestPage.OnQuestAcceptButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuestPage_OnQuestAcceptButtonClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuestPage.OnQuestRejectButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuestPage_OnQuestRejectButtonClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuestPage.OnSlotHovered
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIQuestPage_OnSlotHovered final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIQuestPage.GetUIDataQuest
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIQuestPage_GetUIDataQuest final
+{
+public:
+	class UObject*                                InOuter;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UM1UIDataQuest*                         ReturnValue;                                       // 0x0008(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIQuestRewards.BP_SwitchRewardPanel
@@ -47551,30 +47650,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIReactorEnchant.OnContenxtButton_Cancel
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIReactorEnchant_OnContenxtButton_Cancel final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIReactorEnchant.OnGuideClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIReactorEnchant_OnGuideClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIReactorEnchant.OnItemList_Clicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIReactorEnchant_OnItemList_Clicked final
-{
-public:
-	class UM1UIWidget*                            InClickedWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIReactorEnchantInfo.BP_SetEnchantLevel
 // 0x000C (0x000C - 0x0000)
 struct M1UIReactorEnchantInfo_BP_SetEnchantLevel final
@@ -47705,9 +47780,17 @@ public:
 	EM1ReactorOptimizationSlotUIType              InType;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRecordCategoryListPanel.OnEntryItemClicked
+// Function M1.M1UIRecordListPanel.OnClicked_Category
 // 0x0008 (0x0008 - 0x0000)
-struct M1UIRecordCategoryListPanel_OnEntryItemClicked final
+struct M1UIRecordListPanel_OnClicked_Category final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRecordListPanel.OnEntryItemClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRecordListPanel_OnEntryItemClicked final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -47737,14 +47820,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRecordPanel.OnClickedEntry_RecordCategorySlot
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRecordPanel_OnClickedEntry_RecordCategorySlot final
-{
-public:
-	class UM1UIData*                              InUIData;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIRenameTextInput.BP_ExceedLimitLength
 // 0x0001 (0x0001 - 0x0000)
 struct M1UIRenameTextInput_BP_ExceedLimitLength final
@@ -47769,6 +47844,99 @@ public:
 	class FText                                   InText;                                            // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
 	ETextCommit                                   InCommitMethod;                                    // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIResearchItemSlot.BP_SetBookmark
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIResearchItemSlot_BP_SetBookmark final
+{
+public:
+	bool                                          bBookmark;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIResearchItemSlot.BP_SetFinalOwned
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIResearchItemSlot_BP_SetFinalOwned final
+{
+public:
+	bool                                          bOwned;                                            // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIResearchItemSlot.BP_SetHoldStatus
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIResearchItemSlot_BP_SetHoldStatus final
+{
+public:
+	bool                                          bHold;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bExceedMax;                                        // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIResearchItemSlot.BP_SetItemTier
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIResearchItemSlot_BP_SetItemTier final
+{
+public:
+	EM1ItemTierType                               InTierType;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIResearchItemSlot.BP_SetNewMark
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIResearchItemSlot_BP_SetNewMark final
+{
+public:
+	bool                                          bNew;                                              // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIResearchItemSlot.BP_SetOwnedCount
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIResearchItemSlot_BP_SetOwnedCount final
+{
+public:
+	int32                                         InCount;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bVisible;                                          // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIResearchItemSlot.BP_SetPerk
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIResearchItemSlot_BP_SetPerk final
+{
+public:
+	bool                                          bPerkExist;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIResearchItemSlot.BP_SetRankStatus
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIResearchItemSlot_BP_SetRankStatus final
+{
+public:
+	int32                                         InCount;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bEnough;                                           // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIResearchItemSlot.OnEventTimerTick
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIResearchItemSlot_OnEventTimerTick final
+{
+public:
+	double                                        InSecond;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIResearchItemSlot.OnMaterialItemClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIResearchItemSlot_OnMaterialItemClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIResearchFeaturedSlot.BP_SetSlotBG
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIResearchFeaturedSlot_BP_SetSlotBG final
+{
+public:
+	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIResearchFeaturedSlotWithPage.OnEventTabSelected
@@ -47917,14 +48085,6 @@ struct M1UIResearchItemIcon_BP_SetAmountVisibility final
 {
 public:
 	bool                                          bVisible;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UICodexResearchConditionIcon.BP_SetTimePercentRatio
-// 0x0004 (0x0004 - 0x0000)
-struct M1UICodexResearchConditionIcon_BP_SetTimePercentRatio final
-{
-public:
-	float                                         InRatio;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIResearchPage.ClosePopup
@@ -48125,6 +48285,23 @@ public:
 	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
+// Function M1.M1UIRotationDropSlot.BP_SetAccessoryDetails
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRotationDropSlot_BP_SetAccessoryDetails final
+{
+public:
+	EM1EquipmentCategoryType                      InCategoryType;                                    // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRotationDropSlot.BP_SetReactorDetails
+// 0x0002 (0x0002 - 0x0000)
+struct M1UIRotationDropSlot_BP_SetReactorDetails final
+{
+public:
+	EM1ElementalDamageChannel                     InElementalType;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1SkillArcheType                             InArcheType;                                       // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1UIRotationDropBase.OnCancelClicked
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIRotationDropBase_OnCancelClicked final
@@ -48181,20 +48358,52 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRotationShopItemSlot.BP_ShowBottomPanel
+// Function M1.M1UIRune.BP_ChangeSelectionMarkerType
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIRotationShopItemSlot_BP_ShowBottomPanel final
+struct M1UIRune_BP_ChangeSelectionMarkerType final
 {
 public:
-	EM1ShopItemBottomPanelType                    InType;                                            // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsWarning;                                        // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRotationShopItemSlot.BP_ShowIsOwned
+// Function M1.M1UIRune.BP_MarkAsSelectedRune
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIRotationShopItemSlot_BP_ShowIsOwned final
+struct M1UIRune_BP_MarkAsSelectedRune final
 {
 public:
-	bool                                          InOwned;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          InbSelected;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRune.BP_ShowSelectionDecoration
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIRune_BP_ShowSelectionDecoration final
+{
+public:
+	bool                                          InbShow;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRune.OnEventDragDetected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRune_OnEventDragDetected final
+{
+public:
+	class UM1UIWidget*                            InDraggedWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRune.OnEventEnteredPickedRuneCancelled
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRune_OnEventEnteredPickedRuneCancelled final
+{
+public:
+	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRune.OnEventEnteredPickedRuneDrop
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRune_OnEventEnteredPickedRuneDrop final
+{
+public:
+	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIRuneBoardCapacityInfo.BP_UpdateCapacity
@@ -48239,45 +48448,6 @@ public:
 // Function M1.M1UIRuneBoardCapacityInfo.OnRuneDetached
 // 0x0018 (0x0018 - 0x0000)
 struct M1UIRuneBoardCapacityInfo_OnRuneDetached final
-{
-public:
-	const class UM1UIDataItemInfo_Rune*           InDetachedRuneData;                                // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	const class UM1UIDataRuneSocket*              InRuneSocketData;                                  // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bIsQuickDetach;                                    // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIRuneBoardCharacterSkillItem.BP_OnSkillDetailChanged
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIRuneBoardCharacterSkillItem_BP_OnSkillDetailChanged final
-{
-public:
-	bool                                          bIsChanged;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneBoardCharacterSkillItem.BP_OnSkillRedirected
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIRuneBoardCharacterSkillItem_BP_OnSkillRedirected final
-{
-public:
-	bool                                          bIsChanged;                                        // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneBoardCharacterSkillItem.OnRuneAttached
-// 0x0020 (0x0020 - 0x0000)
-struct M1UIRuneBoardCharacterSkillItem_OnRuneAttached final
-{
-public:
-	const class UM1UIDataItemInfo_Rune*           InAttachedRuneData;                                // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	const class UM1UIDataItemInfo_Rune*           InAlreadyAttachedRuneData;                         // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	const class UM1UIDataRuneSocket*              InRuneSocketData;                                  // 0x0010(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bIsQuickAttach;                                    // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIRuneBoardCharacterSkillItem.OnRuneDetached
-// 0x0018 (0x0018 - 0x0000)
-struct M1UIRuneBoardCharacterSkillItem_OnRuneDetached final
 {
 public:
 	const class UM1UIDataItemInfo_Rune*           InDetachedRuneData;                                // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -48394,6 +48564,84 @@ struct M1UIRuneBoardPreview_Weapon_OnSwitchStatInfoWidget final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneBoardPreview_Character.OnDragEnteredToRune
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIRuneBoardPreview_Character_OnDragEnteredToRune final
+{
+public:
+	const class UM1UIRune*                        InRuneWidget;                                      // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class UUserWidget*                      InDraggedRuneIcon;                                 // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class UM1UIDataItemInfo_Rune*           InRuneData;                                        // 0x0010(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneBoardPreview_Character.OnDragEnteredToSocket
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIRuneBoardPreview_Character_OnDragEnteredToSocket final
+{
+public:
+	const class UUserWidget*                      InDraggedRuneIcon;                                 // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class UM1UIDataRuneSocket*              InRuneSocketData;                                  // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneBoardPreview_Character.OnDragLeftFromRune
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIRuneBoardPreview_Character_OnDragLeftFromRune final
+{
+public:
+	const class UM1UIRune*                        InRuneWidget;                                      // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class UUserWidget*                      InDraggedRuneIcon;                                 // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class UM1UIDataItemInfo_Rune*           InRuneData;                                        // 0x0010(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneBoardPreview_Character.OnDragLeftFromSocket
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIRuneBoardPreview_Character_OnDragLeftFromSocket final
+{
+public:
+	const class UUserWidget*                      InDraggedRuneIcon;                                 // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class UM1UIDataRuneSocket*              InRuneSocketData;                                  // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneBoardPreview_Character.OnRuneAttached
+// 0x0020 (0x0020 - 0x0000)
+struct M1UIRuneBoardPreview_Character_OnRuneAttached final
+{
+public:
+	const class UM1UIDataItemInfo_Rune*           InAttachedRuneData;                                // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class UM1UIDataItemInfo_Rune*           InAlreadyAttachedRuneData;                         // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class UM1UIDataRuneSocket*              InRuneSocketData;                                  // 0x0010(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsQuickAttach;                                    // 0x0018(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIRuneBoardPreview_Character.OnRuneDetached
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIRuneBoardPreview_Character_OnRuneDetached final
+{
+public:
+	const class UM1UIDataItemInfo_Rune*           InDetachedRuneData;                                // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class UM1UIDataRuneSocket*              InRuneSocketData;                                  // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bIsQuickDetach;                                    // 0x0010(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIRuneBoardPreview_Character.OnRuneDragAttachFailed
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRuneBoardPreview_Character_OnRuneDragAttachFailed final
+{
+public:
+	const class UM1UIDataItemInfo_Rune*           InDraggedRuneData;                                 // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneBoardPreview_Character.OnRuneDragCancelled
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIRuneBoardPreview_Character_OnRuneDragCancelled final
+{
+public:
+	const class UUserWidget*                      InDraggedRuneIcon;                                 // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	const class UM1UIDataRuneSocket*              InRuneSocketData;                                  // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UISideTab.Callback_RemovedFromFocusPath
@@ -48544,70 +48792,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRuneCompose_Inform.BP_UpdateCompletedPageNum
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIRuneCompose_Inform_BP_UpdateCompletedPageNum final
-{
-public:
-	int32                                         InPageNum;                                         // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneCompose_Inform.BP_UpdateRequiredCurrency
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIRuneCompose_Inform_BP_UpdateRequiredCurrency final
-{
-public:
-	bool                                          bEnough;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneCompose_Inform.OnHoldCompleted_ComposeRune
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRuneCompose_Inform_OnHoldCompleted_ComposeRune final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneCompose_Inform.OnMaterialSlotClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRuneCompose_Inform_OnMaterialSlotClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneCompose_Inform.OnMaterialSlotMouseHovered
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRuneCompose_Inform_OnMaterialSlotMouseHovered final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneCompose_Inform.OnMaterialSlotMouseUnhovered
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRuneCompose_Inform_OnMaterialSlotMouseUnhovered final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneCompose_Inform.BP_GetMaterialSlots
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIRuneCompose_Inform_BP_GetMaterialSlots final
-{
-public:
-	TArray<class UM1UIRune*>                      ReturnValue;                                       // 0x0000(0x0010)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneCompose_Inform.BP_IsComposeSequencePlaying
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIRuneCompose_Inform_BP_IsComposeSequencePlaying final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIRuneCompose_Main.OnAllSelectComplete
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIRuneCompose_Main_OnAllSelectComplete final
@@ -48750,6 +48934,14 @@ public:
 // Function M1.M1UIRuneCompose_Main.OnShowProbabilityClicked
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIRuneCompose_Main_OnShowProbabilityClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIRuneCompose_Result.CallBack_Confirm
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIRuneCompose_Result_CallBack_Confirm final
 {
 public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -49093,70 +49285,28 @@ public:
 	class UM1UIWidget*                            InTooltipWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRuneIcon.BP_OnDragDetected
+// Function M1.M1UIDataRuneBoard.GetRuneClassType
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIRuneIcon_BP_OnDragDetected final
+struct M1UIDataRuneBoard_GetRuneClassType final
 {
 public:
-	bool                                          InbDragDetected;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RuneClassType                              ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRuneIcon.BP_SetCapacityIncrement
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIRuneIcon_BP_SetCapacityIncrement final
-{
-public:
-	int32                                         InValue;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneIcon.BP_SetCost
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIRuneIcon_BP_SetCost final
-{
-public:
-	int32                                         InValue;                                           // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneIcon.BP_SetEnchantLevel
-// 0x000C (0x000C - 0x0000)
-struct M1UIRuneIcon_BP_SetEnchantLevel final
-{
-public:
-	int32                                         EnchantLevel;                                      // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EnchantMaxLevel;                                   // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Targetlevel;                                       // 0x0008(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneIcon.BP_SetRuneBgEffect
+// Function M1.M1UIDataRuneBoard_Weapon.GetEquipItemClassType
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIRuneIcon_BP_SetRuneBgEffect final
+struct M1UIDataRuneBoard_Weapon_GetEquipItemClassType final
 {
 public:
-	bool                                          bSet;                                              // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1EquipItemClassType                         ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRuneIcon.BP_SetRuneMatchCondition
+// Function M1.M1UIDataRuneBoard_Weapon.GetWeaponTier
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIRuneIcon_BP_SetRuneMatchCondition final
+struct M1UIDataRuneBoard_Weapon_GetWeaponTier final
 {
 public:
-	EM1RuneSocketTypeMatchCondition               InCondition;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneIcon.OnEventPickCancelled
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRuneIcon_OnEventPickCancelled final
-{
-public:
-	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneIcon.OnEventPickDrop
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRuneIcon_OnEventPickDrop final
-{
-public:
-	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemTierType                               ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIRuneBoard.BP_OpenSideTab
@@ -49392,78 +49542,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIRuneSocket.BP_OnDragEnterRune
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIRuneSocket_BP_OnDragEnterRune final
-{
-public:
-	EM1RuneSocketTypeMatchCondition               InCondition;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneSocket.ChangeButtonUI
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIRuneSocket_ChangeButtonUI final
-{
-public:
-	EM1ButtonUIType                               InButtonState;                                     // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneSocket.ChangeDimmedUI
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIRuneSocket_ChangeDimmedUI final
-{
-public:
-	bool                                          InDimmed;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneSocket.OnEventDragDetected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRuneSocket_OnEventDragDetected final
-{
-public:
-	class UM1UIWidget*                            InDraggedWidget;                                   // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneSocket.OnEventEnteredPickedRuneCancelled
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRuneSocket_OnEventEnteredPickedRuneCancelled final
-{
-public:
-	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneSocket.OnEventEnteredPickedRuneDrop
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRuneSocket_OnEventEnteredPickedRuneDrop final
-{
-public:
-	class UM1PickDropOperation*                   InOperation;                                       // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneSocket.GetCapacityIncrement
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIRuneSocket_GetCapacityIncrement final
-{
-public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneSocket.GetCost
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIRuneSocket_GetCost final
-{
-public:
-	int64                                         ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIRuneSocket.GetRuneSubClassType
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIRuneSocket_GetRuneSubClassType final
-{
-public:
-	EM1RuneSubClassType                           ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIRuneSocketTypeAdd_Inform.BP_UpdateByRuneSocketTypeAddCondition
 // 0x0001 (0x0001 - 0x0000)
 struct M1UIRuneSocketTypeAdd_Inform_BP_UpdateByRuneSocketTypeAddCondition final
@@ -49535,6 +49613,70 @@ struct M1UIRuneSocketTypeAdd_Inform_OnCharacterLevelChanged final
 public:
 	struct FM1TemplateId                          InCharacterTemplateId;                             // 0x0000(0x0004)(ConstParm, Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	int32                                         InNewLevel;                                        // 0x0004(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataRuneSocketTypeAdd.GetLevel
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIDataRuneSocketTypeAdd_GetLevel final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataRuneSocketTypeAdd.GetMaxLevel
+// 0x0004 (0x0004 - 0x0000)
+struct M1UIDataRuneSocketTypeAdd_GetMaxLevel final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataRuneSocketTypeAdd.GetOwnerGrade
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIDataRuneSocketTypeAdd_GetOwnerGrade final
+{
+public:
+	EM1CharacterGrade                             ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataRuneSocketTypeAdd.GetOwnerIcon
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIDataRuneSocketTypeAdd_GetOwnerIcon final
+{
+public:
+	class UTexture2D*                             ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataRuneSocketTypeAdd.GetOwnerStringId
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIDataRuneSocketTypeAdd_GetOwnerStringId final
+{
+public:
+	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataRuneSocketTypeAdd.GetOwnerTier
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIDataRuneSocketTypeAdd_GetOwnerTier final
+{
+public:
+	EM1ItemTierType                               ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataRuneSocketTypeAdd.GetOwnerTierText
+// 0x0018 (0x0018 - 0x0000)
+struct M1UIDataRuneSocketTypeAdd_GetOwnerTierText final
+{
+public:
+	class FText                                   ReturnValue;                                       // 0x0000(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIDataRuneSocketTypeAdd.GetRuneSocketOwnerType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIDataRuneSocketTypeAdd_GetRuneSocketOwnerType final
+{
+public:
+	EM1RuneSocketOwnerType                        ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIRuneSocketTypeAdd_Main.OnAttachedDetachedRune
@@ -49747,6 +49889,126 @@ public:
 	int32                                         PageNum;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UISeasonReward.BP_ChangeGoodsBuyButtonState
+// 0x0001 (0x0001 - 0x0000)
+struct M1UISeasonReward_BP_ChangeGoodsBuyButtonState final
+{
+public:
+	EM1SeasonRewardButtonState                    InState;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.BP_ShowDetailView
+// 0x0001 (0x0001 - 0x0000)
+struct M1UISeasonReward_BP_ShowDetailView final
+{
+public:
+	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.OnCancelClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_OnCancelClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.OnCursorEnteredSlot
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_OnCursorEnteredSlot final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.OnDetailViewButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_OnDetailViewButtonClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.OnEntryClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_OnEntryClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.OnEntryRightMouseButtonUp
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_OnEntryRightMouseButtonUp final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.OnGoodsBuyButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_OnGoodsBuyButtonClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.OnGoToBounsClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_OnGoToBounsClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.OnGoToGeneralClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_OnGoToGeneralClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.OnPageBuyClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_OnPageBuyClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.OnPanelChangedPageNumber
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_OnPanelChangedPageNumber final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.OnPanelCreateEntryTooltipWidget
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_OnPanelCreateEntryTooltipWidget final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.OnPremiumUpgradeButtonClicked
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_OnPremiumUpgradeButtonClicked final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISeasonReward.UpdateFromGoodsInfo
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISeasonReward_UpdateFromGoodsInfo final
+{
+public:
+	class UM1UIDataShopGoodsInfo_BattlePass*      InBattlePassGoodsInfo;                             // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1UISelectableButtons.MakeButtonSelected
 // 0x0004 (0x0004 - 0x0000)
 struct M1UISelectableButtons_MakeButtonSelected final
@@ -49851,70 +50113,6 @@ public:
 	EM1ShopItemBottomPanelType                    InType;                                            // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIShopPage.OnCancelClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIShopPage_OnCancelClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIShopPage.OnEventCursorEntered
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIShopPage_OnEventCursorEntered final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIShopPage.OnEventCursorLost
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIShopPage_OnEventCursorLost final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIShopPage_Buy.OnEventCursorClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIShopPage_Buy_OnEventCursorClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIShopPage_Buy.ReceiveBuyItem
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIShopPage_Buy_ReceiveBuyItem final
-{
-public:
-	struct FM1ItemServiceBuyItemResult            InBuyItemResult;                                   // 0x0000(0x0010)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIShopPage_Buy.RequestBuyAddEvent
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIShopPage_Buy_RequestBuyAddEvent final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIShopPage_Buy.RequestBuyNoEvent
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIShopPage_Buy_RequestBuyNoEvent final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIShopPage_Buy.RequestCharge
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIShopPage_Buy_RequestCharge final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIShopPage_Sell.OnEventCursorClicked
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIShopPage_Sell_OnEventCursorClicked final
@@ -50005,20 +50203,20 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIShopRegionalTerms.OnShowCommercialTransReg
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIShopRegionalTerms_OnShowCommercialTransReg final
+// Function M1.M1UIShopPurchase.BP_SetQuantityControl
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIShopPurchase_BP_SetQuantityControl final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShow;                                             // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIShopRegionalTerms.OnShowMoneySettlementReg
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIShopRegionalTerms_OnShowMoneySettlementReg final
+// Function M1.M1UIShopPurchase.BP_ShowWarningTerm
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIShopPurchase_BP_ShowWarningTerm final
 {
 public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bShow;                                             // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIShopTerms.BP_ShowWithdrawals
@@ -50223,14 +50421,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UISocial_BlockList.OnEntrySelected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISocial_BlockList_OnEntrySelected final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIDataSocialBlock.GetPlatformAccountName
 // 0x0010 (0x0010 - 0x0000)
 struct M1UIDataSocialBlock_GetPlatformAccountName final
@@ -50329,14 +50519,6 @@ public:
 	float                                         InDeltaTime;                                       // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UISocial_RecentList.OnEntryClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UISocial_RecentList_OnEntryClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UISocial_RequestSupportList.OnEntryClicked
 // 0x0008 (0x0008 - 0x0000)
 struct M1UISocial_RequestSupportList_OnEntryClicked final
@@ -50351,6 +50533,22 @@ struct M1UISocial_RequestSupportList_OnExpiredInviteTime final
 {
 public:
 	class UM1UIWidget*                            InUIData;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISocial_UsersList.OnClickedBtnLeaveParty
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISocial_UsersList_OnClickedBtnLeaveParty final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UISocial_UsersList.OnEntrySelected
+// 0x0008 (0x0008 - 0x0000)
+struct M1UISocial_UsersList_OnEntrySelected final
+{
+public:
+	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UISocial_UsersListItem.OnInGameBlockUserChanged
@@ -50444,6 +50642,14 @@ struct M1UITaskTargetListItem_Destruction_BP_SetImmune final
 {
 public:
 	bool                                          bImmune;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UITaskTargetListItem_Supply.ChangeProgressBarTintColor
+// 0x0014 (0x0014 - 0x0000)
+struct M1UITaskTargetListItem_Supply_ChangeProgressBarTintColor final
+{
+public:
+	struct FSlateColor                            InColor;                                           // 0x0000(0x0014)(Parm, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UITaskTargetListItem_BaseMissionTarget.BP_UpdateByState
@@ -50542,17 +50748,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1Toast.Create
-// 0x0028 (0x0028 - 0x0000)
-struct M1Toast_Create final
-{
-public:
-	class UObject*                                WorldContextObject;                                // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   InName;                                            // 0x0008(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<class FString>                         InParam;                                           // 0x0010(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
-	class UM1Toast*                               ReturnValue;                                       // 0x0020(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIToastMessage_HoldButton.OnButtonEvent_HoldBegin
 // 0x0008 (0x0008 - 0x0000)
 struct M1UIToastMessage_HoldButton_OnButtonEvent_HoldBegin final
@@ -50601,31 +50796,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIUserInfo.BP_ApplyCustomizingSettings
-// 0x0028 (0x0028 - 0x0000)
-struct M1UIUserInfo_BP_ApplyCustomizingSettings final
-{
-public:
-	struct FM1TypedUICustomizing                  InNamecardInfo;                                    // 0x0000(0x0028)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIUserInfo.BP_SetMasteryInfo
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIUserInfo_BP_SetMasteryInfo final
-{
-public:
-	bool                                          bMaxLevel;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIUserInfo.BP_SetPlatformIcon
-// 0x0002 (0x0002 - 0x0000)
-struct M1UIUserInfo_BP_SetPlatformIcon final
-{
-public:
-	EM1LoginPlatformTypes                         InLocalPlatformType;                               // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LoginPlatformTypes                         InPlayerPlatformType;                              // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UISimpleUserInfo.BP_SetMasteryInfo
 // 0x0001 (0x0001 - 0x0000)
 struct M1UISimpleUserInfo_BP_SetMasteryInfo final
@@ -50661,6 +50831,14 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	bool                                          bToggleValue;                                      // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1UIUserReportTypeEntry.SetTitleAndDescription
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIUserReportTypeEntry_SetTitleAndDescription final
+{
+public:
+	class FName                                   InStringId;                                        // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIUserReport.OnButtonHoldComplete_Confirm
@@ -50899,22 +51077,6 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIVoidBattle_BossPartsLabel.OnSetAdvantageType_BP
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIVoidBattle_BossPartsLabel_OnSetAdvantageType_BP final
-{
-public:
-	EM1DamageAdvantageType                        InAdvantageType;                                   // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIVoidBattle_BossPartsLabel.OnSetPartsNameUIKey_BP
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIVoidBattle_BossPartsLabel_OnSetPartsNameUIKey_BP final
-{
-public:
-	class FString                                 InUIKey;                                           // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIVoidBattle_Main.BP_ShowBackgroundOfVeryHard
 // 0x0001 (0x0001 - 0x0000)
 struct M1UIVoidBattle_Main_BP_ShowBackgroundOfVeryHard final
@@ -51118,30 +51280,14 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIVoidVesselRemainTimeBasedRewardInfo.BP_SetCanAcquireReward
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIVoidVesselRemainTimeBasedRewardInfo_BP_SetCanAcquireReward final
+// Function M1.M1UIVoidVesselRewardDetail.OnMouseWheelOnSlot
+// 0x0080 (0x0080 - 0x0000)
+struct M1UIVoidVesselRewardDetail_OnMouseWheelOnSlot final
 {
 public:
-	bool                                          bCanAcquire;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIVoidVesselRemainTimeBasedRewardInfo.SetHoveredRewardItemRemainTime
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIVoidVesselRemainTimeBasedRewardInfo_SetHoveredRewardItemRemainTime final
-{
-public:
-	struct FTimespan                              InRemainTime;                                      // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWarehouse.OnTabButtonSelected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWarehouse_OnTabButtonSelected final
-{
-public:
-	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bSelectionChanged;                                 // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function M1.M1UIWarehousePanel.BP_OnChangedItemCategory
@@ -51282,12 +51428,12 @@ public:
 	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1UIDataWeaponBookEntry.IsLocked
+// Function M1.M1UIWayPointActorWidget.OnActorWidgetVisibilityChanged
 // 0x0001 (0x0001 - 0x0000)
-struct M1UIDataWeaponBookEntry_IsLocked final
+struct M1UIWayPointActorWidget_OnActorWidgetVisibilityChanged final
 {
 public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	ESlateVisibility                              InVisiblity;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIDataWeaponBookCount.GetCurrentCount
@@ -51321,96 +51467,6 @@ struct M1UIWeaponBookEntryList_BP_UpdateWeaponBookCount final
 public:
 	int32                                         InOwnCount;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	int32                                         InTotalCount;                                      // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWeaponBook.OnEventCancelClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWeaponBook_OnEventCancelClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWeaponBook.OnEventDetachAllBegin
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWeaponBook_OnEventDetachAllBegin final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWeaponBook.OnEventDetachAllCancel
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWeaponBook_OnEventDetachAllCancel final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWeaponBook.OnEventDetachAllDone
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWeaponBook_OnEventDetachAllDone final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWeaponBook.OnEventOpenRuneBoard
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWeaponBook_OnEventOpenRuneBoard final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWeaponBook.OnEventResearchDetailsClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWeaponBook_OnEventResearchDetailsClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWeaponBook.OnEventTabSelected
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWeaponBook_OnEventTabSelected final
-{
-public:
-	int32                                         InTabIndex;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bSelected;                                         // 0x0004(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1UIWeaponBook.OnGuideClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWeaponBook_OnGuideClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWeaponBook.OnItemSlotClicked
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWeaponBook_OnItemSlotClicked final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWeaponBook.OnItemSlotCursorEntered
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWeaponBook_OnItemSlotCursorEntered final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWeaponBook.OnItemSlotCursorLeft
-// 0x0008 (0x0008 - 0x0000)
-struct M1UIWeaponBook_OnItemSlotCursorLeft final
-{
-public:
-	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIWidgetMissionDebug.BP_MissionActorDesc
@@ -51507,46 +51563,6 @@ struct M1UIWorldDifficultySlot_BP_SetLocked final
 {
 public:
 	bool                                          bIsLocked;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataWorldDifficulty.GetStringId
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIDataWorldDifficulty_GetStringId final
-{
-public:
-	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataWorldDifficulty.GetTemplateIdAsInt32
-// 0x0004 (0x0004 - 0x0000)
-struct M1UIDataWorldDifficulty_GetTemplateIdAsInt32 final
-{
-public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataWorldDifficulty.GetUnlockQuestConditionStringId
-// 0x0010 (0x0010 - 0x0000)
-struct M1UIDataWorldDifficulty_GetUnlockQuestConditionStringId final
-{
-public:
-	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataWorldDifficulty.HasUnlockCondition
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIDataWorldDifficulty_HasUnlockCondition final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIDataWorldDifficulty.IsCurrentLevel
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIDataWorldDifficulty_IsCurrentLevel final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIWorldField.BP_SetAsLocatedField
@@ -51656,46 +51672,6 @@ public:
 	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIWorldMapObjectIcon.BP_SetAsDimmed
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIWorldMapObjectIcon_BP_SetAsDimmed final
-{
-public:
-	bool                                          bSet;                                              // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWorldMapObjectIcon.MinimizeIcon
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIWorldMapObjectIcon_MinimizeIcon final
-{
-public:
-	bool                                          bSet;                                              // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWorldMapObjectIcon.ShowFlicker
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIWorldMapObjectIcon_ShowFlicker final
-{
-public:
-	bool                                          bSet;                                              // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWorldMapObjectIcon.IsIconMinimized
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIWorldMapObjectIcon_IsIconMinimized final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWorldMapObjectIcon.IsIconVisible
-// 0x0001 (0x0001 - 0x0000)
-struct M1UIWorldMapObjectIcon_IsIconVisible final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1UIWorldMapObjectNpcIcon.BP_IsVisibleHighlightEffect
 // 0x0001 (0x0001 - 0x0000)
 struct M1UIWorldMapObjectNpcIcon_BP_IsVisibleHighlightEffect final
@@ -51718,6 +51694,14 @@ struct M1UIWorldMapObjectNpcIcon_BP_VisibleHighlightEffect final
 {
 public:
 	bool                                          bVisible;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWorldMapObjectNpcIcon.OnChangeHighlightEffectByEvent
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIWorldMapObjectNpcIcon_OnChangeHighlightEffectByEvent final
+{
+public:
+	bool                                          bMarked;                                           // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIWorldMapObjectMissionIcon.BP_SetInstanceDungeonRoationIcon
@@ -51768,6 +51752,14 @@ public:
 	int32                                         InIndex;                                           // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1UIWorldMapObjectWrapper.GetMapObjectIconWidget
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWorldMapObjectWrapper_GetMapObjectIconWidget final
+{
+public:
+	class UM1UIWorldMapObject*                    ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1UIWorldMapObject.BP_SetAsMarked
 // 0x0001 (0x0001 - 0x0000)
 struct M1UIWorldMapObject_BP_SetAsMarked final
@@ -51808,22 +51800,52 @@ public:
 	class UM1UIWidget*                            InWidget;                                          // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1UIWorldMapObjectDescription.OnMouseWheelOnSlot
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIWorldMapObjectDescription_OnMouseWheelOnSlot final
-{
-public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
 // Function M1.M1UIWorldMapObjectDescriptionItem_Npc.BP_SetRotationShopSpawnText
 // 0x0001 (0x0001 - 0x0000)
 struct M1UIWorldMapObjectDescriptionItem_Npc_BP_SetRotationShopSpawnText final
 {
 public:
 	bool                                          bIsSpawned;                                        // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWorldMapObjectDescriptionItem_Mission.BP_SetMissionIconUIData
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWorldMapObjectDescriptionItem_Mission_BP_SetMissionIconUIData final
+{
+public:
+	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWorldMapObjectDescriptionItem_Mission.BP_SetMissionLegionCategory
+// 0x0010 (0x0010 - 0x0000)
+struct M1UIWorldMapObjectDescriptionItem_Mission_BP_SetMissionLegionCategory final
+{
+public:
+	TArray<EM1LegionCategory>                     InLegionCategory;                                  // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWorldMapObjectDescriptionItem_Mission.BP_SetMissionPlayTimeGuide
+// 0x0008 (0x0008 - 0x0000)
+struct M1UIWorldMapObjectDescriptionItem_Mission_BP_SetMissionPlayTimeGuide final
+{
+public:
+	class FName                                   PlayTimeGuideStringId;                             // 0x0000(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWorldMapObjectDescriptionItem_Mission.BP_SetMissionRewardByGradeTextByCategory
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIWorldMapObjectDescriptionItem_Mission_BP_SetMissionRewardByGradeTextByCategory final
+{
+public:
+	EM1MissionCategory                            InCategory;                                        // 0x0000(0x0001)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1UIWorldMapObjectDescriptionItem_Mission.BP_SetMissionWaveType
+// 0x0001 (0x0001 - 0x0000)
+struct M1UIWorldMapObjectDescriptionItem_Mission_BP_SetMissionWaveType final
+{
+public:
+	bool                                          bHasWave;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1UIWorldMapObjectDescriptionItem_Squad.BP_SetPlatformIcon
@@ -51865,16 +51887,6 @@ struct M1UIWorldMissionItem_BP_SetInvasionEffectVisibility final
 {
 public:
 	bool                                          bIsInvasion;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1UIWorldMissionDetails.OnMouseWheelOnSlot
-// 0x0080 (0x0080 - 0x0000)
-struct M1UIWorldMissionDetails_OnMouseWheelOnSlot final
-{
-public:
-	struct FPointerEvent                          InPointerEvent;                                    // 0x0000(0x0078)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	bool                                          bHandled;                                          // 0x0078(0x0001)(Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_79[0x7];                                       // 0x0079(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function M1.M1UIWorldMissionInfo.BP_DifficultyChanged
@@ -52219,103 +52231,6 @@ public:
 	class UM1ActorWidgetComponent*                ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1Weapon.NetMulticastSetWeaponActionState
-// 0x0001 (0x0001 - 0x0000)
-struct M1Weapon_NetMulticastSetWeaponActionState final
-{
-public:
-	EM1WeaponActionState                          ActionState;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1Weapon.ReserveDestroy
-// 0x0004 (0x0004 - 0x0000)
-struct M1Weapon_ReserveDestroy final
-{
-public:
-	float                                         LifeSpan;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1Weapon.ServerSetWeaponActionState
-// 0x0001 (0x0001 - 0x0000)
-struct M1Weapon_ServerSetWeaponActionState final
-{
-public:
-	EM1WeaponActionState                          ActionState;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1Weapon.BP_GetEquipAnim
-// 0x0010 (0x0010 - 0x0000)
-struct M1Weapon_BP_GetEquipAnim final
-{
-public:
-	class FName                                   InSourceSlotName;                                  // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UAnimSequenceBase*                      ReturnValue;                                       // 0x0008(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1Weapon.BP_GetUnEquipAnim
-// 0x0010 (0x0010 - 0x0000)
-struct M1Weapon_BP_GetUnEquipAnim final
-{
-public:
-	class FName                                   InTargetSlotName;                                  // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UAnimSequenceBase*                      ReturnValue;                                       // 0x0008(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1Weapon.ClientDirectionValidationInfo
-// 0x0040 (0x0040 - 0x0000)
-struct M1Weapon_ClientDirectionValidationInfo final
-{
-public:
-	struct FVector                                FireLoc;                                           // 0x0000(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector_NetQuantizeNormal              FireDir;                                           // 0x000C(0x000C)(Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                HitLoc;                                            // 0x0018(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                ServerActorLocation;                               // 0x0024(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                CameraRightVector;                                 // 0x0030(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Validationsize;                                    // 0x003C(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1Weapon.ClientLocationValidationInfo
-// 0x001C (0x001C - 0x0000)
-struct M1Weapon_ClientLocationValidationInfo final
-{
-public:
-	struct FVector                                ClientLoc;                                         // 0x0000(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                ServerLoc;                                         // 0x000C(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Validationsize;                                    // 0x0018(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1Weapon.GetAltWeaponAbility
-// 0x0008 (0x0008 - 0x0000)
-struct M1Weapon_GetAltWeaponAbility final
-{
-public:
-	class UM1SkillAbility*                        ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1Weapon.GetDroppedWithContainer
-// 0x0008 (0x0008 - 0x0000)
-struct M1Weapon_GetDroppedWithContainer final
-{
-public:
-	class AM1DropContainer*                       ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1Weapon.GetPerkAbility
-// 0x0008 (0x0008 - 0x0000)
-struct M1Weapon_GetPerkAbility final
-{
-public:
-	class UM1WeaponPerkAbility*                   ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1Weapon.IsZoomedOrOwnWay
-// 0x0001 (0x0001 - 0x0000)
-struct M1Weapon_IsZoomedOrOwnWay final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function M1.M1WeaponChargeComponent.OnRep_CurrentLevel
 // 0x0004 (0x0004 - 0x0000)
 struct M1WeaponChargeComponent_OnRep_CurrentLevel final
@@ -52471,6 +52386,122 @@ public:
 	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
 };
 
+// Function M1.M1WeaponInstantHitComponent.BP_FireInternal
+// 0x0014 (0x0014 - 0x0000)
+struct M1WeaponInstantHitComponent_BP_FireInternal final
+{
+public:
+	float                                         FireTime;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                FireLoc;                                           // 0x0004(0x000C)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         WeaponRange;                                       // 0x0010(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WeaponInstantHitComponent.HitScanForBP
+// 0x0020 (0x0020 - 0x0000)
+struct M1WeaponInstantHitComponent_HitScanForBP final
+{
+public:
+	struct FVector                                FireLoc;                                           // 0x0000(0x000C)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                AimLoc;                                            // 0x000C(0x000C)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         WeaponRange;                                       // 0x0018(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         FireTime;                                          // 0x001C(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WeaponInstantHitComponent.NetMulticastSimulateInstantHit
+// 0x0018 (0x0018 - 0x0000)
+struct M1WeaponInstantHitComponent_NetMulticastSimulateInstantHit final
+{
+public:
+	struct FVector                                FireLoc;                                           // 0x0000(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector_NetQuantizeNormal              FireDir;                                           // 0x000C(0x000C)(Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WeaponInstantHitComponent.NetMulticastSimulateInstantHits
+// 0x0020 (0x0020 - 0x0000)
+struct M1WeaponInstantHitComponent_NetMulticastSimulateInstantHits final
+{
+public:
+	struct FVector                                FireLoc;                                           // 0x0000(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FVector_NetQuantizeNormal>      NetFireDirs;                                       // 0x0010(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WeaponInstantHitComponent.NetMulticastSimulateInstantShellHits
+// 0x0030 (0x0030 - 0x0000)
+struct M1WeaponInstantHitComponent_NetMulticastSimulateInstantShellHits final
+{
+public:
+	struct FVector                                FireLoc;                                           // 0x0000(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FVector_NetQuantizeNormal>      NetHitDirs;                                        // 0x0010(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+	TArray<struct FVector_NetQuantize>            NetMissLocs;                                       // 0x0020(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WeaponInstantHitComponent.NetMulticastSimulateMissHit
+// 0x0018 (0x0018 - 0x0000)
+struct M1WeaponInstantHitComponent_NetMulticastSimulateMissHit final
+{
+public:
+	struct FVector                                FireLoc;                                           // 0x0000(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                AimLoc;                                            // 0x000C(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WeaponInstantHitComponent.ServerInstantHits
+// 0x0058 (0x0058 - 0x0000)
+struct M1WeaponInstantHitComponent_ServerInstantHits final
+{
+public:
+	TArray<struct FHitResult>                     HitResults;                                        // 0x0000(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	struct FVector                                FireLoc;                                           // 0x0010(0x000C)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FVector_NetQuantizeNormal>      NetFireDirs;                                       // 0x0020(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+	float                                         FireTime;                                          // 0x0030(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         BurstIndex;                                        // 0x0034(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1InstantHitShellInfo                 ShellInfo;                                         // 0x0038(0x0020)(ConstParm, Parm, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WeaponInstantHitComponent.ServerInstantShellHits
+// 0x0058 (0x0058 - 0x0000)
+struct M1WeaponInstantHitComponent_ServerInstantShellHits final
+{
+public:
+	float                                         FireTime;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                FireLoc;                                           // 0x0004(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         BurstIndex;                                        // 0x0010(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FVector_NetQuantizeNormal>      NetHitDirs;                                        // 0x0018(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+	struct FM1InstantHitShellInfo                 ShellInfo;                                         // 0x0028(0x0020)(ConstParm, Parm, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	TArray<struct FVector_NetQuantize>            NetMissLocs;                                       // 0x0048(0x0010)(ConstParm, Parm, ZeroConstructor, ReferenceParm, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WeaponInstantHitComponent.ServerMissHit
+// 0x0020 (0x0020 - 0x0000)
+struct M1WeaponInstantHitComponent_ServerMissHit final
+{
+public:
+	float                                         FireTime;                                          // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                FireLoc;                                           // 0x0004(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FVector                                AimLoc;                                            // 0x0010(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         BurstIndex;                                        // 0x001C(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WeaponInstantHitComponent.BP_FilterHitResults
+// 0x0020 (0x0020 - 0x0000)
+struct M1WeaponInstantHitComponent_BP_FilterHitResults final
+{
+public:
+	TArray<struct FHitResult>                     HitResults;                                        // 0x0000(0x0010)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	TArray<struct FHitResult>                     ReturnValue;                                       // 0x0010(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, ContainsInstancedReference, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WeaponInstantHitComponent.BP_GetTargetingRule
+// 0x000C (0x000C - 0x0000)
+struct M1WeaponInstantHitComponent_BP_GetTargetingRule final
+{
+public:
+	struct FM1AbilityCollisionTargetingRule       ReturnValue;                                       // 0x0000(0x000C)(Parm, OutParm, ReturnParm, NoDestructor, NativeAccessSpecifierPublic)
+};
+
 // Function M1.M1WeaponLauncherComponent.ServerFireProjectile
 // 0x001C (0x001C - 0x0000)
 struct M1WeaponLauncherComponent_ServerFireProjectile final
@@ -52481,20 +52512,12 @@ public:
 	float                                         FireTime;                                          // 0x0018(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// Function M1.M1WeaponReloadComponent.ServerEndReload
-// 0x0001 (0x0001 - 0x0000)
-struct M1WeaponReloadComponent_ServerEndReload final
+// Function M1.M1WeaponPreview.GetMeshComponent
+// 0x0008 (0x0008 - 0x0000)
+struct M1WeaponPreview_GetMeshComponent final
 {
 public:
-	bool                                          ByInterrupt;                                       // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WeaponReloadComponent.ServerStartReload
-// 0x0004 (0x0004 - 0x0000)
-struct M1WeaponReloadComponent_ServerStartReload final
-{
-public:
-	float                                         InPlayRate;                                        // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class USkeletalMeshComponent*                 ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1WeaponRoundsComponent.ClientCorrectRounds
@@ -52590,14 +52613,6 @@ struct M1WeaponSlotControlComponent_ServerSyncWeaponChanging final
 public:
 	EM1EquipmentSlotType                          InFromWeaponSlot;                                  // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	EM1EquipmentSlotType                          ToWeaponSlot;                                      // 0x0001(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WeaponSprayPatternComponent.GetCurrentSpreadSize
-// 0x0004 (0x0004 - 0x0000)
-struct M1WeaponSprayPatternComponent_GetCurrentSpreadSize final
-{
-public:
-	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function M1.M1WeaponVfxComponent.BP_GetBeamRifleFXParamColor
@@ -52971,132 +52986,32 @@ public:
 	uint8                                         Pad_12[0x6];                                       // 0x0012(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function M1.M1WireCaster.ClientCancelWire
+// Function M1.M1WireDestination.OnTrrigerBeginOverlap
+// 0x00C0 (0x00C0 - 0x0000)
+struct M1WireDestination_OnTrrigerBeginOverlap final
+{
+public:
+	class UPrimitiveComponent*                    OverlappedComponent;                               // 0x0000(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class AActor*                                 OtherActor;                                        // 0x0008(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UPrimitiveComponent*                    OtherComp;                                         // 0x0010(0x0008)(Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         OtherBodyIndex;                                    // 0x0018(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bFromSweep;                                        // 0x001C(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FHitResult                             SweepResult;                                       // 0x0020(0x009C)(ConstParm, Parm, OutParm, ReferenceParm, IsPlainOldData, NoDestructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
+	uint8                                         Pad_BC[0x4];                                       // 0x00BC(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function M1.M1WireDestination.GetPullingDestLocation
+// 0x000C (0x000C - 0x0000)
+struct M1WireDestination_GetPullingDestLocation final
+{
+public:
+	struct FVector                                ReturnValue;                                       // 0x0000(0x000C)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function M1.M1WireDestination.IsOwnerOverlapped
 // 0x0001 (0x0001 - 0x0000)
-struct M1WireCaster_ClientCancelWire final
-{
-public:
-	bool                                          bImmediately;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireCaster.NetMulticast_FireWireHook
-// 0x00B8 (0x00B8 - 0x0000)
-struct M1WireCaster_NetMulticast_FireWireHook final
-{
-public:
-	struct FHitResult                             InHit;                                             // 0x0000(0x009C)(ConstParm, Parm, ReferenceParm, IsPlainOldData, NoDestructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
-	struct FVector                                InDestOffest;                                      // 0x009C(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                InTerrainOffset;                                   // 0x00A8(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bAllowedAir;                                       // 0x00B4(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_B5[0x3];                                       // 0x00B5(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1WireCaster.OnFinishedDeboneWireAction
-// 0x0001 (0x0001 - 0x0000)
-struct M1WireCaster_OnFinishedDeboneWireAction final
-{
-public:
-	bool                                          bCanceled;                                         // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireCaster.OnOwnerMovementModeChanged
-// 0x0010 (0x0010 - 0x0000)
-struct M1WireCaster_OnOwnerMovementModeChanged final
-{
-public:
-	class ACharacter*                             Character;                                         // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EMovementMode                                 PrevMovementMode;                                  // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         PrevCustomMode;                                    // 0x0009(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_A[0x6];                                        // 0x000A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function M1.M1WireCaster.OnRepWireState
-// 0x0001 (0x0001 - 0x0000)
-struct M1WireCaster_OnRepWireState final
-{
-public:
-	EM1WireState                                  PrevState;                                         // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireCaster.ServerCancelWire
-// 0x0001 (0x0001 - 0x0000)
-struct M1WireCaster_ServerCancelWire final
-{
-public:
-	bool                                          bImmediately;                                      // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireCaster.ServerStartWireAction
-// 0x00B8 (0x00B8 - 0x0000)
-struct M1WireCaster_ServerStartWireAction final
-{
-public:
-	struct FHitResult                             InHit;                                             // 0x0000(0x009C)(ConstParm, Parm, ReferenceParm, IsPlainOldData, NoDestructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
-	float                                         InAimPitch;                                        // 0x009C(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                InDestOffest;                                      // 0x00A0(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FVector                                InTerrainOffset;                                   // 0x00AC(0x000C)(ConstParm, Parm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireCaster.ServerTerrainOffsetLog
-// 0x0008 (0x0008 - 0x0000)
-struct M1WireCaster_ServerTerrainOffsetLog final
-{
-public:
-	float                                         HalfHeight;                                        // 0x0000(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         CapsuleHalfHeight;                                 // 0x0004(0x0004)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireCaster.GetDebonePartsComponent
-// 0x0008 (0x0008 - 0x0000)
-struct M1WireCaster_GetDebonePartsComponent final
-{
-public:
-	class UM1MonsterPartsComponent*               ReturnValue;                                       // 0x0000(0x0008)(ExportObject, Parm, OutParm, ZeroConstructor, ReturnParm, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireCaster.GetDestinationType
-// 0x0001 (0x0001 - 0x0000)
-struct M1WireCaster_GetDestinationType final
-{
-public:
-	EM1WireDestinationType                        ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireCaster.GetDestPoint
-// 0x0008 (0x0008 - 0x0000)
-struct M1WireCaster_GetDestPoint final
-{
-public:
-	class AM1WireDestination*                     ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireCaster.GetPullingSpeed
-// 0x0004 (0x0004 - 0x0000)
-struct M1WireCaster_GetPullingSpeed final
-{
-public:
-	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireCaster.GetWireHitInfo
-// 0x009C (0x009C - 0x0000)
-struct M1WireCaster_GetWireHitInfo final
-{
-public:
-	struct FHitResult                             ReturnValue;                                       // 0x0000(0x009C)(Parm, OutParm, ReturnParm, IsPlainOldData, NoDestructor, ContainsInstancedReference, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireCaster.IsActive
-// 0x0001 (0x0001 - 0x0000)
-struct M1WireCaster_IsActive final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function M1.M1WireCaster.IsValidLandingSpot
-// 0x0001 (0x0001 - 0x0000)
-struct M1WireCaster_IsValidLandingSpot final
+struct M1WireDestination_IsOwnerOverlapped final
 {
 public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)

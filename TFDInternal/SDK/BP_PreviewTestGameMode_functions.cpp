@@ -17,20 +17,6 @@
 namespace SDK
 {
 
-// Function BP_PreviewTestGameMode.BP_PreviewTestGameMode_C.ReceiveBeginPlay
-// (Event, Protected, BlueprintEvent)
-
-void ABP_PreviewTestGameMode_C::ReceiveBeginPlay()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("BP_PreviewTestGameMode_C", "ReceiveBeginPlay");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function BP_PreviewTestGameMode.BP_PreviewTestGameMode_C.ExecuteUbergraph_BP_PreviewTestGameMode
 // (Final, UbergraphFunction, HasDefaults)
 // Parameters:
@@ -48,6 +34,20 @@ void ABP_PreviewTestGameMode_C::ExecuteUbergraph_BP_PreviewTestGameMode(int32 En
 	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function BP_PreviewTestGameMode.BP_PreviewTestGameMode_C.ReceiveBeginPlay
+// (Event, Protected, BlueprintEvent)
+
+void ABP_PreviewTestGameMode_C::ReceiveBeginPlay()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BP_PreviewTestGameMode_C", "ReceiveBeginPlay");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 }

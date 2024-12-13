@@ -17,30 +17,6 @@
 namespace SDK
 {
 
-// Function BP_Sec_PC_001_A_VAR_BODY_000.BP_Sec_PC_001_A_VAR_BODY_000_C.AnimGraph
-// (HasOutParams, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// struct FPoseLink                        InPose                                                 (BlueprintVisible, BlueprintReadOnly, Parm, NoDestructor)
-// struct FPoseLink                        AnimGraph_0                                            (Parm, OutParm, NoDestructor)
-
-void UBP_Sec_PC_001_A_VAR_BODY_000_C::AnimGraph(const struct FPoseLink& InPose, struct FPoseLink* AnimGraph_0)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("BP_Sec_PC_001_A_VAR_BODY_000_C", "AnimGraph");
-
-	Params::BP_Sec_PC_001_A_VAR_BODY_000_C_AnimGraph Parms{};
-
-	Parms.InPose = std::move(InPose);
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	if (AnimGraph_0 != nullptr)
-		*AnimGraph_0 = std::move(Parms.AnimGraph_0);
-}
-
-
 // Function BP_Sec_PC_001_A_VAR_BODY_000.BP_Sec_PC_001_A_VAR_BODY_000_C.ExecuteUbergraph_BP_Sec_PC_001_A_VAR_BODY_000
 // (Final, UbergraphFunction)
 // Parameters:
@@ -78,6 +54,30 @@ void UBP_Sec_PC_001_A_VAR_BODY_000_C::BlueprintThreadSafeUpdateAnimation(float D
 	Parms.DeltaTime = DeltaTime;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function BP_Sec_PC_001_A_VAR_BODY_000.BP_Sec_PC_001_A_VAR_BODY_000_C.AnimGraph
+// (HasOutParams, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// struct FPoseLink                        InPose                                                 (BlueprintVisible, BlueprintReadOnly, Parm, NoDestructor)
+// struct FPoseLink                        AnimGraph_0                                            (Parm, OutParm, NoDestructor)
+
+void UBP_Sec_PC_001_A_VAR_BODY_000_C::AnimGraph(const struct FPoseLink& InPose, struct FPoseLink* AnimGraph_0)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BP_Sec_PC_001_A_VAR_BODY_000_C", "AnimGraph");
+
+	Params::BP_Sec_PC_001_A_VAR_BODY_000_C_AnimGraph Parms{};
+
+	Parms.InPose = std::move(InPose);
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	if (AnimGraph_0 != nullptr)
+		*AnimGraph_0 = std::move(Parms.AnimGraph_0);
 }
 
 }

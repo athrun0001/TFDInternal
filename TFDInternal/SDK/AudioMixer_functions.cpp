@@ -296,31 +296,6 @@ bool USynthComponent::IsPlaying() const
 }
 
 
-// Function AudioMixer.SubmixEffectSubmixEQPreset.SetSettings
-// (Final, Native, Public, HasOutParams, BlueprintCallable)
-// Parameters:
-// struct FSubmixEffectSubmixEQSettings    InSettings                                             (ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-
-void USubmixEffectSubmixEQPreset::SetSettings(const struct FSubmixEffectSubmixEQSettings& InSettings)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("SubmixEffectSubmixEQPreset", "SetSettings");
-
-	Params::SubmixEffectSubmixEQPreset_SetSettings Parms{};
-
-	Parms.InSettings = std::move(InSettings);
-
-	auto Flgs = Func->FunctionFlags;
-	Func->FunctionFlags |= 0x400;
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Func->FunctionFlags = Flgs;
-}
-
-
 // Function AudioMixer.AudioMixerBlueprintLibrary.AddMasterSubmixEffect
 // (Final, Native, Static, Public, BlueprintCallable)
 // Parameters:
@@ -1532,6 +1507,31 @@ void USubmixEffectDynamicsProcessorPreset::SetSettings(const struct FSubmixEffec
 	Params::SubmixEffectDynamicsProcessorPreset_SetSettings Parms{};
 
 	Parms.Settings_0 = std::move(Settings_0);
+
+	auto Flgs = Func->FunctionFlags;
+	Func->FunctionFlags |= 0x400;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Func->FunctionFlags = Flgs;
+}
+
+
+// Function AudioMixer.SubmixEffectSubmixEQPreset.SetSettings
+// (Final, Native, Public, HasOutParams, BlueprintCallable)
+// Parameters:
+// struct FSubmixEffectSubmixEQSettings    InSettings                                             (ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+
+void USubmixEffectSubmixEQPreset::SetSettings(const struct FSubmixEffectSubmixEQSettings& InSettings)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("SubmixEffectSubmixEQPreset", "SetSettings");
+
+	Params::SubmixEffectSubmixEQPreset_SetSettings Parms{};
+
+	Parms.InSettings = std::move(InSettings);
 
 	auto Flgs = Func->FunctionFlags;
 	Func->FunctionFlags |= 0x400;

@@ -33,12 +33,12 @@ public:
 
 public:
 	void UILoop();
-	void SequenceEvent__ENTRYPOINTUI_Guide_Respawn();
-	void OnAnimationFinished(const class UWidgetAnimation* Animation);
 	void ExecuteUbergraph_UI_Guide_Respawn(int32 EntryPoint);
+	void SequenceEvent__ENTRYPOINTUI_Guide_Respawn();
 	void BP_widget_playAkEvent(class UAkAudioEvent* AkEvent);
 	void BP_EndOverlap();
 	void BP_BeginOverlap();
+	void OnAnimationFinished(const class UWidgetAnimation* Animation);
 
 public:
 	static class UClass* StaticClass()

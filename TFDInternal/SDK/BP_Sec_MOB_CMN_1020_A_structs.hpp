@@ -16,6 +16,12 @@
 namespace SDK
 {
 
+// ScriptStruct BP_Sec_MOB_CMN_1020_A.BP_Sec_MOB_CMN_1020_A_C.AnimBlueprintGeneratedMutableData
+// 0x0000 (0x0001 - 0x0001)
+struct BP_Sec_MOB_CMN_1020_A::FAnimBlueprintGeneratedMutableData final : public FAnimBlueprintMutableData
+{
+};
+
 // ScriptStruct BP_Sec_MOB_CMN_1020_A.BP_Sec_MOB_CMN_1020_A_C.AnimBlueprintGeneratedConstantData
 // 0x00CF (0x00D0 - 0x0001)
 struct BP_Sec_MOB_CMN_1020_A::FAnimBlueprintGeneratedConstantData final : public FAnimBlueprintConstantData

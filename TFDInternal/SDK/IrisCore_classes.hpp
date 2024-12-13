@@ -18,21 +18,6 @@
 namespace SDK
 {
 
-// Class IrisCore.NetObjectFilter
-// 0x0000 (0x0028 - 0x0028)
-class UNetObjectFilter : public UObject
-{
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"NetObjectFilter">();
-	}
-	static class UNetObjectFilter* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UNetObjectFilter>();
-	}
-};
-
 // Class IrisCore.DataStream
 // 0x0000 (0x0028 - 0x0028)
 class UDataStream : public UObject
@@ -48,69 +33,21 @@ public:
 	}
 };
 
-// Class IrisCore.NetObjectFilterConfig
-// 0x0000 (0x0028 - 0x0028)
-class UNetObjectFilterConfig : public UObject
+// Class IrisCore.ReplicationBridge
+// 0x00E8 (0x0110 - 0x0028)
+class UReplicationBridge : public UObject
 {
 public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"NetObjectFilterConfig">();
-	}
-	static class UNetObjectFilterConfig* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UNetObjectFilterConfig>();
-	}
-};
-
-// Class IrisCore.FilterOutNetObjectFilterConfig
-// 0x0000 (0x0028 - 0x0028)
-class UFilterOutNetObjectFilterConfig final : public UNetObjectFilterConfig
-{
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"FilterOutNetObjectFilterConfig">();
-	}
-	static class UFilterOutNetObjectFilterConfig* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UFilterOutNetObjectFilterConfig>();
-	}
-};
-
-// Class IrisCore.NetBlobHandler
-// 0x0010 (0x0038 - 0x0028)
-class UNetBlobHandler : public UObject
-{
-public:
-	uint8                                         Pad_28[0x10];                                      // 0x0028(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	uint8                                         Pad_28[0xE8];                                      // 0x0028(0x00E8)(Fixing Struct Size After Last Property [ Dumper-7 ])
 
 public:
 	static class UClass* StaticClass()
 	{
-		return StaticClassImpl<"NetBlobHandler">();
+		return StaticClassImpl<"ReplicationBridge">();
 	}
-	static class UNetBlobHandler* GetDefaultObj()
+	static class UReplicationBridge* GetDefaultObj()
 	{
-		return GetDefaultObjImpl<UNetBlobHandler>();
-	}
-};
-
-// Class IrisCore.NetRPCHandler
-// 0x0008 (0x0040 - 0x0038)
-class UNetRPCHandler final : public UNetBlobHandler
-{
-public:
-	uint8                                         Pad_38[0x8];                                       // 0x0038(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"NetRPCHandler">();
-	}
-	static class UNetRPCHandler* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UNetRPCHandler>();
+		return GetDefaultObjImpl<UReplicationBridge>();
 	}
 };
 
@@ -151,26 +88,48 @@ public:
 	}
 };
 
-// Class IrisCore.ObjectReplicationBridgeConfig
-// 0x0050 (0x0078 - 0x0028)
-class UObjectReplicationBridgeConfig final : public UObject
+// Class IrisCore.NetObjectFilterConfig
+// 0x0000 (0x0028 - 0x0028)
+class UNetObjectFilterConfig : public UObject
 {
-public:
-	TArray<struct FObjectReplicationBridgePollConfig> PollConfigs;                                       // 0x0028(0x0010)(ZeroConstructor, Config, NativeAccessSpecifierPrivate)
-	TArray<struct FObjectReplicationBridgeFilterConfig> FilterConfigs;                                     // 0x0038(0x0010)(ZeroConstructor, Config, NativeAccessSpecifierPrivate)
-	TArray<struct FObjectReplicationBridgePrioritizerConfig> PrioritizerConfigs;                                // 0x0048(0x0010)(ZeroConstructor, Config, NativeAccessSpecifierPrivate)
-	TArray<struct FObjectReplicationBridgeDeltaCompressionConfig> DeltaCompressionConfigs;                           // 0x0058(0x0010)(ZeroConstructor, Config, NativeAccessSpecifierPrivate)
-	class FName                                   DefaultSpatialFilterName;                          // 0x0068(0x0008)(ZeroConstructor, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-	class FName                                   RequiredNetDriverChannelClassName;                 // 0x0070(0x0008)(ZeroConstructor, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-
 public:
 	static class UClass* StaticClass()
 	{
-		return StaticClassImpl<"ObjectReplicationBridgeConfig">();
+		return StaticClassImpl<"NetObjectFilterConfig">();
 	}
-	static class UObjectReplicationBridgeConfig* GetDefaultObj()
+	static class UNetObjectFilterConfig* GetDefaultObj()
 	{
-		return GetDefaultObjImpl<UObjectReplicationBridgeConfig>();
+		return GetDefaultObjImpl<UNetObjectFilterConfig>();
+	}
+};
+
+// Class IrisCore.FilterOutNetObjectFilterConfig
+// 0x0000 (0x0028 - 0x0028)
+class UFilterOutNetObjectFilterConfig final : public UNetObjectFilterConfig
+{
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"FilterOutNetObjectFilterConfig">();
+	}
+	static class UFilterOutNetObjectFilterConfig* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UFilterOutNetObjectFilterConfig>();
+	}
+};
+
+// Class IrisCore.NetObjectFilter
+// 0x0000 (0x0028 - 0x0028)
+class UNetObjectFilter : public UObject
+{
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"NetObjectFilter">();
+	}
+	static class UNetObjectFilter* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UNetObjectFilter>();
 	}
 };
 
@@ -237,6 +196,24 @@ public:
 	static class ULocationBasedNetObjectPrioritizer* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<ULocationBasedNetObjectPrioritizer>();
+	}
+};
+
+// Class IrisCore.NetBlobHandler
+// 0x0010 (0x0038 - 0x0028)
+class UNetBlobHandler : public UObject
+{
+public:
+	uint8                                         Pad_28[0x10];                                      // 0x0028(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"NetBlobHandler">();
+	}
+	static class UNetBlobHandler* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UNetBlobHandler>();
 	}
 };
 
@@ -408,6 +385,24 @@ public:
 	}
 };
 
+// Class IrisCore.NetRPCHandler
+// 0x0008 (0x0040 - 0x0038)
+class UNetRPCHandler final : public UNetBlobHandler
+{
+public:
+	uint8                                         Pad_38[0x8];                                       // 0x0038(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"NetRPCHandler">();
+	}
+	static class UNetRPCHandler* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UNetRPCHandler>();
+	}
+};
+
 // Class IrisCore.NetTokenDataStream
 // 0x0050 (0x0078 - 0x0028)
 class UNetTokenDataStream final : public UDataStream
@@ -456,24 +451,6 @@ public:
 	}
 };
 
-// Class IrisCore.ReplicationBridge
-// 0x00E8 (0x0110 - 0x0028)
-class UReplicationBridge : public UObject
-{
-public:
-	uint8                                         Pad_28[0xE8];                                      // 0x0028(0x00E8)(Fixing Struct Size After Last Property [ Dumper-7 ])
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"ReplicationBridge">();
-	}
-	static class UReplicationBridge* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UReplicationBridge>();
-	}
-};
-
 // Class IrisCore.ObjectReplicationBridge
 // 0x0330 (0x0440 - 0x0110)
 class UObjectReplicationBridge : public UReplicationBridge
@@ -489,6 +466,29 @@ public:
 	static class UObjectReplicationBridge* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<UObjectReplicationBridge>();
+	}
+};
+
+// Class IrisCore.ObjectReplicationBridgeConfig
+// 0x0050 (0x0078 - 0x0028)
+class UObjectReplicationBridgeConfig final : public UObject
+{
+public:
+	TArray<struct FObjectReplicationBridgePollConfig> PollConfigs;                                       // 0x0028(0x0010)(ZeroConstructor, Config, NativeAccessSpecifierPrivate)
+	TArray<struct FObjectReplicationBridgeFilterConfig> FilterConfigs;                                     // 0x0038(0x0010)(ZeroConstructor, Config, NativeAccessSpecifierPrivate)
+	TArray<struct FObjectReplicationBridgePrioritizerConfig> PrioritizerConfigs;                                // 0x0048(0x0010)(ZeroConstructor, Config, NativeAccessSpecifierPrivate)
+	TArray<struct FObjectReplicationBridgeDeltaCompressionConfig> DeltaCompressionConfigs;                           // 0x0058(0x0010)(ZeroConstructor, Config, NativeAccessSpecifierPrivate)
+	class FName                                   DefaultSpatialFilterName;                          // 0x0068(0x0008)(ZeroConstructor, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+	class FName                                   RequiredNetDriverChannelClassName;                 // 0x0070(0x0008)(ZeroConstructor, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"ObjectReplicationBridgeConfig">();
+	}
+	static class UObjectReplicationBridgeConfig* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UObjectReplicationBridgeConfig>();
 	}
 };
 

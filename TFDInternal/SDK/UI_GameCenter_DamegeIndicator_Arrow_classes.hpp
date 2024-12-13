@@ -35,10 +35,10 @@ public:
 	void Tick(const struct FGeometry& MyGeometry, float InDeltaTime);
 	void StateSetting(int32 State);
 	void PreConstruct(bool IsDesignTime);
+	void PlayAnimations();
 	void ExecuteUbergraph_UI_GameCenter_DamegeIndicator_Arrow(int32 EntryPoint);
 	void Construct();
 	void BP_Init();
-	void PlayAnimations();
 
 public:
 	static class UClass* StaticClass()

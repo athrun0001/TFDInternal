@@ -370,6 +370,20 @@ void ULocomotion_C::EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimG
 }
 
 
+// Function Locomotion.Locomotion_C.EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_4493892A496BF91BB06913BFD7170CA3
+// (BlueprintEvent)
+
+void ULocomotion_C::EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_4493892A496BF91BB06913BFD7170CA3()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Locomotion_C", "EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_4493892A496BF91BB06913BFD7170CA3");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function Locomotion.Locomotion_C.EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_3319593F410F82EB051771A9EE2CEDD7
 // (BlueprintEvent)
 
@@ -468,17 +482,23 @@ void ULocomotion_C::EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimG
 }
 
 
-// Function Locomotion.Locomotion_C.EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_4493892A496BF91BB06913BFD7170CA3
-// (BlueprintEvent)
+// Function Locomotion.Locomotion_C.BlueprintUpdateAnimation
+// (Event, Public, BlueprintEvent)
+// Parameters:
+// float                                   DeltaTimeX                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
-void ULocomotion_C::EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_4493892A496BF91BB06913BFD7170CA3()
+void ULocomotion_C::BlueprintUpdateAnimation(float DeltaTimeX)
 {
 	static class UFunction* Func = nullptr;
 
 	if (Func == nullptr)
-		Func = Class->GetFunction("Locomotion_C", "EvaluateGraphExposedInputs_ExecuteUbergraph_Locomotion_AnimGraphNode_TransitionResult_4493892A496BF91BB06913BFD7170CA3");
+		Func = Class->GetFunction("Locomotion_C", "BlueprintUpdateAnimation");
 
-	UObject::ProcessEvent(Func, nullptr);
+	Params::Locomotion_C_BlueprintUpdateAnimation Parms{};
+
+	Parms.DeltaTimeX = DeltaTimeX;
+
+	UObject::ProcessEvent(Func, &Parms);
 }
 
 
@@ -514,26 +534,6 @@ void ULocomotion_C::AnimGraph(struct FPoseLink* AnimGraph_0)
 
 	if (AnimGraph_0 != nullptr)
 		*AnimGraph_0 = std::move(Parms.AnimGraph_0);
-}
-
-
-// Function Locomotion.Locomotion_C.BlueprintUpdateAnimation
-// (Event, Public, BlueprintEvent)
-// Parameters:
-// float                                   DeltaTimeX                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void ULocomotion_C::BlueprintUpdateAnimation(float DeltaTimeX)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Locomotion_C", "BlueprintUpdateAnimation");
-
-	Params::Locomotion_C_BlueprintUpdateAnimation Parms{};
-
-	Parms.DeltaTimeX = DeltaTimeX;
-
-	UObject::ProcessEvent(Func, &Parms);
 }
 
 }

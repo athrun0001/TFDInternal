@@ -10,11 +10,11 @@
 
 #include "Basic.hpp"
 
+#include "Engine_structs.hpp"
 #include "M1_classes.hpp"
 #include "M1Data_structs.hpp"
-#include "ViessaPassiveTargetInfo_structs.hpp"
-#include "Engine_structs.hpp"
 #include "GameplayTags_structs.hpp"
+#include "ViessaPassiveTargetInfo_structs.hpp"
 
 
 namespace SDK

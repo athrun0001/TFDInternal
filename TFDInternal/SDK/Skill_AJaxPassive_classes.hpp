@@ -10,10 +10,10 @@
 
 #include "Basic.hpp"
 
-#include "Engine_structs.hpp"
 #include "M1Data_structs.hpp"
 #include "M1_structs.hpp"
 #include "M1_classes.hpp"
+#include "Engine_structs.hpp"
 
 
 namespace SDK

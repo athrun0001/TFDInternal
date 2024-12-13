@@ -32,12 +32,12 @@ public:
 	void OnFunctionalTest();
 	void OnEventReceived_6BD88B004E57299C75FE6DB6B89DE81C(const struct FM1AbilityEvent& Event);
 	void OnCompleted_6BD88B004E57299C75FE6DB6B89DE81C(const struct FM1AbilityEvent& Event);
-	void ExecuteUbergraph_Skill_AJaxHyperCube(int32 EntryPoint);
-	void BP_OnDeactivated(bool bCancelled);
-	void BP_OnActivated();
 	void OnBlendOut_6BD88B004E57299C75FE6DB6B89DE81C(const struct FM1AbilityEvent& Event);
 	void OnAbilityEvent_1F6E028A4095C5034DD575915DFF51D5(const struct FM1AbilityEvent& Event);
 	void GetSkillMontage(class UAnimMontage** SkillMontage);
+	void ExecuteUbergraph_Skill_AJaxHyperCube(int32 EntryPoint);
+	void BP_OnDeactivated(bool bCancelled);
+	void BP_OnActivated();
 
 	void BP_MakePreloadAssetList(struct FM1AbilityAssetPreload* OutAbilityAssetPreload) const;
 

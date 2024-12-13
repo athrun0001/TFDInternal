@@ -17,6 +17,26 @@
 namespace SDK
 {
 
+// Function UI_Timer.UI_Timer_C.ExecuteUbergraph_UI_Timer
+// (Final, UbergraphFunction)
+// Parameters:
+// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_Timer_C::ExecuteUbergraph_UI_Timer(int32 EntryPoint)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Timer_C", "ExecuteUbergraph_UI_Timer");
+
+	Params::UI_Timer_C_ExecuteUbergraph_UI_Timer Parms{};
+
+	Parms.EntryPoint = EntryPoint;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
 // Function UI_Timer.UI_Timer_C.SetUI_IconBrush
 // (Public, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -52,26 +72,6 @@ void UUI_Timer_C::PreConstruct(bool IsDesignTime)
 	Params::UI_Timer_C_PreConstruct Parms{};
 
 	Parms.IsDesignTime = IsDesignTime;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_Timer.UI_Timer_C.ExecuteUbergraph_UI_Timer
-// (Final, UbergraphFunction)
-// Parameters:
-// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Timer_C::ExecuteUbergraph_UI_Timer(int32 EntryPoint)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Timer_C", "ExecuteUbergraph_UI_Timer");
-
-	Params::UI_Timer_C_ExecuteUbergraph_UI_Timer Parms{};
-
-	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

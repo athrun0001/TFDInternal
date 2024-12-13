@@ -31,6 +31,28 @@ void UUI_ItemIcon_Perk_C::SetUIStyel()
 }
 
 
+// Function UI_ItemIcon_Perk.UI_ItemIcon_Perk_C.SetPerkLevel
+// (Public, HasDefaults, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// int32                                   Level                                                  (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// bool                                    MaxLevel                                               (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_ItemIcon_Perk_C::SetPerkLevel(int32 Level, bool MaxLevel)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ItemIcon_Perk_C", "SetPerkLevel");
+
+	Params::UI_ItemIcon_Perk_C_SetPerkLevel Parms{};
+
+	Parms.Level = Level;
+	Parms.MaxLevel = MaxLevel;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
 // Function UI_ItemIcon_Perk.UI_ItemIcon_Perk_C.PreConstruct
 // (BlueprintCosmetic, Event, Public, BlueprintEvent)
 // Parameters:
@@ -66,28 +88,6 @@ void UUI_ItemIcon_Perk_C::ExecuteUbergraph_UI_ItemIcon_Perk(int32 EntryPoint)
 	Params::UI_ItemIcon_Perk_C_ExecuteUbergraph_UI_ItemIcon_Perk Parms{};
 
 	Parms.EntryPoint = EntryPoint;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_ItemIcon_Perk.UI_ItemIcon_Perk_C.SetPerkLevel
-// (Public, HasDefaults, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// int32                                   Level                                                  (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-// bool                                    MaxLevel                                               (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_ItemIcon_Perk_C::SetPerkLevel(int32 Level, bool MaxLevel)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ItemIcon_Perk_C", "SetPerkLevel");
-
-	Params::UI_ItemIcon_Perk_C_SetPerkLevel Parms{};
-
-	Parms.Level = Level;
-	Parms.MaxLevel = MaxLevel;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

@@ -18,6 +18,21 @@
 namespace SDK
 {
 
+// Class RigVM.RigVMMemoryStorage
+// 0x0000 (0x0028 - 0x0028)
+class URigVMMemoryStorage final : public UObject
+{
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"RigVMMemoryStorage">();
+	}
+	static class URigVMMemoryStorage* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<URigVMMemoryStorage>();
+	}
+};
+
 // Class RigVM.RigVMHost
 // 0x0158 (0x0180 - 0x0028)
 class URigVMHost : public UObject
@@ -90,64 +105,6 @@ public:
 	}
 };
 
-// Class RigVM.RigVMMemoryStorage
-// 0x0000 (0x0028 - 0x0028)
-class URigVMMemoryStorage final : public UObject
-{
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"RigVMMemoryStorage">();
-	}
-	static class URigVMMemoryStorage* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<URigVMMemoryStorage>();
-	}
-};
-
-// Class RigVM.RigVMUserWorkflowOptions
-// 0x0070 (0x0098 - 0x0028)
-class URigVMUserWorkflowOptions : public UObject
-{
-public:
-	class UObject*                                Subject;                                           // 0x0028(0x0008)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, NoDestructor, Protected, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierProtected)
-	struct FRigVMUserWorkflow                     Workflow;                                          // 0x0030(0x0058)(Edit, BlueprintVisible, BlueprintReadOnly, DisableEditOnInstance, ContainsInstancedReference, Protected, NativeAccessSpecifierProtected)
-	uint8                                         Pad_88[0x10];                                      // 0x0088(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
-
-public:
-	void ReportError(const class FString& InMessage);
-	void ReportInfo(const class FString& InMessage);
-	void ReportWarning(const class FString& InMessage);
-
-	bool IsValid() const;
-	bool RequiresDialog() const;
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"RigVMUserWorkflowOptions">();
-	}
-	static class URigVMUserWorkflowOptions* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<URigVMUserWorkflowOptions>();
-	}
-};
-
-// Class RigVM.RigVMGraphFunctionHost
-// 0x0000 (0x0028 - 0x0028)
-class IRigVMGraphFunctionHost final : public IInterface
-{
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"RigVMGraphFunctionHost">();
-	}
-	static class IRigVMGraphFunctionHost* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<IRigVMGraphFunctionHost>();
-	}
-};
-
 // Class RigVM.RigVM
 // 0x03C8 (0x03F0 - 0x0028)
 class URigVM : public UObject
@@ -206,6 +163,49 @@ public:
 	static class URigVM* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<URigVM>();
+	}
+};
+
+// Class RigVM.RigVMUserWorkflowOptions
+// 0x0070 (0x0098 - 0x0028)
+class URigVMUserWorkflowOptions : public UObject
+{
+public:
+	class UObject*                                Subject;                                           // 0x0028(0x0008)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, NoDestructor, Protected, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	struct FRigVMUserWorkflow                     Workflow;                                          // 0x0030(0x0058)(Edit, BlueprintVisible, BlueprintReadOnly, DisableEditOnInstance, ContainsInstancedReference, Protected, NativeAccessSpecifierProtected)
+	uint8                                         Pad_88[0x10];                                      // 0x0088(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	void ReportError(const class FString& InMessage);
+	void ReportInfo(const class FString& InMessage);
+	void ReportWarning(const class FString& InMessage);
+
+	bool IsValid() const;
+	bool RequiresDialog() const;
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"RigVMUserWorkflowOptions">();
+	}
+	static class URigVMUserWorkflowOptions* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<URigVMUserWorkflowOptions>();
+	}
+};
+
+// Class RigVM.RigVMGraphFunctionHost
+// 0x0000 (0x0028 - 0x0028)
+class IRigVMGraphFunctionHost final : public IInterface
+{
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"RigVMGraphFunctionHost">();
+	}
+	static class IRigVMGraphFunctionHost* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<IRigVMGraphFunctionHost>();
 	}
 };
 

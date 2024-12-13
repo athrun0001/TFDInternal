@@ -18,11 +18,11 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass NormalMonsterBase.NormalMonsterBase_C
-// 0x0010 (0x0F20 - 0x0F10)
+// 0x0010 (0x0F30 - 0x0F20)
 class ANormalMonsterBase_C : public AM1NormalMonster
 {
 public:
-	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0F10(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
+	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0F20(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
 
 public:
 	void ReceiveBeginPlay();

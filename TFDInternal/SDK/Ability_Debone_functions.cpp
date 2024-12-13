@@ -17,6 +17,30 @@
 namespace SDK
 {
 
+// Function Ability_Debone.Ability_Debone_C.UpdateStamina
+// (Public, HasOutParams, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// double                                  DeltaSeconds                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// bool                                    bRunOutStamina                                         (Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UAbility_Debone_C::UpdateStamina(double DeltaSeconds, bool* bRunOutStamina)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Ability_Debone_C", "UpdateStamina");
+
+	Params::Ability_Debone_C_UpdateStamina Parms{};
+
+	Parms.DeltaSeconds = DeltaSeconds;
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	if (bRunOutStamina != nullptr)
+		*bRunOutStamina = Parms.bRunOutStamina;
+}
+
+
 // Function Ability_Debone.Ability_Debone_C.UpdatePositionAndIK
 // (Public, HasDefaults, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -65,27 +89,23 @@ void UAbility_Debone_C::TryAbilityEventDeboneEnd()
 }
 
 
-// Function Ability_Debone.Ability_Debone_C.UpdateStamina
-// (Public, HasOutParams, BlueprintCallable, BlueprintEvent)
+// Function Ability_Debone.Ability_Debone_C.StopArriveCameraClamp
+// (Public, BlueprintCallable, BlueprintEvent)
 // Parameters:
-// double                                  DeltaSeconds                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-// bool                                    bRunOutStamina                                         (Parm, OutParm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// bool                                    bStop                                                  (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
-void UAbility_Debone_C::UpdateStamina(double DeltaSeconds, bool* bRunOutStamina)
+void UAbility_Debone_C::StopArriveCameraClamp(bool bStop)
 {
 	static class UFunction* Func = nullptr;
 
 	if (Func == nullptr)
-		Func = Class->GetFunction("Ability_Debone_C", "UpdateStamina");
+		Func = Class->GetFunction("Ability_Debone_C", "StopArriveCameraClamp");
 
-	Params::Ability_Debone_C_UpdateStamina Parms{};
+	Params::Ability_Debone_C_StopArriveCameraClamp Parms{};
 
-	Parms.DeltaSeconds = DeltaSeconds;
+	Parms.bStop = bStop;
 
 	UObject::ProcessEvent(Func, &Parms);
-
-	if (bRunOutStamina != nullptr)
-		*bRunOutStamina = Parms.bRunOutStamina;
 }
 
 
@@ -157,26 +177,6 @@ void UAbility_Debone_C::ServerOnReceiveCancelInput()
 }
 
 
-// Function Ability_Debone.Ability_Debone_C.StopArriveCameraClamp
-// (Public, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// bool                                    bStop                                                  (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UAbility_Debone_C::StopArriveCameraClamp(bool bStop)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Ability_Debone_C", "StopArriveCameraClamp");
-
-	Params::Ability_Debone_C_StopArriveCameraClamp Parms{};
-
-	Parms.bStop = bStop;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function Ability_Debone.Ability_Debone_C.ServerOnReceiveAction1Input
 // (Net, NetReliable, NetServer, BlueprintCallable, BlueprintEvent)
 
@@ -208,6 +208,40 @@ void UAbility_Debone_C::ServerIgnoreDeboneStamina(bool bIgnore)
 	Parms.bIgnore = bIgnore;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function Ability_Debone.Ability_Debone_C.ServerIgnoreDeboneCooltime
+// (Net, NetServer, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// bool                                    bIgnore                                                (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UAbility_Debone_C::ServerIgnoreDeboneCooltime(bool bIgnore)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Ability_Debone_C", "ServerIgnoreDeboneCooltime");
+
+	Params::Ability_Debone_C_ServerIgnoreDeboneCooltime Parms{};
+
+	Parms.bIgnore = bIgnore;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function Ability_Debone.Ability_Debone_C.ResetDebone
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UAbility_Debone_C::ResetDebone()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Ability_Debone_C", "ResetDebone");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 
@@ -515,26 +549,6 @@ void UAbility_Debone_C::OnAbilityEvent_C04518B1422087423B7917B34F50F3BC(const st
 }
 
 
-// Function Ability_Debone.Ability_Debone_C.OnAbilityEvent_792E32904B35F1C03B854FBCAA6B6319
-// (HasOutParams, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// struct FM1AbilityEvent                  Event                                                  (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
-
-void UAbility_Debone_C::OnAbilityEvent_792E32904B35F1C03B854FBCAA6B6319(const struct FM1AbilityEvent& Event)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Ability_Debone_C", "OnAbilityEvent_792E32904B35F1C03B854FBCAA6B6319");
-
-	Params::Ability_Debone_C_OnAbilityEvent_792E32904B35F1C03B854FBCAA6B6319 Parms{};
-
-	Parms.Event = std::move(Event);
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function Ability_Debone.Ability_Debone_C.OnAbilityEvent_50AC98084D5FAC1BCBD9EDA054BAAD2B
 // (HasOutParams, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -548,6 +562,26 @@ void UAbility_Debone_C::OnAbilityEvent_50AC98084D5FAC1BCBD9EDA054BAAD2B(const st
 		Func = Class->GetFunction("Ability_Debone_C", "OnAbilityEvent_50AC98084D5FAC1BCBD9EDA054BAAD2B");
 
 	Params::Ability_Debone_C_OnAbilityEvent_50AC98084D5FAC1BCBD9EDA054BAAD2B Parms{};
+
+	Parms.Event = std::move(Event);
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function Ability_Debone.Ability_Debone_C.OnAbilityEvent_792E32904B35F1C03B854FBCAA6B6319
+// (HasOutParams, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// struct FM1AbilityEvent                  Event                                                  (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
+
+void UAbility_Debone_C::OnAbilityEvent_792E32904B35F1C03B854FBCAA6B6319(const struct FM1AbilityEvent& Event)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Ability_Debone_C", "OnAbilityEvent_792E32904B35F1C03B854FBCAA6B6319");
+
+	Params::Ability_Debone_C_OnAbilityEvent_792E32904B35F1C03B854FBCAA6B6319 Parms{};
 
 	Parms.Event = std::move(Event);
 
@@ -1045,40 +1079,6 @@ void UAbility_Debone_C::AbilityEvent_DeboneArrived()
 
 	if (Func == nullptr)
 		Func = Class->GetFunction("Ability_Debone_C", "AbilityEvent_DeboneArrived");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function Ability_Debone.Ability_Debone_C.ServerIgnoreDeboneCooltime
-// (Net, NetServer, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// bool                                    bIgnore                                                (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UAbility_Debone_C::ServerIgnoreDeboneCooltime(bool bIgnore)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Ability_Debone_C", "ServerIgnoreDeboneCooltime");
-
-	Params::Ability_Debone_C_ServerIgnoreDeboneCooltime Parms{};
-
-	Parms.bIgnore = bIgnore;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function Ability_Debone.Ability_Debone_C.ResetDebone
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UAbility_Debone_C::ResetDebone()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Ability_Debone_C", "ResetDebone");
 
 	UObject::ProcessEvent(Func, nullptr);
 }

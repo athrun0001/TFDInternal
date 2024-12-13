@@ -10,18 +10,26 @@
 
 #include "Basic.hpp"
 
-#include "PhysicsCore_structs.hpp"
-#include "CoreUObject_structs.hpp"
 #include "GameplayTags_structs.hpp"
-#include "SubSkillSetting_structs.hpp"
-#include "SubSkillCollision_structs.hpp"
+#include "CoreUObject_structs.hpp"
 #include "M1Data_structs.hpp"
 #include "M1_structs.hpp"
+#include "SubSkillSetting_structs.hpp"
+#include "SubSkillCollision_structs.hpp"
 #include "Engine_structs.hpp"
+#include "PhysicsCore_structs.hpp"
 
 
 namespace SDK::Params
 {
+
+// Function Default_Fist.Default_Fist_C.ServerDamageToEnemy
+// 0x0010 (0x0010 - 0x0000)
+struct Default_Fist_C_ServerDamageToEnemy final
+{
+public:
+	TArray<class AActor*>                         InEnemies;                                         // 0x0000(0x0010)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
+};
 
 // Function Default_Fist.Default_Fist_C.SendRuneEvent
 // 0x0148 (0x0148 - 0x0000)
@@ -60,14 +68,6 @@ public:
 	struct FM1AbilityEvent                        K2Node_MakeStruct_M1AbilityEvent_1;                // 0x0058(0x0040)()
 };
 
-// Function Default_Fist.Default_Fist_C.ServerDamageToEnemy
-// 0x0010 (0x0010 - 0x0000)
-struct Default_Fist_C_ServerDamageToEnemy final
-{
-public:
-	TArray<class AActor*>                         InEnemies;                                         // 0x0000(0x0010)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
-};
-
 // Function Default_Fist.Default_Fist_C.RotateToAttackDirectionIfNeed
 // 0x0018 (0x0018 - 0x0000)
 struct Default_Fist_C_RotateToAttackDirectionIfNeed final
@@ -77,6 +77,24 @@ public:
 	struct FRotator                               CallFunc_Conv_VectorToRotator_ReturnValue;         // 0x0008(0x000C)(ZeroConstructor, IsPlainOldData, NoDestructor)
 	bool                                          CallFunc_Vector_IsNearlyZero_ReturnValue;          // 0x0014(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          CallFunc_K2_SetActorRotation_ReturnValue;          // 0x0015(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function Default_Fist.Default_Fist_C.OnUpdate_1C9BEB0A42DB15447A2DAA9BAFDF1BEE
+// 0x0004 (0x0004 - 0x0000)
+struct Default_Fist_C_OnUpdate_1C9BEB0A42DB15447A2DAA9BAFDF1BEE final
+{
+public:
+	float                                         DeltaTime;                                         // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function Default_Fist.Default_Fist_C.OnRep_bIsLanded
+// 0x0018 (0x0018 - 0x0000)
+struct Default_Fist_C_OnRep_bIsLanded final
+{
+public:
+	class UAnimMontage*                           CallFunc_GetAnimMontage_ReturnValue;               // 0x0000(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	class AActor*                                 CallFunc_GetOwnerActor_ReturnValue;                // 0x0008(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	bool                                          CallFunc_IsValid_ReturnValue;                      // 0x0010(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function Default_Fist.Default_Fist_C.OnFinished_FA896AD34AED6B31532A3BB7F0DD5EC9
@@ -90,35 +108,9 @@ public:
 	struct FVector                                FinalTargetLocation;                               // 0x0004(0x000C)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function Default_Fist.Default_Fist_C.OnUpdate_1C9BEB0A42DB15447A2DAA9BAFDF1BEE
-// 0x0004 (0x0004 - 0x0000)
-struct Default_Fist_C_OnUpdate_1C9BEB0A42DB15447A2DAA9BAFDF1BEE final
-{
-public:
-	float                                         DeltaTime;                                         // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function Default_Fist.Default_Fist_C.OnEventReceived_D54F2B39422DA08EA130338C89FA1FCE
 // 0x0040 (0x0040 - 0x0000)
 struct Default_Fist_C_OnEventReceived_D54F2B39422DA08EA130338C89FA1FCE final
-{
-public:
-	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
-};
-
-// Function Default_Fist.Default_Fist_C.OnRep_bIsLanded
-// 0x0018 (0x0018 - 0x0000)
-struct Default_Fist_C_OnRep_bIsLanded final
-{
-public:
-	class UAnimMontage*                           CallFunc_GetAnimMontage_ReturnValue;               // 0x0000(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	class AActor*                                 CallFunc_GetOwnerActor_ReturnValue;                // 0x0008(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	bool                                          CallFunc_IsValid_ReturnValue;                      // 0x0010(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function Default_Fist.Default_Fist_C.OnEventReceived_07EC16C846839553D378A2A49AB9C354
-// 0x0040 (0x0040 - 0x0000)
-struct Default_Fist_C_OnEventReceived_07EC16C846839553D378A2A49AB9C354 final
 {
 public:
 	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
@@ -132,12 +124,28 @@ public:
 	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
 };
 
+// Function Default_Fist.Default_Fist_C.OnEventReceived_07EC16C846839553D378A2A49AB9C354
+// 0x0040 (0x0040 - 0x0000)
+struct Default_Fist_C_OnEventReceived_07EC16C846839553D378A2A49AB9C354 final
+{
+public:
+	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
+};
+
 // Function Default_Fist.Default_Fist_C.OnEvent_726A9F1347453B65ABB65DAE8EEB8F6E
 // 0x0140 (0x0140 - 0x0000)
 struct Default_Fist_C_OnEvent_726A9F1347453B65ABB65DAE8EEB8F6E final
 {
 public:
 	struct FM1CalcDamageInfo                      DamageInfo;                                        // 0x0000(0x0140)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, ContainsInstancedReference)
+};
+
+// Function Default_Fist.Default_Fist_C.OnCompleted_D54F2B39422DA08EA130338C89FA1FCE
+// 0x0040 (0x0040 - 0x0000)
+struct Default_Fist_C_OnCompleted_D54F2B39422DA08EA130338C89FA1FCE final
+{
+public:
+	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
 };
 
 // Function Default_Fist.Default_Fist_C.OnCompleted_5E573E1E46AA8A55B901328E15DB16D6
@@ -175,14 +183,6 @@ public:
 // Function Default_Fist.Default_Fist_C.OnBlendOut_07EC16C846839553D378A2A49AB9C354
 // 0x0040 (0x0040 - 0x0000)
 struct Default_Fist_C_OnBlendOut_07EC16C846839553D378A2A49AB9C354 final
-{
-public:
-	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
-};
-
-// Function Default_Fist.Default_Fist_C.OnCompleted_D54F2B39422DA08EA130338C89FA1FCE
-// 0x0040 (0x0040 - 0x0000)
-struct Default_Fist_C_OnCompleted_D54F2B39422DA08EA130338C89FA1FCE final
 {
 public:
 	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
@@ -258,25 +258,6 @@ public:
 	class UAnimMontage*                           K2Node_Select_Default;                             // 0x0058(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function Default_Fist.Default_Fist_C.GetAnimMontage
-// 0x0058 (0x0058 - 0x0000)
-struct Default_Fist_C_GetAnimMontage final
-{
-public:
-	struct FGameplayTag                           Key;                                               // 0x0000(0x0008)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, NoDestructor, HasGetValueTypeHash)
-	class UAnimMontage*                           ReturnValue;                                       // 0x0008(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash)
-	bool                                          Temp_bool_Variable;                                // 0x0010(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FSubSkillSetting                       CallFunc_Map_Find_Value;                           // 0x0018(0x0020)(HasGetValueTypeHash)
-	bool                                          CallFunc_Map_Find_ReturnValue;                     // 0x0038(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class AActor*                                 CallFunc_GetOwnerActor_ReturnValue;                // 0x0040(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	EM1CharacterGender                            CallFunc_GetPlayerAnimPresetType_ReturnValue;      // 0x0048(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          CallFunc_EqualEqual_ByteByte_ReturnValue;          // 0x0049(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_4A[0x6];                                       // 0x004A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	class UAnimMontage*                           K2Node_Select_Default;                             // 0x0050(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function Default_Fist.Default_Fist_C.GetAttackTag
 // 0x0058 (0x0058 - 0x0000)
 struct Default_Fist_C_GetAttackTag final
@@ -302,67 +283,23 @@ public:
 	struct FGameplayTag                           K2Node_Select_Default_1;                           // 0x0050(0x0008)(NoDestructor, HasGetValueTypeHash)
 };
 
-// Function Default_Fist.Default_Fist_C.DamageToEnemy
-// 0x0108 (0x0108 - 0x0000)
-struct Default_Fist_C_DamageToEnemy final
+// Function Default_Fist.Default_Fist_C.GetAnimMontage
+// 0x0058 (0x0058 - 0x0000)
+struct Default_Fist_C_GetAnimMontage final
 {
 public:
-	int32                                         AttackCount;                                       // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FSubSkillSetting                       InSetting;                                         // 0x0008(0x0020)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, HasGetValueTypeHash)
-	struct FGameplayTagContainer                  AttackTag;                                         // 0x0028(0x0020)(Edit, BlueprintVisible)
-	struct FVector                                FinalDamgeExtent;                                  // 0x0048(0x000C)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	struct FRotator                               FinalDamageRotation;                               // 0x0054(0x000C)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor)
-	struct FVector                                FinalDamageLocation;                               // 0x0060(0x000C)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	struct FSubSkillCollision                     LocalDamageCollision;                              // 0x006C(0x0028)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          Temp_bool_Variable;                                // 0x0094(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_95[0x3];                                       // 0x0095(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<class AActor*>                         CallFunc_Get_Target_Actors_OutActors;              // 0x0098(0x0010)(ReferenceParm)
-	int32                                         Temp_int_Array_Index_Variable;                     // 0x00A8(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	int32                                         CallFunc_Array_Length_ReturnValue;                 // 0x00AC(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	class AActor*                                 CallFunc_Array_Get_Item;                           // 0x00B0(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	struct FVector                                CallFunc_K2_GetActorLocation_ReturnValue;          // 0x00B8(0x000C)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	EPhysicalSurface                              CallFunc_GetSurfaceType_ReturnValue;               // 0x00C4(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	EValidOutputPin                               CallFunc_FindAkComponentWithValid_OutputPins;      // 0x00C5(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_C6[0x2];                                       // 0x00C6(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	class UM1AkComponent*                         CallFunc_FindAkComponentWithValid_ReturnValue;     // 0x00C8(0x0008)(ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
-	TArray<class UNiagaraComponent*>              CallFunc_SpawnFXsForAbilityToTarget_ReturnValue;   // 0x00D0(0x0010)(ReferenceParm, ContainsInstancedReference)
-	bool                                          K2Node_SwitchEnum_CmpSuccess;                      // 0x00E0(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          CallFunc_IsDedicatedServer_ReturnValue;            // 0x00E1(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_E2[0x2];                                       // 0x00E2(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         Temp_int_Loop_Counter_Variable;                    // 0x00E4(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          CallFunc_EqualEqual_GameplayTag_ReturnValue;       // 0x00E8(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          CallFunc_Less_IntInt_ReturnValue;                  // 0x00E9(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_EA[0x2];                                       // 0x00EA(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         CallFunc_Add_IntInt_ReturnValue;                   // 0x00EC(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          CallFunc_IsLocallyControlled_ReturnValue;          // 0x00F0(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_F1[0x7];                                       // 0x00F1(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class UM1DataSoundEffects*                    K2Node_Select_Default;                             // 0x00F8(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	bool                                          CallFunc_Array_IsValidIndex_ReturnValue;           // 0x0100(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function Default_Fist.Default_Fist_C.CheckValidateRadius
-// 0x0080 (0x0080 - 0x0000)
-struct Default_Fist_C_CheckValidateRadius final
-{
-public:
-	class AActor*                                 InTarget;                                          // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	bool                                          ReturnValue;                                       // 0x0008(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class AActor*                                 CallFunc_GetOwnerActor_ReturnValue;                // 0x0010(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	struct FVector                                CallFunc_GetActorBounds_Origin;                    // 0x0018(0x000C)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	struct FVector                                CallFunc_GetActorBounds_BoxExtent;                 // 0x0024(0x000C)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	float                                         CallFunc_GetDistanceTo_ReturnValue;                // 0x0030(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	double                                        CallFunc_GetMaxElement_ReturnValue;                // 0x0038(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	struct FVector                                CallFunc_GetActorBounds_Origin_1;                  // 0x0040(0x000C)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	struct FVector                                CallFunc_GetActorBounds_BoxExtent_1;               // 0x004C(0x000C)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	double                                        CallFunc_GetMaxElement_ReturnValue_1;              // 0x0058(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	double                                        CallFunc_Add_DoubleDouble_ReturnValue;             // 0x0060(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	double                                        CallFunc_Add_DoubleDouble_ReturnValue_1;           // 0x0068(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          CallFunc_Less_DoubleDouble_ReturnValue;            // 0x0070(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_71[0x7];                                       // 0x0071(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	double                                        CallFunc_Less_DoubleDouble_A_ImplicitCast;         // 0x0078(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	struct FGameplayTag                           Key;                                               // 0x0000(0x0008)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, NoDestructor, HasGetValueTypeHash)
+	class UAnimMontage*                           ReturnValue;                                       // 0x0008(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash)
+	bool                                          Temp_bool_Variable;                                // 0x0010(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FSubSkillSetting                       CallFunc_Map_Find_Value;                           // 0x0018(0x0020)(HasGetValueTypeHash)
+	bool                                          CallFunc_Map_Find_ReturnValue;                     // 0x0038(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class AActor*                                 CallFunc_GetOwnerActor_ReturnValue;                // 0x0040(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	EM1CharacterGender                            CallFunc_GetPlayerAnimPresetType_ReturnValue;      // 0x0048(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          CallFunc_EqualEqual_ByteByte_ReturnValue;          // 0x0049(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_4A[0x6];                                       // 0x004A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	class UAnimMontage*                           K2Node_Select_Default;                             // 0x0050(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function Default_Fist.Default_Fist_C.Get Target Actors
@@ -597,6 +534,69 @@ public:
 	uint8                                         Pad_A11[0x7];                                      // 0x0A11(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
 	struct FSubSkillSetting                       CallFunc_Map_Find_Value_1;                         // 0x0A18(0x0020)(HasGetValueTypeHash)
 	bool                                          CallFunc_Map_Find_ReturnValue_1;                   // 0x0A38(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function Default_Fist.Default_Fist_C.DamageToEnemy
+// 0x0108 (0x0108 - 0x0000)
+struct Default_Fist_C_DamageToEnemy final
+{
+public:
+	int32                                         AttackCount;                                       // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FSubSkillSetting                       InSetting;                                         // 0x0008(0x0020)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, HasGetValueTypeHash)
+	struct FGameplayTagContainer                  AttackTag;                                         // 0x0028(0x0020)(Edit, BlueprintVisible)
+	struct FVector                                FinalDamgeExtent;                                  // 0x0048(0x000C)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	struct FRotator                               FinalDamageRotation;                               // 0x0054(0x000C)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor)
+	struct FVector                                FinalDamageLocation;                               // 0x0060(0x000C)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	struct FSubSkillCollision                     LocalDamageCollision;                              // 0x006C(0x0028)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          Temp_bool_Variable;                                // 0x0094(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_95[0x3];                                       // 0x0095(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class AActor*>                         CallFunc_Get_Target_Actors_OutActors;              // 0x0098(0x0010)(ReferenceParm)
+	int32                                         Temp_int_Array_Index_Variable;                     // 0x00A8(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	int32                                         CallFunc_Array_Length_ReturnValue;                 // 0x00AC(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	class AActor*                                 CallFunc_Array_Get_Item;                           // 0x00B0(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	struct FVector                                CallFunc_K2_GetActorLocation_ReturnValue;          // 0x00B8(0x000C)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	EPhysicalSurface                              CallFunc_GetSurfaceType_ReturnValue;               // 0x00C4(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	EValidOutputPin                               CallFunc_FindAkComponentWithValid_OutputPins;      // 0x00C5(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_C6[0x2];                                       // 0x00C6(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	class UM1AkComponent*                         CallFunc_FindAkComponentWithValid_ReturnValue;     // 0x00C8(0x0008)(ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
+	TArray<class UNiagaraComponent*>              CallFunc_SpawnFXsForAbilityToTarget_ReturnValue;   // 0x00D0(0x0010)(ReferenceParm, ContainsInstancedReference)
+	bool                                          K2Node_SwitchEnum_CmpSuccess;                      // 0x00E0(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          CallFunc_IsDedicatedServer_ReturnValue;            // 0x00E1(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_E2[0x2];                                       // 0x00E2(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         Temp_int_Loop_Counter_Variable;                    // 0x00E4(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          CallFunc_EqualEqual_GameplayTag_ReturnValue;       // 0x00E8(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          CallFunc_Less_IntInt_ReturnValue;                  // 0x00E9(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_EA[0x2];                                       // 0x00EA(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         CallFunc_Add_IntInt_ReturnValue;                   // 0x00EC(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          CallFunc_IsLocallyControlled_ReturnValue;          // 0x00F0(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_F1[0x7];                                       // 0x00F1(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class UM1DataSoundEffects*                    K2Node_Select_Default;                             // 0x00F8(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	bool                                          CallFunc_Array_IsValidIndex_ReturnValue;           // 0x0100(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function Default_Fist.Default_Fist_C.CheckValidateRadius
+// 0x0080 (0x0080 - 0x0000)
+struct Default_Fist_C_CheckValidateRadius final
+{
+public:
+	class AActor*                                 InTarget;                                          // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	bool                                          ReturnValue;                                       // 0x0008(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class AActor*                                 CallFunc_GetOwnerActor_ReturnValue;                // 0x0010(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	struct FVector                                CallFunc_GetActorBounds_Origin;                    // 0x0018(0x000C)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	struct FVector                                CallFunc_GetActorBounds_BoxExtent;                 // 0x0024(0x000C)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	float                                         CallFunc_GetDistanceTo_ReturnValue;                // 0x0030(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	double                                        CallFunc_GetMaxElement_ReturnValue;                // 0x0038(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	struct FVector                                CallFunc_GetActorBounds_Origin_1;                  // 0x0040(0x000C)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	struct FVector                                CallFunc_GetActorBounds_BoxExtent_1;               // 0x004C(0x000C)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	double                                        CallFunc_GetMaxElement_ReturnValue_1;              // 0x0058(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	double                                        CallFunc_Add_DoubleDouble_ReturnValue;             // 0x0060(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	double                                        CallFunc_Add_DoubleDouble_ReturnValue_1;           // 0x0068(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          CallFunc_Less_DoubleDouble_ReturnValue;            // 0x0070(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_71[0x7];                                       // 0x0071(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	double                                        CallFunc_Less_DoubleDouble_A_ImplicitCast;         // 0x0078(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function Default_Fist.Default_Fist_C.CalcValidateTolerance

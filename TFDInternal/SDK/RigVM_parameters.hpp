@@ -196,46 +196,6 @@ public:
 	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// Function RigVM.RigVMUserWorkflowOptions.ReportError
-// 0x0010 (0x0010 - 0x0000)
-struct RigVMUserWorkflowOptions_ReportError final
-{
-public:
-	class FString                                 InMessage;                                         // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function RigVM.RigVMUserWorkflowOptions.ReportInfo
-// 0x0010 (0x0010 - 0x0000)
-struct RigVMUserWorkflowOptions_ReportInfo final
-{
-public:
-	class FString                                 InMessage;                                         // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function RigVM.RigVMUserWorkflowOptions.ReportWarning
-// 0x0010 (0x0010 - 0x0000)
-struct RigVMUserWorkflowOptions_ReportWarning final
-{
-public:
-	class FString                                 InMessage;                                         // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function RigVM.RigVMUserWorkflowOptions.IsValid
-// 0x0001 (0x0001 - 0x0000)
-struct RigVMUserWorkflowOptions_IsValid final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function RigVM.RigVMUserWorkflowOptions.RequiresDialog
-// 0x0001 (0x0001 - 0x0000)
-struct RigVMUserWorkflowOptions_RequiresDialog final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // Function RigVM.RigVM.AddRigVMFunction
 // 0x0018 (0x0018 - 0x0000)
 struct RigVM_AddRigVMFunction final
@@ -485,6 +445,46 @@ struct RigVM_GetStatistics final
 {
 public:
 	struct FRigVMStatistics                       ReturnValue;                                       // 0x0000(0x0038)(Parm, OutParm, ReturnParm, NoDestructor, NativeAccessSpecifierPublic)
+};
+
+// Function RigVM.RigVMUserWorkflowOptions.ReportError
+// 0x0010 (0x0010 - 0x0000)
+struct RigVMUserWorkflowOptions_ReportError final
+{
+public:
+	class FString                                 InMessage;                                         // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function RigVM.RigVMUserWorkflowOptions.ReportInfo
+// 0x0010 (0x0010 - 0x0000)
+struct RigVMUserWorkflowOptions_ReportInfo final
+{
+public:
+	class FString                                 InMessage;                                         // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function RigVM.RigVMUserWorkflowOptions.ReportWarning
+// 0x0010 (0x0010 - 0x0000)
+struct RigVMUserWorkflowOptions_ReportWarning final
+{
+public:
+	class FString                                 InMessage;                                         // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function RigVM.RigVMUserWorkflowOptions.IsValid
+// 0x0001 (0x0001 - 0x0000)
+struct RigVMUserWorkflowOptions_IsValid final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function RigVM.RigVMUserWorkflowOptions.RequiresDialog
+// 0x0001 (0x0001 - 0x0000)
+struct RigVMUserWorkflowOptions_RequiresDialog final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 }

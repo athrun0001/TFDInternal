@@ -21,6 +21,14 @@
 namespace SDK::Params
 {
 
+// Function UI_Chatting.UI_Chatting_C.SetMinBGOpacity
+// 0x0004 (0x0004 - 0x0000)
+struct UI_Chatting_C_SetMinBGOpacity final
+{
+public:
+	float                                         CallFunc_GetMinimalUIBackgroundOpacity_ReturnValue; // 0x0000(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
 // Function UI_Chatting.UI_Chatting_C.PlayTextInputAkEvent
 // 0x0070 (0x0070 - 0x0000)
 struct UI_Chatting_C_PlayTextInputAkEvent final
@@ -68,14 +76,6 @@ struct UI_Chatting_C_OnAddedToFocusPath final
 {
 public:
 	struct FFocusEvent                            InFocusEvent;                                      // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, NoDestructor)
-};
-
-// Function UI_Chatting.UI_Chatting_C.SetMinBGOpacity
-// 0x0004 (0x0004 - 0x0000)
-struct UI_Chatting_C_SetMinBGOpacity final
-{
-public:
-	float                                         CallFunc_GetMinimalUIBackgroundOpacity_ReturnValue; // 0x0000(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_Chatting.UI_Chatting_C.IsMinimalUIState

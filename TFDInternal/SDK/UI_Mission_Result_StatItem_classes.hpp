@@ -32,9 +32,9 @@ public:
 	bool                                          Deco01Off;                                         // 0x0731(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
+	void PreConstruct(bool IsDesignTime);
 	void UI_View();
 	void SetDataImpl(class UM1UIData* InData);
-	void PreConstruct(bool IsDesignTime);
 	void ExecuteUbergraph_UI_Mission_Result_StatItem(int32 EntryPoint);
 
 public:

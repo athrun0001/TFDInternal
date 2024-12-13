@@ -17,46 +17,6 @@
 namespace SDK
 {
 
-// Function UI_ItemIconOnly_Rune.UI_ItemIconOnly_Rune_C.PreConstruct
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
-// Parameters:
-// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_ItemIconOnly_Rune_C::PreConstruct(bool IsDesignTime)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ItemIconOnly_Rune_C", "PreConstruct");
-
-	Params::UI_ItemIconOnly_Rune_C_PreConstruct Parms{};
-
-	Parms.IsDesignTime = IsDesignTime;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_ItemIconOnly_Rune.UI_ItemIconOnly_Rune_C.ExecuteUbergraph_UI_ItemIconOnly_Rune
-// (Final, UbergraphFunction, HasDefaults)
-// Parameters:
-// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_ItemIconOnly_Rune_C::ExecuteUbergraph_UI_ItemIconOnly_Rune(int32 EntryPoint)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ItemIconOnly_Rune_C", "ExecuteUbergraph_UI_ItemIconOnly_Rune");
-
-	Params::UI_ItemIconOnly_Rune_C_ExecuteUbergraph_UI_ItemIconOnly_Rune Parms{};
-
-	Parms.EntryPoint = EntryPoint;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_ItemIconOnly_Rune.UI_ItemIconOnly_Rune_C.SetUI_RunePadding
 // (Public, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -112,6 +72,46 @@ void UUI_ItemIconOnly_Rune_C::SetDataImpl(class UM1UIData* InData)
 	Params::UI_ItemIconOnly_Rune_C_SetDataImpl Parms{};
 
 	Parms.InData = InData;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_ItemIconOnly_Rune.UI_ItemIconOnly_Rune_C.PreConstruct
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+// Parameters:
+// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_ItemIconOnly_Rune_C::PreConstruct(bool IsDesignTime)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ItemIconOnly_Rune_C", "PreConstruct");
+
+	Params::UI_ItemIconOnly_Rune_C_PreConstruct Parms{};
+
+	Parms.IsDesignTime = IsDesignTime;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_ItemIconOnly_Rune.UI_ItemIconOnly_Rune_C.ExecuteUbergraph_UI_ItemIconOnly_Rune
+// (Final, UbergraphFunction, HasDefaults)
+// Parameters:
+// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_ItemIconOnly_Rune_C::ExecuteUbergraph_UI_ItemIconOnly_Rune(int32 EntryPoint)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ItemIconOnly_Rune_C", "ExecuteUbergraph_UI_ItemIconOnly_Rune");
+
+	Params::UI_ItemIconOnly_Rune_C_ExecuteUbergraph_UI_ItemIconOnly_Rune Parms{};
+
+	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

@@ -17,6 +17,34 @@
 namespace SDK
 {
 
+// Function Skill_LepicArmLNC.Skill_LepicArmLNC_C.OnFunctionalTest
+// (Event, Protected, BlueprintEvent)
+
+void USkill_LepicArmLNC_C::OnFunctionalTest()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Skill_LepicArmLNC_C", "OnFunctionalTest");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function Skill_LepicArmLNC.Skill_LepicArmLNC_C.OnActivatedAltWeapon
+// (BlueprintCallable, BlueprintEvent)
+
+void USkill_LepicArmLNC_C::OnActivatedAltWeapon()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Skill_LepicArmLNC_C", "OnActivatedAltWeapon");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function Skill_LepicArmLNC.Skill_LepicArmLNC_C.OnAbilityEvent_3A13A6C94180B2DA4F4077885B102387
 // (HasOutParams, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -74,34 +102,6 @@ void USkill_LepicArmLNC_C::BP_OnDeactivated(bool bCancelled)
 	Parms.bCancelled = bCancelled;
 
 	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function Skill_LepicArmLNC.Skill_LepicArmLNC_C.OnFunctionalTest
-// (Event, Protected, BlueprintEvent)
-
-void USkill_LepicArmLNC_C::OnFunctionalTest()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Skill_LepicArmLNC_C", "OnFunctionalTest");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function Skill_LepicArmLNC.Skill_LepicArmLNC_C.OnActivatedAltWeapon
-// (BlueprintCallable, BlueprintEvent)
-
-void USkill_LepicArmLNC_C::OnActivatedAltWeapon()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Skill_LepicArmLNC_C", "OnActivatedAltWeapon");
-
-	UObject::ProcessEvent(Func, nullptr);
 }
 
 

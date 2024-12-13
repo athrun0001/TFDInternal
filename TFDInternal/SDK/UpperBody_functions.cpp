@@ -61,6 +61,20 @@ void UUpperBody_C::ExecuteUbergraph_UpperBody(int32 EntryPoint)
 }
 
 
+// Function UpperBody.UpperBody_C.EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_M1AnimGraphNode_Reinitialize_B0B3BA3645600B7C4B81C5BE06C3E1CB
+// (BlueprintEvent)
+
+void UUpperBody_C::EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_M1AnimGraphNode_Reinitialize_B0B3BA3645600B7C4B81C5BE06C3E1CB()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UpperBody_C", "EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_M1AnimGraphNode_Reinitialize_B0B3BA3645600B7C4B81C5BE06C3E1CB");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UpperBody.UpperBody_C.EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_M1AnimGraphNode_Reinitialize_8724D40A458AA26A812B20980B9362F9
 // (BlueprintEvent)
 
@@ -252,20 +266,6 @@ void UUpperBody_C::EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_AnimGra
 
 	if (Func == nullptr)
 		Func = Class->GetFunction("UpperBody_C", "EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_AnimGraphNode_TransitionResult_16C28B4D47A0F2091512C8AC96D7D503");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function UpperBody.UpperBody_C.EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_M1AnimGraphNode_Reinitialize_B0B3BA3645600B7C4B81C5BE06C3E1CB
-// (BlueprintEvent)
-
-void UUpperBody_C::EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_M1AnimGraphNode_Reinitialize_B0B3BA3645600B7C4B81C5BE06C3E1CB()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UpperBody_C", "EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_M1AnimGraphNode_Reinitialize_B0B3BA3645600B7C4B81C5BE06C3E1CB");
 
 	UObject::ProcessEvent(Func, nullptr);
 }

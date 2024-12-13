@@ -44,11 +44,11 @@ public:
 	bool                                          ForSkillMovie;                                     // 0x0889(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
-	void UISetSkillMovie();
 	void PreConstruct(bool IsDesignTime);
 	void ExecuteUbergraph_UI_Game(int32 EntryPoint);
 	void Construct();
 	void BP_SetButtonsVisibility(EM1MapType InMapType);
+	void UISetSkillMovie();
 	TArray<class UWidget*> BP_GetWidgetsToHideForPlayerCustomHUDOnly();
 
 public:

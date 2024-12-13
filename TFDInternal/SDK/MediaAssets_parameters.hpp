@@ -12,12 +12,137 @@
 
 #include "CoreUObject_structs.hpp"
 #include "MediaAssets_structs.hpp"
-#include "MediaUtils_structs.hpp"
 #include "Engine_structs.hpp"
+#include "MediaUtils_structs.hpp"
 
 
 namespace SDK::Params
 {
+
+// Function MediaAssets.MediaComponent.GetMediaPlayer
+// 0x0008 (0x0008 - 0x0000)
+struct MediaComponent_GetMediaPlayer final
+{
+public:
+	class UMediaPlayer*                           ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.MediaComponent.GetMediaTexture
+// 0x0008 (0x0008 - 0x0000)
+struct MediaComponent_GetMediaTexture final
+{
+public:
+	class UMediaTexture*                          ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.MediaSource.SetMediaOptionBool
+// 0x000C (0x000C - 0x0000)
+struct MediaSource_SetMediaOptionBool final
+{
+public:
+	class FName                                   Key;                                               // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Value;                                             // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function MediaAssets.MediaSource.SetMediaOptionFloat
+// 0x000C (0x000C - 0x0000)
+struct MediaSource_SetMediaOptionFloat final
+{
+public:
+	class FName                                   Key;                                               // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Value;                                             // 0x0008(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.MediaSource.SetMediaOptionInt64
+// 0x0010 (0x0010 - 0x0000)
+struct MediaSource_SetMediaOptionInt64 final
+{
+public:
+	class FName                                   Key;                                               // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         Value;                                             // 0x0008(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.MediaSource.SetMediaOptionString
+// 0x0018 (0x0018 - 0x0000)
+struct MediaSource_SetMediaOptionString final
+{
+public:
+	class FName                                   Key;                                               // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 Value;                                             // 0x0008(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.MediaSource.GetUrl
+// 0x0010 (0x0010 - 0x0000)
+struct MediaSource_GetUrl final
+{
+public:
+	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.MediaSource.Validate
+// 0x0001 (0x0001 - 0x0000)
+struct MediaSource_Validate final
+{
+public:
+	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.MediaTexture.SetMediaPlayer
+// 0x0008 (0x0008 - 0x0000)
+struct MediaTexture_SetMediaPlayer final
+{
+public:
+	class UMediaPlayer*                           NewMediaPlayer;                                    // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.MediaTexture.GetAspectRatio
+// 0x0004 (0x0004 - 0x0000)
+struct MediaTexture_GetAspectRatio final
+{
+public:
+	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.MediaTexture.GetHeight
+// 0x0004 (0x0004 - 0x0000)
+struct MediaTexture_GetHeight final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.MediaTexture.GetMediaPlayer
+// 0x0008 (0x0008 - 0x0000)
+struct MediaTexture_GetMediaPlayer final
+{
+public:
+	class UMediaPlayer*                           ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.MediaTexture.GetTextureNumMips
+// 0x0004 (0x0004 - 0x0000)
+struct MediaTexture_GetTextureNumMips final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.MediaTexture.GetWidth
+// 0x0004 (0x0004 - 0x0000)
+struct MediaTexture_GetWidth final
+{
+public:
+	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MediaAssets.FileMediaSource.SetFilePath
+// 0x0010 (0x0010 - 0x0000)
+struct FileMediaSource_SetFilePath final
+{
+public:
+	class FString                                 Path;                                              // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
 
 // Function MediaAssets.MediaPlayer.CanPlaySource
 // 0x0010 (0x0010 - 0x0000)
@@ -664,131 +789,6 @@ struct MediaPlayer_SupportsSeeking final
 {
 public:
 	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaSource.SetMediaOptionBool
-// 0x000C (0x000C - 0x0000)
-struct MediaSource_SetMediaOptionBool final
-{
-public:
-	class FName                                   Key;                                               // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Value;                                             // 0x0008(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// Function MediaAssets.MediaSource.SetMediaOptionFloat
-// 0x000C (0x000C - 0x0000)
-struct MediaSource_SetMediaOptionFloat final
-{
-public:
-	class FName                                   Key;                                               // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Value;                                             // 0x0008(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaSource.SetMediaOptionInt64
-// 0x0010 (0x0010 - 0x0000)
-struct MediaSource_SetMediaOptionInt64 final
-{
-public:
-	class FName                                   Key;                                               // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         Value;                                             // 0x0008(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaSource.SetMediaOptionString
-// 0x0018 (0x0018 - 0x0000)
-struct MediaSource_SetMediaOptionString final
-{
-public:
-	class FName                                   Key;                                               // 0x0000(0x0008)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 Value;                                             // 0x0008(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaSource.GetUrl
-// 0x0010 (0x0010 - 0x0000)
-struct MediaSource_GetUrl final
-{
-public:
-	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaSource.Validate
-// 0x0001 (0x0001 - 0x0000)
-struct MediaSource_Validate final
-{
-public:
-	bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaTexture.SetMediaPlayer
-// 0x0008 (0x0008 - 0x0000)
-struct MediaTexture_SetMediaPlayer final
-{
-public:
-	class UMediaPlayer*                           NewMediaPlayer;                                    // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaTexture.GetAspectRatio
-// 0x0004 (0x0004 - 0x0000)
-struct MediaTexture_GetAspectRatio final
-{
-public:
-	float                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaTexture.GetHeight
-// 0x0004 (0x0004 - 0x0000)
-struct MediaTexture_GetHeight final
-{
-public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaTexture.GetMediaPlayer
-// 0x0008 (0x0008 - 0x0000)
-struct MediaTexture_GetMediaPlayer final
-{
-public:
-	class UMediaPlayer*                           ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaTexture.GetTextureNumMips
-// 0x0004 (0x0004 - 0x0000)
-struct MediaTexture_GetTextureNumMips final
-{
-public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaTexture.GetWidth
-// 0x0004 (0x0004 - 0x0000)
-struct MediaTexture_GetWidth final
-{
-public:
-	int32                                         ReturnValue;                                       // 0x0000(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.FileMediaSource.SetFilePath
-// 0x0010 (0x0010 - 0x0000)
-struct FileMediaSource_SetFilePath final
-{
-public:
-	class FString                                 Path;                                              // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaComponent.GetMediaPlayer
-// 0x0008 (0x0008 - 0x0000)
-struct MediaComponent_GetMediaPlayer final
-{
-public:
-	class UMediaPlayer*                           ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MediaAssets.MediaComponent.GetMediaTexture
-// 0x0008 (0x0008 - 0x0000)
-struct MediaComponent_GetMediaTexture final
-{
-public:
-	class UMediaTexture*                          ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function MediaAssets.MediaPlaylist.Add

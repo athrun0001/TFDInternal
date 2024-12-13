@@ -17,20 +17,6 @@
 namespace SDK
 {
 
-// Function UI_Popup.UI_Popup_C.SequenceEvent__ENTRYPOINTUI_Popup
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_Popup_C::SequenceEvent__ENTRYPOINTUI_Popup()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Popup_C", "SequenceEvent__ENTRYPOINTUI_Popup");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function UI_Popup.UI_Popup_C.OnEventWidgetOpen
 // (Event, Protected, BlueprintEvent)
 // Parameters:
@@ -108,6 +94,20 @@ void UUI_Popup_C::BP_SetButtonCountImpl(int32 InCount)
 	Parms.InCount = InCount;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_Popup.UI_Popup_C.SequenceEvent__ENTRYPOINTUI_Popup
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_Popup_C::SequenceEvent__ENTRYPOINTUI_Popup()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Popup_C", "SequenceEvent__ENTRYPOINTUI_Popup");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 

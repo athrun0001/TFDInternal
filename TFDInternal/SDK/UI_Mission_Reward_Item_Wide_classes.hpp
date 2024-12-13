@@ -40,9 +40,9 @@ public:
 
 public:
 	void ExecuteUbergraph_UI_Mission_Reward_Item_Wide(int32 EntryPoint);
-	void BP_SetWeaponDetails(class UTexture2D* InTexture, const class FString& InText);
 	void BP_SetRuneDetails(EM1RuneClassType InClassType);
 	void BP_SetReactorDetails(EM1ElementalDamageChannel InElementalType, EM1SkillArcheType InArcheType);
+	void BP_SetWeaponDetails(class UTexture2D* InTexture, const class FString& InText);
 
 public:
 	static class UClass* StaticClass()

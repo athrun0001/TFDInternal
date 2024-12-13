@@ -10,8 +10,8 @@
 
 #include "Basic.hpp"
 
-#include "Engine_structs.hpp"
 #include "CoreUObject_structs.hpp"
+#include "Engine_structs.hpp"
 #include "UMG_classes.hpp"
 
 
@@ -38,16 +38,16 @@ public:
 	struct FTimerHandle                           TimerHandle_CloseAnim;                             // 0x02A0(0x0008)(Edit, BlueprintVisible, DisableEditOnInstance, NoDestructor, HasGetValueTypeHash)
 
 public:
-	void UISetColor_Max(bool Max_0, const struct FLinearColor& MaxLevelColor);
 	void UISetMaterial(double InAngle);
-	void UISetColor_Effect(const struct FLinearColor& BaseColor, const struct FLinearColor& MultiplyColor);
 	void UISetDefault();
+	void UISetColor_Max(bool Max_0, const struct FLinearColor& MaxLevelColor);
+	void UISetColor_Effect(const struct FLinearColor& BaseColor, const struct FLinearColor& MultiplyColor);
 	void PreConstruct(bool IsDesignTime);
-	void CloseGauge(bool bCloseImmediately);
 	void OpenGauge();
-	void ClearCloseTimer();
 	void OnCloseAnimEnd();
 	void ExecuteUbergraph_UI_ChargeGauge_001_Gague(int32 EntryPoint);
+	void CloseGauge(bool bCloseImmediately);
+	void ClearCloseTimer();
 
 public:
 	static class UClass* StaticClass()

@@ -29,9 +29,9 @@ public:
 	ESlateVisibility                              InKeyVisible;                                      // 0x0828(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
-	void PreConstruct(bool IsDesignTime);
 	void ExecuteUbergraph_UI_Page_Rotation(int32 EntryPoint);
 	void Construct();
+	void PreConstruct(bool IsDesignTime);
 
 public:
 	static class UClass* StaticClass()

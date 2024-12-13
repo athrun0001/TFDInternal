@@ -33,6 +33,14 @@ public:
 	EM1WidgetAnimDirection                        InDirection;                                       // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
+// Function UI_VideoGuideMessage.UI_VideoGuideMessage_C.BP_ShowTitle
+// 0x0001 (0x0001 - 0x0000)
+struct UI_VideoGuideMessage_C_BP_ShowTitle final
+{
+public:
+	bool                                          bShow;                                             // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
 // Function UI_VideoGuideMessage.UI_VideoGuideMessage_C.ExecuteUbergraph_UI_VideoGuideMessage
 // 0x0018 (0x0018 - 0x0000)
 struct UI_VideoGuideMessage_C_ExecuteUbergraph_UI_VideoGuideMessage final
@@ -47,14 +55,6 @@ public:
 	ESlateVisibility                              K2Node_Select_Default;                             // 0x0010(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	EM1WidgetAnimDirection                        K2Node_Event_InDirection_1;                        // 0x0011(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	EM1WidgetAnimDirection                        K2Node_Event_InDirection;                          // 0x0012(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_VideoGuideMessage.UI_VideoGuideMessage_C.BP_ShowTitle
-// 0x0001 (0x0001 - 0x0000)
-struct UI_VideoGuideMessage_C_BP_ShowTitle final
-{
-public:
-	bool                                          bShow;                                             // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 }

@@ -196,25 +196,5 @@ void UUI_Customize_ItemDetails_C::BP_ShowAttackType(bool bShow)
 	UObject::ProcessEvent(Func, &Parms);
 }
 
-
-// Function UI_Customize_ItemDetails.UI_Customize_ItemDetails_C.BP_SetTier
-// (Event, Protected, BlueprintEvent)
-// Parameters:
-// class UM1UIDataItemInfo*                InInfo                                                 (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Customize_ItemDetails_C::BP_SetTier(const class UM1UIDataItemInfo* InInfo)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Customize_ItemDetails_C", "BP_SetTier");
-
-	Params::UI_Customize_ItemDetails_C_BP_SetTier Parms{};
-
-	Parms.InInfo = InInfo;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
 }
 

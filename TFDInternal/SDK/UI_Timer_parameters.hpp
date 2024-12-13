@@ -17,22 +17,6 @@
 namespace SDK::Params
 {
 
-// Function UI_Timer.UI_Timer_C.SetUI_IconBrush
-// 0x0001 (0x0001 - 0x0000)
-struct UI_Timer_C_SetUI_IconBrush final
-{
-public:
-	bool                                          IsIcon;                                            // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_Timer.UI_Timer_C.PreConstruct
-// 0x0001 (0x0001 - 0x0000)
-struct UI_Timer_C_PreConstruct final
-{
-public:
-	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_Timer.UI_Timer_C.ExecuteUbergraph_UI_Timer
 // 0x0058 (0x0058 - 0x0000)
 struct UI_Timer_C_ExecuteUbergraph_UI_Timer final
@@ -53,6 +37,22 @@ public:
 	ESlateVisibility                              K2Node_Select_Default_1;                           // 0x0049(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	uint8                                         Pad_4A[0x6];                                       // 0x004A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
 	class UScaleBoxSlot*                          CallFunc_SlotAsScaleBoxSlot_ReturnValue;           // 0x0050(0x0008)(ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_Timer.UI_Timer_C.SetUI_IconBrush
+// 0x0001 (0x0001 - 0x0000)
+struct UI_Timer_C_SetUI_IconBrush final
+{
+public:
+	bool                                          IsIcon;                                            // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_Timer.UI_Timer_C.PreConstruct
+// 0x0001 (0x0001 - 0x0000)
+struct UI_Timer_C_PreConstruct final
+{
+public:
+	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 }

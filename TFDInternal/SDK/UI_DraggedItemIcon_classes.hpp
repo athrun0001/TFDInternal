@@ -14,8 +14,8 @@
 #include "M1Data_structs.hpp"
 #include "M1_structs.hpp"
 #include "M1_classes.hpp"
-#include "Slate_structs.hpp"
 #include "UMG_structs.hpp"
+#include "Slate_structs.hpp"
 
 
 namespace SDK

@@ -59,26 +59,6 @@ void ASplineAOEBase_C::OnFinish()
 }
 
 
-// Function SplineAOEBase.SplineAOEBase_C.OnEvaluateCondition
-// (Protected, HasOutParams, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// bool                                    ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-bool ASplineAOEBase_C::OnEvaluateCondition()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("SplineAOEBase_C", "OnEvaluateCondition");
-
-	Params::SplineAOEBase_C_OnEvaluateCondition Parms{};
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	return Parms.ReturnValue;
-}
-
-
 // Function SplineAOEBase.SplineAOEBase_C.OnEndOverlap
 // (Protected, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -156,6 +136,26 @@ void ASplineAOEBase_C::NetMulticastSpawnDecalVFX(const struct FTransform& InTran
 	Parms.InTransfrom = std::move(InTransfrom);
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function SplineAOEBase.SplineAOEBase_C.OnEvaluateCondition
+// (Protected, HasOutParams, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// bool                                    ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+bool ASplineAOEBase_C::OnEvaluateCondition()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("SplineAOEBase_C", "OnEvaluateCondition");
+
+	Params::SplineAOEBase_C_OnEvaluateCondition Parms{};
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	return Parms.ReturnValue;
 }
 
 

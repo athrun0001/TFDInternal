@@ -33,11 +33,11 @@ public:
 	bool                                          UIFocused;                                         // 0x0739(0x0001)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
+	void BP_ChangeButtonUI(EM1ButtonUIType InType);
+	void BP_ResetButtonState();
 	void ExecuteUbergraph_UI_Button_Deco_Default1(int32 EntryPoint);
 	void Construct();
 	void BP_Selected(bool InSelected);
-	void BP_ResetButtonState();
-	void BP_ChangeButtonUI(EM1ButtonUIType InType);
 
 public:
 	static class UClass* StaticClass()

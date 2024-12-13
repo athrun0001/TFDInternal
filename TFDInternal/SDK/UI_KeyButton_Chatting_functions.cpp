@@ -41,26 +41,6 @@ void UUI_KeyButton_Chatting_C::SetTextureAndOpacity(class UImage* Target, class 
 }
 
 
-// Function UI_KeyButton_Chatting.UI_KeyButton_Chatting_C.PreConstruct
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
-// Parameters:
-// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_KeyButton_Chatting_C::PreConstruct(bool IsDesignTime)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_KeyButton_Chatting_C", "PreConstruct");
-
-	Params::UI_KeyButton_Chatting_C_PreConstruct Parms{};
-
-	Parms.IsDesignTime = IsDesignTime;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_KeyButton_Chatting.UI_KeyButton_Chatting_C.SetTextColor
 // (Public, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -78,6 +58,26 @@ void UUI_KeyButton_Chatting_C::SetTextColor(const struct FSlateColor& KeyText, c
 
 	Parms.KeyText = std::move(KeyText);
 	Parms.ButtonText = std::move(ButtonText);
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_KeyButton_Chatting.UI_KeyButton_Chatting_C.PreConstruct
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+// Parameters:
+// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_KeyButton_Chatting_C::PreConstruct(bool IsDesignTime)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_KeyButton_Chatting_C", "PreConstruct");
+
+	Params::UI_KeyButton_Chatting_C_PreConstruct Parms{};
+
+	Parms.IsDesignTime = IsDesignTime;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

@@ -37,28 +37,6 @@ void UUI_Mission_Reward_Item_Wide_C::ExecuteUbergraph_UI_Mission_Reward_Item_Wid
 }
 
 
-// Function UI_Mission_Reward_Item_Wide.UI_Mission_Reward_Item_Wide_C.BP_SetWeaponDetails
-// (Event, Protected, BlueprintEvent)
-// Parameters:
-// class UTexture2D*                       InTexture                                              (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-// class FString                           InText                                                 (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, HasGetValueTypeHash)
-
-void UUI_Mission_Reward_Item_Wide_C::BP_SetWeaponDetails(class UTexture2D* InTexture, const class FString& InText)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Mission_Reward_Item_Wide_C", "BP_SetWeaponDetails");
-
-	Params::UI_Mission_Reward_Item_Wide_C_BP_SetWeaponDetails Parms{};
-
-	Parms.InTexture = InTexture;
-	Parms.InText = std::move(InText);
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_Mission_Reward_Item_Wide.UI_Mission_Reward_Item_Wide_C.BP_SetRuneDetails
 // (Event, Protected, BlueprintEvent)
 // Parameters:
@@ -96,6 +74,28 @@ void UUI_Mission_Reward_Item_Wide_C::BP_SetReactorDetails(EM1ElementalDamageChan
 
 	Parms.InElementalType = InElementalType;
 	Parms.InArcheType = InArcheType;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_Mission_Reward_Item_Wide.UI_Mission_Reward_Item_Wide_C.BP_SetWeaponDetails
+// (Event, Protected, BlueprintEvent)
+// Parameters:
+// class UTexture2D*                       InTexture                                              (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+// class FString                           InText                                                 (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, HasGetValueTypeHash)
+
+void UUI_Mission_Reward_Item_Wide_C::BP_SetWeaponDetails(class UTexture2D* InTexture, const class FString& InText)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Mission_Reward_Item_Wide_C", "BP_SetWeaponDetails");
+
+	Params::UI_Mission_Reward_Item_Wide_C_BP_SetWeaponDetails Parms{};
+
+	Parms.InTexture = InTexture;
+	Parms.InText = std::move(InText);
 
 	UObject::ProcessEvent(Func, &Parms);
 }

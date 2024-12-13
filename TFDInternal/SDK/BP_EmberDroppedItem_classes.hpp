@@ -29,9 +29,9 @@ public:
 
 public:
 	void ExecuteUbergraph_BP_EmberDroppedItem(int32 EntryPoint);
+	void BP_SimulationEnabled();
 	void BP_OnSetWhoDroppedThis(class AActor* InActor);
 	void BP_ClientOnGround(float InDeltaTime);
-	void BP_SimulationEnabled();
 
 	bool CanHideEffectsForPerformanceGain() const;
 

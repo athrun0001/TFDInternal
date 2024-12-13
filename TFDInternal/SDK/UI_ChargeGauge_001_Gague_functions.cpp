@@ -17,6 +17,40 @@
 namespace SDK
 {
 
+// Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.UISetMaterial
+// (Public, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// double                                  InAngle                                                (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_ChargeGauge_001_Gague_C::UISetMaterial(double InAngle)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ChargeGauge_001_Gague_C", "UISetMaterial");
+
+	Params::UI_ChargeGauge_001_Gague_C_UISetMaterial Parms{};
+
+	Parms.InAngle = InAngle;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.UISetDefault
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_ChargeGauge_001_Gague_C::UISetDefault()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ChargeGauge_001_Gague_C", "UISetDefault");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.UISetColor_Max
 // (Public, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -34,26 +68,6 @@ void UUI_ChargeGauge_001_Gague_C::UISetColor_Max(bool Max_0, const struct FLinea
 
 	Parms.Max_0 = Max_0;
 	Parms.MaxLevelColor = std::move(MaxLevelColor);
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.UISetMaterial
-// (Public, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// double                                  InAngle                                                (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_ChargeGauge_001_Gague_C::UISetMaterial(double InAngle)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ChargeGauge_001_Gague_C", "UISetMaterial");
-
-	Params::UI_ChargeGauge_001_Gague_C_UISetMaterial Parms{};
-
-	Parms.InAngle = InAngle;
 
 	UObject::ProcessEvent(Func, &Parms);
 }
@@ -81,20 +95,6 @@ void UUI_ChargeGauge_001_Gague_C::UISetColor_Effect(const struct FLinearColor& B
 }
 
 
-// Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.UISetDefault
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_ChargeGauge_001_Gague_C::UISetDefault()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ChargeGauge_001_Gague_C", "UISetDefault");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.PreConstruct
 // (BlueprintCosmetic, Event, Public, BlueprintEvent)
 // Parameters:
@@ -115,26 +115,6 @@ void UUI_ChargeGauge_001_Gague_C::PreConstruct(bool IsDesignTime)
 }
 
 
-// Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.CloseGauge
-// (Public, HasDefaults, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// bool                                    bCloseImmediately                                      (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_ChargeGauge_001_Gague_C::CloseGauge(bool bCloseImmediately)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ChargeGauge_001_Gague_C", "CloseGauge");
-
-	Params::UI_ChargeGauge_001_Gague_C_CloseGauge Parms{};
-
-	Parms.bCloseImmediately = bCloseImmediately;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.OpenGauge
 // (Public, BlueprintCallable, BlueprintEvent)
 
@@ -144,20 +124,6 @@ void UUI_ChargeGauge_001_Gague_C::OpenGauge()
 
 	if (Func == nullptr)
 		Func = Class->GetFunction("UI_ChargeGauge_001_Gague_C", "OpenGauge");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.ClearCloseTimer
-// (Private, BlueprintCallable, BlueprintEvent)
-
-void UUI_ChargeGauge_001_Gague_C::ClearCloseTimer()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ChargeGauge_001_Gague_C", "ClearCloseTimer");
 
 	UObject::ProcessEvent(Func, nullptr);
 }
@@ -194,6 +160,40 @@ void UUI_ChargeGauge_001_Gague_C::ExecuteUbergraph_UI_ChargeGauge_001_Gague(int3
 	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.CloseGauge
+// (Public, HasDefaults, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// bool                                    bCloseImmediately                                      (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_ChargeGauge_001_Gague_C::CloseGauge(bool bCloseImmediately)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ChargeGauge_001_Gague_C", "CloseGauge");
+
+	Params::UI_ChargeGauge_001_Gague_C_CloseGauge Parms{};
+
+	Parms.bCloseImmediately = bCloseImmediately;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.ClearCloseTimer
+// (Private, BlueprintCallable, BlueprintEvent)
+
+void UUI_ChargeGauge_001_Gague_C::ClearCloseTimer()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ChargeGauge_001_Gague_C", "ClearCloseTimer");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 }

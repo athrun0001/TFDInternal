@@ -17,7 +17,7 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass PROJ_StormWarriorGunfire.PROJ_StormWarriorGunfire_C
-// 0x0000 (0x0C30 - 0x0C30)
+// 0x0000 (0x0C40 - 0x0C40)
 class APROJ_StormWarriorGunfire_C final : public APROJ_MonsterGunfire_C
 {
 public:

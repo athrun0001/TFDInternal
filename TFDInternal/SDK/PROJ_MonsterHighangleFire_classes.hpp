@@ -19,14 +19,14 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass PROJ_MonsterHighangleFire.PROJ_MonsterHighangleFire_C
-// 0x0020 (0x0C48 - 0x0C28)
+// 0x0020 (0x0C58 - 0x0C38)
 class APROJ_MonsterHighangleFire_C : public AM1AbilityProjectile
 {
 public:
-	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0C28(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
-	double                                        ArcValue;                                          // 0x0C30(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	struct FVector                                Velocity;                                          // 0x0C38(0x000C)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          DebugDraw;                                         // 0x0C44(0x0001)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0C38(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
+	double                                        ArcValue;                                          // 0x0C40(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	struct FVector                                Velocity;                                          // 0x0C48(0x000C)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          DebugDraw;                                         // 0x0C54(0x0001)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
 	void ExecuteUbergraph_PROJ_MonsterHighangleFire(int32 EntryPoint);

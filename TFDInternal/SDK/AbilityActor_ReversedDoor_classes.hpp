@@ -11,8 +11,8 @@
 #include "Basic.hpp"
 
 #include "Engine_structs.hpp"
-#include "AJaxShieldState_structs.hpp"
 #include "CoreUObject_structs.hpp"
+#include "AJaxShieldState_structs.hpp"
 #include "M1Data_structs.hpp"
 #include "M1_classes.hpp"
 #include "AJaxShieldResourceType_structs.hpp"

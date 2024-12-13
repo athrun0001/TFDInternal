@@ -35,9 +35,9 @@ public:
 
 public:
 	void OnEventWidgetOpen(EM1WidgetAnimDirection InDirection);
-	void OnEventWidgetClose(EM1WidgetAnimDirection InDirection);
 	void ExecuteUbergraph_UI_GuideMessage(int32 EntryPoint);
 	void BP_ShowTitle(bool bShow);
+	void OnEventWidgetClose(EM1WidgetAnimDirection InDirection);
 
 public:
 	static class UClass* StaticClass()

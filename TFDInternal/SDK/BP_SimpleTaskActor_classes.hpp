@@ -10,8 +10,8 @@
 
 #include "Basic.hpp"
 
-#include "BP_SimpleTaskActorBase_classes.hpp"
 #include "Engine_structs.hpp"
+#include "BP_SimpleTaskActorBase_classes.hpp"
 
 
 namespace SDK
@@ -25,8 +25,8 @@ public:
 	struct FPointerToUberGraphFrame               UberGraphFrame_BP_SimpleTaskActor_C;               // 0x0498(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
 
 public:
-	void ReceiveBeginPlay();
 	void ExecuteUbergraph_BP_SimpleTaskActor(int32 EntryPoint);
+	void ReceiveBeginPlay();
 
 public:
 	static class UClass* StaticClass()

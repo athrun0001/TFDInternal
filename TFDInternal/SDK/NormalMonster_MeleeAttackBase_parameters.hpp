@@ -48,6 +48,14 @@ public:
 	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
 };
 
+// Function NormalMonster_MeleeAttackBase.NormalMonster_MeleeAttackBase_C.OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151
+// 0x0040 (0x0040 - 0x0000)
+struct NormalMonster_MeleeAttackBase_C_OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151 final
+{
+public:
+	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
+};
+
 // Function NormalMonster_MeleeAttackBase.NormalMonster_MeleeAttackBase_C.OnBlendOut_246FDEEB41893BBA6D12779DDF33B01E
 // 0x0040 (0x0040 - 0x0000)
 struct NormalMonster_MeleeAttackBase_C_OnBlendOut_246FDEEB41893BBA6D12779DDF33B01E final
@@ -108,14 +116,6 @@ struct NormalMonster_MeleeAttackBase_C_ApplyHit final
 {
 public:
 	TArray<class AActor*>                         CallFunc_CheckOverlapHitDetection_HitActors;       // 0x0000(0x0010)(ReferenceParm)
-};
-
-// Function NormalMonster_MeleeAttackBase.NormalMonster_MeleeAttackBase_C.OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151
-// 0x0040 (0x0040 - 0x0000)
-struct NormalMonster_MeleeAttackBase_C_OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151 final
-{
-public:
-	struct FM1AbilityEvent                        Event;                                             // 0x0000(0x0040)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
 };
 
 }

@@ -12,9 +12,9 @@
 
 #include "CoreUObject_structs.hpp"
 #include "AkAudio_structs.hpp"
+#include "AkEnvZoneType_structs.hpp"
 #include "Engine_structs.hpp"
 #include "Amb_Space_structs.hpp"
-#include "AkEnvZoneType_structs.hpp"
 #include "M1_structs.hpp"
 
 

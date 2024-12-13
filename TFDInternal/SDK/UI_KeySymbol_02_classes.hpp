@@ -36,17 +36,17 @@ public:
 public:
 	void UpdateProgress(double InRatio);
 	void UISetKeyColor();
-	void SequenceEvent_0();
 	void SetVisibleProgressUI(bool InVisible);
-	void ResetProgress();
 	void SetPlayTime(double InPlayTime);
-	void PreConstruct(bool IsDesignTime);
 	void SequenceEvent__ENTRYPOINTUI_KeySymbol_02();
-	void BP_SetProgressUI(const bool bUseProgress);
+	void SequenceEvent_0();
+	void ResetProgress();
+	void PreConstruct(bool IsDesignTime);
 	void ExecuteUbergraph_UI_KeySymbol_02(int32 EntryPoint);
-	void BP_ChangeButtonUI(EM1ButtonUIType InType);
+	void BP_SetProgressUI(const bool bUseProgress);
 	void BP_ChangeProgressUI(const bool InStart, const float InDuration);
 	void BP_ChangeDimmedUI(const bool InDimmed);
+	void BP_ChangeButtonUI(EM1ButtonUIType InType);
 
 public:
 	static class UClass* StaticClass()

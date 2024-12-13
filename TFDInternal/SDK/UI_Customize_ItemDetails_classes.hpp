@@ -61,7 +61,6 @@ public:
 	void BP_ShowPaints(bool bShow);
 	void BP_ShowDescImpl(bool bShow);
 	void BP_ShowAttackType(bool bShow);
-	void BP_SetTier(const class UM1UIDataItemInfo* InInfo);
 
 public:
 	static class UClass* StaticClass()

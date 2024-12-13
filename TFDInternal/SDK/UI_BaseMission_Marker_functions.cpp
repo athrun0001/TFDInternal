@@ -17,25 +17,37 @@
 namespace SDK
 {
 
-// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.Tick
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.BP_UpdateVisibility
+// (Event, Protected, BlueprintEvent)
 // Parameters:
-// struct FGeometry                        MyGeometry                                             (BlueprintVisible, BlueprintReadOnly, Parm, IsPlainOldData, NoDestructor)
-// float                                   InDeltaTime                                            (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// bool                                    bIsVisible                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
-void UUI_BaseMission_Marker_C::Tick(const struct FGeometry& MyGeometry, float InDeltaTime)
+void UUI_BaseMission_Marker_C::BP_UpdateVisibility(bool bIsVisible)
 {
 	static class UFunction* Func = nullptr;
 
 	if (Func == nullptr)
-		Func = Class->GetFunction("UI_BaseMission_Marker_C", "Tick");
+		Func = Class->GetFunction("UI_BaseMission_Marker_C", "BP_UpdateVisibility");
 
-	Params::UI_BaseMission_Marker_C_Tick Parms{};
+	Params::UI_BaseMission_Marker_C_BP_UpdateVisibility Parms{};
 
-	Parms.MyGeometry = std::move(MyGeometry);
-	Parms.InDeltaTime = InDeltaTime;
+	Parms.bIsVisible = bIsVisible;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.Construct
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+
+void UUI_BaseMission_Marker_C::Construct()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_BaseMission_Marker_C", "Construct");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 
@@ -54,26 +66,6 @@ void UUI_BaseMission_Marker_C::SetUIState(bool IsDim)
 	Params::UI_BaseMission_Marker_C_SetUIState Parms{};
 
 	Parms.IsDim = IsDim;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.PreConstruct
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
-// Parameters:
-// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_BaseMission_Marker_C::PreConstruct(bool IsDesignTime)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_BaseMission_Marker_C", "PreConstruct");
-
-	Params::UI_BaseMission_Marker_C_PreConstruct Parms{};
-
-	Parms.IsDesignTime = IsDesignTime;
 
 	UObject::ProcessEvent(Func, &Parms);
 }
@@ -99,35 +91,43 @@ void UUI_BaseMission_Marker_C::ExecuteUbergraph_UI_BaseMission_Marker(int32 Entr
 }
 
 
-// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.Construct
+// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.PreConstruct
 // (BlueprintCosmetic, Event, Public, BlueprintEvent)
+// Parameters:
+// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
-void UUI_BaseMission_Marker_C::Construct()
+void UUI_BaseMission_Marker_C::PreConstruct(bool IsDesignTime)
 {
 	static class UFunction* Func = nullptr;
 
 	if (Func == nullptr)
-		Func = Class->GetFunction("UI_BaseMission_Marker_C", "Construct");
+		Func = Class->GetFunction("UI_BaseMission_Marker_C", "PreConstruct");
 
-	UObject::ProcessEvent(Func, nullptr);
+	Params::UI_BaseMission_Marker_C_PreConstruct Parms{};
+
+	Parms.IsDesignTime = IsDesignTime;
+
+	UObject::ProcessEvent(Func, &Parms);
 }
 
 
-// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.BP_UpdateVisibility
-// (Event, Protected, BlueprintEvent)
+// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.Tick
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
 // Parameters:
-// bool                                    bIsVisible                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// struct FGeometry                        MyGeometry                                             (BlueprintVisible, BlueprintReadOnly, Parm, IsPlainOldData, NoDestructor)
+// float                                   InDeltaTime                                            (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
-void UUI_BaseMission_Marker_C::BP_UpdateVisibility(bool bIsVisible)
+void UUI_BaseMission_Marker_C::Tick(const struct FGeometry& MyGeometry, float InDeltaTime)
 {
 	static class UFunction* Func = nullptr;
 
 	if (Func == nullptr)
-		Func = Class->GetFunction("UI_BaseMission_Marker_C", "BP_UpdateVisibility");
+		Func = Class->GetFunction("UI_BaseMission_Marker_C", "Tick");
 
-	Params::UI_BaseMission_Marker_C_BP_UpdateVisibility Parms{};
+	Params::UI_BaseMission_Marker_C_Tick Parms{};
 
-	Parms.bIsVisible = bIsVisible;
+	Parms.MyGeometry = std::move(MyGeometry);
+	Parms.InDeltaTime = InDeltaTime;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

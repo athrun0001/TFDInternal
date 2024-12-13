@@ -31,40 +31,6 @@ void UUI_Guide_Respawn_C::UILoop()
 }
 
 
-// Function UI_Guide_Respawn.UI_Guide_Respawn_C.SequenceEvent__ENTRYPOINTUI_Guide_Respawn
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_Guide_Respawn_C::SequenceEvent__ENTRYPOINTUI_Guide_Respawn()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Guide_Respawn_C", "SequenceEvent__ENTRYPOINTUI_Guide_Respawn");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function UI_Guide_Respawn.UI_Guide_Respawn_C.OnAnimationFinished
-// (BlueprintCosmetic, Event, Protected, BlueprintEvent)
-// Parameters:
-// class UWidgetAnimation*                 Animation                                              (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Guide_Respawn_C::OnAnimationFinished(const class UWidgetAnimation* Animation)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Guide_Respawn_C", "OnAnimationFinished");
-
-	Params::UI_Guide_Respawn_C_OnAnimationFinished Parms{};
-
-	Parms.Animation = Animation;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_Guide_Respawn.UI_Guide_Respawn_C.ExecuteUbergraph_UI_Guide_Respawn
 // (Final, UbergraphFunction)
 // Parameters:
@@ -82,6 +48,20 @@ void UUI_Guide_Respawn_C::ExecuteUbergraph_UI_Guide_Respawn(int32 EntryPoint)
 	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_Guide_Respawn.UI_Guide_Respawn_C.SequenceEvent__ENTRYPOINTUI_Guide_Respawn
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_Guide_Respawn_C::SequenceEvent__ENTRYPOINTUI_Guide_Respawn()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Guide_Respawn_C", "SequenceEvent__ENTRYPOINTUI_Guide_Respawn");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 
@@ -130,6 +110,26 @@ void UUI_Guide_Respawn_C::BP_BeginOverlap()
 		Func = Class->GetFunction("UI_Guide_Respawn_C", "BP_BeginOverlap");
 
 	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function UI_Guide_Respawn.UI_Guide_Respawn_C.OnAnimationFinished
+// (BlueprintCosmetic, Event, Protected, BlueprintEvent)
+// Parameters:
+// class UWidgetAnimation*                 Animation                                              (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+
+void UUI_Guide_Respawn_C::OnAnimationFinished(const class UWidgetAnimation* Animation)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Guide_Respawn_C", "OnAnimationFinished");
+
+	Params::UI_Guide_Respawn_C_OnAnimationFinished Parms{};
+
+	Parms.Animation = Animation;
+
+	UObject::ProcessEvent(Func, &Parms);
 }
 
 }

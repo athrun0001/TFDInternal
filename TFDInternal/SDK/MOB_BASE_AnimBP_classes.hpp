@@ -10,12 +10,12 @@
 
 #include "Basic.hpp"
 
-#include "AnimGraphRuntime_structs.hpp"
 #include "Engine_structs.hpp"
-#include "MOB_BASE_AnimBP_structs.hpp"
-#include "M1Data_structs.hpp"
 #include "M1_structs.hpp"
 #include "M1_classes.hpp"
+#include "MOB_BASE_AnimBP_structs.hpp"
+#include "M1Data_structs.hpp"
+#include "AnimGraphRuntime_structs.hpp"
 
 
 namespace SDK

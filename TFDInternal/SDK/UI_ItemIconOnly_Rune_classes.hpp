@@ -30,11 +30,11 @@ public:
 	struct FMargin                                Rune_Padding;                                      // 0x0728(0x0010)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor)
 
 public:
-	void PreConstruct(bool IsDesignTime);
-	void ExecuteUbergraph_UI_ItemIconOnly_Rune(int32 EntryPoint);
 	void SetUI_RunePadding(const struct FMargin& Margin);
 	void SetUI_RuneIcon(class UM1UIDataItemInfo* UIData_0);
 	void SetDataImpl(class UM1UIData* InData);
+	void PreConstruct(bool IsDesignTime);
+	void ExecuteUbergraph_UI_ItemIconOnly_Rune(int32 EntryPoint);
 
 public:
 	static class UClass* StaticClass()

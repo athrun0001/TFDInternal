@@ -17,7 +17,7 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass PROJ_SoullessHighAngleFire.PROJ_SoullessHighAngleFire_C
-// 0x0000 (0x0C48 - 0x0C48)
+// 0x0000 (0x0C58 - 0x0C58)
 class APROJ_SoullessHighAngleFire_C final : public APROJ_MonsterHighangleFire_C
 {
 public:

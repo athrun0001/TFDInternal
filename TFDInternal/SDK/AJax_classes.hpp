@@ -18,12 +18,12 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass AJax.AJax_C
-// 0x0010 (0x1220 - 0x1210)
+// 0x0010 (0x1230 - 0x1220)
 class AAJax_C final : public APlayerBase_C
 {
 public:
-	struct FM1ScaledInteger                       SavedCurrentEnergyShield;                          // 0x1208(0x0008)(Edit, BlueprintVisible, DisableEditOnInstance, NoDestructor, HasGetValueTypeHash)
-	struct FM1ScaledInteger                       SavedCurrentHp;                                    // 0x1210(0x0008)(Edit, BlueprintVisible, DisableEditOnInstance, NoDestructor, HasGetValueTypeHash)
+	struct FM1ScaledInteger                       SavedCurrentEnergyShield;                          // 0x1218(0x0008)(Edit, BlueprintVisible, DisableEditOnInstance, NoDestructor, HasGetValueTypeHash)
+	struct FM1ScaledInteger                       SavedCurrentHp;                                    // 0x1220(0x0008)(Edit, BlueprintVisible, DisableEditOnInstance, NoDestructor, HasGetValueTypeHash)
 
 public:
 	static class UClass* StaticClass()

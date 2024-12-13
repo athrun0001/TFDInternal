@@ -16,14 +16,6 @@
 namespace SDK::Params
 {
 
-// Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.UI_Deco_TitleLine_Event_0
-// 0x0008 (0x0008 - 0x0000)
-struct UI_GameTop_LevelUp_C_UI_Deco_TitleLine_Event_0 final
-{
-public:
-	class UUI_Deco_TitleLine_01_C*                UI_Deco_TitleLine;                                 // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.PlaySkillAnim
 // 0x0090 (0x0090 - 0x0000)
 struct UI_GameTop_LevelUp_C_PlaySkillAnim final
@@ -51,12 +43,28 @@ public:
 	class UUMGSequencePlayer*                     CallFunc_PlayAnimationForward_ReturnValue;         // 0x0088(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 };
 
+// Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.UI_Deco_TitleLine_Event_0
+// 0x0008 (0x0008 - 0x0000)
+struct UI_GameTop_LevelUp_C_UI_Deco_TitleLine_Event_0 final
+{
+public:
+	class UUI_Deco_TitleLine_01_C*                UI_Deco_TitleLine;                                 // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
+};
+
 // Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.OnEventWidgetOpen
 // 0x0001 (0x0001 - 0x0000)
 struct UI_GameTop_LevelUp_C_OnEventWidgetOpen final
 {
 public:
 	EM1WidgetAnimDirection                        InDirection;                                       // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.BP_UpdateAppearanceByLevel
+// 0x0001 (0x0001 - 0x0000)
+struct UI_GameTop_LevelUp_C_BP_UpdateAppearanceByLevel final
+{
+public:
+	bool                                          bIsMaxLevel;                                       // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.GetEndAnimation
@@ -98,14 +106,6 @@ public:
 	uint8                                         Pad_81[0x7];                                       // 0x0081(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
 	class UUMGSequencePlayer*                     CallFunc_PlayUIAnimation_ReturnValue_1;            // 0x0088(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 	TDelegate<void()>                             K2Node_CreateDelegate_OutputDelegate_1;            // 0x0090(0x0010)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.BP_UpdateAppearanceByLevel
-// 0x0001 (0x0001 - 0x0000)
-struct UI_GameTop_LevelUp_C_BP_UpdateAppearanceByLevel final
-{
-public:
-	bool                                          bIsMaxLevel;                                       // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_GameTop_LevelUp.UI_GameTop_LevelUp_C.BP_playakSound

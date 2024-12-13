@@ -39,10 +39,10 @@ public:
 	void StateSetting(int32 State);
 	void PreConstruct(bool IsDesignTime);
 	void PlayAnimations_2(double DeltaTime);
-	void Construct();
 	void PlayAnimations();
-	void BP_Init();
 	void ExecuteUbergraph_UI_GameCenter_DamegeIndicator_Arrow1(int32 EntryPoint);
+	void Construct();
+	void BP_Init();
 
 public:
 	static class UClass* StaticClass()

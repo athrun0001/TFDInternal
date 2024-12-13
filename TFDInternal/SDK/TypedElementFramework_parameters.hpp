@@ -16,6 +16,45 @@
 namespace SDK::Params
 {
 
+// Function TypedElementFramework.TestTypedElementInterfaceA.GetDisplayName
+// 0x0020 (0x0020 - 0x0000)
+struct TestTypedElementInterfaceA_GetDisplayName final
+{
+public:
+	struct FScriptTypedElementHandle              InElementHandle;                                   // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	class FText                                   ReturnValue;                                       // 0x0008(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
+};
+
+// Function TypedElementFramework.TestTypedElementInterfaceA.SetDisplayName
+// 0x0028 (0x0028 - 0x0000)
+struct TestTypedElementInterfaceA_SetDisplayName final
+{
+public:
+	struct FScriptTypedElementHandle              InElementHandle;                                   // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	class FText                                   InNewName;                                         // 0x0008(0x0018)(Parm, NativeAccessSpecifierPublic)
+	bool                                          bNotify;                                           // 0x0020(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          ReturnValue;                                       // 0x0021(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_22[0x6];                                       // 0x0022(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// Function TypedElementFramework.TypedElementRegistry.GetInstance
+// 0x0008 (0x0008 - 0x0000)
+struct TypedElementRegistry_GetInstance final
+{
+public:
+	class UTypedElementRegistry*                  ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function TypedElementFramework.TypedElementRegistry.GetElementInterface
+// 0x0018 (0x0018 - 0x0000)
+struct TypedElementRegistry_GetElementInterface final
+{
+public:
+	struct FScriptTypedElementHandle              InElementHandle;                                   // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
+	TSubclassOf<class IInterface>                 InBaseInterfaceType;                               // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class UObject*                                ReturnValue;                                       // 0x0010(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function TypedElementFramework.TypedElementHandleLibrary.Equal
 // 0x0018 (0x0018 - 0x0000)
 struct TypedElementHandleLibrary_Equal final
@@ -54,27 +93,6 @@ struct TypedElementHandleLibrary_Release final
 {
 public:
 	struct FScriptTypedElementHandle              ElementHandle;                                     // 0x0000(0x0008)(Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-};
-
-// Function TypedElementFramework.TestTypedElementInterfaceA.GetDisplayName
-// 0x0020 (0x0020 - 0x0000)
-struct TestTypedElementInterfaceA_GetDisplayName final
-{
-public:
-	struct FScriptTypedElementHandle              InElementHandle;                                   // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	class FText                                   ReturnValue;                                       // 0x0008(0x0018)(Parm, OutParm, ReturnParm, NativeAccessSpecifierPublic)
-};
-
-// Function TypedElementFramework.TestTypedElementInterfaceA.SetDisplayName
-// 0x0028 (0x0028 - 0x0000)
-struct TestTypedElementInterfaceA_SetDisplayName final
-{
-public:
-	struct FScriptTypedElementHandle              InElementHandle;                                   // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	class FText                                   InNewName;                                         // 0x0008(0x0018)(Parm, NativeAccessSpecifierPublic)
-	bool                                          bNotify;                                           // 0x0020(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          ReturnValue;                                       // 0x0021(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_22[0x6];                                       // 0x0022(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Function TypedElementFramework.TypedElementListLibrary.Add
@@ -277,24 +295,6 @@ struct TypedElementListLibrary_Shrink final
 {
 public:
 	struct FScriptTypedElementListProxy           ElementList;                                       // 0x0000(0x0010)(Parm, NativeAccessSpecifierPublic)
-};
-
-// Function TypedElementFramework.TypedElementRegistry.GetInstance
-// 0x0008 (0x0008 - 0x0000)
-struct TypedElementRegistry_GetInstance final
-{
-public:
-	class UTypedElementRegistry*                  ReturnValue;                                       // 0x0000(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function TypedElementFramework.TypedElementRegistry.GetElementInterface
-// 0x0018 (0x0018 - 0x0000)
-struct TypedElementRegistry_GetElementInterface final
-{
-public:
-	struct FScriptTypedElementHandle              InElementHandle;                                   // 0x0000(0x0008)(ConstParm, Parm, OutParm, ReferenceParm, NativeAccessSpecifierPublic)
-	TSubclassOf<class IInterface>                 InBaseInterfaceType;                               // 0x0008(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class UObject*                                ReturnValue;                                       // 0x0010(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function TypedElementFramework.TestTypedElementInterfaceB.MarkAsTested

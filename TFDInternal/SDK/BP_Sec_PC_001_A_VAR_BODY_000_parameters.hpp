@@ -16,15 +16,6 @@
 namespace SDK::Params
 {
 
-// Function BP_Sec_PC_001_A_VAR_BODY_000.BP_Sec_PC_001_A_VAR_BODY_000_C.AnimGraph
-// 0x0020 (0x0020 - 0x0000)
-struct BP_Sec_PC_001_A_VAR_BODY_000_C_AnimGraph final
-{
-public:
-	struct FPoseLink                              InPose;                                            // 0x0000(0x0010)(BlueprintVisible, BlueprintReadOnly, Parm, NoDestructor)
-	struct FPoseLink                              AnimGraph_0;                                       // 0x0010(0x0010)(Parm, OutParm, NoDestructor)
-};
-
 // Function BP_Sec_PC_001_A_VAR_BODY_000.BP_Sec_PC_001_A_VAR_BODY_000_C.ExecuteUbergraph_BP_Sec_PC_001_A_VAR_BODY_000
 // 0x0004 (0x0004 - 0x0000)
 struct BP_Sec_PC_001_A_VAR_BODY_000_C_ExecuteUbergraph_BP_Sec_PC_001_A_VAR_BODY_000 final
@@ -45,6 +36,15 @@ public:
 	double                                        CallFunc_SelectFloat_ReturnValue;                  // 0x0010(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        CallFunc_SelectFloat_A_ImplicitCast;               // 0x0018(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        CallFunc_Greater_DoubleDouble_A_ImplicitCast;      // 0x0020(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function BP_Sec_PC_001_A_VAR_BODY_000.BP_Sec_PC_001_A_VAR_BODY_000_C.AnimGraph
+// 0x0020 (0x0020 - 0x0000)
+struct BP_Sec_PC_001_A_VAR_BODY_000_C_AnimGraph final
+{
+public:
+	struct FPoseLink                              InPose;                                            // 0x0000(0x0010)(BlueprintVisible, BlueprintReadOnly, Parm, NoDestructor)
+	struct FPoseLink                              AnimGraph_0;                                       // 0x0010(0x0010)(Parm, OutParm, NoDestructor)
 };
 
 }

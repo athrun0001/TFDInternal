@@ -42,19 +42,19 @@ public:
 	bool                                          bPlayProgressFullAnim;                             // 0x07C9(0x0001)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
-	void ExecuteUbergraph_UI_Mission_Result_MasterRankProgress(int32 EntryPoint);
-	void WidgetAnimationEvt_UIAnim_ProgressFull_K2Node_WidgetAnimationEvent_0();
-	void UISetDefault();
+	void PreConstruct(bool IsDesignTime);
 	void UIMax_Level(bool Max_Level);
+	void ExecuteUbergraph_UI_Mission_Result_MasterRankProgress(int32 EntryPoint);
 	void Construct();
 	void BP_ShowExpText(EM1UIMissionResultExpType InType, int64 InExp);
-	void BP_SetLevel(int32 InLevel);
 	void BP_SetIsMaxLevel();
 	void BP_SetExpProgressValue(EM1UIMissionResultExpType InType, float InProgressValue);
+	void BP_ResetAllExpProgressValue();
 	void BP_PlayLevelUpAnim();
 	void BP_MasteryRankExpAcquiredType(const TArray<EM1UIMissionResultExpType>& InAcquiredType);
-	void BP_ResetAllExpProgressValue();
-	void PreConstruct(bool IsDesignTime);
+	void BP_SetLevel(int32 InLevel);
+	void WidgetAnimationEvt_UIAnim_ProgressFull_K2Node_WidgetAnimationEvent_0();
+	void UISetDefault();
 
 public:
 	static class UClass* StaticClass()

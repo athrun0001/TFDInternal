@@ -17,6 +17,20 @@
 namespace SDK
 {
 
+// Function UI_WidgetContainer.UI_WidgetContainer_C.SetUIForSkillMovie
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_WidgetContainer_C::SetUIForSkillMovie()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_WidgetContainer_C", "SetUIForSkillMovie");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UI_WidgetContainer.UI_WidgetContainer_C.PreConstruct
 // (BlueprintCosmetic, Event, Public, BlueprintEvent)
 // Parameters:
@@ -54,20 +68,6 @@ void UUI_WidgetContainer_C::ExecuteUbergraph_UI_WidgetContainer(int32 EntryPoint
 	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_WidgetContainer.UI_WidgetContainer_C.SetUIForSkillMovie
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_WidgetContainer_C::SetUIForSkillMovie()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_WidgetContainer_C", "SetUIForSkillMovie");
-
-	UObject::ProcessEvent(Func, nullptr);
 }
 
 }

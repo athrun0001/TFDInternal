@@ -39,14 +39,14 @@ public:
 	int32                                         PrevLevel;                                         // 0x0770(0x0004)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
-	void PreConstruct(bool IsDesignTime);
 	void SetGaugeCount(int32 GaugeCount);
-	void OnChargeLevelIncreased(int32 CurrentLevel);
 	void SetGaugeColor(const struct FM1WeaponChargeGaugeUIColors& GaugeColors);
-	void ExecuteUbergraph_UI_ChargeGauge_001(int32 EntryPoint);
+	void PreConstruct(bool IsDesignTime);
+	void OnChargeLevelIncreased(int32 CurrentLevel);
 	void OnChargeLevelDecreased(int32 CurrentLevel);
-	void BP_OnInitChargeGauge(int32 GaugeCount, const struct FM1WeaponChargeGaugeUIColors& GaugeUIColors);
+	void ExecuteUbergraph_UI_ChargeGauge_001(int32 EntryPoint);
 	void BP_StoppedWeaponCharge();
+	void BP_OnInitChargeGauge(int32 GaugeCount, const struct FM1WeaponChargeGaugeUIColors& GaugeUIColors);
 	void BP_ChangedWeaponChargeLevel(int32 CurrentLevel, bool bShowProgress);
 
 public:

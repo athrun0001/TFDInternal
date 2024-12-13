@@ -33,10 +33,10 @@ public:
 	class UUI_Social_Platform_Icon_C*             UI_Social_Platform_Icon;                           // 0x0730(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
 
 public:
-	void SetDataImpl(class UM1UIData* InData);
-	void OnEventWidgetOpen(EM1WidgetAnimDirection InDirection);
 	void ExecuteUbergraph_UI_Button_Tooltip_PlayerName(int32 EntryPoint);
 	void Construct();
+	void SetDataImpl(class UM1UIData* InData);
+	void OnEventWidgetOpen(EM1WidgetAnimDirection InDirection);
 
 public:
 	static class UClass* StaticClass()

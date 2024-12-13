@@ -16,6 +16,14 @@
 namespace SDK::Params
 {
 
+// Function UI_Mission_Result_StatItem.UI_Mission_Result_StatItem_C.PreConstruct
+// 0x0001 (0x0001 - 0x0000)
+struct UI_Mission_Result_StatItem_C_PreConstruct final
+{
+public:
+	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
 // Function UI_Mission_Result_StatItem.UI_Mission_Result_StatItem_C.UI View
 // 0x0008 (0x0008 - 0x0000)
 struct UI_Mission_Result_StatItem_C_UI_View final
@@ -37,14 +45,6 @@ struct UI_Mission_Result_StatItem_C_SetDataImpl final
 {
 public:
 	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_Mission_Result_StatItem.UI_Mission_Result_StatItem_C.PreConstruct
-// 0x0001 (0x0001 - 0x0000)
-struct UI_Mission_Result_StatItem_C_PreConstruct final
-{
-public:
-	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_Mission_Result_StatItem.UI_Mission_Result_StatItem_C.ExecuteUbergraph_UI_Mission_Result_StatItem

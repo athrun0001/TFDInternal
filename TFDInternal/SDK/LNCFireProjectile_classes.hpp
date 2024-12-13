@@ -11,8 +11,8 @@
 #include "Basic.hpp"
 
 #include "Engine_structs.hpp"
-#include "CoreUObject_structs.hpp"
 #include "GameplayTags_structs.hpp"
+#include "CoreUObject_structs.hpp"
 #include "M1_classes.hpp"
 
 
@@ -21,7 +21,7 @@ namespace SDK
 
 // BlueprintGeneratedClass LNCFireProjectile.LNCFireProjectile_C
 // 0x0078 (0x0318 - 0x02A0)
-class ULNCFireProjectile_C : public UM1Ability
+class ULNCFireProjectile_C final : public UM1Ability
 {
 public:
 	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x02A0(0x0008)(ZeroConstructor, Transient, DuplicateTransient)

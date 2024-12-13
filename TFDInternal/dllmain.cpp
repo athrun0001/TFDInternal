@@ -1391,7 +1391,7 @@ DWORD WINAPI Init(HMODULE Module)
 	sigmod GameModule = { NULL,NULL };
 	do
 	{
-		if (!wcscmp(mEntry.szModule, L"M1-Win64-Shipping.exe"))
+		if (!_wcsicmp(mEntry.szModule, L"M1-Win64-Shipping.exe"))
 		{
 			GameModule = { (uintptr_t)mEntry.hModule, mEntry.modBaseSize };
 		}

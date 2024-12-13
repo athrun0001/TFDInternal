@@ -37,6 +37,20 @@ void ABP_EmberDroppedItem_C::ExecuteUbergraph_BP_EmberDroppedItem(int32 EntryPoi
 }
 
 
+// Function BP_EmberDroppedItem.BP_EmberDroppedItem_C.BP_SimulationEnabled
+// (Event, Public, BlueprintEvent)
+
+void ABP_EmberDroppedItem_C::BP_SimulationEnabled()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BP_EmberDroppedItem_C", "BP_SimulationEnabled");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function BP_EmberDroppedItem.BP_EmberDroppedItem_C.BP_OnSetWhoDroppedThis
 // (Event, Public, BlueprintEvent)
 // Parameters:
@@ -74,20 +88,6 @@ void ABP_EmberDroppedItem_C::BP_ClientOnGround(float InDeltaTime)
 	Parms.InDeltaTime = InDeltaTime;
 
 	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function BP_EmberDroppedItem.BP_EmberDroppedItem_C.BP_SimulationEnabled
-// (Event, Public, BlueprintEvent)
-
-void ABP_EmberDroppedItem_C::BP_SimulationEnabled()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("BP_EmberDroppedItem_C", "BP_SimulationEnabled");
-
-	UObject::ProcessEvent(Func, nullptr);
 }
 
 

@@ -10,9 +10,9 @@
 
 #include "Basic.hpp"
 
+#include "CoreUObject_structs.hpp"
 #include "Engine_structs.hpp"
 #include "SlateCore_structs.hpp"
-#include "CoreUObject_structs.hpp"
 #include "M1_classes.hpp"
 
 
@@ -38,9 +38,9 @@ public:
 
 public:
 	void SetUIStyel();
+	void SetPerkLevel(int32 Level, bool MaxLevel);
 	void PreConstruct(bool IsDesignTime);
 	void ExecuteUbergraph_UI_ItemIcon_Perk(int32 EntryPoint);
-	void SetPerkLevel(int32 Level, bool MaxLevel);
 
 public:
 	static class UClass* StaticClass()

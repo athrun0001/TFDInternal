@@ -10,8 +10,8 @@
 
 #include "Basic.hpp"
 
-#include "Engine_structs.hpp"
 #include "Viessa_IceSphereData_structs.hpp"
+#include "Engine_structs.hpp"
 #include "CoreUObject_structs.hpp"
 #include "M1_classes.hpp"
 
@@ -55,7 +55,6 @@ public:
 public:
 	void TickUpdateShoot(double DeltaSeconds);
 	void TickUpdateRedetection(double DeltaSeconds);
-	void RotateTarget(double DeltaSeconds, bool* FinishedRotation);
 	void ReceiveTick(float DeltaSeconds);
 	void ProccessDestory();
 	void OnRep_IceSphereName();
@@ -72,8 +71,9 @@ public:
 	void DestroyFiredIceSphere(class FName InIceSphereName);
 	void CanShoot(bool* Result);
 	void BP_OnPostSpawnAbilityActor();
-	void AddSkeletalMeshControl(class USkeletalMeshComponent* OwnedSkeletalMeshComp, class FName ControlTag, class FName BaseSocketName, bool bIsCosmetic);
+	void RotateTarget(double DeltaSeconds, bool* FinishedRotation);
 	void AddIceSphereControls();
+	void AddSkeletalMeshControl(class USkeletalMeshComponent* OwnedSkeletalMeshComp, class FName ControlTag, class FName BaseSocketName, bool bIsCosmetic);
 
 public:
 	static class UClass* StaticClass()

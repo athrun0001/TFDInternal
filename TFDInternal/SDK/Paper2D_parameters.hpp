@@ -11,8 +11,8 @@
 #include "Basic.hpp"
 
 #include "CoreUObject_structs.hpp"
-#include "SlateCore_structs.hpp"
 #include "Paper2D_structs.hpp"
+#include "SlateCore_structs.hpp"
 
 
 namespace SDK::Params

@@ -17,17 +17,6 @@
 namespace SDK::Params
 {
 
-// Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.UISetColor_Max
-// 0x0024 (0x0024 - 0x0000)
-struct UI_ChargeGauge_001_Gague_C_UISetColor_Max final
-{
-public:
-	bool                                          Max_0;                                             // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FLinearColor                           MaxLevelColor;                                     // 0x0004(0x0010)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	struct FLinearColor                           CallFunc_SelectColor_ReturnValue;                  // 0x0014(0x0010)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.UISetMaterial
 // 0x0048 (0x0048 - 0x0000)
 struct UI_ChargeGauge_001_Gague_C_UISetMaterial final
@@ -50,6 +39,17 @@ public:
 	float                                         CallFunc_SetScalarParameterValue_Value_ImplicitCast_3; // 0x0040(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
+// Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.UISetColor_Max
+// 0x0024 (0x0024 - 0x0000)
+struct UI_ChargeGauge_001_Gague_C_UISetColor_Max final
+{
+public:
+	bool                                          Max_0;                                             // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FLinearColor                           MaxLevelColor;                                     // 0x0004(0x0010)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	struct FLinearColor                           CallFunc_SelectColor_ReturnValue;                  // 0x0014(0x0010)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
 // Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.UISetColor_Effect
 // 0x0030 (0x0030 - 0x0000)
 struct UI_ChargeGauge_001_Gague_C_UISetColor_Effect final
@@ -69,19 +69,6 @@ public:
 	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.CloseGauge
-// 0x0020 (0x0020 - 0x0000)
-struct UI_ChargeGauge_001_Gague_C_CloseGauge final
-{
-public:
-	bool                                          bCloseImmediately;                                 // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class UUMGSequencePlayer*                     CallFunc_PlayAnimation_ReturnValue;                // 0x0008(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	float                                         CallFunc_GetEndTime_ReturnValue;                   // 0x0010(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FTimerHandle                           CallFunc_K2_SetTimer_ReturnValue;                  // 0x0018(0x0008)(NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.OpenGauge
 // 0x0008 (0x0008 - 0x0000)
 struct UI_ChargeGauge_001_Gague_C_OpenGauge final
@@ -99,6 +86,19 @@ public:
 	bool                                          K2Node_Event_IsDesignTime;                         // 0x0004(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
 	double                                        CallFunc_UISetMaterial_InAngle_ImplicitCast;       // 0x0008(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_ChargeGauge_001_Gague.UI_ChargeGauge_001_Gague_C.CloseGauge
+// 0x0020 (0x0020 - 0x0000)
+struct UI_ChargeGauge_001_Gague_C_CloseGauge final
+{
+public:
+	bool                                          bCloseImmediately;                                 // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class UUMGSequencePlayer*                     CallFunc_PlayAnimation_ReturnValue;                // 0x0008(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	float                                         CallFunc_GetEndTime_ReturnValue;                   // 0x0010(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FTimerHandle                           CallFunc_K2_SetTimer_ReturnValue;                  // 0x0018(0x0008)(NoDestructor, HasGetValueTypeHash)
 };
 
 }

@@ -31,20 +31,20 @@ public:
 	class UUMGSequencePlayer*                     CallFunc_PlayAnimation_ReturnValue;                // 0x0018(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function UI_Button_Deco_Default2.UI_Button_Deco_Default2_C.BP_Selected
-// 0x0001 (0x0001 - 0x0000)
-struct UI_Button_Deco_Default2_C_BP_Selected final
-{
-public:
-	bool                                          InSelected;                                        // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_Button_Deco_Default2.UI_Button_Deco_Default2_C.BP_ChangeButtonUI
 // 0x0001 (0x0001 - 0x0000)
 struct UI_Button_Deco_Default2_C_BP_ChangeButtonUI final
 {
 public:
 	EM1ButtonUIType                               InType;                                            // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_Button_Deco_Default2.UI_Button_Deco_Default2_C.BP_Selected
+// 0x0001 (0x0001 - 0x0000)
+struct UI_Button_Deco_Default2_C_BP_Selected final
+{
+public:
+	bool                                          InSelected;                                        // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 }

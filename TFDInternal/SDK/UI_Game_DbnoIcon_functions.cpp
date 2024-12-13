@@ -17,6 +17,26 @@
 namespace SDK
 {
 
+// Function UI_Game_DbnoIcon.UI_Game_DbnoIcon_C.SetProgressRatio
+// (Event, Public, BlueprintEvent)
+// Parameters:
+// float                                   InRatio                                                (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_Game_DbnoIcon_C::SetProgressRatio(const float InRatio)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Game_DbnoIcon_C", "SetProgressRatio");
+
+	Params::UI_Game_DbnoIcon_C_SetProgressRatio Parms{};
+
+	Parms.InRatio = InRatio;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
 // Function UI_Game_DbnoIcon.UI_Game_DbnoIcon_C.UpdateProgress
 // (Public, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -52,26 +72,6 @@ void UUI_Game_DbnoIcon_C::StartProgress(const float InPlayTime)
 	Params::UI_Game_DbnoIcon_C_StartProgress Parms{};
 
 	Parms.InPlayTime = InPlayTime;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_Game_DbnoIcon.UI_Game_DbnoIcon_C.SetProgressRatio
-// (Event, Public, BlueprintEvent)
-// Parameters:
-// float                                   InRatio                                                (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Game_DbnoIcon_C::SetProgressRatio(const float InRatio)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Game_DbnoIcon_C", "SetProgressRatio");
-
-	Params::UI_Game_DbnoIcon_C_SetProgressRatio Parms{};
-
-	Parms.InRatio = InRatio;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

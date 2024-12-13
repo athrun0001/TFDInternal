@@ -18,12 +18,11 @@ namespace SDK
 {
 
 // WidgetBlueprintGeneratedClass UI_Codex_Tracking_Task_Item.UI_Codex_Tracking_Task_Item_C
-// 0x0010 (0x0738 - 0x0728)
+// 0x0008 (0x0730 - 0x0728)
 class UUI_Codex_Tracking_Task_Item_C final : public UM1UIGameCodexTrackingDetailSlot
 {
 public:
 	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0728(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
-	class UImage*                                 Image_98;                                          // 0x0730(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
 
 public:
 	void SetUI_Complete_Color(bool In_complete);

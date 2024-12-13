@@ -41,12 +41,12 @@ public:
 	void OnEventReceived_246FDEEB41893BBA6D12779DDF33B01E(const struct FM1AbilityEvent& Event);
 	void OnCompleted_A19958C04C8AB1CE32CDBF9C7D4EC151(const struct FM1AbilityEvent& Event);
 	void OnCompleted_246FDEEB41893BBA6D12779DDF33B01E(const struct FM1AbilityEvent& Event);
+	void OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151(const struct FM1AbilityEvent& Event);
 	void OnBlendOut_246FDEEB41893BBA6D12779DDF33B01E(const struct FM1AbilityEvent& Event);
 	void ExecuteUbergraph_NormalMonster_MeleeAttackBase(int32 EntryPoint);
 	void CheckOverlapHitDetection(TArray<class AActor*>* HitActors);
 	void BP_OnActivated();
 	void ApplyHit();
-	void OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151(const struct FM1AbilityEvent& Event);
 
 public:
 	static class UClass* StaticClass()

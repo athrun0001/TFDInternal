@@ -17,6 +17,31 @@
 namespace SDK
 {
 
+// Function CalcShieldBaseDamage.CalcShieldBaseDamage_C.DoCalculation
+// (Protected, HasOutParams, HasDefaults, BlueprintCallable, BlueprintEvent, Const)
+// Parameters:
+// struct FM1AbilityOpCalcParam            Param                                                  (BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, NoDestructor)
+// struct FM1CalcDamageInfo                DamageInfo                                             (BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, ContainsInstancedReference)
+
+void UCalcShieldBaseDamage_C::DoCalculation(struct FM1AbilityOpCalcParam& Param, struct FM1CalcDamageInfo& DamageInfo) const
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("CalcShieldBaseDamage_C", "DoCalculation");
+
+	Params::CalcShieldBaseDamage_C_DoCalculation Parms{};
+
+	Parms.Param = std::move(Param);
+	Parms.DamageInfo = std::move(DamageInfo);
+
+	UObject::ProcessEvent(Func, &Parms);
+
+	Param = std::move(Parms.Param);
+	DamageInfo = std::move(Parms.DamageInfo);
+}
+
+
 // Function CalcShieldBaseDamage.CalcShieldBaseDamage_C.GetDamageRatio
 // (Public, HasOutParams, HasDefaults, BlueprintCallable, BlueprintEvent, BlueprintPure, Const)
 // Parameters:
@@ -40,31 +65,6 @@ void UCalcShieldBaseDamage_C::GetDamageRatio(struct FM1AbilityOpCalcParam& Param
 
 	if (Ratio != nullptr)
 		*Ratio = Parms.Ratio;
-}
-
-
-// Function CalcShieldBaseDamage.CalcShieldBaseDamage_C.DoCalculation
-// (Protected, HasOutParams, HasDefaults, BlueprintCallable, BlueprintEvent, Const)
-// Parameters:
-// struct FM1AbilityOpCalcParam            Param                                                  (BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, NoDestructor)
-// struct FM1CalcDamageInfo                DamageInfo                                             (BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm, ContainsInstancedReference)
-
-void UCalcShieldBaseDamage_C::DoCalculation(struct FM1AbilityOpCalcParam& Param, struct FM1CalcDamageInfo& DamageInfo) const
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("CalcShieldBaseDamage_C", "DoCalculation");
-
-	Params::CalcShieldBaseDamage_C_DoCalculation Parms{};
-
-	Parms.Param = std::move(Param);
-	Parms.DamageInfo = std::move(DamageInfo);
-
-	UObject::ProcessEvent(Func, &Parms);
-
-	Param = std::move(Parms.Param);
-	DamageInfo = std::move(Parms.DamageInfo);
 }
 
 }

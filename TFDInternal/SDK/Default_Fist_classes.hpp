@@ -10,15 +10,15 @@
 
 #include "Basic.hpp"
 
+#include "PhysicsCore_structs.hpp"
+#include "Engine_structs.hpp"
 #include "M1Data_structs.hpp"
 #include "M1_structs.hpp"
 #include "M1_classes.hpp"
-#include "Engine_structs.hpp"
-#include "PhysicsCore_structs.hpp"
-#include "CoreUObject_structs.hpp"
-#include "SubSkillAnimSetting_structs.hpp"
 #include "SubSkillSetting_structs.hpp"
 #include "GameplayTags_structs.hpp"
+#include "CoreUObject_structs.hpp"
+#include "SubSkillAnimSetting_structs.hpp"
 
 
 namespace SDK
@@ -26,7 +26,7 @@ namespace SDK
 
 // BlueprintGeneratedClass Default_Fist.Default_Fist_C
 // 0x01B8 (0x04F0 - 0x0338)
-class UDefault_Fist_C final : public UM1SkillAbility
+class UDefault_Fist_C : public UM1SkillAbility
 {
 public:
 	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0338(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
@@ -65,35 +65,35 @@ public:
 public:
 	void WaitLand();
 	void WaitDamageToEvent();
-	void SendRuneEvent(class UObject* Object);
 	void StartUpdateWireVelocity();
-	void SendPrevRuneEvent();
 	void ServerDamageToEnemy(const TArray<class AActor*>& InEnemies);
+	void SendRuneEvent(class UObject* Object);
+	void SendPrevRuneEvent();
 	void RotateToAttackDirectionIfNeed();
-	void OnFinished_FA896AD34AED6B31532A3BB7F0DD5EC9(bool DestinationReached, bool TimedOut, const struct FVector& FinalTargetLocation);
 	void OnUpdate_1C9BEB0A42DB15447A2DAA9BAFDF1BEE(float DeltaTime);
-	void OnEventReceived_D54F2B39422DA08EA130338C89FA1FCE(const struct FM1AbilityEvent& Event);
 	void OnRep_bIsLanded();
-	void OnEventReceived_07EC16C846839553D378A2A49AB9C354(const struct FM1AbilityEvent& Event);
+	void OnFinished_FA896AD34AED6B31532A3BB7F0DD5EC9(bool DestinationReached, bool TimedOut, const struct FVector& FinalTargetLocation);
+	void OnEventReceived_D54F2B39422DA08EA130338C89FA1FCE(const struct FM1AbilityEvent& Event);
 	void OnEventReceived_5E573E1E46AA8A55B901328E15DB16D6(const struct FM1AbilityEvent& Event);
+	void OnEventReceived_07EC16C846839553D378A2A49AB9C354(const struct FM1AbilityEvent& Event);
 	void OnEvent_726A9F1347453B65ABB65DAE8EEB8F6E(const struct FM1CalcDamageInfo& DamageInfo);
+	void OnCompleted_D54F2B39422DA08EA130338C89FA1FCE(const struct FM1AbilityEvent& Event);
 	void OnCompleted_5E573E1E46AA8A55B901328E15DB16D6(const struct FM1AbilityEvent& Event);
 	void OnCompleted_07EC16C846839553D378A2A49AB9C354(const struct FM1AbilityEvent& Event);
 	void OnBlendOut_D54F2B39422DA08EA130338C89FA1FCE(const struct FM1AbilityEvent& Event);
 	void OnBlendOut_5E573E1E46AA8A55B901328E15DB16D6(const struct FM1AbilityEvent& Event);
 	void OnBlendOut_07EC16C846839553D378A2A49AB9C354(const struct FM1AbilityEvent& Event);
-	void OnCompleted_D54F2B39422DA08EA130338C89FA1FCE(const struct FM1AbilityEvent& Event);
 	void OnAbilityEvent_283F594C46065D7C2BA6929F6639E384(const struct FM1AbilityEvent& Event);
 	void OnAbilityEvent_09DFF00F4B92C4EE431B928C804677D1(const struct FM1AbilityEvent& Event);
 	void LaunchForWireLand();
 	void HandleAbilityEvent(const struct FM1AbilityEvent& AbilityEvent);
 	class UAnimMontage* GetNonChargeAnimMontage();
-	class UAnimMontage* GetAnimMontage(const struct FGameplayTag& Key);
 	void GetAttackTag(struct FGameplayTag* Tag);
-	void DamageToEnemy(int32 AttackCount, const struct FSubSkillSetting& InSetting);
-	bool CheckValidateRadius(class AActor* InTarget);
+	class UAnimMontage* GetAnimMontage(const struct FGameplayTag& Key);
 	void Get_Target_Actors(const struct FSubSkillCollision& DamageCollision, TArray<class AActor*>* OutActors);
 	void ExecuteUbergraph_Default_Fist(int32 EntryPoint);
+	void DamageToEnemy(int32 AttackCount, const struct FSubSkillSetting& InSetting);
+	bool CheckValidateRadius(class AActor* InTarget);
 	void CalcValidateTolerance(double* OutValidateRadius);
 	void BP_OnDeactivated(bool bCancelled);
 	void BP_OnActivated();

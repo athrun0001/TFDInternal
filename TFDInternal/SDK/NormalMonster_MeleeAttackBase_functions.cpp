@@ -97,6 +97,26 @@ void UNormalMonster_MeleeAttackBase_C::OnCompleted_246FDEEB41893BBA6D12779DDF33B
 }
 
 
+// Function NormalMonster_MeleeAttackBase.NormalMonster_MeleeAttackBase_C.OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151
+// (HasOutParams, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// struct FM1AbilityEvent                  Event                                                  (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
+
+void UNormalMonster_MeleeAttackBase_C::OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151(const struct FM1AbilityEvent& Event)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("NormalMonster_MeleeAttackBase_C", "OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151");
+
+	Params::NormalMonster_MeleeAttackBase_C_OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151 Parms{};
+
+	Parms.Event = std::move(Event);
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
 // Function NormalMonster_MeleeAttackBase.NormalMonster_MeleeAttackBase_C.OnBlendOut_246FDEEB41893BBA6D12779DDF33B01E
 // (HasOutParams, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -183,26 +203,6 @@ void UNormalMonster_MeleeAttackBase_C::ApplyHit()
 		Func = Class->GetFunction("NormalMonster_MeleeAttackBase_C", "ApplyHit");
 
 	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function NormalMonster_MeleeAttackBase.NormalMonster_MeleeAttackBase_C.OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151
-// (HasOutParams, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// struct FM1AbilityEvent                  Event                                                  (ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, OutParm, ReferenceParm)
-
-void UNormalMonster_MeleeAttackBase_C::OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151(const struct FM1AbilityEvent& Event)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("NormalMonster_MeleeAttackBase_C", "OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151");
-
-	Params::NormalMonster_MeleeAttackBase_C_OnBlendOut_A19958C04C8AB1CE32CDBF9C7D4EC151 Parms{};
-
-	Parms.Event = std::move(Event);
-
-	UObject::ProcessEvent(Func, &Parms);
 }
 
 }

@@ -18,6 +18,54 @@
 namespace SDK
 {
 
+// Class GameplayTasks.GameplayTask
+// 0x0040 (0x0068 - 0x0028)
+class UGameplayTask : public UObject
+{
+public:
+	uint8                                         Pad_28[0x8];                                       // 0x0028(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   InstanceName;                                      // 0x0030(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	uint8                                         Pad_38[0x2];                                       // 0x0038(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	ETaskResourceOverlapPolicy                    ResourceOverlapPolicy;                             // 0x003A(0x0001)(ZeroConstructor, Config, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+	uint8                                         Pad_3B[0x25];                                      // 0x003B(0x0025)(Fixing Size After Last Property [ Dumper-7 ])
+	class UGameplayTask*                          ChildTask;                                         // 0x0060(0x0008)(ZeroConstructor, NoDestructor, Protected, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+
+public:
+	void EndTask();
+	void GenericGameplayTaskDelegate__DelegateSignature();
+	void ReadyForActivation();
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"GameplayTask">();
+	}
+	static class UGameplayTask* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UGameplayTask>();
+	}
+};
+
+// Class GameplayTasks.GameplayTask_TimeLimitedExecution
+// 0x0038 (0x00A0 - 0x0068)
+class UGameplayTask_TimeLimitedExecution final : public UGameplayTask
+{
+public:
+	FMulticastInlineDelegateProperty_             OnFinished;                                        // 0x0068(0x0010)(ZeroConstructor, InstancedReference, BlueprintAssignable, NativeAccessSpecifierPublic)
+	FMulticastInlineDelegateProperty_             OnTimeExpired;                                     // 0x0078(0x0010)(ZeroConstructor, InstancedReference, BlueprintAssignable, NativeAccessSpecifierPublic)
+	uint8                                         Pad_88[0x18];                                      // 0x0088(0x0018)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"GameplayTask_TimeLimitedExecution">();
+	}
+	static class UGameplayTask_TimeLimitedExecution* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UGameplayTask_TimeLimitedExecution>();
+	}
+};
+
 // Class GameplayTasks.GameplayTasksComponent
 // 0x0078 (0x0120 - 0x00A8)
 class UGameplayTasksComponent : public UActorComponent
@@ -50,6 +98,21 @@ public:
 	}
 };
 
+// Class GameplayTasks.GameplayTaskOwnerInterface
+// 0x0000 (0x0028 - 0x0028)
+class IGameplayTaskOwnerInterface final : public IInterface
+{
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"GameplayTaskOwnerInterface">();
+	}
+	static class IGameplayTaskOwnerInterface* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<IGameplayTaskOwnerInterface>();
+	}
+};
+
 // Class GameplayTasks.GameplayTaskResource
 // 0x0010 (0x0038 - 0x0028)
 class UGameplayTaskResource : public UObject
@@ -69,49 +132,6 @@ public:
 	static class UGameplayTaskResource* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<UGameplayTaskResource>();
-	}
-};
-
-// Class GameplayTasks.GameplayTask
-// 0x0040 (0x0068 - 0x0028)
-class UGameplayTask : public UObject
-{
-public:
-	uint8                                         Pad_28[0x8];                                       // 0x0028(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
-	class FName                                   InstanceName;                                      // 0x0030(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
-	uint8                                         Pad_38[0x2];                                       // 0x0038(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	ETaskResourceOverlapPolicy                    ResourceOverlapPolicy;                             // 0x003A(0x0001)(ZeroConstructor, Config, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
-	uint8                                         Pad_3B[0x25];                                      // 0x003B(0x0025)(Fixing Size After Last Property [ Dumper-7 ])
-	class UGameplayTask*                          ChildTask;                                         // 0x0060(0x0008)(ZeroConstructor, NoDestructor, Protected, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierProtected)
-
-public:
-	void EndTask();
-	void GenericGameplayTaskDelegate__DelegateSignature();
-	void ReadyForActivation();
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"GameplayTask">();
-	}
-	static class UGameplayTask* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UGameplayTask>();
-	}
-};
-
-// Class GameplayTasks.GameplayTaskOwnerInterface
-// 0x0000 (0x0028 - 0x0028)
-class IGameplayTaskOwnerInterface final : public IInterface
-{
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"GameplayTaskOwnerInterface">();
-	}
-	static class IGameplayTaskOwnerInterface* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<IGameplayTaskOwnerInterface>();
 	}
 };
 
@@ -158,26 +178,6 @@ public:
 	static class UGameplayTask_SpawnActor* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<UGameplayTask_SpawnActor>();
-	}
-};
-
-// Class GameplayTasks.GameplayTask_TimeLimitedExecution
-// 0x0038 (0x00A0 - 0x0068)
-class UGameplayTask_TimeLimitedExecution final : public UGameplayTask
-{
-public:
-	FMulticastInlineDelegateProperty_             OnFinished;                                        // 0x0068(0x0010)(ZeroConstructor, InstancedReference, BlueprintAssignable, NativeAccessSpecifierPublic)
-	FMulticastInlineDelegateProperty_             OnTimeExpired;                                     // 0x0078(0x0010)(ZeroConstructor, InstancedReference, BlueprintAssignable, NativeAccessSpecifierPublic)
-	uint8                                         Pad_88[0x18];                                      // 0x0088(0x0018)(Fixing Struct Size After Last Property [ Dumper-7 ])
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"GameplayTask_TimeLimitedExecution">();
-	}
-	static class UGameplayTask_TimeLimitedExecution* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UGameplayTask_TimeLimitedExecution>();
 	}
 };
 

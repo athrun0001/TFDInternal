@@ -10,11 +10,11 @@
 
 #include "Basic.hpp"
 
-#include "Engine_structs.hpp"
-#include "AnimGraphRuntime_structs.hpp"
-#include "AnimBP_NpcBase_structs.hpp"
 #include "M1_structs.hpp"
 #include "M1_classes.hpp"
+#include "AnimGraphRuntime_structs.hpp"
+#include "Engine_structs.hpp"
+#include "AnimBP_NpcBase_structs.hpp"
 
 
 namespace SDK
@@ -67,8 +67,8 @@ public:
 	class UAimOffsetBlendSpace*                   Look_At_Aim_Offset;                                // 0x0970(0x0008)(Edit, BlueprintVisible, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 
 public:
-	void ExecuteUbergraph_AnimBP_NpcBase(int32 EntryPoint);
 	void AnimGraph(struct FPoseLink* AnimGraph_0);
+	void ExecuteUbergraph_AnimBP_NpcBase(int32 EntryPoint);
 
 public:
 	static class UClass* StaticClass()

@@ -10,9 +10,9 @@
 
 #include "Basic.hpp"
 
+#include "CoreUObject_classes.hpp"
 #include "GameplayTags_structs.hpp"
 #include "Engine_classes.hpp"
-#include "CoreUObject_classes.hpp"
 
 
 namespace SDK

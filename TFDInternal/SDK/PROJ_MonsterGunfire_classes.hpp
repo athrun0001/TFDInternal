@@ -18,11 +18,11 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass PROJ_MonsterGunfire.PROJ_MonsterGunfire_C
-// 0x0008 (0x0C30 - 0x0C28)
+// 0x0008 (0x0C40 - 0x0C38)
 class APROJ_MonsterGunfire_C : public AM1AbilityProjectile
 {
 public:
-	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0C28(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
+	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0C38(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
 
 public:
 	void ReceiveBeginPlay();

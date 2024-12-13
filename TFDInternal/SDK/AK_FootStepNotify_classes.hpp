@@ -10,11 +10,11 @@
 
 #include "Basic.hpp"
 
-#include "PcFootStepState_structs.hpp"
-#include "Engine_classes.hpp"
-#include "PhysicsCore_structs.hpp"
-#include "AkAudio_structs.hpp"
 #include "M1_structs.hpp"
+#include "PcFootStepState_structs.hpp"
+#include "PhysicsCore_structs.hpp"
+#include "Engine_classes.hpp"
+#include "AkAudio_structs.hpp"
 
 
 namespace SDK

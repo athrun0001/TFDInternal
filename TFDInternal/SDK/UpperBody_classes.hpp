@@ -10,11 +10,11 @@
 
 #include "Basic.hpp"
 
-#include "UpperBody_structs.hpp"
-#include "AnimGraphRuntime_structs.hpp"
 #include "Engine_structs.hpp"
 #include "M1_structs.hpp"
 #include "M1_classes.hpp"
+#include "UpperBody_structs.hpp"
+#include "AnimGraphRuntime_structs.hpp"
 
 
 namespace SDK
@@ -108,6 +108,7 @@ public:
 public:
 	void UpperBodyLayer(const struct FPoseLink& InputPose, struct FPoseLink* UpperBodyLayer_0);
 	void ExecuteUbergraph_UpperBody(int32 EntryPoint);
+	void EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_M1AnimGraphNode_Reinitialize_B0B3BA3645600B7C4B81C5BE06C3E1CB();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_M1AnimGraphNode_Reinitialize_8724D40A458AA26A812B20980B9362F9();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_AnimGraphNode_TransitionResult_F9B8E4EF4B966F4B6A577980E4FCEA16();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_AnimGraphNode_TransitionResult_F18BA7DA4BDECA87617EE38DD1948ABF();
@@ -122,7 +123,6 @@ public:
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_AnimGraphNode_TransitionResult_2343FDC4431154CEC19FE381F9F04B71();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_AnimGraphNode_TransitionResult_1986F49142BEEC963E972B845EF15F92();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_AnimGraphNode_TransitionResult_16C28B4D47A0F2091512C8AC96D7D503();
-	void EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_M1AnimGraphNode_Reinitialize_B0B3BA3645600B7C4B81C5BE06C3E1CB();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_UpperBody_AnimGraphNode_RotationOffsetBlendSpace_2B98A1F641FB474C685B479FE1C14AAD();
 	void AnimGraph(struct FPoseLink* AnimGraph_0);
 	void AimOffsetLayer(const struct FPoseLink& InPose, struct FPoseLink* AimOffsetLayer_0);

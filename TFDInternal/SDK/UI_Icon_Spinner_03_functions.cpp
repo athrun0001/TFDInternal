@@ -17,26 +17,6 @@
 namespace SDK
 {
 
-// Function UI_Icon_Spinner_03.UI_Icon_Spinner_03_C.PreConstruct
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
-// Parameters:
-// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Icon_Spinner_03_C::PreConstruct(bool IsDesignTime)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Icon_Spinner_03_C", "PreConstruct");
-
-	Params::UI_Icon_Spinner_03_C_PreConstruct Parms{};
-
-	Parms.IsDesignTime = IsDesignTime;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_Icon_Spinner_03.UI_Icon_Spinner_03_C.ExecuteUbergraph_UI_Icon_Spinner_03
 // (Final, UbergraphFunction)
 // Parameters:
@@ -52,6 +32,26 @@ void UUI_Icon_Spinner_03_C::ExecuteUbergraph_UI_Icon_Spinner_03(int32 EntryPoint
 	Params::UI_Icon_Spinner_03_C_ExecuteUbergraph_UI_Icon_Spinner_03 Parms{};
 
 	Parms.EntryPoint = EntryPoint;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_Icon_Spinner_03.UI_Icon_Spinner_03_C.PreConstruct
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+// Parameters:
+// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_Icon_Spinner_03_C::PreConstruct(bool IsDesignTime)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Icon_Spinner_03_C", "PreConstruct");
+
+	Params::UI_Icon_Spinner_03_C_PreConstruct Parms{};
+
+	Parms.IsDesignTime = IsDesignTime;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

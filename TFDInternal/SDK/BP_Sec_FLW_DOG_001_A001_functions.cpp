@@ -37,26 +37,6 @@ void UBP_Sec_FLW_DOG_001_A001_C::ExecuteUbergraph_BP_Sec_FLW_DOG_001_A001(int32 
 }
 
 
-// Function BP_Sec_FLW_DOG_001_A001.BP_Sec_FLW_DOG_001_A001_C.BlueprintThreadSafeUpdateAnimation
-// (Event, Public, BlueprintCallable, BlueprintEvent)
-// Parameters:
-// float                                   DeltaTime                                              (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UBP_Sec_FLW_DOG_001_A001_C::BlueprintThreadSafeUpdateAnimation(float DeltaTime)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("BP_Sec_FLW_DOG_001_A001_C", "BlueprintThreadSafeUpdateAnimation");
-
-	Params::BP_Sec_FLW_DOG_001_A001_C_BlueprintThreadSafeUpdateAnimation Parms{};
-
-	Parms.DeltaTime = DeltaTime;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function BP_Sec_FLW_DOG_001_A001.BP_Sec_FLW_DOG_001_A001_C.AnimGraph
 // (HasOutParams, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -78,6 +58,26 @@ void UBP_Sec_FLW_DOG_001_A001_C::AnimGraph(const struct FPoseLink& InPose, struc
 
 	if (AnimGraph_0 != nullptr)
 		*AnimGraph_0 = std::move(Parms.AnimGraph_0);
+}
+
+
+// Function BP_Sec_FLW_DOG_001_A001.BP_Sec_FLW_DOG_001_A001_C.BlueprintThreadSafeUpdateAnimation
+// (Event, Public, BlueprintCallable, BlueprintEvent)
+// Parameters:
+// float                                   DeltaTime                                              (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UBP_Sec_FLW_DOG_001_A001_C::BlueprintThreadSafeUpdateAnimation(float DeltaTime)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("BP_Sec_FLW_DOG_001_A001_C", "BlueprintThreadSafeUpdateAnimation");
+
+	Params::BP_Sec_FLW_DOG_001_A001_C_BlueprintThreadSafeUpdateAnimation Parms{};
+
+	Parms.DeltaTime = DeltaTime;
+
+	UObject::ProcessEvent(Func, &Parms);
 }
 
 }

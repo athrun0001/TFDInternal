@@ -10,9 +10,9 @@
 
 #include "Basic.hpp"
 
-#include "BP_NpcBase_classes.hpp"
-#include "CoreUObject_structs.hpp"
 #include "Engine_structs.hpp"
+#include "CoreUObject_structs.hpp"
+#include "BP_NpcBase_classes.hpp"
 
 
 namespace SDK

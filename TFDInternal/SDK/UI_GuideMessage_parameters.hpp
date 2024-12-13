@@ -25,14 +25,6 @@ public:
 	EM1WidgetAnimDirection                        InDirection;                                       // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function UI_GuideMessage.UI_GuideMessage_C.OnEventWidgetClose
-// 0x0001 (0x0001 - 0x0000)
-struct UI_GuideMessage_C_OnEventWidgetClose final
-{
-public:
-	EM1WidgetAnimDirection                        InDirection;                                       // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_GuideMessage.UI_GuideMessage_C.ExecuteUbergraph_UI_GuideMessage
 // 0x0028 (0x0028 - 0x0000)
 struct UI_GuideMessage_C_ExecuteUbergraph_UI_GuideMessage final
@@ -58,6 +50,14 @@ struct UI_GuideMessage_C_BP_ShowTitle final
 {
 public:
 	bool                                          bShow;                                             // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_GuideMessage.UI_GuideMessage_C.OnEventWidgetClose
+// 0x0001 (0x0001 - 0x0000)
+struct UI_GuideMessage_C_OnEventWidgetClose final
+{
+public:
+	EM1WidgetAnimDirection                        InDirection;                                       // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 }

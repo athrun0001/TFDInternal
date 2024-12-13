@@ -151,25 +151,5 @@ void UUI_Game_Radar_Icon_C::BP_UpdateHeightPanel(int32 InUpOrDown)
 	UObject::ProcessEvent(Func, &Parms);
 }
 
-
-// Function UI_Game_Radar_Icon.UI_Game_Radar_Icon_C.BP_SetSquadIndex
-// (Event, Public, BlueprintEvent)
-// Parameters:
-// int32                                   InIndex                                                (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Game_Radar_Icon_C::BP_SetSquadIndex(int32 InIndex)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Game_Radar_Icon_C", "BP_SetSquadIndex");
-
-	Params::UI_Game_Radar_Icon_C_BP_SetSquadIndex Parms{};
-
-	Parms.InIndex = InIndex;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
 }
 

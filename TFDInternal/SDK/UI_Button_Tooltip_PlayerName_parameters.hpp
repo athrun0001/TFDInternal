@@ -18,22 +18,6 @@
 namespace SDK::Params
 {
 
-// Function UI_Button_Tooltip_PlayerName.UI_Button_Tooltip_PlayerName_C.SetDataImpl
-// 0x0008 (0x0008 - 0x0000)
-struct UI_Button_Tooltip_PlayerName_C_SetDataImpl final
-{
-public:
-	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_Button_Tooltip_PlayerName.UI_Button_Tooltip_PlayerName_C.OnEventWidgetOpen
-// 0x0001 (0x0001 - 0x0000)
-struct UI_Button_Tooltip_PlayerName_C_OnEventWidgetOpen final
-{
-public:
-	EM1WidgetAnimDirection                        InDirection;                                       // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_Button_Tooltip_PlayerName.UI_Button_Tooltip_PlayerName_C.ExecuteUbergraph_UI_Button_Tooltip_PlayerName
 // 0x0080 (0x0080 - 0x0000)
 struct UI_Button_Tooltip_PlayerName_C_ExecuteUbergraph_UI_Button_Tooltip_PlayerName final
@@ -60,6 +44,22 @@ public:
 	ESlateVisibility                              Temp_byte_Variable_1;                              // 0x0078(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	bool                                          Temp_bool_Variable;                                // 0x0079(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	ESlateVisibility                              K2Node_Select_Default;                             // 0x007A(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_Button_Tooltip_PlayerName.UI_Button_Tooltip_PlayerName_C.SetDataImpl
+// 0x0008 (0x0008 - 0x0000)
+struct UI_Button_Tooltip_PlayerName_C_SetDataImpl final
+{
+public:
+	class UM1UIData*                              InData;                                            // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_Button_Tooltip_PlayerName.UI_Button_Tooltip_PlayerName_C.OnEventWidgetOpen
+// 0x0001 (0x0001 - 0x0000)
+struct UI_Button_Tooltip_PlayerName_C_OnEventWidgetOpen final
+{
+public:
+	EM1WidgetAnimDirection                        InDirection;                                       // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 }

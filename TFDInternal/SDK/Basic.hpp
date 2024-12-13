@@ -31,12 +31,12 @@ using namespace UC;
 */
 namespace Offsets
 {
-	static int32 GObjects          = 0x0;
-	static int32 AppendString      = 0x0;
-	static int32 GNames            = 0x0;
-	static int32 GWorld            = 0x0;
-	static int32 ProcessEvent      = 0x0;
-	static int32 ProcessEventIdx   = 0x0000004D;
+	static int32 GObjects          = 0x09B1D890;
+	constexpr int32 AppendString      = 0x00000000;
+	static int32 GNames            = 0x09E54340;
+	constexpr int32 GWorld            = 0x09E49E38;
+	constexpr int32 ProcessEvent      = 0x03CCD5E0;
+	constexpr int32 ProcessEventIdx   = 0x0000004D;
 }
 
 namespace InSDKUtils
@@ -84,7 +84,7 @@ class UClass;
 class UObject;
 class UFunction;
 
-struct FName;
+class FName;
 
 namespace BasicFilesImpleUtils
 {

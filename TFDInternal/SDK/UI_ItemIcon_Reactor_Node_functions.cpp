@@ -99,20 +99,6 @@ void UUI_ItemIcon_Reactor_Node_C::PreConstruct(bool IsDesignTime)
 }
 
 
-// Function UI_ItemIcon_Reactor_Node.UI_ItemIcon_Reactor_Node_C.Construct
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
-
-void UUI_ItemIcon_Reactor_Node_C::Construct()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ItemIcon_Reactor_Node_C", "Construct");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function UI_ItemIcon_Reactor_Node.UI_ItemIcon_Reactor_Node_C.ExecuteUbergraph_UI_ItemIcon_Reactor_Node
 // (Final, UbergraphFunction)
 // Parameters:
@@ -130,6 +116,20 @@ void UUI_ItemIcon_Reactor_Node_C::ExecuteUbergraph_UI_ItemIcon_Reactor_Node(int3
 	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_ItemIcon_Reactor_Node.UI_ItemIcon_Reactor_Node_C.Construct
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+
+void UUI_ItemIcon_Reactor_Node_C::Construct()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ItemIcon_Reactor_Node_C", "Construct");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 }

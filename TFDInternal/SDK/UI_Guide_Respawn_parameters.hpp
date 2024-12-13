@@ -14,14 +14,6 @@
 namespace SDK::Params
 {
 
-// Function UI_Guide_Respawn.UI_Guide_Respawn_C.OnAnimationFinished
-// 0x0008 (0x0008 - 0x0000)
-struct UI_Guide_Respawn_C_OnAnimationFinished final
-{
-public:
-	const class UWidgetAnimation*                 Animation;                                         // 0x0000(0x0008)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_Guide_Respawn.UI_Guide_Respawn_C.ExecuteUbergraph_UI_Guide_Respawn
 // 0x0038 (0x0038 - 0x0000)
 struct UI_Guide_Respawn_C_ExecuteUbergraph_UI_Guide_Respawn final
@@ -45,6 +37,14 @@ struct UI_Guide_Respawn_C_BP_widget_playAkEvent final
 {
 public:
 	class UAkAudioEvent*                          AkEvent;                                           // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_Guide_Respawn.UI_Guide_Respawn_C.OnAnimationFinished
+// 0x0008 (0x0008 - 0x0000)
+struct UI_Guide_Respawn_C_OnAnimationFinished final
+{
+public:
+	const class UWidgetAnimation*                 Animation;                                         // 0x0000(0x0008)(ConstParm, BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
 };
 
 }

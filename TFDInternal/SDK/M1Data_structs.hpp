@@ -10,9 +10,9 @@
 
 #include "Basic.hpp"
 
+#include "GameplayTags_structs.hpp"
 #include "CoreUObject_structs.hpp"
 #include "Engine_structs.hpp"
-#include "GameplayTags_structs.hpp"
 
 
 namespace SDK
@@ -3404,32 +3404,23 @@ public:
 	class FName                                   RowName;                                           // 0x0028(0x0008)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ReactorEnchantRequiredItemData
-// 0x0014 (0x0014 - 0x0000)
-struct FM1ReactorEnchantRequiredItemData final
+// ScriptStruct M1Data.M1InGameSocialOptionData
+// 0x0010 (0x0010 - 0x0000)
+struct FM1InGameSocialOptionData final
 {
 public:
-	EM1ItemType                                   ItemType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FName                                   ID;                                                // 0x0004(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Amount;                                            // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ConditionLevel;                                    // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1InGameSocialOptionType                     FriendRequestOption;                               // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1InGameSocialOptionType                     PartyRequestOption;                                // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1InGameSocialOptionType                     ChattingOption;                                    // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1InGameSocialOptionType                     SupportOption;                                     // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ReactorEnchantRequiredData
-// 0x0018 (0x0018 - 0x0000)
-struct FM1ReactorEnchantRequiredData final
+// ScriptStruct M1Data.M1TemplateId
+// 0x0004 (0x0004 - 0x0000)
+struct FM1TemplateId final
 {
 public:
-	int32                                         EnchantLevel;                                      // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1ReactorEnchantRequiredItemData> RequiredItemDataList;                              // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1DropItemLevelWeightDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1DropItemLevelWeightDataLink final : public FDataLink
-{
+	int32                                         ID;                                                // 0x0000(0x0004)(Edit, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, SimpleDisplay, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 };
 
 // ScriptStruct M1Data.M1ItemTidBox
@@ -3440,6 +3431,31 @@ public:
 	EM1ItemType                                   Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
 	int32                                         TemplateId;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CodexItemInfoList
+// 0x0018 (0x0018 - 0x0000)
+struct FM1CodexItemInfoList final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1ItemTidBox>                  ItemInfoList;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizingItemMiscDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1CustomizingItemMiscDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1QuestCompleteConditionGroupInfo
+// 0x000C (0x000C - 0x0000)
+struct FM1QuestCompleteConditionGroupInfo final
+{
+public:
+	EM1QuestCompleteConditionGroupType            Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   GroupStringId;                                     // 0x0004(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1RuneEquipInfo
@@ -3511,59 +3527,79 @@ public:
 	TArray<struct FM1RuneLoadoutInfo>             Values;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1RangeCondition
-// 0x0018 (0x0018 - 0x0000)
-struct FM1RangeCondition final
-{
-public:
-	bool                                          NeedRangeCheck;                                    // 0x0000(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         RangeMin;                                          // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         RangeMax;                                          // 0x0008(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         HighRange;                                         // 0x000C(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         LowRange;                                          // 0x0010(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         AngleRangeMax;                                     // 0x0014(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SkillTargetSearchParam
-// 0x0028 (0x0028 - 0x0000)
-struct FM1SkillTargetSearchParam final
-{
-public:
-	struct FSoftObjectPath                        EnvQuery;                                          // 0x0000(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         RadiusMin;                                         // 0x0020(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         RadiusMax;                                         // 0x0024(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SkillAssetData
-// 0x0100 (0x0100 - 0x0000)
-struct FM1SkillAssetData final
-{
-public:
-	struct FSoftObjectPath                        NormalIcon;                                        // 0x0000(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        ActiveIcon;                                        // 0x0020(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        PreviewImage;                                      // 0x0040(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        PreviewMovie;                                      // 0x0060(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        Montage;                                           // 0x0080(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        Sequence;                                          // 0x00A0(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftClassPath                         CustomIconWidget;                                  // 0x00C0(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftClassPath                         CustomHUDWidget;                                   // 0x00E0(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1StatValuePair
-// 0x0010 (0x0010 - 0x0000)
-struct FM1StatValuePair final
-{
-public:
-	EM1StatType                                   StatTypeEnum;                                      // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	double                                        StatValue;                                         // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SkillAbilityDataLink
+// ScriptStruct M1Data.M1AbilityDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1SkillAbilityDataLink final : public FDataLink
+struct FM1AbilityDataLink final : public FDataLink
 {
+};
+
+// ScriptStruct M1Data.M1InstantUseItemData
+// 0x0078 (0x0080 - 0x0008)
+struct FM1InstantUseItemData final : public FTableRowBase
+{
+public:
+	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          TemplateId;                                        // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   StringId;                                          // 0x0014(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ObtainableCountPerChance;                          // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Private;                                           // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1AbilityDataLink                     Ability;                                           // 0x0028(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FSoftClassPath                         PropClass;                                         // 0x0058(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1StatType                                   CurrentStatCapacity;                               // 0x0078(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RoundsType                                 RoundsCapacity;                                    // 0x0079(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          NumberLimit;                                       // 0x007A(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ImportanceType                             ImportanceType;                                    // 0x007B(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_7C[0x4];                                       // 0x007C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1RecordInfo
+// 0x0004 (0x0004 - 0x0000)
+struct FM1RecordInfo final
+{
+public:
+	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1AutomationTestNestData
+// 0x0008 (0x0008 - 0x0000)
+struct FM1AutomationTestNestData final
+{
+public:
+	int32                                         MaxHp;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MaxMp;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1AutomationTestStatData
+// 0x0028 (0x0028 - 0x0000)
+struct FM1AutomationTestStatData final
+{
+public:
+	struct FM1AutomationTestNestData              Nest;                                              // 0x0000(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	int32                                         MaxHp;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MaxMp;                                             // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1AutomationTestAttr                         MainAttr;                                          // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<EM1AutomationTestAttr>                 SubAttrs;                                          // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1AutomationTestOtherDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1AutomationTestOtherDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1AutomationTestCharacterData
+// 0x0080 (0x0088 - 0x0008)
+struct FM1AutomationTestCharacterData : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<EM1AutomationTestAttr>                 CharacterAttrs;                                    // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1AutomationTestNestData>      Nests;                                             // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1AutomationTestStatData              Stat;                                              // 0x0030(0x0028)(Edit, NativeAccessSpecifierPublic)
+	struct FM1AutomationTestOtherDataLink         Other;                                             // 0x0058(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1AbilityParamData
@@ -3577,112 +3613,102 @@ public:
 	class FString                                 Value;                                             // 0x0010(0x0010)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1TaggedAbilityParamData
-// 0x0018 (0x0018 - 0x0000)
-struct FM1TaggedAbilityParamData final
+// ScriptStruct M1Data.M1ProficiencyDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ProficiencyDataLink final : public FDataLink
 {
-public:
-	struct FGameplayTag                           Tag;                                               // 0x0000(0x0008)(Edit, BlueprintVisible, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0008(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1SkillLevelData
-// 0x0078 (0x0078 - 0x0000)
-struct FM1SkillLevelData final
+// ScriptStruct M1Data.M1DecomposeResultItemInfo
+// 0x000C (0x000C - 0x0000)
+struct FM1DecomposeResultItemInfo final
+{
+public:
+	int32                                         TemplateId;                                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemType                                   Type;                                              // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         Count;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1FellowSkillItemDecomposeResult
+// 0x0018 (0x0018 - 0x0000)
+struct FM1FellowSkillItemDecomposeResult final
+{
+public:
+	EM1ItemReason                                 Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1DecomposeResultItemInfo>     ItemList;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MasteryRank
+// 0x0008 (0x0008 - 0x0000)
+struct FM1MasteryRank final
+{
+public:
+	int32                                         Min;                                               // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Max;                                               // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1LoadingTooltipData
+// 0x0028 (0x0030 - 0x0008)
+struct FM1LoadingTooltipData final : public FTableRowBase
+{
+public:
+	class FString                                 StringId;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1MasteryRank                         MasteryRank;                                       // 0x0018(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	TArray<class FString>                         Tags;                                              // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1StatValuePair
+// 0x0010 (0x0010 - 0x0000)
+struct FM1StatValuePair final
+{
+public:
+	EM1StatType                                   StatTypeEnum;                                      // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	double                                        StatValue;                                         // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MissionTargetAbilityDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1MissionTargetAbilityDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1MissionTargetLevelData
+// 0x0028 (0x0028 - 0x0000)
+struct FM1MissionTargetLevelData final
 {
 public:
 	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Cooltime;                                          // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MaxStackCount;                                     // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         StackChargingTime;                                 // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         ActiveDuration;                                    // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1StatValuePair                       ActivateCost;                                      // 0x0018(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	struct FM1SkillAbilityDataLink                SkillAbility;                                      // 0x0028(0x0030)(Edit, NativeAccessSpecifierPublic)
-	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0058(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1TaggedAbilityParamData>      TaggedParams;                                      // 0x0068(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1StatValuePair>               VariableBaseStats;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1MissionTargetAbilityDataLink> Abilities;                                         // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1SkillData
-// 0x0128 (0x0130 - 0x0008)
-struct FM1SkillData : public FTableRowBase
-{
-public:
-	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   StringId;                                          // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1SkillAssetData                      AssetData;                                         // 0x0018(0x0100)(Edit, NativeAccessSpecifierPublic)
-	EM1SkillType                                  Type;                                              // 0x0118(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ElementalDamageChannel                     ElementalType;                                     // 0x0119(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1SkillArcheType                             ArcheType;                                         // 0x011A(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         GroupIndex;                                        // 0x011B(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bCanUsedInAir;                                     // 0x011C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11D[0x3];                                      // 0x011D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1SkillLevelData>              LvData;                                            // 0x0120(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MonsterSkillData
-// 0x0050 (0x0180 - 0x0130)
-struct FM1MonsterSkillData : public FM1SkillData
-{
-public:
-	float                                         SelectRate;                                        // 0x0130(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1RangeCondition                      RangeCondition;                                    // 0x0134(0x0018)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14C[0x4];                                      // 0x014C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1SkillTargetSearchParam              SearchParam;                                       // 0x0150(0x0028)(Edit, NativeAccessSpecifierPublic)
-	bool                                          bStopSkillWhenMainTargetInvalid;                   // 0x0178(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bCanMove;                                          // 0x0179(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_17A[0x6];                                      // 0x017A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1SummonsSkillData
-// 0x0000 (0x0180 - 0x0180)
-struct FM1SummonsSkillData final : public FM1MonsterSkillData
-{
-};
-
-// ScriptStruct M1Data.M1TemplateId
-// 0x0004 (0x0004 - 0x0000)
-struct FM1TemplateId final
-{
-public:
-	int32                                         ID;                                                // 0x0000(0x0004)(Edit, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, SimpleDisplay, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-};
-
-// ScriptStruct M1Data.M1PartsDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1PartsDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1RecordInfo
-// 0x0004 (0x0004 - 0x0000)
-struct FM1RecordInfo final
+// ScriptStruct M1Data.M1VoidBattleClearInfo
+// 0x0008 (0x0008 - 0x0000)
+struct FM1VoidBattleClearInfo final
 {
 public:
 	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ClearCount;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1HitPointInfo
+// ScriptStruct M1Data.M1PerkAbilityDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1PerkAbilityDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1ExtractPaintRes
 // 0x0018 (0x0018 - 0x0000)
-struct FM1HitPointInfo final
+struct FM1ExtractPaintRes final
 {
 public:
-	class FString                                 BoneName;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         HPDamageRate;                                      // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1DamageAdvantageType                        AdvantageType;                                     // 0x0014(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_15[0x3];                                       // 0x0015(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1RotationShopDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1RotationShopDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1SummonsDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1SummonsDataLink final : public FDataLink
-{
+	EM1ItemReason                                 Result;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1TemplateId>                  PaintList;                                         // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1ScaledInteger
@@ -3693,82 +3719,20 @@ public:
 	int64                                         Value;                                             // 0x0000(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 };
 
-// ScriptStruct M1Data.M1RandomOptionChangeDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1RandomOptionChangeDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1MonsterAIBattleState
-// 0x0060 (0x0060 - 0x0000)
-struct FM1MonsterAIBattleState final
-{
-public:
-	float                                         AttackRadius;                                      // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         TargetSearchRadius;                                // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         TargetSearchTimeMin;                               // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         TargetSearchTimeMax;                               // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         TargetSearchAngle;                                 // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         TargetChangeRate;                                  // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1RelationsCheckType                         Relations;                                         // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x3];                                       // 0x0019(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FGameplayTag                           QueryTag;                                          // 0x001C(0x0008)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1AITargetingPriority                        TargetingPriority;                                 // 0x0024(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          CheckTargetVisible;                                // 0x0028(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_29[0x3];                                       // 0x0029(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         TargetHoldRadius;                                  // 0x002C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         PursuitRadius;                                     // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         AllianceCallRadius;                                // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         AllianceBattleRadius;                              // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         PatrolHitRadius;                                   // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         PatrolRadius;                                      // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          UseCoverUpInBattle;                                // 0x0044(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_45[0x3];                                       // 0x0045(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         WaitTimeOnCoverUp;                                 // 0x0048(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          UseHomeLocationWithTargetSearch;                   // 0x004C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4D[0x3];                                       // 0x004D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<float>                                 BattleRangeList;                                   // 0x0050(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ConsumableItemDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1ConsumableItemDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1VoidBattleRequiredItem
-// 0x0038 (0x0038 - 0x0000)
-struct FM1VoidBattleRequiredItem final
-{
-public:
-	struct FM1ConsumableItemDataLink              ItemId;                                            // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	int32                                         Amount;                                            // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1BoostExpData
+// ScriptStruct M1Data.M1LeaveCharacterNotiInfo
 // 0x0010 (0x0010 - 0x0000)
-struct FM1BoostExpData final
-{
-public:
-	EM1BoostType                                  Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         BoostExp;                                          // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CharacterAddExpNoti
-// 0x0038 (0x0038 - 0x0000)
-struct FM1CharacterAddExpNoti final
+struct FM1LeaveCharacterNotiInfo final
 {
 public:
 	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          PlayerTid;                                         // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Exp;                                               // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         BoostExp;                                          // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1BoostExpData>                BoostDataList;                                     // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	EM1ExpNotiType                                NotiType;                                          // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	bool                                          ServerMove;                                        // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1DropItemLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1DropItemLink final : public FDataLink
+{
 };
 
 // ScriptStruct M1Data.M1AbilityOperationStatModifierData
@@ -3867,260 +3831,6 @@ public:
 	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0058(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1MapDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1MapDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1CharacterUIData
-// 0x0080 (0x0080 - 0x0000)
-struct FM1CharacterUIData final
-{
-public:
-	struct FSoftObjectPath                        IconPath;                                          // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        BigIconPath;                                       // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IntroduceSequence;                                 // 0x0040(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftClassPath                         CustomHUDWidgetPath;                               // 0x0060(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CommonGaugeData
-// 0x0048 (0x0048 - 0x0000)
-struct FM1CommonGaugeData final
-{
-public:
-	class FString                                 CurrentStatStringId;                               // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 MaxStatStringId;                                   // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bFillOnInit;                                       // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FSoftClassPath                         WidgetPath;                                        // 0x0028(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CharacterLevelInfo
-// 0x0050 (0x0050 - 0x0000)
-struct FM1CharacterLevelInfo final
-{
-public:
-	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1StatValuePair>               VariableStats;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	int64                                         RewardCharacterExp;                                // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         RewardProficiencyExp;                              // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         RewardBattlePassExp;                               // 0x0028(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<int32>                                 PassiveSkillLevels;                                // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<int32>                                 ActiveSkillLevels;                                 // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SkillDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1SkillDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1CharacterData
-// 0x00D0 (0x00D8 - 0x0008)
-struct FM1CharacterData : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 StringId;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1DamageAdvantageType                        AdvantageType;                                     // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_21[0x3];                                       // 0x0021(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FName                                   HitPoint;                                          // 0x0024(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FSoftClassPath                         BlueprintClass;                                    // 0x0030(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        LegacyDataAsset;                                   // 0x0050(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1CharacterLevelInfo>          Lv;                                                // 0x0070(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<EM1StatType>                           UnusedGaugeStats;                                  // 0x0080(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1StatValuePair>               Stats;                                             // 0x0090(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1StatValuePair>               BareHandStats;                                     // 0x00A0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1SkillDataLink>               PassiveSkills;                                     // 0x00B0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1SkillDataLink>               ActiveSkills;                                      // 0x00C0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	EM1CharacterSize                              CharacterSize;                                     // 0x00D0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D1[0x7];                                       // 0x00D1(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.DataLinkUnion
-// 0x0008 (0x0030 - 0x0028)
-struct FDataLinkUnion : public FDataLinkBase
-{
-public:
-	class FName                                   ID;                                                // 0x0028(0x0008)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ItemDataBox
-// 0x0008 (0x0038 - 0x0030)
-struct FM1ItemDataBox final : public FDataLinkUnion
-{
-public:
-	EM1ItemType                                   Type;                                              // 0x0030(0x0001)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_31[0x7];                                       // 0x0031(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1RewardType
-// 0x0040 (0x0040 - 0x0000)
-struct FM1RewardType final
-{
-public:
-	struct FM1ItemDataBox                         RewardItem;                                        // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
-	int32                                         Count;                                             // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_3C[0x4];                                       // 0x003C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1PlayerData
-// 0x0108 (0x01E0 - 0x00D8)
-struct FM1PlayerData final : public FM1CharacterData
-{
-public:
-	class FName                                   Name;                                              // 0x00D8(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   CharacterConceptStringId;                          // 0x00E0(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1CharacterGender                            CharacterGender;                                   // 0x00E8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1CharacterGrade                             CharacterGrade;                                    // 0x00E9(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_EA[0x6];                                       // 0x00EA(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1CharacterUIData                     UIData;                                            // 0x00F0(0x0080)(Edit, NativeAccessSpecifierPublic)
-	struct FM1CommonGaugeData                     CommonGauge;                                       // 0x0170(0x0048)(Edit, NativeAccessSpecifierPublic)
-	int32                                         MasteryLevel;                                      // 0x01B8(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsTemporary;                                       // 0x01BC(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1BD[0x3];                                      // 0x01BD(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1RewardType>                  SellRewards;                                       // 0x01C0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	class FString                                 GroupId;                                           // 0x01D0(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CodexTrackingData
-// 0x000C (0x000C - 0x0000)
-struct FM1CodexTrackingData final
-{
-public:
-	EM1CodexTrackingType                          TrackingType;                                      // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int8                                          SlotIndex;                                         // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2[0x2];                                        // 0x0002(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1TemplateId                          TrackingTid;                                       // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          ResearchMaterial;                                  // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CodexTrackingList
-// 0x0010 (0x0010 - 0x0000)
-struct FM1CodexTrackingList final
-{
-public:
-	TArray<struct FM1CodexTrackingData>           Trackings;                                         // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PackageItemElementInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FM1PackageItemElementInfo final
-{
-public:
-	struct FM1ItemTidBox                          ItemTid;                                           // 0x0000(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	int32                                         Count;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PackageItemOpenResult
-// 0x0014 (0x0014 - 0x0000)
-struct FM1PackageItemOpenResult final
-{
-public:
-	EM1PackageItemReason                          Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1PackageItemElementInfo              Item;                                              // 0x0004(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InvasionDungeonDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1InvasionDungeonDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1RunePosition
-// 0x0010 (0x0010 - 0x0000)
-struct FM1RunePosition final
-{
-public:
-	int64                                         RuneUid;                                           // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1RuneSubClassType                           RuneSubClassType;                                  // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         SocketIndex;                                       // 0x0009(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_A[0x6];                                        // 0x000A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1RunePositionBundle
-// 0x0010 (0x0010 - 0x0000)
-struct FM1RunePositionBundle final
-{
-public:
-	TArray<struct FM1RunePosition>                RunePositionList;                                  // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RegionLatency
-// 0x0018 (0x0018 - 0x0000)
-struct FM1RegionLatency final
-{
-public:
-	class FString                                 Name;                                              // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Latency;                                           // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1RegionLatencyInfosMs
-// 0x0010 (0x0010 - 0x0000)
-struct FM1RegionLatencyInfosMs final
-{
-public:
-	TArray<struct FM1RegionLatency>               Infos;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1AuidWithLatencyInfo
-// 0x0020 (0x0020 - 0x0000)
-struct FM1AuidWithLatencyInfo final
-{
-public:
-	TArray<int64>                                 AccountUids;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1RegionLatencyInfosMs                LatencyInfo;                                       // 0x0010(0x0010)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PackageItemDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1PackageItemDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1FocusGoalCompleteNoti
-// 0x0010 (0x0010 - 0x0000)
-struct FM1FocusGoalCompleteNoti final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         SourceTid;                                         // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          ItemTid;                                           // 0x000C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MasteryLevelDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1MasteryLevelDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1QuestParamGroupData
-// 0x0020 (0x0028 - 0x0008)
-struct FM1QuestParamGroupData final : public FTableRowBase
-{
-public:
-	class FName                                   StringIdName;                                      // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1QuestParamType                             QuestParamType;                                    // 0x0010(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<class FString>                         Ids;                                               // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SearchKeywordInfo
-// 0x0040 (0x0040 - 0x0000)
-struct FM1SearchKeywordInfo final
-{
-public:
-	class FString                                 StringId;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 Payload;                                           // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IconImage;                                         // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1EventBoostTargetContent
 // 0x0018 (0x0018 - 0x0000)
 struct FM1EventBoostTargetContent final
@@ -4131,225 +3841,28 @@ public:
 	TArray<class FName>                           ConditionList;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1EventBoostRewardType
-// 0x0040 (0x0040 - 0x0000)
-struct FM1EventBoostRewardType final
+// ScriptStruct M1Data.M1WorldMissionMiscData
+// 0x0000 (0x0008 - 0x0008)
+struct FM1WorldMissionMiscData final : public FTableRowBase
+{
+};
+
+// ScriptStruct M1Data.M1GaugeStatInfo
+// 0x0003 (0x0003 - 0x0000)
+struct FM1GaugeStatInfo final
 {
 public:
-	struct FM1ItemDataBox                         RewardItem;                                        // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
-	int64                                         Coefficient;                                       // 0x0038(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bGauge;                                            // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1StatType                                   MaxType;                                           // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bFillOnInit;                                       // 0x0002(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1EventBoostingDetailData
-// 0x0038 (0x0038 - 0x0000)
-struct FM1EventBoostingDetailData final
-{
-public:
-	EM1EventBoostType                             BoostType;                                         // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1MapDataLink>                 FieldList;                                         // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1EventBoostTargetContent>     ContentList;                                       // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1EventBoostRewardType>        RewardTypeList;                                    // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1FellowInfo
-// 0x0030 (0x0030 - 0x0000)
-struct FM1FellowInfo final
-{
-public:
-	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 Name;                                              // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Exp;                                               // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          EnableSkill;                                       // 0x0028(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_29[0x7];                                       // 0x0029(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1BattlePassDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1BattlePassDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1BoostItemEffect
-// 0x0030 (0x0030 - 0x0000)
-struct FM1BoostItemEffect final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1BuffSubItemType                            BuffType;                                          // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         BoostGroupId;                                      // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         BoostValue;                                        // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FDateTime                              EndTime;                                           // 0x0020(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          NewBoostItemTid;                                   // 0x0028(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1BoostItemEffectBundle
-// 0x0010 (0x0010 - 0x0000)
-struct FM1BoostItemEffectBundle final
-{
-public:
-	TArray<struct FM1BoostItemEffect>             DataList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MonsterDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1MonsterDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1EncountInfo
-// 0x0038 (0x0038 - 0x0000)
-struct FM1EncountInfo final
-{
-public:
-	struct FM1MonsterDataLink                     MonsterId;                                         // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	float                                         EncountRate;                                       // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1EncountData
-// 0x0038 (0x0040 - 0x0008)
-struct FM1EncountData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EncountLevelMin;                                   // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EncountLevelMax;                                   // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         EncountPointMin;                                   // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         EncountPointMax;                                   // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         EncountTimer;                                      // 0x0028(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1EncountInfo>                 Encount;                                           // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PaidProductDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1PaidProductDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1TitleItemInfo
+// ScriptStruct M1Data.M1ShopRestrictionInfo
 // 0x0004 (0x0004 - 0x0000)
-struct FM1TitleItemInfo final
+struct FM1ShopRestrictionInfo final
 {
 public:
-	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SummonsSkillDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1SummonsSkillDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1CashShopCategoryClickRecord
-// 0x0008 (0x0008 - 0x0000)
-struct FM1CashShopCategoryClickRecord final
-{
-public:
-	EM1ShopCategoryType                           CategoryType;                                      // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         ClickCount;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1BunchItemDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1BunchItemDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1NpcSpawnPeriod
-// 0x0010 (0x0010 - 0x0000)
-struct FM1NpcSpawnPeriod final
-{
-public:
-	class FName                                   Start;                                             // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   End;                                               // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1QuestSubCondition
-// 0x0018 (0x0018 - 0x0000)
-struct FM1QuestSubCondition final
-{
-public:
-	EM1QuestSubConditionType                      Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 Value;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CharacterSizeData
-// 0x0008 (0x0008 - 0x0000)
-struct FM1CharacterSizeData final
-{
-public:
-	EM1CharacterSize                              Type;                                              // 0x0000(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         Size;                                              // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InitializationData
-// 0x0018 (0x0018 - 0x0000)
-struct FM1InitializationData final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ItemType                                   ItemType;                                          // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         TemplateId;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Count;                                             // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1PackageGroupDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1PackageGroupDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1PackageGroupUpgradeInfo
-// 0x0060 (0x0060 - 0x0000)
-struct FM1PackageGroupUpgradeInfo final
-{
-public:
-	struct FM1ConsumableItemDataLink              RequiredStabilizerId;                              // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	struct FM1PackageGroupDataLink                PackageGroupId;                                    // 0x0030(0x0030)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1TitleMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1TitleMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1MapBattleZoneDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1MapBattleZoneDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1MonsterAIVulgusPost
-// 0x000C (0x000C - 0x0000)
-struct FM1MonsterAIVulgusPost final
-{
-public:
-	float                                         NonBattleTargetSearchRadius;                       // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         NonBattlePatrolRadius;                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         NonBattlePatrolHitRadius;                          // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MonsterAIOverride
-// 0x000C (0x000C - 0x0000)
-struct FM1MonsterAIOverride final
-{
-public:
-	struct FM1MonsterAIVulgusPost                 VulgusPost;                                        // 0x0000(0x000C)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	int32                                         ProductionTid;                                     // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MapSubData
@@ -4394,169 +3907,269 @@ public:
 	struct FM1ClientChecksum                      Checksum;                                          // 0x0070(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1MoveDedicatedServerNoti
-// 0x00C0 (0x00C0 - 0x0000)
-struct FM1MoveDedicatedServerNoti final
-{
-public:
-	EM1MoveDedicatedServerReason                  Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<int64>                                 AccountUids;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1DedicatedServerInfo                 ServerInfo;                                        // 0x0018(0x00A0)(Edit, NativeAccessSpecifierPublic)
-	bool                                          MovePosition;                                      // 0x00B8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_B9[0x7];                                       // 0x00B9(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonMiscDataLink
+// ScriptStruct M1Data.M1SkillDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1InstanceDungeonMiscDataLink final : public FDataLink
+struct FM1SkillDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1ConsumableInfo
-// 0x0020 (0x0020 - 0x0000)
-struct FM1ConsumableInfo final
-{
-public:
-	int64                                         Uid;                                               // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          Tid;                                               // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Count;                                             // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ItemTagStatus                              TagStatus;                                         // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1CompleteCondition
+// ScriptStruct M1Data.M1SkillRedirectInfo
 // 0x0040 (0x0040 - 0x0000)
-struct FM1CompleteCondition final
+struct FM1SkillRedirectInfo final
 {
 public:
-	EM1CompleteConditionType                      Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1SkillDataLink                       Skill;                                             // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	class FString                                 Slot;                                              // 0x0030(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1VoidBattleBossElementalResTypes
+// 0x0004 (0x0004 - 0x0000)
+struct FM1VoidBattleBossElementalResTypes final
+{
+public:
+	EM1ElementalDegreeType                        BlazerResType;                                     // 0x0000(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ElementalDegreeType                        GlacierResType;                                    // 0x0001(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ElementalDegreeType                        ElectricityResType;                                // 0x0002(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ElementalDegreeType                        DemonicResType;                                    // 0x0003(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1VoidBattleBossInfo
+// 0x0010 (0x0010 - 0x0000)
+struct FM1VoidBattleBossInfo final
+{
+public:
+	EM1ElementalDamageChannel                     ElementalAtkType;                                  // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FName                                   StringId;                                          // 0x0004(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Count;                                             // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<class FString>                         Params;                                            // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	class FString                                 WorldMapTarget;                                    // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1QuestSubCondition>           SubConditions;                                     // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int32                                         RecommendElementalDefValue;                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1VoidBattleBossElementalResTypes     ElementalResTypes;                                 // 0x0008(0x0004)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	int32                                         MinMembers;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1MapSubDataStrId
+// ScriptStruct M1Data.M1InventorySlotExpansionOverNotiData
 // 0x0018 (0x0018 - 0x0000)
-struct FM1MapSubDataStrId final
+struct FM1InventorySlotExpansionOverNotiData final
 {
 public:
-	class FString                                 ID;                                                // 0x0000(0x0010)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1MapSubType                                 Type;                                              // 0x0010(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1InventoryType                              InventoryType;                                     // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1ItemTidBox                          ItemTidBox;                                        // 0x000C(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	int32                                         Amount;                                            // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1OpenField
-// 0x0020 (0x0020 - 0x0000)
-struct FM1OpenField final
+// ScriptStruct M1Data.M1EliteMonsterSkillDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1EliteMonsterSkillDataLink final : public FDataLink
 {
-public:
-	struct FM1TemplateId                          MapTemplateId;                                     // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1MapSubDataStrId                     SubData;                                           // 0x0008(0x0018)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1CurrencyPair
-// 0x0008 (0x0008 - 0x0000)
-struct FM1CurrencyPair final
+// ScriptStruct M1Data.M1ItemUidBox
+// 0x0010 (0x0010 - 0x0000)
+struct FM1ItemUidBox final
 {
 public:
-	EM1CurrencyType                               Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         Amount;                                            // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1QuestStartPoint
-// 0x0018 (0x0018 - 0x0000)
-struct FM1QuestStartPoint final
-{
-public:
-	EM1QuestStartPointType                        Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemType                                   Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<class FString>                         Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int64                                         Uid;                                               // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1QuestStartCondition
+// ScriptStruct M1Data.M1TeleportToMissionInfo
 // 0x0018 (0x0018 - 0x0000)
-struct FM1QuestStartCondition final
+struct FM1TeleportToMissionInfo final
 {
 public:
-	EM1QuestStartConditionType                    Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         Count;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<class FString>                         Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<int64>                                 AccountUids;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          MissionId;                                         // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MoveDedicatedServerReason                  Reason;                                            // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1QuestCompleteConditionGroupInfo
-// 0x000C (0x000C - 0x0000)
-struct FM1QuestCompleteConditionGroupInfo final
+// ScriptStruct M1Data.DataLinkUnion
+// 0x0008 (0x0030 - 0x0028)
+struct FDataLinkUnion : public FDataLinkBase
 {
 public:
-	EM1QuestCompleteConditionGroupType            Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FName                                   GroupStringId;                                     // 0x0004(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   ID;                                                // 0x0028(0x0008)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1QuestDirection
-// 0x0038 (0x0038 - 0x0000)
-struct FM1QuestDirection final
+// ScriptStruct M1Data.M1ItemDataBox
+// 0x0008 (0x0038 - 0x0030)
+struct FM1ItemDataBox final : public FDataLinkUnion
 {
 public:
-	EM1QuestDirectionType                         Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<class FString>                         Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        AssetPath;                                         // 0x0018(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemType                                   Type;                                              // 0x0030(0x0001)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_31[0x7];                                       // 0x0031(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1QuestRewardItem
+// ScriptStruct M1Data.M1PackageGroupElement
 // 0x0048 (0x0048 - 0x0000)
-struct FM1QuestRewardItem final
+struct FM1PackageGroupElement final
 {
 public:
 	struct FM1ItemDataBox                         Item;                                              // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
-	int32                                         Amount;                                            // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsMainItem;                                        // 0x0040(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          ShowAsGroupQuestReward;                            // 0x0041(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_42[0x6];                                       // 0x0042(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	int32                                         ValueMin;                                          // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ValueMax;                                          // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Ratio;                                             // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_44[0x4];                                       // 0x0044(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1PlayerDataLink
+// ScriptStruct M1Data.M1PartsDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1PlayerDataLink final : public FDataLink
+struct FM1PartsDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1QuestData
-// 0x00E8 (0x00F0 - 0x0008)
-struct FM1QuestData : public FTableRowBase
+// ScriptStruct M1Data.M1MonsterTagData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1MonsterTagData final : public FTableRowBase
+{
+public:
+	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          TemplateId;                                        // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   GroupId;                                           // 0x0014(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1EMonsterTagRateType                        RateType;                                          // 0x001C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1WorldMissionDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1WorldMissionDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1CustomizingItemBaseLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1CustomizingItemBaseLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1MissionWaveDropItemRequest
+// 0x0038 (0x0038 - 0x0000)
+struct FM1MissionWaveDropItemRequest final
+{
+public:
+	struct FM1TemplateId                          MissionWaveTemplateId;                             // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MonsterCategory                            MonsterCategory;                                   // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         MonsterUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MonsterLevel;                                      // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          PartsTid;                                          // 0x0014(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<EM1MonsterSubType>                     MonsterSubTypeList;                                // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<int64>                                 AccountUidList;                                    // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1BoostExpData
+// 0x0010 (0x0010 - 0x0000)
+struct FM1BoostExpData final
+{
+public:
+	EM1BoostType                                  Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         BoostExp;                                          // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ProficiencyAddExpResult
+// 0x0038 (0x0038 - 0x0000)
+struct FM1ProficiencyAddExpResult final
+{
+public:
+	struct FM1TemplateId                          EquipmentId;                                       // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         OriginExp;                                         // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         BoostedExp;                                        // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1BoostExpData>                BoostExpDatas;                                     // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x0028(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         Exp;                                               // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1WeaponProficiencyPointNoti
+// 0x0020 (0x0020 - 0x0000)
+struct FM1WeaponProficiencyPointNoti final
+{
+public:
+	EM1ExpNotiType                                NotiType;                                          // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         AccountUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1ProficiencyAddExpResult>     ResultList;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MultiSupplierAbilityParamData
+// 0x0018 (0x0018 - 0x0000)
+struct FM1MultiSupplierAbilityParamData final
+{
+public:
+	class FString                                 AbilityId;                                         // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1StatType                                   CurrentStatCapacity;                               // 0x0010(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RoundsType                                 RoundsCapacity;                                    // 0x0011(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_12[0x2];                                       // 0x0012(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         Value;                                             // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MultiSupplierData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1MultiSupplierData final : public FTableRowBase
 {
 public:
 	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   StringIdName;                                      // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1QuestType                                  Type;                                              // 0x0014(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_15[0x3];                                       // 0x0015(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1QuestStartPoint>             StartPoints;                                       // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1QuestStartCondition>         StartConditions;                                   // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1QuestCompleteConditionGroupInfo     CompleteConditionGroupInfo;                        // 0x0038(0x000C)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	uint8                                         Pad_44[0x4];                                       // 0x0044(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1CompleteCondition>           CompleteConditions;                                // 0x0048(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1QuestDirection>              QuestDirections;                                   // 0x0058(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1OpenField                           OpenField;                                         // 0x0068(0x0020)(Edit, NativeAccessSpecifierPublic)
-	int64                                         RewardCharacterExp;                                // 0x0088(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         RewardMasteryExp;                                  // 0x0090(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         RewardSeasonExp;                                   // 0x0098(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1CurrencyPair>                RewardCurrencies;                                  // 0x00A0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1QuestRewardItem>             RewardItems;                                       // 0x00B0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1PlayerDataLink>              RequiredCharacterIds;                              // 0x00C0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	class FString                                 OutgoingMailId;                                    // 0x00D0(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         SubTrackerPriority;                                // 0x00E0(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ProgressId;                                        // 0x00E4(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   QuestMarkerTarget;                                 // 0x00E8(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ReuseTimer;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1MultiSupplierAbilityParamData> Operations;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SearchKeywordDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1SearchKeywordDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1MapDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1MapDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1EventBoostRewardType
+// 0x0040 (0x0040 - 0x0000)
+struct FM1EventBoostRewardType final
+{
+public:
+	struct FM1ItemDataBox                         RewardItem;                                        // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
+	int64                                         Coefficient;                                       // 0x0038(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1EventBoostingDetailData
+// 0x0038 (0x0038 - 0x0000)
+struct FM1EventBoostingDetailData final
+{
+public:
+	EM1EventBoostType                             BoostType;                                         // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1MapDataLink>                 FieldList;                                         // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1EventBoostTargetContent>     ContentList;                                       // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1EventBoostRewardType>        RewardTypeList;                                    // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1FieldObjectDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1FieldObjectDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1FieldObjectSpawnInfo
+// 0x0038 (0x0038 - 0x0000)
+struct FM1FieldObjectSpawnInfo final
+{
+public:
+	int32                                         Rate;                                              // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1FieldObjectDataLink                 FieldObject;                                       // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1FieldObjectSpawnGroupData
+// 0x0010 (0x0018 - 0x0008)
+struct FM1FieldObjectSpawnGroupData final : public FTableRowBase
+{
+public:
+	TArray<struct FM1FieldObjectSpawnInfo>        SpawnObject;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1RuneInfo
@@ -4571,16 +4184,271 @@ public:
 	uint8                                         Pad_12[0x6];                                       // 0x0012(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1MultiSupplierDataLink
+// ScriptStruct M1Data.M1MonsterUIData
+// 0x0020 (0x0020 - 0x0000)
+struct FM1MonsterUIData final
+{
+public:
+	struct FSoftObjectPath                        IconPath;                                          // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizeBoundedSkin
+// 0x0028 (0x0028 - 0x0000)
+struct FM1CustomizeBoundedSkin final
+{
+public:
+	struct FM1TemplateId                          SkinTid;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1TemplateId>                  BindPaintTids;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1TemplateId>                  BindHairPaintTids;                                 // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizeItem
+// 0x0010 (0x0010 - 0x0000)
+struct FM1CustomizeItem final
+{
+public:
+	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EvolutionIdx;                                      // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EvolutionComplete;                                 // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         StackCount;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizeParts
+// 0x0004 (0x0004 - 0x0000)
+struct FM1CustomizeParts final
+{
+public:
+	struct FM1TemplateId                          SkinTid;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizeCharacterInventory
+// 0x0018 (0x0018 - 0x0000)
+struct FM1CustomizeCharacterInventory final
+{
+public:
+	struct FM1TemplateId                          PlayerTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1CustomizeParts>              Customizes;                                        // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizeWeaponInventory
+// 0x0008 (0x0008 - 0x0000)
+struct FM1CustomizeWeaponInventory final
+{
+public:
+	struct FM1TemplateId                          WeaponTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          CustomizeTid;                                      // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizePaintInventory
+// 0x0010 (0x0010 - 0x0000)
+struct FM1CustomizePaintInventory final
+{
+public:
+	struct FM1TemplateId                          SourceTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          SkinTid;                                           // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          PaintTid;                                          // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Slot;                                              // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizeRingSlotInvenvory
+// 0x000C (0x000C - 0x0000)
+struct FM1CustomizeRingSlotInvenvory final
+{
+public:
+	struct FM1TemplateId                          CustomizeTid;                                      // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Page;                                              // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Slot;                                              // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizeBoundedCharacter
+// 0x0018 (0x0018 - 0x0000)
+struct FM1CustomizeBoundedCharacter final
+{
+public:
+	struct FM1TemplateId                          PlayerTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1TemplateId>                  BindSkinTids;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizeBoundedWeapon
+// 0x0018 (0x0018 - 0x0000)
+struct FM1CustomizeBoundedWeapon final
+{
+public:
+	struct FM1TemplateId                          WeaponTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1TemplateId>                  BindSkinTids;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizeFellowInventory
+// 0x0018 (0x0018 - 0x0000)
+struct FM1CustomizeFellowInventory final
+{
+public:
+	struct FM1TemplateId                          FellowTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1CustomizeParts>              Customizes;                                        // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizeBoundedFellow
+// 0x0018 (0x0018 - 0x0000)
+struct FM1CustomizeBoundedFellow final
+{
+public:
+	struct FM1TemplateId                          FellowTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1TemplateId>                  BindSkinTids;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizeInvenvory
+// 0x00C8 (0x00C8 - 0x0000)
+struct FM1CustomizeInvenvory final
+{
+public:
+	EM1CustomizeReason                            Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1CustomizeItem>               GainItems;                                         // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizeCharacterInventory> CustomizeCharacters;                               // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizeWeaponInventory>    CustomizeWeapons;                                  // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizePaintInventory>     CustomizePaints;                                   // 0x0038(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizePaintInventory>     CustomizeHairPaints;                               // 0x0048(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizeRingSlotInvenvory>  CustomizeRingSlot;                                 // 0x0058(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1TemplateId>                  CustomizeEtc;                                      // 0x0068(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizeBoundedSkin>        CustomizeBoundedSkin;                              // 0x0078(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizeBoundedCharacter>   CustomizeBoundedCharacter;                         // 0x0088(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizeBoundedWeapon>      CustomizeBoundedWeapon;                            // 0x0098(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizeFellowInventory>    CustomizeFellows;                                  // 0x00A8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizeBoundedFellow>      CustomizeBoundedFellow;                            // 0x00B8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CharacterAddExpNoti
+// 0x0038 (0x0038 - 0x0000)
+struct FM1CharacterAddExpNoti final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          PlayerTid;                                         // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         Exp;                                               // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         BoostExp;                                          // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1BoostExpData>                BoostDataList;                                     // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	EM1ExpNotiType                                NotiType;                                          // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1LoadingGroupList
+// 0x0018 (0x0018 - 0x0000)
+struct FM1LoadingGroupList final
+{
+public:
+	class FString                                 GroupId;                                           // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Ratio;                                             // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1MailItemInfo
+// 0x0020 (0x0020 - 0x0000)
+struct FM1MailItemInfo final
+{
+public:
+	int32                                         Index;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1ItemTidBox                          ItemTidBox;                                        // 0x0004(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         Amount;                                            // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Received;                                          // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1QuestSubCondition
+// 0x0018 (0x0018 - 0x0000)
+struct FM1QuestSubCondition final
+{
+public:
+	EM1QuestSubConditionType                      Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 Value;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1FellowInfo
+// 0x0030 (0x0030 - 0x0000)
+struct FM1FellowInfo final
+{
+public:
+	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 Name;                                              // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         Exp;                                               // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          EnableSkill;                                       // 0x0028(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_29[0x7];                                       // 0x0029(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1InvasionEntranceInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1InvasionEntranceInfo final
+{
+public:
+	int32                                         TotalRewardExp;                                    // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          InvasionDungeon;                                   // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1TemplateId>                  AbilityDataList;                                   // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InvasionEntranceInfoList
+// 0x0020 (0x0020 - 0x0000)
+struct FM1InvasionEntranceInfoList final
+{
+public:
+	bool                                          NoEntrant;                                         // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         ScheduleIdx;                                       // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RemainTimeSec;                                     // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1InvasionEntranceInfo>        EntranceInfos;                                     // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RangedFloat
+// 0x0008 (0x0008 - 0x0000)
+struct FM1RangedFloat final
+{
+public:
+	float                                         Min;                                               // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Max;                                               // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MoveDedicatedServerNoti
+// 0x00C0 (0x00C0 - 0x0000)
+struct FM1MoveDedicatedServerNoti final
+{
+public:
+	EM1MoveDedicatedServerReason                  Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<int64>                                 AccountUids;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1DedicatedServerInfo                 ServerInfo;                                        // 0x0018(0x00A0)(Edit, NativeAccessSpecifierPublic)
+	bool                                          MovePosition;                                      // 0x00B8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_B9[0x7];                                       // 0x00B9(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1EquipmentDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1MultiSupplierDataLink final : public FDataLink
+struct FM1EquipmentDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1DropGroupDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1DropGroupDataLink final : public FDataLink
+// ScriptStruct M1Data.M1CompleteCondition
+// 0x0040 (0x0040 - 0x0000)
+struct FM1CompleteCondition final
 {
+public:
+	EM1CompleteConditionType                      Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   StringId;                                          // 0x0004(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Count;                                             // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class FString>                         Params;                                            // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FString                                 WorldMapTarget;                                    // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1QuestSubCondition>           SubConditions;                                     // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1KeyText
@@ -4603,48 +4471,359 @@ public:
 	struct FM1KeyText                             EN;                                                // 0x0048(0x0040)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ContentsStringTableDataRow
-// 0x0000 (0x0088 - 0x0088)
-struct FM1ContentsStringTableDataRow final : public FM1StringTableDataRow
-{
-};
-
-// ScriptStruct M1Data.M1WeaponProficiencyBoostInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FM1WeaponProficiencyBoostInfo final
+// ScriptStruct M1Data.M1StoryStringTableDataRow
+// 0x0008 (0x0090 - 0x0088)
+struct FM1StoryStringTableDataRow final : public FM1StringTableDataRow
 {
 public:
-	struct FM1TemplateId                          WeaponUid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Boost;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         Exp;                                               // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          NeedStringKeyReplacement;                          // 0x0088(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_89[0x7];                                       // 0x0089(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1ItemUidBox
+// ScriptStruct M1Data.M1CurrencyInfo
 // 0x0010 (0x0010 - 0x0000)
-struct FM1ItemUidBox final
+struct FM1CurrencyInfo final
 {
 public:
-	EM1ItemType                                   Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1CurrencyType                               Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Uid;                                               // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         Count;                                             // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1UIStringTableDataRow
-// 0x0000 (0x0088 - 0x0088)
-struct FM1UIStringTableDataRow final : public FM1StringTableDataRow
-{
-};
-
-// ScriptStruct M1Data.M1VoidBattleUIData
-// 0x00A0 (0x00A0 - 0x0000)
-struct FM1VoidBattleUIData final
+// ScriptStruct M1Data.M1StatUIData
+// 0x0020 (0x0020 - 0x0000)
+struct FM1StatUIData final
 {
 public:
-	struct FSoftObjectPath                        LockIconPath;                                      // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        UnlockIconPath;                                    // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        SmallIconPath;                                     // 0x0040(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftClassPath                         InfoWidgetPath;                                    // 0x0060(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        VeryHardIconPath;                                  // 0x0080(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          UIRecord;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         UIGroupId;                                         // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         OrderInGroup;                                      // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1StatUIRecordType                           UIRecordType;                                      // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         DecimalPlaces;                                     // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bChart;                                            // 0x0014(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_15[0x3];                                       // 0x0015(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1RangedFloat                         ChartRange;                                        // 0x0018(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PackageGroupData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1PackageGroupData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1PackageGroupElement>         PackageGroupElementList;                           // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CodexTrackingData
+// 0x000C (0x000C - 0x0000)
+struct FM1CodexTrackingData final
+{
+public:
+	EM1CodexTrackingType                          TrackingType;                                      // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int8                                          SlotIndex;                                         // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2[0x2];                                        // 0x0002(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1TemplateId                          TrackingTid;                                       // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          ResearchMaterial;                                  // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CodexTrackingList
+// 0x0010 (0x0010 - 0x0000)
+struct FM1CodexTrackingList final
+{
+public:
+	TArray<struct FM1CodexTrackingData>           Trackings;                                         // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1TitleDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1TitleDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1QuestParam
+// 0x0008 (0x0008 - 0x0000)
+struct FM1QuestParam final
+{
+public:
+	int32                                         Count;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Complete;                                          // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1IncQuestProgressRes
+// 0x0010 (0x0010 - 0x0000)
+struct FM1IncQuestProgressRes final
+{
+public:
+	EM1IncQuestProgressReason                     Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1QuestParam                          Param;                                             // 0x0004(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	bool                                          CompleteAll;                                       // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1RunePosition
+// 0x0010 (0x0010 - 0x0000)
+struct FM1RunePosition final
+{
+public:
+	int64                                         RuneUid;                                           // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RuneSubClassType                           RuneSubClassType;                                  // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         SocketIndex;                                       // 0x0009(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_A[0x6];                                        // 0x000A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1RunePositionBundle
+// 0x0010 (0x0010 - 0x0000)
+struct FM1RunePositionBundle final
+{
+public:
+	TArray<struct FM1RunePosition>                RunePositionList;                                  // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1LevelByNumOfSquadMember
+// 0x0008 (0x0008 - 0x0000)
+struct FM1LevelByNumOfSquadMember final
+{
+public:
+	int32                                         NumOfMembers;                                      // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MonsterLevel;                                      // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1BoostItemEffect
+// 0x0030 (0x0030 - 0x0000)
+struct FM1BoostItemEffect final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1BuffSubItemType                            BuffType;                                          // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         BoostGroupId;                                      // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         BoostValue;                                        // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FDateTime                              EndTime;                                           // 0x0020(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          NewBoostItemTid;                                   // 0x0028(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1ItemUIData
+// 0x0060 (0x0060 - 0x0000)
+struct FM1ItemUIData final
+{
+public:
+	struct FSoftObjectPath                        IconPath;                                          // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IconBigPath;                                       // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IconSmallPath;                                     // 0x0040(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RandomOptionGroupDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1RandomOptionGroupDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1EquipmentLevel
+// 0x0080 (0x0080 - 0x0000)
+struct FM1EquipmentLevel final
+{
+public:
+	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1StatValuePair>               VariableBaseStats;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1RandomOptionGroupDataLink           RandomOptionGroupId;                               // 0x0018(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1AbilityDataLink                     ActiveAbility;                                     // 0x0048(0x0030)(Edit, NativeAccessSpecifierPublic)
+	int32                                         SellingPrice;                                      // 0x0078(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_7C[0x4];                                       // 0x007C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1EquipmentData
+// 0x00E8 (0x00F0 - 0x0008)
+struct FM1EquipmentData : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   StringId;                                          // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1ItemUIData                          UIData;                                            // 0x0018(0x0060)(Edit, NativeAccessSpecifierPublic)
+	EM1EquipmentCategoryType                      CategoryType;                                      // 0x0078(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1EquipItemClassType                         ClassType;                                         // 0x0079(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemTierType                               TierType;                                          // 0x007A(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_7B[0x5];                                       // 0x007B(0x0005)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1StatValuePair>               BaseStats;                                         // 0x0080(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1EquipmentLevel>              Lv;                                                // 0x0090(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int32                                         RuneSocketCount;                                   // 0x00A0(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_A4[0x4];                                       // 0x00A4(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1StatValuePair>               RequiredStats;                                     // 0x00A8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FSoftClassPath                         PropClass;                                         // 0x00B8(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1CurrencyType                               SellingType;                                       // 0x00D8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D9[0x3];                                       // 0x00D9(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         ImportantPriority;                                 // 0x00DC(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ImportanceType                             ImportanceType;                                    // 0x00E0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_E1[0x3];                                       // 0x00E1(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         MasteryLevel;                                      // 0x00E4(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsTemporary;                                       // 0x00E8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_E9[0x7];                                       // 0x00E9(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1ReactorEnchantEffectInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1ReactorEnchantEffectInfo final
+{
+public:
+	int32                                         EnchantLevel;                                      // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1StatValuePair>               Stats;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ReactorEnchantEffectByItemLevel
+// 0x0018 (0x0018 - 0x0000)
+struct FM1ReactorEnchantEffectByItemLevel final
+{
+public:
+	int32                                         ItemLevel;                                         // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1ReactorEnchantEffectInfo>    EnchantEffectInfo;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ReactorAbilityDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ReactorAbilityDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1TaggedAbilityParamData
+// 0x0018 (0x0018 - 0x0000)
+struct FM1TaggedAbilityParamData final
+{
+public:
+	struct FGameplayTag                           Tag;                                               // 0x0000(0x0008)(Edit, BlueprintVisible, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0008(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ReactorOptimizedConditionDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ReactorOptimizedConditionDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1ReactorData
+// 0x0098 (0x0188 - 0x00F0)
+struct FM1ReactorData final : public FM1EquipmentData
+{
+public:
+	bool                                          Enchantable;                                       // 0x00F0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_F1[0x7];                                       // 0x00F1(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1ReactorEnchantEffectByItemLevel> EnchantEffectByItemLv;                             // 0x00F8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1ReactorAbilityDataLink              Ability;                                           // 0x0108(0x0030)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0138(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1TaggedAbilityParamData>      TaggedParams;                                      // 0x0148(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1ReactorOptimizedConditionDataLink   OptimizedCondition;                                // 0x0158(0x0030)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1EquipmentDecomposeDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1EquipmentDecomposeDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1SummonsLevelInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1SummonsLevelInfo final
+{
+public:
+	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Lifetime;                                          // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1StatValuePair>               AdjectiveStats;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MonsterAIDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1MonsterAIDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1CharacterLevelInfo
+// 0x0050 (0x0050 - 0x0000)
+struct FM1CharacterLevelInfo final
+{
+public:
+	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1StatValuePair>               VariableStats;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int64                                         RewardCharacterExp;                                // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         RewardProficiencyExp;                              // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         RewardBattlePassExp;                               // 0x0028(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<int32>                                 PassiveSkillLevels;                                // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<int32>                                 ActiveSkillLevels;                                 // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CharacterData
+// 0x00D0 (0x00D8 - 0x0008)
+struct FM1CharacterData : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 StringId;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1DamageAdvantageType                        AdvantageType;                                     // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_21[0x3];                                       // 0x0021(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   HitPoint;                                          // 0x0024(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FSoftClassPath                         BlueprintClass;                                    // 0x0030(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        LegacyDataAsset;                                   // 0x0050(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1CharacterLevelInfo>          Lv;                                                // 0x0070(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<EM1StatType>                           UnusedGaugeStats;                                  // 0x0080(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1StatValuePair>               Stats;                                             // 0x0090(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1StatValuePair>               BareHandStats;                                     // 0x00A0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1SkillDataLink>               PassiveSkills;                                     // 0x00B0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1SkillDataLink>               ActiveSkills;                                      // 0x00C0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	EM1CharacterSize                              CharacterSize;                                     // 0x00D0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D1[0x7];                                       // 0x00D1(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1MonsterData
+// 0x00B8 (0x0190 - 0x00D8)
+struct FM1MonsterData : public FM1CharacterData
+{
+public:
+	EM1MonsterCategory                            MonsterCategory;                                   // 0x00D8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LegionCategory                             LegionCategory;                                    // 0x00D9(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_DA[0x6];                                       // 0x00DA(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1MonsterAIDataLink                   AI;                                                // 0x00E0(0x0030)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1MonsterAIDataLink>           RuntimeChangeAI;                                   // 0x0110(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FString                                 ActionGroupId;                                     // 0x0120(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 PartsGroupId;                                      // 0x0130(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          UseControllerRotationYaw;                          // 0x0140(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          DisableInstantDropItem;                            // 0x0141(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_142[0x2];                                      // 0x0142(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         AttackAccuracyRate;                                // 0x0144(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         SpawnMonsterId;                                    // 0x0148(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class FName>                           Tags;                                              // 0x0150(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1MonsterUIData                       UIData;                                            // 0x0160(0x0020)(Edit, NativeAccessSpecifierPublic)
+	bool                                          ShowMapIcon;                                       // 0x0180(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_181[0x3];                                      // 0x0181(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         GrantEliteWeight;                                  // 0x0184(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MonsterSpecialty                           Specialty;                                         // 0x0188(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_189[0x7];                                      // 0x0189(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1SummonsData
+// 0x0010 (0x01A0 - 0x0190)
+struct FM1SummonsData final : public FM1MonsterData
+{
+public:
+	TArray<struct FM1SummonsLevelInfo>            SummonsLv;                                         // 0x0190(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PaintData
+// 0x0008 (0x0008 - 0x0000)
+struct FM1PaintData final
+{
+public:
+	struct FM1TemplateId                          PaintTid;                                          // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Slot;                                              // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1InventorySlotCount
@@ -4660,37 +4839,14 @@ public:
 	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1CustomizePaintInventory
-// 0x0010 (0x0010 - 0x0000)
-struct FM1CustomizePaintInventory final
-{
-public:
-	struct FM1TemplateId                          SourceTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          SkinTid;                                           // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          PaintTid;                                          // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Slot;                                              // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1UpdateCustomizingSkinPaints
-// 0x0028 (0x0028 - 0x0000)
-struct FM1UpdateCustomizingSkinPaints final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizePaintInventory>     PaintInventory;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizePaintInventory>     HairInventory;                                     // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InventorySlotExpansionOverNotiData
+// ScriptStruct M1Data.M1VoidBattleUnlockCondition
 // 0x0018 (0x0018 - 0x0000)
-struct FM1InventorySlotExpansionOverNotiData final
+struct FM1VoidBattleUnlockCondition final
 {
 public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1InventoryType                              InventoryType;                                     // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1ItemTidBox                          ItemTidBox;                                        // 0x000C(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	int32                                         Amount;                                            // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1VoidBattleUnlockConditionType              Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class FString>                         Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MasteryCanLevelUpNoti
@@ -4703,124 +4859,68 @@ public:
 	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1MonsterSpawnGroupDataLink
+// ScriptStruct M1Data.M1FellowDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1MonsterSpawnGroupDataLink final : public FDataLink
+struct FM1FellowDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1NpcDataLink
+// ScriptStruct M1Data.M1BoostItemEffectBundle
+// 0x0010 (0x0010 - 0x0000)
+struct FM1BoostItemEffectBundle final
+{
+public:
+	TArray<struct FM1BoostItemEffect>             DataList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ContentsStringTableDataRow
+// 0x0000 (0x0088 - 0x0088)
+struct FM1ContentsStringTableDataRow final : public FM1StringTableDataRow
+{
+};
+
+// ScriptStruct M1Data.M1TitleItemInfo
+// 0x0004 (0x0004 - 0x0000)
+struct FM1TitleItemInfo final
+{
+public:
+	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1DialogDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1NpcDataLink final : public FDataLink
+struct FM1DialogDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1NpcSpawnInfo
-// 0x0040 (0x0040 - 0x0000)
-struct FM1NpcSpawnInfo final
+// ScriptStruct M1Data.M1QuestRewardItem
+// 0x0048 (0x0048 - 0x0000)
+struct FM1QuestRewardItem final
 {
 public:
-	TArray<struct FM1NpcSpawnPeriod>              SpawnPeriods;                                      // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1NpcDataLink                         ReplacementNpc;                                    // 0x0010(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1ItemDataBox                         Item;                                              // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
+	int32                                         Amount;                                            // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsMainItem;                                        // 0x0040(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          ShowAsGroupQuestReward;                            // 0x0041(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_42[0x6];                                       // 0x0042(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1NpcServiceUnlockCondition
+// ScriptStruct M1Data.M1FocusGoalCompleteNoti
 // 0x0018 (0x0018 - 0x0000)
-struct FM1NpcServiceUnlockCondition final
-{
-public:
-	EM1NpcServiceUnlockConditionType              Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<class FString>                         Values;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1NpcService
-// 0x0050 (0x0050 - 0x0000)
-struct FM1NpcService final
-{
-public:
-	class FName                                   StringId;                                          // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1NpcServiceType                             ServiceType;                                       // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 ServiceValue;                                      // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftClassPath                         WidgetClass;                                       // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1NpcServiceUnlockCondition>   UnlockConditions;                                  // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1NpcData
-// 0x00E0 (0x00E8 - 0x0008)
-struct FM1NpcData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   StringIdName;                                      // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   StringIdButtonName;                                // 0x0014(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FSoftClassPath                         BlueprintClass;                                    // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1NpcSpawnType                               SpawnType;                                         // 0x0040(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_41[0x3];                                       // 0x0041(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         NameTagOffset;                                     // 0x0044(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        HudIcon;                                           // 0x0048(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        MapIcon;                                           // 0x0068(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          ShowMapIcon;                                       // 0x0088(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          SkipNpcMenu;                                       // 0x0089(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_8A[0x6];                                       // 0x008A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1NpcService>                  Services;                                          // 0x0090(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	bool                                          Collision;                                         // 0x00A0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_A1[0x7];                                       // 0x00A1(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1NpcSpawnInfo                        SpawnInfo;                                         // 0x00A8(0x0040)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1VoidBattleRewards
-// 0x0008 (0x0008 - 0x0000)
-struct FM1VoidBattleRewards final
-{
-public:
-	struct FM1CurrencyPair                        Currency;                                          // 0x0000(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CodexItemInfoList
-// 0x0018 (0x0018 - 0x0000)
-struct FM1CodexItemInfoList final
+struct FM1FocusGoalCompleteNoti final
 {
 public:
 	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1ItemTidBox>                  ItemInfoList;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int32                                         SourceTid1;                                        // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         SourceTid2;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          ItemTid;                                           // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1FellowLevelExpDataLink
+// ScriptStruct M1Data.M1InvasionDungeonMiscDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1FellowLevelExpDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1MonsterTagData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1MonsterTagData final : public FTableRowBase
-{
-public:
-	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          TemplateId;                                        // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   GroupId;                                           // 0x0014(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1EMonsterTagRateType                        RateType;                                          // 0x001C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1FocusGoalProgressNoti
-// 0x0018 (0x0018 - 0x0000)
-struct FM1FocusGoalProgressNoti final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         SourceTid;                                         // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          ItemTid;                                           // 0x000C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Value;                                             // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1FocusGoalProgressReason                    Reason;                                            // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1VoidVesselRewardGroupLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1VoidVesselRewardGroupLink final : public FDataLink
+struct FM1InvasionDungeonMiscDataLink final : public FDataLink
 {
 };
 
@@ -4839,24 +4939,53 @@ public:
 	TArray<class FName>                           TableIDs;                                          // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1AbilityTooltipSettingDetailData
-// 0x0028 (0x0028 - 0x0000)
-struct FM1AbilityTooltipSettingDetailData final
+// ScriptStruct M1Data.M1PackageOpenerDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1PackageOpenerDataLink final : public FDataLink
 {
-public:
-	class FName                                   Type;                                              // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   DataStringID;                                      // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   FormatStringID;                                    // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1AbilityTooltipRefData>       RefData;                                           // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1AbilityTooltipSettingData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1AbilityTooltipSettingData final : public FTableRowBase
+// ScriptStruct M1Data.M1SkillStringTableDataRow
+// 0x0000 (0x0088 - 0x0088)
+struct FM1SkillStringTableDataRow final : public FM1StringTableDataRow
+{
+};
+
+// ScriptStruct M1Data.M1FocusGoalProgressNoti
+// 0x0020 (0x0020 - 0x0000)
+struct FM1FocusGoalProgressNoti final
 {
 public:
-	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1AbilityTooltipSettingDetailData> DetailData;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         SourceTid1;                                        // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         SourceTid2;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          ItemTid;                                           // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Value;                                             // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1FocusGoalProgressReason                    Reason;                                            // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1QuestParamGroupDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1QuestParamGroupDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RuneComposeCostData
+// 0x0010 (0x0010 - 0x0000)
+struct FM1RuneComposeCostData final
+{
+public:
+	EM1ItemTierType                               Tier;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1CurrencyType                               CurrencyType;                                      // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         Amount;                                            // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RuneDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1RuneDataLink final : public FDataLink
+{
 };
 
 // ScriptStruct M1Data.M1RequestSupportInfo
@@ -4877,75 +5006,423 @@ public:
 	uint8                                         Pad_52[0x6];                                       // 0x0052(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1RuneMiscDataLink
+// ScriptStruct M1Data.M1ResearchDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1RuneMiscDataLink final : public FDataLink
+struct FM1ResearchDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1PerkEnchantRequiredItemData
-// 0x0010 (0x0010 - 0x0000)
-struct FM1PerkEnchantRequiredItemData final
-{
-public:
-	EM1ItemType                                   Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FName                                   ID;                                                // 0x0004(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Amount;                                            // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1TeleportToMissionInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1TeleportToMissionInfo final
-{
-public:
-	TArray<int64>                                 AccountUids;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          MissionId;                                         // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1MoveDedicatedServerReason                  Reason;                                            // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MissionDataLink
+// ScriptStruct M1Data.M1MonsterDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1MissionDataLink final : public FDataLink
+struct FM1MonsterDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1InventorySlotCountBundle
-// 0x0010 (0x0010 - 0x0000)
-struct FM1InventorySlotCountBundle final
-{
-public:
-	TArray<struct FM1InventorySlotCount>          DataList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MasteryRank
-// 0x0008 (0x0008 - 0x0000)
-struct FM1MasteryRank final
+// ScriptStruct M1Data.M1EncountInfo
+// 0x0038 (0x0038 - 0x0000)
+struct FM1EncountInfo final
 {
 public:
-	int32                                         Min;                                               // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Max;                                               // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1MonsterDataLink                     MonsterId;                                         // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	float                                         EncountRate;                                       // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1LoadingTooltipData
-// 0x0028 (0x0030 - 0x0008)
-struct FM1LoadingTooltipData final : public FTableRowBase
+// ScriptStruct M1Data.M1EncountData
+// 0x0038 (0x0040 - 0x0008)
+struct FM1EncountData final : public FTableRowBase
 {
 public:
-	class FString                                 StringId;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1MasteryRank                         MasteryRank;                                       // 0x0018(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	TArray<class FString>                         Tags;                                              // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EncountLevelMin;                                   // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EncountLevelMax;                                   // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         EncountPointMin;                                   // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         EncountPointMax;                                   // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         EncountTimer;                                      // 0x0028(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1EncountInfo>                 Encount;                                           // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1QuestDataLink
+// ScriptStruct M1Data.M1MissionTaskSubDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1QuestDataLink final : public FDataLink
+struct FM1MissionTaskSubDataLink final : public FDataLink
 {
+};
+
+// ScriptStruct M1Data.M1RewardItem
+// 0x0040 (0x0040 - 0x0000)
+struct FM1RewardItem final
+{
+public:
+	struct FM1ItemDataBox                         Item;                                              // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
+	int32                                         Amount;                                            // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MailDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1MailDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1AttendanceEventInfo
+// 0x0078 (0x0078 - 0x0000)
+struct FM1AttendanceEventInfo final
+{
+public:
+	int32                                         Date;                                              // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1RewardItem                          Reward;                                            // 0x0008(0x0040)(Edit, NativeAccessSpecifierPublic)
+	struct FM1MailDataLink                        EventRewardMailId;                                 // 0x0048(0x0030)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InitializationData
+// 0x0018 (0x0018 - 0x0000)
+struct FM1InitializationData final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemType                                   ItemType;                                          // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         TemplateId;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Count;                                             // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1ReactorOptimizedConditionData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1ReactorOptimizedConditionData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ReactorOptimizedConditionType              ConditionType;                                     // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 ConditionId;                                       // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1JunkItemFilterOptionElement
+// 0x0018 (0x0018 - 0x0000)
+struct FM1JunkItemFilterOptionElement final
+{
+public:
+	EM1JunkFilterOption                           Key1;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1StatType                                   Key2;                                              // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 Value;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1JunkItemFilterOptions
+// 0x0018 (0x0018 - 0x0000)
+struct FM1JunkItemFilterOptions final
+{
+public:
+	bool                                          HasSavedJunkFilter;                                // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1JunkItemFilterOptionElement> KeyValues;                                         // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1DropItemLevelWeightDetailData
+// 0x0008 (0x0008 - 0x0000)
+struct FM1DropItemLevelWeightDetailData final
+{
+public:
+	int32                                         Diff;                                              // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Weight;                                            // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1FellowMiscDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1FellowMiscDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonScoreSection
+// 0x0008 (0x0008 - 0x0000)
+struct FM1InstanceDungeonScoreSection final
+{
+public:
+	int32                                         Score;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Ratio;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InvasionDungeonMODDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1InvasionDungeonMODDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1MasteryExpNoti
+// 0x0018 (0x0018 - 0x0000)
+struct FM1MasteryExpNoti final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          Level;                                             // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         Exp;                                               // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RPC_HEADER
+// 0x0008 (0x0008 - 0x0000)
+struct FM1RPC_HEADER final
+{
+public:
+	int32                                         RequestID;                                         // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int16                                         ProcedureId;                                       // 0x0004(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_6[0x2];                                        // 0x0006(0x0002)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1ReactorEnchantRequireDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ReactorEnchantRequireDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1DropItemNotiElement
+// 0x0020 (0x0020 - 0x0000)
+struct FM1DropItemNotiElement final
+{
+public:
+	int64                                         DropOid;                                           // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1ItemTidBox                          ItemTid;                                           // 0x0010(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	int32                                         Count;                                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1DropItemInfoNoti
+// 0x0020 (0x0020 - 0x0000)
+struct FM1DropItemInfoNoti final
+{
+public:
+	int64                                         MosterUId;                                         // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          PartsTid;                                          // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1DropItemNotiElement>         DropItemNotiList;                                  // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PartyMoveRes
+// 0x00B8 (0x00B8 - 0x0000)
+struct FM1PartyMoveRes final
+{
+public:
+	EM1PartyErrorCode                             ErrorCode;                                         // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<int64>                                 AccountUids;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1DedicatedServerInfo                 ServerInfo;                                        // 0x0018(0x00A0)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MissionTargetData
+// 0x0050 (0x0058 - 0x0008)
+struct FM1MissionTargetData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 StringId;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MissionTargetType                          Type;                                              // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FSoftClassPath                         BlueprintClass;                                    // 0x0028(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1MissionTargetLevelData>      Lv;                                                // 0x0048(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ResearchDataType
+// 0x0018 (0x0018 - 0x0000)
+struct FM1ResearchDataType final
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         RemainTicks;                                       // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ResearchStatus                             ResearchStatus;                                    // 0x0010(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x3];                                       // 0x0011(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         RepeatCount;                                       // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1UnlockedFieldInfo
+// 0x0038 (0x0038 - 0x0000)
+struct FM1UnlockedFieldInfo final
+{
+public:
+	struct FM1TemplateId                          MapTemplateId;                                     // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          HasEntered;                                        // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1MapSubData>                  MapSubData;                                        // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<class FString>                         CampEntryPointId;                                  // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1TemplateId>                  BattleZoneId;                                      // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1VoidVesselRewardGroupLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1VoidVesselRewardGroupLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1WorldMissionData
+// 0x0048 (0x0050 - 0x0008)
+struct FM1WorldMissionData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1MapDataLink                         MapId;                                             // 0x0010(0x0030)(Edit, NativeAccessSpecifierPublic)
+	EM1InstanceDungeonDifficulty                  Difficulty;                                        // 0x0040(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_41[0x3];                                       // 0x0041(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   EnterWorldMissionToast;                            // 0x0044(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsAccessible;                                      // 0x004C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4D[0x3];                                       // 0x004D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1ConsumableInfo
+// 0x0020 (0x0020 - 0x0000)
+struct FM1ConsumableInfo final
+{
+public:
+	int64                                         Uid;                                               // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          Tid;                                               // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         Count;                                             // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemTagStatus                              TagStatus;                                         // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1InvasionDungeonDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1InvasionDungeonDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1MonsterDropInfo
+// 0x0040 (0x0040 - 0x0000)
+struct FM1MonsterDropInfo final
+{
+public:
+	EM1MonsterCategory                            MonsterCategory;                                   // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MonsterSubType                             MonsterSubType;                                    // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1DropItemLink                        DropItem;                                          // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
+	int32                                         DropEquipLevelRangeMin;                            // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         DropEquipLevelRangeMax;                            // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1EliteMonsterSkillGroupDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1EliteMonsterSkillGroupDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1EliteAbilityGroup
+// 0x0038 (0x0038 - 0x0000)
+struct FM1EliteAbilityGroup final
+{
+public:
+	struct FM1EliteMonsterSkillGroupDataLink      ID;                                                // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	int32                                         Rate;                                              // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1MissionTaskSubData
+// 0x0068 (0x0070 - 0x0008)
+struct FM1MissionTaskSubData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   StringId;                                          // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   OptionalStringId;                                  // 0x0014(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1MonsterDropInfo>             MonsterDropInfoList;                               // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int32                                         TaskSuccessScore;                                  // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   TaskDropCollection;                                // 0x0034(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   TaskDropSupply;                                    // 0x003C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         EliteApperanceChance;                              // 0x0044(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EliteMonsterSpawnMax;                              // 0x0048(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         EliteMonsterSpawnChance;                           // 0x004C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1EliteAbilityGroup>           EliteAbilityGroup;                                 // 0x0050(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1EliteMonsterSkillGroupDataLink> DefaultEliteAbilityGroup;                          // 0x0060(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1UnixTime
+// 0x0004 (0x0004 - 0x0000)
+struct alignas(0x04) FM1UnixTime final
+{
+public:
+	uint8                                         Pad_0[0x4];                                        // 0x0000(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1EquipmentBaseInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1EquipmentBaseInfo final
+{
+public:
+	int64                                         Uid;                                               // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          Tid;                                               // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1UnixTime                            CreateDate;                                        // 0x000C(0x0004)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemTagStatus                              TagStatus;                                         // 0x0014(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          WareHouse;                                         // 0x0015(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_16[0x2];                                       // 0x0016(0x0002)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1InstantUseItemDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1InstantUseItemDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1AchievementCategoryDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1AchievementCategoryDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RuneCompact
+// 0x0010 (0x0010 - 0x0000)
+struct FM1RuneCompact final
+{
+public:
+	int64                                         Uid;                                               // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Enchant;                                           // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int16                                         EquipCount;                                        // 0x000C(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_E[0x2];                                        // 0x000E(0x0002)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1RunesByTid
+// 0x0018 (0x0018 - 0x0000)
+struct FM1RunesByTid final
+{
+public:
+	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1RuneCompact>                 Runes;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ItemPack
+// 0x000C (0x000C - 0x0000)
+struct FM1ItemPack final
+{
+public:
+	struct FM1ItemTidBox                          ItemInfo;                                          // 0x0000(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	int32                                         Count;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1VoidBattleMiscDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1VoidBattleMiscDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1ItemDecomposeResult
+// 0x0010 (0x0010 - 0x0000)
+struct FM1ItemDecomposeResult final
+{
+public:
+	TArray<struct FM1DecomposeResultItemInfo>     ItemList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1QuestDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1QuestDataLink final : public FDataLink
 {
 };
 
@@ -4985,257 +5462,66 @@ public:
 	TArray<struct FM1ChallengeDetailData>         ChallengeDataList;                                 // 0x0098(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ReactorOptimizedValueByTier
-// 0x000C (0x000C - 0x0000)
-struct FM1ReactorOptimizedValueByTier final
+// ScriptStruct M1Data.M1EventBoostingData
+// 0x0018 (0x00C0 - 0x00A8)
+struct FM1EventBoostingData final : public FM1EventData
 {
 public:
-	EM1ItemTierType                               Tier;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         SatisfactionRatio;                                 // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         DissatisfactionRatio;                              // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         BoostLimitMasteryRank;                             // 0x00A8(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_AC[0x4];                                       // 0x00AC(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1EventBoostingDetailData>     BoostDataList;                                     // 0x00B0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1RPC_HEADER
-// 0x0008 (0x0008 - 0x0000)
-struct FM1RPC_HEADER final
-{
-public:
-	int32                                         RequestID;                                         // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int16                                         ProcedureId;                                       // 0x0004(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_6[0x2];                                        // 0x0006(0x0002)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1BattlePassShopDataLink
+// ScriptStruct M1Data.M1MissionWaveDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1BattlePassShopDataLink final : public FDataLink
+struct FM1MissionWaveDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1EventAttendanceReward
-// 0x0048 (0x0048 - 0x0000)
-struct FM1EventAttendanceReward final
-{
-public:
-	struct FM1ItemDataBox                         Item;                                              // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
-	int64                                         Amount;                                            // 0x0038(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_44[0x4];                                       // 0x0044(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1EventAttendanceInfo
-// 0x0080 (0x0080 - 0x0000)
-struct FM1EventAttendanceInfo final
+// ScriptStruct M1Data.M1JunkItemDecomposeResult
+// 0x0010 (0x0010 - 0x0000)
+struct FM1JunkItemDecomposeResult final
 {
 public:
-	int32                                         Days;                                              // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1EventAttendanceReward               Reward;                                            // 0x0008(0x0048)(Edit, NativeAccessSpecifierPublic)
-	struct FM1MailDataLink                        EventRewardMailId;                                 // 0x0050(0x0030)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1DecomposeResultItemInfo>     ItemList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1EventAttendanceData
-// 0x0010 (0x00A8 - 0x0098)
-struct FM1EventAttendanceData final : public FM1EventBaseData
+// ScriptStruct M1Data.M1LoadingImageRandomData
+// 0x0010 (0x0018 - 0x0008)
+struct FM1LoadingImageRandomData final : public FTableRowBase
 {
 public:
-	TArray<struct FM1EventAttendanceInfo>         AttendanceInfo;                                    // 0x0098(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1LoadingGroupList>            LoadingGroupList;                                  // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1MasteryExpNoti
-// 0x0018 (0x0018 - 0x0000)
-struct FM1MasteryExpNoti final
+// ScriptStruct M1Data.M1ItemBoxesInfo
+// 0x0010 (0x0010 - 0x0000)
+struct FM1ItemBoxesInfo final
 {
 public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          Level;                                             // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Exp;                                               // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1ItemUidBox>                  ItemBoxList;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1DifficultyAbilityDataLink
+// ScriptStruct M1Data.M1InitializationBundle
+// 0x0010 (0x0010 - 0x0000)
+struct FM1InitializationBundle final
+{
+public:
+	TArray<struct FM1InitializationData>          InitializationDataList;                            // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1EventBaseDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1DifficultyAbilityDataLink final : public FDataLink
+struct FM1EventBaseDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1DifficultyAbilityInfo
-// 0x0038 (0x0038 - 0x0000)
-struct FM1DifficultyAbilityInfo final
+// ScriptStruct M1Data.M1InventorySlotCountBundle
+// 0x0010 (0x0010 - 0x0000)
+struct FM1InventorySlotCountBundle final
 {
 public:
-	bool                                          ApplyToPlayer;                                     // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1DifficultyAbilityDataLink           AbilityData;                                       // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CharacterLevelData
-// 0x0028 (0x0030 - 0x0008)
-struct FM1CharacterLevelData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         RequiredExp;                                       // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         AccumulatedExp;                                    // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RuneCharacterCapacity;                             // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_24[0x4];                                       // 0x0024(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         RewardMasteryExp;                                  // 0x0028(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1DecomposeResultItemInfo
-// 0x000C (0x000C - 0x0000)
-struct FM1DecomposeResultItemInfo final
-{
-public:
-	int32                                         TemplateId;                                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ItemType                                   Type;                                              // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         Count;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonScoreSection
-// 0x0008 (0x0008 - 0x0000)
-struct FM1InstanceDungeonScoreSection final
-{
-public:
-	int32                                         Score;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Ratio;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonReward
-// 0x0050 (0x0050 - 0x0000)
-struct FM1InstanceDungeonReward final
-{
-public:
-	struct FM1RewardType                          Item;                                              // 0x0000(0x0040)(Edit, NativeAccessSpecifierPublic)
-	TArray<struct FM1InstanceDungeonScoreSection> ScoreSection;                                      // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonRewardData
-// 0x0028 (0x0030 - 0x0008)
-struct FM1InstanceDungeonRewardData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 StringId;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1InstanceDungeonReward>       Rewards;                                           // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1VoidVesselDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1VoidVesselDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1ProficiencyAddExpResult
-// 0x0038 (0x0038 - 0x0000)
-struct FM1ProficiencyAddExpResult final
-{
-public:
-	struct FM1TemplateId                          EquipmentId;                                       // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         OriginExp;                                         // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         BoostedExp;                                        // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1BoostExpData>                BoostExpDatas;                                     // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x0028(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Exp;                                               // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1WeaponProficiencyPointNoti
-// 0x0020 (0x0020 - 0x0000)
-struct FM1WeaponProficiencyPointNoti final
-{
-public:
-	EM1ExpNotiType                                NotiType;                                          // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         AccountUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1ProficiencyAddExpResult>     ResultList;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizingItemDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1CustomizingItemDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1SkillTooltipLevelData
-// 0x0018 (0x0018 - 0x0000)
-struct FM1SkillTooltipLevelData final
-{
-public:
-	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SkillTooltipDetailData
-// 0x0050 (0x0050 - 0x0000)
-struct FM1SkillTooltipDetailData final
-{
-public:
-	class FName                                   DataStringID;                                      // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   FormatStringID;                                    // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1SkillInfoTextFormatType                    TextFormatType;                                    // 0x0010(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x3];                                       // 0x0011(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         DecimalPlaces;                                     // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1SkillInfoBenefitType                       BenefitType;                                       // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FSoftClassPath                         CalcClass;                                         // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1SkillTooltipLevelData>       LvData;                                            // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ResearchBookMarkDataBundle
-// 0x0018 (0x0018 - 0x0000)
-struct FM1ResearchBookMarkDataBundle final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1TemplateId>                  ResearchTemplateIdList;                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MissionTaskSubDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1MissionTaskSubDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1PartyMoveRes
-// 0x00B8 (0x00B8 - 0x0000)
-struct FM1PartyMoveRes final
-{
-public:
-	EM1PartyErrorCode                             ErrorCode;                                         // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<int64>                                 AccountUids;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1DedicatedServerInfo                 ServerInfo;                                        // 0x0018(0x00A0)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1FellowSkillItemDecomposeResult
-// 0x0018 (0x0018 - 0x0000)
-struct FM1FellowSkillItemDecomposeResult final
-{
-public:
-	EM1ItemReason                                 Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1DecomposeResultItemInfo>     ItemList;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InvasionDungeonTimeAttackGroupLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1InvasionDungeonTimeAttackGroupLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1VoidBattleClearInfo
-// 0x0008 (0x0008 - 0x0000)
-struct FM1VoidBattleClearInfo final
-{
-public:
-	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ClearCount;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1InventorySlotCount>          DataList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1AbilityTooltipType
@@ -5252,362 +5538,59 @@ public:
 	struct FSoftClassPath                         CalcClass;                                         // 0x0010(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ProductMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1ProductMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1UnlockedFieldInfo
-// 0x0038 (0x0038 - 0x0000)
-struct FM1UnlockedFieldInfo final
-{
-public:
-	struct FM1TemplateId                          MapTemplateId;                                     // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          HasEntered;                                        // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1MapSubData>                  MapSubData;                                        // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<class FString>                         CampEntryPointId;                                  // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1TemplateId>                  BattleZoneId;                                      // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonScoreInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1InstanceDungeonScoreInfo final
-{
-public:
-	int32                                         MaxScore;                                          // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<int32>                                 MonsterKillScore;                                  // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CurrencyInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FM1CurrencyInfo final
-{
-public:
-	EM1CurrencyType                               Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Count;                                             // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SummonsLevelInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1SummonsLevelInfo final
-{
-public:
-	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Lifetime;                                          // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1StatValuePair>               AdjectiveStats;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MonsterUIData
-// 0x0020 (0x0020 - 0x0000)
-struct FM1MonsterUIData final
-{
-public:
-	struct FSoftObjectPath                        IconPath;                                          // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MonsterAIDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1MonsterAIDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1MonsterData
-// 0x00B8 (0x0190 - 0x00D8)
-struct FM1MonsterData : public FM1CharacterData
-{
-public:
-	EM1MonsterCategory                            MonsterCategory;                                   // 0x00D8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LegionCategory                             LegionCategory;                                    // 0x00D9(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_DA[0x6];                                       // 0x00DA(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1MonsterAIDataLink                   AI;                                                // 0x00E0(0x0030)(Edit, NativeAccessSpecifierPublic)
-	TArray<struct FM1MonsterAIDataLink>           RuntimeChangeAI;                                   // 0x0110(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	class FString                                 ActionGroupId;                                     // 0x0120(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 PartsGroupId;                                      // 0x0130(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          UseControllerRotationYaw;                          // 0x0140(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          DisableInstantDropItem;                            // 0x0141(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_142[0x2];                                      // 0x0142(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         AttackAccuracyRate;                                // 0x0144(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         SpawnMonsterId;                                    // 0x0148(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<class FName>                           Tags;                                              // 0x0150(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1MonsterUIData                       UIData;                                            // 0x0160(0x0020)(Edit, NativeAccessSpecifierPublic)
-	bool                                          ShowMapIcon;                                       // 0x0180(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_181[0x3];                                      // 0x0181(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         GrantEliteWeight;                                  // 0x0184(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1MonsterSpecialty                           Specialty;                                         // 0x0188(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_189[0x7];                                      // 0x0189(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1SummonsData
-// 0x0010 (0x01A0 - 0x0190)
-struct FM1SummonsData final : public FM1MonsterData
-{
-public:
-	TArray<struct FM1SummonsLevelInfo>            SummonsLv;                                         // 0x0190(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonModifierPresetCommonInfo
-// 0x0008 (0x0008 - 0x0000)
-struct FM1InstanceDungeonModifierPresetCommonInfo final
-{
-public:
-	float                                         ScoreBonus;                                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bRotationWithInvasion;                             // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonRotationRewardMax
+// ScriptStruct M1Data.M1PlatformInfo
 // 0x0028 (0x0028 - 0x0000)
-struct FM1InstanceDungeonRotationRewardMax final
-{
-public:
-	TArray<struct FM1ConsumableItemDataLink>      LimitItems;                                        // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	int32                                         MaxCount;                                          // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FDateTime                              RotationStartTime;                                 // 0x0018(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RotationIntervalDay;                               // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RotationChangeTimeHour;                            // 0x0024(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonMiscData
-// 0x0038 (0x0040 - 0x0008)
-struct FM1InstanceDungeonMiscData final : public FTableRowBase
-{
-public:
-	TArray<struct FM1InstanceDungeonModifierPresetCommonInfo> ModifierPresetCommonInfo;                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1InstanceDungeonRotationRewardMax    RotationRewardMax;                                 // 0x0018(0x0028)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ReactorEnchantRequireDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1ReactorEnchantRequireDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1UnixTime
-// 0x0004 (0x0004 - 0x0000)
-struct alignas(0x04) FM1UnixTime final
-{
-public:
-	uint8                                         Pad_0[0x4];                                        // 0x0000(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1EquipmentBaseInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1EquipmentBaseInfo final
-{
-public:
-	int64                                         Uid;                                               // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          Tid;                                               // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1UnixTime                            CreateDate;                                        // 0x000C(0x0004)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ItemTagStatus                              TagStatus;                                         // 0x0014(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          WareHouse;                                         // 0x0015(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_16[0x2];                                       // 0x0016(0x0002)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1InvasionDungeonMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1InvasionDungeonMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1PhysicalPowerOptionData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1PhysicalPowerOptionData final : public FTableRowBase
-{
-public:
-	bool                                          bLaunchWhenDeathRagDoll;                           // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         LaunchPower;                                       // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         LaunchAssistAngle;                                 // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         PowerAfterLaunch;                                  // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         PhysicalPower;                                     // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1FixedDungeonRewardInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FM1FixedDungeonRewardInfo final
+struct FM1PlatformInfo final
 {
 public:
 	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RewardTid;                                         // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class FString                                 LoginPlatformId;                                   // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         LoginPlatformUid;                                  // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         LoginPlatformType;                                 // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1EventDataLink
+// ScriptStruct M1Data.M1DropGroupDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1EventDataLink final : public FDataLink
+struct FM1DropGroupDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1ItemPack
-// 0x000C (0x000C - 0x0000)
-struct FM1ItemPack final
-{
-public:
-	struct FM1ItemTidBox                          ItemInfo;                                          // 0x0000(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	int32                                         Count;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PerkUIData
-// 0x0060 (0x0060 - 0x0000)
-struct FM1PerkUIData final
+// ScriptStruct M1Data.M1DropItemElement
+// 0x0038 (0x0038 - 0x0000)
+struct FM1DropItemElement final
 {
 public:
-	struct FSoftObjectPath                        IconPath;                                          // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftClassPath                         CustomHUDWidget;                                   // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        PreviewMovie;                                      // 0x0040(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1DropGroupDataLink                   DropGroupId;                                       // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	float                                         Ratio;                                             // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1RedeemItemBox
-// 0x0008 (0x0038 - 0x0030)
-struct FM1RedeemItemBox final : public FDataLinkUnion
+// ScriptStruct M1Data.M1InstantUseDropGroupDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1InstantUseDropGroupDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1InstantUseDropItemElement
+// 0x0038 (0x0038 - 0x0000)
+struct FM1InstantUseDropItemElement final
 {
 public:
-	EM1RedeemType                                 Type;                                              // 0x0030(0x0001)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_31[0x7];                                       // 0x0031(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	struct FM1InstantUseDropGroupDataLink         DropGroupId;                                       // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	float                                         Ratio;                                             // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1ItemUIData
-// 0x0060 (0x0060 - 0x0000)
-struct FM1ItemUIData final
-{
-public:
-	struct FSoftObjectPath                        IconPath;                                          // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IconBigPath;                                       // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IconSmallPath;                                     // 0x0040(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1DecomposeRewardData
-// 0x0040 (0x0040 - 0x0000)
-struct FM1DecomposeRewardData final
-{
-public:
-	struct FM1ItemDataBox                         RewardItem;                                        // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
-	int32                                         RewardCount;                                       // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_3C[0x4];                                       // 0x003C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1ConsumableItemData
-// 0x0148 (0x0150 - 0x0008)
-struct FM1ConsumableItemData : public FTableRowBase
+// ScriptStruct M1Data.M1DropItem
+// 0x0028 (0x0030 - 0x0008)
+struct FM1DropItem final : public FTableRowBase
 {
 public:
 	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   StringId;                                          // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1ItemUIData                          UIData;                                            // 0x0018(0x0060)(Edit, NativeAccessSpecifierPublic)
-	EM1ConsumableItemCategoryType                 Category;                                          // 0x0078(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ItemTierType                               TierType;                                          // 0x0079(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ConsumableItemHowToUse                     HowToUse;                                          // 0x007A(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          RemainAtUse;                                       // 0x007B(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ObtainableCountPerChance;                          // 0x007C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MaxCapacity;                                       // 0x0080(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Decomposable;                                      // 0x0084(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_85[0x3];                                       // 0x0085(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1DecomposeRewardData>         DecomposeRewards;                                  // 0x0088(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	bool                                          Deletable;                                         // 0x0098(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          SeasonReset;                                       // 0x0099(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9A[0x6];                                       // 0x009A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1ItemDataBox                         SellingType;                                       // 0x00A0(0x0038)(Edit, NativeAccessSpecifierPublic)
-	int32                                         SellingPrice;                                      // 0x00D8(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_DC[0x4];                                       // 0x00DC(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1RedeemItemBox                       RedeemItem;                                        // 0x00E0(0x0038)(Edit, NativeAccessSpecifierPublic)
-	struct FSoftClassPath                         PropClass;                                         // 0x0118(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ImportantPriority;                                 // 0x0138(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ImportanceType                             ImportanceType;                                    // 0x013C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_13D[0x3];                                      // 0x013D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         FellowExp;                                         // 0x0140(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MasteryLevel;                                      // 0x0144(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsTemporary;                                       // 0x0148(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_149[0x7];                                      // 0x0149(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1ItemDecomposeResult
-// 0x0010 (0x0010 - 0x0000)
-struct FM1ItemDecomposeResult final
-{
-public:
-	TArray<struct FM1DecomposeResultItemInfo>     ItemList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1JunkItemDecomposeResult
-// 0x0010 (0x0010 - 0x0000)
-struct FM1JunkItemDecomposeResult final
-{
-public:
-	TArray<struct FM1DecomposeResultItemInfo>     ItemList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MissionDropRatio
-// 0x0008 (0x0008 - 0x0000)
-struct FM1MissionDropRatio final
-{
-public:
-	EM1MissionCategory                            MissionCategory;                                   // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         DropRatio;                                         // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1BaseItemDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1BaseItemDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1ItemBoxesInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FM1ItemBoxesInfo final
-{
-public:
-	TArray<struct FM1ItemUidBox>                  ItemBoxList;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PartyRequestInfo
-// 0x0070 (0x0070 - 0x0000)
-struct FM1PartyRequestInfo final
-{
-public:
-	class FString                                 SeqId;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         AccountUid;                                        // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 AccountName;                                       // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          MasteryLevel;                                      // 0x0028(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         AuthValue;                                         // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          CharacterTid;                                      // 0x0038(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_3C[0x4];                                       // 0x003C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         CharacterLevel;                                    // 0x0040(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         ElapsedTimeSec;                                    // 0x0048(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 PlatformId;                                        // 0x0050(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         PlatfromUid;                                       // 0x0060(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LoginPlatformTypes                         PlatformType;                                      // 0x0068(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          CrossPlayOn;                                       // 0x0069(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_6A[0x6];                                       // 0x006A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1RotationShopScheduleDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1RotationShopScheduleDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1InitializationBundle
-// 0x0010 (0x0010 - 0x0000)
-struct FM1InitializationBundle final
-{
-public:
-	TArray<struct FM1InitializationData>          InitializationDataList;                            // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RuneSocketGrantDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1RuneSocketGrantDataLink final : public FDataLink
-{
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1DropItemElement>             DropItemElementList;                               // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1InstantUseDropItemElement>   InstantUseDropItemElementList;                     // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MasteryInfo
@@ -5618,332 +5601,6 @@ public:
 	struct FM1TemplateId                          Level;                                             // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
 	int64                                         Exp;                                               // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ItemOptionStatRangeRate
-// 0x0008 (0x0008 - 0x0000)
-struct FM1ItemOptionStatRangeRate final
-{
-public:
-	int32                                         UpperRange;                                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Rate;                                              // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ItemOptionTierRange
-// 0x0008 (0x0008 - 0x0000)
-struct FM1ItemOptionTierRange final
-{
-public:
-	EM1ItemOptionTierType                         OptionTierType;                                    // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         UpperRange;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ItemOptionMiscData
-// 0x0040 (0x0048 - 0x0008)
-struct FM1ItemOptionMiscData final : public FTableRowBase
-{
-public:
-	TArray<EM1StatType>                           RandomOptionRangedWeaponBanStatGroup;              // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<EM1StatType>                           RandomOptionReactorBanStatGroup;                   // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1ItemOptionStatRangeRate>     StatValueSection;                                  // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1ItemOptionTierRange>         OptionTierSection;                                 // 0x0038(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SuccessMissionResByAccount
-// 0x0028 (0x0028 - 0x0000)
-struct FM1SuccessMissionResByAccount final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1CurrencyInfo>                CurrencyBoost;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	int32                                         ExpBoost;                                          // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ExpBoostByEvent;                                   // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MasteryBoost;                                      // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_24[0x4];                                       // 0x0024(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1SuccessMissionRes
-// 0x0010 (0x0010 - 0x0000)
-struct FM1SuccessMissionRes final
-{
-public:
-	TArray<struct FM1SuccessMissionResByAccount>  AccountList;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CharacterInfo
-// 0x0028 (0x0028 - 0x0000)
-struct FM1CharacterInfo final
-{
-public:
-	int64                                         Uid;                                               // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          Tid;                                               // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Exp;                                               // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MaxLevel;                                          // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ResetCount;                                        // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_24[0x4];                                       // 0x0024(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1PhysicalPowerOptionDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1PhysicalPowerOptionDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1ResearchDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1ResearchDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1EquipmentRandomOptionCompact
-// 0x0010 (0x0010 - 0x0000)
-struct FM1EquipmentRandomOptionCompact final
-{
-public:
-	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1ScaledInteger                       StatValue;                                         // 0x0008(0x0008)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizingItemInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FM1CustomizingItemInfo final
-{
-public:
-	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EvolutionIdx;                                      // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EvolutionComplete;                                 // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         StackCount;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1AbilityData
-// 0x0068 (0x0070 - 0x0008)
-struct FM1AbilityData : public FTableRowBase
-{
-public:
-	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftClassPath                         AbilityClass;                                      // 0x0010(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1TaggedAbilityOperationData>  Operations;                                        // 0x0030(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1TaggedInvokeStatusEffectData> InvokeStatusEffects;                               // 0x0040(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1TaggedSpawnAbilityActorData> SpawnAbilityActors;                                // 0x0050(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0060(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RuneAbilityData
-// 0x0000 (0x0070 - 0x0070)
-struct FM1RuneAbilityData final : public FM1AbilityData
-{
-};
-
-// ScriptStruct M1Data.M1ReactorMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1ReactorMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1PerkInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FM1PerkInfo final
-{
-public:
-	int64                                         EquipmentUid;                                      // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          Tid;                                               // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizeParts
-// 0x0004 (0x0004 - 0x0000)
-struct FM1CustomizeParts final
-{
-public:
-	struct FM1TemplateId                          SkinTid;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizeFellowInventory
-// 0x0018 (0x0018 - 0x0000)
-struct FM1CustomizeFellowInventory final
-{
-public:
-	struct FM1TemplateId                          FellowTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1CustomizeParts>              Customizes;                                        // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1DropItemLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1DropItemLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1PartsDropElement
-// 0x0090 (0x0090 - 0x0000)
-struct FM1PartsDropElement final
-{
-public:
-	struct FM1PartsDataLink                       PartsDataId;                                       // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	struct FM1DropItemLink                        DropItemDebone;                                    // 0x0030(0x0030)(Edit, NativeAccessSpecifierPublic)
-	struct FM1DropItemLink                        DropItemDestruction;                               // 0x0060(0x0030)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1BossLvDropElement
-// 0x0050 (0x0050 - 0x0000)
-struct FM1BossLvDropElement final
-{
-public:
-	struct FM1DropItemLink                        DropItemIdBossKill;                                // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	TArray<struct FM1PartsDropElement>            PartsDrop;                                         // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	int32                                         DropEquipLevelRangeMin;                            // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         DropEquipLevelRangeMax;                            // 0x0044(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         StandardLv;                                        // 0x0048(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4C[0x4];                                       // 0x004C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1EquipmentRandomOptionInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1EquipmentRandomOptionInfo final
-{
-public:
-	int64                                         EquipmentUid;                                      // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int16                                         Index;                                             // 0x0008(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_A[0x2];                                        // 0x000A(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1TemplateId                          Tid;                                               // 0x000C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1ScaledInteger                       StatValue;                                         // 0x0010(0x0008)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1BlockUser
-// 0x0030 (0x0030 - 0x0000)
-struct FM1BlockUser final
-{
-public:
-	class FString                                 AccountName;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 PlatformId;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         PlatformUid;                                       // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LoginPlatformTypes                         PlatformType;                                      // 0x0028(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_29[0x7];                                       // 0x0029(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1BlockList
-// 0x0018 (0x0018 - 0x0000)
-struct FM1BlockList final
-{
-public:
-	EM1BlockUpdateType                            UpdateType;                                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1BlockUser>                   BlockUsers;                                        // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizeBoundedCharacter
-// 0x0018 (0x0018 - 0x0000)
-struct FM1CustomizeBoundedCharacter final
-{
-public:
-	struct FM1TemplateId                          PlayerTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1TemplateId>                  BindSkinTids;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ReactorBaseInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1ReactorBaseInfo final
-{
-public:
-	int64                                         EquipmentUid;                                      // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EnchantLevel;                                      // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          FirstOptimizeId;                                   // 0x000C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          SecondOptimizeId;                                  // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1MissionWaveDropItemRequest
-// 0x0038 (0x0038 - 0x0000)
-struct FM1MissionWaveDropItemRequest final
-{
-public:
-	struct FM1TemplateId                          MissionWaveTemplateId;                             // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1MonsterCategory                            MonsterCategory;                                   // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         MonsterUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MonsterLevel;                                      // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          PartsTid;                                          // 0x0014(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<EM1MonsterSubType>                     MonsterSubTypeList;                                // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<int64>                                 AccountUidList;                                    // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RandomOptionCountInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1RandomOptionCountInfo final
-{
-public:
-	EM1EquipmentCategoryType                      Category;                                          // 0x0000(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<int32>                                 Tier;                                              // 0x0008(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MissionInfo
-// 0x000C (0x000C - 0x0000)
-struct FM1MissionInfo final
-{
-public:
-	struct FM1TemplateId                          MissionId;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Complete;                                          // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         CompleteCnt;                                       // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1AutomationTestCharacterDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1AutomationTestCharacterDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1ItemLevelUpgradeDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1ItemLevelUpgradeDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1TitleItemInvenvory
-// 0x0020 (0x0020 - 0x0000)
-struct FM1TitleItemInvenvory final
-{
-public:
-	EM1TitleReason                                Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1TemplateId>                  GainTitles;                                        // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          PrefixTitle;                                       // 0x0018(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          SuffixTitle;                                       // 0x001C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MonsterHPInfoClass
-// 0x0028 (0x0028 - 0x0000)
-struct FM1MonsterHPInfoClass final
-{
-public:
-	EM1MonsterCategory                            MonsterCategory;                                   // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FSoftClassPath                         MonsterInfoClass;                                  // 0x0008(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RequiredItemData
-// 0x0010 (0x0010 - 0x0000)
-struct FM1RequiredItemData final
-{
-public:
-	EM1ItemType                                   ItemType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FName                                   ID;                                                // 0x0004(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Amount;                                            // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1FellowExpItemUseInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FM1FellowExpItemUseInfo final
-{
-public:
-	TArray<struct FM1RequiredItemData>            ExpItemList;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1PaintSimpleInfo
@@ -5981,53 +5638,260 @@ public:
 	struct FM1SkinSimpleInfo                      Customize;                                         // 0x0018(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1TitleMiscData
-// 0x0030 (0x0038 - 0x0008)
-struct FM1TitleMiscData final : public FTableRowBase
-{
-public:
-	TArray<class FString>                         ReverseOrderList;                                  // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IconPath;                                          // 0x0018(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1EventBaseDataLink
+// ScriptStruct M1Data.M1RuneComposeMiscDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1EventBaseDataLink final : public FDataLink
+struct FM1RuneComposeMiscDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1StatusEffectUIData
-// 0x0038 (0x0038 - 0x0000)
-struct FM1StatusEffectUIData final
+// ScriptStruct M1Data.M1CharacterInfo
+// 0x0028 (0x0028 - 0x0000)
+struct FM1CharacterInfo final
 {
 public:
-	struct FSoftObjectPath                        Icon;                                              // 0x0000(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 NoticeStringId;                                    // 0x0020(0x0010)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   ToastId;                                           // 0x0030(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         Uid;                                               // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          Tid;                                               // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         Exp;                                               // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MaxLevel;                                          // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ResetCount;                                        // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_24[0x4];                                       // 0x0024(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1StatusEffectData
-// 0x0098 (0x0108 - 0x0070)
-struct FM1StatusEffectData final : public FM1AbilityData
+// ScriptStruct M1Data.M1InstanceDungeonModifierPresetCommonInfo
+// 0x0008 (0x0008 - 0x0000)
+struct FM1InstanceDungeonModifierPresetCommonInfo final
 {
 public:
-	struct FGameplayTag                           BlockingOwnerTag;                                  // 0x0070(0x0008)(Edit, BlueprintVisible, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Channel;                                           // 0x0078(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ApplyPriority;                                     // 0x007C(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1StatusEffectAmassType                      AmassType;                                         // 0x0080(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bReplaceOnlyDuration;                              // 0x0081(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_82[0x2];                                       // 0x0082(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         MaxStackCount;                                     // 0x0084(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         StartStackCount;                                   // 0x0088(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1StatusEffectStackDecreasePolicy            StackDecreasePolicy;                               // 0x008C(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_8D[0x3];                                       // 0x008D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 Duration;                                          // 0x0090(0x0010)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Period;                                            // 0x00A0(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_A4[0x4];                                       // 0x00A4(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1StatusEffectUIData                  UIData;                                            // 0x00A8(0x0038)(Edit, BlueprintVisible, NativeAccessSpecifierPublic)
-	struct FGameplayTag                           IdTag;                                             // 0x00E0(0x0008)(Edit, BlueprintVisible, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FGameplayTag>                   RemoveTags;                                        // 0x00E8(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FGameplayTag>                   ImmuneTags;                                        // 0x00F8(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
+	float                                         ScoreBonus;                                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bRotationWithInvasion;                             // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1BoostLimitData
+// 0x0008 (0x0008 - 0x0000)
+struct FM1BoostLimitData final
+{
+public:
+	EM1BuffSubItemType                            BuffSubItemType;                                   // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         LimitValue;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CustomizingItemInfo
+// 0x0010 (0x0010 - 0x0000)
+struct FM1CustomizingItemInfo final
+{
+public:
+	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EvolutionIdx;                                      // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EvolutionComplete;                                 // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         StackCount;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MonsterHPInfoClass
+// 0x0028 (0x0028 - 0x0000)
+struct FM1MonsterHPInfoClass final
+{
+public:
+	EM1MonsterCategory                            MonsterCategory;                                   // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FSoftClassPath                         MonsterInfoClass;                                  // 0x0008(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PerkInfo
+// 0x0010 (0x0010 - 0x0000)
+struct FM1PerkInfo final
+{
+public:
+	int64                                         EquipmentUid;                                      // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          Tid;                                               // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1GameServerMoveData
+// 0x0048 (0x0048 - 0x0000)
+struct FM1GameServerMoveData final
+{
+public:
+	int32                                         MoveServerIndex;                                   // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 MoveServerVersion;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 MoveServerAddr;                                    // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int16                                         MovePort;                                          // 0x0028(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2A[0x6];                                       // 0x002A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         DediOid;                                           // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 SessionToken;                                      // 0x0038(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1EquipmentRandomOptionInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1EquipmentRandomOptionInfo final
+{
+public:
+	int64                                         EquipmentUid;                                      // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int16                                         Index;                                             // 0x0008(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_A[0x2];                                        // 0x000A(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1TemplateId                          Tid;                                               // 0x000C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1ScaledInteger                       StatValue;                                         // 0x0010(0x0008)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ReactorBaseInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1ReactorBaseInfo final
+{
+public:
+	int64                                         EquipmentUid;                                      // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EnchantLevel;                                      // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          FirstOptimizeId;                                   // 0x000C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          SecondOptimizeId;                                  // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1ReservedStringTableDataRowLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ReservedStringTableDataRowLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1AchievementDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1AchievementDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1AchievementCategoryData
+// 0x0050 (0x0058 - 0x0008)
+struct FM1AchievementCategoryData final : public FTableRowBase
+{
+public:
+	int32                                         CategoryId;                                        // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 StringId;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IconPath;                                          // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1AchievementDataLink>         AchievementList;                                   // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int32                                         SortOrder;                                         // 0x0050(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_54[0x4];                                       // 0x0054(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1MissionInfo
+// 0x000C (0x000C - 0x0000)
+struct FM1MissionInfo final
+{
+public:
+	struct FM1TemplateId                          MissionId;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Complete;                                          // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         CompleteCnt;                                       // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonSelectionMODDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1InstanceDungeonSelectionMODDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1DifficultyInfoDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1DifficultyInfoDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1MiniGameParam
+// 0x0020 (0x0020 - 0x0000)
+struct FM1MiniGameParam final
+{
+public:
+	class FString                                 Key;                                               // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 Value;                                             // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MiniGameDetailData
+// 0x0070 (0x0070 - 0x0000)
+struct FM1MiniGameDetailData final
+{
+public:
+	struct FM1DifficultyInfoDataLink              FieldDifficulty;                                   // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1MiniGameParam>               Params;                                            // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1DropItemLink                        Reward;                                            // 0x0040(0x0030)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MiniGameData
+// 0x0020 (0x0028 - 0x0008)
+struct FM1MiniGameData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MiniGameType                               Type;                                              // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1MiniGameDetailData>          DetailDataList;                                    // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FName                                   StringId;                                          // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1TitleItemInvenvory
+// 0x0020 (0x0020 - 0x0000)
+struct FM1TitleItemInvenvory final
+{
+public:
+	EM1TitleReason                                Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1TemplateId>                  GainTitles;                                        // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          PrefixTitle;                                       // 0x0018(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          SuffixTitle;                                       // 0x001C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RequiredItemData
+// 0x0010 (0x0010 - 0x0000)
+struct FM1RequiredItemData final
+{
+public:
+	EM1ItemType                                   ItemType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   ID;                                                // 0x0004(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Amount;                                            // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1FellowExpItemUseInfo
+// 0x0010 (0x0010 - 0x0000)
+struct FM1FellowExpItemUseInfo final
+{
+public:
+	TArray<struct FM1RequiredItemData>            ExpItemList;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1UIStringTableDataRowLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1UIStringTableDataRowLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RewardType
+// 0x0040 (0x0040 - 0x0000)
+struct FM1RewardType final
+{
+public:
+	struct FM1ItemDataBox                         RewardItem;                                        // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
+	int32                                         Count;                                             // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_3C[0x4];                                       // 0x003C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonReward
+// 0x0050 (0x0050 - 0x0000)
+struct FM1InstanceDungeonReward final
+{
+public:
+	struct FM1RewardType                          Item;                                              // 0x0000(0x0040)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1InstanceDungeonScoreSection> ScoreSection;                                      // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MasteryUIData
+// 0x0030 (0x0030 - 0x0000)
+struct FM1MasteryUIData final
+{
+public:
+	struct FSoftObjectPath                        IconPath;                                          // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 StringId;                                          // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1WeaponProficiencyInfo
@@ -6042,68 +5906,21 @@ public:
 	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1InstanceDungeonAbilityDataLink
+// ScriptStruct M1Data.M1StatTypeOpFloat
+// 0x0008 (0x0008 - 0x0000)
+struct FM1StatTypeOpFloat final
+{
+public:
+	EM1StatType                                   StatType;                                          // 0x0000(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1StatModifierOp                             ModOp;                                             // 0x0001(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2[0x2];                                        // 0x0002(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         Value;                                             // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1EventAttendanceDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1InstanceDungeonAbilityDataLink final : public FDataLink
+struct FM1EventAttendanceDataLink final : public FDataLink
 {
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonMODData
-// 0x0008 (0x0010 - 0x0008)
-struct FM1InstanceDungeonMODData : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonModifierPresetData
-// 0x0018 (0x0028 - 0x0010)
-struct FM1InstanceDungeonModifierPresetData final : public FM1InstanceDungeonMODData
-{
-public:
-	TArray<struct FM1InstanceDungeonAbilityDataLink> AbilityData;                                       // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	bool                                          bRotate;                                           // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1MasteryUIData
-// 0x0030 (0x0030 - 0x0000)
-struct FM1MasteryUIData final
-{
-public:
-	struct FSoftObjectPath                        IconPath;                                          // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 StringId;                                          // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MasteryLevelData
-// 0x0098 (0x00A0 - 0x0008)
-struct FM1MasteryLevelData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RequiredExpToNextLv;                               // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         TotalRequiredExpToNextLv;                          // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RuneWeaponCapacity;                                // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RuneCharacterCapacity;                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         RuneWeaponSlot;                                    // 0x001C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         RuneCharacterSlot;                                 // 0x001D(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1E[0x2];                                       // 0x001E(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         EquipInventorySlot;                                // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         WareHouseSlot;                                     // 0x0024(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         WeaponSlot;                                        // 0x0028(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ReactorSlot;                                       // 0x002C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         AccessoryNeckSlot;                                 // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         AccessoryEarringSlot;                              // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         AccessoryRingSlot;                                 // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         AccessoryBraceletSlot;                             // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         TradeCount;                                        // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         CodexTargetSlot;                                   // 0x0044(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         PresetSlot;                                        // 0x0048(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         VoidVaultStabilizerMaxStack;                       // 0x004C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IconPath;                                          // 0x0050(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IconBigPath;                                       // 0x0070(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1MasteryUIData>               Info;                                              // 0x0090(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1WearingInfo
@@ -6116,23 +5933,37 @@ public:
 	int64                                         EquipmentUid;                                      // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1EquipmentDecomposeDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1EquipmentDecomposeDataLink final : public FDataLink
+// ScriptStruct M1Data.M1AbilityData
+// 0x0068 (0x0070 - 0x0008)
+struct FM1AbilityData : public FTableRowBase
+{
+public:
+	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftClassPath                         AbilityClass;                                      // 0x0010(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1TaggedAbilityOperationData>  Operations;                                        // 0x0030(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1TaggedInvokeStatusEffectData> InvokeStatusEffects;                               // 0x0040(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1TaggedSpawnAbilityActorData> SpawnAbilityActors;                                // 0x0050(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0060(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SetOptionAbilityData
+// 0x0000 (0x0070 - 0x0070)
+struct FM1SetOptionAbilityData final : public FM1AbilityData
 {
 };
 
 // ScriptStruct M1Data.M1FocusGoalInfo
-// 0x0014 (0x0014 - 0x0000)
+// 0x0018 (0x0018 - 0x0000)
 struct FM1FocusGoalInfo final
 {
 public:
 	int32                                         Index;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	EM1FocusGoalSourceType                        SourceType;                                        // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         SourceTid;                                         // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          ItemTid;                                           // 0x000C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Value;                                             // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         SourceTid1;                                        // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         SourceTid2;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          ItemTid;                                           // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Value;                                             // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1FocusGoalInfos
@@ -6145,65 +5976,26 @@ public:
 	TArray<struct FM1FocusGoalInfo>               FocusGoalInfoList;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ChatBlockRuleData
-// 0x0010 (0x0018 - 0x0008)
-struct FM1ChatBlockRuleData final : public FTableRowBase
-{
-public:
-	EM1ChattingBlockRule                          Rule;                                              // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          UseBlock;                                          // 0x0009(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_A[0x2];                                        // 0x000A(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         RestrictStackCount;                                // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ResetStackInterval;                                // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         UnblockTime;                                       // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SetOptionDataLink
+// ScriptStruct M1Data.M1InstanceFieldContentsDataBaseLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1SetOptionDataLink final : public FDataLink
+struct FM1InstanceFieldContentsDataBaseLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1MapModifier
-// 0x0004 (0x0004 - 0x0000)
-struct FM1MapModifier final
+// ScriptStruct M1Data.M1VoidBattleInfo
+// 0x0050 (0x0050 - 0x0000)
+struct FM1VoidBattleInfo final
 {
 public:
-	struct FM1TemplateId                          ModifierId;                                        // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1DediGameModifierInfo
-// 0x0020 (0x0020 - 0x0000)
-struct FM1DediGameModifierInfo final
-{
-public:
-	TArray<struct FM1MapModifier>                 Modifiers;                                         // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1FixedDungeonRewardInfo>      FixedRewardInfos;                                  // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1EquipmentDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1EquipmentDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1BaseWeaponItemElement
-// 0x0038 (0x0038 - 0x0000)
-struct FM1BaseWeaponItemElement final
-{
-public:
-	struct FM1EquipmentDataLink                   ID;                                                // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1RequestCustomizingEvolution
-// 0x0008 (0x0008 - 0x0000)
-struct FM1RequestCustomizingEvolution final
-{
-public:
-	struct FM1TemplateId                          SkinTid;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EvolutionIndex;                                    // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 MonsterId;                                         // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 StringId;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1LevelByNumOfSquadMember>     MonsterLevelBySquad;                               // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	EM1VoidBattleDifficulty                       Difficulty;                                        // 0x0030(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_31[0x3];                                       // 0x0031(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         TimeLimit;                                         // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         DeathCount;                                        // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_3C[0x4];                                       // 0x003C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 FieldId;                                           // 0x0040(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1SlotVersionPair
@@ -6225,64 +6017,32 @@ public:
 	TArray<struct FM1SlotVersionPair>             Versions;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1InstantUseDropGroupElement
+// ScriptStruct M1Data.M1FilterOption
+// 0x0003 (0x0003 - 0x0000)
+struct FM1FilterOption final
+{
+public:
+	EM1ItemTierType                               ItemTierType;                                      // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RoundsType                                 RoundsType;                                        // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1EquipItemClassType                         ClassType;                                         // 0x0002(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CharacterStringTableDataRow
+// 0x0000 (0x0088 - 0x0088)
+struct FM1CharacterStringTableDataRow final : public FM1StringTableDataRow
+{
+};
+
+// ScriptStruct M1Data.M1ChargeLevelData
 // 0x0014 (0x0014 - 0x0000)
-struct FM1InstantUseDropGroupElement final
+struct FM1ChargeLevelData final
 {
 public:
-	class FName                                   ItemId;                                            // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ValueMin;                                          // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ValueMax;                                          // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Ratio;                                             // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1AchievementDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1AchievementDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1StatTypeOpFloat
-// 0x0008 (0x0008 - 0x0000)
-struct FM1StatTypeOpFloat final
-{
-public:
-	EM1StatType                                   StatType;                                          // 0x0000(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1StatModifierOp                             ModOp;                                             // 0x0001(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2[0x2];                                        // 0x0002(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         Value;                                             // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SetOptionTooltipDetailData
-// 0x0028 (0x0028 - 0x0000)
-struct FM1SetOptionTooltipDetailData final
-{
-public:
-	int32                                         DecimalPlaces;                                     // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1AbilityParamData                    Param;                                             // 0x0008(0x0020)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1FellowLevelExpData
-// 0x0020 (0x0028 - 0x0008)
-struct FM1FellowLevelExpData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         RequiredExp;                                       // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         AccumulatedExp;                                    // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         RewardMasteryExp;                                  // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizeBoundedFellow
-// 0x0018 (0x0018 - 0x0000)
-struct FM1CustomizeBoundedFellow final
-{
-public:
-	struct FM1TemplateId                          FellowTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1TemplateId>                  BindSkinTids;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	float                                         ChargeAmount;                                      // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         ChargeRate;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         DischargeRate;                                     // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         SteadyDuration;                                    // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         DamageMultiplier;                                  // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1CharacterSimpleInfo
@@ -6299,36 +6059,37 @@ public:
 	TArray<struct FM1SkinSimpleInfo>              Customizes;                                        // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1StartServerSessionRes
-// 0x0010 (0x0010 - 0x0000)
-struct FM1StartServerSessionRes final
+// ScriptStruct M1Data.M1PartsDropElement
+// 0x0090 (0x0090 - 0x0000)
+struct FM1PartsDropElement final
 {
 public:
-	bool                                          Result;                                            // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         DediOid;                                           // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1PartsDataLink                       PartsDataId;                                       // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1DropItemLink                        DropItemDebone;                                    // 0x0030(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1DropItemLink                        DropItemDestruction;                               // 0x0060(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1PackageGroupElement
-// 0x0048 (0x0048 - 0x0000)
-struct FM1PackageGroupElement final
+// ScriptStruct M1Data.M1BossLvDropElement
+// 0x0050 (0x0050 - 0x0000)
+struct FM1BossLvDropElement final
 {
 public:
-	struct FM1ItemDataBox                         Item;                                              // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
-	int32                                         ValueMin;                                          // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ValueMax;                                          // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Ratio;                                             // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_44[0x4];                                       // 0x0044(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	struct FM1DropItemLink                        DropItemIdBossKill;                                // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1PartsDropElement>            PartsDrop;                                         // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int32                                         DropEquipLevelRangeMin;                            // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         DropEquipLevelRangeMax;                            // 0x0044(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         StandardLv;                                        // 0x0048(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4C[0x4];                                       // 0x004C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1PackageGroupData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1PackageGroupData final : public FTableRowBase
+// ScriptStruct M1Data.M1LoadoutSlotTypeAndIndex
+// 0x000C (0x000C - 0x0000)
+struct FM1LoadoutSlotTypeAndIndex final
 {
 public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1PackageGroupElement>         PackageGroupElementList;                           // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1ItemTidBox                          OwnerTid;                                          // 0x0000(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	uint8                                         LoadoutSlotIndex;                                  // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1FellowSimpleInfo
@@ -6371,50 +6132,29 @@ public:
 	TArray<struct FM1FellowSimpleInfo>            FellowList;                                        // 0x00C0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1FellowPropValuePair
-// 0x0010 (0x0010 - 0x0000)
-struct FM1FellowPropValuePair final
-{
-public:
-	EM1FellowPropertiesType                       PropType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	double                                        Value;                                             // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1FellowLevelInfo
-// 0x0028 (0x0028 - 0x0000)
-struct FM1FellowLevelInfo final
-{
-public:
-	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1StatValuePair>               PlayerAddStats;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1FellowPropValuePair>         FellowProperties;                                  // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1FellowData
-// 0x0098 (0x0170 - 0x00D8)
-struct FM1FellowData final : public FM1CharacterData
-{
-public:
-	EM1ItemTierType                               Tier;                                              // 0x00D8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D9[0x7];                                       // 0x00D9(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1FellowLevelInfo>             FellowLv;                                          // 0x00E0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1ItemUIData                          UIData;                                            // 0x00F0(0x0060)(Edit, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IntroduceSequencePath;                             // 0x0150(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1FieldUnlockedNoti
-// 0x0040 (0x0040 - 0x0000)
-struct FM1FieldUnlockedNoti final
+// ScriptStruct M1Data.M1MissionMidRewardResByAccount
+// 0x0020 (0x0020 - 0x0000)
+struct FM1MissionMidRewardResByAccount final
 {
 public:
 	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          MapTemplateId;                                     // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1MapSubData                          MapSubData;                                        // 0x000C(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<class FString>                         CampEntryPointId;                                  // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1TemplateId>                  BattleZoneId;                                      // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int32                                         ExpBoost;                                          // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1ItemPack>                    Acquires;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MissionMidRewardRes
+// 0x0010 (0x0010 - 0x0000)
+struct FM1MissionMidRewardRes final
+{
+public:
+	TArray<struct FM1MissionMidRewardResByAccount> AccountList;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PaintExtractDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1PaintExtractDataLink final : public FDataLink
+{
 };
 
 // ScriptStruct M1Data.M1AuthAndLoadCharactersRes
@@ -6442,19 +6182,9 @@ public:
 	struct FM1SettingInfo                         SettingInfo;                                       // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1LoadoutSlotTypeAndIndex
-// 0x000C (0x000C - 0x0000)
-struct FM1LoadoutSlotTypeAndIndex final
-{
-public:
-	struct FM1ItemTidBox                          OwnerTid;                                          // 0x0000(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	uint8                                         LoadoutSlotIndex;                                  // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1ItemSelectorDataLink
+// ScriptStruct M1Data.M1MiniGameMiscDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1ItemSelectorDataLink final : public FDataLink
+struct FM1MiniGameMiscDataLink final : public FDataLink
 {
 };
 
@@ -6467,55 +6197,42 @@ public:
 	class FString                                 LogPath;                                           // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1DifficultyInfoMiscDataLink
+// ScriptStruct M1Data.M1WeaponProficiencyBoostInfo
+// 0x0010 (0x0010 - 0x0000)
+struct FM1WeaponProficiencyBoostInfo final
+{
+public:
+	struct FM1TemplateId                          WeaponUid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Boost;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         Exp;                                               // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1AddWeaponProficiencyPointRes
+// 0x0018 (0x0018 - 0x0000)
+struct FM1AddWeaponProficiencyPointRes final
+{
+public:
+	TArray<struct FM1WeaponProficiencyBoostInfo>  WeaponProficiencyBoostList;                        // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int32                                         MasteryBoost;                                      // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1BlockUser
+// 0x0030 (0x0030 - 0x0000)
+struct FM1BlockUser final
+{
+public:
+	class FString                                 AccountName;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 PlatformId;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         PlatformUid;                                       // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         PlatformType;                                      // 0x0028(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_29[0x7];                                       // 0x0029(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1RotationDropDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1DifficultyInfoMiscDataLink final : public FDataLink
+struct FM1RotationDropDataLink final : public FDataLink
 {
-};
-
-// ScriptStruct M1Data.M1GameServerMoveData
-// 0x0048 (0x0048 - 0x0000)
-struct FM1GameServerMoveData final
-{
-public:
-	int32                                         MoveServerIndex;                                   // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 MoveServerVersion;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 MoveServerAddr;                                    // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int16                                         MovePort;                                          // 0x0028(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2A[0x6];                                       // 0x002A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         DediOid;                                           // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 SessionToken;                                      // 0x0038(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CheatMasteryExpUp
-// 0x0008 (0x0008 - 0x0000)
-struct FM1CheatMasteryExpUp final
-{
-public:
-	int64                                         Exp;                                               // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PlatformBlockUser
-// 0x0008 (0x0008 - 0x0000)
-struct FM1PlatformBlockUser final
-{
-public:
-	int64                                         PlatformUid;                                       // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PaintExtractDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1PaintExtractDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1PCOptionData
-// 0x0001 (0x0001 - 0x0000)
-struct FM1PCOptionData final
-{
-public:
-	bool                                          CrossPlayOn;                                       // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1PSOptionData
@@ -6526,26 +6243,31 @@ public:
 	bool                                          CrossPlayOn;                                       // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1XBOXOptionData
-// 0x000C (0x000C - 0x0000)
-struct FM1XBOXOptionData final
+// ScriptStruct M1Data.M1BlockList
+// 0x0018 (0x0018 - 0x0000)
+struct FM1BlockList final
 {
 public:
-	bool                                          CrossPlayOn;                                       // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	EM1XBOXInnerOptionType                        InnerSocialOption;                                 // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1XBOXOuterOptionType                        OuterSocialOption;                                 // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1BlockUpdateType                            UpdateType;                                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1BlockUser>                   BlockUsers;                                        // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1CrossPlayOptionData
-// 0x0010 (0x0010 - 0x0000)
-struct FM1CrossPlayOptionData final
+// ScriptStruct M1Data.M1PlatformBlockUser
+// 0x0008 (0x0008 - 0x0000)
+struct FM1PlatformBlockUser final
 {
 public:
-	struct FM1PCOptionData                        PC;                                                // 0x0000(0x0001)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	struct FM1PSOptionData                        PS;                                                // 0x0001(0x0001)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2[0x2];                                        // 0x0002(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1XBOXOptionData                      XBOX;                                              // 0x0004(0x000C)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	int64                                         PlatformUid;                                       // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1FieldObjectActivateConditionParamsByDifficulty
+// 0x0040 (0x0040 - 0x0000)
+struct FM1FieldObjectActivateConditionParamsByDifficulty final
+{
+public:
+	struct FM1DifficultyInfoDataLink              DifficultyId;                                      // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	TArray<class FString>                         Params;                                            // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1PlatformBlockList
@@ -6572,19 +6294,34 @@ public:
 	int32                                         MasteryRankLevel;                                  // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1DifficultyInfoDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1DifficultyInfoDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1DifficultiesDropItem
-// 0x0060 (0x0060 - 0x0000)
-struct FM1DifficultiesDropItem final
+// ScriptStruct M1Data.M1RandomOptionChangeCostWithTier
+// 0x0018 (0x0018 - 0x0000)
+struct FM1RandomOptionChangeCostWithTier final
 {
 public:
-	struct FM1DifficultyInfoDataLink              DifficultyId;                                      // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	struct FM1DropItemLink                        DropItem;                                          // 0x0030(0x0030)(Edit, NativeAccessSpecifierPublic)
+	EM1ItemTierType                               Tier;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1RequiredItemData>            Cost;                                              // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RandomOptionChangeData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1RandomOptionChangeData final : public FTableRowBase
+{
+public:
+	int32                                         OptionLockStep;                                    // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1EquipmentCategoryType                      EquipmentCategoryType;                             // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1RandomOptionChangeCostWithTier> CostByTier;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ResearchBookMarkDataBundle
+// 0x0018 (0x0018 - 0x0000)
+struct FM1ResearchBookMarkDataBundle final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1TemplateId>                  ResearchTemplateIdList;                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1FriendRequest
@@ -6610,41 +6347,27 @@ public:
 	TArray<struct FM1Friend>                      Value;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ItemOptionDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1ItemOptionDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1RandomOptionGroupElement
-// 0x0038 (0x0038 - 0x0000)
-struct FM1RandomOptionGroupElement final
+// ScriptStruct M1Data.M1MailDeletePushInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1MailDeletePushInfo final
 {
 public:
-	struct FM1ItemOptionDataLink                  OptionId;                                          // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	int32                                         InitialRate;                                       // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ChangeRate;                                        // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<int64>                                 DeleteMailList;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1RandomOptionGroupData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1RandomOptionGroupData final : public FTableRowBase
+// ScriptStruct M1Data.M1ItemOptionStat
+// 0x0010 (0x0010 - 0x0000)
+struct FM1ItemOptionStat final
 {
 public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1RandomOptionGroupElement>    Elements;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MissionRequest
-// 0x0020 (0x0020 - 0x0000)
-struct FM1MissionRequest final
-{
-public:
-	struct FM1TemplateId                          MissionId;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         AccountUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 ControllerType;                                    // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1StatType                                   StatTypeEnum;                                      // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1StatModifierOp                             Op;                                                // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2[0x2];                                        // 0x0002(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         StatValueMin;                                      // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         StatValueMax;                                      // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         DecimalPlaces;                                     // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1FriendRequestList
@@ -6657,6 +6380,24 @@ public:
 	TArray<struct FM1FriendRequest>               Value;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1IncQuestProgressReq
+// 0x000C (0x000C - 0x0000)
+struct FM1IncQuestProgressReq final
+{
+public:
+	struct FM1TemplateId                          QuestTid;                                          // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ParamIndex;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         IncCount;                                          // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1IncQuestProgressReqList
+// 0x0010 (0x0010 - 0x0000)
+struct FM1IncQuestProgressReqList final
+{
+public:
+	TArray<struct FM1IncQuestProgressReq>         Requests;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1RemoveAllByPlatformBlockParam
 // 0x0010 (0x0010 - 0x0000)
 struct FM1RemoveAllByPlatformBlockParam final
@@ -6665,15 +6406,12 @@ public:
 	TArray<class FString>                         AccountNames;                                      // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1CustomizeItem
+// ScriptStruct M1Data.M1JoinDedicatedServerAccounts
 // 0x0010 (0x0010 - 0x0000)
-struct FM1CustomizeItem final
+struct FM1JoinDedicatedServerAccounts final
 {
 public:
-	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EvolutionIdx;                                      // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EvolutionComplete;                                 // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         StackCount;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<int64>                                 Accounts;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1NGSPacket
@@ -6684,225 +6422,72 @@ public:
 	TArray<uint8>                                 Data;                                              // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1QuestParam
-// 0x0008 (0x0008 - 0x0000)
-struct FM1QuestParam final
+// ScriptStruct M1Data.M1EquipmentMailItemInfo
+// 0x0030 (0x0030 - 0x0000)
+struct FM1EquipmentMailItemInfo final
 {
 public:
-	int32                                         Count;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Complete;                                          // 0x0004(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	int32                                         Index;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          TemplateId;                                        // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Received;                                          // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1EquipmentRandomOptionInfo>   RandomOptions;                                     // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1PerkInfo>                    Perks;                                             // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1IncQuestProgressRes
+// ScriptStruct M1Data.M1RuneMailItemInfo
 // 0x0010 (0x0010 - 0x0000)
-struct FM1IncQuestProgressRes final
+struct FM1RuneMailItemInfo final
 {
 public:
-	EM1IncQuestProgressReason                     Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1QuestParam                          Param;                                             // 0x0004(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	bool                                          CompleteAll;                                       // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Index;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          TemplateId;                                        // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EnchantLevel;                                      // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Received;                                          // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1IncQuestProgressResList
-// 0x0010 (0x0010 - 0x0000)
-struct FM1IncQuestProgressResList final
+// ScriptStruct M1Data.M1MailInfo
+// 0x0090 (0x0090 - 0x0000)
+struct FM1MailInfo final
 {
 public:
-	TArray<struct FM1IncQuestProgressRes>         Responses;                                         // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InGameSocialOptionData
-// 0x0010 (0x0010 - 0x0000)
-struct FM1InGameSocialOptionData final
-{
-public:
-	EM1InGameSocialOptionType                     FriendRequestOption;                               // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1InGameSocialOptionType                     PartyRequestOption;                                // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1InGameSocialOptionType                     ChattingOption;                                    // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1InGameSocialOptionType                     SupportOption;                                     // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1FieldObjectActivateConditionParamsByDifficulty
-// 0x0040 (0x0040 - 0x0000)
-struct FM1FieldObjectActivateConditionParamsByDifficulty final
-{
-public:
-	struct FM1DifficultyInfoDataLink              DifficultyId;                                      // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	TArray<class FString>                         Params;                                            // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SearchResponse
-// 0x0070 (0x0070 - 0x0000)
-struct FM1SearchResponse final
-{
-public:
-	EM1SearchType                                 Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1SearchErrorCode                            ErrorCode;                                         // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 AccountName;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          MapTemplatedId;                                    // 0x0018(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         MasteryLevel;                                      // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          CharacterTid;                                      // 0x0028(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         CharacterLevel;                                    // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          PrefixTitleTid;                                    // 0x0038(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          SuffixTitleTid;                                    // 0x003C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 LoginPlatformId;                                   // 0x0040(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         LoginPlatformUid;                                  // 0x0050(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LoginPlatformTypes                         LoginPlatform;                                     // 0x0058(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MailType                                   MailType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         MailId;                                            // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          MailTemplateId;                                    // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 Sender;                                            // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 Title;                                             // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 Content;                                           // 0x0038(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FDateTime                              StartDate;                                         // 0x0048(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FDateTime                              EndDate;                                           // 0x0050(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Reading;                                           // 0x0058(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_59[0x7];                                       // 0x0059(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         ExternAuthValue;                                   // 0x0060(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsCreator;                                         // 0x0068(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          PartyMaster;                                       // 0x0069(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_6A[0x6];                                       // 0x006A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1MailItemInfo>                ItemList;                                          // 0x0060(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1EquipmentMailItemInfo>       EquipItemList;                                     // 0x0070(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1RuneMailItemInfo>            RuneItemList;                                      // 0x0080(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1DummyData
-// 0x0001 (0x0001 - 0x0000)
-struct FM1DummyData final
-{
-public:
-	uint8                                         Pad_0[0x1];                                        // 0x0000(0x0001)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1MailDeleteAllInfo
+// ScriptStruct M1Data.M1MailInfoBundle
 // 0x0018 (0x0018 - 0x0000)
-struct FM1MailDeleteAllInfo final
+struct FM1MailInfoBundle final
 {
 public:
 	EM1MailReason                                 Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<int64>                                 RemainMailList;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1MailInfo>                    MailList;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1MapEntryPointUIData
-// 0x0040 (0x0040 - 0x0000)
-struct FM1MapEntryPointUIData final
-{
-public:
-	struct FSoftObjectPath                        LockIconPath;                                      // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        UnlockIconPath;                                    // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MapEntryPointInfo
-// 0x00A8 (0x00A8 - 0x0000)
-struct FM1MapEntryPointInfo final
-{
-public:
-	class FString                                 PointId;                                           // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1MapBattleZoneDataLink               BattleZone;                                        // 0x0010(0x0030)(Edit, NativeAccessSpecifierPublic)
-	EM1EntryPointUnlockType                       UnlockType;                                        // 0x0040(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_41[0x7];                                       // 0x0041(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 StringId;                                          // 0x0048(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 RoleStringId;                                      // 0x0058(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1MapEntryPointUIData                 UIData;                                            // 0x0068(0x0040)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CashShopSubCategoryClickRecord
+// ScriptStruct M1Data.M1RandomOptionCountInfo
 // 0x0018 (0x0018 - 0x0000)
-struct FM1CashShopSubCategoryClickRecord final
+struct FM1RandomOptionCountInfo final
 {
 public:
-	class FString                                 GroupCategory;                                     // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ClickCount;                                        // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1MissionInfoList
-// 0x0018 (0x0018 - 0x0000)
-struct FM1MissionInfoList final
-{
-public:
-	int64                                         LastPlayMissionId;                                 // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1MissionInfo>                 MissionInfos;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CashShopProductClickRecord
-// 0x0008 (0x0008 - 0x0000)
-struct FM1CashShopProductClickRecord final
-{
-public:
-	struct FM1TemplateId                          ProductId;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ClickCount;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CheatData
-// 0x0048 (0x0050 - 0x0008)
-struct FM1CheatData final : public FTableRowBase
-{
-public:
-	class FString                                 StringId;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 ParentId;                                          // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 Title;                                             // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 Command;                                           // 0x0038(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bHasParam;                                         // 0x0048(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_49[0x7];                                       // 0x0049(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1ReinforceSlotInfo
-// 0x0008 (0x0008 - 0x0000)
-struct FM1ReinforceSlotInfo final
-{
-public:
-	int32                                         GroupIndex;                                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         SlotIndex;                                         // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CashShopClickRecordNoti
-// 0x0030 (0x0030 - 0x0000)
-struct FM1CashShopClickRecordNoti final
-{
-public:
-	TArray<struct FM1CashShopCategoryClickRecord> CategoryClickRecords;                              // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CashShopSubCategoryClickRecord> SubCategoryClickRecords;                           // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CashShopProductClickRecord>  ProductClickRecords;                               // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1AnnouncementNoti
-// 0x0018 (0x0018 - 0x0000)
-struct FM1AnnouncementNoti final
-{
-public:
-	EM1AnnouncementType                           AnnouncementType;                                  // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 NoticeContext;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MonsterDropInfo
-// 0x0040 (0x0040 - 0x0000)
-struct FM1MonsterDropInfo final
-{
-public:
-	EM1MonsterCategory                            MonsterCategory;                                   // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1MonsterSubType                             MonsterSubType;                                    // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1DropItemLink                        DropItem;                                          // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
-	int32                                         DropEquipLevelRangeMin;                            // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         DropEquipLevelRangeMax;                            // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1JunkItemFilterOptionElement
-// 0x0018 (0x0018 - 0x0000)
-struct FM1JunkItemFilterOptionElement final
-{
-public:
-	EM1JunkFilterOption                           Key1;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1StatType                                   Key2;                                              // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 Value;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1JunkItemFilterOptions
-// 0x0018 (0x0018 - 0x0000)
-struct FM1JunkItemFilterOptions final
-{
-public:
-	bool                                          HasSavedJunkFilter;                                // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1EquipmentCategoryType                      Category;                                          // 0x0000(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1JunkItemFilterOptionElement> KeyValues;                                         // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<int32>                                 Tier;                                              // 0x0008(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1BalanceData
@@ -6986,6 +6571,117 @@ public:
 	int32                                         FocusGoalItemMaxCount;                             // 0x0184(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1DummyData
+// 0x0001 (0x0001 - 0x0000)
+struct FM1DummyData final
+{
+public:
+	uint8                                         Pad_0[0x1];                                        // 0x0000(0x0001)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1ResearchBookMarkData
+// 0x0010 (0x0010 - 0x0000)
+struct FM1ResearchBookMarkData final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          ResearchTemplateId;                                // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1CashShopCategoryClickRecord
+// 0x0008 (0x0008 - 0x0000)
+struct FM1CashShopCategoryClickRecord final
+{
+public:
+	EM1ShopCategoryType                           CategoryType;                                      // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         ClickCount;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1DifficultiesDropItem
+// 0x0060 (0x0060 - 0x0000)
+struct FM1DifficultiesDropItem final
+{
+public:
+	struct FM1DifficultyInfoDataLink              DifficultyId;                                      // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1DropItemLink                        DropItem;                                          // 0x0030(0x0030)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ItemSelectorInfo
+// 0x0008 (0x0008 - 0x0000)
+struct FM1ItemSelectorInfo final
+{
+public:
+	struct FM1TemplateId                          SelectorTid;                                       // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Index;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CashShopSubCategoryClickRecord
+// 0x0018 (0x0018 - 0x0000)
+struct FM1CashShopSubCategoryClickRecord final
+{
+public:
+	class FString                                 GroupCategory;                                     // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ClickCount;                                        // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1CashShopProductClickRecord
+// 0x0008 (0x0008 - 0x0000)
+struct FM1CashShopProductClickRecord final
+{
+public:
+	struct FM1TemplateId                          ProductId;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ClickCount;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ItemOptionDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ItemOptionDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RandomOptionGroupElement
+// 0x0038 (0x0038 - 0x0000)
+struct FM1RandomOptionGroupElement final
+{
+public:
+	struct FM1ItemOptionDataLink                  OptionId;                                          // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	int32                                         InitialRate;                                       // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ChangeRate;                                        // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RandomOptionGroupData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1RandomOptionGroupData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1RandomOptionGroupElement>    Elements;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CashShopClickRecordNoti
+// 0x0030 (0x0030 - 0x0000)
+struct FM1CashShopClickRecordNoti final
+{
+public:
+	TArray<struct FM1CashShopCategoryClickRecord> CategoryClickRecords;                              // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CashShopSubCategoryClickRecord> SubCategoryClickRecords;                           // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CashShopProductClickRecord>  ProductClickRecords;                               // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1AnnouncementNoti
+// 0x0018 (0x0018 - 0x0000)
+struct FM1AnnouncementNoti final
+{
+public:
+	EM1AnnouncementType                           AnnouncementType;                                  // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 NoticeContext;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1RPC_SUB_HEADER
 // 0x0004 (0x0004 - 0x0000)
 struct FM1RPC_SUB_HEADER final
@@ -6993,6 +6689,49 @@ struct FM1RPC_SUB_HEADER final
 public:
 	int16                                         SourceServer;                                      // 0x0000(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	int16                                         TargetServer;                                      // 0x0002(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MapBattleZoneDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1MapBattleZoneDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1MapEntryPointUIData
+// 0x0040 (0x0040 - 0x0000)
+struct FM1MapEntryPointUIData final
+{
+public:
+	struct FSoftObjectPath                        LockIconPath;                                      // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        UnlockIconPath;                                    // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MapEntryPointInfo
+// 0x00A8 (0x00A8 - 0x0000)
+struct FM1MapEntryPointInfo final
+{
+public:
+	class FString                                 PointId;                                           // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1MapBattleZoneDataLink               BattleZone;                                        // 0x0010(0x0030)(Edit, NativeAccessSpecifierPublic)
+	EM1EntryPointUnlockType                       UnlockType;                                        // 0x0040(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_41[0x7];                                       // 0x0041(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 StringId;                                          // 0x0048(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 RoleStringId;                                      // 0x0058(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1MapEntryPointUIData                 UIData;                                            // 0x0068(0x0040)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MatchingGameEndPlayerAttribute
+// 0x0020 (0x0020 - 0x0000)
+struct FM1MatchingGameEndPlayerAttribute final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RecordRevive;                                      // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RecordDeath;                                       // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RecordDamagegive;                                  // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RecordElapsedtime;                                 // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RecordFinalClearRound;                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1EE_ERROR
@@ -7005,6 +6744,16 @@ public:
 	class FString                                 ErrorMessage;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1CurrencyInternalTran
+// 0x0010 (0x0010 - 0x0000)
+struct FM1CurrencyInternalTran final
+{
+public:
+	EM1CurrencyInternalType                       Type;                                              // 0x0000(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         Count;                                             // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1EE_OK
 // 0x0001 (0x0001 - 0x0000)
 struct FM1EE_OK final
@@ -7013,54 +6762,44 @@ public:
 	uint8                                         Pad_0[0x1];                                        // 0x0000(0x0001)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1EliteMonsterSkillGroupDataLink
+// ScriptStruct M1Data.M1AccountWithConsumableInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1AccountWithConsumableInfo final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<int64>                                 ConsumableUids;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CheatData
+// 0x0048 (0x0050 - 0x0008)
+struct FM1CheatData final : public FTableRowBase
+{
+public:
+	class FString                                 StringId;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 ParentId;                                          // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 Title;                                             // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 Command;                                           // 0x0038(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bHasParam;                                         // 0x0048(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_49[0x7];                                       // 0x0049(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1MapTargetInfo
+// 0x0020 (0x0020 - 0x0000)
+struct FM1MapTargetInfo final
+{
+public:
+	EM1MapTargetType                              TargetType;                                        // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 TargetId;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ProgressValue;                                     // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bEssential;                                        // 0x001C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1AutomationTestCharacterDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1EliteMonsterSkillGroupDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1EliteAbilityGroup
-// 0x0038 (0x0038 - 0x0000)
-struct FM1EliteAbilityGroup final
-{
-public:
-	struct FM1EliteMonsterSkillGroupDataLink      ID;                                                // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	int32                                         Rate;                                              // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1MapEliteMonsterSpawnData
-// 0x0030 (0x0030 - 0x0000)
-struct FM1MapEliteMonsterSpawnData final
-{
-public:
-	int32                                         EliteMonsterSpawnMin;                              // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EliteMonsterSpawnMax;                              // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         EliteMonsterSpawnRatio;                            // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EliteMonsterSpawnSkipCount;                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1EliteAbilityGroup>           EliteAbilityGroup;                                 // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1EliteMonsterSkillGroupDataLink> DefaultEliteAbilityGroup;                          // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1LimitItemCompleteResult
-// 0x000C (0x000C - 0x0000)
-struct FM1LimitItemCompleteResult final
-{
-public:
-	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         AmountBef;                                         // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         AmountAft;                                         // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1TrackingData
-// 0x0000 (0x0008 - 0x0008)
-struct FM1TrackingData final : public FTableRowBase
-{
-};
-
-// ScriptStruct M1Data.M1AutomationTestOtherDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1AutomationTestOtherDataLink final : public FDataLink
+struct FM1AutomationTestCharacterDataLink final : public FDataLink
 {
 };
 
@@ -7068,28 +6807,6 @@ struct FM1AutomationTestOtherDataLink final : public FDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1AutomationTestNpcDataLink final : public FDataLink
 {
-};
-
-// ScriptStruct M1Data.M1AutomationTestNestData
-// 0x0008 (0x0008 - 0x0000)
-struct FM1AutomationTestNestData final
-{
-public:
-	int32                                         MaxHp;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MaxMp;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1AutomationTestStatData
-// 0x0028 (0x0028 - 0x0000)
-struct FM1AutomationTestStatData final
-{
-public:
-	struct FM1AutomationTestNestData              Nest;                                              // 0x0000(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	int32                                         MaxHp;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MaxMp;                                             // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1AutomationTestAttr                         MainAttr;                                          // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<EM1AutomationTestAttr>                 SubAttrs;                                          // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1AutomationTestOtherData
@@ -7106,17 +6823,36 @@ public:
 	struct FDateTime                              Dt;                                                // 0x0050(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1AutomationTestCharacterData
-// 0x0080 (0x0088 - 0x0008)
-struct FM1AutomationTestCharacterData : public FTableRowBase
+// ScriptStruct M1Data.M1BattleShopCompileUnit
+// 0x0018 (0x0018 - 0x0000)
+struct FM1BattleShopCompileUnit final
 {
 public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<EM1AutomationTestAttr>                 CharacterAttrs;                                    // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1AutomationTestNestData>      Nests;                                             // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1AutomationTestStatData              Stat;                                              // 0x0030(0x0028)(Edit, NativeAccessSpecifierPublic)
-	struct FM1AutomationTestOtherDataLink         Other;                                             // 0x0058(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          BattlePassTid;                                     // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          ShopTid;                                           // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1TemplateId>                  ProductTidList;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1BattleShopCompileUnitBundle
+// 0x0018 (0x0018 - 0x0000)
+struct FM1BattleShopCompileUnitBundle final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1BattleShopCompileUnit>       DataList;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MapEliteMonsterSpawnData
+// 0x0030 (0x0030 - 0x0000)
+struct FM1MapEliteMonsterSpawnData final
+{
+public:
+	int32                                         EliteMonsterSpawnMin;                              // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EliteMonsterSpawnMax;                              // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         EliteMonsterSpawnRatio;                            // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EliteMonsterSpawnSkipCount;                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1EliteAbilityGroup>           EliteAbilityGroup;                                 // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1EliteMonsterSkillGroupDataLink> DefaultEliteAbilityGroup;                          // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1AutomationTestNpcData
@@ -7127,42 +6863,12 @@ public:
 	struct FM1AutomationTestStatData              SecondStat;                                        // 0x0088(0x0028)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1InstantUseItemDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1InstantUseItemDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1CurrencyInternalTran
-// 0x0010 (0x0010 - 0x0000)
-struct FM1CurrencyInternalTran final
+// ScriptStruct M1Data.M1ItemInfoBox
+// 0x0030 (0x0030 - 0x0000)
+struct alignas(0x08) FM1ItemInfoBox final
 {
 public:
-	EM1CurrencyInternalType                       Type;                                              // 0x0000(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Count;                                             // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CurrencyInternalTranBundle
-// 0x0018 (0x0018 - 0x0000)
-struct FM1CurrencyInternalTranBundle final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1CurrencyInternalTran>        DataList;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MapTargetInfo
-// 0x0020 (0x0020 - 0x0000)
-struct FM1MapTargetInfo final
-{
-public:
-	EM1MapTargetType                              TargetType;                                        // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 TargetId;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ProgressValue;                                     // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bEssential;                                        // 0x001C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	uint8                                         Pad_0[0x30];                                       // 0x0000(0x0030)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1StatDataLink
@@ -7177,38 +6883,29 @@ struct FM1RangedWeaponRecoilDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1EquipmentRandomOptionPair
-// 0x0010 (0x0010 - 0x0000)
-struct FM1EquipmentRandomOptionPair final
-{
-public:
-	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1ScaledInteger                       StatValue;                                         // 0x0008(0x0008)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CheatCreateEquipmentReq
-// 0x0020 (0x0020 - 0x0000)
-struct FM1CheatCreateEquipmentReq final
-{
-public:
-	struct FM1TemplateId                          EquipmentTid;                                      // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         OptionalLevel;                                     // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1EquipmentRandomOptionPair>   RandomOptions;                                     // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstantUseDropGroupDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1InstantUseDropGroupDataLink final : public FDataLink
-{
-};
-
 // ScriptStruct M1Data.M1StringTableDataRowLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1StringTableDataRowLink final : public FDataLink
 {
+};
+
+// ScriptStruct M1Data.M1PackageItemElementInfo
+// 0x0010 (0x0010 - 0x0000)
+struct FM1PackageItemElementInfo final
+{
+public:
+	struct FM1ItemTidBox                          ItemTid;                                           // 0x0000(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	int32                                         Count;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PackageItemOpenResult
+// 0x0014 (0x0014 - 0x0000)
+struct FM1PackageItemOpenResult final
+{
+public:
+	EM1PackageItemReason                          Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1PackageItemElementInfo              Item;                                              // 0x0004(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1ItemStringTableDataRowLink
@@ -7220,44 +6917,6 @@ struct FM1ItemStringTableDataRowLink final : public FDataLink
 // ScriptStruct M1Data.M1SystemStringTableDataRowLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1SystemStringTableDataRowLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1VoidBattleEntranceInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1VoidBattleEntranceInfo final
-{
-public:
-	struct FM1TemplateId                          MapId;                                             // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1MapSubData                          MapSubData;                                        // 0x0004(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	bool                                          Entrance;                                          // 0x0014(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_15[0x3];                                       // 0x0015(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1VoidBattleEntranceInfoByAccount
-// 0x0018 (0x0018 - 0x0000)
-struct FM1VoidBattleEntranceInfoByAccount final
-{
-public:
-	int64                                         AccId;                                             // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1VoidBattleEntranceInfo>      EntranceInfos;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1UIStringTableDataRowLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1UIStringTableDataRowLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1SkillStringTableDataRowLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1SkillStringTableDataRowLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1CharacterStringTableDataRowLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1CharacterStringTableDataRowLink final : public FDataLink
 {
 };
 
@@ -7273,17 +6932,47 @@ public:
 	int32                                         Boss;                                              // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1RotationDropMiscData
-// 0x0038 (0x0040 - 0x0008)
-struct FM1RotationDropMiscData final : public FTableRowBase
+// ScriptStruct M1Data.M1SkillStringTableDataRowLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1SkillStringTableDataRowLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1MapModifier
+// 0x0004 (0x0004 - 0x0000)
+struct FM1MapModifier final
 {
 public:
-	struct FDateTime                              RotationStartTime;                                 // 0x0008(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RotationDateInterval;                              // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RotationChangeTime;                                // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1RotationDropRatio                   RotationDropRatio;                                 // 0x0018(0x0014)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1MissionDropRatio>            MissionDropRatio;                                  // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          ModifierId;                                        // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CheatRequestMatchingParam
+// 0x0030 (0x0030 - 0x0000)
+struct FM1CheatRequestMatchingParam final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          MapId;                                             // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1MapSubData                          MapSubData;                                        // 0x000C(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	bool                                          IsPrivate;                                         // 0x001C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1MapModifier>                 Modifiers;                                         // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CharacterStringTableDataRowLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1CharacterStringTableDataRowLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1ShopBuyData
+// 0x0010 (0x0010 - 0x0000)
+struct FM1ShopBuyData final
+{
+public:
+	int32                                         ProductTid;                                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         BuyCount;                                          // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FDateTime                              BuyDate;                                           // 0x0008(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1StoryStringTableDataRowLink
@@ -7292,44 +6981,20 @@ struct FM1StoryStringTableDataRowLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1MatchingStartPlayerAttribute
-// 0x0048 (0x0048 - 0x0000)
-struct FM1MatchingStartPlayerAttribute final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MaxClearRound;                                     // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 ControllerType;                                    // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 CountryName;                                       // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         PlayerWeaponAtk;                                   // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         PlayerSkillAtk;                                    // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         PlayerDefense;                                     // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         PlayerMaxShield;                                   // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         PlayerMaxHp;                                       // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         PlayerMaxMentality;                                // 0x0044(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ReservedStringTableDataRowLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1ReservedStringTableDataRowLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1BattleShopCompileUnit
-// 0x0018 (0x0018 - 0x0000)
-struct FM1BattleShopCompileUnit final
-{
-public:
-	struct FM1TemplateId                          BattlePassTid;                                     // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          ShopTid;                                           // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1TemplateId>                  ProductTidList;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1ContentsStringTableDataRowLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1ContentsStringTableDataRowLink final : public FDataLink
 {
+};
+
+// ScriptStruct M1Data.M1ItemInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1ItemInfo final
+{
+public:
+	int64                                         ID;                                                // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         Quantity;                                          // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         CreateDate;                                        // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1ProductStringTableDataRowLink
@@ -7344,38 +7009,15 @@ struct FM1MonsterTagDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1DediAccountInfo
-// 0x0020 (0x0020 - 0x0000)
-struct FM1DediAccountInfo final
-{
-public:
-	class FString                                 AccountUid;                                        // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 AccountName;                                       // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1DediInfoForMonitor
-// 0x0060 (0x0060 - 0x0000)
-struct FM1DediInfoForMonitor final
-{
-public:
-	int32                                         ProcessId;                                         // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Port;                                              // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         UserCnt;                                           // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 State;                                             // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 StartInfo;                                         // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         Oid;                                               // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MultiWorldIndex;                                   // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ThreadAffinityIndex;                               // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         WorldTickTimeMs;                                   // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         TotalWorldTickTimeMs;                              // 0x0044(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          UsingSpicaNetwork;                                 // 0x0048(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_49[0x7];                                       // 0x0049(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1DediAccountInfo>             ParticipantList;                                   // 0x0050(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1HitPointDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1HitPointDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1NpcDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1NpcDataLink final : public FDataLink
 {
 };
 
@@ -7391,16 +7033,22 @@ struct FM1SetOptionTooltipDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1DialogDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1DialogDataLink final : public FDataLink
-{
-};
-
 // ScriptStruct M1Data.M1EncountDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1EncountDataLink final : public FDataLink
 {
+};
+
+// ScriptStruct M1Data.M1RecentPlayerNoti
+// 0x0030 (0x0030 - 0x0000)
+struct FM1RecentPlayerNoti final
+{
+public:
+	class FString                                 AccountName;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 LoginPlatformId;                                   // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         LoginPlatformUid;                                  // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         LoginPlatformType;                                 // 0x0028(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_29[0x7];                                       // 0x0029(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1LoadingTooltipDataLink
@@ -7409,93 +7057,10 @@ struct FM1LoadingTooltipDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1CustomizeCharacterInventory
-// 0x0018 (0x0018 - 0x0000)
-struct FM1CustomizeCharacterInventory final
-{
-public:
-	struct FM1TemplateId                          PlayerTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1CustomizeParts>              Customizes;                                        // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizeWeaponInventory
-// 0x0008 (0x0008 - 0x0000)
-struct FM1CustomizeWeaponInventory final
-{
-public:
-	struct FM1TemplateId                          WeaponTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          CustomizeTid;                                      // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizeRingSlotInvenvory
-// 0x000C (0x000C - 0x0000)
-struct FM1CustomizeRingSlotInvenvory final
-{
-public:
-	struct FM1TemplateId                          CustomizeTid;                                      // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Page;                                              // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Slot;                                              // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizeBoundedSkin
-// 0x0028 (0x0028 - 0x0000)
-struct FM1CustomizeBoundedSkin final
-{
-public:
-	struct FM1TemplateId                          SkinTid;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1TemplateId>                  BindPaintTids;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1TemplateId>                  BindHairPaintTids;                                 // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizeBoundedWeapon
-// 0x0018 (0x0018 - 0x0000)
-struct FM1CustomizeBoundedWeapon final
-{
-public:
-	struct FM1TemplateId                          WeaponTid;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1TemplateId>                  BindSkinTids;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizeInvenvory
-// 0x00C8 (0x00C8 - 0x0000)
-struct FM1CustomizeInvenvory final
-{
-public:
-	EM1CustomizeReason                            Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1CustomizeItem>               GainItems;                                         // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizeCharacterInventory> CustomizeCharacters;                               // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizeWeaponInventory>    CustomizeWeapons;                                  // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizePaintInventory>     CustomizePaints;                                   // 0x0038(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizePaintInventory>     CustomizeHairPaints;                               // 0x0048(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizeRingSlotInvenvory>  CustomizeRingSlot;                                 // 0x0058(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1TemplateId>                  CustomizeEtc;                                      // 0x0068(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizeBoundedSkin>        CustomizeBoundedSkin;                              // 0x0078(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizeBoundedCharacter>   CustomizeBoundedCharacter;                         // 0x0088(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizeBoundedWeapon>      CustomizeBoundedWeapon;                            // 0x0098(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizeFellowInventory>    CustomizeFellows;                                  // 0x00A8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizeBoundedFellow>      CustomizeBoundedFellow;                            // 0x00B8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1LoadingImageRandomDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1LoadingImageRandomDataLink final : public FDataLink
 {
-};
-
-// ScriptStruct M1Data.M1FriendErrorMessageNoti
-// 0x0030 (0x0030 - 0x0000)
-struct FM1FriendErrorMessageNoti final
-{
-public:
-	int64                                         ReceiverUid;                                       // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 TargetName;                                        // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 TargetPlatformId;                                  // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1FriendContentsType                         ContentsType;                                      // 0x0028(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1FriendErrorCode                            ErrorCode;                                         // 0x002C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1TestAssetDataLink
@@ -7504,16 +7069,40 @@ struct FM1TestAssetDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1AbilityDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1AbilityDataLink final : public FDataLink
-{
-};
-
 // ScriptStruct M1Data.M1RuneAbilityDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1RuneAbilityDataLink final : public FDataLink
 {
+};
+
+// ScriptStruct M1Data.M1ItemOptionStatRangeRate
+// 0x0008 (0x0008 - 0x0000)
+struct FM1ItemOptionStatRangeRate final
+{
+public:
+	int32                                         UpperRange;                                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Rate;                                              // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ItemOptionTierRange
+// 0x0008 (0x0008 - 0x0000)
+struct FM1ItemOptionTierRange final
+{
+public:
+	EM1ItemOptionTierType                         OptionTierType;                                    // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         UpperRange;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ItemOptionMiscData
+// 0x0040 (0x0048 - 0x0008)
+struct FM1ItemOptionMiscData final : public FTableRowBase
+{
+public:
+	TArray<EM1StatType>                           RandomOptionRangedWeaponBanStatGroup;              // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<EM1StatType>                           RandomOptionReactorBanStatGroup;                   // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1ItemOptionStatRangeRate>     StatValueSection;                                  // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1ItemOptionTierRange>         OptionTierSection;                                 // 0x0038(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1RuneUIDataLink
@@ -7528,25 +7117,16 @@ struct FM1RuneAutoEquipLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1RandomOptionChangeCostWithTier
-// 0x0018 (0x0018 - 0x0000)
-struct FM1RandomOptionChangeCostWithTier final
+// ScriptStruct M1Data.M1FellowLevelExpData
+// 0x0020 (0x0028 - 0x0008)
+struct FM1FellowLevelExpData final : public FTableRowBase
 {
 public:
-	EM1ItemTierType                               Tier;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1RequiredItemData>            Cost;                                              // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RandomOptionChangeData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1RandomOptionChangeData final : public FTableRowBase
-{
-public:
-	int32                                         OptionLockStep;                                    // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1EquipmentCategoryType                      EquipmentCategoryType;                             // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1RandomOptionChangeCostWithTier> CostByTier;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         RequiredExp;                                       // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         AccumulatedExp;                                    // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         RewardMasteryExp;                                  // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1EpicMonsterSkillDataLink
@@ -7555,29 +7135,61 @@ struct FM1EpicMonsterSkillDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1ItemOptionStat
-// 0x0010 (0x0010 - 0x0000)
-struct FM1ItemOptionStat final
-{
-public:
-	EM1StatType                                   StatTypeEnum;                                      // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1StatModifierOp                             Op;                                                // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2[0x2];                                        // 0x0002(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         StatValueMin;                                      // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         StatValueMax;                                      // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         DecimalPlaces;                                     // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
 // ScriptStruct M1Data.M1MonsterSkillDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1MonsterSkillDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1EliteMonsterSkillDataLink
+// ScriptStruct M1Data.M1AccountUidWithMissionGrade
+// 0x0010 (0x0010 - 0x0000)
+struct FM1AccountUidWithMissionGrade final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MissionGrade;                                      // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1EquipmentSlotType                          SlotType;                                          // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1SuccessMissionRequest
+// 0x0028 (0x0028 - 0x0000)
+struct FM1SuccessMissionRequest final
+{
+public:
+	struct FM1TemplateId                          MissionId;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1AccountUidWithMissionGrade>  AccountMissionGradePairs;                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FString                                 ControllerType;                                    // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SkillAbilityDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1EliteMonsterSkillDataLink final : public FDataLink
+struct FM1SkillAbilityDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RuneComposeMiscData
+// 0x0020 (0x0028 - 0x0008)
+struct FM1RuneComposeMiscData final : public FTableRowBase
+{
+public:
+	int32                                         ComposeTargetCount;                                // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         AdditionalRewardWeightByClass;                     // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         AdditionalRewardWeightBySocket;                    // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1RuneComposeCostData>         CostDataList;                                      // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PhysicalPowerOptionDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1PhysicalPowerOptionDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1PaidProductDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1PaidProductDataLink final : public FDataLink
 {
 };
 
@@ -7587,79 +7199,9 @@ struct FM1SkillRedirectDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1PerkAbilityDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1PerkAbilityDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1PerkDetailData
-// 0x0080 (0x0080 - 0x0000)
-struct FM1PerkDetailData final
-{
-public:
-	int32                                         EnchantLevel;                                      // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1PerkAbilityDataLink                 Ability;                                           // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
-	class FString                                 StringId;                                          // 0x0038(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         AbilityProbability;                                // 0x0048(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4C[0x4];                                       // 0x004C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0050(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1TaggedAbilityParamData>      TaggedParams;                                      // 0x0060(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1PerkEnchantRequiredItemData> EnchantRequiredItems;                              // 0x0070(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1PerkTooltipDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1PerkTooltipDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1RotationProductDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1RotationProductDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1AbilityTooltipSettingMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1AbilityTooltipSettingMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1AbilityTooltipSettingDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1AbilityTooltipSettingDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1FieldObjectDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1FieldObjectDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1SeasonReinforceAbilityDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1SeasonReinforceAbilityDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1SeasonReinforceDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1SeasonReinforceDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1SummonsAIDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1SummonsAIDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1CustomizingAbilityDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1CustomizingAbilityDataLink final : public FDataLink
 {
 };
 
@@ -7681,72 +7223,51 @@ public:
 	TArray<struct FM1CreditInfo>                  Infos;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ReactorAbilityDataLink
+// ScriptStruct M1Data.M1AbilityTooltipSettingMiscDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1ReactorAbilityDataLink final : public FDataLink
+struct FM1AbilityTooltipSettingMiscDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1LaboratoryMonsterSpawnData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1LaboratoryMonsterSpawnData final : public FTableRowBase
-{
-public:
-	int32                                         Index;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1MonsterDataLink>             SpawnList;                                         // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SetOptionAbilityDataLink
+// ScriptStruct M1Data.M1AbilityTooltipSettingDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1SetOptionAbilityDataLink final : public FDataLink
+struct FM1AbilityTooltipSettingDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1MissionMonsterAbilityDataLink
+// ScriptStruct M1Data.M1CommonShopDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1MissionMonsterAbilityDataLink final : public FDataLink
+struct FM1CommonShopDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1ReactorEnchantEffectInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1ReactorEnchantEffectInfo final
-{
-public:
-	int32                                         EnchantLevel;                                      // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1StatValuePair>               Stats;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1StatOverrideData
-// 0x0018 (0x0018 - 0x0000)
-struct FM1StatOverrideData final
-{
-public:
-	EM1StatType                                   StatType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 Value;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ChatBlockRuleDataLink
+// ScriptStruct M1Data.M1SeasonReinforceAbilityDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1ChatBlockRuleDataLink final : public FDataLink
+struct FM1SeasonReinforceAbilityDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1MailDeletePushInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1MailDeletePushInfo final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<int64>                                 DeleteMailList;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ChatChannelDataLink
+// ScriptStruct M1Data.M1SeasonReinforceDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1ChatChannelDataLink final : public FDataLink
+struct FM1SeasonReinforceDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1BunchItemDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1BunchItemDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1SummonsDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1SummonsDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1SummonsAIDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1SummonsAIDataLink final : public FDataLink
 {
 };
 
@@ -7767,106 +7288,118 @@ public:
 	uint8                                         Pad_3C[0x4];                                       // 0x003C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1EventBoostingData
-// 0x0018 (0x00C0 - 0x00A8)
-struct FM1EventBoostingData final : public FM1EventData
+// ScriptStruct M1Data.M1SummonsSkillDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1SummonsSkillDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1CustomizingAbilityDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1CustomizingAbilityDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1ReactorOptimizedValueByTier
+// 0x000C (0x000C - 0x0000)
+struct FM1ReactorOptimizedValueByTier final
 {
 public:
-	int32                                         BoostLimitMasteryRank;                             // 0x00A8(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_AC[0x4];                                       // 0x00AC(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1EventBoostingDetailData>     BoostDataList;                                     // 0x00B0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	EM1ItemTierType                               Tier;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         SatisfactionRatio;                                 // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         DissatisfactionRatio;                              // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1CreditsDataLink
+// ScriptStruct M1Data.M1SetOptionAbilityDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1CreditsDataLink final : public FDataLink
+struct FM1SetOptionAbilityDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1FieldObjectSpawnGroupDataLink
+// ScriptStruct M1Data.M1MailDeleteAllInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1MailDeleteAllInfo final
+{
+public:
+	EM1MailReason                                 Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<int64>                                 RemainMailList;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MissionMonsterAbilityDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1FieldObjectSpawnGroupDataLink final : public FDataLink
+struct FM1MissionMonsterAbilityDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1RuneSocketGrantDetailData
+// ScriptStruct M1Data.M1MissionMonsterAbilityData
+// 0x0000 (0x0070 - 0x0070)
+struct FM1MissionMonsterAbilityData final : public FM1AbilityData
+{
+};
+
+// ScriptStruct M1Data.M1ChatBlockRuleDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ChatBlockRuleDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1ChatChannelDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ChatChannelDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1ConsumableItemDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ConsumableItemDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RuneCostIncreaseResource
 // 0x0038 (0x0038 - 0x0000)
-struct FM1RuneSocketGrantDetailData final
+struct FM1RuneCostIncreaseResource final
 {
 public:
-	struct FM1ConsumableItemDataLink              ItemId;                                            // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	int32                                         Order;                                             // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1ConsumableItemDataLink              ItemData;                                          // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	int32                                         Amount;                                            // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1RuneSocketGrantData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1RuneSocketGrantData final : public FTableRowBase
+// ScriptStruct M1Data.M1ProductDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ProductDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RuneMiscData
+// 0x0180 (0x0188 - 0x0008)
+struct FM1RuneMiscData final : public FTableRowBase
 {
 public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1RuneClassType                              ClassType;                                         // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1RuneSocketType                             SocketType;                                        // 0x000D(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_E[0x2];                                        // 0x000E(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1RuneSocketGrantDetailData>   DetailDatas;                                       // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MissionTargetAbilityDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1MissionTargetAbilityDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1MissionTargetLevelData
-// 0x0028 (0x0028 - 0x0000)
-struct FM1MissionTargetLevelData final
-{
-public:
-	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1StatValuePair>               VariableBaseStats;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1MissionTargetAbilityDataLink> Abilities;                                         // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PresetWearingInfo
-// 0x0020 (0x0020 - 0x0000)
-struct FM1PresetWearingInfo final
-{
-public:
-	EM1PresetSlotType                             SlotIndex;                                         // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         ItemUid;                                           // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1ItemTidBox                          ItemTid;                                           // 0x0010(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         LoadoutSlotIndex;                                  // 0x001C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1MissionTargetDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1MissionTargetDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1BoostItemMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1BoostItemMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1LaboratoryMonsterSpawnDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1LaboratoryMonsterSpawnDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1DifficultyAbilityData
-// 0x0028 (0x0098 - 0x0070)
-struct FM1DifficultyAbilityData final : public FM1AbilityData
-{
-public:
-	class FName                                   StringId;                                          // 0x0070(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IconPath;                                          // 0x0078(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RuneWeapontMaxCount;                               // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RuneCharacterMaxCount;                             // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         RuneCostReduceValue;                               // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         RuneCostIncreaseValue;                             // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemTierType                               RuneDecomposeNoticeTier;                           // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x3];                                       // 0x0019(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         RuneDecomposeNoticeEnchantLevel;                   // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1RuneCostIncreaseResource            CharacterRuneCostIncreaseResource;                 // 0x0020(0x0038)(Edit, NativeAccessSpecifierPublic)
+	struct FM1RuneCostIncreaseResource            WeaponRuneCostIncreaseResource;                    // 0x0058(0x0038)(Edit, NativeAccessSpecifierPublic)
+	struct FM1ConsumableItemDataLink              RuneSocketGrantItem;                               // 0x0090(0x0030)(Edit, NativeAccessSpecifierPublic)
+	int32                                         CharacterAddRuneCapacity;                          // 0x00C0(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         WeaponAddRuneCapacity;                             // 0x00C4(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         CapacityIncreaseCorrection;                        // 0x00C8(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         CapacityReduceCorrection;                          // 0x00CC(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class FString>                         ValidRuneGroupIds;                                 // 0x00D0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1RequiredItemData                    LoadoutSlotExpandRequiredItem;                     // 0x00E0(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	int32                                         LoadoutNameLimitLength;                            // 0x00F0(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemTierType                               MinimumSendLostMailTier;                           // 0x00F4(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_F5[0x3];                                       // 0x00F5(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1CommonShopDataLink                  RuneShop;                                          // 0x00F8(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1ProductDataLink                     RuneCapacityExtendProduct;                         // 0x0128(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1ProductDataLink                     RuneSocketTypeProduct;                             // 0x0158(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MissionTargetActiveAbilityData
@@ -7879,58 +7412,85 @@ public:
 	float                                         CooltimeMax;                                       // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1SearchKeywordDataLink
+// ScriptStruct M1Data.M1CreditsDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1SearchKeywordDataLink final : public FDataLink
+struct FM1CreditsDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1RangedFloat
-// 0x0008 (0x0008 - 0x0000)
-struct FM1RangedFloat final
-{
-public:
-	float                                         Min;                                               // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Max;                                               // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstantUseItemData
-// 0x0078 (0x0080 - 0x0008)
-struct FM1InstantUseItemData final : public FTableRowBase
-{
-public:
-	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          TemplateId;                                        // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   StringId;                                          // 0x0014(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ObtainableCountPerChance;                          // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Private;                                           // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1AbilityDataLink                     Ability;                                           // 0x0028(0x0030)(Edit, NativeAccessSpecifierPublic)
-	struct FSoftClassPath                         PropClass;                                         // 0x0058(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1StatType                                   CurrentStatCapacity;                               // 0x0078(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1RoundsType                                 RoundsCapacity;                                    // 0x0079(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          NumberLimit;                                       // 0x007A(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ImportanceType                             ImportanceType;                                    // 0x007B(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_7C[0x4];                                       // 0x007C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonLimitInfo
-// 0x0008 (0x0008 - 0x0000)
-struct FM1InstanceDungeonLimitInfo final
-{
-public:
-	struct FM1TemplateId                          ItemTid;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         TotalAmount;                                       // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonLimitInfoList
+// ScriptStruct M1Data.M1CurrencyInternalTranBundle
 // 0x0018 (0x0018 - 0x0000)
-struct FM1InstanceDungeonLimitInfoList final
+struct FM1CurrencyInternalTranBundle final
 {
 public:
-	int32                                         RemainTimeSec;                                     // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1InstanceDungeonLimitInfo>    Values;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1CurrencyInternalTran>        DataList;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1FieldObjectSpawnGroupDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1FieldObjectSpawnGroupDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1MissionTargetDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1MissionTargetDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1LaboratoryMonsterSpawnData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1LaboratoryMonsterSpawnData final : public FTableRowBase
+{
+public:
+	int32                                         Index;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1MonsterDataLink>             SpawnList;                                         // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1LaboratoryMonsterSpawnDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1LaboratoryMonsterSpawnDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonAbilityDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1InstanceDungeonAbilityDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1StatOverrideData
+// 0x0018 (0x0018 - 0x0000)
+struct FM1StatOverrideData final
+{
+public:
+	EM1StatType                                   StatType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 Value;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1DifficultyAbilityDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1DifficultyAbilityDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1MultiSupplierDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1MultiSupplierDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1QuestStartPoint
+// 0x0018 (0x0018 - 0x0000)
+struct FM1QuestStartPoint final
+{
+public:
+	EM1QuestStartPointType                        Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class FString>                         Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1SimpleItemInfo
@@ -7944,10 +7504,39 @@ public:
 	int64                                         Count;                                             // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1CurrencyDataLink
+// ScriptStruct M1Data.M1BoostItemMiscDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1CurrencyDataLink final : public FDataLink
+struct FM1BoostItemMiscDataLink final : public FDataLink
 {
+};
+
+// ScriptStruct M1Data.M1SearchKeywordInfo
+// 0x0040 (0x0040 - 0x0000)
+struct FM1SearchKeywordInfo final
+{
+public:
+	class FString                                 StringId;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 Payload;                                           // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IconImage;                                         // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CharacterSizeData
+// 0x0008 (0x0008 - 0x0000)
+struct FM1CharacterSizeData final
+{
+public:
+	EM1CharacterSize                              Type;                                              // 0x0000(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         Size;                                              // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1DifficultyAbilityData
+// 0x0028 (0x0098 - 0x0070)
+struct FM1DifficultyAbilityData final : public FM1AbilityData
+{
+public:
+	class FName                                   StringId;                                          // 0x0070(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IconPath;                                          // 0x0078(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1StatModifierClampInfo
@@ -7960,69 +7549,6 @@ public:
 	struct FM1RangedFloat                         Multiply;                                          // 0x0010(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1GaugeStatInfo
-// 0x0003 (0x0003 - 0x0000)
-struct FM1GaugeStatInfo final
-{
-public:
-	bool                                          bGauge;                                            // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1StatType                                   MaxType;                                           // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bFillOnInit;                                       // 0x0002(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MultiSupplierAbilityParamData
-// 0x0018 (0x0018 - 0x0000)
-struct FM1MultiSupplierAbilityParamData final
-{
-public:
-	class FString                                 AbilityId;                                         // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1StatType                                   CurrentStatCapacity;                               // 0x0010(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1RoundsType                                 RoundsCapacity;                                    // 0x0011(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_12[0x2];                                       // 0x0012(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         Value;                                             // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MultiSupplierData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1MultiSupplierData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ReuseTimer;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1MultiSupplierAbilityParamData> Operations;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1StatUIData
-// 0x0020 (0x0020 - 0x0000)
-struct FM1StatUIData final
-{
-public:
-	bool                                          UIRecord;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         UIGroupId;                                         // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         OrderInGroup;                                      // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1StatUIRecordType                           UIRecordType;                                      // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         DecimalPlaces;                                     // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bChart;                                            // 0x0014(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_15[0x3];                                       // 0x0015(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1RangedFloat                         ChartRange;                                        // 0x0018(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceFieldContentsDataBase
-// 0x00A8 (0x00B0 - 0x0008)
-struct FM1InstanceFieldContentsDataBase : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1MapDataLink                         MapId;                                             // 0x0010(0x0030)(Edit, NativeAccessSpecifierPublic)
-	class FString                                 PlayerStartTag;                                    // 0x0040(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        BGImagePath;                                       // 0x0050(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1MissionDataLink                     MissionId;                                         // 0x0070(0x0030)(Edit, NativeAccessSpecifierPublic)
-	TArray<struct FM1InstanceDungeonAbilityDataLink> DefaultAbilities;                                  // 0x00A0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1StatBaseData
 // 0x0008 (0x0010 - 0x0008)
 struct FM1StatBaseData : public FTableRowBase
@@ -8031,6 +7557,12 @@ public:
 	EM1StatType                                   StatTypeEnum;                                      // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
 	EM1StatValueOrder                             ValueOrder;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PackageGroupDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1PackageGroupDataLink final : public FDataLink
+{
 };
 
 // ScriptStruct M1Data.M1StatData
@@ -8060,12 +7592,6 @@ public:
 	float                                         Yaw;                                               // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1PackageOpenerDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1PackageOpenerDataLink final : public FDataLink
-{
-};
-
 // ScriptStruct M1Data.M1RangedWeaponRecoilData
 // 0x0030 (0x0038 - 0x0008)
 struct FM1RangedWeaponRecoilData final : public FTableRowBase
@@ -8079,15 +7605,31 @@ public:
 	TArray<struct FM1RecoilInfo>                  RecoilInfos;                                       // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ShopSellInfoNoti
-// 0x0020 (0x0020 - 0x0000)
-struct FM1ShopSellInfoNoti final
+// ScriptStruct M1Data.M1ShopBuyBundleData
+// 0x0010 (0x0010 - 0x0000)
+struct FM1ShopBuyBundleData final
 {
 public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1ItemUidBox                          ItemUid;                                           // 0x0008(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	int32                                         Count;                                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1CommonShopResultType                       Result;                                            // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1ShopBuyData>                 DataList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InstantUseDropGroupElement
+// 0x0014 (0x0014 - 0x0000)
+struct FM1InstantUseDropGroupElement final
+{
+public:
+	class FName                                   ItemId;                                            // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ValueMin;                                          // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ValueMax;                                          // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Ratio;                                             // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ShopRestrictionInfoBundle
+// 0x0010 (0x0010 - 0x0000)
+struct FM1ShopRestrictionInfoBundle final
+{
+public:
+	TArray<struct FM1ShopRestrictionInfo>         ShopRestrictionInfoList;                           // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1InstantUseDropGroupData
@@ -8100,18 +7642,15 @@ public:
 	TArray<struct FM1InstantUseDropGroupElement>  DropGroupElementList;                              // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1BattleShopCompileUnitBundle
-// 0x0018 (0x0018 - 0x0000)
-struct FM1BattleShopCompileUnitBundle final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1BattleShopCompileUnit>       DataList;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1ItemStringTableDataRow
 // 0x0000 (0x0088 - 0x0088)
 struct FM1ItemStringTableDataRow final : public FM1StringTableDataRow
+{
+};
+
+// ScriptStruct M1Data.M1FellowLevelExpDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1FellowLevelExpDataLink final : public FDataLink
 {
 };
 
@@ -8121,44 +7660,10 @@ struct FM1SystemStringTableDataRow final : public FM1StringTableDataRow
 {
 };
 
-// ScriptStruct M1Data.M1SkillStringTableDataRow
+// ScriptStruct M1Data.M1UIStringTableDataRow
 // 0x0000 (0x0088 - 0x0088)
-struct FM1SkillStringTableDataRow final : public FM1StringTableDataRow
+struct FM1UIStringTableDataRow final : public FM1StringTableDataRow
 {
-};
-
-// ScriptStruct M1Data.M1CharacterStringTableDataRow
-// 0x0000 (0x0088 - 0x0088)
-struct FM1CharacterStringTableDataRow final : public FM1StringTableDataRow
-{
-};
-
-// ScriptStruct M1Data.M1MonsterMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1MonsterMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1StoryStringTableDataRow
-// 0x0008 (0x0090 - 0x0088)
-struct FM1StoryStringTableDataRow final : public FM1StringTableDataRow
-{
-public:
-	bool                                          NeedStringKeyReplacement;                          // 0x0088(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_89[0x7];                                       // 0x0089(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1BattlePassLevelNoti
-// 0x0020 (0x0020 - 0x0000)
-struct FM1BattlePassLevelNoti final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          BattlePassTid;                                     // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         BattlePassLevel;                                   // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         BattlePassExp;                                     // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1BattlePassLevelReason                      Reason;                                            // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1ReservedStringTableDataRow
@@ -8167,20 +7672,43 @@ struct FM1ReservedStringTableDataRow final : public FM1StringTableDataRow
 {
 };
 
+// ScriptStruct M1Data.M1PartyErrorMessageNoti
+// 0x0048 (0x0048 - 0x0000)
+struct FM1PartyErrorMessageNoti final
+{
+public:
+	class FString                                 SeqId;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1PartyContentsType                          ContensType;                                       // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         ReceiverUid;                                       // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 SenderName;                                        // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 SenderPlatformId;                                  // 0x0030(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1PartyErrorCode                             SenderMessage;                                     // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_44[0x4];                                       // 0x0044(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
 // ScriptStruct M1Data.M1ProductStringTableDataRow
 // 0x0000 (0x0088 - 0x0088)
 struct FM1ProductStringTableDataRow final : public FM1StringTableDataRow
 {
 };
 
-// ScriptStruct M1Data.M1BlockErrorMessageNoti
-// 0x0010 (0x0010 - 0x0000)
-struct FM1BlockErrorMessageNoti final
+// ScriptStruct M1Data.M1MonsterAIVulgusPost
+// 0x000C (0x000C - 0x0000)
+struct FM1MonsterAIVulgusPost final
 {
 public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1BlockErrorCode                             ErrorCode;                                         // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	float                                         NonBattleTargetSearchRadius;                       // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         NonBattlePatrolRadius;                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         NonBattlePatrolHitRadius;                          // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MonsterAIOverride
+// 0x000C (0x000C - 0x0000)
+struct FM1MonsterAIOverride final
+{
+public:
+	struct FM1MonsterAIVulgusPost                 VulgusPost;                                        // 0x0000(0x000C)(Edit, NoDestructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MonsterAIMission
@@ -8193,6 +7721,43 @@ public:
 	TArray<float>                                 MissionRangeList;                                  // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1MonsterMiscDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1MonsterMiscDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1MonsterAIBattleState
+// 0x0060 (0x0060 - 0x0000)
+struct FM1MonsterAIBattleState final
+{
+public:
+	float                                         AttackRadius;                                      // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         TargetSearchRadius;                                // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         TargetSearchTimeMin;                               // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         TargetSearchTimeMax;                               // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         TargetSearchAngle;                                 // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         TargetChangeRate;                                  // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RelationsCheckType                         Relations;                                         // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x3];                                       // 0x0019(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FGameplayTag                           QueryTag;                                          // 0x001C(0x0008)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1AITargetingPriority                        TargetingPriority;                                 // 0x0024(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          CheckTargetVisible;                                // 0x0028(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_29[0x3];                                       // 0x0029(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         TargetHoldRadius;                                  // 0x002C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         PursuitRadius;                                     // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         AllianceCallRadius;                                // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         AllianceBattleRadius;                              // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         PatrolHitRadius;                                   // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         PatrolRadius;                                      // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          UseCoverUpInBattle;                                // 0x0044(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_45[0x3];                                       // 0x0045(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         WaitTimeOnCoverUp;                                 // 0x0048(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          UseHomeLocationWithTargetSearch;                   // 0x004C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4D[0x3];                                       // 0x004D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<float>                                 BattleRangeList;                                   // 0x0050(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1MonsterAISubBehaviorTree
 // 0x0028 (0x0028 - 0x0000)
 struct FM1MonsterAISubBehaviorTree final
@@ -8202,9 +7767,9 @@ public:
 	struct FSoftObjectPath                        BTPath;                                            // 0x0008(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1FellowDataLink
+// ScriptStruct M1Data.M1MonsterSpawnGroupDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1FellowDataLink final : public FDataLink
+struct FM1MonsterSpawnGroupDataLink final : public FDataLink
 {
 };
 
@@ -8233,6 +7798,85 @@ public:
 	uint8                                         Pad_1BC[0x4];                                      // 0x01BC(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
+// ScriptStruct M1Data.M1RangeCondition
+// 0x0018 (0x0018 - 0x0000)
+struct FM1RangeCondition final
+{
+public:
+	bool                                          NeedRangeCheck;                                    // 0x0000(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         RangeMin;                                          // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         RangeMax;                                          // 0x0008(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         HighRange;                                         // 0x000C(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         LowRange;                                          // 0x0010(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         AngleRangeMax;                                     // 0x0014(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RotationProductDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1RotationProductDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1HitPointInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1HitPointInfo final
+{
+public:
+	class FString                                 BoneName;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         HPDamageRate;                                      // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1DamageAdvantageType                        AdvantageType;                                     // 0x0014(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_15[0x3];                                       // 0x0015(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1PerkEnchantRequiredItemData
+// 0x0010 (0x0010 - 0x0000)
+struct FM1PerkEnchantRequiredItemData final
+{
+public:
+	EM1ItemType                                   Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   ID;                                                // 0x0004(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Amount;                                            // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PerkDetailData
+// 0x0080 (0x0080 - 0x0000)
+struct FM1PerkDetailData final
+{
+public:
+	int32                                         EnchantLevel;                                      // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1PerkAbilityDataLink                 Ability;                                           // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
+	class FString                                 StringId;                                          // 0x0038(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         AbilityProbability;                                // 0x0048(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4C[0x4];                                       // 0x004C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0050(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1TaggedAbilityParamData>      TaggedParams;                                      // 0x0060(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1PerkEnchantRequiredItemData> EnchantRequiredItems;                              // 0x0070(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PerkUIData
+// 0x0060 (0x0060 - 0x0000)
+struct FM1PerkUIData final
+{
+public:
+	struct FSoftObjectPath                        IconPath;                                          // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftClassPath                         CustomHUDWidget;                                   // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        PreviewMovie;                                      // 0x0040(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PerkData
+// 0x0078 (0x0080 - 0x0008)
+struct FM1PerkData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1PerkDetailData>              DetailDataList;                                    // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1PerkUIData                          UIData;                                            // 0x0020(0x0060)(Edit, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1HitPointData
 // 0x0020 (0x0028 - 0x0008)
 struct FM1HitPointData final : public FTableRowBase
@@ -8242,134 +7886,81 @@ public:
 	TArray<struct FM1HitPointInfo>                Param;                                             // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1CommonShopDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1CommonShopDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1ReactorEnchantEffectByItemLevel
+// ScriptStruct M1Data.M1NpcServiceUnlockCondition
 // 0x0018 (0x0018 - 0x0000)
-struct FM1ReactorEnchantEffectByItemLevel final
+struct FM1NpcServiceUnlockCondition final
 {
 public:
-	int32                                         ItemLevel;                                         // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1ReactorEnchantEffectInfo>    EnchantEffectInfo;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	EM1NpcServiceUnlockConditionType              Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class FString>                         Values;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1RandomOptionGroupDataLink
+// ScriptStruct M1Data.M1NpcService
+// 0x0050 (0x0050 - 0x0000)
+struct FM1NpcService final
+{
+public:
+	class FName                                   StringId;                                          // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1NpcServiceType                             ServiceType;                                       // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 ServiceValue;                                      // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftClassPath                         WidgetClass;                                       // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1NpcServiceUnlockCondition>   UnlockConditions;                                  // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RandomOptionChangeDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1RandomOptionGroupDataLink final : public FDataLink
+struct FM1RandomOptionChangeDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1EquipmentLevel
-// 0x0080 (0x0080 - 0x0000)
-struct FM1EquipmentLevel final
-{
-public:
-	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1StatValuePair>               VariableBaseStats;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1RandomOptionGroupDataLink           RandomOptionGroupId;                               // 0x0018(0x0030)(Edit, NativeAccessSpecifierPublic)
-	struct FM1AbilityDataLink                     ActiveAbility;                                     // 0x0048(0x0030)(Edit, NativeAccessSpecifierPublic)
-	int32                                         SellingPrice;                                      // 0x0078(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_7C[0x4];                                       // 0x007C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1EquipmentData
-// 0x00E8 (0x00F0 - 0x0008)
-struct FM1EquipmentData : public FTableRowBase
+// ScriptStruct M1Data.M1NpcSpawnPeriod
+// 0x0010 (0x0010 - 0x0000)
+struct FM1NpcSpawnPeriod final
 {
 public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   StringId;                                          // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1ItemUIData                          UIData;                                            // 0x0018(0x0060)(Edit, NativeAccessSpecifierPublic)
-	EM1EquipmentCategoryType                      CategoryType;                                      // 0x0078(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1EquipItemClassType                         ClassType;                                         // 0x0079(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ItemTierType                               TierType;                                          // 0x007A(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_7B[0x5];                                       // 0x007B(0x0005)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1StatValuePair>               BaseStats;                                         // 0x0080(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1EquipmentLevel>              Lv;                                                // 0x0090(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	int32                                         RuneSocketCount;                                   // 0x00A0(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_A4[0x4];                                       // 0x00A4(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1StatValuePair>               RequiredStats;                                     // 0x00A8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FSoftClassPath                         PropClass;                                         // 0x00B8(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1CurrencyType                               SellingType;                                       // 0x00D8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D9[0x3];                                       // 0x00D9(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         ImportantPriority;                                 // 0x00DC(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ImportanceType                             ImportanceType;                                    // 0x00E0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_E1[0x3];                                       // 0x00E1(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         MasteryLevel;                                      // 0x00E4(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsTemporary;                                       // 0x00E8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_E9[0x7];                                       // 0x00E9(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class FName                                   Start;                                             // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   End;                                               // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ReactorOptimizedConditionDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1ReactorOptimizedConditionDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1ReactorData
-// 0x0098 (0x0188 - 0x00F0)
-struct FM1ReactorData final : public FM1EquipmentData
-{
-public:
-	bool                                          Enchantable;                                       // 0x00F0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_F1[0x7];                                       // 0x00F1(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1ReactorEnchantEffectByItemLevel> EnchantEffectByItemLv;                             // 0x00F8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1ReactorAbilityDataLink              Ability;                                           // 0x0108(0x0030)(Edit, NativeAccessSpecifierPublic)
-	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0138(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1TaggedAbilityParamData>      TaggedParams;                                      // 0x0148(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1ReactorOptimizedConditionDataLink   OptimizedCondition;                                // 0x0158(0x0030)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PlatformAchievementPlatformInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1PlatformAchievementPlatformInfo final
-{
-public:
-	EM1ContentsPlatformType                       Platform;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bAlreadyAchieved;                                  // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 ID;                                                // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PlatformAchievementData
-// 0x0030 (0x0038 - 0x0008)
-struct FM1PlatformAchievementData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1PlatformAchievementPlatformInfo> PlatformAchievementInfos;                          // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	EM1PlatformAchievementObjectiveCondition      ObjectiveCondition;                                // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<class FString>                         ObjectiveParams;                                   // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RewardItem
+// ScriptStruct M1Data.M1NpcSpawnInfo
 // 0x0040 (0x0040 - 0x0000)
-struct FM1RewardItem final
+struct FM1NpcSpawnInfo final
 {
 public:
-	struct FM1ItemDataBox                         Item;                                              // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
-	int32                                         Amount;                                            // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1NpcSpawnPeriod>              SpawnPeriods;                                      // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1NpcDataLink                         ReplacementNpc;                                    // 0x0010(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1AttendanceEventInfo
-// 0x0078 (0x0078 - 0x0000)
-struct FM1AttendanceEventInfo final
+// ScriptStruct M1Data.M1BattlePassDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1BattlePassDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1NpcData
+// 0x00E0 (0x00E8 - 0x0008)
+struct FM1NpcData final : public FTableRowBase
 {
 public:
-	int32                                         Date;                                              // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1RewardItem                          Reward;                                            // 0x0008(0x0040)(Edit, NativeAccessSpecifierPublic)
-	struct FM1MailDataLink                        EventRewardMailId;                                 // 0x0048(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   StringIdName;                                      // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   StringIdButtonName;                                // 0x0014(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FSoftClassPath                         BlueprintClass;                                    // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1NpcSpawnType                               SpawnType;                                         // 0x0040(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_41[0x3];                                       // 0x0041(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         NameTagOffset;                                     // 0x0044(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        HudIcon;                                           // 0x0048(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        MapIcon;                                           // 0x0068(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          ShowMapIcon;                                       // 0x0088(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          SkipNpcMenu;                                       // 0x0089(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_8A[0x6];                                       // 0x008A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1NpcService>                  Services;                                          // 0x0090(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	bool                                          Collision;                                         // 0x00A0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_A1[0x7];                                       // 0x00A1(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1NpcSpawnInfo                        SpawnInfo;                                         // 0x00A8(0x0040)(Edit, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1NpcServiceUnlockData
@@ -8384,6 +7975,22 @@ public:
 	class FName                                   UnlockNotificationToastId;                         // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1MissionDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1MissionDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1SetOptionTooltipDetailData
+// 0x0028 (0x0028 - 0x0000)
+struct FM1SetOptionTooltipDetailData final
+{
+public:
+	int32                                         DecimalPlaces;                                     // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1AbilityParamData                    Param;                                             // 0x0008(0x0020)(Edit, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1SetOptionTooltipData
 // 0x0018 (0x0020 - 0x0008)
 struct FM1SetOptionTooltipData final : public FTableRowBase
@@ -8393,9 +8000,9 @@ public:
 	TArray<struct FM1SetOptionTooltipDetailData>  DetailData;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1MissionWaveDataLink
+// ScriptStruct M1Data.M1RecordDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1MissionWaveDataLink final : public FDataLink
+struct FM1RecordDataLink final : public FDataLink
 {
 };
 
@@ -8421,52 +8028,39 @@ public:
 	TArray<struct FM1MarkerInfo>                  MarkerInfoList;                                    // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1MiniGameDataLink
+// ScriptStruct M1Data.M1BattlePassChallengeDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1MiniGameDataLink final : public FDataLink
+struct FM1BattlePassChallengeDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1ProficiencyAdditionalData
+// ScriptStruct M1Data.M1ProficiencyData
+// 0x0010 (0x0018 - 0x0008)
+struct FM1ProficiencyData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RequiredProficiency;                               // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RewardMasteryExp;                                  // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         WeaponRuneCapacity;                                // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1AttendanceCount
 // 0x0008 (0x0008 - 0x0000)
-struct FM1ProficiencyAdditionalData final
+struct FM1AttendanceCount final
 {
 public:
-	EM1ItemTierType                               Tier;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         RewardMasteryExpRate;                              // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          EventId;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int16                                         Count;                                             // 0x0004(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int16                                         RewardedIndex;                                     // 0x0006(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ProficiencyMiscData
-// 0x0010 (0x0018 - 0x0008)
-struct FM1ProficiencyMiscData final : public FTableRowBase
+// ScriptStruct M1Data.M1AttendanceCountInfo
+// 0x0010 (0x0010 - 0x0000)
+struct FM1AttendanceCountInfo final
 {
 public:
-	TArray<struct FM1ProficiencyAdditionalData>   AdditionalDataList;                                // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1LoadingGroupList
-// 0x0018 (0x0018 - 0x0000)
-struct FM1LoadingGroupList final
-{
-public:
-	class FString                                 GroupId;                                           // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Ratio;                                             // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1RuneComposeDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1RuneComposeDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1LoadingImageRandomData
-// 0x0010 (0x0018 - 0x0008)
-struct FM1LoadingImageRandomData final : public FTableRowBase
-{
-public:
-	TArray<struct FM1LoadingGroupList>            LoadingGroupList;                                  // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1AttendanceCount>             Infos;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1TestAssetData
@@ -8477,10 +8071,50 @@ public:
 	struct FSoftObjectPath                        AssetData;                                         // 0x0008(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1QuestParamGroupDataLink
+// ScriptStruct M1Data.M1RotationShopDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1QuestParamGroupDataLink final : public FDataLink
+struct FM1RotationShopDataLink final : public FDataLink
 {
+};
+
+// ScriptStruct M1Data.M1EquipmentRandomOptionCompact
+// 0x0010 (0x0010 - 0x0000)
+struct FM1EquipmentRandomOptionCompact final
+{
+public:
+	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1ScaledInteger                       StatValue;                                         // 0x0008(0x0008)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1EquipmentRandomOptions
+// 0x0020 (0x0020 - 0x0000)
+struct FM1EquipmentRandomOptions final
+{
+public:
+	int64                                         EquipmentUid;                                      // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int16                                         OptionIndexBitFlags;                               // 0x0008(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_A[0x6];                                        // 0x000A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1EquipmentRandomOptionCompact> Options;                                           // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InventoryInfo
+// 0x00C0 (0x00C0 - 0x0000)
+struct FM1InventoryInfo final
+{
+public:
+	TArray<struct FM1EquipmentBaseInfo>           Equipments;                                        // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1ConsumableInfo>              Consumables;                                       // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1RunesByTid>                  Runes;                                             // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CharacterInfo>               Characters;                                        // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CurrencyInfo>                Currencies;                                        // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1WeaponProficiencyInfo>       WeaponProficiencies;                               // 0x0050(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1EquipmentRandomOptions>      RandomOptions;                                     // 0x0060(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1PerkInfo>                    Perks;                                             // 0x0070(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1ReactorBaseInfo>             ReactorInfos;                                      // 0x0080(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1TitleItemInfo>               TitleInfos;                                        // 0x0090(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1RecordInfo>                  RecordInfos;                                       // 0x00A0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1FellowInfo>                  FellowInfos;                                       // 0x00B0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1AbilityTargetData
@@ -8492,553 +8126,6 @@ public:
 	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0020(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ExternalParticipateInfo
-// 0x0028 (0x0028 - 0x0000)
-struct FM1ExternalParticipateInfo final
-{
-public:
-	class FString                                 ParticipateUserName;                               // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ServerIndex;                                       // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 ServerVersion;                                     // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1LoginRequestInfo
-// 0x0130 (0x0130 - 0x0000)
-struct FM1LoginRequestInfo final
-{
-public:
-	class FString                                 Name;                                              // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ExternalLinkerType                         ExternalLinkerType;                                // 0x0010(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 ExternalLinkerData;                                // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 CountryName;                                       // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 SignCountry;                                       // 0x0038(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 DeviceName;                                        // 0x0048(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1OsTypes                                    OsType;                                            // 0x0058(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_5C[0x4];                                       // 0x005C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 OsName;                                            // 0x0060(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 OsLanguage;                                        // 0x0070(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1Locale                                     Locale;                                            // 0x0080(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_81[0x7];                                       // 0x0081(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 LoginPlatformId;                                   // 0x0088(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         LoginPlatformUid;                                  // 0x0098(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LoginPlatformTypes                         LoginPlatform;                                     // 0x00A0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_A1[0x7];                                       // 0x00A1(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1RegionLatencyInfosMs                RegionLatencyInfos;                                // 0x00A8(0x0010)(Edit, NativeAccessSpecifierPublic)
-	struct FM1CrossPlayOptionData                 CrossPlayOptionData;                               // 0x00B8(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	struct FM1ExternalParticipateInfo             ParticipateInfo;                                   // 0x00C8(0x0028)(Edit, NativeAccessSpecifierPublic)
-	bool                                          Boosting;                                          // 0x00F0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_F1[0x3];                                       // 0x00F1(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         Revision;                                          // 0x00F4(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsCreator;                                         // 0x00F8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_F9[0x7];                                       // 0x00F9(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1ClientChecksum                      Checksum;                                          // 0x0100(0x0030)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RuneUIStatDesc
-// 0x0028 (0x0028 - 0x0000)
-struct FM1RuneUIStatDesc final
-{
-public:
-	EM1StatType                                   StatEnum;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 StatsType;                                         // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   SeperatedStringKey;                                // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         ReferValue;                                        // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bCanNotCombine;                                    // 0x0024(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_25[0x3];                                       // 0x0025(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1InstanceFieldContentsDataBaseLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1InstanceFieldContentsDataBaseLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1InvasionDungeonMiscData
-// 0x0060 (0x0068 - 0x0008)
-struct FM1InvasionDungeonMiscData final : public FTableRowBase
-{
-public:
-	struct FM1QuestDataLink                       UnlockQuest;                                       // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
-	struct FM1InstanceFieldContentsDataBaseLink   UnlockDungeon;                                     // 0x0038(0x0030)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ProficiencyDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1ProficiencyDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1RuneUIReferData
-// 0x0004 (0x0004 - 0x0000)
-struct FM1RuneUIReferData final
-{
-public:
-	float                                         Value;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RuneUIDesc
-// 0x0030 (0x0030 - 0x0000)
-struct FM1RuneUIDesc final
-{
-public:
-	class FName                                   ConditionStringKey;                                // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   CommentStringKey;                                  // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1RuneUIReferData>             Refer;                                             // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1RuneUIStatDesc>              Stat;                                              // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RecommendSpecsUIDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1RecommendSpecsUIDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1RuneUIData
-// 0x0028 (0x0030 - 0x0008)
-struct FM1RuneUIData final : public FTableRowBase
-{
-public:
-	class FString                                 StringId;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   TitleStringKey;                                    // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1RuneUIDesc>                  CombineDesc;                                       // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RuneDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1RuneDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1RuneAutoEquip
-// 0x0058 (0x0060 - 0x0008)
-struct FM1RuneAutoEquip final : public FTableRowBase
-{
-public:
-	struct FM1PlayerDataLink                      EquipTargetCharacter;                              // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
-	EM1EquipItemClassType                         EquipTargetWeapon;                                 // 0x0038(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1RuneDataLink>                RuneList;                                          // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	class FString                                 Comment;                                           // 0x0050(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PerkDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1PerkDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1MailItemInfo
-// 0x0020 (0x0020 - 0x0000)
-struct FM1MailItemInfo final
-{
-public:
-	int32                                         Index;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1ItemTidBox                          ItemTidBox;                                        // 0x0004(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Amount;                                            // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Received;                                          // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1RuneLvData
-// 0x0040 (0x0040 - 0x0000)
-struct FM1RuneLvData final
-{
-public:
-	struct FM1StatusEffectDataLink                StatusEffect;                                      // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	TArray<struct FM1StatValuePair>               BaseStats;                                         // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ReactorDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1ReactorDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1FixedOptionIndexes
-// 0x0010 (0x0010 - 0x0000)
-struct FM1FixedOptionIndexes final
-{
-public:
-	TArray<int16>                                 OptionIndexes;                                     // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonRewardDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1InstanceDungeonRewardDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1RandomMatchBonusRewardElement
-// 0x0040 (0x0040 - 0x0000)
-struct FM1RandomMatchBonusRewardElement final
-{
-public:
-	struct FM1ItemDataBox                         Item;                                              // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
-	int32                                         Amount;                                            // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Ratio;                                             // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RandomMatchBonusReward
-// 0x0030 (0x0030 - 0x0000)
-struct FM1RandomMatchBonusReward final
-{
-public:
-	int64                                         CharacterExp;                                      // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         ProficiencyExp;                                    // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         SeasonExp;                                         // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1CurrencyPair                        Currency;                                          // 0x0018(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1RandomMatchBonusRewardElement> Items;                                             // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonRotationReward
-// 0x0040 (0x0040 - 0x0000)
-struct FM1InstanceDungeonRotationReward final
-{
-public:
-	struct FM1RewardType                          Item;                                              // 0x0000(0x0040)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonModifierPresetDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1InstanceDungeonModifierPresetDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonData
-// 0x0090 (0x0140 - 0x00B0)
-struct FM1InstanceDungeonData final : public FM1InstanceFieldContentsDataBase
-{
-public:
-	class FString                                 Group;                                             // 0x00B0(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1InstanceDungeonDifficulty                  Difficulty;                                        // 0x00C0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C1[0x3];                                       // 0x00C1(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         MinMembers;                                        // 0x00C4(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1InstanceDungeonRewardDataLink> RewardGroups;                                      // 0x00C8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1InstanceDungeonRotationReward> RotationRewards;                                   // 0x00D8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1InstanceDungeonModifierPresetDataLink> ModifierPresets;                                   // 0x00E8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1RandomMatchBonusReward              RandomMatchBonusReward;                            // 0x00F8(0x0030)(Edit, NativeAccessSpecifierPublic)
-	struct FM1InstanceDungeonScoreInfo            ScoreInfo;                                         // 0x0128(0x0018)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1VoidBattleMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1VoidBattleMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1EpicMonsterSkillData
-// 0x0000 (0x0130 - 0x0130)
-struct FM1EpicMonsterSkillData final : public FM1SkillData
-{
-};
-
-// ScriptStruct M1Data.M1EliteMonsterSkillData
-// 0x0010 (0x0140 - 0x0130)
-struct FM1EliteMonsterSkillData final : public FM1SkillData
-{
-public:
-	bool                                          DontGiveByMonster;                                 // 0x0130(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_131[0x3];                                      // 0x0131(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FName                                   UIGroupId;                                         // 0x0134(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_13C[0x4];                                      // 0x013C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1AchievementCategoryData
-// 0x0050 (0x0058 - 0x0008)
-struct FM1AchievementCategoryData final : public FTableRowBase
-{
-public:
-	int32                                         CategoryId;                                        // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 StringId;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IconPath;                                          // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1AchievementDataLink>         AchievementList;                                   // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	int32                                         SortOrder;                                         // 0x0050(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_54[0x4];                                       // 0x0054(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1EliteMonsterSkillSelectInfo
-// 0x0038 (0x0038 - 0x0000)
-struct FM1EliteMonsterSkillSelectInfo final
-{
-public:
-	struct FM1EliteMonsterSkillDataLink           ID;                                                // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	float                                         Rate;                                              // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1CustomizingItemMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1CustomizingItemMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1EliteMonsterSkillGroupData
-// 0x0010 (0x0018 - 0x0008)
-struct FM1EliteMonsterSkillGroupData final : public FTableRowBase
-{
-public:
-	TArray<struct FM1EliteMonsterSkillSelectInfo> Skills;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SkillAbilityData
-// 0x0048 (0x00B8 - 0x0070)
-struct FM1SkillAbilityData final : public FM1AbilityData
-{
-public:
-	struct FSoftObjectPath                        Montage;                                           // 0x0070(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        Sequence;                                          // 0x0090(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          bCanBeInterrupted;                                 // 0x00B0(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_B1[0x7];                                       // 0x00B1(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1SkillRedirectInfo
-// 0x0040 (0x0040 - 0x0000)
-struct FM1SkillRedirectInfo final
-{
-public:
-	struct FM1SkillDataLink                       Skill;                                             // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	class FString                                 Slot;                                              // 0x0030(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CommunityReportInfo
-// 0x0038 (0x0038 - 0x0000)
-struct FM1CommunityReportInfo final
-{
-public:
-	class FString                                 ReporteeName;                                      // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ReportReasonType                           ReportType;                                        // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 Comment;                                           // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 ReporterCountry;                                   // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SkillRedirectData
-// 0x0020 (0x0028 - 0x0008)
-struct FM1SkillRedirectData final : public FTableRowBase
-{
-public:
-	TArray<struct FM1SkillRedirectInfo>           NormalSkills;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1SkillRedirectInfo>           UltimateSkills;                                    // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1VoidBattleBossElementalResTypes
-// 0x0004 (0x0004 - 0x0000)
-struct FM1VoidBattleBossElementalResTypes final
-{
-public:
-	EM1ElementalDegreeType                        BlazerResType;                                     // 0x0000(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ElementalDegreeType                        GlacierResType;                                    // 0x0001(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ElementalDegreeType                        ElectricityResType;                                // 0x0002(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ElementalDegreeType                        DemonicResType;                                    // 0x0003(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1VoidBattleBossInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FM1VoidBattleBossInfo final
-{
-public:
-	EM1ElementalDamageChannel                     ElementalAtkType;                                  // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         RecommendElementalDefValue;                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1VoidBattleBossElementalResTypes     ElementalResTypes;                                 // 0x0008(0x0004)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	int32                                         MinMembers;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PerkTooltipData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1PerkTooltipData final : public FTableRowBase
-{
-public:
-	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1SkillTooltipDetailData>      DetailData;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1AbilityTooltipSettingMiscData
-// 0x0030 (0x0038 - 0x0008)
-struct FM1AbilityTooltipSettingMiscData final : public FTableRowBase
-{
-public:
-	TArray<struct FM1AbilityTooltipType>          TypeList;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FSoftClassPath                         DisplayOpCalcClass;                                // 0x0018(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1EventMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1EventMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1AccountList
-// 0x0010 (0x0010 - 0x0000)
-struct FM1AccountList final
-{
-public:
-	TArray<int64>                                 Accounts;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SeasonReinforceAbilityData
-// 0x0000 (0x0070 - 0x0070)
-struct FM1SeasonReinforceAbilityData final : public FM1AbilityData
-{
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonSelectionMODGroupDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1InstanceDungeonSelectionMODGroupDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1SeasonReinforceData
-// 0x0060 (0x0068 - 0x0008)
-struct FM1SeasonReinforceData final : public FTableRowBase
-{
-public:
-	class FName                                   StringId;                                          // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IconPath;                                          // 0x0010(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1SeasonReinforceGroupType                   GroupType;                                         // 0x0030(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_31[0x3];                                       // 0x0031(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	float                                         Cooltime;                                          // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1SeasonReinforceAbilityDataLink      SeasonReinforceAbility;                            // 0x0038(0x0030)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1EventAttendanceDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1EventAttendanceDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1ResponseBoundedSkin
-// 0x0030 (0x0030 - 0x0000)
-struct FM1ResponseBoundedSkin final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          SkinTid;                                           // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1TemplateId>                  BindPaintTids;                                     // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1TemplateId>                  BindHairPaintTids;                                 // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1SummonsAIData
-// 0x0000 (0x01C0 - 0x01C0)
-struct FM1SummonsAIData final : public FM1MonsterAIData
-{
-};
-
-// ScriptStruct M1Data.M1JoinDedicatedServerParam
-// 0x0028 (0x0028 - 0x0000)
-struct FM1JoinDedicatedServerParam final
-{
-public:
-	struct FM1TemplateId                          MapTemplateId;                                     // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1MapSubData                          MapSubData;                                        // 0x0004(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	bool                                          CheckUnlock;                                       // 0x0014(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          PrivateField;                                      // 0x0015(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_16[0x2];                                       // 0x0016(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1MapModifier>                 Modifiers;                                         // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizingAbilityData
-// 0x0000 (0x0070 - 0x0070)
-struct FM1CustomizingAbilityData final : public FM1AbilityData
-{
-};
-
-// ScriptStruct M1Data.M1RecordDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1RecordDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1MaterialData
-// 0x0018 (0x0018 - 0x0000)
-struct FM1MaterialData final
-{
-public:
-	EM1ItemTierType                               MaterialTier;                                      // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1RequiredItemData>            RequiredItems;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PerkAbilityData
-// 0x0000 (0x0070 - 0x0070)
-struct FM1PerkAbilityData final : public FM1AbilityData
-{
-};
-
-// ScriptStruct M1Data.M1ReactorAbilityData
-// 0x0000 (0x0070 - 0x0070)
-struct FM1ReactorAbilityData final : public FM1AbilityData
-{
-};
-
-// ScriptStruct M1Data.M1BattlePassChallengeDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1BattlePassChallengeDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1SetOptionAbilityData
-// 0x0000 (0x0070 - 0x0070)
-struct FM1SetOptionAbilityData final : public FM1AbilityData
-{
-};
-
-// ScriptStruct M1Data.M1MissionMonsterAbilityData
-// 0x0000 (0x0070 - 0x0070)
-struct FM1MissionMonsterAbilityData final : public FM1AbilityData
-{
-};
-
-// ScriptStruct M1Data.M1FieldObjectSpawnInfo
-// 0x0038 (0x0038 - 0x0000)
-struct FM1FieldObjectSpawnInfo final
-{
-public:
-	int32                                         Rate;                                              // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1FieldObjectDataLink                 FieldObject;                                       // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1FieldObjectSpawnGroupData
-// 0x0010 (0x0018 - 0x0008)
-struct FM1FieldObjectSpawnGroupData final : public FTableRowBase
-{
-public:
-	TArray<struct FM1FieldObjectSpawnInfo>        SpawnObject;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1LvFactorData
-// 0x0018 (0x0018 - 0x0000)
-struct FM1LvFactorData final
-{
-public:
-	int32                                         NumOfPartyMember;                                  // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1StatOverrideData>            StatOverrideList;                                  // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MissionTargetAbilityData
-// 0x0010 (0x0080 - 0x0070)
-struct FM1MissionTargetAbilityData final : public FM1AbilityData
-{
-public:
-	bool                                          Passive;                                           // 0x0070(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_71[0x3];                                       // 0x0071(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1MissionTargetActiveAbilityData      ActiveAbility;                                     // 0x0074(0x000C)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1InstanceDungeonDataLink final : public FDataLink
-{
-};
-
 // ScriptStruct M1Data.M1ItemDef
 // 0x0048 (0x0048 - 0x0000)
 struct FM1ItemDef final
@@ -9048,6 +8135,12 @@ public:
 	int64                                         Amount;                                            // 0x0038(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	int32                                         Ratio;                                             // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_44[0x4];                                       // 0x0044(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1InvasionDungeonTimeAttackGroupLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1InvasionDungeonTimeAttackGroupLink final : public FDataLink
+{
 };
 
 // ScriptStruct M1Data.M1InvasionDungeonTimeAttackReward
@@ -9072,29 +8165,703 @@ public:
 	TArray<struct FM1InvasionDungeonTimeAttackReward> TimeAttack;                                        // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1InvasionDungeonData
-// 0x0060 (0x0110 - 0x00B0)
-struct FM1InvasionDungeonData final : public FM1InstanceFieldContentsDataBase
+// ScriptStruct M1Data.M1RuneMiscDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1RuneMiscDataLink final : public FDataLink
 {
-public:
-	struct FM1InstanceDungeonDataLink             InstanceDungeon;                                   // 0x00B0(0x0030)(Edit, NativeAccessSpecifierPublic)
-	int32                                         SeasonExpLimit;                                    // 0x00E0(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_E4[0x4];                                       // 0x00E4(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1InvasionDungeonRewardInfo           RewardInfo;                                        // 0x00E8(0x0028)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1MissionTargetData
-// 0x0050 (0x0058 - 0x0008)
-struct FM1MissionTargetData final : public FTableRowBase
+// ScriptStruct M1Data.M1RuneAbilityData
+// 0x0000 (0x0070 - 0x0070)
+struct FM1RuneAbilityData final : public FM1AbilityData
+{
+};
+
+// ScriptStruct M1Data.M1RuneUIStatDesc
+// 0x0028 (0x0028 - 0x0000)
+struct FM1RuneUIStatDesc final
+{
+public:
+	EM1StatType                                   StatEnum;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 StatsType;                                         // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   SeperatedStringKey;                                // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         ReferValue;                                        // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bCanNotCombine;                                    // 0x0024(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_25[0x3];                                       // 0x0025(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1ReactorDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ReactorDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RuneUIReferData
+// 0x0004 (0x0004 - 0x0000)
+struct FM1RuneUIReferData final
+{
+public:
+	float                                         Value;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RuneUIDesc
+// 0x0030 (0x0030 - 0x0000)
+struct FM1RuneUIDesc final
+{
+public:
+	class FName                                   ConditionStringKey;                                // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   CommentStringKey;                                  // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1RuneUIReferData>             Refer;                                             // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1RuneUIStatDesc>              Stat;                                              // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RuneComposeDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1RuneComposeDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RuneUIData
+// 0x0028 (0x0030 - 0x0008)
+struct FM1RuneUIData final : public FTableRowBase
+{
+public:
+	class FString                                 StringId;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   TitleStringKey;                                    // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1RuneUIDesc>                  CombineDesc;                                       // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CurrencyPair
+// 0x0008 (0x0008 - 0x0000)
+struct FM1CurrencyPair final
+{
+public:
+	EM1CurrencyType                               Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         Amount;                                            // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1VoidBattleRewards
+// 0x0008 (0x0008 - 0x0000)
+struct FM1VoidBattleRewards final
+{
+public:
+	struct FM1CurrencyPair                        Currency;                                          // 0x0000(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1VoidBattleCompleteResult
+// 0x0008 (0x0008 - 0x0000)
+struct FM1VoidBattleCompleteResult final
+{
+public:
+	struct FM1VoidBattleRewards                   Rewards;                                           // 0x0000(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PlayerDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1PlayerDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RuneAutoEquip
+// 0x0058 (0x0060 - 0x0008)
+struct FM1RuneAutoEquip final : public FTableRowBase
+{
+public:
+	struct FM1PlayerDataLink                      EquipTargetCharacter;                              // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
+	EM1EquipItemClassType                         EquipTargetWeapon;                                 // 0x0038(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1RuneDataLink>                RuneList;                                          // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FString                                 Comment;                                           // 0x0050(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1QuestParamGroupData
+// 0x0020 (0x0028 - 0x0008)
+struct FM1QuestParamGroupData final : public FTableRowBase
+{
+public:
+	class FName                                   StringIdName;                                      // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1QuestParamType                             QuestParamType;                                    // 0x0010(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class FString>                         Ids;                                               // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SkillAssetData
+// 0x0100 (0x0100 - 0x0000)
+struct FM1SkillAssetData final
+{
+public:
+	struct FSoftObjectPath                        NormalIcon;                                        // 0x0000(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        ActiveIcon;                                        // 0x0020(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        PreviewImage;                                      // 0x0040(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        PreviewMovie;                                      // 0x0060(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        Montage;                                           // 0x0080(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        Sequence;                                          // 0x00A0(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftClassPath                         CustomIconWidget;                                  // 0x00C0(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftClassPath                         CustomHUDWidget;                                   // 0x00E0(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1BattlePassSeasonInfo
+// 0x0020 (0x0020 - 0x0000)
+struct FM1BattlePassSeasonInfo final
+{
+public:
+	struct FM1TemplateId                          BattlePassId;                                      // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RewardMaxLevel;                                    // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         Exp;                                               // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Premium;                                           // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          LevelUpgrade;                                      // 0x0019(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1A[0x6];                                       // 0x001A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1SkillLevelData
+// 0x0078 (0x0078 - 0x0000)
+struct FM1SkillLevelData final
+{
+public:
+	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Cooltime;                                          // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MaxStackCount;                                     // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         StackChargingTime;                                 // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         ActiveDuration;                                    // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1StatValuePair                       ActivateCost;                                      // 0x0018(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	struct FM1SkillAbilityDataLink                SkillAbility;                                      // 0x0028(0x0030)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0058(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1TaggedAbilityParamData>      TaggedParams;                                      // 0x0068(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1InstanceDungeonDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonMODData
+// 0x0008 (0x0010 - 0x0008)
+struct FM1InstanceDungeonMODData : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonModifierPresetData
+// 0x0018 (0x0028 - 0x0010)
+struct FM1InstanceDungeonModifierPresetData final : public FM1InstanceDungeonMODData
+{
+public:
+	TArray<struct FM1InstanceDungeonAbilityDataLink> AbilityData;                                       // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	bool                                          bRotate;                                           // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1RandomMatchBonusRewardElement
+// 0x0040 (0x0040 - 0x0000)
+struct FM1RandomMatchBonusRewardElement final
+{
+public:
+	struct FM1ItemDataBox                         Item;                                              // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
+	int32                                         Amount;                                            // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Ratio;                                             // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RecommendSpecsUIDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1RecommendSpecsUIDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1SkillData
+// 0x0128 (0x0130 - 0x0008)
+struct FM1SkillData : public FTableRowBase
+{
+public:
+	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   StringId;                                          // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1SkillAssetData                      AssetData;                                         // 0x0018(0x0100)(Edit, NativeAccessSpecifierPublic)
+	EM1SkillType                                  Type;                                              // 0x0118(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ElementalDamageChannel                     ElementalType;                                     // 0x0119(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1SkillArcheType                             ArcheType;                                         // 0x011A(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         GroupIndex;                                        // 0x011B(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bCanUsedInAir;                                     // 0x011C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11D[0x3];                                      // 0x011D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1SkillLevelData>              LvData;                                            // 0x0120(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SkillTargetSearchParam
+// 0x0028 (0x0028 - 0x0000)
+struct FM1SkillTargetSearchParam final
+{
+public:
+	struct FSoftObjectPath                        EnvQuery;                                          // 0x0000(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         RadiusMin;                                         // 0x0020(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         RadiusMax;                                         // 0x0024(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PerkDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1PerkDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1EpicMonsterSkillData
+// 0x0000 (0x0130 - 0x0130)
+struct FM1EpicMonsterSkillData final : public FM1SkillData
+{
+};
+
+// ScriptStruct M1Data.M1BattlePassMiscData
+// 0x00A0 (0x00A8 - 0x0008)
+struct FM1BattlePassMiscData final : public FTableRowBase
+{
+public:
+	struct FM1ItemDataBox                         PremiumResource;                                   // 0x0008(0x0038)(Edit, NativeAccessSpecifierPublic)
+	int32                                         PremiumResourceAmount;                             // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_44[0x4];                                       // 0x0044(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1ItemDataBox                         LevelUpResource;                                   // 0x0048(0x0038)(Edit, NativeAccessSpecifierPublic)
+	int32                                         LevelUpResourceAmount;                             // 0x0080(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         BundleUnitCount;                                   // 0x0084(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         BundleDiscountRate;                                // 0x0088(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         CompileRate;                                       // 0x008C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	double                                        AlertRemainSeconds;                                // 0x0090(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MissionRepeatExp;                                  // 0x0098(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MissionWaveExp;                                    // 0x009C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         VoidBattleExp;                                     // 0x00A0(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         AdjustmentRandTime;                                // 0x00A4(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MonsterSkillData
+// 0x0050 (0x0180 - 0x0130)
+struct FM1MonsterSkillData : public FM1SkillData
+{
+public:
+	float                                         SelectRate;                                        // 0x0130(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1RangeCondition                      RangeCondition;                                    // 0x0134(0x0018)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14C[0x4];                                      // 0x014C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1SkillTargetSearchParam              SearchParam;                                       // 0x0150(0x0028)(Edit, NativeAccessSpecifierPublic)
+	bool                                          bStopSkillWhenMainTargetInvalid;                   // 0x0178(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bCanMove;                                          // 0x0179(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_17A[0x6];                                      // 0x017A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1CustomizingItemDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1CustomizingItemDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1EliteMonsterSkillData
+// 0x0010 (0x0140 - 0x0130)
+struct FM1EliteMonsterSkillData final : public FM1SkillData
+{
+public:
+	bool                                          DontGiveByMonster;                                 // 0x0130(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_131[0x3];                                      // 0x0131(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   UIGroupId;                                         // 0x0134(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_13C[0x4];                                      // 0x013C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1EliteMonsterSkillSelectInfo
+// 0x0038 (0x0038 - 0x0000)
+struct FM1EliteMonsterSkillSelectInfo final
+{
+public:
+	struct FM1EliteMonsterSkillDataLink           ID;                                                // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	float                                         Rate;                                              // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1EliteMonsterSkillGroupData
+// 0x0010 (0x0018 - 0x0008)
+struct FM1EliteMonsterSkillGroupData final : public FTableRowBase
+{
+public:
+	TArray<struct FM1EliteMonsterSkillSelectInfo> Skills;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SkillAbilityData
+// 0x0048 (0x00B8 - 0x0070)
+struct FM1SkillAbilityData final : public FM1AbilityData
+{
+public:
+	struct FSoftObjectPath                        Montage;                                           // 0x0070(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        Sequence;                                          // 0x0090(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bCanBeInterrupted;                                 // 0x00B0(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_B1[0x7];                                       // 0x00B1(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1OntimeEventItem
+// 0x0010 (0x0010 - 0x0000)
+struct FM1OntimeEventItem final
+{
+public:
+	EM1ItemType                                   ItemType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         ItemTemplateId;                                    // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         Amount;                                            // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MailLanguageInfo
+// 0x0038 (0x0038 - 0x0000)
+struct FM1MailLanguageInfo final
+{
+public:
+	EM1Locale                                     Code;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 Sender;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 Title;                                             // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 Content;                                           // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1OntimeEvent
+// 0x0040 (0x0040 - 0x0000)
+struct FM1OntimeEvent final
+{
+public:
+	int64                                         EventId;                                           // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FDateTime                              StartTime;                                         // 0x0008(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FDateTime                              EndTime;                                           // 0x0010(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FDateTime                              ExpireTime;                                        // 0x0018(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1MailLanguageInfo>            LanguageList;                                      // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1OntimeEventItem>             ItemList;                                          // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1OntimeEventBundle
+// 0x0010 (0x0010 - 0x0000)
+struct FM1OntimeEventBundle final
+{
+public:
+	TArray<struct FM1OntimeEvent>                 OntimeEventList;                                   // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MasteryLevelDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1MasteryLevelDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1PhysicalPowerOptionData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1PhysicalPowerOptionData final : public FTableRowBase
+{
+public:
+	bool                                          bLaunchWhenDeathRagDoll;                           // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         LaunchPower;                                       // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         LaunchAssistAngle;                                 // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         PowerAfterLaunch;                                  // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         PhysicalPower;                                     // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1CurrencyDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1CurrencyDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1SkillRedirectData
+// 0x0020 (0x0028 - 0x0008)
+struct FM1SkillRedirectData final : public FTableRowBase
+{
+public:
+	TArray<struct FM1SkillRedirectInfo>           NormalSkills;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1SkillRedirectInfo>           UltimateSkills;                                    // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1VoidBattleUIData
+// 0x00A0 (0x00A0 - 0x0000)
+struct FM1VoidBattleUIData final
+{
+public:
+	struct FSoftObjectPath                        LockIconPath;                                      // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        UnlockIconPath;                                    // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        SmallIconPath;                                     // 0x0040(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftClassPath                         InfoWidgetPath;                                    // 0x0060(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        VeryHardIconPath;                                  // 0x0080(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SkillTooltipLevelData
+// 0x0018 (0x0018 - 0x0000)
+struct FM1SkillTooltipLevelData final
+{
+public:
+	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1AbilityParamData>            Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonSelectionMODGroupDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1InstanceDungeonSelectionMODGroupDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1SkillTooltipDetailData
+// 0x0050 (0x0050 - 0x0000)
+struct FM1SkillTooltipDetailData final
+{
+public:
+	class FName                                   DataStringID;                                      // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   FormatStringID;                                    // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1SkillInfoTextFormatType                    TextFormatType;                                    // 0x0010(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x3];                                       // 0x0011(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         DecimalPlaces;                                     // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1SkillInfoBenefitType                       BenefitType;                                       // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FSoftClassPath                         CalcClass;                                         // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1SkillTooltipLevelData>       LvData;                                            // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PerkTooltipData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1PerkTooltipData final : public FTableRowBase
+{
+public:
+	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1SkillTooltipDetailData>      DetailData;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1AbilityTooltipSettingMiscData
+// 0x0030 (0x0038 - 0x0008)
+struct FM1AbilityTooltipSettingMiscData final : public FTableRowBase
+{
+public:
+	TArray<struct FM1AbilityTooltipType>          TypeList;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FSoftClassPath                         DisplayOpCalcClass;                                // 0x0018(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1OntimeEventRemoveData
+// 0x0008 (0x0008 - 0x0000)
+struct FM1OntimeEventRemoveData final
+{
+public:
+	int64                                         EventId;                                           // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1AbilityTooltipSettingDetailData
+// 0x0028 (0x0028 - 0x0000)
+struct FM1AbilityTooltipSettingDetailData final
+{
+public:
+	class FName                                   Type;                                              // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   DataStringID;                                      // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   FormatStringID;                                    // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1AbilityTooltipRefData>       RefData;                                           // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonMiscDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1InstanceDungeonMiscDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1AbilityTooltipSettingData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1AbilityTooltipSettingData final : public FTableRowBase
+{
+public:
+	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1AbilityTooltipSettingDetailData> DetailData;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SeasonReinforceAbilityData
+// 0x0000 (0x0070 - 0x0070)
+struct FM1SeasonReinforceAbilityData final : public FM1AbilityData
+{
+};
+
+// ScriptStruct M1Data.M1DropItemLevelWeightData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1DropItemLevelWeightData final : public FTableRowBase
 {
 public:
 	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 StringId;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1MissionTargetType                          Type;                                              // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FSoftClassPath                         BlueprintClass;                                    // 0x0028(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1MissionTargetLevelData>      Lv;                                                // 0x0048(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<int32>                                 WeightList;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SeasonReinforceData
+// 0x0060 (0x0068 - 0x0008)
+struct FM1SeasonReinforceData final : public FTableRowBase
+{
+public:
+	class FName                                   StringId;                                          // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IconPath;                                          // 0x0010(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1SeasonReinforceGroupType                   GroupType;                                         // 0x0030(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_31[0x3];                                       // 0x0031(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         Cooltime;                                          // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1SeasonReinforceAbilityDataLink      SeasonReinforceAbility;                            // 0x0038(0x0030)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1StatusEffectUIData
+// 0x0038 (0x0038 - 0x0000)
+struct FM1StatusEffectUIData final
+{
+public:
+	struct FSoftObjectPath                        Icon;                                              // 0x0000(0x0020)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 NoticeStringId;                                    // 0x0020(0x0010)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   ToastId;                                           // 0x0030(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1DropItemLevelWeightDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1DropItemLevelWeightDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1StatusEffectData
+// 0x0098 (0x0108 - 0x0070)
+struct FM1StatusEffectData final : public FM1AbilityData
+{
+public:
+	struct FGameplayTag                           BlockingOwnerTag;                                  // 0x0070(0x0008)(Edit, BlueprintVisible, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Channel;                                           // 0x0078(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ApplyPriority;                                     // 0x007C(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1StatusEffectAmassType                      AmassType;                                         // 0x0080(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bReplaceOnlyDuration;                              // 0x0081(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_82[0x2];                                       // 0x0082(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         MaxStackCount;                                     // 0x0084(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         StartStackCount;                                   // 0x0088(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1StatusEffectStackDecreasePolicy            StackDecreasePolicy;                               // 0x008C(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_8D[0x3];                                       // 0x008D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 Duration;                                          // 0x0090(0x0010)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Period;                                            // 0x00A0(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_A4[0x4];                                       // 0x00A4(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1StatusEffectUIData                  UIData;                                            // 0x00A8(0x0038)(Edit, BlueprintVisible, NativeAccessSpecifierPublic)
+	struct FGameplayTag                           IdTag;                                             // 0x00E0(0x0008)(Edit, BlueprintVisible, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FGameplayTag>                   RemoveTags;                                        // 0x00E8(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FGameplayTag>                   ImmuneTags;                                        // 0x00F8(0x0010)(Edit, BlueprintVisible, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1EventMiscDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1EventMiscDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1ResponseBoundedCharacter
+// 0x0020 (0x0020 - 0x0000)
+struct FM1ResponseBoundedCharacter final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          PlayerTid;                                         // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1TemplateId>                  BindTids;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ScaledIntegerRange
+// 0x0010 (0x0010 - 0x0000)
+struct alignas(0x08) FM1ScaledIntegerRange final
+{
+public:
+	uint8                                         Pad_0[0x10];                                       // 0x0000(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1SummonsAIData
+// 0x0000 (0x01C0 - 0x01C0)
+struct FM1SummonsAIData final : public FM1MonsterAIData
+{
+};
+
+// ScriptStruct M1Data.M1EventAttendanceReward
+// 0x0048 (0x0048 - 0x0000)
+struct FM1EventAttendanceReward final
+{
+public:
+	struct FM1ItemDataBox                         Item;                                              // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
+	int64                                         Amount;                                            // 0x0038(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_44[0x4];                                       // 0x0044(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1EventAttendanceInfo
+// 0x0080 (0x0080 - 0x0000)
+struct FM1EventAttendanceInfo final
+{
+public:
+	int32                                         Days;                                              // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1EventAttendanceReward               Reward;                                            // 0x0008(0x0048)(Edit, NativeAccessSpecifierPublic)
+	struct FM1MailDataLink                        EventRewardMailId;                                 // 0x0050(0x0030)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SummonsSkillData
+// 0x0000 (0x0180 - 0x0180)
+struct FM1SummonsSkillData final : public FM1MonsterSkillData
+{
+};
+
+// ScriptStruct M1Data.M1CustomizingAbilityData
+// 0x0000 (0x0070 - 0x0070)
+struct FM1CustomizingAbilityData final : public FM1AbilityData
+{
+};
+
+// ScriptStruct M1Data.M1TitleMiscDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1TitleMiscDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1PerkAbilityData
+// 0x0000 (0x0070 - 0x0070)
+struct FM1PerkAbilityData final : public FM1AbilityData
+{
+};
+
+// ScriptStruct M1Data.M1ReactorAbilityData
+// 0x0000 (0x0070 - 0x0070)
+struct FM1ReactorAbilityData final : public FM1AbilityData
+{
+};
+
+// ScriptStruct M1Data.M1ChatBlockRuleData
+// 0x0010 (0x0018 - 0x0008)
+struct FM1ChatBlockRuleData final : public FTableRowBase
+{
+public:
+	EM1ChattingBlockRule                          Rule;                                              // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          UseBlock;                                          // 0x0009(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_A[0x2];                                        // 0x000A(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         RestrictStackCount;                                // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ResetStackInterval;                                // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         UnblockTime;                                       // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1UICloseDialogData
+// 0x0038 (0x0038 - 0x0000)
+struct FM1UICloseDialogData final
+{
+public:
+	int32                                         UnlockSeasonReinforceCount;                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1DialogDataLink                      DialogId;                                          // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1LvFactorData
+// 0x0018 (0x0018 - 0x0000)
+struct FM1LvFactorData final
+{
+public:
+	int32                                         NumOfPartyMember;                                  // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1StatOverrideData>            StatOverrideList;                                  // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MissionTargetAbilityData
+// 0x0010 (0x0080 - 0x0070)
+struct FM1MissionTargetAbilityData final : public FM1AbilityData
+{
+public:
+	bool                                          Passive;                                           // 0x0070(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_71[0x3];                                       // 0x0071(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1MissionTargetActiveAbilityData      ActiveAbility;                                     // 0x0074(0x000C)(Edit, NoDestructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1InstanceDungeonAbilityData
@@ -9109,6 +8876,76 @@ public:
 	TArray<EM1MonsterCategory>                    MonsterCategories;                                 // 0x00A8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1QuestStartCondition
+// 0x0018 (0x0018 - 0x0000)
+struct FM1QuestStartCondition final
+{
+public:
+	EM1QuestStartConditionType                    Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         Count;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<class FString>                         Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1QuestDirection
+// 0x0038 (0x0038 - 0x0000)
+struct FM1QuestDirection final
+{
+public:
+	EM1QuestDirectionType                         Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class FString>                         Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        AssetPath;                                         // 0x0018(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MapSubDataStrId
+// 0x0018 (0x0018 - 0x0000)
+struct FM1MapSubDataStrId final
+{
+public:
+	class FString                                 ID;                                                // 0x0000(0x0010)(Edit, BlueprintVisible, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1MapSubType                                 Type;                                              // 0x0010(0x0001)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1OpenField
+// 0x0020 (0x0020 - 0x0000)
+struct FM1OpenField final
+{
+public:
+	struct FM1TemplateId                          MapTemplateId;                                     // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1MapSubDataStrId                     SubData;                                           // 0x0008(0x0018)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1QuestData
+// 0x00E8 (0x00F0 - 0x0008)
+struct FM1QuestData : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   StringIdName;                                      // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1QuestType                                  Type;                                              // 0x0014(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_15[0x3];                                       // 0x0015(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1QuestStartPoint>             StartPoints;                                       // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1QuestStartCondition>         StartConditions;                                   // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1QuestCompleteConditionGroupInfo     CompleteConditionGroupInfo;                        // 0x0038(0x000C)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	uint8                                         Pad_44[0x4];                                       // 0x0044(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1CompleteCondition>           CompleteConditions;                                // 0x0048(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1QuestDirection>              QuestDirections;                                   // 0x0058(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1OpenField                           OpenField;                                         // 0x0068(0x0020)(Edit, NativeAccessSpecifierPublic)
+	int64                                         RewardCharacterExp;                                // 0x0088(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         RewardMasteryExp;                                  // 0x0090(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         RewardSeasonExp;                                   // 0x0098(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1CurrencyPair>                RewardCurrencies;                                  // 0x00A0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1QuestRewardItem>             RewardItems;                                       // 0x00B0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1PlayerDataLink>              RequiredCharacterIds;                              // 0x00C0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FString                                 OutgoingMailId;                                    // 0x00D0(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         SubTrackerPriority;                                // 0x00E0(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ProgressId;                                        // 0x00E4(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   QuestMarkerTarget;                                 // 0x00E8(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1SearchKeywordData
 // 0x0018 (0x0020 - 0x0008)
 struct FM1SearchKeywordData final : public FTableRowBase
@@ -9119,45 +8956,25 @@ public:
 	TArray<struct FM1SearchKeywordInfo>           Keywords;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1RuneClassTypeData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1RuneClassTypeData final : public FTableRowBase
-{
-public:
-	EM1RuneClassType                              RuneClassType;                                     // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          WeaponBook;                                        // 0x0009(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_A[0x6];                                        // 0x000A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<EM1EquipItemClassType>                 WeaponClassType;                                   // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1BoostItemDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1BoostItemDataLink final : public FDataLink
 {
 };
 
+// ScriptStruct M1Data.M1CheatCreateCharacterRes
+// 0x0030 (0x0030 - 0x0000)
+struct FM1CheatCreateCharacterRes final
+{
+public:
+	EM1CheatCreateCharacterResultType             Result;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1CharacterInfo                       CreatedCharacter;                                  // 0x0008(0x0028)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1CurrencyInternalDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1CurrencyInternalDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1ResearchDataType
-// 0x0018 (0x0018 - 0x0000)
-struct FM1ResearchDataType final
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         RemainTicks;                                       // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ResearchStatus                             ResearchStatus;                                    // 0x0010(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_11[0x3];                                       // 0x0011(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         RepeatCount;                                       // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1CustomizingItemBaseLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1CustomizingItemBaseLink final : public FDataLink
 {
 };
 
@@ -9173,18 +8990,69 @@ struct FM1CharacterDataLink final : public FDataLink
 {
 };
 
+// ScriptStruct M1Data.M1RotationDropData
+// 0x0098 (0x00A0 - 0x0008)
+struct FM1RotationDropData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1MapBattleZoneDataLink               BattleZoneId;                                      // 0x0010(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1DifficultyInfoDataLink              DifficultyId;                                      // 0x0040(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        BGImagePath;                                       // 0x0070(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1DropItemLink>                RotationDrop;                                      // 0x0090(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1CharacterLevelDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1CharacterLevelDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1ItemShortIndexBundle
-// 0x0010 (0x0010 - 0x0000)
-struct FM1ItemShortIndexBundle final
+// ScriptStruct M1Data.M1BaseItemDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1BaseItemDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1PresetWearingInfo
+// 0x0020 (0x0020 - 0x0000)
+struct FM1PresetWearingInfo final
 {
 public:
-	TArray<int16>                                 ItemShortIndexList;                                // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	EM1PresetSlotType                             SlotIndex;                                         // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         ItemUid;                                           // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1ItemTidBox                          ItemTid;                                           // 0x0010(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         LoadoutSlotIndex;                                  // 0x001C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1PresetInfo
+// 0x0030 (0x0030 - 0x0000)
+struct FM1PresetInfo final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         PresetIndex;                                       // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 PresetName;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1PresetWearingInfo>           WearingList;                                       // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PresetInfoBundle
+// 0x0010 (0x0010 - 0x0000)
+struct FM1PresetInfoBundle final
+{
+public:
+	TArray<struct FM1PresetInfo>                  Presets;                                           // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PackageItemDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1PackageItemDataLink final : public FDataLink
+{
 };
 
 // ScriptStruct M1Data.M1RangedWeaponDataLink
@@ -9197,25 +9065,6 @@ struct FM1RangedWeaponDataLink final : public FDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1BossMonsterDataLink final : public FDataLink
 {
-};
-
-// ScriptStruct M1Data.M1FellowMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1FellowMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1TitleData
-// 0x0030 (0x0038 - 0x0008)
-struct FM1TitleData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 Title;                                             // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 TitleFemale;                                       // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1TitleType                                  Type;                                              // 0x0030(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_31[0x7];                                       // 0x0031(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1AccessoryDataLink
@@ -9242,26 +9091,59 @@ struct FM1BalanceDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1WeapnProficiencyPoint
-// 0x0010 (0x0010 - 0x0000)
-struct FM1WeapnProficiencyPoint final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          WeaponTemplateId;                                  // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          MonsterTemplateId;                                 // 0x000C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ProductDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1ProductDataLink final : public FDataLink
-{
-};
-
 // ScriptStruct M1Data.M1BattlePassProductDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1BattlePassProductDataLink final : public FDataLink
 {
+};
+
+// ScriptStruct M1Data.M1ProductMiscDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ProductMiscDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1PartyMemberInfo
+// 0x0048 (0x0048 - 0x0000)
+struct FM1PartyMemberInfo final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 AccountName;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         AuthValue;                                         // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          MasteryLevel;                                      // 0x0020(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_24[0x4];                                       // 0x0024(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 PlatformId;                                        // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         PlatformUid;                                       // 0x0038(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         PlatformType;                                      // 0x0040(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Master;                                            // 0x0041(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsCreator;                                         // 0x0042(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_43[0x5];                                       // 0x0043(0x0005)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1BattlePassShopDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1BattlePassShopDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RotationShopScheduleDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1RotationShopScheduleDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1ResearchResultNoti
+// 0x0020 (0x0020 - 0x0000)
+struct FM1ResearchResultNoti final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          ResearchTemplateId;                                // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ResearchReason                             Reason;                                            // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         RemainTicks;                                       // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ResearchStatus                             ResearchStatus;                                    // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1ResearchMiscDataLink
@@ -9270,52 +9152,38 @@ struct FM1ResearchMiscDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1RuneCompact
-// 0x0010 (0x0010 - 0x0000)
-struct FM1RuneCompact final
-{
-public:
-	int64                                         Uid;                                               // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Enchant;                                           // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int16                                         EquipCount;                                        // 0x000C(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_E[0x2];                                        // 0x000E(0x0002)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1RunesByTid
-// 0x0018 (0x0018 - 0x0000)
-struct FM1RunesByTid final
-{
-public:
-	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1RuneCompact>                 Runes;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1RuneClassTypeDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1RuneClassTypeDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1ItemSelectorUnit
-// 0x0018 (0x0018 - 0x0000)
-struct FM1ItemSelectorUnit final
+// ScriptStruct M1Data.M1PaintExtractData
+// 0x0078 (0x0080 - 0x0008)
+struct FM1PaintExtractData final : public FTableRowBase
 {
 public:
-	int32                                         Index;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1ItemDataBox>                 Items;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1RequiredItemData>            ExtractCost;                                       // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizingItemDataLink>     PaintCustomizingItemList;                          // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	bool                                          LimitMarkOn;                                       // 0x0030(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_31[0x3];                                       // 0x0031(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   StringId;                                          // 0x0034(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_3C[0x4];                                       // 0x003C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FSoftObjectPath                        IconPath;                                          // 0x0040(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        PaintGroupImagePath;                               // 0x0060(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RuneSocketGrantDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1RuneSocketGrantDataLink final : public FDataLink
+{
 };
 
 // ScriptStruct M1Data.M1ProficiencyMiscDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1ProficiencyMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1RuneComposeMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1RuneComposeMiscDataLink final : public FDataLink
 {
 };
 
@@ -9325,15 +9193,28 @@ struct FM1PlatformAchievementDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1VoidBattleDataLink
+// ScriptStruct M1Data.M1InstanceDungeonRotationRewardMax
+// 0x0028 (0x0028 - 0x0000)
+struct FM1InstanceDungeonRotationRewardMax final
+{
+public:
+	TArray<struct FM1ConsumableItemDataLink>      LimitItems;                                        // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int32                                         MaxCount;                                          // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FDateTime                              RotationStartTime;                                 // 0x0018(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RotationIntervalDay;                               // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RotationChangeTimeHour;                            // 0x0024(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ReactorMiscDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1VoidBattleDataLink final : public FDataLink
+struct FM1ReactorMiscDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1WorldMissionDataLink
+// ScriptStruct M1Data.M1VoidBattleDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1WorldMissionDataLink final : public FDataLink
+struct FM1VoidBattleDataLink final : public FDataLink
 {
 };
 
@@ -9349,33 +9230,38 @@ struct FM1InstanceDungeonMODDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1DropItemNotiElement
-// 0x0020 (0x0020 - 0x0000)
-struct FM1DropItemNotiElement final
-{
-public:
-	int64                                         DropOid;                                           // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         AccountUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1ItemTidBox                          ItemTid;                                           // 0x0010(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	int32                                         Count;                                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1DropItemInfoNoti
-// 0x0020 (0x0020 - 0x0000)
-struct FM1DropItemInfoNoti final
-{
-public:
-	int64                                         MosterUId;                                         // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          PartsTid;                                          // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1DropItemNotiElement>         DropItemNotiList;                                  // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InstanceDungeonSelectionMODDataLink
+// ScriptStruct M1Data.M1InstanceDungeonRewardDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1InstanceDungeonSelectionMODDataLink final : public FDataLink
+struct FM1InstanceDungeonRewardDataLink final : public FDataLink
 {
+};
+
+// ScriptStruct M1Data.M1MiniGameDropItemRequest
+// 0x0030 (0x0030 - 0x0000)
+struct FM1MiniGameDropItemRequest final
+{
+public:
+	struct FM1TemplateId                          MiniGameTid;                                       // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          DifficyltyTid;                                     // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<int64>                                 AccountUidList;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1AccountWithConsumableInfo           ConsumableInfo;                                    // 0x0018(0x0018)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonModifierPresetDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1InstanceDungeonModifierPresetDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RuneComposeResult
+// 0x0028 (0x0028 - 0x0000)
+struct FM1RuneComposeResult final
+{
+public:
+	EM1RuneReason                                 Result;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1TemplateId>                  RewardTemplateIdList;                              // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1TemplateId>                  NewAcquireTemplateIdList;                          // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1CharacterDungeonDataLink
@@ -9384,15 +9270,43 @@ struct FM1CharacterDungeonDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1InvasionDungeonMODDataLink
+// ScriptStruct M1Data.M1VoidVesselDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1InvasionDungeonMODDataLink final : public FDataLink
+struct FM1VoidVesselDataLink final : public FDataLink
 {
+};
+
+// ScriptStruct M1Data.M1PartyJoinInfo
+// 0x0070 (0x0070 - 0x0000)
+struct FM1PartyJoinInfo final
+{
+public:
+	class FString                                 SeqId;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 AccountName;                                       // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          MasteryLevel;                                      // 0x0028(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         AuthValue;                                         // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          CharacterTid;                                      // 0x0038(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_3C[0x4];                                       // 0x003C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         CharacterLevel;                                    // 0x0040(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         ElapsedTimeSec;                                    // 0x0048(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 PlatformId;                                        // 0x0050(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         PlatfromUid;                                       // 0x0060(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         PlatformType;                                      // 0x0068(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          CrossPlayOn;                                       // 0x0069(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_6A[0x6];                                       // 0x006A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1MailMiscDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1MailMiscDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1EventDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1EventDataLink final : public FDataLink
 {
 };
 
@@ -9402,20 +9316,23 @@ struct FM1EventBoostingDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1ItemLevelUpgradeData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1ItemLevelUpgradeData final : public FTableRowBase
+// ScriptStruct M1Data.M1ItemLevelUpgradeDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ItemLevelUpgradeDataLink final : public FDataLink
 {
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ItemTierType                               TargetTier;                                        // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1MaterialData>                MaterialDataList;                                  // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1TitleDataLink
+// ScriptStruct M1Data.M1EventAttendanceData
+// 0x0010 (0x00A8 - 0x0098)
+struct FM1EventAttendanceData final : public FM1EventBaseData
+{
+public:
+	TArray<struct FM1EventAttendanceInfo>         AttendanceInfo;                                    // 0x0098(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SetOptionDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1TitleDataLink final : public FDataLink
+struct FM1SetOptionDataLink final : public FDataLink
 {
 };
 
@@ -9437,44 +9354,35 @@ struct FM1BattlePassMiscDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1AchievementCategoryDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1AchievementCategoryDataLink final : public FDataLink
-{
-};
-
 // ScriptStruct M1Data.M1StatBaseDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1StatBaseDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1MiniGameMiscDataLink
+// ScriptStruct M1Data.M1MailMultiRequestInfo
+// 0x0010 (0x0010 - 0x0000)
+struct FM1MailMultiRequestInfo final
+{
+public:
+	TArray<int64>                                 MailIdList;                                        // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MiniGameDataLink
 // 0x0000 (0x0030 - 0x0030)
-struct FM1MiniGameMiscDataLink final : public FDataLink
+struct FM1MiniGameDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1NewMailPushInfo
-// 0x0020 (0x0020 - 0x0000)
-struct FM1NewMailPushInfo final
+// ScriptStruct M1Data.M1DifficultyInfoMiscDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1DifficultyInfoMiscDataLink final : public FDataLink
 {
-public:
-	EM1MailType                                   MailType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         AccountUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<int64>                                 NewMailIdList;                                     // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1QuestGroupDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1QuestGroupDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1RotationDropDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1RotationDropDataLink final : public FDataLink
 {
 };
 
@@ -9490,31 +9398,25 @@ struct FM1PaintExtractMiscDataLink final : public FDataLink
 {
 };
 
+// ScriptStruct M1Data.M1ItemSelectorDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1ItemSelectorDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1PaintExtractMiscData
+// 0x0008 (0x0010 - 0x0008)
+struct FM1PaintExtractMiscData final : public FTableRowBase
+{
+public:
+	int32                                         MaxPaintExtractOnceCount;                          // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
 // ScriptStruct M1Data.M1SeasonDataLink
 // 0x0000 (0x0030 - 0x0030)
 struct FM1SeasonDataLink final : public FDataLink
 {
-};
-
-// ScriptStruct M1Data.M1SeasonMiscDataLink
-// 0x0000 (0x0030 - 0x0030)
-struct FM1SeasonMiscDataLink final : public FDataLink
-{
-};
-
-// ScriptStruct M1Data.M1ItemSelectorData
-// 0x0090 (0x0098 - 0x0008)
-struct FM1ItemSelectorData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1ItemSelectorUnit>            Units;                                             // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	class FName                                   GroupName;                                         // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   StringId;                                          // 0x0028(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1ItemUIData                          UIData;                                            // 0x0030(0x0060)(Edit, NativeAccessSpecifierPublic)
-	bool                                          bIncludeUltimate;                                  // 0x0090(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_91[0x7];                                       // 0x0091(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1ShopBuyAcquireInfo
@@ -9526,36 +9428,77 @@ public:
 	int32                                         Count;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ShopBuyInfo
-// 0x0038 (0x0038 - 0x0000)
-struct FM1ShopBuyInfo final
+// ScriptStruct M1Data.M1SeasonMiscDataLink
+// 0x0000 (0x0030 - 0x0030)
+struct FM1SeasonMiscDataLink final : public FDataLink
+{
+};
+
+// ScriptStruct M1Data.M1RedeemItemBox
+// 0x0008 (0x0038 - 0x0030)
+struct FM1RedeemItemBox final : public FDataLinkUnion
 {
 public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          ShopId;                                            // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          ProductId;                                         // 0x000C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1CommonShopResultType                       Result;                                            // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RedeemType                                 Type;                                              // 0x0030(0x0001)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_31[0x7];                                       // 0x0031(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1JoinDedicatedServerParam
+// 0x0028 (0x0028 - 0x0000)
+struct FM1JoinDedicatedServerParam final
+{
+public:
+	struct FM1TemplateId                          MapTemplateId;                                     // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1MapSubData                          MapSubData;                                        // 0x0004(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	bool                                          CheckUnlock;                                       // 0x0014(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          PrivateField;                                      // 0x0015(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_16[0x2];                                       // 0x0016(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1MapModifier>                 Modifiers;                                         // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1DecomposeRewardData
+// 0x0040 (0x0040 - 0x0000)
+struct FM1DecomposeRewardData final
+{
+public:
+	struct FM1ItemDataBox                         RewardItem;                                        // 0x0000(0x0038)(Edit, NativeAccessSpecifierPublic)
+	int32                                         RewardCount;                                       // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_3C[0x4];                                       // 0x003C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1ConsumableItemData
+// 0x0148 (0x0150 - 0x0008)
+struct FM1ConsumableItemData : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   StringId;                                          // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FDateTime                              BuyTime;                                           // 0x0018(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         BuyCount;                                          // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_24[0x4];                                       // 0x0024(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1ShopBuyAcquireInfo>          AcquireList;                                       // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ShopBuyInfoBundle
-// 0x0010 (0x0010 - 0x0000)
-struct FM1ShopBuyInfoBundle final
-{
-public:
-	TArray<struct FM1ShopBuyInfo>                 BuyInfoList;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1JoinDedicatedServerAccounts
-// 0x0010 (0x0010 - 0x0000)
-struct FM1JoinDedicatedServerAccounts final
-{
-public:
-	TArray<int64>                                 Accounts;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1ItemUIData                          UIData;                                            // 0x0018(0x0060)(Edit, NativeAccessSpecifierPublic)
+	EM1ConsumableItemCategoryType                 Category;                                          // 0x0078(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemTierType                               TierType;                                          // 0x0079(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ConsumableItemHowToUse                     HowToUse;                                          // 0x007A(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          RemainAtUse;                                       // 0x007B(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ObtainableCountPerChance;                          // 0x007C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MaxCapacity;                                       // 0x0080(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Decomposable;                                      // 0x0084(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_85[0x3];                                       // 0x0085(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1DecomposeRewardData>         DecomposeRewards;                                  // 0x0088(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	bool                                          Deletable;                                         // 0x0098(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          SeasonReset;                                       // 0x0099(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_9A[0x6];                                       // 0x009A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1ItemDataBox                         SellingType;                                       // 0x00A0(0x0038)(Edit, NativeAccessSpecifierPublic)
+	int32                                         SellingPrice;                                      // 0x00D8(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_DC[0x4];                                       // 0x00DC(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1RedeemItemBox                       RedeemItem;                                        // 0x00E0(0x0038)(Edit, NativeAccessSpecifierPublic)
+	struct FSoftClassPath                         PropClass;                                         // 0x0118(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ImportantPriority;                                 // 0x0138(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ImportanceType                             ImportanceType;                                    // 0x013C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_13D[0x3];                                      // 0x013D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         FellowExp;                                         // 0x0140(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MasteryLevel;                                      // 0x0144(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsTemporary;                                       // 0x0148(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_149[0x7];                                      // 0x0149(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1BoostItemData
@@ -9571,14 +9514,32 @@ public:
 	int32                                         RemainSec;                                         // 0x015C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1BoostLimitData
-// 0x0008 (0x0008 - 0x0000)
-struct FM1BoostLimitData final
+// ScriptStruct M1Data.M1DifficultyAbilityInfo
+// 0x0038 (0x0038 - 0x0000)
+struct FM1DifficultyAbilityInfo final
 {
 public:
-	EM1BuffSubItemType                            BuffSubItemType;                                   // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         LimitValue;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          ApplyToPlayer;                                     // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1DifficultyAbilityDataLink           AbilityData;                                       // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1BattleZoneDifficultyData
+// 0x0040 (0x0040 - 0x0000)
+struct FM1BattleZoneDifficultyData final
+{
+public:
+	struct FM1MapBattleZoneDataLink               BattleZoneId;                                      // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1DifficultyAbilityInfo>       DifficultyAbilityInfo;                             // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1FieldDifficultyData
+// 0x0040 (0x0040 - 0x0000)
+struct FM1FieldDifficultyData final
+{
+public:
+	struct FM1MapDataLink                         MapId;                                             // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1BattleZoneDifficultyData>    BattleZoneDifficulty;                              // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1BoostItemMiscData
@@ -9594,18 +9555,6 @@ public:
 	struct FM1ProductDataLink                     PresetSlotIncrementProduct;                        // 0x00D8(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1InstanceDungeonSelectionMODData
-// 0x0040 (0x0050 - 0x0010)
-struct FM1InstanceDungeonSelectionMODData final : public FM1InstanceDungeonMODData
-{
-public:
-	int32                                         Category;                                          // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         CategoryRatio;                                     // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         ScoreBonus;                                        // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1InstanceDungeonAbilityDataLink      AbilityData;                                       // 0x0020(0x0030)(Edit, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1CurrencyInternalData
 // 0x0010 (0x0018 - 0x0008)
 struct FM1CurrencyInternalData final : public FTableRowBase
@@ -9617,14 +9566,6 @@ public:
 	EM1LoginPlatformTypes                         Platform;                                          // 0x000F(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	bool                                          IsTemporary;                                       // 0x0010(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1DifficultyInfoMiscData
-// 0x0010 (0x0018 - 0x0008)
-struct FM1DifficultyInfoMiscData final : public FTableRowBase
-{
-public:
-	TArray<EM1MonsterCategory>                    MonsterCategory;                                   // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1CurrencyData
@@ -9672,6 +9613,24 @@ public:
 	class FName                                   StringId;                                          // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
 	struct FM1ItemUIData                          UIData;                                            // 0x0018(0x0060)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MatchingStartPlayerAttribute
+// 0x0048 (0x0048 - 0x0000)
+struct FM1MatchingStartPlayerAttribute final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MaxClearRound;                                     // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 ControllerType;                                    // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 CountryName;                                       // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         PlayerWeaponAtk;                                   // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         PlayerSkillAtk;                                    // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         PlayerDefense;                                     // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         PlayerMaxShield;                                   // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         PlayerMaxHp;                                       // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         PlayerMaxMentality;                                // 0x0044(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1CustomizingCommonSkinData
@@ -9722,20 +9681,6 @@ public:
 	uint8                                         Pad_151[0x7];                                      // 0x0151(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1MatchingGameEndPlayerAttribute
-// 0x0020 (0x0020 - 0x0000)
-struct FM1MatchingGameEndPlayerAttribute final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RecordRevive;                                      // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RecordDeath;                                       // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RecordDamagegive;                                  // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RecordElapsedtime;                                 // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RecordFinalClearRound;                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
 // ScriptStruct M1Data.M1RingMenuActionData
 // 0x0008 (0x0080 - 0x0078)
 struct FM1RingMenuActionData final : public FM1CustomizingItemBase
@@ -9767,12 +9712,104 @@ public:
 	TArray<struct FM1DefaultSkin>                 DefaultSkins;                                      // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1EquipmentCategoryTypes
-// 0x0010 (0x0010 - 0x0000)
-struct FM1EquipmentCategoryTypes final
+// ScriptStruct M1Data.M1PlatformAchievementCompleteInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1PlatformAchievementCompleteInfo final
 {
 public:
-	TArray<EM1EquipmentCategoryType>              DataList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          AchievementId;                                     // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<EM1ContentsPlatformType>               AchievedPlatforms;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PlatformAchievementCompleteInfoList
+// 0x0010 (0x0010 - 0x0000)
+struct FM1PlatformAchievementCompleteInfoList final
+{
+public:
+	TArray<struct FM1PlatformAchievementCompleteInfo> CompleteInfos;                                     // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1FellowPropValuePair
+// 0x0010 (0x0010 - 0x0000)
+struct FM1FellowPropValuePair final
+{
+public:
+	EM1FellowPropertiesType                       PropType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	double                                        Value;                                             // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1FellowLevelInfo
+// 0x0028 (0x0028 - 0x0000)
+struct FM1FellowLevelInfo final
+{
+public:
+	int32                                         Level;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1StatValuePair>               PlayerAddStats;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1FellowPropValuePair>         FellowProperties;                                  // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CharacterUIData
+// 0x0080 (0x0080 - 0x0000)
+struct FM1CharacterUIData final
+{
+public:
+	struct FSoftObjectPath                        IconPath;                                          // 0x0000(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        BigIconPath;                                       // 0x0020(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IntroduceSequence;                                 // 0x0040(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftClassPath                         CustomHUDWidgetPath;                               // 0x0060(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CommonGaugeData
+// 0x0048 (0x0048 - 0x0000)
+struct FM1CommonGaugeData final
+{
+public:
+	class FString                                 CurrentStatStringId;                               // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 MaxStatStringId;                                   // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bFillOnInit;                                       // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FSoftClassPath                         WidgetPath;                                        // 0x0028(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PlayerData
+// 0x0108 (0x01E0 - 0x00D8)
+struct FM1PlayerData final : public FM1CharacterData
+{
+public:
+	class FName                                   Name;                                              // 0x00D8(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   CharacterConceptStringId;                          // 0x00E0(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1CharacterGender                            CharacterGender;                                   // 0x00E8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1CharacterGrade                             CharacterGrade;                                    // 0x00E9(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_EA[0x6];                                       // 0x00EA(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1CharacterUIData                     UIData;                                            // 0x00F0(0x0080)(Edit, NativeAccessSpecifierPublic)
+	struct FM1CommonGaugeData                     CommonGauge;                                       // 0x0170(0x0048)(Edit, NativeAccessSpecifierPublic)
+	int32                                         MasteryLevel;                                      // 0x01B8(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsTemporary;                                       // 0x01BC(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1BD[0x3];                                      // 0x01BD(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1RewardType>                  SellRewards;                                       // 0x01C0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FString                                 GroupId;                                           // 0x01D0(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MiniGameSpecialCharacterInfo
+// 0x0038 (0x0038 - 0x0000)
+struct FM1MiniGameSpecialCharacterInfo final
+{
+public:
+	struct FM1PlayerDataLink                      Character;                                         // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	class FName                                   DialogueId;                                        // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MiniGameExtraSettings
+// 0x0018 (0x0018 - 0x0000)
+struct FM1MiniGameExtraSettings final
+{
+public:
+	EM1MiniGameType                               Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1MiniGameSpecialCharacterInfo> SpecialCharacters;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1VariableMaxCapacity
@@ -9785,6 +9822,61 @@ public:
 	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
+// ScriptStruct M1Data.M1MasteryLevelData
+// 0x0098 (0x00A0 - 0x0008)
+struct FM1MasteryLevelData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RequiredExpToNextLv;                               // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         TotalRequiredExpToNextLv;                          // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RuneWeaponCapacity;                                // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RuneCharacterCapacity;                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         RuneWeaponSlot;                                    // 0x001C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         RuneCharacterSlot;                                 // 0x001D(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1E[0x2];                                       // 0x001E(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         EquipInventorySlot;                                // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         WareHouseSlot;                                     // 0x0024(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         WeaponSlot;                                        // 0x0028(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ReactorSlot;                                       // 0x002C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         AccessoryNeckSlot;                                 // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         AccessoryEarringSlot;                              // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         AccessoryRingSlot;                                 // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         AccessoryBraceletSlot;                             // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         TradeCount;                                        // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         CodexTargetSlot;                                   // 0x0044(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         PresetSlot;                                        // 0x0048(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         VoidVaultStabilizerMaxStack;                       // 0x004C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IconPath;                                          // 0x0050(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IconBigPath;                                       // 0x0070(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1MasteryUIData>               Info;                                              // 0x0090(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CharacterLevelData
+// 0x0028 (0x0030 - 0x0008)
+struct FM1CharacterLevelData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         RequiredExp;                                       // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         AccumulatedExp;                                    // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RuneCharacterCapacity;                             // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_24[0x4];                                       // 0x0024(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         RewardMasteryExp;                                  // 0x0028(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1DediGameInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1DediGameInfo final
+{
+public:
+	bool                                          IsPrivate;                                         // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         FieldMasterId;                                     // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         LeaveUserId;                                       // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1TracingQuestInfo
 // 0x0008 (0x0008 - 0x0000)
 struct FM1TracingQuestInfo final
@@ -9795,13 +9887,14 @@ public:
 	uint8                                         Pad_5[0x3];                                        // 0x0005(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1SetQuestTrackerNoti
-// 0x0010 (0x0010 - 0x0000)
-struct FM1SetQuestTrackerNoti final
+// ScriptStruct M1Data.M1BaseWeaponItemElement
+// 0x0038 (0x0038 - 0x0000)
+struct FM1BaseWeaponItemElement final
 {
 public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TracingQuestInfo                    QuestInfo;                                         // 0x0008(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	struct FM1EquipmentDataLink                   ID;                                                // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1BaseCustomizeItemElement
@@ -9812,6 +9905,16 @@ public:
 	struct FM1CustomizingItemDataLink             ID;                                                // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
 	bool                                          bEquip;                                            // 0x0030(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_31[0x7];                                       // 0x0031(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonScoreInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1InstanceDungeonScoreInfo final
+{
+public:
+	int32                                         MaxScore;                                          // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<int32>                                 MonsterKillScore;                                  // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1BaseItemData
@@ -9826,6 +9929,25 @@ public:
 	TArray<struct FM1BaseWeaponItemElement>       AccessorySlot;                                     // 0x0050(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 	struct FM1BaseWeaponItemElement               ReactorSlot;                                       // 0x0060(0x0038)(Edit, NativeAccessSpecifierPublic)
 	TArray<struct FM1BaseCustomizeItemElement>    CustomizingList;                                   // 0x0098(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonLimitInfo
+// 0x0008 (0x0008 - 0x0000)
+struct FM1InstanceDungeonLimitInfo final
+{
+public:
+	struct FM1TemplateId                          ItemTid;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         TotalAmount;                                       // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonLimitInfoList
+// 0x0018 (0x0018 - 0x0000)
+struct FM1InstanceDungeonLimitInfoList final
+{
+public:
+	int32                                         RemainTimeSec;                                     // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1InstanceDungeonLimitInfo>    Values;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1DropGroupElement
@@ -9851,60 +9973,23 @@ public:
 	TArray<struct FM1DropGroupElement>            DropGroupElementList;                              // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1CheatRequestMatchingParam
-// 0x0030 (0x0030 - 0x0000)
-struct FM1CheatRequestMatchingParam final
+// ScriptStruct M1Data.M1MaterialData
+// 0x0018 (0x0018 - 0x0000)
+struct FM1MaterialData final
 {
 public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          MapId;                                             // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1MapSubData                          MapSubData;                                        // 0x000C(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	bool                                          IsPrivate;                                         // 0x001C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1MapModifier>                 Modifiers;                                         // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	EM1ItemTierType                               MaterialTier;                                      // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1RequiredItemData>            RequiredItems;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1DropItemElement
-// 0x0038 (0x0038 - 0x0000)
-struct FM1DropItemElement final
+// ScriptStruct M1Data.M1PackageGroupUpgradeInfo
+// 0x0060 (0x0060 - 0x0000)
+struct FM1PackageGroupUpgradeInfo final
 {
 public:
-	struct FM1DropGroupDataLink                   DropGroupId;                                       // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	float                                         Ratio;                                             // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1InstantUseDropItemElement
-// 0x0038 (0x0038 - 0x0000)
-struct FM1InstantUseDropItemElement final
-{
-public:
-	struct FM1InstantUseDropGroupDataLink         DropGroupId;                                       // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	float                                         Ratio;                                             // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1DropItem
-// 0x0028 (0x0030 - 0x0008)
-struct FM1DropItem final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1DropItemElement>             DropItemElementList;                               // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1InstantUseDropItemElement>   InstantUseDropItemElementList;                     // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1DecomposeRewardItemInfo
-// 0x0014 (0x0014 - 0x0000)
-struct FM1DecomposeRewardItemInfo final
-{
-public:
-	EM1ItemType                                   Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FName                                   Name;                                              // 0x0004(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MinValue;                                          // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MaxValue;                                          // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1ConsumableItemDataLink              RequiredStabilizerId;                              // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1PackageGroupDataLink                PackageGroupId;                                    // 0x0030(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1PackageItemData
@@ -9929,16 +10014,15 @@ public:
 	TArray<struct FM1RequiredItemData>            RequiredItems;                                     // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ChargeLevelData
-// 0x0014 (0x0014 - 0x0000)
-struct FM1ChargeLevelData final
+// ScriptStruct M1Data.M1PlatformAchievementPlatformInfo
+// 0x0018 (0x0018 - 0x0000)
+struct FM1PlatformAchievementPlatformInfo final
 {
 public:
-	float                                         ChargeAmount;                                      // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         ChargeRate;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         DischargeRate;                                     // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         SteadyDuration;                                    // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         DamageMultiplier;                                  // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ContentsPlatformType                       Platform;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          bAlreadyAchieved;                                  // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 ID;                                                // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1RangedWeaponData
@@ -9973,17 +10057,6 @@ public:
 	uint8                                         Pad_1A9[0x7];                                      // 0x01A9(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1ReactorOptimizedConditionData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1ReactorOptimizedConditionData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ReactorOptimizedConditionType              ConditionType;                                     // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 ConditionId;                                       // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1MonsterMiscData
 // 0x0010 (0x0018 - 0x0008)
 struct FM1MonsterMiscData final : public FTableRowBase
@@ -10007,6 +10080,18 @@ public:
 	uint8                                         Pad_1E1[0x7];                                      // 0x01E1(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
+// ScriptStruct M1Data.M1FellowData
+// 0x0098 (0x0170 - 0x00D8)
+struct FM1FellowData final : public FM1CharacterData
+{
+public:
+	EM1ItemTierType                               Tier;                                              // 0x00D8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D9[0x7];                                       // 0x00D9(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1FellowLevelInfo>             FellowLv;                                          // 0x00E0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1ItemUIData                          UIData;                                            // 0x00F0(0x0060)(Edit, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IntroduceSequencePath;                             // 0x0150(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1FellowMiscData
 // 0x0008 (0x0010 - 0x0008)
 struct FM1FellowMiscData final : public FTableRowBase
@@ -10014,18 +10099,6 @@ struct FM1FellowMiscData final : public FTableRowBase
 public:
 	float                                         AutoDecomposeInterval;                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1AttendanceInfo
-// 0x000C (0x000C - 0x0000)
-struct FM1AttendanceInfo final
-{
-public:
-	struct FM1TemplateId                          EventId;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int16                                         Count;                                             // 0x0004(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int16                                         RewardedIndex;                                     // 0x0006(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int16                                         LastRewardIndex;                                   // 0x0008(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_A[0x2];                                        // 0x000A(0x0002)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1AccessoryData
@@ -10050,31 +10123,40 @@ public:
 	struct FM1ItemOptionStat                      BaseStat;                                          // 0x0018(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1CheckEnchantRuneRes
+// ScriptStruct M1Data.M1RuneSocketTypeSelection
+// 0x0003 (0x0003 - 0x0000)
+struct FM1RuneSocketTypeSelection final
+{
+public:
+	EM1RuneSocketType                             SelectedSocketType;                                // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RuneSubClassType                           RuneSubClassType;                                  // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         SocketIndex;                                       // 0x0002(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1VoidVesselCompleteResult
 // 0x0018 (0x0018 - 0x0000)
-struct FM1CheckEnchantRuneRes final
+struct FM1VoidVesselCompleteResult final
 {
 public:
-	EM1RuneReason                                 Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1InstanceDungeonCompleteReason              Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1LoadoutSlotTypeAndIndex>     CapacityOverSlots;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1PackageItemElementInfo>      RewardItems;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1MatchingAuidList
-// 0x0010 (0x0010 - 0x0000)
-struct FM1MatchingAuidList final
+// ScriptStruct M1Data.M1ShopBuyInfo
+// 0x0038 (0x0038 - 0x0000)
+struct FM1ShopBuyInfo final
 {
 public:
-	TArray<int64>                                 Auids;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RotationShopScheduleInfo
-// 0x0008 (0x0008 - 0x0000)
-struct FM1RotationShopScheduleInfo final
-{
-public:
-	struct FM1TemplateId                          Schedule;                                          // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Rotation;                                          // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          ShopId;                                            // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          ProductId;                                         // 0x000C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1CommonShopResultType                       Result;                                            // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FDateTime                              BuyTime;                                           // 0x0018(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         BuyCount;                                          // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_24[0x4];                                       // 0x0024(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1ShopBuyAcquireInfo>          AcquireList;                                       // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MonsterTagRatePair
@@ -10114,6 +10196,20 @@ public:
 	TArray<struct FM1FieldObjectActivateConditionParamsByDifficulty> ParamsByDifficulty;                                // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1DifficultyInfoData
+// 0x0078 (0x0080 - 0x0008)
+struct FM1DifficultyInfoData final : public FTableRowBase
+{
+public:
+	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          TemplateId;                                        // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1QuestDataLink                       UnlockQuest;                                       // 0x0018(0x0030)(Edit, NativeAccessSpecifierPublic)
+	class FName                                   StringId;                                          // 0x0048(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IconPath;                                          // 0x0050(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1FieldDifficultyData>         FieldDifficultyData;                               // 0x0070(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1FieldObjectData
 // 0x0090 (0x0098 - 0x0008)
 struct FM1FieldObjectData final : public FTableRowBase
@@ -10130,15 +10226,6 @@ public:
 	struct FM1DropItemLink                        NoneDifficultyDropItem;                            // 0x0038(0x0030)(Edit, NativeAccessSpecifierPublic)
 	TArray<struct FM1DifficultiesDropItem>        DifficultiesDropItem;                              // 0x0068(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 	struct FSoftClassPath                         BlueprintClass;                                    // 0x0078(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1QuestGroupData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1QuestGroupData final : public FTableRowBase
-{
-public:
-	class FName                                   StringId;                                          // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1QuestDataLink>               QuestList;                                         // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1PartsData
@@ -10171,6 +10258,16 @@ public:
 	TArray<class FName>                           WeaknessHitBoneNames;                              // 0x0080(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1ProficiencyAdditionalData
+// 0x0008 (0x0008 - 0x0000)
+struct FM1ProficiencyAdditionalData final
+{
+public:
+	EM1ItemTierType                               Tier;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	float                                         RewardMasteryExpRate;                              // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1WareHouseIncrementCost
 // 0x000C (0x000C - 0x0000)
 struct FM1WareHouseIncrementCost final
@@ -10181,14 +10278,30 @@ public:
 	int32                                         Cost;                                              // 0x0008(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1RuneComposeResourceData
-// 0x0008 (0x0008 - 0x0000)
-struct FM1RuneComposeResourceData final
+// ScriptStruct M1Data.M1RandomMatchBonusReward
+// 0x0030 (0x0030 - 0x0000)
+struct FM1RandomMatchBonusReward final
 {
 public:
-	EM1ItemTierType                               Tier;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         CharacterExp;                                      // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         ProficiencyExp;                                    // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         SeasonExp;                                         // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1CurrencyPair                        Currency;                                          // 0x0018(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1RandomMatchBonusRewardElement> Items;                                             // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1KilledMonsterInfo
+// 0x0014 (0x0014 - 0x0000)
+struct FM1KilledMonsterInfo final
+{
+public:
+	EM1EquipmentSlotType                          ProficiencySlotType;                               // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         GroupWeight;                                       // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          MonsterTid;                                        // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1EventBoostContentType                      ContentType;                                       // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         ContentTemplateId;                                 // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MapBattleZoneOpenCondition
@@ -10199,30 +10312,6 @@ public:
 	EM1MapBattleZoneOpenConditionType             Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<class FString>                         Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1BattlePassSeasonInfo
-// 0x0020 (0x0020 - 0x0000)
-struct FM1BattlePassSeasonInfo final
-{
-public:
-	struct FM1TemplateId                          BattlePassId;                                      // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RewardMaxLevel;                                    // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Exp;                                               // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Premium;                                           // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          LevelUpgrade;                                      // 0x0019(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1A[0x6];                                       // 0x001A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1BattlePassSeasonInfoBundle
-// 0x0018 (0x0018 - 0x0000)
-struct FM1BattlePassSeasonInfoBundle final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1BattlePassSeasonInfo>        Bundles;                                           // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MapGoalInfo
@@ -10260,50 +10349,6 @@ public:
 	TArray<struct FM1MapBattleZoneOpenCondition>  BattleZoneOpenCondition;                           // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 	TArray<struct FM1MapTargetInfo>               TargetInfo;                                        // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 	TArray<struct FM1MapGoalInfo>                 GoalInfo;                                          // 0x0050(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MailLanguageInfo
-// 0x0038 (0x0038 - 0x0000)
-struct FM1MailLanguageInfo final
-{
-public:
-	EM1Locale                                     Code;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 Sender;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 Title;                                             // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 Content;                                           // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1OntimeEventItem
-// 0x0010 (0x0010 - 0x0000)
-struct FM1OntimeEventItem final
-{
-public:
-	EM1ItemType                                   ItemType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         ItemTemplateId;                                    // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         Amount;                                            // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1OntimeEvent
-// 0x0040 (0x0040 - 0x0000)
-struct FM1OntimeEvent final
-{
-public:
-	int64                                         EventId;                                           // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FDateTime                              StartTime;                                         // 0x0008(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FDateTime                              EndTime;                                           // 0x0010(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FDateTime                              ExpireTime;                                        // 0x0018(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1MailLanguageInfo>            LanguageList;                                      // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1OntimeEventItem>             ItemList;                                          // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1OntimeEventBundle
-// 0x0010 (0x0010 - 0x0000)
-struct FM1OntimeEventBundle final
-{
-public:
-	TArray<struct FM1OntimeEvent>                 OntimeEventList;                                   // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MapData
@@ -10362,6 +10407,14 @@ public:
 	struct FM1MailDataLink                        Mail;                                              // 0x0198(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1MiniGameMiscData
+// 0x0010 (0x0018 - 0x0008)
+struct FM1MiniGameMiscData final : public FTableRowBase
+{
+public:
+	TArray<struct FM1MiniGameExtraSettings>       ExtraSettings;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1ProductDiscountPeriodData
 // 0x0020 (0x0020 - 0x0000)
 struct FM1ProductDiscountPeriodData final
@@ -10373,6 +10426,22 @@ public:
 	struct FDateTime                              EndTime;                                           // 0x0010(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	int32                                         DiscountRate;                                      // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1DropItemRequest
+// 0x0040 (0x0040 - 0x0000)
+struct FM1DropItemRequest final
+{
+public:
+	struct FM1TemplateId                          MonsterSpawnGroupTid;                              // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         MonsterUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MonsterLevel;                                      // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<EM1MonsterSubType>                     MonsterSubTypeList;                                // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<int64>                                 AccountUidList;                                    // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	EM1MonsterCategory                            MonsterCategory;                                   // 0x0038(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1ProductDetailData
@@ -10392,13 +10461,13 @@ public:
 	uint8                                         Pad_5C[0x4];                                       // 0x005C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1BattleZoneDifficultyData
-// 0x0040 (0x0040 - 0x0000)
-struct FM1BattleZoneDifficultyData final
+// ScriptStruct M1Data.M1RequestCustomizingEvolution
+// 0x0008 (0x0008 - 0x0000)
+struct FM1RequestCustomizingEvolution final
 {
 public:
-	struct FM1MapBattleZoneDataLink               BattleZoneId;                                      // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	TArray<struct FM1DifficultyAbilityInfo>       DifficultyAbilityInfo;                             // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          SkinTid;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         EvolutionIndex;                                    // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1ProductUIData
@@ -10411,23 +10480,8 @@ public:
 	struct FSoftObjectPath                        DetailImagePath;                                   // 0x0040(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1BossPartsDropItemRequest
-// 0x0030 (0x0030 - 0x0000)
-struct FM1BossPartsDropItemRequest final
-{
-public:
-	struct FM1TemplateId                          MonsterTid;                                        // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         MonsterUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MonsterLevel;                                      // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          PartsTid;                                          // 0x0014(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsDebone;                                          // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<int64>                                 AccountUidList;                                    // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1ProductData
-// 0x0188 (0x0190 - 0x0008)
+// 0x0190 (0x0198 - 0x0008)
 struct FM1ProductData : public FTableRowBase
 {
 public:
@@ -10460,47 +10514,54 @@ public:
 	uint8                                         Pad_16C[0x4];                                      // 0x016C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<int32>                                 RepeatCount;                                       // 0x0170(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 	TArray<struct FM1ConsumableItemDataLink>      TicketInfos;                                       // 0x0180(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	bool                                          bShowLimitedWarning;                               // 0x0190(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_191[0x7];                                      // 0x0191(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1ResponseBoundedWeapon
+// ScriptStruct M1Data.M1QuestInfo
 // 0x0020 (0x0020 - 0x0000)
-struct FM1ResponseBoundedWeapon final
+struct FM1QuestInfo final
 {
 public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          WeaponTid;                                         // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1TemplateId>                  BindTids;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          QuestId;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1QuestParam>                  QuestParams;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	EM1QuestCompleteState                         CompleteState;                                     // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          Restartable;                                       // 0x001C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1QuestInfoList
+// 0x0028 (0x0028 - 0x0000)
+struct FM1QuestInfoList final
+{
+public:
+	TArray<struct FM1TracingQuestInfo>            TracingQuestInfos;                                 // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1QuestInfo>                   QuestInfos;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          DailyChallengeId;                                  // 0x0020(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          WeeklyChallengeId;                                 // 0x0024(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1PaidProductData
-// 0x0010 (0x01A0 - 0x0190)
+// 0x0010 (0x01A8 - 0x0198)
 struct FM1PaidProductData final : public FM1ProductData
 {
 public:
-	TArray<struct FM1ProductIdInfo>               ProductIdInfoList;                                 // 0x0190(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1ProductIdInfo>               ProductIdInfoList;                                 // 0x0198(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1BattlePassProductData
-// 0x0008 (0x0198 - 0x0190)
+// 0x0008 (0x01A0 - 0x0198)
 struct FM1BattlePassProductData final : public FM1ProductData
 {
 public:
-	bool                                          Premium;                                           // 0x0190(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          LargeSize;                                         // 0x0191(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_192[0x6];                                      // 0x0192(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1MainQuestJumpResult
-// 0x0010 (0x0010 - 0x0000)
-struct FM1MainQuestJumpResult final
-{
-public:
-	TArray<struct FM1TemplateId>                  CompleteQuestIds;                                  // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	bool                                          Premium;                                           // 0x0198(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          LargeSize;                                         // 0x0199(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19A[0x6];                                      // 0x019A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1RotationProductData
-// 0x0000 (0x0190 - 0x0190)
+// 0x0000 (0x0198 - 0x0198)
 struct FM1RotationProductData final : public FM1ProductData
 {
 };
@@ -10512,6 +10573,16 @@ struct FM1ProductMiscData final : public FTableRowBase
 public:
 	int32                                         ImminentDayDeadline;                               // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1AchievementData
+// 0x0028 (0x0118 - 0x00F0)
+struct FM1AchievementData final : public FM1QuestData
+{
+public:
+	struct FSoftObjectPath                        IconPath;                                          // 0x00F0(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         AchievementPoint;                                  // 0x0110(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         SortId;                                            // 0x0114(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1CommonShopData
@@ -10529,25 +10600,18 @@ public:
 	struct FM1MailDataLink                        Mail;                                              // 0x0030(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1FixedOptionIndexes
+// 0x0010 (0x0010 - 0x0000)
+struct FM1FixedOptionIndexes final
+{
+public:
+	TArray<int16>                                 OptionIndexes;                                     // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1BattlePassShopData
 // 0x0000 (0x0060 - 0x0060)
 struct FM1BattlePassShopData final : public FM1CommonShopData
 {
-};
-
-// ScriptStruct M1Data.M1RecordData
-// 0x0068 (0x0070 - 0x0008)
-struct FM1RecordData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   StringId;                                          // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 RecordTypeParam;                                   // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IconPath;                                          // 0x0028(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        SeqAssetPath;                                      // 0x0048(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1RecordType                                 RecordType;                                        // 0x0068(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_69[0x7];                                       // 0x0069(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1RotationShopData
@@ -10556,30 +10620,58 @@ struct FM1RotationShopData final : public FM1CommonShopData
 {
 };
 
-// ScriptStruct M1Data.M1ShopBuyData
-// 0x0010 (0x0010 - 0x0000)
-struct FM1ShopBuyData final
-{
-public:
-	int32                                         ProductTid;                                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         BuyCount;                                          // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FDateTime                              BuyDate;                                           // 0x0008(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ShopBuyBundleData
-// 0x0010 (0x0010 - 0x0000)
-struct FM1ShopBuyBundleData final
-{
-public:
-	TArray<struct FM1ShopBuyData>                 DataList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1RotationShopListInfo
 // 0x0010 (0x0010 - 0x0000)
 struct FM1RotationShopListInfo final
 {
 public:
 	TArray<struct FM1RotationShopDataLink>        ShopList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1AccountInfo
+// 0x01B0 (0x01B0 - 0x0000)
+struct FM1AccountInfo final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 Name;                                              // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MasteryLevel;                                      // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         MasteryExp;                                        // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1InventoryInfo                       Inventory;                                         // 0x0028(0x00C0)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1WearingInfo>                 WearingList;                                       // 0x00E8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1UnlockedFieldInfo>           UnlockedFields;                                    // 0x00F8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1VoidBattleClearInfo>         VoidBattleClearCounts;                             // 0x0108(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int64                                         SelectedCharacterUid;                              // 0x0118(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         SelectedFellowTid;                                 // 0x0120(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          LastMapTemplateId;                                 // 0x0124(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          LastBattleZoneId;                                  // 0x0128(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_12C[0x4];                                      // 0x012C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 LoginPlatformId;                                   // 0x0130(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         LoginPlatformUid;                                  // 0x0140(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         LoginPlatformType;                                 // 0x0148(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_149[0x7];                                      // 0x0149(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         Npsn;                                              // 0x0150(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 CountryName;                                       // 0x0158(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 DeviceName;                                        // 0x0168(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 OsType;                                            // 0x0178(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 OsName;                                            // 0x0188(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 TeamAssignmentID;                                  // 0x0198(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsCreator;                                         // 0x01A8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1A9[0x7];                                      // 0x01A9(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1GetAccountInfoRes
+// 0x01E0 (0x01E0 - 0x0000)
+struct FM1GetAccountInfoRes final
+{
+public:
+	bool                                          Result;                                            // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 ServiceId;                                         // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 RegionId;                                          // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FDateTime                              ServerTimeSync;                                    // 0x0028(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1AccountInfo                         Account;                                           // 0x0030(0x01B0)(Edit, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1RotationShopScheduleData
@@ -10595,6 +10687,19 @@ public:
 	TArray<struct FM1RotationShopListInfo>        Rotation;                                          // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1FieldUnlockedNoti
+// 0x0040 (0x0040 - 0x0000)
+struct FM1FieldUnlockedNoti final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          MapTemplateId;                                     // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1MapSubData                          MapSubData;                                        // 0x000C(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class FString>                         CampEntryPointId;                                  // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1TemplateId>                  BattleZoneId;                                      // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1ResearchCurrency
 // 0x0008 (0x0008 - 0x0000)
 struct FM1ResearchCurrency final
@@ -10605,36 +10710,6 @@ public:
 	int32                                         Price;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1PartyMemberInfo
-// 0x0048 (0x0048 - 0x0000)
-struct FM1PartyMemberInfo final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 AccountName;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         AuthValue;                                         // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          MasteryLevel;                                      // 0x0020(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_24[0x4];                                       // 0x0024(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 PlatformId;                                        // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         PlatformUid;                                       // 0x0038(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LoginPlatformTypes                         PlatformType;                                      // 0x0040(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Master;                                            // 0x0041(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsCreator;                                         // 0x0042(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_43[0x5];                                       // 0x0043(0x0005)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1PartyMemberChangeNoti
-// 0x0028 (0x0028 - 0x0000)
-struct FM1PartyMemberChangeNoti final
-{
-public:
-	bool                                          HasParty;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         PartyId;                                           // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         AccountUid;                                        // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1PartyMemberInfo>             Members;                                           // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1BoostCurrency
 // 0x0008 (0x0008 - 0x0000)
 struct FM1BoostCurrency final
@@ -10643,19 +10718,6 @@ public:
 	EM1CurrencyType                               Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
 	int32                                         Price;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1QuestInfo
-// 0x0020 (0x0020 - 0x0000)
-struct FM1QuestInfo final
-{
-public:
-	struct FM1TemplateId                          QuestId;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1QuestParam>                  QuestParams;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	EM1QuestCompleteState                         CompleteState;                                     // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Restartable;                                       // 0x001C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1ResearchResultItem
@@ -10700,14 +10762,6 @@ public:
 	uint8                                         Pad_8B[0x5];                                       // 0x008B(0x0005)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1SpecValue
-// 0x0004 (0x0004 - 0x0000)
-struct FM1SpecValue final
-{
-public:
-	int32                                         Value;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1ResearchMiscData
 // 0x0018 (0x0020 - 0x0008)
 struct FM1ResearchMiscData final : public FTableRowBase
@@ -10720,14 +10774,17 @@ public:
 	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1FilterOption
-// 0x0003 (0x0003 - 0x0000)
-struct FM1FilterOption final
+// ScriptStruct M1Data.M1EventMiscData
+// 0x0030 (0x0038 - 0x0008)
+struct FM1EventMiscData final : public FTableRowBase
 {
 public:
-	EM1ItemTierType                               ItemTierType;                                      // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1RoundsType                                 RoundsType;                                        // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1EquipItemClassType                         ClassType;                                         // 0x0002(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         DailyResetTime;                                    // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1DayOfWeek                                  WeeklyResetDate;                                   // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FSoftClassPath                         EventWidgetClass;                                  // 0x0010(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         OntimeEventCheckPeriodSec;                         // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1ItemDefBundle
@@ -10738,6 +10795,33 @@ public:
 	int32                                         Ratio;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<struct FM1ItemDef>                     Items;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SearchResponse
+// 0x0070 (0x0070 - 0x0000)
+struct FM1SearchResponse final
+{
+public:
+	EM1SearchType                                 Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1SearchErrorCode                            ErrorCode;                                         // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 AccountName;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          MapTemplatedId;                                    // 0x0018(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         MasteryLevel;                                      // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          CharacterTid;                                      // 0x0028(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         CharacterLevel;                                    // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          PrefixTitleTid;                                    // 0x0038(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          SuffixTitleTid;                                    // 0x003C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 LoginPlatformId;                                   // 0x0040(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         LoginPlatformUid;                                  // 0x0050(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         LoginPlatform;                                     // 0x0058(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_59[0x7];                                       // 0x0059(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         ExternAuthValue;                                   // 0x0060(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsCreator;                                         // 0x0068(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          PartyMaster;                                       // 0x0069(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_6A[0x6];                                       // 0x006A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1MissionRewards
@@ -10758,6 +10842,26 @@ public:
 	TArray<struct FM1ItemDefBundle>               ItemsByGrade;                                      // 0x0060(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1LoginResponseInfo
+// 0x0068 (0x0068 - 0x0000)
+struct FM1LoginResponseInfo final
+{
+public:
+	EM1LoginResultType                            LoginResultType;                                   // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 GameServerAddr;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int16                                         Port;                                              // 0x0018(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1A[0x2];                                       // 0x001A(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         GameServerIndex;                                   // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 GameServerVersion;                                 // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 SessionToken;                                      // 0x0030(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0040(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 AccountName;                                       // 0x0048(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          ForcedCrossPlayOff;                                // 0x0058(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_59[0x7];                                       // 0x0059(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         QueueNumber;                                       // 0x0060(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1MissionFieldPrerequisite
 // 0x0020 (0x0020 - 0x0000)
 struct FM1MissionFieldPrerequisite final
@@ -10770,21 +10874,6 @@ public:
 	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1PartyErrorMessageNoti
-// 0x0048 (0x0048 - 0x0000)
-struct FM1PartyErrorMessageNoti final
-{
-public:
-	class FString                                 SeqId;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1PartyContentsType                          ContensType;                                       // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         ReceiverUid;                                       // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 SenderName;                                        // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 SenderPlatformId;                                  // 0x0030(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1PartyErrorCode                             SenderMessage;                                     // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_44[0x4];                                       // 0x0044(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
 // ScriptStruct M1Data.M1MissionRequiredActivateCondition
 // 0x0018 (0x0018 - 0x0000)
 struct FM1MissionRequiredActivateCondition final
@@ -10793,15 +10882,6 @@ public:
 	EM1MissionRequiredActivateConditionType       Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<class FString>                         Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1TupleId
-// 0x0008 (0x0008 - 0x0000)
-struct FM1TupleId final
-{
-public:
-	struct FM1TemplateId                          Value1;                                            // 0x0000(0x0004)(Edit, DisableEditOnInstance, NoDestructor, SimpleDisplay, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1MissionRewardsEvaluateCondition
@@ -10846,26 +10926,6 @@ public:
 	uint8                                         Pad_1A1[0x7];                                      // 0x01A1(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1MissionTaskSubData
-// 0x0068 (0x0070 - 0x0008)
-struct FM1MissionTaskSubData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   StringId;                                          // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   OptionalStringId;                                  // 0x0014(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1MonsterDropInfo>             MonsterDropInfoList;                               // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	int32                                         TaskSuccessScore;                                  // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   TaskDropCollection;                                // 0x0034(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FName                                   TaskDropSupply;                                    // 0x003C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         EliteApperanceChance;                              // 0x0044(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EliteMonsterSpawnMax;                              // 0x0048(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         EliteMonsterSpawnChance;                           // 0x004C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1EliteAbilityGroup>           EliteAbilityGroup;                                 // 0x0050(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1EliteMonsterSkillGroupDataLink> DefaultEliteAbilityGroup;                          // 0x0060(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1MissionWaveData
 // 0x00C0 (0x00C8 - 0x0008)
 struct FM1MissionWaveData final : public FTableRowBase
@@ -10882,6 +10942,26 @@ public:
 	uint8                                         Pad_A4[0x4];                                       // 0x00A4(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<struct FM1EliteAbilityGroup>           EliteAbilityGroup;                                 // 0x00A8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 	TArray<struct FM1EliteMonsterSkillGroupDataLink> DefaultEliteAbilityGroup;                          // 0x00B8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RuneClassTypeData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1RuneClassTypeData final : public FTableRowBase
+{
+public:
+	EM1RuneClassType                              RuneClassType;                                     // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          WeaponBook;                                        // 0x0009(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_A[0x6];                                        // 0x000A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<EM1EquipItemClassType>                 WeaponClassType;                                   // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RuneLvData
+// 0x0040 (0x0040 - 0x0000)
+struct FM1RuneLvData final
+{
+public:
+	struct FM1StatusEffectDataLink                StatusEffect;                                      // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1StatValuePair>               BaseStats;                                         // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1EnchantRequiredCurrencyData
@@ -10965,54 +11045,44 @@ public:
 	uint8                                         Pad_155[0x3];                                      // 0x0155(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1RuneCostIncreaseResource
+// ScriptStruct M1Data.M1RuneSocketGrantDetailData
 // 0x0038 (0x0038 - 0x0000)
-struct FM1RuneCostIncreaseResource final
+struct FM1RuneSocketGrantDetailData final
 {
 public:
-	struct FM1ConsumableItemDataLink              ItemData;                                          // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	int32                                         Amount;                                            // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1ConsumableItemDataLink              ItemId;                                            // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	int32                                         Order;                                             // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1RuneMiscData
-// 0x0180 (0x0188 - 0x0008)
-struct FM1RuneMiscData final : public FTableRowBase
-{
-public:
-	int32                                         RuneWeapontMaxCount;                               // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RuneCharacterMaxCount;                             // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         RuneCostReduceValue;                               // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         RuneCostIncreaseValue;                             // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ItemTierType                               RuneDecomposeNoticeTier;                           // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x3];                                       // 0x0019(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         RuneDecomposeNoticeEnchantLevel;                   // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1RuneCostIncreaseResource            CharacterRuneCostIncreaseResource;                 // 0x0020(0x0038)(Edit, NativeAccessSpecifierPublic)
-	struct FM1RuneCostIncreaseResource            WeaponRuneCostIncreaseResource;                    // 0x0058(0x0038)(Edit, NativeAccessSpecifierPublic)
-	struct FM1ConsumableItemDataLink              RuneSocketGrantItem;                               // 0x0090(0x0030)(Edit, NativeAccessSpecifierPublic)
-	int32                                         CharacterAddRuneCapacity;                          // 0x00C0(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         WeaponAddRuneCapacity;                             // 0x00C4(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         CapacityIncreaseCorrection;                        // 0x00C8(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         CapacityReduceCorrection;                          // 0x00CC(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<class FString>                         ValidRuneGroupIds;                                 // 0x00D0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1RequiredItemData                    LoadoutSlotExpandRequiredItem;                     // 0x00E0(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-	int32                                         LoadoutNameLimitLength;                            // 0x00F0(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ItemTierType                               MinimumSendLostMailTier;                           // 0x00F4(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_F5[0x3];                                       // 0x00F5(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1CommonShopDataLink                  RuneShop;                                          // 0x00F8(0x0030)(Edit, NativeAccessSpecifierPublic)
-	struct FM1ProductDataLink                     RuneCapacityExtendProduct;                         // 0x0128(0x0030)(Edit, NativeAccessSpecifierPublic)
-	struct FM1ProductDataLink                     RuneSocketTypeProduct;                             // 0x0158(0x0030)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ProficiencyData
-// 0x0010 (0x0018 - 0x0008)
-struct FM1ProficiencyData final : public FTableRowBase
+// ScriptStruct M1Data.M1RuneSocketGrantData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1RuneSocketGrantData final : public FTableRowBase
 {
 public:
 	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RequiredProficiency;                               // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RewardMasteryExp;                                  // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         WeaponRuneCapacity;                                // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RuneClassType                              ClassType;                                         // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RuneSocketType                             SocketType;                                        // 0x000D(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_E[0x2];                                        // 0x000E(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1RuneSocketGrantDetailData>   DetailDatas;                                       // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ProficiencyMiscData
+// 0x0010 (0x0018 - 0x0008)
+struct FM1ProficiencyMiscData final : public FTableRowBase
+{
+public:
+	TArray<struct FM1ProficiencyAdditionalData>   AdditionalDataList;                                // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RuneComposeResourceData
+// 0x0008 (0x0008 - 0x0000)
+struct FM1RuneComposeResourceData final
+{
+public:
+	EM1ItemTierType                               Tier;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         GroupWeight;                                       // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1RuneIdData
@@ -11046,38 +11116,17 @@ public:
 	TArray<struct FM1RuneComposeRewardData>       RewardDataList;                                    // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1RuneComposeCostData
-// 0x0010 (0x0010 - 0x0000)
-struct FM1RuneComposeCostData final
-{
-public:
-	EM1ItemTierType                               Tier;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1CurrencyType                               CurrencyType;                                      // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_2[0x6];                                        // 0x0002(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Amount;                                            // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RuneComposeMiscData
-// 0x0020 (0x0028 - 0x0008)
-struct FM1RuneComposeMiscData final : public FTableRowBase
-{
-public:
-	int32                                         ComposeTargetCount;                                // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         AdditionalRewardWeightByClass;                     // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         AdditionalRewardWeightBySocket;                    // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1RuneComposeCostData>         CostDataList;                                      // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PerkData
-// 0x0078 (0x0080 - 0x0008)
-struct FM1PerkData final : public FTableRowBase
+// ScriptStruct M1Data.M1PlatformAchievementData
+// 0x0030 (0x0038 - 0x0008)
+struct FM1PlatformAchievementData final : public FTableRowBase
 {
 public:
 	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1PerkDetailData>              DetailDataList;                                    // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1PerkUIData                          UIData;                                            // 0x0020(0x0060)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1PlatformAchievementPlatformInfo> PlatformAchievementInfos;                          // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	EM1PlatformAchievementObjectiveCondition      ObjectiveCondition;                                // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<class FString>                         ObjectiveParams;                                   // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1ReactorOptimizeAddCost
@@ -11101,6 +11150,28 @@ public:
 	TArray<struct FM1ReactorOptimizedValueByTier> OptimizedValueByTierList;                          // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1ReactorEnchantRequiredItemData
+// 0x0014 (0x0014 - 0x0000)
+struct FM1ReactorEnchantRequiredItemData final
+{
+public:
+	EM1ItemType                                   ItemType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   ID;                                                // 0x0004(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Amount;                                            // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ConditionLevel;                                    // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ReactorEnchantRequiredData
+// 0x0018 (0x0018 - 0x0000)
+struct FM1ReactorEnchantRequiredData final
+{
+public:
+	int32                                         EnchantLevel;                                      // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1ReactorEnchantRequiredItemData> RequiredItemDataList;                              // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1ReactorEnchantRequiredDataByItemLevel
 // 0x0018 (0x0018 - 0x0000)
 struct FM1ReactorEnchantRequiredDataByItemLevel final
@@ -11121,39 +11192,14 @@ public:
 	TArray<struct FM1ReactorEnchantRequiredDataByItemLevel> EnchantRequireDataByItemLv;                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1LevelByNumOfSquadMember
-// 0x0008 (0x0008 - 0x0000)
-struct FM1LevelByNumOfSquadMember final
+// ScriptStruct M1Data.M1VoidBattleRequiredItem
+// 0x0038 (0x0038 - 0x0000)
+struct FM1VoidBattleRequiredItem final
 {
 public:
-	int32                                         NumOfMembers;                                      // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MonsterLevel;                                      // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1VoidBattleInfo
-// 0x0050 (0x0050 - 0x0000)
-struct FM1VoidBattleInfo final
-{
-public:
-	class FString                                 MonsterId;                                         // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 StringId;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1LevelByNumOfSquadMember>     MonsterLevelBySquad;                               // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	EM1VoidBattleDifficulty                       Difficulty;                                        // 0x0030(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_31[0x3];                                       // 0x0031(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         TimeLimit;                                         // 0x0034(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         DeathCount;                                        // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_3C[0x4];                                       // 0x003C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 FieldId;                                           // 0x0040(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1VoidBattleUnlockCondition
-// 0x0018 (0x0018 - 0x0000)
-struct FM1VoidBattleUnlockCondition final
-{
-public:
-	EM1VoidBattleUnlockConditionType              Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<class FString>                         Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1ConsumableItemDataLink              ItemId;                                            // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
+	int32                                         Amount;                                            // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1VoidBattleStartCondition
@@ -11164,6 +11210,14 @@ public:
 	EM1VoidBattleStartConditionType               Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<class FString>                         Params;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SpecValue
+// 0x0004 (0x0004 - 0x0000)
+struct FM1SpecValue final
+{
+public:
+	int32                                         Value;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1RecommendSpecsUIData
@@ -11207,25 +11261,74 @@ public:
 	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1WorldMissionData
-// 0x0048 (0x0050 - 0x0008)
-struct FM1WorldMissionData final : public FTableRowBase
+// ScriptStruct M1Data.M1InstanceFieldContentsDataBase
+// 0x00A8 (0x00B0 - 0x0008)
+struct FM1InstanceFieldContentsDataBase : public FTableRowBase
 {
 public:
 	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
 	struct FM1MapDataLink                         MapId;                                             // 0x0010(0x0030)(Edit, NativeAccessSpecifierPublic)
-	EM1InstanceDungeonDifficulty                  Difficulty;                                        // 0x0040(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_41[0x3];                                       // 0x0041(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FName                                   EnterWorldMissionToast;                            // 0x0044(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsAccessible;                                      // 0x004C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4D[0x3];                                       // 0x004D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class FString                                 PlayerStartTag;                                    // 0x0040(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        BGImagePath;                                       // 0x0050(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1MissionDataLink                     MissionId;                                         // 0x0070(0x0030)(Edit, NativeAccessSpecifierPublic)
+	TArray<struct FM1InstanceDungeonAbilityDataLink> DefaultAbilities;                                  // 0x00A0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1WorldMissionMiscData
-// 0x0000 (0x0008 - 0x0008)
-struct FM1WorldMissionMiscData final : public FTableRowBase
+// ScriptStruct M1Data.M1InstanceDungeonRotationReward
+// 0x0040 (0x0040 - 0x0000)
+struct FM1InstanceDungeonRotationReward final
 {
+public:
+	struct FM1RewardType                          Item;                                              // 0x0000(0x0040)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonData
+// 0x0090 (0x0140 - 0x00B0)
+struct FM1InstanceDungeonData final : public FM1InstanceFieldContentsDataBase
+{
+public:
+	class FString                                 Group;                                             // 0x00B0(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1InstanceDungeonDifficulty                  Difficulty;                                        // 0x00C0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C1[0x3];                                       // 0x00C1(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         MinMembers;                                        // 0x00C4(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1InstanceDungeonRewardDataLink> RewardGroups;                                      // 0x00C8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1InstanceDungeonRotationReward> RotationRewards;                                   // 0x00D8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1InstanceDungeonModifierPresetDataLink> ModifierPresets;                                   // 0x00E8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1RandomMatchBonusReward              RandomMatchBonusReward;                            // 0x00F8(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1InstanceDungeonScoreInfo            ScoreInfo;                                         // 0x0128(0x0018)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonRewardData
+// 0x0028 (0x0030 - 0x0008)
+struct FM1InstanceDungeonRewardData final : public FTableRowBase
+{
+public:
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 StringId;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1InstanceDungeonReward>       Rewards;                                           // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonMiscData
+// 0x0038 (0x0040 - 0x0008)
+struct FM1InstanceDungeonMiscData final : public FTableRowBase
+{
+public:
+	TArray<struct FM1InstanceDungeonModifierPresetCommonInfo> ModifierPresetCommonInfo;                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1InstanceDungeonRotationRewardMax    RotationRewardMax;                                 // 0x0018(0x0028)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InstanceDungeonSelectionMODData
+// 0x0040 (0x0050 - 0x0010)
+struct FM1InstanceDungeonSelectionMODData final : public FM1InstanceDungeonMODData
+{
+public:
+	int32                                         Category;                                          // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         CategoryRatio;                                     // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         ScoreBonus;                                        // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1InstanceDungeonAbilityDataLink      AbilityData;                                       // 0x0020(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1InstanceDungeonSelectionMODInfo
@@ -11268,6 +11371,26 @@ public:
 	int32                                         Ratio;                                             // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<struct FM1ItemDef>                     Items;                                             // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InvasionDungeonData
+// 0x0060 (0x0110 - 0x00B0)
+struct FM1InvasionDungeonData final : public FM1InstanceFieldContentsDataBase
+{
+public:
+	struct FM1InstanceDungeonDataLink             InstanceDungeon;                                   // 0x00B0(0x0030)(Edit, NativeAccessSpecifierPublic)
+	int32                                         SeasonExpLimit;                                    // 0x00E0(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_E4[0x4];                                       // 0x00E4(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1InvasionDungeonRewardInfo           RewardInfo;                                        // 0x00E8(0x0028)(Edit, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1InvasionDungeonMiscData
+// 0x0060 (0x0068 - 0x0008)
+struct FM1InvasionDungeonMiscData final : public FTableRowBase
+{
+public:
+	struct FM1QuestDataLink                       UnlockQuest;                                       // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
+	struct FM1InstanceFieldContentsDataBaseLink   UnlockDungeon;                                     // 0x0038(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1InvasionDungeonMODData
@@ -11357,17 +11480,27 @@ public:
 	struct FM1MailDataLink                        BulkAccountNameChangeMail;                         // 0x0018(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1EventMiscData
-// 0x0030 (0x0038 - 0x0008)
-struct FM1EventMiscData final : public FTableRowBase
+// ScriptStruct M1Data.M1ItemLevelUpgradeData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1ItemLevelUpgradeData final : public FTableRowBase
 {
 public:
-	int32                                         DailyResetTime;                                    // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1DayOfWeek                                  WeeklyResetDate;                                   // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ItemTierType                               TargetTier;                                        // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FSoftClassPath                         EventWidgetClass;                                  // 0x0010(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         OntimeEventCheckPeriodSec;                         // 0x0030(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_34[0x4];                                       // 0x0034(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1MaterialData>                MaterialDataList;                                  // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1DecomposeRewardItemInfo
+// 0x0014 (0x0014 - 0x0000)
+struct FM1DecomposeRewardItemInfo final
+{
+public:
+	EM1ItemType                                   Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	class FName                                   Name;                                              // 0x0004(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MinValue;                                          // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MaxValue;                                          // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1DecomposeRewardInfoPerLevel
@@ -11415,23 +11548,26 @@ public:
 	TArray<struct FM1SetOptionDetailData>         DetailDataList;                                    // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1DropItemLevelWeightDetailData
-// 0x0008 (0x0008 - 0x0000)
-struct FM1DropItemLevelWeightDetailData final
-{
-public:
-	int32                                         Diff;                                              // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	float                                         Weight;                                            // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1DropItemLevelWeightData
-// 0x0018 (0x0020 - 0x0008)
-struct FM1DropItemLevelWeightData final : public FTableRowBase
+// ScriptStruct M1Data.M1TitleData
+// 0x0030 (0x0038 - 0x0008)
+struct FM1TitleData final : public FTableRowBase
 {
 public:
 	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<int32>                                 WeightList;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FString                                 Title;                                             // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 TitleFemale;                                       // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1TitleType                                  Type;                                              // 0x0030(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_31[0x7];                                       // 0x0031(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1TitleMiscData
+// 0x0030 (0x0038 - 0x0008)
+struct FM1TitleMiscData final : public FTableRowBase
+{
+public:
+	TArray<class FString>                         ReverseOrderList;                                  // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IconPath;                                          // 0x0018(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1BattlePassChallengeReward
@@ -11533,154 +11669,84 @@ public:
 	class FName                                   BGId;                                              // 0x00A0(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1BattlePassMiscData
-// 0x00A0 (0x00A8 - 0x0008)
-struct FM1BattlePassMiscData final : public FTableRowBase
-{
-public:
-	struct FM1ItemDataBox                         PremiumResource;                                   // 0x0008(0x0038)(Edit, NativeAccessSpecifierPublic)
-	int32                                         PremiumResourceAmount;                             // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_44[0x4];                                       // 0x0044(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1ItemDataBox                         LevelUpResource;                                   // 0x0048(0x0038)(Edit, NativeAccessSpecifierPublic)
-	int32                                         LevelUpResourceAmount;                             // 0x0080(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         BundleUnitCount;                                   // 0x0084(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         BundleDiscountRate;                                // 0x0088(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         CompileRate;                                       // 0x008C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	double                                        AlertRemainSeconds;                                // 0x0090(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MissionRepeatExp;                                  // 0x0098(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MissionWaveExp;                                    // 0x009C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         VoidBattleExp;                                     // 0x00A0(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         AdjustmentRandTime;                                // 0x00A4(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1AchievementData
-// 0x0028 (0x0118 - 0x00F0)
-struct FM1AchievementData final : public FM1QuestData
-{
-public:
-	struct FSoftObjectPath                        IconPath;                                          // 0x00F0(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         AchievementPoint;                                  // 0x0110(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         SortId;                                            // 0x0114(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MiniGameParam
-// 0x0020 (0x0020 - 0x0000)
-struct FM1MiniGameParam final
-{
-public:
-	class FString                                 Key;                                               // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 Value;                                             // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MiniGameDetailData
-// 0x0070 (0x0070 - 0x0000)
-struct FM1MiniGameDetailData final
-{
-public:
-	struct FM1DifficultyInfoDataLink              FieldDifficulty;                                   // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	TArray<struct FM1MiniGameParam>               Params;                                            // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1DropItemLink                        Reward;                                            // 0x0040(0x0030)(Edit, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MiniGameData
-// 0x0020 (0x0028 - 0x0008)
-struct FM1MiniGameData final : public FTableRowBase
+// ScriptStruct M1Data.M1RecordData
+// 0x0068 (0x0070 - 0x0008)
+struct FM1RecordData final : public FTableRowBase
 {
 public:
 	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1MiniGameType                               Type;                                              // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1MiniGameDetailData>          DetailDataList;                                    // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	class FName                                   StringId;                                          // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MiniGameSpecialCharacterInfo
-// 0x0038 (0x0038 - 0x0000)
-struct FM1MiniGameSpecialCharacterInfo final
-{
-public:
-	struct FM1PlayerDataLink                      Character;                                         // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	class FName                                   DialogueId;                                        // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MiniGameExtraSettings
-// 0x0018 (0x0018 - 0x0000)
-struct FM1MiniGameExtraSettings final
-{
-public:
-	EM1MiniGameType                               Type;                                              // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1MiniGameSpecialCharacterInfo> SpecialCharacters;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MiniGameMiscData
-// 0x0010 (0x0018 - 0x0008)
-struct FM1MiniGameMiscData final : public FTableRowBase
-{
-public:
-	TArray<struct FM1MiniGameExtraSettings>       ExtraSettings;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1FieldDifficultyData
-// 0x0040 (0x0040 - 0x0000)
-struct FM1FieldDifficultyData final
-{
-public:
-	struct FM1MapDataLink                         MapId;                                             // 0x0000(0x0030)(Edit, NativeAccessSpecifierPublic)
-	TArray<struct FM1BattleZoneDifficultyData>    BattleZoneDifficulty;                              // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1DifficultyInfoData
-// 0x0078 (0x0080 - 0x0008)
-struct FM1DifficultyInfoData final : public FTableRowBase
-{
-public:
-	class FName                                   Name;                                              // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          TemplateId;                                        // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   StringId;                                          // 0x000C(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1QuestDataLink                       UnlockQuest;                                       // 0x0018(0x0030)(Edit, NativeAccessSpecifierPublic)
-	class FName                                   StringId;                                          // 0x0048(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        IconPath;                                          // 0x0050(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1FieldDifficultyData>         FieldDifficultyData;                               // 0x0070(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FString                                 RecordTypeParam;                                   // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        IconPath;                                          // 0x0028(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        SeqAssetPath;                                      // 0x0048(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RecordType                                 RecordType;                                        // 0x0068(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_69[0x7];                                       // 0x0069(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1RotationDropData
-// 0x0098 (0x00A0 - 0x0008)
-struct FM1RotationDropData final : public FTableRowBase
+// ScriptStruct M1Data.M1DifficultyInfoMiscData
+// 0x0010 (0x0018 - 0x0008)
+struct FM1DifficultyInfoMiscData final : public FTableRowBase
+{
+public:
+	TArray<EM1MonsterCategory>                    MonsterCategory;                                   // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1QuestGroupData
+// 0x0018 (0x0020 - 0x0008)
+struct FM1QuestGroupData final : public FTableRowBase
+{
+public:
+	class FName                                   StringId;                                          // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1QuestDataLink>               QuestList;                                         // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MissionDropRatio
+// 0x0008 (0x0008 - 0x0000)
+struct FM1MissionDropRatio final
+{
+public:
+	EM1MissionCategory                            MissionCategory;                                   // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         DropRatio;                                         // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RotationDropMiscData
+// 0x0038 (0x0040 - 0x0008)
+struct FM1RotationDropMiscData final : public FTableRowBase
+{
+public:
+	struct FDateTime                              RotationStartTime;                                 // 0x0008(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RotationDateInterval;                              // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RotationChangeTime;                                // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1RotationDropRatio                   RotationDropRatio;                                 // 0x0018(0x0014)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2C[0x4];                                       // 0x002C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1MissionDropRatio>            MissionDropRatio;                                  // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ItemSelectorUnit
+// 0x0018 (0x0018 - 0x0000)
+struct FM1ItemSelectorUnit final
+{
+public:
+	int32                                         Index;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1ItemDataBox>                 Items;                                             // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ItemSelectorData
+// 0x0090 (0x0098 - 0x0008)
+struct FM1ItemSelectorData final : public FTableRowBase
 {
 public:
 	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1MapBattleZoneDataLink               BattleZoneId;                                      // 0x0010(0x0030)(Edit, NativeAccessSpecifierPublic)
-	struct FM1DifficultyInfoDataLink              DifficultyId;                                      // 0x0040(0x0030)(Edit, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        BGImagePath;                                       // 0x0070(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1DropItemLink>                RotationDrop;                                      // 0x0090(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PaintExtractData
-// 0x0078 (0x0080 - 0x0008)
-struct FM1PaintExtractData final : public FTableRowBase
-{
-public:
-	struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1RequiredItemData>            ExtractCost;                                       // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CustomizingItemDataLink>     PaintCustomizingItemList;                          // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	bool                                          LimitMarkOn;                                       // 0x0030(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_31[0x3];                                       // 0x0031(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	class FName                                   StringId;                                          // 0x0034(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_3C[0x4];                                       // 0x003C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FSoftObjectPath                        IconPath;                                          // 0x0040(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        PaintGroupImagePath;                               // 0x0060(0x0020)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PaintExtractMiscData
-// 0x0008 (0x0010 - 0x0008)
-struct FM1PaintExtractMiscData final : public FTableRowBase
-{
-public:
-	int32                                         MaxPaintExtractOnceCount;                          // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1ItemSelectorUnit>            Units;                                             // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FName                                   GroupName;                                         // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FName                                   StringId;                                          // 0x0028(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1ItemUIData                          UIData;                                            // 0x0030(0x0060)(Edit, NativeAccessSpecifierPublic)
+	bool                                          bIncludeUltimate;                                  // 0x0090(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_91[0x7];                                       // 0x0091(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1SeasonReinforceSlotData
@@ -11736,16 +11802,6 @@ public:
 	TArray<struct FM1SeasonReinforceGroupData>    ReinforceGroupList;                                // 0x00B0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1UICloseDialogData
-// 0x0038 (0x0038 - 0x0000)
-struct FM1UICloseDialogData final
-{
-public:
-	int32                                         UnlockSeasonReinforceCount;                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1DialogDataLink                      DialogId;                                          // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1SeasonMiscData
 // 0x0018 (0x0020 - 0x0008)
 struct FM1SeasonMiscData final : public FTableRowBase
@@ -11756,6 +11812,65 @@ public:
 	TArray<struct FM1UICloseDialogData>           UICloseDialogDatas;                                // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1ExternalParticipateInfo
+// 0x0028 (0x0028 - 0x0000)
+struct FM1ExternalParticipateInfo final
+{
+public:
+	class FString                                 ParticipateUserName;                               // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ServerIndex;                                       // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 ServerVersion;                                     // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RegionLatency
+// 0x0018 (0x0018 - 0x0000)
+struct FM1RegionLatency final
+{
+public:
+	class FString                                 Name;                                              // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         Latency;                                           // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1RegionLatencyInfosMs
+// 0x0010 (0x0010 - 0x0000)
+struct FM1RegionLatencyInfosMs final
+{
+public:
+	TArray<struct FM1RegionLatency>               Infos;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1PCOptionData
+// 0x0001 (0x0001 - 0x0000)
+struct FM1PCOptionData final
+{
+public:
+	bool                                          CrossPlayOn;                                       // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1XBOXOptionData
+// 0x000C (0x000C - 0x0000)
+struct FM1XBOXOptionData final
+{
+public:
+	bool                                          CrossPlayOn;                                       // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	EM1XBOXInnerOptionType                        InnerSocialOption;                                 // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1XBOXOuterOptionType                        OuterSocialOption;                                 // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CrossPlayOptionData
+// 0x0010 (0x0010 - 0x0000)
+struct FM1CrossPlayOptionData final
+{
+public:
+	struct FM1PCOptionData                        PC;                                                // 0x0000(0x0001)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	struct FM1PSOptionData                        PS;                                                // 0x0001(0x0001)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	uint8                                         Pad_2[0x2];                                        // 0x0002(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1XBOXOptionData                      XBOX;                                              // 0x0004(0x000C)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1DatasheetDummyType
 // 0x0001 (0x0001 - 0x0000)
 struct FM1DatasheetDummyType final
@@ -11764,106 +11879,31 @@ public:
 	uint8                                         Pad_0[0x1];                                        // 0x0000(0x0001)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1EquipmentRandomOptions
-// 0x0020 (0x0020 - 0x0000)
-struct FM1EquipmentRandomOptions final
-{
-public:
-	int64                                         EquipmentUid;                                      // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int16                                         OptionIndexBitFlags;                               // 0x0008(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_A[0x6];                                        // 0x000A(0x0006)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1EquipmentRandomOptionCompact> Options;                                           // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InventoryInfo
-// 0x00C0 (0x00C0 - 0x0000)
-struct FM1InventoryInfo final
-{
-public:
-	TArray<struct FM1EquipmentBaseInfo>           Equipments;                                        // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1ConsumableInfo>              Consumables;                                       // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1RunesByTid>                  Runes;                                             // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CharacterInfo>               Characters;                                        // 0x0030(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1CurrencyInfo>                Currencies;                                        // 0x0040(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1WeaponProficiencyInfo>       WeaponProficiencies;                               // 0x0050(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1EquipmentRandomOptions>      RandomOptions;                                     // 0x0060(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1PerkInfo>                    Perks;                                             // 0x0070(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1ReactorBaseInfo>             ReactorInfos;                                      // 0x0080(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1TitleItemInfo>               TitleInfos;                                        // 0x0090(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1RecordInfo>                  RecordInfos;                                       // 0x00A0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1FellowInfo>                  FellowInfos;                                       // 0x00B0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1AccountInfo
-// 0x01B0 (0x01B0 - 0x0000)
-struct FM1AccountInfo final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 Name;                                              // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MasteryLevel;                                      // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         MasteryExp;                                        // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1InventoryInfo                       Inventory;                                         // 0x0028(0x00C0)(Edit, NativeAccessSpecifierPublic)
-	TArray<struct FM1WearingInfo>                 WearingList;                                       // 0x00E8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1UnlockedFieldInfo>           UnlockedFields;                                    // 0x00F8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1VoidBattleClearInfo>         VoidBattleClearCounts;                             // 0x0108(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	int64                                         SelectedCharacterUid;                              // 0x0118(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         SelectedFellowTid;                                 // 0x0120(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          LastMapTemplateId;                                 // 0x0124(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          LastBattleZoneId;                                  // 0x0128(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_12C[0x4];                                      // 0x012C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 LoginPlatformId;                                   // 0x0130(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         LoginPlatformUid;                                  // 0x0140(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LoginPlatformTypes                         LoginPlatformType;                                 // 0x0148(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_149[0x7];                                      // 0x0149(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         Npsn;                                              // 0x0150(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 CountryName;                                       // 0x0158(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 DeviceName;                                        // 0x0168(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 OsType;                                            // 0x0178(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 OsName;                                            // 0x0188(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 TeamAssignmentID;                                  // 0x0198(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          IsCreator;                                         // 0x01A8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1A9[0x7];                                      // 0x01A9(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1PlatformInfo
-// 0x0028 (0x0028 - 0x0000)
-struct FM1PlatformInfo final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 LoginPlatformId;                                   // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         LoginPlatformUid;                                  // 0x0018(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LoginPlatformTypes                         LoginPlatformType;                                 // 0x0020(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_21[0x7];                                       // 0x0021(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1GetAccountInfoRes
-// 0x01E0 (0x01E0 - 0x0000)
-struct FM1GetAccountInfoRes final
+// ScriptStruct M1Data.M1StartServerSessionRes
+// 0x0010 (0x0010 - 0x0000)
+struct FM1StartServerSessionRes final
 {
 public:
 	bool                                          Result;                                            // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 ServiceId;                                         // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 RegionId;                                          // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FDateTime                              ServerTimeSync;                                    // 0x0028(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1AccountInfo                         Account;                                           // 0x0030(0x01B0)(Edit, NativeAccessSpecifierPublic)
+	int64                                         DediOid;                                           // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1PartyRequestChangeNoti
-// 0x0018 (0x0018 - 0x0000)
-struct FM1PartyRequestChangeNoti final
+// ScriptStruct M1Data.M1PartyMemberChangeNoti
+// 0x0028 (0x0028 - 0x0000)
+struct FM1PartyMemberChangeNoti final
 {
 public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1PartyRequestInfo>            Requests;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	bool                                          HasParty;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         PartyId;                                           // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1PartyMemberInfo>             Members;                                           // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1PartyJoinInfo
+// ScriptStruct M1Data.M1PartyRequestInfo
 // 0x0070 (0x0070 - 0x0000)
-struct FM1PartyJoinInfo final
+struct FM1PartyRequestInfo final
 {
 public:
 	class FString                                 SeqId;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -11883,6 +11923,15 @@ public:
 	uint8                                         Pad_6A[0x6];                                       // 0x006A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
+// ScriptStruct M1Data.M1PartyRequestChangeNoti
+// 0x0018 (0x0018 - 0x0000)
+struct FM1PartyRequestChangeNoti final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1PartyRequestInfo>            Requests;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1PartyJoinRequestChangeNoti
 // 0x0018 (0x0018 - 0x0000)
 struct FM1PartyJoinRequestChangeNoti final
@@ -11892,15 +11941,23 @@ public:
 	TArray<struct FM1PartyJoinInfo>               JoinRequests;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1DediGameInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1DediGameInfo final
+// ScriptStruct M1Data.M1FixedDungeonRewardInfo
+// 0x0010 (0x0010 - 0x0000)
+struct FM1FixedDungeonRewardInfo final
 {
 public:
-	bool                                          IsPrivate;                                         // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         FieldMasterId;                                     // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         LeaveUserId;                                       // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         RewardTid;                                         // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1DediGameModifierInfo
+// 0x0020 (0x0020 - 0x0000)
+struct FM1DediGameModifierInfo final
+{
+public:
+	TArray<struct FM1MapModifier>                 Modifiers;                                         // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1FixedDungeonRewardInfo>      FixedRewardInfos;                                  // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MatchingStartInfo
@@ -11936,16 +11993,6 @@ public:
 	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1LeaveCharacterNotiInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FM1LeaveCharacterNotiInfo final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          ServerMove;                                        // 0x0008(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_9[0x7];                                        // 0x0009(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
 // ScriptStruct M1Data.M1PartyJoinDedicatedServerParam
 // 0x0030 (0x0030 - 0x0000)
 struct FM1PartyJoinDedicatedServerParam final
@@ -11958,6 +12005,15 @@ public:
 	bool                                          PrivateField;                                      // 0x001D(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1E[0x2];                                       // 0x001E(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<struct FM1MapModifier>                 Modifiers;                                         // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1AuidWithLatencyInfo
+// 0x0020 (0x0020 - 0x0000)
+struct FM1AuidWithLatencyInfo final
+{
+public:
+	TArray<int64>                                 AccountUids;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1RegionLatencyInfosMs                LatencyInfo;                                       // 0x0010(0x0010)(Edit, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1AuidWithRandomInfo
@@ -11992,12 +12048,26 @@ struct FM1TrackingDataLink final : public FDataLink
 {
 };
 
-// ScriptStruct M1Data.M1ItemInfoBox
-// 0x0030 (0x0030 - 0x0000)
-struct alignas(0x08) FM1ItemInfoBox final
+// ScriptStruct M1Data.M1EquipmentRandomOptionPair
+// 0x0010 (0x0010 - 0x0000)
+struct FM1EquipmentRandomOptionPair final
 {
 public:
-	uint8                                         Pad_0[0x30];                                       // 0x0000(0x0030)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1ScaledInteger                       StatValue;                                         // 0x0008(0x0008)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CheatCreateEquipmentReq
+// 0x0020 (0x0020 - 0x0000)
+struct FM1CheatCreateEquipmentReq final
+{
+public:
+	struct FM1TemplateId                          EquipmentTid;                                      // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Level;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         OptionalLevel;                                     // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1EquipmentRandomOptionPair>   RandomOptions;                                     // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1CheatCreateItemReq
@@ -12049,22 +12119,6 @@ public:
 	TArray<struct FM1FellowInfo>                  FellowInfos;                                       // 0x00B0(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1DropItemRequest
-// 0x0040 (0x0040 - 0x0000)
-struct FM1DropItemRequest final
-{
-public:
-	struct FM1TemplateId                          MonsterSpawnGroupTid;                              // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         MonsterUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MonsterLevel;                                      // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<EM1MonsterSubType>                     MonsterSubTypeList;                                // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<int64>                                 AccountUidList;                                    // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	EM1MonsterCategory                            MonsterCategory;                                   // 0x0038(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
 // ScriptStruct M1Data.M1BossKillDropItemRequest
 // 0x0028 (0x0028 - 0x0000)
 struct FM1BossKillDropItemRequest final
@@ -12078,6 +12132,21 @@ public:
 	TArray<int64>                                 AccountUidList;                                    // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
+// ScriptStruct M1Data.M1BossPartsDropItemRequest
+// 0x0030 (0x0030 - 0x0000)
+struct FM1BossPartsDropItemRequest final
+{
+public:
+	struct FM1TemplateId                          MonsterTid;                                        // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	int64                                         MonsterUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MonsterLevel;                                      // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          PartsTid;                                          // 0x0014(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsDebone;                                          // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<int64>                                 AccountUidList;                                    // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
 // ScriptStruct M1Data.M1MonsterRequestInfoBox
 // 0x0010 (0x0010 - 0x0000)
 struct FM1MonsterRequestInfoBox final
@@ -12086,15 +12155,6 @@ public:
 	EM1EventBoostContentType                      ContentType;                                       // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
 	int64                                         ContentId;                                         // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1AccountWithConsumableInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1AccountWithConsumableInfo final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<int64>                                 ConsumableUids;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MissionTaskDropItemRequest
@@ -12124,25 +12184,32 @@ public:
 	struct FM1AccountWithConsumableInfo           ConsumableInfo;                                    // 0x0018(0x0018)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1MiniGameDropItemRequest
-// 0x0030 (0x0030 - 0x0000)
-struct FM1MiniGameDropItemRequest final
+// ScriptStruct M1Data.M1ShopSellInfoNoti
+// 0x0020 (0x0020 - 0x0000)
+struct FM1ShopSellInfoNoti final
 {
 public:
-	struct FM1TemplateId                          MiniGameTid;                                       // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          DifficyltyTid;                                     // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<int64>                                 AccountUidList;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1AccountWithConsumableInfo           ConsumableInfo;                                    // 0x0018(0x0018)(Edit, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1ItemUidBox                          ItemUid;                                           // 0x0008(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	int32                                         Count;                                             // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1CommonShopResultType                       Result;                                            // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1CheatCreateCharacterRes
-// 0x0030 (0x0030 - 0x0000)
-struct FM1CheatCreateCharacterRes final
+// ScriptStruct M1Data.M1ShopBuyInfoBundle
+// 0x0010 (0x0010 - 0x0000)
+struct FM1ShopBuyInfoBundle final
 {
 public:
-	EM1CheatCreateCharacterResultType             Result;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1CharacterInfo                       CreatedCharacter;                                  // 0x0008(0x0028)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1ShopBuyInfo>                 BuyInfoList;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1RotationShopScheduleInfo
+// 0x0008 (0x0008 - 0x0000)
+struct FM1RotationShopScheduleInfo final
+{
+public:
+	struct FM1TemplateId                          Schedule;                                          // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Rotation;                                          // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1CheatCreateCharacterReq
@@ -12164,49 +12231,45 @@ public:
 	TArray<struct FM1ResearchDataType>            ResearchDataTypeList;                              // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ResearchResultNoti
+// ScriptStruct M1Data.M1MissionInfoList
+// 0x0018 (0x0018 - 0x0000)
+struct FM1MissionInfoList final
+{
+public:
+	int64                                         LastPlayMissionId;                                 // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1MissionInfo>                 MissionInfos;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1MissionRequest
 // 0x0020 (0x0020 - 0x0000)
-struct FM1ResearchResultNoti final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          ResearchTemplateId;                                // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ResearchReason                             Reason;                                            // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         RemainTicks;                                       // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1ResearchStatus                             ResearchStatus;                                    // 0x0018(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_19[0x7];                                       // 0x0019(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1ResearchBookMarkData
-// 0x0010 (0x0010 - 0x0000)
-struct FM1ResearchBookMarkData final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          ResearchTemplateId;                                // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1AccountUidWithMissionGrade
-// 0x0010 (0x0010 - 0x0000)
-struct FM1AccountUidWithMissionGrade final
-{
-public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         MissionGrade;                                      // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1EquipmentSlotType                          SlotType;                                          // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
-};
-
-// ScriptStruct M1Data.M1SuccessMissionRequest
-// 0x0028 (0x0028 - 0x0000)
-struct FM1SuccessMissionRequest final
+struct FM1MissionRequest final
 {
 public:
 	struct FM1TemplateId                          MissionId;                                         // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1AccountUidWithMissionGrade>  AccountMissionGradePairs;                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	class FString                                 ControllerType;                                    // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 ControllerType;                                    // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1SuccessMissionResByAccount
+// 0x0028 (0x0028 - 0x0000)
+struct FM1SuccessMissionResByAccount final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1CurrencyInfo>                CurrencyBoost;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int32                                         ExpBoost;                                          // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ExpBoostByEvent;                                   // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MasteryBoost;                                      // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_24[0x4];                                       // 0x0024(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+};
+
+// ScriptStruct M1Data.M1SuccessMissionRes
+// 0x0010 (0x0010 - 0x0000)
+struct FM1SuccessMissionRes final
+{
+public:
+	TArray<struct FM1SuccessMissionResByAccount>  AccountList;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1MissionAccountInfo
@@ -12229,33 +12292,14 @@ public:
 	TArray<struct FM1MissionAccountInfo>          AccountInfoList;                                   // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1MissionMidRewardResByAccount
-// 0x0020 (0x0020 - 0x0000)
-struct FM1MissionMidRewardResByAccount final
+// ScriptStruct M1Data.M1CheckEnchantRuneRes
+// 0x0018 (0x0018 - 0x0000)
+struct FM1CheckEnchantRuneRes final
 {
 public:
-	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ExpBoost;                                          // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1ItemPack>                    Acquires;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MissionMidRewardRes
-// 0x0010 (0x0010 - 0x0000)
-struct FM1MissionMidRewardRes final
-{
-public:
-	TArray<struct FM1MissionMidRewardResByAccount> AccountList;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RuneSocketTypeSelection
-// 0x0003 (0x0003 - 0x0000)
-struct FM1RuneSocketTypeSelection final
-{
-public:
-	EM1RuneSocketType                             SelectedSocketType;                                // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1RuneSubClassType                           RuneSubClassType;                                  // 0x0001(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         SocketIndex;                                       // 0x0002(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1RuneReason                                 Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1LoadoutSlotTypeAndIndex>     CapacityOverSlots;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1QuestStartMultiple
@@ -12266,54 +12310,67 @@ public:
 	TArray<struct FM1TemplateId>                  StartRequestQuestIds;                              // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1IncQuestProgressReq
-// 0x000C (0x000C - 0x0000)
-struct FM1IncQuestProgressReq final
-{
-public:
-	struct FM1TemplateId                          QuestTid;                                          // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         ParamIndex;                                        // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         IncCount;                                          // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1IncQuestProgressReqList
+// ScriptStruct M1Data.M1IncQuestProgressResList
 // 0x0010 (0x0010 - 0x0000)
-struct FM1IncQuestProgressReqList final
+struct FM1IncQuestProgressResList final
 {
 public:
-	TArray<struct FM1IncQuestProgressReq>         Requests;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1IncQuestProgressRes>         Responses;                                         // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1QuestInfoList
-// 0x0028 (0x0028 - 0x0000)
-struct FM1QuestInfoList final
+// ScriptStruct M1Data.M1SetQuestTrackerNoti
+// 0x0010 (0x0010 - 0x0000)
+struct FM1SetQuestTrackerNoti final
 {
 public:
-	TArray<struct FM1TracingQuestInfo>            TracingQuestInfos;                                 // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1QuestInfo>                   QuestInfos;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          DailyChallengeId;                                  // 0x0020(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          WeeklyChallengeId;                                 // 0x0024(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TracingQuestInfo                    QuestInfo;                                         // 0x0008(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1AddWeaponProficiencyPointRes
+// ScriptStruct M1Data.M1MainQuestJumpResult
+// 0x0010 (0x0010 - 0x0000)
+struct FM1MainQuestJumpResult final
+{
+public:
+	TArray<struct FM1TemplateId>                  CompleteQuestIds;                                  // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1WeapnProficiencyPoint
+// 0x0010 (0x0010 - 0x0000)
+struct FM1WeapnProficiencyPoint final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          WeaponTemplateId;                                  // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          MonsterTemplateId;                                 // 0x000C(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CheatMasteryExpUp
+// 0x0008 (0x0008 - 0x0000)
+struct FM1CheatMasteryExpUp final
+{
+public:
+	int64                                         Exp;                                               // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1VoidBattleEntranceInfo
 // 0x0018 (0x0018 - 0x0000)
-struct FM1AddWeaponProficiencyPointRes final
+struct FM1VoidBattleEntranceInfo final
 {
 public:
-	TArray<struct FM1WeaponProficiencyBoostInfo>  WeaponProficiencyBoostList;                        // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	int32                                         MasteryBoost;                                      // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	struct FM1TemplateId                          MapId;                                             // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1MapSubData                          MapSubData;                                        // 0x0004(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	bool                                          Entrance;                                          // 0x0014(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_15[0x3];                                       // 0x0015(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1RuneComposeResult
-// 0x0028 (0x0028 - 0x0000)
-struct FM1RuneComposeResult final
+// ScriptStruct M1Data.M1VoidBattleEntranceInfoByAccount
+// 0x0018 (0x0018 - 0x0000)
+struct FM1VoidBattleEntranceInfoByAccount final
 {
 public:
-	EM1RuneReason                                 Result;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1TemplateId>                  RewardTemplateIdList;                              // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1TemplateId>                  NewAcquireTemplateIdList;                          // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int64                                         AccId;                                             // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1VoidBattleEntranceInfo>      EntranceInfos;                                     // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1VoidBattleStartConditionByTid
@@ -12345,29 +12402,6 @@ public:
 	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	struct FM1TemplateId                          Tid;                                               // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	int32                                         ClearCount;                                        // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InvasionEntranceInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1InvasionEntranceInfo final
-{
-public:
-	int32                                         TotalRewardExp;                                    // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          InvasionDungeon;                                   // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1TemplateId>                  AbilityDataList;                                   // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1InvasionEntranceInfoList
-// 0x0020 (0x0020 - 0x0000)
-struct FM1InvasionEntranceInfoList final
-{
-public:
-	bool                                          NoEntrant;                                         // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         ScheduleIdx;                                       // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         RemainTimeSec;                                     // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1InvasionEntranceInfo>        EntranceInfos;                                     // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1RequestMatchingResult
@@ -12418,6 +12452,16 @@ public:
 	int32                                         MatchVoidBattleID;                                 // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	int32                                         MatchWorldMissionID;                               // 0x0014(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	TArray<struct FM1MatchingGameEndPlayerAttribute> PlayerAttributes;                                  // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1LimitItemCompleteResult
+// 0x000C (0x000C - 0x0000)
+struct FM1LimitItemCompleteResult final
+{
+public:
+	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         AmountBef;                                         // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         AmountAft;                                         // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1InstanceDungeonCompleteResult
@@ -12501,88 +12545,23 @@ public:
 	struct FM1TemplateId                          Tid;                                               // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1VoidVesselCompleteResult
-// 0x0018 (0x0018 - 0x0000)
-struct FM1VoidVesselCompleteResult final
-{
-public:
-	EM1InstanceDungeonCompleteReason              Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1PackageItemElementInfo>      RewardItems;                                       // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1VoidBattleCompleteResult
-// 0x0008 (0x0008 - 0x0000)
-struct FM1VoidBattleCompleteResult final
-{
-public:
-	struct FM1VoidBattleRewards                   Rewards;                                           // 0x0000(0x0008)(Edit, NoDestructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1EquipmentMailItemInfo
-// 0x0030 (0x0030 - 0x0000)
-struct FM1EquipmentMailItemInfo final
-{
-public:
-	int32                                         Index;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          TemplateId;                                        // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Received;                                          // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1EquipmentRandomOptionInfo>   RandomOptions;                                     // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1PerkInfo>                    Perks;                                             // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1RuneMailItemInfo
+// ScriptStruct M1Data.M1MatchingAuidList
 // 0x0010 (0x0010 - 0x0000)
-struct FM1RuneMailItemInfo final
+struct FM1MatchingAuidList final
 {
 public:
-	int32                                         Index;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          TemplateId;                                        // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         EnchantLevel;                                      // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Received;                                          // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	TArray<int64>                                 Auids;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1MailInfo
-// 0x0090 (0x0090 - 0x0000)
-struct FM1MailInfo final
+// ScriptStruct M1Data.M1NewMailPushInfo
+// 0x0020 (0x0020 - 0x0000)
+struct FM1NewMailPushInfo final
 {
 public:
 	EM1MailType                                   MailType;                                          // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         MailId;                                            // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          MailTemplateId;                                    // 0x0010(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 Sender;                                            // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 Title;                                             // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 Content;                                           // 0x0038(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FDateTime                              StartDate;                                         // 0x0048(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FDateTime                              EndDate;                                           // 0x0050(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          Reading;                                           // 0x0058(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_59[0x7];                                       // 0x0059(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1MailItemInfo>                ItemList;                                          // 0x0060(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1EquipmentMailItemInfo>       EquipItemList;                                     // 0x0070(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-	TArray<struct FM1RuneMailItemInfo>            RuneItemList;                                      // 0x0080(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MailInfoBundle
-// 0x0018 (0x0018 - 0x0000)
-struct FM1MailInfoBundle final
-{
-public:
-	EM1MailReason                                 Reason;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1MailInfo>                    MailList;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1MailMultiRequestInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FM1MailMultiRequestInfo final
-{
-public:
-	TArray<int64>                                 MailIdList;                                        // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<int64>                                 NewMailIdList;                                     // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1RequestCustomizingCharacter
@@ -12612,15 +12591,6 @@ public:
 	struct FM1TemplateId                          CustomizeTid;                                      // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1PaintData
-// 0x0008 (0x0008 - 0x0000)
-struct FM1PaintData final
-{
-public:
-	struct FM1TemplateId                          PaintTid;                                          // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Slot;                                              // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
 // ScriptStruct M1Data.M1RequestCustomizingSkinPaints
 // 0x0028 (0x0028 - 0x0000)
 struct FM1RequestCustomizingSkinPaints final
@@ -12630,6 +12600,16 @@ public:
 	struct FM1TemplateId                          SkinTid;                                           // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	TArray<struct FM1PaintData>                   Paints;                                            // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 	TArray<struct FM1PaintData>                   HairPaints;                                        // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1UpdateCustomizingSkinPaints
+// 0x0028 (0x0028 - 0x0000)
+struct FM1UpdateCustomizingSkinPaints final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizePaintInventory>     PaintInventory;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1CustomizePaintInventory>     HairInventory;                                     // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1RequestCustomizingRingSlot
@@ -12652,15 +12632,27 @@ public:
 	struct FM1TemplateId                          CustomizeTid;                                      // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ResponseBoundedCharacter
+// ScriptStruct M1Data.M1ResponseBoundedWeapon
 // 0x0020 (0x0020 - 0x0000)
-struct FM1ResponseBoundedCharacter final
+struct FM1ResponseBoundedWeapon final
 {
 public:
 	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FM1TemplateId                          PlayerTid;                                         // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          WeaponTid;                                         // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<struct FM1TemplateId>                  BindTids;                                          // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ResponseBoundedSkin
+// 0x0030 (0x0030 - 0x0000)
+struct FM1ResponseBoundedSkin final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          SkinTid;                                           // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1TemplateId>                  BindPaintTids;                                     // 0x0010(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<struct FM1TemplateId>                  BindHairPaintTids;                                 // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1ResponseBoundedFellow
@@ -12690,56 +12682,40 @@ public:
 	TArray<struct FM1TemplateId>                  EquipTemplateIdList;                               // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1PlatformAchievementCompleteInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1PlatformAchievementCompleteInfo final
-{
-public:
-	struct FM1TemplateId                          AchievementId;                                     // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<EM1ContentsPlatformType>               AchievedPlatforms;                                 // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PlatformAchievementCompleteInfoList
+// ScriptStruct M1Data.M1EquipmentCategoryTypes
 // 0x0010 (0x0010 - 0x0000)
-struct FM1PlatformAchievementCompleteInfoList final
+struct FM1EquipmentCategoryTypes final
 {
 public:
-	TArray<struct FM1PlatformAchievementCompleteInfo> CompleteInfos;                                     // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	TArray<EM1EquipmentCategoryType>              DataList;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1KilledMonsterInfo
-// 0x0014 (0x0014 - 0x0000)
-struct FM1KilledMonsterInfo final
-{
-public:
-	EM1EquipmentSlotType                          ProficiencySlotType;                               // 0x0000(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1[0x3];                                        // 0x0001(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FM1TemplateId                          MonsterTid;                                        // 0x0004(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Level;                                             // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1EventBoostContentType                      ContentType;                                       // 0x000C(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         ContentTemplateId;                                 // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1PresetInfo
-// 0x0030 (0x0030 - 0x0000)
-struct FM1PresetInfo final
+// ScriptStruct M1Data.M1BattlePassLevelNoti
+// 0x0020 (0x0020 - 0x0000)
+struct FM1BattlePassLevelNoti final
 {
 public:
 	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         PresetIndex;                                       // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 PresetName;                                        // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	TArray<struct FM1PresetWearingInfo>           WearingList;                                       // 0x0020(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	struct FM1TemplateId                          BattlePassTid;                                     // 0x0008(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         BattlePassLevel;                                   // 0x000C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         BattlePassExp;                                     // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1BattlePassLevelReason                      Reason;                                            // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1PresetInfoBundle
-// 0x0010 (0x0010 - 0x0000)
-struct FM1PresetInfoBundle final
+// ScriptStruct M1Data.M1BattlePassSeasonInfoBundle
+// 0x0018 (0x0018 - 0x0000)
+struct FM1BattlePassSeasonInfoBundle final
 {
 public:
-	TArray<struct FM1PresetInfo>                  Presets;                                           // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<struct FM1BattlePassSeasonInfo>        Bundles;                                           // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1TrackingData
+// 0x0000 (0x0008 - 0x0008)
+struct FM1TrackingData final : public FTableRowBase
+{
 };
 
 // ScriptStruct M1Data.M1ApplyPresetRes
@@ -12752,23 +12728,12 @@ public:
 	struct FM1PresetInfo                          PresetInfo;                                        // 0x0008(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1ExtractPaintRes
-// 0x0018 (0x0018 - 0x0000)
-struct FM1ExtractPaintRes final
+// ScriptStruct M1Data.M1ItemShortIndexBundle
+// 0x0010 (0x0010 - 0x0000)
+struct FM1ItemShortIndexBundle final
 {
 public:
-	EM1ItemReason                                 Result;                                            // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	TArray<struct FM1TemplateId>                  PaintList;                                         // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ItemSelectorInfo
-// 0x0008 (0x0008 - 0x0000)
-struct FM1ItemSelectorInfo final
-{
-public:
-	struct FM1TemplateId                          SelectorTid;                                       // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int32                                         Index;                                             // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<int16>                                 ItemShortIndexList;                                // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1BuyAdditionalData
@@ -12779,6 +12744,15 @@ public:
 	struct FM1TemplateId                          TicketDataId;                                      // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
 	TArray<struct FM1ItemSelectorInfo>            SelectorData;                                      // 0x0008(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1ReinforceSlotInfo
+// 0x0008 (0x0008 - 0x0000)
+struct FM1ReinforceSlotInfo final
+{
+public:
+	int32                                         GroupIndex;                                        // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         SlotIndex;                                         // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1SeasonReinforceInfo
@@ -12858,50 +12832,58 @@ public:
 	TArray<struct FM1MultipleMailResult>          Results;                                           // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1AttendanceCount
-// 0x0008 (0x0008 - 0x0000)
-struct FM1AttendanceCount final
+// ScriptStruct M1Data.M1AttendanceInfo
+// 0x000C (0x000C - 0x0000)
+struct FM1AttendanceInfo final
 {
 public:
 	struct FM1TemplateId                          EventId;                                           // 0x0000(0x0004)(Edit, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	int16                                         Count;                                             // 0x0004(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	int16                                         RewardedIndex;                                     // 0x0006(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int16                                         LastRewardIndex;                                   // 0x0008(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_A[0x2];                                        // 0x000A(0x0002)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1AttendanceCountInfo
-// 0x0010 (0x0010 - 0x0000)
-struct FM1AttendanceCountInfo final
+// ScriptStruct M1Data.M1LoginRequestInfo
+// 0x0130 (0x0130 - 0x0000)
+struct FM1LoginRequestInfo final
 {
 public:
-	TArray<struct FM1AttendanceCount>             Infos;                                             // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	class FString                                 Name;                                              // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ExternalLinkerType                         ExternalLinkerType;                                // 0x0010(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_11[0x7];                                       // 0x0011(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 ExternalLinkerData;                                // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 CountryName;                                       // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 SignCountry;                                       // 0x0038(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 DeviceName;                                        // 0x0048(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1OsTypes                                    OsType;                                            // 0x0058(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_5C[0x4];                                       // 0x005C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 OsName;                                            // 0x0060(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 OsLanguage;                                        // 0x0070(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1Locale                                     Locale;                                            // 0x0080(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_81[0x7];                                       // 0x0081(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 LoginPlatformId;                                   // 0x0088(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         LoginPlatformUid;                                  // 0x0098(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1LoginPlatformTypes                         LoginPlatform;                                     // 0x00A0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_A1[0x7];                                       // 0x00A1(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1RegionLatencyInfosMs                RegionLatencyInfos;                                // 0x00A8(0x0010)(Edit, NativeAccessSpecifierPublic)
+	struct FM1CrossPlayOptionData                 CrossPlayOptionData;                               // 0x00B8(0x0010)(Edit, NoDestructor, NativeAccessSpecifierPublic)
+	struct FM1ExternalParticipateInfo             ParticipateInfo;                                   // 0x00C8(0x0028)(Edit, NativeAccessSpecifierPublic)
+	bool                                          Boosting;                                          // 0x00F0(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_F1[0x3];                                       // 0x00F1(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         Revision;                                          // 0x00F4(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          IsCreator;                                         // 0x00F8(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_F9[0x7];                                       // 0x00F9(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FM1ClientChecksum                      Checksum;                                          // 0x0100(0x0030)(Edit, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1LoginResponseInfo
-// 0x0068 (0x0068 - 0x0000)
-struct FM1LoginResponseInfo final
+// ScriptStruct M1Data.M1TupleId
+// 0x0008 (0x0008 - 0x0000)
+struct FM1TupleId final
 {
 public:
-	EM1LoginResultType                            LoginResultType;                                   // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-	class FString                                 GameServerAddr;                                    // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int16                                         Port;                                              // 0x0018(0x0002)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_1A[0x2];                                       // 0x001A(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         GameServerIndex;                                   // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 GameServerVersion;                                 // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 SessionToken;                                      // 0x0030(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         AccountUid;                                        // 0x0040(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 AccountName;                                       // 0x0048(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	bool                                          ForcedCrossPlayOff;                                // 0x0058(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_59[0x7];                                       // 0x0059(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-	int64                                         QueueNumber;                                       // 0x0060(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ScaledIntegerRange
-// 0x0010 (0x0010 - 0x0000)
-struct alignas(0x08) FM1ScaledIntegerRange final
-{
-public:
-	uint8                                         Pad_0[0x10];                                       // 0x0000(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	struct FM1TemplateId                          Value1;                                            // 0x0000(0x0004)(Edit, DisableEditOnInstance, NoDestructor, SimpleDisplay, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1JoinDedicatedServerOid
@@ -12927,16 +12909,26 @@ public:
 	uint8                                         Pad_AA[0x6];                                       // 0x00AA(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1RecentPlayerNoti
+// ScriptStruct M1Data.M1FriendErrorMessageNoti
 // 0x0030 (0x0030 - 0x0000)
-struct FM1RecentPlayerNoti final
+struct FM1FriendErrorMessageNoti final
 {
 public:
-	class FString                                 AccountName;                                       // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	class FString                                 LoginPlatformId;                                   // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         LoginPlatformUid;                                  // 0x0020(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	EM1LoginPlatformTypes                         LoginPlatformType;                                 // 0x0028(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_29[0x7];                                       // 0x0029(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	int64                                         ReceiverUid;                                       // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 TargetName;                                        // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 TargetPlatformId;                                  // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1FriendContentsType                         ContentsType;                                      // 0x0028(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1FriendErrorCode                            ErrorCode;                                         // 0x002C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1BlockErrorMessageNoti
+// 0x0010 (0x0010 - 0x0000)
+struct FM1BlockErrorMessageNoti final
+{
+public:
+	int64                                         AccountUid;                                        // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1BlockErrorCode                             ErrorCode;                                         // 0x0008(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct M1Data.M1WorldChattingMessage
@@ -12999,14 +12991,33 @@ public:
 	uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
-// ScriptStruct M1Data.M1ItemInfo
-// 0x0018 (0x0018 - 0x0000)
-struct FM1ItemInfo final
+// ScriptStruct M1Data.M1DediAccountInfo
+// 0x0020 (0x0020 - 0x0000)
+struct FM1DediAccountInfo final
 {
 public:
-	int64                                         ID;                                                // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         Quantity;                                          // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	int64                                         CreateDate;                                        // 0x0010(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 AccountUid;                                        // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 AccountName;                                       // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1DediInfoForMonitor
+// 0x0060 (0x0060 - 0x0000)
+struct FM1DediInfoForMonitor final
+{
+public:
+	int32                                         ProcessId;                                         // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         Port;                                              // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         UserCnt;                                           // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 State;                                             // 0x0010(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 StartInfo;                                         // 0x0020(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int64                                         Oid;                                               // 0x0030(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         MultiWorldIndex;                                   // 0x0038(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	int32                                         ThreadAffinityIndex;                               // 0x003C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         WorldTickTimeMs;                                   // 0x0040(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	float                                         TotalWorldTickTimeMs;                              // 0x0044(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	bool                                          UsingSpicaNetwork;                                 // 0x0048(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_49[0x7];                                       // 0x0049(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+	TArray<struct FM1DediAccountInfo>             ParticipantList;                                   // 0x0050(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1UpdateDediInfo
@@ -13110,12 +13121,24 @@ public:
 	struct FDateTime                              EndTime;                                           // 0x0008(0x0008)(Edit, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
-// ScriptStruct M1Data.M1OntimeEventRemoveData
-// 0x0008 (0x0008 - 0x0000)
-struct FM1OntimeEventRemoveData final
+// ScriptStruct M1Data.M1AccountList
+// 0x0010 (0x0010 - 0x0000)
+struct FM1AccountList final
 {
 public:
-	int64                                         EventId;                                           // 0x0000(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	TArray<int64>                                 Accounts;                                          // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct M1Data.M1CommunityReportInfo
+// 0x0038 (0x0038 - 0x0000)
+struct FM1CommunityReportInfo final
+{
+public:
+	class FString                                 ReporteeName;                                      // 0x0000(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	EM1ReportReasonType                           ReportType;                                        // 0x0010(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_14[0x4];                                       // 0x0014(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+	class FString                                 Comment;                                           // 0x0018(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	class FString                                 ReporterCountry;                                   // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // ScriptStruct M1Data.M1BuyPayItemInfo
@@ -13134,22 +13157,6 @@ public:
 	int32                                         Index;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
 	int64                                         DediOid;                                           // 0x0008(0x0008)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ShopRestrictionInfo
-// 0x0004 (0x0004 - 0x0000)
-struct FM1ShopRestrictionInfo final
-{
-public:
-	int32                                         ProductionTid;                                     // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// ScriptStruct M1Data.M1ShopRestrictionInfoBundle
-// 0x0010 (0x0010 - 0x0000)
-struct FM1ShopRestrictionInfoBundle final
-{
-public:
-	TArray<struct FM1ShopRestrictionInfo>         ShopRestrictionInfoList;                           // 0x0000(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 };
 
 }

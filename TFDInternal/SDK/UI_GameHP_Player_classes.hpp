@@ -51,11 +51,11 @@ public:
 	void ExecuteUbergraph_UI_GameHP_Player(int32 EntryPoint);
 	void BP_UpdateVisibility(bool bIsVisible);
 	void BP_UpdatePartyState(const bool bIsPartyMember);
-	void BP_SetSquadIndex(int32 InIndex);
 	void BP_UpdateDBNOUI(const float DBNORatio, const float InteractionRatio);
-	void BP_SetDBNOInteractionTime(float InteractionDuration);
 	void BP_SetVisibleDBNOUI(bool bIsDBNO, EM1DBNOType InDBNOType, bool bInfiniteDuration);
 	void BP_SetVisibleDBNOInteractionUI(const bool bVisible);
+	void BP_SetSquadIndex(int32 InIndex);
+	void BP_SetDBNOInteractionTime(float InteractionDuration);
 	void BP_OnDBNORescueStateChanged(const bool bStartRescue);
 
 public:

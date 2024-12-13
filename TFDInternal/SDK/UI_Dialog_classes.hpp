@@ -27,8 +27,8 @@ public:
 	class UImage*                                 Image_57;                                          // 0x0720(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
 
 public:
-	void SetUI();
 	void ExecuteUbergraph_UI_Dialog(int32 EntryPoint);
+	void SetUI();
 	void Construct();
 
 public:

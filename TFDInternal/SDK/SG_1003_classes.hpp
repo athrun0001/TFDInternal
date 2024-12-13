@@ -10,24 +10,29 @@
 
 #include "Basic.hpp"
 
-#include "SG_classes.hpp"
+#include "M1_classes.hpp"
 
 
 namespace SDK
 {
 
-// AnimBlueprintGeneratedClass SG_1003.SG_1003_C
-// 0x0000 (0x1CD0 - 0x1CD0)
-class USG_1003_C final : public USG_C
+// BlueprintGeneratedClass SG_1003.SG_1003_C
+// 0x0018 (0x0490 - 0x0478)
+class ASG_1003_C final : public AM1Weapon
 {
+public:
+	class UM1WeaponFireLoopComponent*             M1WeaponFireLoop;                                  // 0x0478(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
+	class UM1WeaponRoundsReloadComponent*         M1WeaponRoundsReload;                              // 0x0480(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
+	class UM1WeaponInstantHitComponent*           M1WeaponInstantHit;                                // 0x0488(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
+
 public:
 	static class UClass* StaticClass()
 	{
 		return StaticBPGeneratedClassImpl<"SG_1003_C">();
 	}
-	static class USG_1003_C* GetDefaultObj()
+	static class ASG_1003_C* GetDefaultObj()
 	{
-		return GetDefaultObjImpl<USG_1003_C>();
+		return GetDefaultObjImpl<ASG_1003_C>();
 	}
 };
 

@@ -10,11 +10,11 @@
 
 #include "Basic.hpp"
 
-#include "AnimGraphRuntime_structs.hpp"
 #include "Engine_structs.hpp"
 #include "Engine_classes.hpp"
 #include "M1_structs.hpp"
 #include "AnimBP_NPC_FullBody_structs.hpp"
+#include "AnimGraphRuntime_structs.hpp"
 
 
 namespace SDK
@@ -85,10 +85,6 @@ public:
 	int32                                         TargetIdleRepeatCount;                             // 0x0A80(0x0004)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
-	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_D2390C7C4A932D8EE83722B176E4300B();
-	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_C6250843418910B018FC46A20797F5A5();
-	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_A4BBFE9C47496681D0E98592CCD86288();
-	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_9E470B6C437DA0138013F0956836D41E();
 	void UpdateTargetRepeatCount(EM1NpcAnimState AnimState);
 	void ResetRepeatCount();
 	void HasRepeatedEnough(bool* NewParam);
@@ -96,10 +92,13 @@ public:
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_E729C1854456B72F5D87C78ABE74C55D();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_DE17CFA6472ECCDFF6A37AAAA703853B();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_DB3D83C64F58CE03389901AC142CD336();
+	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_D2390C7C4A932D8EE83722B176E4300B();
+	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_C6250843418910B018FC46A20797F5A5();
+	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_A4BBFE9C47496681D0E98592CCD86288();
+	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_9E470B6C437DA0138013F0956836D41E();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_9CBCE9B44E30B03130ADF4A1144EC5FB();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_91C73DD449C62C37A8DD52BC4F4549C4();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_8FA1637947CCEF185EC09BAB996CE896();
-	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_8C63693141217C69A0F011928FD9001A();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_7653EB62453949D9D9D10DAC6A71930A();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_59331B454AC55487362D25AB9D278192();
 	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_0FAFAFB14E9A32BFE087EEB90BE25817();
@@ -111,6 +110,7 @@ public:
 	void AnimNotify_EnterIdleTwo();
 	void AnimNotify_EnterIdleOne();
 	void AnimGraph(struct FPoseLink* AnimGraph_0);
+	void EvaluateGraphExposedInputs_ExecuteUbergraph_AnimBP_NPC_FullBody_AnimGraphNode_TransitionResult_8C63693141217C69A0F011928FD9001A();
 
 public:
 	static class UClass* StaticClass()

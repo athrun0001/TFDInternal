@@ -17,7 +17,7 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass Viessa.Viessa_C
-// 0x0000 (0x1210 - 0x1210)
+// 0x0000 (0x1220 - 0x1220)
 class AViessa_C final : public APlayerBase_C
 {
 public:

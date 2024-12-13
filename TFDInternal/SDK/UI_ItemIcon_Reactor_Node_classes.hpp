@@ -35,8 +35,8 @@ public:
 	void SetFill(bool Fill, bool Max);
 	void SetEnchant(bool bEnchant);
 	void PreConstruct(bool IsDesignTime);
-	void Construct();
 	void ExecuteUbergraph_UI_ItemIcon_Reactor_Node(int32 EntryPoint);
+	void Construct();
 
 public:
 	static class UClass* StaticClass()

@@ -17,6 +17,26 @@
 namespace SDK
 {
 
+// Function UI_GuideMessage_Meta.UI_GuideMessage_Meta_C.BP_ShowTitle
+// (Event, Protected, BlueprintEvent)
+// Parameters:
+// bool                                    bShow                                                  (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_GuideMessage_Meta_C::BP_ShowTitle(bool bShow)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_GuideMessage_Meta_C", "BP_ShowTitle");
+
+	Params::UI_GuideMessage_Meta_C_BP_ShowTitle Parms{};
+
+	Parms.bShow = bShow;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
 // Function UI_GuideMessage_Meta.UI_GuideMessage_Meta_C.ExecuteUbergraph_UI_GuideMessage_Meta
 // (Final, UbergraphFunction)
 // Parameters:
@@ -48,26 +68,6 @@ void UUI_GuideMessage_Meta_C::Construct()
 		Func = Class->GetFunction("UI_GuideMessage_Meta_C", "Construct");
 
 	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function UI_GuideMessage_Meta.UI_GuideMessage_Meta_C.BP_ShowTitle
-// (Event, Protected, BlueprintEvent)
-// Parameters:
-// bool                                    bShow                                                  (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_GuideMessage_Meta_C::BP_ShowTitle(bool bShow)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_GuideMessage_Meta_C", "BP_ShowTitle");
-
-	Params::UI_GuideMessage_Meta_C_BP_ShowTitle Parms{};
-
-	Parms.bShow = bShow;
-
-	UObject::ProcessEvent(Func, &Parms);
 }
 
 }

@@ -79,6 +79,20 @@ void UUI_GameCenter_DamegeIndicator_Arrow_C::PreConstruct(bool IsDesignTime)
 }
 
 
+// Function UI_GameCenter_DamegeIndicator_Arrow.UI_GameCenter_DamegeIndicator_Arrow_C.PlayAnimations
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_GameCenter_DamegeIndicator_Arrow_C::PlayAnimations()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_GameCenter_DamegeIndicator_Arrow_C", "PlayAnimations");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UI_GameCenter_DamegeIndicator_Arrow.UI_GameCenter_DamegeIndicator_Arrow_C.ExecuteUbergraph_UI_GameCenter_DamegeIndicator_Arrow
 // (Final, UbergraphFunction, HasDefaults)
 // Parameters:
@@ -122,20 +136,6 @@ void UUI_GameCenter_DamegeIndicator_Arrow_C::BP_Init()
 
 	if (Func == nullptr)
 		Func = Class->GetFunction("UI_GameCenter_DamegeIndicator_Arrow_C", "BP_Init");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function UI_GameCenter_DamegeIndicator_Arrow.UI_GameCenter_DamegeIndicator_Arrow_C.PlayAnimations
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_GameCenter_DamegeIndicator_Arrow_C::PlayAnimations()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_GameCenter_DamegeIndicator_Arrow_C", "PlayAnimations");
 
 	UObject::ProcessEvent(Func, nullptr);
 }

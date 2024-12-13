@@ -34,8 +34,8 @@ public:
 
 public:
 	void ExecuteUbergraph_BP_Sec_FLW_DOG_001_A001(int32 EntryPoint);
-	void BlueprintThreadSafeUpdateAnimation(float DeltaTime);
 	void AnimGraph(const struct FPoseLink& InPose, struct FPoseLink* AnimGraph_0);
+	void BlueprintThreadSafeUpdateAnimation(float DeltaTime);
 
 public:
 	static class UClass* StaticClass()

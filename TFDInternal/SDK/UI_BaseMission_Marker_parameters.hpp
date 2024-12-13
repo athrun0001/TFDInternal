@@ -17,13 +17,12 @@
 namespace SDK::Params
 {
 
-// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.Tick
-// 0x003C (0x003C - 0x0000)
-struct UI_BaseMission_Marker_C_Tick final
+// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.BP_UpdateVisibility
+// 0x0001 (0x0001 - 0x0000)
+struct UI_BaseMission_Marker_C_BP_UpdateVisibility final
 {
 public:
-	struct FGeometry                              MyGeometry;                                        // 0x0000(0x0038)(BlueprintVisible, BlueprintReadOnly, Parm, IsPlainOldData, NoDestructor)
-	float                                         InDeltaTime;                                       // 0x0038(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          bIsVisible;                                        // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.SetUIState
@@ -32,14 +31,6 @@ struct UI_BaseMission_Marker_C_SetUIState final
 {
 public:
 	bool                                          IsDim;                                             // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.PreConstruct
-// 0x0001 (0x0001 - 0x0000)
-struct UI_BaseMission_Marker_C_PreConstruct final
-{
-public:
-	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.ExecuteUbergraph_UI_BaseMission_Marker
@@ -62,12 +53,21 @@ public:
 	float                                         CallFunc_SetRenderTransformAngle_Angle_ImplicitCast; // 0x0054(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.BP_UpdateVisibility
+// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.PreConstruct
 // 0x0001 (0x0001 - 0x0000)
-struct UI_BaseMission_Marker_C_BP_UpdateVisibility final
+struct UI_BaseMission_Marker_C_PreConstruct final
 {
 public:
-	bool                                          bIsVisible;                                        // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_BaseMission_Marker.UI_BaseMission_Marker_C.Tick
+// 0x003C (0x003C - 0x0000)
+struct UI_BaseMission_Marker_C_Tick final
+{
+public:
+	struct FGeometry                              MyGeometry;                                        // 0x0000(0x0038)(BlueprintVisible, BlueprintReadOnly, Parm, IsPlainOldData, NoDestructor)
+	float                                         InDeltaTime;                                       // 0x0038(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 }

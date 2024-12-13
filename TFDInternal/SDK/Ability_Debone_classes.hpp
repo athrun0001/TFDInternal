@@ -11,11 +11,11 @@
 #include "Basic.hpp"
 
 #include "GameplayCameras_structs.hpp"
-#include "CoreUObject_structs.hpp"
-#include "Engine_structs.hpp"
+#include "M1Data_structs.hpp"
 #include "M1_structs.hpp"
 #include "M1_classes.hpp"
-#include "M1Data_structs.hpp"
+#include "Engine_structs.hpp"
+#include "CoreUObject_structs.hpp"
 
 
 namespace SDK
@@ -74,17 +74,19 @@ public:
 	TSubclassOf<class UCameraModifier>            DeboneStartCamera;                                 // 0x0508(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnInstance, NoDestructor, UObjectWrapper, HasGetValueTypeHash)
 
 public:
+	void UpdateStamina(double DeltaSeconds, bool* bRunOutStamina);
 	void UpdatePositionAndIK(double DeltaSeconds);
 	void UnapplyIgnoreLookInput();
 	void TryAbilityEventDeboneEnd();
-	void UpdateStamina(double DeltaSeconds, bool* bRunOutStamina);
+	void StopArriveCameraClamp(bool bStop);
 	void ShowStamina(int32 IsEnable);
 	void ShowDeboneUI();
 	void SetOwnerLocalEnduring(bool InEnduring);
 	void ServerOnReceiveCancelInput();
-	void StopArriveCameraClamp(bool bStop);
 	void ServerOnReceiveAction1Input();
 	void ServerIgnoreDeboneStamina(bool bIgnore);
+	void ServerIgnoreDeboneCooltime(bool bIgnore);
+	void ResetDebone();
 	void ResetCameras();
 	void OnRep_PartsHPRate();
 	void OnRep_bOwnerEnduring();
@@ -102,8 +104,8 @@ public:
 	void OnAbilityEvent_F7D92B584B0C87393F7FFD97C44B9AC9(const struct FM1AbilityEvent& Event);
 	void OnAbilityEvent_E8E28EE7440C80A186429789BA43CD6F(const struct FM1AbilityEvent& Event);
 	void OnAbilityEvent_C04518B1422087423B7917B34F50F3BC(const struct FM1AbilityEvent& Event);
-	void OnAbilityEvent_792E32904B35F1C03B854FBCAA6B6319(const struct FM1AbilityEvent& Event);
 	void OnAbilityEvent_50AC98084D5FAC1BCBD9EDA054BAAD2B(const struct FM1AbilityEvent& Event);
+	void OnAbilityEvent_792E32904B35F1C03B854FBCAA6B6319(const struct FM1AbilityEvent& Event);
 	void OnAbilityEvent_1530179148E34C18C2B07C8EA37CF409(const struct FM1AbilityEvent& Event);
 	void IncrementPartsHangonCount();
 	void HideDeboneUI();
@@ -134,8 +136,6 @@ public:
 	void AbilityEvent_DeboneEndureEnd();
 	void AbilityEvent_DeboneEnd();
 	void AbilityEvent_DeboneArrived();
-	void ServerIgnoreDeboneCooltime(bool bIgnore);
-	void ResetDebone();
 
 	void IsEnduring(bool* bEnduring) const;
 	void GetAllCameras(TArray<class UClass*>* OutCameraModifiers) const;

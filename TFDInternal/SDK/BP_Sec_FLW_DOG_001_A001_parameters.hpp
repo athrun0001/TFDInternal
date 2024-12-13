@@ -24,6 +24,15 @@ public:
 	int32                                         EntryPoint;                                        // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
+// Function BP_Sec_FLW_DOG_001_A001.BP_Sec_FLW_DOG_001_A001_C.AnimGraph
+// 0x0020 (0x0020 - 0x0000)
+struct BP_Sec_FLW_DOG_001_A001_C_AnimGraph final
+{
+public:
+	struct FPoseLink                              InPose;                                            // 0x0000(0x0010)(BlueprintVisible, BlueprintReadOnly, Parm, NoDestructor)
+	struct FPoseLink                              AnimGraph_0;                                       // 0x0010(0x0010)(Parm, OutParm, NoDestructor)
+};
+
 // Function BP_Sec_FLW_DOG_001_A001.BP_Sec_FLW_DOG_001_A001_C.BlueprintThreadSafeUpdateAnimation
 // 0x0028 (0x0028 - 0x0000)
 struct BP_Sec_FLW_DOG_001_A001_C_BlueprintThreadSafeUpdateAnimation final
@@ -36,15 +45,6 @@ public:
 	double                                        CallFunc_SelectFloat_ReturnValue;                  // 0x0010(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        CallFunc_SelectFloat_A_ImplicitCast;               // 0x0018(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	double                                        CallFunc_Greater_DoubleDouble_A_ImplicitCast;      // 0x0020(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function BP_Sec_FLW_DOG_001_A001.BP_Sec_FLW_DOG_001_A001_C.AnimGraph
-// 0x0020 (0x0020 - 0x0000)
-struct BP_Sec_FLW_DOG_001_A001_C_AnimGraph final
-{
-public:
-	struct FPoseLink                              InPose;                                            // 0x0000(0x0010)(BlueprintVisible, BlueprintReadOnly, Parm, NoDestructor)
-	struct FPoseLink                              AnimGraph_0;                                       // 0x0010(0x0010)(Parm, OutParm, NoDestructor)
 };
 
 }

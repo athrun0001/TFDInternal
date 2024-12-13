@@ -148,20 +148,20 @@ public:
 	double                                        CallFunc_Less_DoubleDouble_A_ImplicitCast;         // 0x00A8(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function Locomotion.Locomotion_C.AnimGraph
-// 0x0010 (0x0010 - 0x0000)
-struct Locomotion_C_AnimGraph final
-{
-public:
-	struct FPoseLink                              AnimGraph_0;                                       // 0x0000(0x0010)(Parm, OutParm, NoDestructor)
-};
-
 // Function Locomotion.Locomotion_C.BlueprintUpdateAnimation
 // 0x0004 (0x0004 - 0x0000)
 struct Locomotion_C_BlueprintUpdateAnimation final
 {
 public:
 	float                                         DeltaTimeX;                                        // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function Locomotion.Locomotion_C.AnimGraph
+// 0x0010 (0x0010 - 0x0000)
+struct Locomotion_C_AnimGraph final
+{
+public:
+	struct FPoseLink                              AnimGraph_0;                                       // 0x0000(0x0010)(Parm, OutParm, NoDestructor)
 };
 
 }

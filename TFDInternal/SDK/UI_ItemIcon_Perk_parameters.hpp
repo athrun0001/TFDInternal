@@ -35,23 +35,6 @@ public:
 	bool                                          K2Node_DynamicCast_bSuccess_1;                     // 0x0048(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function UI_ItemIcon_Perk.UI_ItemIcon_Perk_C.PreConstruct
-// 0x0001 (0x0001 - 0x0000)
-struct UI_ItemIcon_Perk_C_PreConstruct final
-{
-public:
-	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
-// Function UI_ItemIcon_Perk.UI_ItemIcon_Perk_C.ExecuteUbergraph_UI_ItemIcon_Perk
-// 0x0008 (0x0008 - 0x0000)
-struct UI_ItemIcon_Perk_C_ExecuteUbergraph_UI_ItemIcon_Perk final
-{
-public:
-	int32                                         EntryPoint;                                        // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	bool                                          K2Node_Event_IsDesignTime;                         // 0x0004(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_ItemIcon_Perk.UI_ItemIcon_Perk_C.SetPerkLevel
 // 0x0050 (0x0050 - 0x0000)
 struct UI_ItemIcon_Perk_C_SetPerkLevel final
@@ -73,6 +56,23 @@ public:
 	uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
 	class UUI_ItemIcon_Perk_Node_C*               K2Node_DynamicCast_AsUI_Item_Icon_Perk_Node;       // 0x0040(0x0008)(ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash)
 	bool                                          K2Node_DynamicCast_bSuccess;                       // 0x0048(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_ItemIcon_Perk.UI_ItemIcon_Perk_C.PreConstruct
+// 0x0001 (0x0001 - 0x0000)
+struct UI_ItemIcon_Perk_C_PreConstruct final
+{
+public:
+	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_ItemIcon_Perk.UI_ItemIcon_Perk_C.ExecuteUbergraph_UI_ItemIcon_Perk
+// 0x0008 (0x0008 - 0x0000)
+struct UI_ItemIcon_Perk_C_ExecuteUbergraph_UI_ItemIcon_Perk final
+{
+public:
+	int32                                         EntryPoint;                                        // 0x0000(0x0004)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	bool                                          K2Node_Event_IsDesignTime;                         // 0x0004(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 }

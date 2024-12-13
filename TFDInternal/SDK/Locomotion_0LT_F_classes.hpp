@@ -18,7 +18,7 @@ namespace SDK
 
 // AnimBlueprintGeneratedClass Locomotion_0LT_F.Locomotion_0LT_F_C
 // 0x0000 (0x2A60 - 0x2A60)
-class ULocomotion_0LT_F_C final : public ULocomotion_C
+class ULocomotion_0LT_F_C : public ULocomotion_C
 {
 public:
 	static class UClass* StaticClass()

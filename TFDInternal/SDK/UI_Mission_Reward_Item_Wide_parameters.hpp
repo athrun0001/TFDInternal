@@ -66,15 +66,6 @@ public:
 	ESlateVisibility                              K2Node_Select_Default_3;                           // 0x0125(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function UI_Mission_Reward_Item_Wide.UI_Mission_Reward_Item_Wide_C.BP_SetWeaponDetails
-// 0x0018 (0x0018 - 0x0000)
-struct UI_Mission_Reward_Item_Wide_C_BP_SetWeaponDetails final
-{
-public:
-	class UTexture2D*                             InTexture;                                         // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-	class FString                                 InText;                                            // 0x0008(0x0010)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, HasGetValueTypeHash)
-};
-
 // Function UI_Mission_Reward_Item_Wide.UI_Mission_Reward_Item_Wide_C.BP_SetRuneDetails
 // 0x0001 (0x0001 - 0x0000)
 struct UI_Mission_Reward_Item_Wide_C_BP_SetRuneDetails final
@@ -90,6 +81,15 @@ struct UI_Mission_Reward_Item_Wide_C_BP_SetReactorDetails final
 public:
 	EM1ElementalDamageChannel                     InElementalType;                                   // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 	EM1SkillArcheType                             InArcheType;                                       // 0x0001(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+};
+
+// Function UI_Mission_Reward_Item_Wide.UI_Mission_Reward_Item_Wide_C.BP_SetWeaponDetails
+// 0x0018 (0x0018 - 0x0000)
+struct UI_Mission_Reward_Item_Wide_C_BP_SetWeaponDetails final
+{
+public:
+	class UTexture2D*                             InTexture;                                         // 0x0000(0x0008)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+	class FString                                 InText;                                            // 0x0008(0x0010)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, HasGetValueTypeHash)
 };
 
 }

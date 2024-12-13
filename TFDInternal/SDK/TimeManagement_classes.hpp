@@ -18,45 +18,6 @@
 namespace SDK
 {
 
-// Class TimeManagement.GenlockedTimecodeProvider
-// 0x0028 (0x0058 - 0x0030)
-class UGenlockedTimecodeProvider final : public UTimecodeProvider
-{
-public:
-	bool                                          bUseGenlockToCount;                                // 0x0030(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, AdvancedDisplay, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_31[0x27];                                      // 0x0031(0x0027)(Fixing Struct Size After Last Property [ Dumper-7 ])
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"GenlockedTimecodeProvider">();
-	}
-	static class UGenlockedTimecodeProvider* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UGenlockedTimecodeProvider>();
-	}
-};
-
-// Class TimeManagement.TimeSynchronizationSource
-// 0x0008 (0x0030 - 0x0028)
-class UTimeSynchronizationSource : public UObject
-{
-public:
-	bool                                          bUseForSynchronization;                            // 0x0028(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_29[0x3];                                       // 0x0029(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-	int32                                         FrameOffset;                                       // 0x002C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"TimeSynchronizationSource">();
-	}
-	static class UTimeSynchronizationSource* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UTimeSynchronizationSource>();
-	}
-};
-
 // Class TimeManagement.FixedFrameRateCustomTimeStep
 // 0x0000 (0x0028 - 0x0028)
 class UFixedFrameRateCustomTimeStep : public UEngineCustomTimeStep
@@ -91,6 +52,26 @@ public:
 	}
 };
 
+// Class TimeManagement.TimeSynchronizationSource
+// 0x0008 (0x0030 - 0x0028)
+class UTimeSynchronizationSource : public UObject
+{
+public:
+	bool                                          bUseForSynchronization;                            // 0x0028(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_29[0x3];                                       // 0x0029(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+	int32                                         FrameOffset;                                       // 0x002C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"TimeSynchronizationSource">();
+	}
+	static class UTimeSynchronizationSource* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UTimeSynchronizationSource>();
+	}
+};
+
 // Class TimeManagement.GenlockedFixedRateCustomTimeStep
 // 0x0020 (0x0050 - 0x0030)
 class UGenlockedFixedRateCustomTimeStep final : public UGenlockedCustomTimeStep
@@ -109,6 +90,25 @@ public:
 	static class UGenlockedFixedRateCustomTimeStep* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<UGenlockedFixedRateCustomTimeStep>();
+	}
+};
+
+// Class TimeManagement.GenlockedTimecodeProvider
+// 0x0028 (0x0058 - 0x0030)
+class UGenlockedTimecodeProvider final : public UTimecodeProvider
+{
+public:
+	bool                                          bUseGenlockToCount;                                // 0x0030(0x0001)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, AdvancedDisplay, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_31[0x27];                                      // 0x0031(0x0027)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"GenlockedTimecodeProvider">();
+	}
+	static class UGenlockedTimecodeProvider* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UGenlockedTimecodeProvider>();
 	}
 };
 

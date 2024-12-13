@@ -16,21 +16,22 @@
 namespace SDK
 {
 
-// Class TypedElementFramework.TestTypedElementInterfaceA_ImplUntyped
-// 0x0008 (0x0030 - 0x0028)
-class UTestTypedElementInterfaceA_ImplUntyped final : public UObject
+// Class TypedElementFramework.TestTypedElementInterfaceA
+// 0x0000 (0x0028 - 0x0028)
+class ITestTypedElementInterfaceA final : public IInterface
 {
 public:
-	uint8                                         Pad_28[0x8];                                       // 0x0028(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	class FText GetDisplayName(const struct FScriptTypedElementHandle& InElementHandle);
+	bool SetDisplayName(const struct FScriptTypedElementHandle& InElementHandle, const class FText& InNewName, bool bNotify);
 
 public:
 	static class UClass* StaticClass()
 	{
-		return StaticClassImpl<"TestTypedElementInterfaceA_ImplUntyped">();
+		return StaticClassImpl<"TestTypedElementInterfaceA">();
 	}
-	static class UTestTypedElementInterfaceA_ImplUntyped* GetDefaultObj()
+	static class ITestTypedElementInterfaceA* GetDefaultObj()
 	{
-		return GetDefaultObjImpl<UTestTypedElementInterfaceA_ImplUntyped>();
+		return GetDefaultObjImpl<ITestTypedElementInterfaceA>();
 	}
 };
 
@@ -49,6 +50,29 @@ public:
 	}
 };
 
+// Class TypedElementFramework.TypedElementRegistry
+// 0x0950 (0x0978 - 0x0028)
+class UTypedElementRegistry final : public UObject
+{
+public:
+	uint8                                         Pad_28[0x950];                                     // 0x0028(0x0950)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UTypedElementRegistry* GetInstance();
+
+	class UObject* GetElementInterface(const struct FScriptTypedElementHandle& InElementHandle, const TSubclassOf<class IInterface> InBaseInterfaceType) const;
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"TypedElementRegistry">();
+	}
+	static class UTypedElementRegistry* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UTypedElementRegistry>();
+	}
+};
+
 // Class TypedElementFramework.TypedElementDataStorageInterface
 // 0x0000 (0x0028 - 0x0028)
 class ITypedElementDataStorageInterface final : public IInterface
@@ -61,6 +85,21 @@ public:
 	static class ITypedElementDataStorageInterface* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<ITypedElementDataStorageInterface>();
+	}
+};
+
+// Class TypedElementFramework.TypedElementCounterInterface
+// 0x0000 (0x0028 - 0x0028)
+class ITypedElementCounterInterface final : public IInterface
+{
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"TypedElementCounterInterface">();
+	}
+	static class ITypedElementCounterInterface* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<ITypedElementCounterInterface>();
 	}
 };
 
@@ -100,25 +139,6 @@ public:
 	}
 };
 
-// Class TypedElementFramework.TestTypedElementInterfaceA
-// 0x0000 (0x0028 - 0x0028)
-class ITestTypedElementInterfaceA final : public IInterface
-{
-public:
-	class FText GetDisplayName(const struct FScriptTypedElementHandle& InElementHandle);
-	bool SetDisplayName(const struct FScriptTypedElementHandle& InElementHandle, const class FText& InNewName, bool bNotify);
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"TestTypedElementInterfaceA">();
-	}
-	static class ITestTypedElementInterfaceA* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<ITestTypedElementInterfaceA>();
-	}
-};
-
 // Class TypedElementFramework.TypedElementListLibrary
 // 0x0000 (0x0028 - 0x0028)
 class UTypedElementListLibrary final : public UObject
@@ -153,44 +173,6 @@ public:
 	static class UTypedElementListLibrary* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<UTypedElementListLibrary>();
-	}
-};
-
-// Class TypedElementFramework.TypedElementCounterInterface
-// 0x0000 (0x0028 - 0x0028)
-class ITypedElementCounterInterface final : public IInterface
-{
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"TypedElementCounterInterface">();
-	}
-	static class ITypedElementCounterInterface* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<ITypedElementCounterInterface>();
-	}
-};
-
-// Class TypedElementFramework.TypedElementRegistry
-// 0x0950 (0x0978 - 0x0028)
-class UTypedElementRegistry final : public UObject
-{
-public:
-	uint8                                         Pad_28[0x950];                                     // 0x0028(0x0950)(Fixing Struct Size After Last Property [ Dumper-7 ])
-
-public:
-	static class UTypedElementRegistry* GetInstance();
-
-	class UObject* GetElementInterface(const struct FScriptTypedElementHandle& InElementHandle, const TSubclassOf<class IInterface> InBaseInterfaceType) const;
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"TypedElementRegistry">();
-	}
-	static class UTypedElementRegistry* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UTypedElementRegistry>();
 	}
 };
 
@@ -245,6 +227,24 @@ public:
 	static class UTestTypedElementInterfaceA_ImplTyped* GetDefaultObj()
 	{
 		return GetDefaultObjImpl<UTestTypedElementInterfaceA_ImplTyped>();
+	}
+};
+
+// Class TypedElementFramework.TestTypedElementInterfaceA_ImplUntyped
+// 0x0008 (0x0030 - 0x0028)
+class UTestTypedElementInterfaceA_ImplUntyped final : public UObject
+{
+public:
+	uint8                                         Pad_28[0x8];                                       // 0x0028(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"TestTypedElementInterfaceA_ImplUntyped">();
+	}
+	static class UTestTypedElementInterfaceA_ImplUntyped* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UTestTypedElementInterfaceA_ImplUntyped>();
 	}
 };
 

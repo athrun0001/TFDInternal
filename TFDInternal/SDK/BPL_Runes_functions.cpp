@@ -169,32 +169,6 @@ class UTexture2D* UBPL_Runes_C::GetRuneClassTypeBackImage(EM1RuneClassType InRun
 }
 
 
-// Function BPL_Runes.BPL_Runes_C.GetIconImageByItemClassType
-// (Static, Public, HasOutParams, BlueprintCallable, BlueprintEvent, BlueprintPure)
-// Parameters:
-// EM1EquipItemClassType                   ItemClassType                                          (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-// class UObject*                          __WorldContext                                         (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-// class UTexture2D*                       Image                                                  (Parm, OutParm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-
-void UBPL_Runes_C::GetIconImageByItemClassType(EM1EquipItemClassType ItemClassType, class UObject* __WorldContext, class UTexture2D** Image)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = StaticClass()->GetFunction("BPL_Runes_C", "GetIconImageByItemClassType");
-
-	Params::BPL_Runes_C_GetIconImageByItemClassType Parms{};
-
-	Parms.ItemClassType = ItemClassType;
-	Parms.__WorldContext = __WorldContext;
-
-	GetDefaultObj()->ProcessEvent(Func, &Parms);
-
-	if (Image != nullptr)
-		*Image = Parms.Image;
-}
-
-
 // Function BPL_Runes.BPL_Runes_C.Get Tooltip Text by Rune Class
 // (Static, Public, HasOutParams, HasDefaults, BlueprintCallable, BlueprintEvent, BlueprintPure)
 // Parameters:
@@ -219,6 +193,32 @@ class FText UBPL_Runes_C::Get_Tooltip_Text_by_Rune_Class(EM1RuneClassType InRune
 	GetDefaultObj()->ProcessEvent(Func, &Parms);
 
 	return Parms.ReturnValue;
+}
+
+
+// Function BPL_Runes.BPL_Runes_C.GetIconImageByItemClassType
+// (Static, Public, HasOutParams, BlueprintCallable, BlueprintEvent, BlueprintPure)
+// Parameters:
+// EM1EquipItemClassType                   ItemClassType                                          (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// class UObject*                          __WorldContext                                         (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+// class UTexture2D*                       Image                                                  (Parm, OutParm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+
+void UBPL_Runes_C::GetIconImageByItemClassType(EM1EquipItemClassType ItemClassType, class UObject* __WorldContext, class UTexture2D** Image)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = StaticClass()->GetFunction("BPL_Runes_C", "GetIconImageByItemClassType");
+
+	Params::BPL_Runes_C_GetIconImageByItemClassType Parms{};
+
+	Parms.ItemClassType = ItemClassType;
+	Parms.__WorldContext = __WorldContext;
+
+	GetDefaultObj()->ProcessEvent(Func, &Parms);
+
+	if (Image != nullptr)
+		*Image = Parms.Image;
 }
 
 
@@ -376,31 +376,6 @@ class UTexture2D* UBPL_Runes_C::Get_Rune_Class_Type_Mini_Image_Color(EM1RuneClas
 }
 
 
-// Function BPL_Runes.BPL_Runes_C.Get Rune Class Type Mini Image
-// (Static, Public, HasOutParams, BlueprintCallable, BlueprintEvent, BlueprintPure)
-// Parameters:
-// EM1RuneClassType                        InRuneClassType                                        (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-// class UObject*                          __WorldContext                                         (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
-// class UTexture2D*                       ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash)
-
-class UTexture2D* UBPL_Runes_C::Get_Rune_Class_Type_Mini_Image(EM1RuneClassType InRuneClassType, class UObject* __WorldContext)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = StaticClass()->GetFunction("BPL_Runes_C", "Get Rune Class Type Mini Image");
-
-	Params::BPL_Runes_C_Get_Rune_Class_Type_Mini_Image Parms{};
-
-	Parms.InRuneClassType = InRuneClassType;
-	Parms.__WorldContext = __WorldContext;
-
-	GetDefaultObj()->ProcessEvent(Func, &Parms);
-
-	return Parms.ReturnValue;
-}
-
-
 // Function BPL_Runes.BPL_Runes_C.Get Rune Class Color Type
 // (Static, Public, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -467,6 +442,31 @@ class UTexture2D* UBPL_Runes_C::Get_Rune_Board_Slot_Socket_Icon_in_SocketMode(EM
 	Params::BPL_Runes_C_Get_Rune_Board_Slot_Socket_Icon_in_SocketMode Parms{};
 
 	Parms.InType = InType;
+	Parms.__WorldContext = __WorldContext;
+
+	GetDefaultObj()->ProcessEvent(Func, &Parms);
+
+	return Parms.ReturnValue;
+}
+
+
+// Function BPL_Runes.BPL_Runes_C.Get Rune Class Type Mini Image
+// (Static, Public, HasOutParams, BlueprintCallable, BlueprintEvent, BlueprintPure)
+// Parameters:
+// EM1RuneClassType                        InRuneClassType                                        (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// class UObject*                          __WorldContext                                         (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash)
+// class UTexture2D*                       ReturnValue                                            (Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash)
+
+class UTexture2D* UBPL_Runes_C::Get_Rune_Class_Type_Mini_Image(EM1RuneClassType InRuneClassType, class UObject* __WorldContext)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = StaticClass()->GetFunction("BPL_Runes_C", "Get Rune Class Type Mini Image");
+
+	Params::BPL_Runes_C_Get_Rune_Class_Type_Mini_Image Parms{};
+
+	Parms.InRuneClassType = InRuneClassType;
 	Parms.__WorldContext = __WorldContext;
 
 	GetDefaultObj()->ProcessEvent(Func, &Parms);

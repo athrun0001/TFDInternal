@@ -31,14 +31,6 @@ public:
 	float                                         CallFunc_SetOpacity_InOpacity_ImplicitCast;        // 0x00E0(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
-// Function UI_KeyButton_Chatting.UI_KeyButton_Chatting_C.PreConstruct
-// 0x0001 (0x0001 - 0x0000)
-struct UI_KeyButton_Chatting_C_PreConstruct final
-{
-public:
-	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-};
-
 // Function UI_KeyButton_Chatting.UI_KeyButton_Chatting_C.SetTextColor
 // 0x0028 (0x0028 - 0x0000)
 struct UI_KeyButton_Chatting_C_SetTextColor final
@@ -46,6 +38,14 @@ struct UI_KeyButton_Chatting_C_SetTextColor final
 public:
 	struct FSlateColor                            KeyText;                                           // 0x0000(0x0014)(BlueprintVisible, BlueprintReadOnly, Parm)
 	struct FSlateColor                            ButtonText;                                        // 0x0014(0x0014)(BlueprintVisible, BlueprintReadOnly, Parm)
+};
+
+// Function UI_KeyButton_Chatting.UI_KeyButton_Chatting_C.PreConstruct
+// 0x0001 (0x0001 - 0x0000)
+struct UI_KeyButton_Chatting_C_PreConstruct final
+{
+public:
+	bool                                          IsDesignTime;                                      // 0x0000(0x0001)(BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 };
 
 // Function UI_KeyButton_Chatting.UI_KeyButton_Chatting_C.ExecuteUbergraph_UI_KeyButton_Chatting

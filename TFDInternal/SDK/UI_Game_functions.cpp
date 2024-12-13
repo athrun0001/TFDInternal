@@ -17,20 +17,6 @@
 namespace SDK
 {
 
-// Function UI_Game.UI_Game_C.UISetSkillMovie
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_Game_C::UISetSkillMovie()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Game_C", "UISetSkillMovie");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function UI_Game.UI_Game_C.PreConstruct
 // (BlueprintCosmetic, Event, Public, BlueprintEvent)
 // Parameters:
@@ -102,6 +88,20 @@ void UUI_Game_C::BP_SetButtonsVisibility(EM1MapType InMapType)
 	Parms.InMapType = InMapType;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_Game.UI_Game_C.UISetSkillMovie
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_Game_C::UISetSkillMovie()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Game_C", "UISetSkillMovie");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 

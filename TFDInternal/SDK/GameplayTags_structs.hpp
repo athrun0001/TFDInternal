@@ -64,12 +64,10 @@ enum class EGameplayTagSelectionType : uint8
 	EGameplayTagSelectionType_MAX            = 4,
 };
 
-// ScriptStruct GameplayTags.GameplayTagReferenceHelper
-// 0x0010 (0x0010 - 0x0000)
-struct alignas(0x08) FGameplayTagReferenceHelper final
+// ScriptStruct GameplayTags.GameplayTagNetSerializerConfig
+// 0x0000 (0x0010 - 0x0010)
+struct FGameplayTagNetSerializerConfig final : public FNetSerializerConfig
 {
-public:
-	uint8                                         Pad_0[0x10];                                       // 0x0000(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct GameplayTags.GameplayTag
@@ -89,12 +87,26 @@ public:
 	TArray<struct FGameplayTag>                   ParentTags;                                        // 0x0010(0x0010)(ZeroConstructor, Transient, Protected, NativeAccessSpecifierProtected)
 };
 
+// ScriptStruct GameplayTags.GameplayTagContainerNetSerializerConfig
+// 0x0000 (0x0010 - 0x0010)
+struct FGameplayTagContainerNetSerializerConfig final : public FNetSerializerConfig
+{
+};
+
 // ScriptStruct GameplayTags.GameplayTagContainerNetSerializerSerializationHelper
 // 0x0010 (0x0010 - 0x0000)
 struct FGameplayTagContainerNetSerializerSerializationHelper final
 {
 public:
 	TArray<struct FGameplayTag>                   GameplayTags;                                      // 0x0000(0x0010)(ZeroConstructor, NativeAccessSpecifierPublic)
+};
+
+// ScriptStruct GameplayTags.GameplayTagReferenceHelper
+// 0x0010 (0x0010 - 0x0000)
+struct alignas(0x08) FGameplayTagReferenceHelper final
+{
+public:
+	uint8                                         Pad_0[0x10];                                       // 0x0000(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // ScriptStruct GameplayTags.GameplayTagCreationWidgetHelper
@@ -116,18 +128,6 @@ public:
 	TArray<uint8>                                 QueryTokenStream;                                  // 0x0018(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPrivate)
 	class FString                                 UserDescription;                                   // 0x0028(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 	class FString                                 AutoDescription;                                   // 0x0038(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-};
-
-// ScriptStruct GameplayTags.GameplayTagContainerNetSerializerConfig
-// 0x0000 (0x0010 - 0x0010)
-struct FGameplayTagContainerNetSerializerConfig final : public FNetSerializerConfig
-{
-};
-
-// ScriptStruct GameplayTags.GameplayTagNetSerializerConfig
-// 0x0000 (0x0010 - 0x0010)
-struct FGameplayTagNetSerializerConfig final : public FNetSerializerConfig
-{
 };
 
 // ScriptStruct GameplayTags.GameplayTagRedirect

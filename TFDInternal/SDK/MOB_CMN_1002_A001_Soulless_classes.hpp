@@ -17,7 +17,7 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass MOB_CMN_1002_A001_Soulless.MOB_CMN_1002_A001_Soulless_C
-// 0x0000 (0x0F20 - 0x0F20)
+// 0x0000 (0x0F30 - 0x0F30)
 class AMOB_CMN_1002_A001_Soulless_C final : public ANormalMonsterBase_C
 {
 public:

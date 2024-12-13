@@ -71,60 +71,6 @@ void USkill_AJaxHyperCube_C::OnCompleted_6BD88B004E57299C75FE6DB6B89DE81C(const 
 }
 
 
-// Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.ExecuteUbergraph_Skill_AJaxHyperCube
-// (Final, UbergraphFunction, HasDefaults)
-// Parameters:
-// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void USkill_AJaxHyperCube_C::ExecuteUbergraph_Skill_AJaxHyperCube(int32 EntryPoint)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Skill_AJaxHyperCube_C", "ExecuteUbergraph_Skill_AJaxHyperCube");
-
-	Params::Skill_AJaxHyperCube_C_ExecuteUbergraph_Skill_AJaxHyperCube Parms{};
-
-	Parms.EntryPoint = EntryPoint;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.BP_OnDeactivated
-// (Event, Protected, BlueprintEvent)
-// Parameters:
-// bool                                    bCancelled                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void USkill_AJaxHyperCube_C::BP_OnDeactivated(bool bCancelled)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Skill_AJaxHyperCube_C", "BP_OnDeactivated");
-
-	Params::Skill_AJaxHyperCube_C_BP_OnDeactivated Parms{};
-
-	Parms.bCancelled = bCancelled;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.BP_OnActivated
-// (Event, Protected, BlueprintEvent)
-
-void USkill_AJaxHyperCube_C::BP_OnActivated()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("Skill_AJaxHyperCube_C", "BP_OnActivated");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.OnBlendOut_6BD88B004E57299C75FE6DB6B89DE81C
 // (HasOutParams, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -183,6 +129,60 @@ void USkill_AJaxHyperCube_C::GetSkillMontage(class UAnimMontage** SkillMontage)
 
 	if (SkillMontage != nullptr)
 		*SkillMontage = Parms.SkillMontage;
+}
+
+
+// Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.ExecuteUbergraph_Skill_AJaxHyperCube
+// (Final, UbergraphFunction, HasDefaults)
+// Parameters:
+// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void USkill_AJaxHyperCube_C::ExecuteUbergraph_Skill_AJaxHyperCube(int32 EntryPoint)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Skill_AJaxHyperCube_C", "ExecuteUbergraph_Skill_AJaxHyperCube");
+
+	Params::Skill_AJaxHyperCube_C_ExecuteUbergraph_Skill_AJaxHyperCube Parms{};
+
+	Parms.EntryPoint = EntryPoint;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.BP_OnDeactivated
+// (Event, Protected, BlueprintEvent)
+// Parameters:
+// bool                                    bCancelled                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void USkill_AJaxHyperCube_C::BP_OnDeactivated(bool bCancelled)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Skill_AJaxHyperCube_C", "BP_OnDeactivated");
+
+	Params::Skill_AJaxHyperCube_C_BP_OnDeactivated Parms{};
+
+	Parms.bCancelled = bCancelled;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function Skill_AJaxHyperCube.Skill_AJaxHyperCube_C.BP_OnActivated
+// (Event, Protected, BlueprintEvent)
+
+void USkill_AJaxHyperCube_C::BP_OnActivated()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("Skill_AJaxHyperCube_C", "BP_OnActivated");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 

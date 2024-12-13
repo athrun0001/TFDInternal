@@ -28,8 +28,8 @@ public:
 	double                                        BossDamageRatio;                                   // 0x0148(0x0008)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
-	void GetDamageRatio(struct FM1AbilityOpCalcParam& Param, double* Ratio) const;
 	void DoCalculation(struct FM1AbilityOpCalcParam& Param, struct FM1CalcDamageInfo& DamageInfo) const;
+	void GetDamageRatio(struct FM1AbilityOpCalcParam& Param, double* Ratio) const;
 
 public:
 	static class UClass* StaticClass()

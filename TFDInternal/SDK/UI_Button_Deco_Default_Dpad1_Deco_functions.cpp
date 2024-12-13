@@ -17,26 +17,6 @@
 namespace SDK
 {
 
-// Function UI_Button_Deco_Default_Dpad1_Deco.UI_Button_Deco_Default_Dpad1_Deco_C.ExecuteUbergraph_UI_Button_Deco_Default_Dpad1_Deco
-// (Final, UbergraphFunction)
-// Parameters:
-// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Button_Deco_Default_Dpad1_Deco_C::ExecuteUbergraph_UI_Button_Deco_Default_Dpad1_Deco(int32 EntryPoint)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Button_Deco_Default_Dpad1_Deco_C", "ExecuteUbergraph_UI_Button_Deco_Default_Dpad1_Deco");
-
-	Params::UI_Button_Deco_Default_Dpad1_Deco_C_ExecuteUbergraph_UI_Button_Deco_Default_Dpad1_Deco Parms{};
-
-	Parms.EntryPoint = EntryPoint;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_Button_Deco_Default_Dpad1_Deco.UI_Button_Deco_Default_Dpad1_Deco_C.PreConstruct
 // (BlueprintCosmetic, Event, Public, BlueprintEvent)
 // Parameters:
@@ -52,6 +32,26 @@ void UUI_Button_Deco_Default_Dpad1_Deco_C::PreConstruct(bool IsDesignTime)
 	Params::UI_Button_Deco_Default_Dpad1_Deco_C_PreConstruct Parms{};
 
 	Parms.IsDesignTime = IsDesignTime;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_Button_Deco_Default_Dpad1_Deco.UI_Button_Deco_Default_Dpad1_Deco_C.ExecuteUbergraph_UI_Button_Deco_Default_Dpad1_Deco
+// (Final, UbergraphFunction)
+// Parameters:
+// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_Button_Deco_Default_Dpad1_Deco_C::ExecuteUbergraph_UI_Button_Deco_Default_Dpad1_Deco(int32 EntryPoint)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Button_Deco_Default_Dpad1_Deco_C", "ExecuteUbergraph_UI_Button_Deco_Default_Dpad1_Deco");
+
+	Params::UI_Button_Deco_Default_Dpad1_Deco_C_ExecuteUbergraph_UI_Button_Deco_Default_Dpad1_Deco Parms{};
+
+	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

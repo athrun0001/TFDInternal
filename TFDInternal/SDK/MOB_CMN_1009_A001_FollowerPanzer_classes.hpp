@@ -17,7 +17,7 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass MOB_CMN_1009_A001_FollowerPanzer.MOB_CMN_1009_A001_FollowerPanzer_C
-// 0x0000 (0x0F20 - 0x0F20)
+// 0x0000 (0x0F30 - 0x0F30)
 class AMOB_CMN_1009_A001_FollowerPanzer_C final : public ANormalMonsterBase_C
 {
 public:

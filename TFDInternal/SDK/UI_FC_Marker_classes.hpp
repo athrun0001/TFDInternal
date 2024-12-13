@@ -30,8 +30,8 @@ public:
 public:
 	void OnShowImpl();
 	void ExecuteUbergraph_UI_FC_Marker(int32 EntryPoint);
-	void Construct();
 	void BP_PlayMarkerAnim();
+	void Construct();
 
 public:
 	static class UClass* StaticClass()

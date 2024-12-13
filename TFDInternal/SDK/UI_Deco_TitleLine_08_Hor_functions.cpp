@@ -37,20 +37,6 @@ void UUI_Deco_TitleLine_08_Hor_C::PreConstruct(bool IsDesignTime)
 }
 
 
-// Function UI_Deco_TitleLine_08_Hor.UI_Deco_TitleLine_08_Hor_C.PlaySetOpenUI
-// (BlueprintCallable, BlueprintEvent)
-
-void UUI_Deco_TitleLine_08_Hor_C::PlaySetOpenUI()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Deco_TitleLine_08_Hor_C", "PlaySetOpenUI");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function UI_Deco_TitleLine_08_Hor.UI_Deco_TitleLine_08_Hor_C.ExecuteUbergraph_UI_Deco_TitleLine_08_Hor
 // (Final, UbergraphFunction)
 // Parameters:
@@ -80,6 +66,20 @@ void UUI_Deco_TitleLine_08_Hor_C::Construct()
 
 	if (Func == nullptr)
 		Func = Class->GetFunction("UI_Deco_TitleLine_08_Hor_C", "Construct");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function UI_Deco_TitleLine_08_Hor.UI_Deco_TitleLine_08_Hor_C.PlaySetOpenUI
+// (BlueprintCallable, BlueprintEvent)
+
+void UUI_Deco_TitleLine_08_Hor_C::PlaySetOpenUI()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Deco_TitleLine_08_Hor_C", "PlaySetOpenUI");
 
 	UObject::ProcessEvent(Func, nullptr);
 }

@@ -17,26 +17,6 @@
 namespace SDK
 {
 
-// Function UI_Page_Rotation.UI_Page_Rotation_C.PreConstruct
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
-// Parameters:
-// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Page_Rotation_C::PreConstruct(bool IsDesignTime)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Page_Rotation_C", "PreConstruct");
-
-	Params::UI_Page_Rotation_C_PreConstruct Parms{};
-
-	Parms.IsDesignTime = IsDesignTime;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_Page_Rotation.UI_Page_Rotation_C.ExecuteUbergraph_UI_Page_Rotation
 // (Final, UbergraphFunction)
 // Parameters:
@@ -68,6 +48,26 @@ void UUI_Page_Rotation_C::Construct()
 		Func = Class->GetFunction("UI_Page_Rotation_C", "Construct");
 
 	UObject::ProcessEvent(Func, nullptr);
+}
+
+
+// Function UI_Page_Rotation.UI_Page_Rotation_C.PreConstruct
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
+// Parameters:
+// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_Page_Rotation_C::PreConstruct(bool IsDesignTime)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Page_Rotation_C", "PreConstruct");
+
+	Params::UI_Page_Rotation_C_PreConstruct Parms{};
+
+	Parms.IsDesignTime = IsDesignTime;
+
+	UObject::ProcessEvent(Func, &Parms);
 }
 
 }

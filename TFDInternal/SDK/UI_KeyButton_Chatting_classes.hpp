@@ -30,8 +30,8 @@ public:
 
 public:
 	void SetTextureAndOpacity(class UImage* Target, class UTexture* PaperTexture, double Opacity);
-	void PreConstruct(bool IsDesignTime);
 	void SetTextColor(const struct FSlateColor& KeyText, const struct FSlateColor& ButtonText);
+	void PreConstruct(bool IsDesignTime);
 	void ExecuteUbergraph_UI_KeyButton_Chatting(int32 EntryPoint);
 	void BP_ChangeDimmedUI(const bool InDimmed);
 	void BP_ChangeButtonUI(EM1ButtonUIType InType);

@@ -18,15 +18,15 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass Viessa_AbilityActor_IceSphereProjectile2.Viessa_AbilityActor_IceSphereProjectile2_C
-// 0x0028 (0x0C50 - 0x0C28)
+// 0x0028 (0x0C60 - 0x0C38)
 class AViessa_AbilityActor_IceSphereProjectile2_C final : public AM1AbilityProjectile
 {
 public:
-	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0C28(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
-	int32                                         IceBindeLevelByHit;                                // 0x0C30(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	int32                                         IceBindLevelByExplosion;                           // 0x0C34(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-	class AActor*                                 ProjectileHitActor;                                // 0x0C38(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, DisableEditOnInstance, NoDestructor, HasGetValueTypeHash)
-	TArray<class AActor*>                         ProjectileExplosionTargetActors;                   // 0x0C40(0x0010)(Edit, BlueprintVisible, DisableEditOnTemplate, DisableEditOnInstance)
+	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0C38(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
+	int32                                         IceBindeLevelByHit;                                // 0x0C40(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	int32                                         IceBindLevelByExplosion;                           // 0x0C44(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+	class AActor*                                 ProjectileHitActor;                                // 0x0C48(0x0008)(Edit, BlueprintVisible, ZeroConstructor, DisableEditOnTemplate, DisableEditOnInstance, NoDestructor, HasGetValueTypeHash)
+	TArray<class AActor*>                         ProjectileExplosionTargetActors;                   // 0x0C50(0x0010)(Edit, BlueprintVisible, DisableEditOnTemplate, DisableEditOnInstance)
 
 public:
 	void ProcessExplosionToActor(class AActor* OtherActor, const struct FHitResult& ExplosionResult);

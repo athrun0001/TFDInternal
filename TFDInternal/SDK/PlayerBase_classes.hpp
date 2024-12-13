@@ -17,12 +17,12 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass PlayerBase.PlayerBase_C
-// 0x0010 (0x1210 - 0x1200)
+// 0x0010 (0x1220 - 0x1210)
 #pragma pack(push, 0x1)
 class alignas(0x10) APlayerBase_C : public AM1Player
 {
 public:
-	class UMotionWarpingComponent*                MotionWarping;                                     // 0x1200(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
+	class UMotionWarpingComponent*                MotionWarping;                                     // 0x1210(0x0008)(BlueprintVisible, ZeroConstructor, InstancedReference, NonTransactional, NoDestructor, HasGetValueTypeHash)
 
 public:
 	static class UClass* StaticClass()

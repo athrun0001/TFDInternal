@@ -34,6 +34,8 @@ public:
 	class USizeBox*                               SizeBox_0;                                         // 0x0748(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
 
 public:
+	void SetSize(const struct FVector2D& Size);
+	void SetMax(bool Max);
 	void SetFill(bool Fill_0);
 	void SetEnchantPreview(bool InEnchantPreview);
 	void SetBgStyle(bool ViewBgDeco);
@@ -41,11 +43,9 @@ public:
 	void PreConstruct(bool IsDesignTime);
 	void ExecuteUbergraph_UI_ItemIcon_Perk_Node(int32 EntryPoint);
 	void Construct();
+	void BP_ShowGlowingEffect(const bool bShow);
 	void BP_TurnOn(const bool bIsMaxLevel);
 	void BP_TurnOff();
-	void BP_ShowGlowingEffect(const bool bShow);
-	void SetSize(const struct FVector2D& Size);
-	void SetMax(bool Max);
 
 public:
 	static class UClass* StaticClass()

@@ -17,20 +17,6 @@
 namespace SDK
 {
 
-// Function UI_MapBattleZoneUnlockNoti.UI_MapBattleZoneUnlockNoti_C.SequenceEvent__ENTRYPOINTUI_MapBattleZoneUnlockNoti
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_MapBattleZoneUnlockNoti_C::SequenceEvent__ENTRYPOINTUI_MapBattleZoneUnlockNoti()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_MapBattleZoneUnlockNoti_C", "SequenceEvent__ENTRYPOINTUI_MapBattleZoneUnlockNoti");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
 // Function UI_MapBattleZoneUnlockNoti.UI_MapBattleZoneUnlockNoti_C.ExecuteUbergraph_UI_MapBattleZoneUnlockNoti
 // (Final, UbergraphFunction)
 // Parameters:
@@ -48,6 +34,20 @@ void UUI_MapBattleZoneUnlockNoti_C::ExecuteUbergraph_UI_MapBattleZoneUnlockNoti(
 	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_MapBattleZoneUnlockNoti.UI_MapBattleZoneUnlockNoti_C.SequenceEvent__ENTRYPOINTUI_MapBattleZoneUnlockNoti
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_MapBattleZoneUnlockNoti_C::SequenceEvent__ENTRYPOINTUI_MapBattleZoneUnlockNoti()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_MapBattleZoneUnlockNoti_C", "SequenceEvent__ENTRYPOINTUI_MapBattleZoneUnlockNoti");
+
+	UObject::ProcessEvent(Func, nullptr);
 }
 
 

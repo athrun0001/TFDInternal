@@ -23,18 +23,18 @@
 namespace SDK
 {
 
-// Class LevelSequence.LevelSequenceBurnInInitSettings
+// Class LevelSequence.LevelSequenceMetaData
 // 0x0000 (0x0028 - 0x0028)
-class ULevelSequenceBurnInInitSettings final : public UObject
+class ILevelSequenceMetaData final : public IInterface
 {
 public:
 	static class UClass* StaticClass()
 	{
-		return StaticClassImpl<"LevelSequenceBurnInInitSettings">();
+		return StaticClassImpl<"LevelSequenceMetaData">();
 	}
-	static class ULevelSequenceBurnInInitSettings* GetDefaultObj()
+	static class ILevelSequenceMetaData* GetDefaultObj()
 	{
-		return GetDefaultObjImpl<ULevelSequenceBurnInInitSettings>();
+		return GetDefaultObjImpl<ILevelSequenceMetaData>();
 	}
 };
 
@@ -69,27 +69,6 @@ public:
 	}
 };
 
-// Class LevelSequence.DefaultLevelSequenceInstanceData
-// 0x0048 (0x0070 - 0x0028)
-class UDefaultLevelSequenceInstanceData final : public UObject
-{
-public:
-	uint8                                         Pad_28[0x8];                                       // 0x0028(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
-	class AActor*                                 TransformOriginActor;                              // 0x0030(0x0008)(Edit, BlueprintVisible, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	uint8                                         Pad_38[0x8];                                       // 0x0038(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
-	struct FTransform                             TransformOrigin;                                   // 0x0040(0x0030)(Edit, BlueprintVisible, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-
-public:
-	static class UClass* StaticClass()
-	{
-		return StaticClassImpl<"DefaultLevelSequenceInstanceData">();
-	}
-	static class UDefaultLevelSequenceInstanceData* GetDefaultObj()
-	{
-		return GetDefaultObjImpl<UDefaultLevelSequenceInstanceData>();
-	}
-};
-
 // Class LevelSequence.LevelSequencePlayer
 // 0x0130 (0x05F0 - 0x04C0)
 class ULevelSequencePlayer : public UMovieSceneSequencePlayer
@@ -114,22 +93,24 @@ public:
 	}
 };
 
-// Class LevelSequence.AnimSequenceLevelSequenceLink
-// 0x0030 (0x0058 - 0x0028)
-class UAnimSequenceLevelSequenceLink final : public UAssetUserData
+// Class LevelSequence.DefaultLevelSequenceInstanceData
+// 0x0048 (0x0070 - 0x0028)
+class UDefaultLevelSequenceInstanceData final : public UObject
 {
 public:
-	struct FGuid                                  SkelTrackGuid;                                     // 0x0028(0x0010)(BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	struct FSoftObjectPath                        PathToLevelSequence;                               // 0x0038(0x0020)(BlueprintVisible, ZeroConstructor, AssetRegistrySearchable, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_28[0x8];                                       // 0x0028(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	class AActor*                                 TransformOriginActor;                              // 0x0030(0x0008)(Edit, BlueprintVisible, ZeroConstructor, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	uint8                                         Pad_38[0x8];                                       // 0x0038(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	struct FTransform                             TransformOrigin;                                   // 0x0040(0x0030)(Edit, BlueprintVisible, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 
 public:
 	static class UClass* StaticClass()
 	{
-		return StaticClassImpl<"AnimSequenceLevelSequenceLink">();
+		return StaticClassImpl<"DefaultLevelSequenceInstanceData">();
 	}
-	static class UAnimSequenceLevelSequenceLink* GetDefaultObj()
+	static class UDefaultLevelSequenceInstanceData* GetDefaultObj()
 	{
-		return GetDefaultObjImpl<UAnimSequenceLevelSequenceLink>();
+		return GetDefaultObjImpl<UDefaultLevelSequenceInstanceData>();
 	}
 };
 
@@ -188,18 +169,37 @@ public:
 	}
 };
 
-// Class LevelSequence.LevelSequenceMetaData
+// Class LevelSequence.AnimSequenceLevelSequenceLink
+// 0x0030 (0x0058 - 0x0028)
+class UAnimSequenceLevelSequenceLink final : public UAssetUserData
+{
+public:
+	struct FGuid                                  SkelTrackGuid;                                     // 0x0028(0x0010)(BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	struct FSoftObjectPath                        PathToLevelSequence;                               // 0x0038(0x0020)(BlueprintVisible, ZeroConstructor, AssetRegistrySearchable, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+public:
+	static class UClass* StaticClass()
+	{
+		return StaticClassImpl<"AnimSequenceLevelSequenceLink">();
+	}
+	static class UAnimSequenceLevelSequenceLink* GetDefaultObj()
+	{
+		return GetDefaultObjImpl<UAnimSequenceLevelSequenceLink>();
+	}
+};
+
+// Class LevelSequence.LevelSequenceBurnInInitSettings
 // 0x0000 (0x0028 - 0x0028)
-class ILevelSequenceMetaData final : public IInterface
+class ULevelSequenceBurnInInitSettings final : public UObject
 {
 public:
 	static class UClass* StaticClass()
 	{
-		return StaticClassImpl<"LevelSequenceMetaData">();
+		return StaticClassImpl<"LevelSequenceBurnInInitSettings">();
 	}
-	static class ILevelSequenceMetaData* GetDefaultObj()
+	static class ULevelSequenceBurnInInitSettings* GetDefaultObj()
 	{
-		return GetDefaultObjImpl<ILevelSequenceMetaData>();
+		return GetDefaultObjImpl<ULevelSequenceBurnInInitSettings>();
 	}
 };
 

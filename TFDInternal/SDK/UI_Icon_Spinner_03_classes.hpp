@@ -26,8 +26,8 @@ public:
 	class UWidgetAnimation*                       UIAnim_Loop;                                       // 0x0710(0x0008)(BlueprintVisible, BlueprintReadOnly, ZeroConstructor, Transient, RepSkip, NoDestructor, HasGetValueTypeHash)
 
 public:
-	void PreConstruct(bool IsDesignTime);
 	void ExecuteUbergraph_UI_Icon_Spinner_03(int32 EntryPoint);
+	void PreConstruct(bool IsDesignTime);
 
 public:
 	static class UClass* StaticClass()

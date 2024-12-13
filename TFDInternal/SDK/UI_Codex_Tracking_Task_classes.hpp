@@ -18,12 +18,12 @@ namespace SDK
 {
 
 // WidgetBlueprintGeneratedClass UI_Codex_Tracking_Task.UI_Codex_Tracking_Task_C
-// 0x0010 (0x0728 - 0x0718)
+// 0x0010 (0x0730 - 0x0720)
 class UUI_Codex_Tracking_Task_C final : public UM1UIGameCodexTrackingSlot
 {
 public:
-	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0718(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
-	class UUI_Deco_TitleLine_04_C*                UI_Deco_TitleLine_04;                              // 0x0720(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
+	struct FPointerToUberGraphFrame               UberGraphFrame;                                    // 0x0720(0x0008)(ZeroConstructor, Transient, DuplicateTransient)
+	class UUI_Deco_TitleLine_04_C*                UI_Deco_TitleLine_04;                              // 0x0728(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
 
 public:
 	void PreConstruct(bool IsDesignTime);

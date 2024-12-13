@@ -10,8 +10,8 @@
 
 #include "Basic.hpp"
 
-#include "Engine_structs.hpp"
 #include "CoreUObject_structs.hpp"
+#include "Engine_structs.hpp"
 #include "M1_classes.hpp"
 
 
@@ -31,9 +31,9 @@ public:
 	float                                         In_Height_Override;                                // 0x0774(0x0004)(Edit, BlueprintVisible, ZeroConstructor, Config, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
 public:
-	void SetCurrencyPanelSize();
 	void PreConstruct(bool IsDesignTime);
 	void ExecuteUbergraph_UI_Currencies(int32 EntryPoint);
+	void SetCurrencyPanelSize();
 
 public:
 	static class UClass* StaticClass()

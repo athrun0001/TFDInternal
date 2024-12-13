@@ -37,26 +37,6 @@ void UUI_GuideMessage_C::OnEventWidgetOpen(EM1WidgetAnimDirection InDirection)
 }
 
 
-// Function UI_GuideMessage.UI_GuideMessage_C.OnEventWidgetClose
-// (Event, Protected, BlueprintEvent)
-// Parameters:
-// EM1WidgetAnimDirection                  InDirection                                            (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_GuideMessage_C::OnEventWidgetClose(EM1WidgetAnimDirection InDirection)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_GuideMessage_C", "OnEventWidgetClose");
-
-	Params::UI_GuideMessage_C_OnEventWidgetClose Parms{};
-
-	Parms.InDirection = InDirection;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_GuideMessage.UI_GuideMessage_C.ExecuteUbergraph_UI_GuideMessage
 // (Final, UbergraphFunction)
 // Parameters:
@@ -92,6 +72,26 @@ void UUI_GuideMessage_C::BP_ShowTitle(bool bShow)
 	Params::UI_GuideMessage_C_BP_ShowTitle Parms{};
 
 	Parms.bShow = bShow;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_GuideMessage.UI_GuideMessage_C.OnEventWidgetClose
+// (Event, Protected, BlueprintEvent)
+// Parameters:
+// EM1WidgetAnimDirection                  InDirection                                            (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_GuideMessage_C::OnEventWidgetClose(EM1WidgetAnimDirection InDirection)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_GuideMessage_C", "OnEventWidgetClose");
+
+	Params::UI_GuideMessage_C_OnEventWidgetClose Parms{};
+
+	Parms.InDirection = InDirection;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

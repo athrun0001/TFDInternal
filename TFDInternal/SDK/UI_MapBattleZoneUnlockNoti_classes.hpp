@@ -27,8 +27,8 @@ public:
 	class UM1TextBlock*                           Text_Title;                                        // 0x0770(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
 
 public:
-	void SequenceEvent__ENTRYPOINTUI_MapBattleZoneUnlockNoti();
 	void ExecuteUbergraph_UI_MapBattleZoneUnlockNoti(int32 EntryPoint);
+	void SequenceEvent__ENTRYPOINTUI_MapBattleZoneUnlockNoti();
 	void BP_widget_playAkEvent(class UAkAudioEvent* AkEvent);
 
 public:

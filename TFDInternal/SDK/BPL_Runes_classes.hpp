@@ -30,18 +30,18 @@ public:
 	static void GetTextByRuneClassType(EM1RuneClassType InClassType, class UObject* __WorldContext, class FString* ReturnUIKey);
 	static void GetTextByItemClassType(EM1EquipItemClassType ItemClassType, class UObject* __WorldContext, class FText* Text);
 	static class UTexture2D* GetRuneClassTypeBackImage(EM1RuneClassType InRuneClassType, class UObject* __WorldContext);
-	static void GetIconImageByItemClassType(EM1EquipItemClassType ItemClassType, class UObject* __WorldContext, class UTexture2D** Image);
 	static class FText Get_Tooltip_Text_by_Rune_Class(EM1RuneClassType InRuneClassType, EM1UITextType InType, class UObject* __WorldContext);
+	static void GetIconImageByItemClassType(EM1EquipItemClassType ItemClassType, class UObject* __WorldContext, class UTexture2D** Image);
 	static class FText Get_Text_By_Supported_Types_By_Rune_Class(EM1RuneClassType InRuneClassType, EM1UITextType InType, class UObject* __WorldContext);
 	static class FText Get_Text_by_Rune_Class_Type_Capacity(EM1RuneClassType InRuneClassType, class UObject* __WorldContext);
 	static class FText Get_Tab_Text_By_Supported_Types_By_Rune_Class(EM1RuneClassType InRuneClassType, EM1UITextType InType, class UObject* __WorldContext);
 	static class UTexture2D* Get_Rune_Socket_Type_Mini_Image(EM1RuneSocketType InRuneSocketType, class UObject* __WorldContext);
 	static class UTexture2D* Get_Rune_Socket_Image(EM1RuneSocketType InType, class UObject* __WorldContext);
 	static class UTexture2D* Get_Rune_Class_Type_Mini_Image_Color(EM1RuneClassType InRuneClassType, class UObject* __WorldContext);
-	static class UTexture2D* Get_Rune_Class_Type_Mini_Image(EM1RuneClassType InRuneClassType, class UObject* __WorldContext);
 	static void Get_Rune_Class_Color_Type(class UImage* SetImage, EM1RuneClassType InRuneClassType, class UObject* __WorldContext);
 	static class UTexture2D* Get_Rune_Board_Slot_Soket_Icon_in_Empty_Bg(EM1RuneSocketType InType, class UObject* __WorldContext);
 	static class UTexture2D* Get_Rune_Board_Slot_Socket_Icon_in_SocketMode(EM1RuneSocketType InType, class UObject* __WorldContext);
+	static class UTexture2D* Get_Rune_Class_Type_Mini_Image(EM1RuneClassType InRuneClassType, class UObject* __WorldContext);
 
 	void SetEnchantLevelIcon(class UUI_RuneEnchant_Icon_C* InEnchantLevelIcon, int32 InLevel, class UObject* __WorldContext);
 

@@ -10,11 +10,11 @@
 
 #include "Basic.hpp"
 
+#include "GameplayTags_structs.hpp"
 #include "CoreUObject_structs.hpp"
 #include "Engine_structs.hpp"
 #include "M1Data_structs.hpp"
 #include "M1_structs.hpp"
-#include "GameplayTags_structs.hpp"
 
 
 namespace SDK::Params

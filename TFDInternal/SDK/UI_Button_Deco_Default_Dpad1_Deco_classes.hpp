@@ -28,8 +28,8 @@ public:
 	class UImage*                                 Image_218;                                         // 0x0720(0x0008)(BlueprintVisible, ExportObject, BlueprintReadOnly, ZeroConstructor, DisableEditOnInstance, InstancedReference, RepSkip, NoDestructor, PersistentInstance, HasGetValueTypeHash)
 
 public:
-	void ExecuteUbergraph_UI_Button_Deco_Default_Dpad1_Deco(int32 EntryPoint);
 	void PreConstruct(bool IsDesignTime);
+	void ExecuteUbergraph_UI_Button_Deco_Default_Dpad1_Deco(int32 EntryPoint);
 
 public:
 	static class UClass* StaticClass()

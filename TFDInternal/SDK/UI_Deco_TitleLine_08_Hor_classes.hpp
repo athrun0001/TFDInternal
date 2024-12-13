@@ -32,9 +32,9 @@ public:
 
 public:
 	void PreConstruct(bool IsDesignTime);
-	void PlaySetOpenUI();
 	void ExecuteUbergraph_UI_Deco_TitleLine_08_Hor(int32 EntryPoint);
 	void Construct();
+	void PlaySetOpenUI();
 
 public:
 	static class UClass* StaticClass()

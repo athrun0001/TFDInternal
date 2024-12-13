@@ -17,26 +17,6 @@
 namespace SDK
 {
 
-// Function UI_ChargeGauge_001.UI_ChargeGauge_001_C.PreConstruct
-// (BlueprintCosmetic, Event, Public, BlueprintEvent)
-// Parameters:
-// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_ChargeGauge_001_C::PreConstruct(bool IsDesignTime)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ChargeGauge_001_C", "PreConstruct");
-
-	Params::UI_ChargeGauge_001_C_PreConstruct Parms{};
-
-	Parms.IsDesignTime = IsDesignTime;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
 // Function UI_ChargeGauge_001.UI_ChargeGauge_001_C.SetGaugeCount
 // (Public, HasDefaults, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -52,26 +32,6 @@ void UUI_ChargeGauge_001_C::SetGaugeCount(int32 GaugeCount)
 	Params::UI_ChargeGauge_001_C_SetGaugeCount Parms{};
 
 	Parms.GaugeCount = GaugeCount;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_ChargeGauge_001.UI_ChargeGauge_001_C.OnChargeLevelIncreased
-// (BlueprintCallable, BlueprintEvent)
-// Parameters:
-// int32                                   CurrentLevel                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_ChargeGauge_001_C::OnChargeLevelIncreased(int32 CurrentLevel)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ChargeGauge_001_C", "OnChargeLevelIncreased");
-
-	Params::UI_ChargeGauge_001_C_OnChargeLevelIncreased Parms{};
-
-	Parms.CurrentLevel = CurrentLevel;
 
 	UObject::ProcessEvent(Func, &Parms);
 }
@@ -97,21 +57,41 @@ void UUI_ChargeGauge_001_C::SetGaugeColor(const struct FM1WeaponChargeGaugeUICol
 }
 
 
-// Function UI_ChargeGauge_001.UI_ChargeGauge_001_C.ExecuteUbergraph_UI_ChargeGauge_001
-// (Final, UbergraphFunction, HasDefaults)
+// Function UI_ChargeGauge_001.UI_ChargeGauge_001_C.PreConstruct
+// (BlueprintCosmetic, Event, Public, BlueprintEvent)
 // Parameters:
-// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+// bool                                    IsDesignTime                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
 
-void UUI_ChargeGauge_001_C::ExecuteUbergraph_UI_ChargeGauge_001(int32 EntryPoint)
+void UUI_ChargeGauge_001_C::PreConstruct(bool IsDesignTime)
 {
 	static class UFunction* Func = nullptr;
 
 	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ChargeGauge_001_C", "ExecuteUbergraph_UI_ChargeGauge_001");
+		Func = Class->GetFunction("UI_ChargeGauge_001_C", "PreConstruct");
 
-	Params::UI_ChargeGauge_001_C_ExecuteUbergraph_UI_ChargeGauge_001 Parms{};
+	Params::UI_ChargeGauge_001_C_PreConstruct Parms{};
 
-	Parms.EntryPoint = EntryPoint;
+	Parms.IsDesignTime = IsDesignTime;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_ChargeGauge_001.UI_ChargeGauge_001_C.OnChargeLevelIncreased
+// (BlueprintCallable, BlueprintEvent)
+// Parameters:
+// int32                                   CurrentLevel                                           (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_ChargeGauge_001_C::OnChargeLevelIncreased(int32 CurrentLevel)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ChargeGauge_001_C", "OnChargeLevelIncreased");
+
+	Params::UI_ChargeGauge_001_C_OnChargeLevelIncreased Parms{};
+
+	Parms.CurrentLevel = CurrentLevel;
 
 	UObject::ProcessEvent(Func, &Parms);
 }
@@ -137,6 +117,40 @@ void UUI_ChargeGauge_001_C::OnChargeLevelDecreased(int32 CurrentLevel)
 }
 
 
+// Function UI_ChargeGauge_001.UI_ChargeGauge_001_C.ExecuteUbergraph_UI_ChargeGauge_001
+// (Final, UbergraphFunction, HasDefaults)
+// Parameters:
+// int32                                   EntryPoint                                             (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_ChargeGauge_001_C::ExecuteUbergraph_UI_ChargeGauge_001(int32 EntryPoint)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ChargeGauge_001_C", "ExecuteUbergraph_UI_ChargeGauge_001");
+
+	Params::UI_ChargeGauge_001_C_ExecuteUbergraph_UI_ChargeGauge_001 Parms{};
+
+	Parms.EntryPoint = EntryPoint;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_ChargeGauge_001.UI_ChargeGauge_001_C.BP_StoppedWeaponCharge
+// (Event, Protected, BlueprintEvent)
+
+void UUI_ChargeGauge_001_C::BP_StoppedWeaponCharge()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ChargeGauge_001_C", "BP_StoppedWeaponCharge");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UI_ChargeGauge_001.UI_ChargeGauge_001_C.BP_OnInitChargeGauge
 // (Event, Protected, HasOutParams, BlueprintEvent)
 // Parameters:
@@ -156,20 +170,6 @@ void UUI_ChargeGauge_001_C::BP_OnInitChargeGauge(int32 GaugeCount, const struct 
 	Parms.GaugeUIColors = std::move(GaugeUIColors);
 
 	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_ChargeGauge_001.UI_ChargeGauge_001_C.BP_StoppedWeaponCharge
-// (Event, Protected, BlueprintEvent)
-
-void UUI_ChargeGauge_001_C::BP_StoppedWeaponCharge()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ChargeGauge_001_C", "BP_StoppedWeaponCharge");
-
-	UObject::ProcessEvent(Func, nullptr);
 }
 
 

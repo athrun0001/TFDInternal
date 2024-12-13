@@ -173,6 +173,22 @@ public:
 	struct FMovieSceneObjectBindingID             ReturnValue;                                       // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReturnParm, ReferenceParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
+// Function MovieSceneTracks.MovieSceneCinematicShotSection.SetShotDisplayName
+// 0x0010 (0x0010 - 0x0000)
+struct MovieSceneCinematicShotSection_SetShotDisplayName final
+{
+public:
+	class FString                                 InShotDisplayName;                                 // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MovieSceneTracks.MovieSceneCinematicShotSection.GetShotDisplayName
+// 0x0010 (0x0010 - 0x0000)
+struct MovieSceneCinematicShotSection_GetShotDisplayName final
+{
+public:
+	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
 // Function MovieSceneTracks.MovieSceneAudioSection.SetSound
 // 0x0008 (0x0008 - 0x0000)
 struct MovieSceneAudioSection_SetSound final
@@ -219,38 +235,6 @@ struct MovieSceneCameraCutSection_GetCameraBindingID final
 {
 public:
 	struct FMovieSceneObjectBindingID             ReturnValue;                                       // 0x0000(0x0018)(ConstParm, Parm, OutParm, ReturnParm, ReferenceParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MovieSceneTracks.MovieSceneCinematicShotSection.SetShotDisplayName
-// 0x0010 (0x0010 - 0x0000)
-struct MovieSceneCinematicShotSection_SetShotDisplayName final
-{
-public:
-	class FString                                 InShotDisplayName;                                 // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MovieSceneTracks.MovieSceneCinematicShotSection.GetShotDisplayName
-// 0x0010 (0x0010 - 0x0000)
-struct MovieSceneCinematicShotSection_GetShotDisplayName final
-{
-public:
-	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MovieSceneTracks.MovieSceneCVarSection.SetFromString
-// 0x0010 (0x0010 - 0x0000)
-struct MovieSceneCVarSection_SetFromString final
-{
-public:
-	class FString                                 InString;                                          // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
-
-// Function MovieSceneTracks.MovieSceneCVarSection.GetString
-// 0x0010 (0x0010 - 0x0000)
-struct MovieSceneCVarSection_GetString final
-{
-public:
-	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function MovieSceneTracks.MovieSceneDataLayerSection.SetDataLayerAssets
@@ -331,6 +315,22 @@ struct MovieSceneDataLayerSection_GetPrerollState final
 {
 public:
 	EDataLayerRuntimeState                        ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MovieSceneTracks.MovieSceneCVarSection.SetFromString
+// 0x0010 (0x0010 - 0x0000)
+struct MovieSceneCVarSection_SetFromString final
+{
+public:
+	class FString                                 InString;                                          // 0x0000(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+};
+
+// Function MovieSceneTracks.MovieSceneCVarSection.GetString
+// 0x0010 (0x0010 - 0x0000)
+struct MovieSceneCVarSection_GetString final
+{
+public:
+	class FString                                 ReturnValue;                                       // 0x0000(0x0010)(Parm, OutParm, ZeroConstructor, ReturnParm, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 };
 
 // Function MovieSceneTracks.MovieSceneLevelVisibilitySection.SetLevelNames

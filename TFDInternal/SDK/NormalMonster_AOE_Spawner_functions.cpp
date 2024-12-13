@@ -45,6 +45,20 @@ void ANormalMonster_AOE_Spawner_C::Spawn_AOE()
 }
 
 
+// Function NormalMonster_AOE_Spawner.NormalMonster_AOE_Spawner_C.BP_OnPostSpawnAbilityActor
+// (Event, Protected, BlueprintEvent)
+
+void ANormalMonster_AOE_Spawner_C::BP_OnPostSpawnAbilityActor()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("NormalMonster_AOE_Spawner_C", "BP_OnPostSpawnAbilityActor");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function NormalMonster_AOE_Spawner.NormalMonster_AOE_Spawner_C.FindRandomLocation2D
 // (Public, HasOutParams, BlueprintCallable, BlueprintEvent)
 // Parameters:
@@ -107,20 +121,6 @@ void ANormalMonster_AOE_Spawner_C::ExecuteUbergraph_NormalMonster_AOE_Spawner(in
 	Parms.EntryPoint = EntryPoint;
 
 	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function NormalMonster_AOE_Spawner.NormalMonster_AOE_Spawner_C.BP_OnPostSpawnAbilityActor
-// (Event, Protected, BlueprintEvent)
-
-void ANormalMonster_AOE_Spawner_C::BP_OnPostSpawnAbilityActor()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("NormalMonster_AOE_Spawner_C", "BP_OnPostSpawnAbilityActor");
-
-	UObject::ProcessEvent(Func, nullptr);
 }
 
 }

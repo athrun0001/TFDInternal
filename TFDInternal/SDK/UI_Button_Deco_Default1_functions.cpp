@@ -17,6 +17,40 @@
 namespace SDK
 {
 
+// Function UI_Button_Deco_Default1.UI_Button_Deco_Default1_C.BP_ChangeButtonUI
+// (Event, Protected, BlueprintEvent)
+// Parameters:
+// EM1ButtonUIType                         InType                                                 (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
+
+void UUI_Button_Deco_Default1_C::BP_ChangeButtonUI(EM1ButtonUIType InType)
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Button_Deco_Default1_C", "BP_ChangeButtonUI");
+
+	Params::UI_Button_Deco_Default1_C_BP_ChangeButtonUI Parms{};
+
+	Parms.InType = InType;
+
+	UObject::ProcessEvent(Func, &Parms);
+}
+
+
+// Function UI_Button_Deco_Default1.UI_Button_Deco_Default1_C.BP_ResetButtonState
+// (Event, Public, BlueprintEvent)
+
+void UUI_Button_Deco_Default1_C::BP_ResetButtonState()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_Button_Deco_Default1_C", "BP_ResetButtonState");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UI_Button_Deco_Default1.UI_Button_Deco_Default1_C.ExecuteUbergraph_UI_Button_Deco_Default1
 // (Final, UbergraphFunction)
 // Parameters:
@@ -66,40 +100,6 @@ void UUI_Button_Deco_Default1_C::BP_Selected(bool InSelected)
 	Params::UI_Button_Deco_Default1_C_BP_Selected Parms{};
 
 	Parms.InSelected = InSelected;
-
-	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_Button_Deco_Default1.UI_Button_Deco_Default1_C.BP_ResetButtonState
-// (Event, Public, BlueprintEvent)
-
-void UUI_Button_Deco_Default1_C::BP_ResetButtonState()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Button_Deco_Default1_C", "BP_ResetButtonState");
-
-	UObject::ProcessEvent(Func, nullptr);
-}
-
-
-// Function UI_Button_Deco_Default1.UI_Button_Deco_Default1_C.BP_ChangeButtonUI
-// (Event, Protected, BlueprintEvent)
-// Parameters:
-// EM1ButtonUIType                         InType                                                 (BlueprintVisible, BlueprintReadOnly, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash)
-
-void UUI_Button_Deco_Default1_C::BP_ChangeButtonUI(EM1ButtonUIType InType)
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_Button_Deco_Default1_C", "BP_ChangeButtonUI");
-
-	Params::UI_Button_Deco_Default1_C_BP_ChangeButtonUI Parms{};
-
-	Parms.InType = InType;
 
 	UObject::ProcessEvent(Func, &Parms);
 }

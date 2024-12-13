@@ -17,6 +17,20 @@
 namespace SDK
 {
 
+// Function UI_ToastMessage_MidLine.UI_ToastMessage_MidLine_C.SequenceEvent__ENTRYPOINTUI_ToastMessage_MidLine
+// (Public, BlueprintCallable, BlueprintEvent)
+
+void UUI_ToastMessage_MidLine_C::SequenceEvent__ENTRYPOINTUI_ToastMessage_MidLine()
+{
+	static class UFunction* Func = nullptr;
+
+	if (Func == nullptr)
+		Func = Class->GetFunction("UI_ToastMessage_MidLine_C", "SequenceEvent__ENTRYPOINTUI_ToastMessage_MidLine");
+
+	UObject::ProcessEvent(Func, nullptr);
+}
+
+
 // Function UI_ToastMessage_MidLine.UI_ToastMessage_MidLine_C.ExecuteUbergraph_UI_ToastMessage_MidLine
 // (Final, UbergraphFunction)
 // Parameters:
@@ -68,20 +82,6 @@ void UUI_ToastMessage_MidLine_C::BP_playakEvent(class UAkAudioEvent* AkEvent)
 	Parms.AkEvent = AkEvent;
 
 	UObject::ProcessEvent(Func, &Parms);
-}
-
-
-// Function UI_ToastMessage_MidLine.UI_ToastMessage_MidLine_C.SequenceEvent__ENTRYPOINTUI_ToastMessage_MidLine
-// (Public, BlueprintCallable, BlueprintEvent)
-
-void UUI_ToastMessage_MidLine_C::SequenceEvent__ENTRYPOINTUI_ToastMessage_MidLine()
-{
-	static class UFunction* Func = nullptr;
-
-	if (Func == nullptr)
-		Func = Class->GetFunction("UI_ToastMessage_MidLine_C", "SequenceEvent__ENTRYPOINTUI_ToastMessage_MidLine");
-
-	UObject::ProcessEvent(Func, nullptr);
 }
 
 }

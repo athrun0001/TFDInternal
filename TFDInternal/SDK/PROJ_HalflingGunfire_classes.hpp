@@ -17,7 +17,7 @@ namespace SDK
 {
 
 // BlueprintGeneratedClass PROJ_HalflingGunfire.PROJ_HalflingGunfire_C
-// 0x0000 (0x0C30 - 0x0C30)
+// 0x0000 (0x0C40 - 0x0C40)
 class APROJ_HalflingGunfire_C final : public APROJ_MonsterGunfire_C
 {
 public:
