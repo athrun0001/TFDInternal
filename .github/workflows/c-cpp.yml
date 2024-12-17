@@ -23,17 +23,17 @@ jobs:
 
     # Step 3: Build the project
     - name: Build Solution
-      run: msbuild TFDInternal.sln /p:Configuration=Debug
+      run: msbuild DescendantInternal.sln /p:Configuration=Release
 
     - name: List Files in Output Directory
-      run: dir x64\Debug
+      run: dir x64\Release
 
     # Step 4: Archive build artifacts (optional)
     - name: Archive Build Artifacts
       uses: actions/upload-artifact@v3
       with:
         name: build-artifacts
-        path: x64\Debug
+        path: x64\Release
         
     # Step 1: Check out the code (required for versioning or tag creation)
     #- name: Checkout code
@@ -58,8 +58,8 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: x64\Debug\TFDInternal.dll
-        asset_name: TFDInternal.dll
+        asset_path: x64\Release\DescendantInternal.dll
+        asset_name: DescendantInternal.dll
         asset_content_type: application/octet-stream
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
