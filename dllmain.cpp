@@ -102,9 +102,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (cfg_AimbotNoSpread)
 			{
 				DWORD old;
-				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
-				memcpy(NoSpreadAddress, &NoSpreadCheat, sizeof(uint8_t) * 9);
-				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, old, NULL);
+				VirtualProtect(NoSpreadAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
+				memcpy(NoSpreadAddress, &Recoil[1], sizeof(uint8_t)); // 1/7/25 dont need a separate 74/74 array lol
+				VirtualProtect(NoSpreadAddress, sizeof(uint8_t), old, NULL);
 			}
 
 			if (cfg_AimbotNoRecoil)
@@ -1066,16 +1066,16 @@ void DrawMenu()
 				if (cfg_AimbotNoSpread)
 				{
 					DWORD old;
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
-					memcpy(NoSpreadAddress, &NoSpreadCheat, sizeof(uint8_t) * 9);
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, old, NULL);
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
+					memcpy(NoSpreadAddress, &Recoil[1], sizeof(uint8_t));
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), old, NULL);
 				}
 				else
 				{
 					DWORD old;
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
-					memcpy(NoSpreadAddress, &NoSpreadOriginal, sizeof(uint8_t) * 9);
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, old, NULL);
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
+					memcpy(NoSpreadAddress, &Recoil[0], sizeof(uint8_t));
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), old, NULL);
 				}
 			}
 			if (ZeroGUI::Checkbox((char*)"Enable No Recoil", &cfg_AimbotNoRecoil))
@@ -1463,7 +1463,7 @@ DWORD WINAPI Init(HMODULE Module)
 			return 1;
 		}
 		SpreadPtr = GameModule.dwBase + SpreadPtr;
-		NoSpreadAddress = reinterpret_cast<uint8_t*>(SpreadPtr);// +3);
+		NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) + 0x16);
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found NoSpread\n";
 		Sleep(1000);
