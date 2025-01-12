@@ -43,11 +43,11 @@ const char* GObjectsSig = "\x4C\x8B\x0D\x00\x00\x00\x00\x8B\xD0";
 const char* GObjectsMask = "xxx????xx";
 //const char* NoSpreadSig =	"\xF3\x0F\x5C\x00\xF3\x0F\x5F\xF2\xF3\x0F\x5D\xF7\x0F\x28\xC6";
 //const char* NoSpreadMask =	"xxx?xxxxxxxxxxx";
-const char* NoSpreadSig = "\xE8\x00\x00\x00\x00\x48\x8B\x86\xD0\x00\x00\x00\x48\x8B\x98";
-const char* NoSpreadMask = "x????xxxxxxxxxx";
+const char* NoSpreadSig = "\x48\x8B\x86\xD0\x00\x00\x00\xF3\x44\x0F\x11\x86";
+const char* NoSpreadMask = "xxxxxxxxxxxx";
 // F3 45 0F 5C C9 90 90 90 90
-//uint8_t NoSpreadOriginal[9] = { 0xF3, 0x41, 0x0F, 0x5D, 0xF6, 0x44, 0x0F, 0x28, 0xC6 };
-//uint8_t NoSpreadCheat[9] = { 0xF3, 0x45, 0x0F, 0x5C, 0xC9, 0x90, 0x90, 0x90, 0x90};
+uint8_t NoSpreadOriginal[9] = { 0xF3, 0x41, 0x0F, 0x5D, 0xF6, 0x44, 0x0F, 0x28, 0xC6 };
+uint8_t NoSpreadCheat[9] = { 0xF3, 0x45, 0x0F, 0x5C, 0xC9, 0x90, 0x90, 0x90, 0x90 };
 uint8_t* NoSpreadAddress = 0;
 //  Original 84 C0 74 1F 48 8B BE E8 00 00 00
 const char* NoRecoilSig = "\x84\xC0\x74\x1F\x48\x8B\xBE\xF0\x00\x00\x00";

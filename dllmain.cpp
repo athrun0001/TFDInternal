@@ -10,40 +10,80 @@
 
 bool CheckPointers()
 {
-	GEngine = TFD_SDK::UEngine::GetEngine();
+	if (!GEngine)
+		GEngine = TFD_SDK::UEngine::GetEngine();
 	if (GEngine)
 	{
-		GWorld = TFD_SDK::UWorld::GetWorld();
-		if (GWorld != nullptr)
+		GWorld = nullptr;
+		for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
 		{
-			if (!GWorld->IsA(TFD_SDK::UWorld::StaticClass()) || GWorld->IsDefaultObject())
-				return false;
+			TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
 
-			if (GWorld->Name.ToString() != "Lobby_P" && GWorld->Name.ToString() != "Level_Transition")
+			if (!Obj)
+				continue;
+
+			if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
+				Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
+				Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
+				Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
+				Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
+				continue;
+
+			if (Obj->Flags & TFD_SDK::EObjectFlags::LoadCompleted && Obj->IsA(TFD_SDK::UWorld::StaticClass()) && !Obj->IsDefaultObject())
+			{
+				TFD_SDK::UWorld* World = static_cast<TFD_SDK::UWorld*>(Obj);
+				if (World->OwningGameInstance)
+				{
+					if (World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+					{
+						std::string Name = World->Name.ToString();
+						if (Name != "" && Name != "None")
+						{
+							GWorld = World;
+							break;
+						}
+					}
+				}
+			}
+		}
+		if (GWorld && isGUIInit)
+		{
+			if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
 			{
 				if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 				{
-					if (GWorld->OwningGameInstance->LocalPlayers && GWorld->OwningGameInstance->LocalPlayers[0] && GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController)
+					std::string Name = GWorld->Name.ToString();
+					if (Name != "" && Name != "None")
 					{
-						if (GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass()))
+						if (Name != "Lobby_P" && Name != "Level_Transition")
 						{
-							TFD_SDK::AM1PlayerController* PC = static_cast<TFD_SDK::AM1PlayerController*>(GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController);
-							if (PC->Character && PC->Character->IsA(TFD_SDK::AM1Player::StaticClass()) && PC->ActorManager_Subsystem && PC->ActorManager_Subsystem->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass()))
+							if (GWorld->OwningGameInstance->LocalPlayers && GWorld->OwningGameInstance->LocalPlayers[0] && GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController)
 							{
-								PlayerController = PC;
-								LocalPlayer = GWorld->OwningGameInstance->LocalPlayers[0];
-								LocalCharacter = static_cast<TFD_SDK::AM1Player*>(PlayerController->Character);
-								Actors = PC->ActorManager_Subsystem;
-								ZeroGUI::SetController(GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController);
-								if (PlayerController->IsA(TFD_SDK::AM1PlayerControllerInGame::StaticClass()))
+
+								if (GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass()))
 								{
-									PlayerIngameController = static_cast<TFD_SDK::AM1PlayerControllerInGame*>(PlayerController);
-									inGame = true;
+									TFD_SDK::AM1PlayerController* PC = static_cast<TFD_SDK::AM1PlayerController*>(GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController);
+									if (PC->Character && PC->Character->IsA(TFD_SDK::AM1Player::StaticClass()) && PC->ActorManager_Subsystem && PC->ActorManager_Subsystem->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass()))
+									{
+										PlayerController = PC;
+										LocalPlayer = GWorld->OwningGameInstance->LocalPlayers[0];
+										LocalCharacter = static_cast<TFD_SDK::AM1Player*>(PlayerController->Character);
+										Actors = PC->ActorManager_Subsystem;
+										ZeroGUI::controller = GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController;
+										if (PlayerController->IsA(TFD_SDK::AM1PlayerControllerInGame::StaticClass()))
+										{
+											PlayerIngameController = static_cast<TFD_SDK::AM1PlayerControllerInGame*>(PlayerController);
+											inGame = true;
+										}
+										else
+										{
+											inGame = false;
+											PlayerIngameController = nullptr;
+										}
+
+										return true;
+									}
 								}
-								else
-									inGame = false;
-								
-								return true;
 							}
 						}
 					}
@@ -51,11 +91,12 @@ bool CheckPointers()
 			}
 		}
 	}
-	//std::cout << "Pointers not valid. \n";
 	PlayerController = nullptr;
 	LocalPlayer = nullptr;
 	LocalCharacter = nullptr;
 	Actors = nullptr;
+	PlayerIngameController = nullptr;
+	inGame = false;
 	return false;
 }
 
@@ -99,12 +140,19 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				IDBoneMap = ReadEnemyBonesData();
 			}
 
-			if (cfg_AimbotNoSpread)
+			if (cfg_AimbotNoSpread) //line 156 and also 1139
 			{
 				DWORD old;
-				VirtualProtect(NoSpreadAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
-				memcpy(NoSpreadAddress, &Recoil[1], sizeof(uint8_t)); // 1/7/25 dont need a separate 74/74 array lol
-				VirtualProtect(NoSpreadAddress, sizeof(uint8_t), old, NULL);
+				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
+				memcpy(NoSpreadAddress, &NoSpreadCheat, sizeof(uint8_t) * 9);
+				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, old, NULL);
+			}
+			else
+			{
+				DWORD old;
+				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
+				memcpy(NoSpreadAddress, &NoSpreadOriginal, sizeof(uint8_t) * 9);
+				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, old, NULL);
 			}
 
 			if (cfg_AimbotNoRecoil)
@@ -1063,19 +1111,19 @@ void DrawMenu()
 			ZeroGUI::SliderFloat((char*)"Aimbot Speed", &cfg_AimbotSmoothing, 1.0f, 100.0f);
 			if (ZeroGUI::Checkbox((char*)"Enable No Spread", &cfg_AimbotNoSpread))
 			{
-				if (cfg_AimbotNoSpread)
+				if (cfg_AimbotNoSpread) //line 156 and also 1139
 				{
 					DWORD old;
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
-					memcpy(NoSpreadAddress, &Recoil[1], sizeof(uint8_t));
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), old, NULL);
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
+					memcpy(NoSpreadAddress, &NoSpreadCheat, sizeof(uint8_t) * 9);
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, old, NULL);
 				}
 				else
 				{
 					DWORD old;
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
-					memcpy(NoSpreadAddress, &Recoil[0], sizeof(uint8_t));
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), old, NULL);
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
+					memcpy(NoSpreadAddress, &NoSpreadOriginal, sizeof(uint8_t) * 9);
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, old, NULL);
 				}
 			}
 			if (ZeroGUI::Checkbox((char*)"Enable No Recoil", &cfg_AimbotNoRecoil))
@@ -1439,7 +1487,7 @@ DWORD WINAPI Init(HMODULE Module)
 		Sleep(1000);
 #endif // IS_DEBUG
 
-		uintptr_t GObjsPtr = FindSignature(procID, GameModule, GObjectsSig, GObjectsMask);
+		/*uintptr_t GObjsPtr = FindSignature(procID, GameModule, GObjectsSig, GObjectsMask);
 		if (!GObjsPtr)
 		{
 			throw std::runtime_error("Unable to find GObjects.");
@@ -1449,8 +1497,8 @@ DWORD WINAPI Init(HMODULE Module)
 		uintptr_t GObjOffsetAddress = GObjsPtr + 3;
 		int32_t GObjOffsetRelative = *reinterpret_cast<int32_t*>(GObjOffsetAddress);
 		uintptr_t GObjAddress = (GObjsPtr + 7) + GObjOffsetRelative;
-		uintptr_t GObjeOffset = GObjAddress - GameModule.dwBase;
-		TFD_SDK::Offsets::GObjects = GObjeOffset;
+		uintptr_t GObjeOffset = GObjAddress - GameModule.dwBase;*/
+		TFD_SDK::Offsets::GObjects = 0x09B29CF0;
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found GObjects at: " << std::hex << GObjeOffset << std::dec << "\n";
 		Sleep(1000);
@@ -1463,7 +1511,7 @@ DWORD WINAPI Init(HMODULE Module)
 			return 1;
 		}
 		SpreadPtr = GameModule.dwBase + SpreadPtr;
-		NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) + 0x16);
+		NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) - 0x9);
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found NoSpread\n";
 		Sleep(1000);
