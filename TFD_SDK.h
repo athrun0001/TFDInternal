@@ -1020,6 +1020,76 @@ namespace TFD_SDK
 		}
 	};
 
+	// 0x0020 (0x0450 - 0x0430)
+	class AM1FieldInteractableActor_Hit : public AM1FieldInteractableActor
+	{
+	public:
+		uint8                                         AM1FieldInteractableActor_Hit_Class[0x20];
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1FieldInteractableActor_Hit">();
+		}
+		static class AM1FieldInteractableActor_Hit* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<AM1FieldInteractableActor_Hit>();
+		}
+	};
+
+	// 0x0000 (0x0450 - 0x0450)
+	class ABP_FieldInteractableBase_Hit_C : public AM1FieldInteractableActor_Hit
+	{
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticBPGeneratedClassImpl<"BP_FieldInteractableBase_Hit_C">();
+		}
+		static class ABP_FieldInteractableBase_Hit_C* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<ABP_FieldInteractableBase_Hit_C>();
+		}
+	};
+
+	class ABP_INTER_VulgusBox_C final : public ABP_FieldInteractableBase_Hit_C
+	{
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticBPGeneratedClassImpl<"BP_INTER_VulgusBox_C">();
+		}
+		static class ABP_INTER_VulgusBox_C* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<ABP_INTER_VulgusBox_C>();
+		}
+	};
+
+	// 0x0000 (0x0448 - 0x0448)
+	class ABP_FieldInteractableBase_Interaction_C : public AM1FieldInteractableActor_Interaction
+	{
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticBPGeneratedClassImpl<"BP_FieldInteractableBase_Interaction_C">();
+		}
+		static class ABP_FieldInteractableBase_Interaction_C* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<ABP_FieldInteractableBase_Interaction_C>();
+		}
+	};
+
+	// 0x0000 (0x0448 - 0x0448)
+	class ABP_INTER_MilitarySupplies_C final : public ABP_FieldInteractableBase_Interaction_C
+	{
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticBPGeneratedClassImpl<"BP_INTER_MilitarySupplies_C">();
+		}
+		static class ABP_INTER_MilitarySupplies_C* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<ABP_INTER_MilitarySupplies_C>();
+		}
+	};
 
 	struct M1PrivateOnlineServiceComponent_ServerChangePlayer final
 	{

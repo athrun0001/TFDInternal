@@ -691,6 +691,36 @@ void ItemESPVacuum()
 								}
 								continue;
 							}
+							if (Actor->IsA(TFD_SDK::AM1FieldInteractableActor_Hit::StaticClass()))
+							{
+								if (Actor->GetFullName().contains("VulgusBox"))
+								{
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
+									{
+
+										ZeroGUI::TextCenter((char*)"Resource Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+									}
+
+								}
+								continue;
+							}
+							else if (Actor->IsA(TFD_SDK::AM1FieldInteractableActor_Interaction::StaticClass()))
+							{
+								if (Actor->GetFullName().contains("MilitarySupplies"))
+								{
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
+									{
+
+										ZeroGUI::TextCenter((char*)"Supplies", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+									}
+
+								}
+								continue;
+							}
 						}
 
 						if (!Actor->IsA(TFD_SDK::AM1DroppedItem::StaticClass()))
