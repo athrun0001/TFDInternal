@@ -22,6 +22,7 @@ namespace SDK
 
 using namespace UC;
 
+#include "../NameCollisions.inl"
 
 /*
 * Disclaimer:

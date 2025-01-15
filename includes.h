@@ -31,6 +31,7 @@ HRESULT UpdateControllerState();
 */
 static __int64 (*M1org)(void* ViewportClient, void* DebugCanvas) = NULL;
 static __int64 YourHookProc(void* ViewportClient, void* DebugCanvas);
+//static __int64 YourHookProc_old(void* self, void* Canvas);
 ULONG64* GetDrawTransitionVTableAddress(TFD_SDK::UGameViewportClient* vp);
 DWORD WINAPI Init(HMODULE Module);
 
@@ -39,15 +40,24 @@ DWORD WINAPI Init(HMODULE Module);
 */
 const char* GNamesSig = "\x4C\x8D\x35\x00\x00\x00\x00\x0F\x95\x44\x24\x2C\x48\x2B\xCB";
 const char* GNamesMask = "xxx????xxxxxxx";
-const char* GObjectsSig = "\x4C\x8B\x0D\x00\x00\x00\x00\x8B\xD0";
-const char* GObjectsMask = "xxx????xx";
+//const char* GObjectsSig = "\x4C\x8B\x0D\x00\x00\x00\x00\x8B\xD0";
+//const char* GObjectsMask = "xxx????xx";
+const char* GObjectsSig = "\x80\x08\x00\x37\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x21";
+const char* GObjectsMask = "xx?xxxxxxxxxxxxxxxx";
+// 80 08 DF 37 00 00 00 00 00 00 00 00 00 00 00 00 00 00 21
 //const char* NoSpreadSig =	"\xF3\x0F\x5C\x00\xF3\x0F\x5F\xF2\xF3\x0F\x5D\xF7\x0F\x28\xC6";
 //const char* NoSpreadMask =	"xxx?xxxxxxxxxxx";
+//const char* NoSpreadSig = "\xF3\x41\x0F\x5D\xF6\x44\x0F\x28\xC6";
+//const char* NoSpreadMask = "xxxxxxxxx";
+// // F3 45 0F 5C C9 90 90 90 90
+// 74 7D E8 ?? ?? ?? ?? 48 8B 53 10 <- add 0x16 to signature address to get to the JE, change JE to JNE
+// old pattern is 48 8B 86 D0 00 00 00 F3 44 0F 11 86 - 0x9
+//const char* NoSpreadSig = "\xE8\x00\x00\x00\x00\x48\x8B\x86\xD0\x00\x00\x00\x48\x8B\x98";
+//const char* NoSpreadMask = "x????xxxxxxxxxx";
 const char* NoSpreadSig = "\x48\x8B\x86\xD0\x00\x00\x00\xF3\x44\x0F\x11\x86";
 const char* NoSpreadMask = "xxxxxxxxxxxx";
-// F3 45 0F 5C C9 90 90 90 90
 uint8_t NoSpreadOriginal[9] = { 0xF3, 0x41, 0x0F, 0x5D, 0xF6, 0x44, 0x0F, 0x28, 0xC6 };
-uint8_t NoSpreadCheat[9] = { 0xF3, 0x45, 0x0F, 0x5C, 0xC9, 0x90, 0x90, 0x90, 0x90 };
+uint8_t NoSpreadCheat[9] = { 0xF3, 0x45, 0x0F, 0x5C, 0xC9, 0x90, 0x90, 0x90, 0x90};
 uint8_t* NoSpreadAddress = 0;
 //  Original 84 C0 74 1F 48 8B BE E8 00 00 00
 const char* NoRecoilSig = "\x84\xC0\x74\x1F\x48\x8B\xBE\xF0\x00\x00\x00";
@@ -56,6 +66,8 @@ uint8_t* NoRecoilAddress = 0;
 const char* RapidFireSig = "\x72\x00\xF3\x0F\x10\x87\x00\x00\x00\x00\x48";
 const char* RapidFireMask = "x?xxxx????x";
 uint8_t* RapidFireAddress = 0;
+
+
 
 struct sigmod {
 	uintptr_t dwBase, dwSize;
@@ -66,8 +78,11 @@ uintptr_t FindSignature(int procID, sigmod mod, const char* sig, const char* mas
 /*
 *  Data
 */
+std::vector<int> Worlds;
+
 bool CheckPointers();
 TFD_SDK::UWorld* GWorld;
+TFD_SDK::UWorld* OriginalWorld;
 TFD_SDK::UEngine* GEngine;
 TFD_SDK::ULocalPlayer* LocalPlayer;
 TFD_SDK::AM1PlayerController* PlayerController;

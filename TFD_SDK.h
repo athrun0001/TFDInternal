@@ -280,9 +280,9 @@ namespace TFD_SDK
 	class USkinnedMeshComponent : public UMeshComponent
 	{
 	public:
-		uint8 Pad_BoneArray[0x58]; // <-- In Dumped SDK the class starts at 0x4B0 but the first field is listed as starting at 0x4A8? 
+		uint8 Pad_BoneArray[0x68]; // 0x58 <-- In Dumped SDK the class starts at 0x4B0 but the first field is listed as starting at 0x4A8? 
 		TArray<FTransform> BoneArray; // 0x0508(0x0010)
-		uint8 Pad_USkinnedMeshComponent_Class[0x278]; // 0x518
+		uint8 Pad_USkinnedMeshComponent_Class[0x268]; // 0x278 0x518
 		class FName GetBoneName(int32 BoneIndex) const;
 		int32 GetNumBones() const;
 	};
@@ -489,13 +489,47 @@ namespace TFD_SDK
 			return GetDefaultObjImpl<UM1ActorManagerSubsystem>();
 		}
 	};
+	// 0x0110 (0x0138 - 0x0028)
+	class UM1CharacterAttribute : public UObject
+	{
+	public:
+		uint8 UM1CharacterAttribute_Class[0x110];
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1CharacterAttribute">();
+		}
+		static class UM1CharacterAttribute* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<UM1CharacterAttribute>();
+		}
+	};
+	// 0x00E0 (0x0218 - 0x0138)
+	class UM1MonsterAttribute : public UM1CharacterAttribute
+	{
+	public:
+		uint8 UM1MonsterAttribute_Class[0xE0];
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MonsterAttribute">();
+		}
+		static class UM1MonsterAttribute* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<UM1MonsterAttribute>();
+		}
+	};
+
 	// 0x06B0 (0x0BB0 - 0x0500)
 	class AM1Character : public ACharacter
 	{
 	public:
 		uint8 Pad_InfoWidget[0x2D0]; // 0x4F8 but actually 0x500 because ACharacter is padded to 0x10
 		class UM1CharacterInfoWidgetComponent* InfoWidgetComponent; // 0x07C8(0x0008) Need this
-		uint8 Pad_CharacterID[0x220]; // 0x7D0
+		uint8 Pad_CharacterAttribute[0x40]; // 0x7D0
+		class UM1CharacterAttribute* CharacterAttribute;// 0x0810(0x0008)
+		uint8 Pad_CharacterId[0x1D8]; // 0x818
 		struct FM1TemplateId CharacterId; // 0x09F0(0x0004) Need this
 		uint8 Pad_AM1CharClass[0x1BC]; // 0x9F4
 
@@ -562,7 +596,22 @@ namespace TFD_SDK
 		}
 	};
 #pragma pack(pop)
+	// 0x0130 (0x0CE0 - 0x0BB0)
+	class AM1Fellow final : public AM1Character
+	{
+	public:
+		uint8 Pad_AM1Fellow_Class[0x130]; // 0xAB0
 
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1Fellow">();
+		}
+		static class AM1Fellow* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<AM1Fellow>();
+		}
+	};
 	struct FM1WeaponSlot final
 	{
 	public:

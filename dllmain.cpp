@@ -113,6 +113,18 @@ bool WorldToScreen(const TFD_SDK::FVector& worldLoc, TFD_SDK::FVector2D* screenP
 	return isOnScreen;
 }
 
+
+//static __int64 YourHookProc_old(void* self, void* Canvas)
+//{
+//	if (Canvas)
+//	{
+//		if (IsKeyPressed(VK_INSERT))
+//			CheckPointers();
+//	}
+//
+//	return M1org(self, Canvas);
+//}
+
 static __int64 YourHookProc(void* self, void* Canvas)
 {
 	if (Canvas)
@@ -128,7 +140,8 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				lastScreenSize = myCanvas->SizeX;
 			}
 			ZeroGUI::CurrentFont = GEngine->SmallFont;
-			ZeroGUI::SetupCanvas(myCanvas, GEngine);
+			ZeroGUI::canvas = myCanvas;
+			ZeroGUI::engine = GEngine;
 
 			if (cfg_CacheEnemyNames)
 			{
@@ -140,18 +153,11 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				IDBoneMap = ReadEnemyBonesData();
 			}
 
-			if (cfg_AimbotNoSpread) //line 156 and also 1139
+			if (cfg_AimbotNoSpread)
 			{
 				DWORD old;
 				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
 				memcpy(NoSpreadAddress, &NoSpreadCheat, sizeof(uint8_t) * 9);
-				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, old, NULL);
-			}
-			else
-			{
-				DWORD old;
-				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
-				memcpy(NoSpreadAddress, &NoSpreadOriginal, sizeof(uint8_t) * 9);
 				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, old, NULL);
 			}
 
@@ -173,8 +179,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 
 			isGUIInit = true;
-			std::cout << "DescentInternal - World: " << std::hex << GWorld << std::dec << "\n";
-			std::cout << "DescentInternal - GUI Init\n";
 		}
 
 		if (updateMiddle)
@@ -186,7 +190,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			ScreenMiddle.X = (myCanvas->SizeX / 2.0f) / aspectRatioX;
 			ScreenMiddle.Y = (myCanvas->SizeY / 2.0f) / aspectRatioY;
 			updateMiddle = false;
-			std::cout << "DescentInternal - Updated Middle\n";
 		}
 
 		if (IsKeyPressed(VK_INSERT))
@@ -196,21 +199,16 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				SaveCFG();
 		}
 
-		if (cfg_DrawMenu)
-		{
-			DrawMenu();
-		}
-
 		UpdateControllerState();
 
 
 		if (CheckPointers())
 		{
+
 			int State = -1;
 			if (GWorld && GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 			{
-				TFD_SDK::UM1GameInstance* instance = static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance);
-				State = (int)instance->ConnectionState;
+				State = (int)(static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState);
 			}
 
 			if (State != 10) // Game isn't ready, don't do anything or it will likely crash
@@ -222,13 +220,13 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					PlayerIngameController->HeartbeatTesterComponent->Deactivate();
 			}
 
-			
+
 
 			//This code is used to find the BoneArray offset in case it moves, but it can also be moved because the parent classes have shifted
 			//if (IsKeyPressed(VK_NUMPAD1))
 			//{
-			//	int off = offsetof(TFD_SDK::USkinnedMeshComponent, BoneArray);
-			//	std::cout << off << "\n";
+			//	//int off = offsetof(TFD_SDK::USkinnedMeshComponent, BoneArray);
+			//	//std::cout << off << "\n";
 
 			//	BoneOffset += 0x04;
 			//	//auto pp = std::addressof(PlayerController->Character->Mesh) + 0x04;
@@ -436,6 +434,12 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				}
 			}*/
 
+
+			if (cfg_DrawMenu)
+			{
+				DrawMenu();
+			}
+
 			ZeroGUI::Draw_Cursor(cfg_DrawMenu);
 
 
@@ -520,7 +524,7 @@ void InstantReload()
 
 void PlayerEnemyESP()
 {
-	if (!Actors || !Actors->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass()))
+	if (!GWorld || !PlayerController || !PlayerController->ActorManager_Subsystem || !Actors || !Actors->Characters)
 		return;
 
 	if (cfg_DrawPlayerNames || cfg_DrawPlayerBoxes || cfg_DrawEnemyNames || cfg_DrawEnemyBoxes || cfg_DrawPlayerLines || cfg_DrawEnemyLines)
@@ -528,9 +532,10 @@ void PlayerEnemyESP()
 		if (Actors->Characters.IsValid() && Actors->Characters.Num() > 0)
 		{
 			int StartNumber = Actors->Characters.Num();
-			static bool gotfont = false;
 			for (int i = 0; i < Actors->Characters.Num(); i++)
 			{
+				if (!GWorld || !PlayerController || !PlayerController->ActorManager_Subsystem || !Actors || !Actors->Characters)
+					return;
 				if (Actors->Characters.Num() != StartNumber)
 					return;
 				if (!Actors->Characters.IsValidIndex(i))
@@ -542,35 +547,22 @@ void PlayerEnemyESP()
 						continue;
 					if (p->IsA(TFD_SDK::AM1Player::StaticClass()))
 					{
+						TFD_SDK::AM1Player* player = static_cast<TFD_SDK::AM1Player*>(p);
+						//if (player->bPlayerInputEnabled)
+						//{
+						//	continue;
+						//}
 						TFD_SDK::FVector2D ScreenPos = { -1, -1 };
 						if (WorldToScreen(p->K2_GetActorLocation(), &ScreenPos))
 						{
-							TFD_SDK::AM1Player* player = static_cast<TFD_SDK::AM1Player*>(p);
-							//if (!gotfont)
-							//{
-							//	if (player->InfoWidgetComponent)
-							//	{
-							//		TFD_SDK::UM1UIActorWidget* Base = player->InfoWidgetComponent->ActorWidget.Get();
-							//		if (Base->IsA(TFD_SDK::UM1UICharacterInfoBase::StaticClass()))
-							//		{
-							//			TFD_SDK::UM1UICharacterInfoBase* Info = static_cast<TFD_SDK::UM1UICharacterInfoBase*>(Base);
-							//			if (Info)
-							//			{
-							//				ZeroGUI::CurrentFont = static_cast<TFD_SDK::UFont*>(Info->TB_Name->Font.FontObject);
-							//				gotfont = true;
-							//			}
-							//		}
-							//	}
-							//}
-							if (player->bPlayerInputEnabled)
-							{
-								continue;
-							}
 							if (cfg_DrawPlayerNames)
-								if (player->PlayerName)
+							{
+								if (player->PlayerName && player->PlayerName.ToString() != "")
 								{
-									ZeroGUI::TextCenter((char*)player->PlayerName.ToString().c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen, false);
+									std::string Name = player->PlayerName.ToString();
+									ZeroGUI::TextCenter((char*)Name.c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen, false);
 								}
+							}
 							if (cfg_DrawPlayerBoxes)
 							{
 								float ODistance = p->GetDistanceTo(LocalPlayer->PlayerController->Pawn) / cfg_DistanceScale;
@@ -582,7 +574,7 @@ void PlayerEnemyESP()
 						}
 
 					}
-					else if (p->IsA(TFD_SDK::AM1Monster::StaticClass()))
+					else if (p->IsA(TFD_SDK::AM1Monster::StaticClass()) || p->CharacterAttribute->IsA(TFD_SDK::UM1MonsterAttribute::StaticClass()))
 					{
 						TFD_SDK::AM1Monster* monster = static_cast<TFD_SDK::AM1Monster*>(p);
 						TFD_SDK::FVector2D ScreenPos = { -1, -1 };
@@ -591,6 +583,29 @@ void PlayerEnemyESP()
 							TFD_SDK::FLinearColor color = ColorDarkRed;
 							if (PlayerController->LineOfSightTo(p, TFD_SDK::FVector{ 0, 0, 0 }, false))
 								color = ColorRed;
+
+							// Finding fucking new bone targets
+							//if (p->Mesh && p->Mesh->BoneArray.IsValid() && p->Mesh->BoneArray.Num() > 0)
+							//{
+							//	TFD_SDK::FMatrix ComponentMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(p->Mesh->K2_GetComponentToWorld());
+							//	//std::vector<int> indexes = IDBoneMap[p->CharacterId.ID];
+							//	for (int j = 0; j < p->Mesh->BoneArray.Num(); j++)
+							//	{
+							//		if (p->Mesh->BoneArray.IsValidIndex(j))
+							//		{
+							//			TFD_SDK::FTransform bone = p->Mesh->BoneArray[j];
+							//			TFD_SDK::FMatrix BoneMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(bone);
+							//			TFD_SDK::FMatrix WorldMatrix = TFD_SDK::UKismetMathLibrary::Multiply_MatrixMatrix(BoneMatrix, ComponentMatrix);
+							//			TFD_SDK::FTransform WorldPosition = TFD_SDK::UKismetMathLibrary::Conv_MatrixToTransform(WorldMatrix);
+							//			TFD_SDK::FVector2D BoneScreenPos = { -1, -1 };
+							//			if (WorldToScreen(WorldPosition.Translation, &BoneScreenPos))
+							//			{
+							//				ZeroGUI::TextCenter((char*)p->Mesh->GetBoneName(j).ToString().c_str(), BoneScreenPos, TFD_SDK::FLinearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, true);
+							//			}
+							//		}
+							//	}
+							//}
+
 
 							// Was used to detect 'monster' actors
 							/*if (monster->Children.Num() > 0)
@@ -627,9 +642,9 @@ void PlayerEnemyESP()
 								//			ZeroGUI::TextCenter((char*)monster->Mesh->GetBoneName(j).ToString().c_str(), BoneScreenPos, TFD_SDK::FLinearColor{ 1.0f, 0.0f, 1.0f, 1.0f }, false);
 								//		}
 								//	}
-								if (!IDNameMap.contains(monster->CharacterId.ID))
+								if (!IDNameMap.contains(p->CharacterId.ID))
 								{
-									TFD_SDK::UM1UIActorWidget* Base = monster->InfoWidgetComponent->ActorWidget.Get();
+									TFD_SDK::UM1UIActorWidget* Base = p->InfoWidgetComponent->ActorWidget.Get();
 									if (Base)
 									{
 										if (Base->IsA(TFD_SDK::UM1UICharacterInfoBase::StaticClass()))
@@ -638,7 +653,7 @@ void PlayerEnemyESP()
 											if (Info)
 											{
 												std::string name = Info->TB_Name->Text.ToString();
-												int id = monster->CharacterId.ID;
+												int id = p->CharacterId.ID;
 												IDNameMap.insert({ id, name });
 												NamesChanged = true;
 											}
@@ -648,7 +663,7 @@ void PlayerEnemyESP()
 								}
 								else
 								{
-									ZeroGUI::TextCenter((char*)IDNameMap[(int)monster->CharacterId.ID].c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color, false);
+									ZeroGUI::TextCenter((char*)IDNameMap[(int)p->CharacterId.ID].c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color, false);
 								}
 							}
 							if (cfg_DrawEnemyBoxes)
@@ -1018,112 +1033,121 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 			{
 				if (p->IsDead())
 					continue;
-				if (!p->IsA(TFD_SDK::AM1Monster::StaticClass()))
-					continue;
-				if (!PlayerController->LineOfSightTo(p, TFD_SDK::FVector{ 0, 0, 0 }, false))
+				//if (!p->IsA(TFD_SDK::AM1Monster::StaticClass()) && !p->CharacterAttribute->IsA(TFD_SDK::UM1MonsterAttribute::StaticClass()))
+				//if (!p->CharacterAttribute->IsA(TFD_SDK::UM1MonsterAttribute::StaticClass()))
+				//	continue;
+				if (p->IsA(TFD_SDK::AM1Monster::StaticClass()) || p->CharacterAttribute->IsA(TFD_SDK::UM1MonsterAttribute::StaticClass()))
 				{
-					if (p->Children.Num() > 0)
+					if (!PlayerController->LineOfSightTo(p, TFD_SDK::FVector{ 0, 0, 0 }, false))
 					{
-						bool any = false;
-						for (int c = 0; c < p->Children.Num(); c++)
+						if (p->Children.Num() > 0)
 						{
-							if (p->Children[c]->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
-								if (p->Children[c]->Class->GetFullName().contains("Immunity") || p->Children[c]->Class->GetFullName().contains("JudgementEye"))
-									if (PlayerController->LineOfSightTo(p->Children[c], TFD_SDK::FVector{ 0, 0, 0 }, false))
-										any = true;
+							bool any = false;
+							for (int c = 0; c < p->Children.Num(); c++)
+							{
+								if (p->Children[c]->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
+									if (p->Children[c]->Class->GetFullName().contains("Immunity") || p->Children[c]->Class->GetFullName().contains("JudgementEye"))
+										if (PlayerController->LineOfSightTo(p->Children[c], TFD_SDK::FVector{ 0, 0, 0 }, false))
+											any = true;
+							}
+							if (!any)
+								continue;
 						}
-						if (!any)
+						else
 							continue;
 					}
-					else
-						continue;
-				}
-				if (!IDBoneMap.contains(p->CharacterId.ID))
-				{
-					if (p->Mesh && p->Mesh->BoneArray.IsValid() && p->Mesh->BoneArray.Num() > 0)
+					if (!IDBoneMap.contains(p->CharacterId.ID))
 					{
-						std::vector<int> bones = { };
-						for (int j = 0; j < p->Mesh->BoneArray.Num(); j++)
+						if (p->Mesh && p->Mesh->BoneArray.IsValid() && p->Mesh->BoneArray.Num() > 0)
 						{
-							if (p->Mesh->BoneArray.IsValidIndex(j))
+							std::vector<int> bones = { };
+							for (int j = 0; j < p->Mesh->BoneArray.Num(); j++)
 							{
-								if (p->Mesh->GetBoneName(j).ToString().contains("Weakness") || p->Mesh->GetBoneName(j).ToString().contains("-Head"))
+								if (p->Mesh->BoneArray.IsValidIndex(j))
 								{
-									bones.push_back(j);
+									if (p->Mesh->GetBoneName(j).ToString().contains("Weakness") || p->Mesh->GetBoneName(j).ToString().contains("-Head") || p->Mesh->GetBoneName(j).ToString().contains("_head"))
+									{
+										bones.push_back(j);
+									}
 								}
 							}
-						}
-						if (bones.size() > 0)
-						{
-							IDBoneMap.insert({ p->CharacterId.ID, bones });
-							BonesChanged = true;
+							if (bones.size() > 0)
+							{
+								IDBoneMap.insert({ p->CharacterId.ID, bones });
+								BonesChanged = true;
+							}
 						}
 					}
-				}
-				else
-				{
-					// Some enemies have 'balls' that spawn, they are Children of the current Actor with a class of M1AbilityActor
-					// no bones for them, so target just their actor location?
-					if (p->Mesh && p->Mesh->BoneArray.IsValid() && p->Mesh->BoneArray.Num() > 0)
+					else
 					{
-						TFD_SDK::FMatrix ComponentMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(p->Mesh->K2_GetComponentToWorld());
-						std::vector<int> indexes = IDBoneMap[p->CharacterId.ID];
-						for (int j = 0; j < indexes.size(); j++)
+						// Some enemies have 'balls' that spawn, they are Children of the current Actor with a class of M1AbilityActor
+						// no bones for them, so target just their actor location?
+						if (p->Mesh && p->Mesh->BoneArray.IsValid() && p->Mesh->BoneArray.Num() > 0)
 						{
-							if (p->Mesh->BoneArray.IsValidIndex(indexes[j]))
+							TFD_SDK::FMatrix ComponentMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(p->Mesh->K2_GetComponentToWorld());
+							std::vector<int> indexes = IDBoneMap[p->CharacterId.ID];
+							for (int j = 0; j < indexes.size(); j++)
 							{
-								TFD_SDK::FTransform bone = p->Mesh->BoneArray[indexes[j]];
-								TFD_SDK::FMatrix BoneMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(bone);
-								TFD_SDK::FMatrix WorldMatrix = TFD_SDK::UKismetMathLibrary::Multiply_MatrixMatrix(BoneMatrix, ComponentMatrix);
-								TFD_SDK::FTransform WorldPosition = TFD_SDK::UKismetMathLibrary::Conv_MatrixToTransform(WorldMatrix);
-								TFD_SDK::FVector2D BoneScreenPos = { -1, -1 };
-								if (WorldToScreen(WorldPosition.Translation, &BoneScreenPos))
+								if (p->Mesh->BoneArray.IsValidIndex(indexes[j]))
 								{
-									//ZeroGUI::TextCenter((char*)"Bone", BoneScreenPos, TFD_SDK::FLinearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, true);
-
-									float distance = TFD_SDK::UKismetMathLibrary::Distance2D(ScreenMiddle, BoneScreenPos);
-									//ZeroGUI::TextCenter((char*)p->Class->GetFullName().c_str(), TFD_SDK::FVector2D{ 500, 500 }, TFD_SDK::FLinearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, false);
-									if (distance > cfg_AimbotFOV)
-										continue;
-									if (distance < closestDistance)
+									TFD_SDK::FTransform bone = p->Mesh->BoneArray[indexes[j]];
+									TFD_SDK::FMatrix BoneMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(bone);
+									TFD_SDK::FMatrix WorldMatrix = TFD_SDK::UKismetMathLibrary::Multiply_MatrixMatrix(BoneMatrix, ComponentMatrix);
+									TFD_SDK::FTransform WorldPosition = TFD_SDK::UKismetMathLibrary::Conv_MatrixToTransform(WorldMatrix);
+									TFD_SDK::FVector2D BoneScreenPos = { -1, -1 };
+									if (WorldToScreen(WorldPosition.Translation, &BoneScreenPos))
 									{
-										closestDistance = distance;
-										ID = p->Index;
-										Aimbot_BoneIndex = indexes[j];
-										ret = p;
+										//ZeroGUI::TextCenter((char*)"Bone", BoneScreenPos, TFD_SDK::FLinearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, true);
+
+										float distance = TFD_SDK::UKismetMathLibrary::Distance2D(ScreenMiddle, BoneScreenPos);
+										//ZeroGUI::TextCenter((char*)p->Class->GetFullName().c_str(), TFD_SDK::FVector2D{ 500, 500 }, TFD_SDK::FLinearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, false);
+										if (distance > cfg_AimbotFOV)
+											continue;
+										if (distance < closestDistance)
+										{
+											closestDistance = distance;
+											ID = p->Index;
+											Aimbot_BoneIndex = indexes[j];
+											ret = p;
+										}
 									}
 								}
 							}
 						}
-					}
 
-					if (p->Children.Num() > 0)
-					{
-						for (int a = 0; a < p->Children.Num(); a++)
+						if (p->Children.Num() > 0)
 						{
-							if (p->Children[a]->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
+							for (int a = 0; a < p->Children.Num(); a++)
 							{
-								if (!(p->Children[a]->Class->GetFullName().contains("Immun")) && !(p->Children[a]->Class->GetFullName().contains("JudgementEye")))
-									continue;
-								TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+								/*TFD_SDK::FVector2D ScreenPos = { -1, -1 };
 								if (WorldToScreen(p->Children[a]->K2_GetActorLocation(), &ScreenPos))
 								{
-									float distance = TFD_SDK::UKismetMathLibrary::Distance2D(ScreenMiddle, ScreenPos);
-									//ZeroGUI::TextCenter((char*)p->Children[a]->Class->GetFullName().c_str(), TFD_SDK::FVector2D{ 500.0f, 200.0f + (50.0f * a) }, TFD_SDK::FLinearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, false);
-									if (distance > cfg_AimbotFOV)
+									ZeroGUI::TextCenter((char*)p->Children[a]->Class->GetFullName().c_str(), ScreenPos, TFD_SDK::FLinearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, false);
+								}*/
+								if (p->Children[a]->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
+								{
+									if (!(p->Children[a]->Class->GetFullName().contains("Immun")) && !(p->Children[a]->Class->GetFullName().contains("JudgementEye")))
 										continue;
-									if (distance < closestDistance)
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									if (WorldToScreen(p->Children[a]->K2_GetActorLocation(), &ScreenPos))
 									{
-										closestDistance = distance;
-										ID = p->Children[a]->Index;
-										Aimbot_BoneIndex = 999;
-										ret = p->Children[a];
+										float distance = TFD_SDK::UKismetMathLibrary::Distance2D(ScreenMiddle, ScreenPos);
+										//ZeroGUI::TextCenter((char*)p->Children[a]->Class->GetFullName().c_str(), TFD_SDK::FVector2D{ 500.0f, 200.0f + (50.0f * a) }, TFD_SDK::FLinearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, false);
+										if (distance > cfg_AimbotFOV)
+											continue;
+										if (distance < closestDistance)
+										{
+											closestDistance = distance;
+											ID = p->Children[a]->Index;
+											Aimbot_BoneIndex = 999;
+											ret = p->Children[a];
+										}
 									}
 								}
 							}
 						}
-					}
 
+					}
 				}
 			}
 		}
@@ -1195,7 +1219,7 @@ void DrawMenu()
 			ZeroGUI::SliderFloat((char*)"Aimbot Speed", &cfg_AimbotSmoothing, 1.0f, 100.0f);
 			if (ZeroGUI::Checkbox((char*)"Enable No Spread", &cfg_AimbotNoSpread))
 			{
-				if (cfg_AimbotNoSpread) //line 156 and also 1139
+				if (cfg_AimbotNoSpread)
 				{
 					DWORD old;
 					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
@@ -1244,7 +1268,7 @@ void DrawMenu()
 					VirtualProtect(RapidFireAddress, sizeof(uint8_t), old, NULL);
 				}
 			}
-			ZeroGUI::Checkbox((char*)"Enable Auto-Reload", &cfg_NoReload);
+			//ZeroGUI::Checkbox((char*)"Enable Auto-Reload", &cfg_NoReload);
 		}
 		if (tab == 3)
 		{
@@ -1594,17 +1618,18 @@ DWORD WINAPI Init(HMODULE Module)
 		{
 			throw std::runtime_error("Unable to find GObjects.");
 			return 1;
-		}
-		GObjsPtr = GameModule.dwBase + GObjsPtr;
-		uintptr_t GObjOffsetAddress = GObjsPtr + 3;
-		int32_t GObjOffsetRelative = *reinterpret_cast<int32_t*>(GObjOffsetAddress);
-		uintptr_t GObjAddress = (GObjsPtr + 7) + GObjOffsetRelative;
-		uintptr_t GObjeOffset = GObjAddress - GameModule.dwBase;*/
+		}*/
+		//GObjsPtr = GameModule.dwBase + GObjsPtr;
+		//uintptr_t GObjOffsetAddress = GObjsPtr + 3;
+		//int32_t GObjOffsetRelative = *reinterpret_cast<int32_t*>(GObjOffsetAddress);
+		//uintptr_t GObjAddress = (GObjsPtr + 7) + GObjOffsetRelative;
+		//uintptr_t GObjeOffset = GObjAddress - GameModule.dwBase;
 		TFD_SDK::Offsets::GObjects = 0x09B29CF0;
 #ifdef IS_DEBUG
-		std::cout << "DescentInternal - Found GObjects at: " << std::hex << GObjeOffset << std::dec << "\n";
+		std::cout << "DescentInternal - Found GObjects at: " << std::hex << GObjsPtr << std::dec << "\n";
 		Sleep(1000);
 #endif // IS_DEBUG
+		//TFD_SDK::Offsets::GObjects = 0x9B29CF0;
 
 		uintptr_t SpreadPtr = FindSignature(procID, GameModule, NoSpreadSig, NoSpreadMask);
 		if (!SpreadPtr)
@@ -1613,9 +1638,9 @@ DWORD WINAPI Init(HMODULE Module)
 			return 1;
 		}
 		SpreadPtr = GameModule.dwBase + SpreadPtr;
-		NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) - 0x9);
+		NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) - 0x9);// +0x16);
 #ifdef IS_DEBUG
-		std::cout << "DescentInternal - Found NoSpread\n";
+		std::cout << "DescentInternal - Found NoSpread at " << std::hex << SpreadPtr << std::dec << "\n";
 		Sleep(1000);
 #endif // IS_DEBUG
 
@@ -1628,7 +1653,7 @@ DWORD WINAPI Init(HMODULE Module)
 		RecoilPtr = GameModule.dwBase + RecoilPtr;
 		NoRecoilAddress = reinterpret_cast<uint8_t*>(RecoilPtr + 2);
 #ifdef IS_DEBUG
-		std::cout << "DescentInternal - Found NoRecoil\n";
+		std::cout << "DescentInternal - Found NoRecoil at " << std::hex << RecoilPtr << std::dec << "\n";
 		Sleep(1000);
 #endif // IS_DEBUG
 
