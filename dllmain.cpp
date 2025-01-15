@@ -163,6 +163,14 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				VirtualProtect(NoRecoilAddress, sizeof(uint8_t), old, NULL);
 			}
 
+			if (cfg_AimbotRapidFire)
+			{
+				DWORD old;
+				VirtualProtect(RapidFireAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
+				memcpy(RapidFireAddress, &RapidFire[1], sizeof(uint8_t));
+				VirtualProtect(RapidFireAddress, sizeof(uint8_t), old, NULL);
+			}
+
 
 			isGUIInit = true;
 			std::cout << "DescentInternal - World: " << std::hex << GWorld << std::dec << "\n";
@@ -1219,6 +1227,23 @@ void DrawMenu()
 					VirtualProtect(NoRecoilAddress, sizeof(uint8_t), old, NULL);
 				}
 			}
+			if (ZeroGUI::Checkbox((char*)"Enable Rapidfire", &cfg_AimbotRapidFire))
+			{
+				if (cfg_AimbotRapidFire)
+				{
+					DWORD old;
+					VirtualProtect(RapidFireAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
+					memcpy(RapidFireAddress, &RapidFire[1], sizeof(uint8_t));
+					VirtualProtect(RapidFireAddress, sizeof(uint8_t), old, NULL);
+				}
+				else
+				{
+					DWORD old;
+					VirtualProtect(RapidFireAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
+					memcpy(RapidFireAddress, &RapidFire[0], sizeof(uint8_t));
+					VirtualProtect(RapidFireAddress, sizeof(uint8_t), old, NULL);
+				}
+			}
 			ZeroGUI::Checkbox((char*)"Enable Auto-Reload", &cfg_NoReload);
 		}
 		if (tab == 3)
@@ -1303,7 +1328,7 @@ void LoadCFG()
 		cfg_AimbotNoSpread = ini.GetBoolValue("Aimbot", "EnableNoSpread");
 		cfg_NoReload = ini.GetBoolValue("Extra", "EnableNoReload");
 		cfg_AimbotNoRecoil = ini.GetBoolValue("Aimbot", "EnableNoRecoil");
-
+		cfg_AimbotRapidFire = ini.GetBoolValue("Aimbot", "EnableRapidFire");
 
 		cfg_CacheEnemyNames = ini.GetBoolValue("Extra", "CacheNames");
 		cfg_CacheEnemyBones = ini.GetBoolValue("Extra", "CacheBones");
@@ -1350,6 +1375,7 @@ void SaveCFG()
 
 	ini.SetBoolValue("Aimbot", "EnableNoSpread", cfg_AimbotNoSpread);
 	ini.SetBoolValue("Aimbot", "EnableNoRecoil", cfg_AimbotNoRecoil);
+	ini.SetBoolValue("Aimbot", "EnableRapidFire", cfg_AimbotRapidFire);
 
 	ini.SetBoolValue("Extra", "EnableNoReload", cfg_NoReload);
 	ini.SetBoolValue("Extra", "EnableVacuum", cfg_LootVacuum);
@@ -1603,6 +1629,19 @@ DWORD WINAPI Init(HMODULE Module)
 		NoRecoilAddress = reinterpret_cast<uint8_t*>(RecoilPtr + 2);
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found NoRecoil\n";
+		Sleep(1000);
+#endif // IS_DEBUG
+
+		uintptr_t RapidFirePtr = FindSignature(procID, GameModule, RapidFireSig, RapidFireMask);
+		if (!RapidFirePtr)
+		{
+			throw std::runtime_error("Unable to find Rapidfire.");
+			return 1;
+		}
+		RapidFirePtr = GameModule.dwBase + RapidFirePtr;
+		RapidFireAddress = reinterpret_cast<uint8_t*>(RapidFirePtr);
+#ifdef IS_DEBUG
+		std::cout << "DescentInternal - Found RapidFire at " << std::hex << RapidFirePtr << std::dec << "\n";
 		Sleep(1000);
 #endif // IS_DEBUG
 
