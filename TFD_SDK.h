@@ -273,14 +273,14 @@ namespace TFD_SDK
 	class alignas(0x10) UMeshComponent : public UPrimitiveComponent
 	{
 	public:
-		uint8 Pad_UMeshComponent_Class[0x40];
+		uint8 Pad_UMeshComponent_Class[0x38];
 	};
 #pragma pack(pop)
 	// 0x02E0 (0x0790 - 0x04B0)
 	class USkinnedMeshComponent : public UMeshComponent
 	{
 	public:
-		uint8 Pad_BoneArray[0x68]; // 0x58 <-- In Dumped SDK the class starts at 0x4B0 but the first field is listed as starting at 0x4A8? 
+		uint8 Pad_BoneArray[0x70]; // 0x58 <-- In Dumped SDK the class starts at 0x4B0 but the first field is listed as starting at 0x4A8? 
 		TArray<FTransform> BoneArray; // 0x0508(0x0010)
 		uint8 Pad_USkinnedMeshComponent_Class[0x268]; // 0x278 0x518
 		class FName GetBoneName(int32 BoneIndex) const;
@@ -447,7 +447,7 @@ namespace TFD_SDK
 	class UM1PrivateOnlineServiceComponent final : public UM1ActorComponent
 	{
 	public:
-		uint8 Pad_UM1PrivateOnlineServiceComponent_Class[0x848]; // 0xC8
+		uint8 Pad_UM1PrivateOnlineServiceComponent_Class[0x8C0]; // 0xC8
 		void ServerChangePlayer(const struct FM1TemplateId& InCharacterTid);
 	};
 	// 0x0080 (0x0128 - 0x00A8)
@@ -493,7 +493,7 @@ namespace TFD_SDK
 	class UM1CharacterAttribute : public UObject
 	{
 	public:
-		uint8 UM1CharacterAttribute_Class[0x110];
+		uint8 UM1CharacterAttribute_Class[0x118];
 
 	public:
 		static class UClass* StaticClass()
@@ -509,7 +509,7 @@ namespace TFD_SDK
 	class UM1MonsterAttribute : public UM1CharacterAttribute
 	{
 	public:
-		uint8 UM1MonsterAttribute_Class[0xE0];
+		uint8 UM1MonsterAttribute_Class[0xD8];
 	public:
 		static class UClass* StaticClass()
 		{
@@ -525,13 +525,13 @@ namespace TFD_SDK
 	class AM1Character : public ACharacter
 	{
 	public:
-		uint8 Pad_InfoWidget[0x2D0]; // 0x4F8 but actually 0x500 because ACharacter is padded to 0x10
+		uint8 Pad_InfoWidget[0x338]; // 0x4F8 but actually 0x500 because ACharacter is padded to 0x10
 		class UM1CharacterInfoWidgetComponent* InfoWidgetComponent; // 0x07C8(0x0008) Need this
 		uint8 Pad_CharacterAttribute[0x40]; // 0x7D0
 		class UM1CharacterAttribute* CharacterAttribute;// 0x0810(0x0008)
-		uint8 Pad_CharacterId[0x1D8]; // 0x818
+		uint8 Pad_CharacterId[0x1F0]; // 0x818
 		struct FM1TemplateId CharacterId; // 0x09F0(0x0004) Need this
-		uint8 Pad_AM1CharClass[0x1BC]; // 0x9F4
+		uint8 Pad_AM1CharClass[0x1EC]; // 0x9F4
 
 		bool IsDead() const;
 
@@ -547,20 +547,20 @@ namespace TFD_SDK
 	};
 	// These show as errors but are correct when compiled
 	static_assert(offsetof(AM1Character, Pad_InfoWidget) == 0x4F8, "Bad alignment");
-	static_assert(offsetof(AM1Character, InfoWidgetComponent) == 0x7C8, "Bad alignment");
-	static_assert(offsetof(AM1Character, CharacterId) == 0x9F0, "Bad alignment");
+	static_assert(offsetof(AM1Character, InfoWidgetComponent) == 0x830, "Bad alignment");
+	static_assert(offsetof(AM1Character, CharacterId) == 0xA70, "Bad alignment");
 
 	// 0x0660 (0x1210 - 0x0BB0)
 	class AM1Player final : public AM1Character
 	{
 	public:
-		uint8 Pad_WeaponSlot[0x248]; // 0xBB0
+		uint8 Pad_WeaponSlot[0x278]; // 0xBB0
 		class UM1WeaponSlotControlComponent* WeaponSlotControl; // 0x0DF8(0x0008) Need this
-		uint8 Pad_PlayerName[0x90]; // 0xE00
+		uint8 Pad_PlayerName[0x88]; // 0xE00
 		class FString PlayerName; // 0x0E90(0x0010) Need this
-		uint8 Pad_PlayerInput[0x42]; // 0xEA0
+		uint8 Pad_PlayerInput[0x52]; // 0xEA0
 		bool bPlayerInputEnabled; // 0x0EE2(0x0001) Need this
-		uint8 Pad_AM1PlayerClass[0x32D]; // 0xEE3
+		uint8 Pad_AM1PlayerClass[0x345]; // 0xEE3
 
 		void RequestTeleportAtSequence(const struct FVector& InLocation, const struct FRotator& InRotation);
 
@@ -575,17 +575,17 @@ namespace TFD_SDK
 		}
 	};
 	// These show as errors but are correct when compiled
-	static_assert(offsetof(AM1Player, Pad_WeaponSlot) == 0xBB0, "Bad alignment");
-	static_assert(offsetof(AM1Player, WeaponSlotControl) == 0xDF8, "Bad alignment");
-	static_assert(offsetof(AM1Player, PlayerName) == 0xE90, "Bad alignment");
-	static_assert(offsetof(AM1Player, bPlayerInputEnabled) == 0xEE2, "Bad alignment");
+	static_assert(offsetof(AM1Player, Pad_WeaponSlot) == 0xC60, "Bad alignment");
+	static_assert(offsetof(AM1Player, WeaponSlotControl) == 0xED8, "Bad alignment");
+	static_assert(offsetof(AM1Player, PlayerName) == 0xF68, "Bad alignment");
+	static_assert(offsetof(AM1Player, bPlayerInputEnabled) == 0xFCA, "Bad alignment");
 
 	// 0x01D0 (0x0D80 - 0x0BB0)
 #pragma pack(push, 0x1)
 	class alignas(0x10) AM1Monster : public AM1Character
 	{
 	public:
-		uint8 Pad_AM1Monster_Class[0x1D0]; // 0xAB0
+		uint8 Pad_AM1Monster_Class[0x1E8]; // 0xAB0
 		static class UClass* StaticClass()
 		{
 			return StaticClassImpl<"M1Monster">();
@@ -650,7 +650,7 @@ namespace TFD_SDK
 	class AM1Actor : public AActor
 	{
 	public:
-		uint8 Pad_AM1Actor_Class[0xE0];
+		uint8 Pad_AM1Actor_Class[0xE8];
 
 	public:
 		static class UClass* StaticClass()
@@ -679,7 +679,7 @@ namespace TFD_SDK
 	class UM1WeaponRoundsComponent final : public UM1WeaponComponent
 	{
 	public:
-		uint8 Pad_CurrentRounds[0x14];
+		uint8 Pad_CurrentRounds[0x1C];
 		int32 CurrentRounds; // 0x00EC(0x0004)
 
 		void ClientFillCurrentRoundByServer();
@@ -688,7 +688,7 @@ namespace TFD_SDK
 	class AM1AbilityActor : public AM1Actor
 	{
 	public:
-		uint8 Pad_AM1AbilityActor_Class[0x428];
+		uint8 Pad_AM1AbilityActor_Class[0x438];
 		static class UClass* StaticClass()
 		{
 			return StaticClassImpl<"M1AbilityActor">();
@@ -718,7 +718,7 @@ namespace TFD_SDK
 	class UM1UIWidget : public UUserWidget
 	{
 	public:
-		uint8 Pad_UM1UIWidget_Class[0x4B8];
+		uint8 Pad_UM1UIWidget_Class[0x4C0];
 	};
 
 	class UM1UIActorWidget : public UM1UIWidget
@@ -731,9 +731,9 @@ namespace TFD_SDK
 	class UM1ActorWidgetComponent : public USceneComponent
 	{
 	public:
-		uint8 Pad_ActorWidget[0x40];
+		uint8 Pad_ActorWidget[0x48];
 		TWeakObjectPtr<class UM1UIActorWidget> ActorWidget; // 0x0230(0x0008)
-		uint8 Pad_UM1ActorWidgetComponent_Class[0x1D8];
+		uint8 Pad_UM1ActorWidgetComponent_Class[0x1E0];
 	};
 	// 0x0030 (0x0440 - 0x0410)
 	class UM1CharacterInfoWidgetComponent final : public UM1ActorWidgetComponent

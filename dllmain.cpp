@@ -1268,7 +1268,7 @@ void DrawMenu()
 					VirtualProtect(RapidFireAddress, sizeof(uint8_t), old, NULL);
 				}
 			}
-			//ZeroGUI::Checkbox((char*)"Enable Auto-Reload", &cfg_NoReload);
+			ZeroGUI::Checkbox((char*)"Enable Auto-Reload", &cfg_NoReload);
 		}
 		if (tab == 3)
 		{
@@ -1624,7 +1624,7 @@ DWORD WINAPI Init(HMODULE Module)
 		//int32_t GObjOffsetRelative = *reinterpret_cast<int32_t*>(GObjOffsetAddress);
 		//uintptr_t GObjAddress = (GObjsPtr + 7) + GObjOffsetRelative;
 		//uintptr_t GObjeOffset = GObjAddress - GameModule.dwBase;
-		TFD_SDK::Offsets::GObjects = 0x09B29CF0;
+		TFD_SDK::Offsets::GObjects = 0x09C0F9A0;
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found GObjects at: " << std::hex << GObjsPtr << std::dec << "\n";
 		Sleep(1000);
