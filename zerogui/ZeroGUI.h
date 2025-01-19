@@ -1,8 +1,8 @@
 #pragma once
 #include "../TFD_SDK.h"
-#include "../SDK/Basic.hpp"
-#include "../SDK/CoreUObject_classes.hpp"
-#include "../SDK/CoreUObject_structs.hpp"
+//#include "../SDK/Basic.hpp"
+//#include "../SDK/CoreUObject_classes.hpp"
+//#include "../SDK/CoreUObject_structs.hpp"
 wchar_t* s2wc(const char* c)
 {
 	const size_t cSize = strlen(c) + 1;

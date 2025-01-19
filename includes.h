@@ -1,17 +1,17 @@
 #pragma once
-#include <windows.h>
-#include <iostream>
+//#include <windows.h>
+//#include <iostream>
 #include <fstream>
-#include <iomanip>
-#include <vector>
+//#include <iomanip>
+//#include <vector>
 #include "zerogui/ZeroGUI.h"
 #include <map>
 #include <TlHelp32.h>
 #include "SimpleIni.h"
-#include <bitset>
+//#include <bitset>
 #include <XInput.h>
 #pragma comment(lib,"xinput.lib")
-#include "TFD_SDK.h"
+//#include "TFD_SDK.h"
 
 
 #define IsKeyPressed(key) GetAsyncKeyState(key) & 1 && GetAsyncKeyState(key) & 0x8000

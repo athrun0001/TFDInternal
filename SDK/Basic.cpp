@@ -8,10 +8,10 @@
 
 // Basic file containing function-implementations from Basic.hpp
 
-#include "Basic.hpp"
+//#include "Basic.hpp"
 
 #include "CoreUObject_classes.hpp"
-#include "CoreUObject_structs.hpp"
+//#include "CoreUObject_structs.hpp"
 
 namespace SDK
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "SDK/Basic.hpp"
+//#include "SDK/Basic.hpp"
 #include "SDK/CoreUObject_classes.hpp"
 #include "SDK/CoreUObject_structs.hpp"
 
@@ -12,6 +12,7 @@ namespace TFD_SDK
 	public:
 		uint8 Pad_4D3[0x30];
 		class UFont* SmallFont; // 0x0058(0x0008)
+		uint8 Pad_UEngine_Class[0xFD8];
 	public:
 		static class UEngine* GetEngine();
 
@@ -37,6 +38,7 @@ namespace TFD_SDK
 		TArray<class ULevel*> Levels; // 0x0178(0x0010) Need
 		uint8  Pad_OwningGameInstance[0x38]; // 0x188 38
 		class UGameInstance* OwningGameInstance; // 0x01C0(0x0008) Need
+		uint8  Pad_UWorld_Class[0x750]; // 0x188 38
 		
 	public:
 		static class UWorld* GetWorld();
@@ -59,6 +61,7 @@ namespace TFD_SDK
 		class TArray<class TFD_SDK::AActor*> Actors; // 0x0098(0x0010)
 		uint8  Pad_WorldSettings[0x1C8]; // 0xA8 1C8
 		class AWorldSettings* WorldSettings; // 0x0270(0x0008)
+		uint8  Pad_ULevel_Class[0x78]; // 0x28 70
 		
 		static class UClass* StaticClass()
 		{
@@ -128,6 +131,17 @@ namespace TFD_SDK
 	// Start 0x38
 	class UGameViewportClient : public UScriptViewportClient
 	{
+		uint8 Pad_UGameViewportClient_Class[0x378]; // 0x0038
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"GameViewportClient">();
+		}
+		static class UGameViewportClient* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<UGameViewportClient>();
+		}
 	};
 	// 0x0230 (0x0278 - 0x0048)
 	class ULocalPlayer : public UPlayer
@@ -171,6 +185,9 @@ namespace TFD_SDK
 
 	class APlayerCameraManager : public AActor
 	{
+	public:
+		uint8 Pad_APlayerCameraManager_Class[0x3808]; // 0x0248
+
 	public:
 		struct FVector GetCameraLocation() const;
 		struct FRotator GetCameraRotation() const;
@@ -372,7 +389,7 @@ namespace TFD_SDK
 	class UFont final : public UObject
 	{
 	public:
-		uint8                                         Pad_ADE[0x8]; // 0x0028(0x0008)
+		uint8                                         Pad_ADE[0x1A8]; // 0x0028(0x0008)
 	};
 
 
@@ -399,6 +416,7 @@ namespace TFD_SDK
 	{
 	public:
 		EM1OnlineServiceConnectionState ConnectionState; // 0x01C0(0x0001)
+		uint8 Pad_UM1GameInstance_Class[0x107]; // 0x01C1
 
 	public:
 		static class UClass* StaticClass()
@@ -462,6 +480,7 @@ namespace TFD_SDK
 	public:
 		uint8 PadHeartbeat[0x200];
 		class UM1HeartbeatTesterComponent* HeartbeatTesterComponent; // 0x0B08(0x0008)
+		uint8 Pad_AM1PlayerControllerInGame_Class[0x288];// 0x0B10
 
 	public:
 		static class UClass* StaticClass()
@@ -478,6 +497,7 @@ namespace TFD_SDK
 	{
 	public:
 		TArray<class AM1Character*> Characters; // 0x0030(0x0010)
+		uint8 Pad_UM1ActorManagerSubsystem_Class[0x140];// 0x0040
 
 	public:
 		static class UClass* StaticClass()
@@ -551,7 +571,7 @@ namespace TFD_SDK
 	static_assert(offsetof(AM1Character, CharacterId) == 0xA70, "Bad alignment");
 
 	// 0x0660 (0x1210 - 0x0BB0)
-	class AM1Player final : public AM1Character
+	class AM1Player : public AM1Character
 	{
 	public:
 		uint8 Pad_WeaponSlot[0x278]; // 0xBB0
@@ -640,6 +660,7 @@ namespace TFD_SDK
 		struct FM1ActivatedWeaponSlot ActivatedWeaponSlot; // 0x00F0(0x0040)
 		uint8 Pad_Player_Owner[0x30];// 0x0130
 		class AM1Player* Player_Owner; // 0x0160(0x0008)
+		uint8 Pad_UM1WeaponSlotControlComponent_Class[0x70]; // 0x0168
 
 		static class UClass* StaticClass()
 		{
@@ -663,11 +684,12 @@ namespace TFD_SDK
 		}
 	};
 	// 0x0150 (0x0478 - 0x0328)
-	class AM1Weapon final : public AM1Actor
+	class AM1Weapon : public AM1Actor
 	{
 	public:
 		uint8 Pad_RoundsComponent[0x30];
 		class UM1WeaponRoundsComponent* RoundsComponent; // 0x0358(0x0008)
+		uint8 Pad_AM1Weapon_Class[0x120];
 	};
 	// 0x0010 (0x00D8 - 0x00C8)
 	class UM1WeaponComponent : public UM1ActorComponent
@@ -681,6 +703,7 @@ namespace TFD_SDK
 	public:
 		uint8 Pad_CurrentRounds[0x1C];
 		int32 CurrentRounds; // 0x00EC(0x0004)
+		uint8 Pad_UM1WeaponRoundsComponent_Class[0x10];
 
 		void ClientFillCurrentRoundByServer();
 	};
@@ -747,6 +770,7 @@ namespace TFD_SDK
 	public:
 		uint8 Pad_TB_Name[0x8];
 		class UM1TextBlock* TB_Name; // 0x0740(0x0008)
+		uint8 Pad_UM1UICharacterInfoBase_Class[0xA8];
 
 	public:
 		static class UClass* StaticClass()
@@ -769,6 +793,7 @@ namespace TFD_SDK
 	{
 	public:
 		class UObject* FontObject; // 0x0000(0x0008)
+		uint8 Pad_FSlateFontInfo_Class[0x50];
 	};
 
 	class UTextBlock : public UTextLayoutWidget
@@ -777,11 +802,13 @@ namespace TFD_SDK
 		class FText Text; // 0x0150(0x0018)
 		uint8 Pad_Font[0x38];
 		struct FSlateFontInfo Font; // 0x01A0(0x0058)
+		uint8 Pad_UTextBlock_Class[0x108];
 	};
 
 	class UM1TextBlock : public UTextBlock
 	{
-
+	public:
+		uint8 Pad_UM1TextBlock_Class[0x18];
 	};
 
 	enum class EM1MiniGameDifficulty : uint8
@@ -805,10 +832,11 @@ namespace TFD_SDK
 		uint8 Pad_AM1FieldIntActorInt_Class[0x18];
 	};
 	// 0x0008 (0x0450 - 0x0448)
-	class AM1FieldInteractableActorMiniGame : public AM1FieldInteractableActor_Interaction
+	class AM1FieldInteractableActorMiniGame final : public AM1FieldInteractableActor_Interaction
 	{
 	public:
 		EM1MiniGameDifficulty MiniGameDifficulty; // 0x0440(0x0001)
+		uint8 Pad_451[0x7];
 
 	public:
 		static class UClass* StaticClass()
@@ -835,7 +863,8 @@ namespace TFD_SDK
 		Record = 9,
 		CurrencyInternal = 10,
 		ItemSelector = 11,
-		Max = 12,
+		Fellow = 12,
+		Max = 13,
 	};
 
 	struct FM1ItemTidBox final

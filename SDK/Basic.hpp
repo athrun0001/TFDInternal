@@ -8,13 +8,13 @@
 
 // Basic file containing structs required by the SDK
 
-#include <string>
-#include <iostream>
+//#include <string>
+//#include <iostream>
 #include <Windows.h>
 #include <functional>
-#include <type_traits>
+//#include <type_traits>
 
-#include "../PropertyFixup.hpp"
+//#include "../PropertyFixup.hpp"
 #include "../UnrealContainers.hpp"
 
 namespace SDK
@@ -784,6 +784,7 @@ class TDelegate
 {
 public:
 	struct InvalidUseOfTDelegate                  TemplateParamIsNotAFunctionSignature;              // 0x0000(0x0000)(NOT AUTO-GENERATED PROPERTY)
+	uint8                                         Pad_0[0x10];                                       // 0x0000(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
 };
 
 // Predefined struct TDelegate<Ret(Args...)>
@@ -795,6 +796,7 @@ public:
 	FWeakObjectPtr                                Object;                                            // 0x0000(0x0008)(NOT AUTO-GENERATED PROPERTY)
 	FName                                         FunctionName;                                      // 0x0008(0x0008)(NOT AUTO-GENERATED PROPERTY)
 };
+
 
 #define UE_ENUM_OPERATORS(EEnumClass)																																	\
 																																										\
@@ -979,7 +981,7 @@ enum class EClassCastFlags : uint64
 	SetProperty							= 0x0000800000000000,
 	EnumProperty						= 0x0001000000000000,
 	USparseDelegateFunction				= 0x0002000000000000,
-	FMulticastInlineDelegateProperty	= 0x0004000000000000,
+	FMulticasTMulticastInlineDelegateProperty = 0x0004000000000000,
 	FMulticastSparseDelegateProperty	= 0x0008000000000000,
 	FFieldPathProperty					= 0x0010000000000000,
 	FLargeWorldCoordinatesRealProperty	= 0x0080000000000000,

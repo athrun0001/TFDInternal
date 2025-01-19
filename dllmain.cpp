@@ -1,7 +1,7 @@
 
 #include "includes.h"
-#include <thread>
-#include <fstream>
+//#include <thread>
+//#include <fstream>
 
 // Uncomment the line below for console window + some debug prints
 //#define IS_DEBUG
@@ -711,6 +711,8 @@ void ItemESPVacuum()
 								if (WorldToScreen(WorldPositiona, &ScreenPosa))
 								{
 									ZeroGUI::TextCenter((char*)"Coded Vault", TFD_SDK::FVector2D{ ScreenPosa.X, ScreenPosa.Y + 20 }, TFD_SDK::FLinearColor{ 0.7f, 0.0f, 1.0f, 1.0f }, false);
+									if (cfg_DrawItemLines)
+										ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPosa.X, ScreenPosa.Y }, ColorRare);
 								}
 								continue;
 							}
@@ -724,6 +726,8 @@ void ItemESPVacuum()
 									{
 
 										ZeroGUI::TextCenter((char*)"Resource Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										if (cfg_DrawItemLines)
+											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
 									}
 
 								}
@@ -739,6 +743,8 @@ void ItemESPVacuum()
 									{
 
 										ZeroGUI::TextCenter((char*)"Supplies", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										if (cfg_DrawItemLines)
+											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
 									}
 
 								}

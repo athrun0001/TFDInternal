@@ -229,13 +229,13 @@
 # pragma warning (disable: 4127 4503 4702 4786)
 #endif
 
-#include <cstring>
-#include <cstdlib>
-#include <string>
-#include <map>
-#include <list>
-#include <algorithm>
-#include <stdio.h>
+//#include <cstring>
+//#include <cstdlib>
+//#include <string>
+//#include <map>
+//#include <list>
+//#include <algorithm>
+//#include <stdio.h>
 
 #ifdef SI_SUPPORT_IOSTREAMS
 # include <iostream>
