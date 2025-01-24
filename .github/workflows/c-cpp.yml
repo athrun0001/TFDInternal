@@ -46,8 +46,7 @@ jobs:
       with:
         tag_name: v1.0.${{ github.run_number }} # Replace with your versioning logic
         release_name: Release v1.0.${{ github.run_number }}
-        body: |
-          Release notes for this version.
+        body: ${{ github.event.head_commit.message }}
         draft: false
         prerelease: false
       env:
