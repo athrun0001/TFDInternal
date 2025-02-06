@@ -38,7 +38,7 @@ namespace TFD_SDK
 		TArray<class ULevel*> Levels; // 0x0178(0x0010) Need
 		uint8  Pad_OwningGameInstance[0x38]; // 0x188 38
 		class UGameInstance* OwningGameInstance; // 0x01C0(0x0008) Need
-		uint8  Pad_UWorld_Class[0x750]; // 0x188 38
+		uint8  Pad_UWorld_Class[0x750]; // 0x1C8 750
 		
 	public:
 		static class UWorld* GetWorld();
@@ -61,7 +61,7 @@ namespace TFD_SDK
 		class TArray<class TFD_SDK::AActor*> Actors; // 0x0098(0x0010)
 		uint8  Pad_WorldSettings[0x1C8]; // 0xA8 1C8
 		class AWorldSettings* WorldSettings; // 0x0270(0x0008)
-		uint8  Pad_ULevel_Class[0x78]; // 0x28 70
+		uint8  Pad_ULevel_Class[0x78]; // 0x278 78
 		
 		static class UClass* StaticClass()
 		{
@@ -102,7 +102,7 @@ namespace TFD_SDK
 	public:
 		uint8 Pad_LocalPlayers[0x10]; // 0x28 10
 		TArray<class ULocalPlayer*>  LocalPlayers; // 0x0038(0x0010)
-		uint8 Pad_UGameInstance_Class[0x178]; // 0x48 150
+		uint8 Pad_UGameInstance_Class[0x178]; // 0x48 178
 	};
 	// Start 0x28
 	class UPlayer : public UObject
@@ -131,7 +131,7 @@ namespace TFD_SDK
 	// Start 0x38
 	class UGameViewportClient : public UScriptViewportClient
 	{
-		uint8 Pad_UGameViewportClient_Class[0x378]; // 0x0038
+		uint8 Pad_UGameViewportClient_Class[0x378]; // 0x0038 378
 
 	public:
 		static class UClass* StaticClass()
@@ -163,7 +163,7 @@ namespace TFD_SDK
 	class AController : public AActor
 	{
 	public:
-		uint8 Pad_75A[0x40]; // 0x248
+		uint8 Pad_75A[0x40]; // 0x248 40
 		class APawn* Pawn; // 0x0288(0x0008)
 		uint8 Pad_Character[0x8]; // 0x290 8
 		class ACharacter* Character; // 0x0298(0x0008)
@@ -186,7 +186,7 @@ namespace TFD_SDK
 	class APlayerCameraManager : public AActor
 	{
 	public:
-		uint8 Pad_APlayerCameraManager_Class[0x3808]; // 0x0248
+		uint8 Pad_APlayerCameraManager_Class[0x3808]; // 0x0248 3808
 
 	public:
 		struct FVector GetCameraLocation() const;
@@ -246,7 +246,7 @@ namespace TFD_SDK
 	{
 	public:
 		class USkeletalMeshComponent* Mesh; // 0x02B8(0x0008)
-		uint8 Pad_ACharacter_Class[0x238]; // 0x2C0 240
+		uint8 Pad_ACharacter_Class[0x238]; // 0x2C0 238
 	};
 #pragma pack(pop)
 
@@ -306,7 +306,7 @@ namespace TFD_SDK
 	// 0x0690 (0x0E20 - 0x0790)
 	class USkeletalMeshComponent : public USkinnedMeshComponent
 	{
-		uint8 Pad_USkeletalMeshComponent_Class[0x690]; // 0x790
+		uint8 Pad_USkeletalMeshComponent_Class[0x690]; // 0x690
 	};
 	// 0x0000 (0x0028 - 0x0028)
 	class UBlueprintFunctionLibrary : public UObject
@@ -381,9 +381,9 @@ namespace TFD_SDK
 	class AWorldSettings : public AInfo
 	{
 	public:
-		uint8 Pad_TimeDilation[0x128]; // 0x248
+		uint8 Pad_TimeDilation[0x128]; // 0x248 
 		float TimeDilation; // 0x0370(0x0004)
-		uint8 Pad_AWorldSettings_Class[0xAC];
+		uint8 Pad_AWorldSettings_Class[0xAC]; // 0x0374
 	};
 
 	class UFont final : public UObject
@@ -441,7 +441,7 @@ namespace TFD_SDK
 	public:
 		uint8 Pad_ActorManager[0x78]; // 0x788
 		class UM1ActorManagerSubsystem* ActorManager_Subsystem; // 0x0800(0x0008)
-		uint8 Pad_PrivateOnlineServComp[0x10];
+		uint8 Pad_PrivateOnlineServComp[0x10]; // 0x0808(0x0010)
 		class UM1PrivateOnlineServiceComponent* PrivateOnlineServiceComponent; // 0x0818(0x0008)
 		uint8 Pad_AM1PlayerController_Class[0xE8]; // 0x820
 
@@ -465,7 +465,7 @@ namespace TFD_SDK
 	class UM1PrivateOnlineServiceComponent final : public UM1ActorComponent
 	{
 	public:
-		uint8 Pad_UM1PrivateOnlineServiceComponent_Class[0x8C0]; // 0xC8
+		uint8 Pad_UM1PrivateOnlineServiceComponent_Class[0x8D8]; // 0xC8
 		void ServerChangePlayer(const struct FM1TemplateId& InCharacterTid);
 	};
 	// 0x0080 (0x0128 - 0x00A8)
@@ -546,12 +546,12 @@ namespace TFD_SDK
 	{
 	public:
 		uint8 Pad_InfoWidget[0x338]; // 0x4F8 but actually 0x500 because ACharacter is padded to 0x10
-		class UM1CharacterInfoWidgetComponent* InfoWidgetComponent; // 0x07C8(0x0008) Need this
-		uint8 Pad_CharacterAttribute[0x40]; // 0x7D0
-		class UM1CharacterAttribute* CharacterAttribute;// 0x0810(0x0008)
-		uint8 Pad_CharacterId[0x1F0]; // 0x818
-		struct FM1TemplateId CharacterId; // 0x09F0(0x0004) Need this
-		uint8 Pad_AM1CharClass[0x1EC]; // 0x9F4
+		class UM1CharacterInfoWidgetComponent* InfoWidgetComponent; // 0x830(0x0008) Need this
+		uint8 Pad_CharacterAttribute[0x40]; // 0x838
+		class UM1CharacterAttribute* CharacterAttribute;// 0x0878(0x0008)
+		uint8 Pad_CharacterId[0x1F0]; // 0x880
+		struct FM1TemplateId CharacterId; // 0x0A70(0x0004) Need this
+		uint8 Pad_AM1CharClass[0x1EC]; // 0xA74
 
 		bool IsDead() const;
 
@@ -574,13 +574,13 @@ namespace TFD_SDK
 	class AM1Player : public AM1Character
 	{
 	public:
-		uint8 Pad_WeaponSlot[0x278]; // 0xBB0
-		class UM1WeaponSlotControlComponent* WeaponSlotControl; // 0x0DF8(0x0008) Need this
-		uint8 Pad_PlayerName[0x88]; // 0xE00
-		class FString PlayerName; // 0x0E90(0x0010) Need this
-		uint8 Pad_PlayerInput[0x52]; // 0xEA0
-		bool bPlayerInputEnabled; // 0x0EE2(0x0001) Need this
-		uint8 Pad_AM1PlayerClass[0x345]; // 0xEE3
+		uint8 Pad_WeaponSlot[0x278]; // 0xC60
+		class UM1WeaponSlotControlComponent* WeaponSlotControl; // 0x0ED8(0x0008) Need this
+		uint8 Pad_PlayerName[0x88]; // 0xEE0
+		class FString PlayerName; // 0x0F68(0x0010) Need this
+		uint8 Pad_PlayerInput[0x52]; // 0xF78
+		bool bPlayerInputEnabled; // 0x0FCA(0x0001) Need this
+		uint8 Pad_AM1PlayerClass[0x345]; // 0xFCB
 
 		void RequestTeleportAtSequence(const struct FVector& InLocation, const struct FRotator& InRotation);
 
@@ -688,8 +688,8 @@ namespace TFD_SDK
 	{
 	public:
 		uint8 Pad_RoundsComponent[0x30];
-		class UM1WeaponRoundsComponent* RoundsComponent; // 0x0358(0x0008)
-		uint8 Pad_AM1Weapon_Class[0x120];
+		class UM1WeaponRoundsComponent* RoundsComponent; // 0x0360(0x0008)
+		uint8 Pad_AM1Weapon_Class[0x120]; // 0x0368
 	};
 	// 0x0010 (0x00D8 - 0x00C8)
 	class UM1WeaponComponent : public UM1ActorComponent
@@ -804,13 +804,13 @@ namespace TFD_SDK
 		struct FSlateFontInfo Font; // 0x01A0(0x0058)
 		uint8 Pad_UTextBlock_Class[0x108];
 	};
-
-	class UM1TextBlock : public UTextBlock
+	#pragma pack(push, 0x1)
+	class alignas(0x10) UM1TextBlock : public UTextBlock
 	{
 	public:
 		uint8 Pad_UM1TextBlock_Class[0x18];
 	};
-
+	#pragma pack(pop)
 	enum class EM1MiniGameDifficulty : uint8
 	{
 		None = 0,

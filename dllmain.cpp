@@ -156,9 +156,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (cfg_AimbotNoSpread)
 			{
 				DWORD old;
-				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
-				memcpy(NoSpreadAddress, &NoSpreadCheat, sizeof(uint8_t) * 9);
-				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, old, NULL);
+				VirtualProtect(NoSpreadAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
+				memcpy(NoSpreadAddress, &NoSpread[1], sizeof(uint8_t));
+				VirtualProtect(NoSpreadAddress, sizeof(uint8_t), old, NULL);
 			}
 
 			if (cfg_AimbotNoRecoil)
@@ -1228,16 +1228,16 @@ void DrawMenu()
 				if (cfg_AimbotNoSpread)
 				{
 					DWORD old;
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
-					memcpy(NoSpreadAddress, &NoSpreadCheat, sizeof(uint8_t) * 9);
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, old, NULL);
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
+					memcpy(NoSpreadAddress, &NoSpread[1], sizeof(uint8_t));
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), old, NULL);
 				}
 				else
 				{
 					DWORD old;
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, PAGE_EXECUTE_READWRITE, &old);
-					memcpy(NoSpreadAddress, &NoSpreadOriginal, sizeof(uint8_t) * 9);
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 9, old, NULL);
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
+					memcpy(NoSpreadAddress, &NoSpread[0], sizeof(uint8_t));
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), old, NULL);
 				}
 			}
 			if (ZeroGUI::Checkbox((char*)"Enable No Recoil", &cfg_AimbotNoRecoil))
@@ -1630,7 +1630,7 @@ DWORD WINAPI Init(HMODULE Module)
 		//int32_t GObjOffsetRelative = *reinterpret_cast<int32_t*>(GObjOffsetAddress);
 		//uintptr_t GObjAddress = (GObjsPtr + 7) + GObjOffsetRelative;
 		//uintptr_t GObjeOffset = GObjAddress - GameModule.dwBase;
-		TFD_SDK::Offsets::GObjects = 0x09C125F0;
+		TFD_SDK::Offsets::GObjects = 0x09CC43E0;
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found GObjects at: " << std::hex << GObjsPtr << std::dec << "\n";
 		Sleep(1000);
@@ -1644,7 +1644,7 @@ DWORD WINAPI Init(HMODULE Module)
 			return 1;
 		}
 		SpreadPtr = GameModule.dwBase + SpreadPtr;
-		NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) - 0x9);// +0x16);
+		NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) + 0x3);// +0x16);
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found NoSpread at " << std::hex << SpreadPtr << std::dec << "\n";
 		Sleep(1000);
@@ -1670,7 +1670,7 @@ DWORD WINAPI Init(HMODULE Module)
 			return 1;
 		}
 		RapidFirePtr = GameModule.dwBase + RapidFirePtr;
-		RapidFireAddress = reinterpret_cast<uint8_t*>(RapidFirePtr);
+		RapidFireAddress = (reinterpret_cast<uint8_t*>(RapidFirePtr) - 0xA);
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found RapidFire at " << std::hex << RapidFirePtr << std::dec << "\n";
 		Sleep(1000);
