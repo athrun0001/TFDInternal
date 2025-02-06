@@ -156,9 +156,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (cfg_AimbotNoSpread)
 			{
 				DWORD old;
-				VirtualProtect(NoSpreadAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
-				memcpy(NoSpreadAddress, &NoSpread[1], sizeof(uint8_t));
-				VirtualProtect(NoSpreadAddress, sizeof(uint8_t), old, NULL);
+				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, PAGE_EXECUTE_READWRITE, &old);
+				memcpy(NoSpreadAddress, &NoSpreadCheat, sizeof(uint8_t) * 8);
+				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, old, NULL);
 			}
 
 			if (cfg_AimbotNoRecoil)
@@ -1228,16 +1228,16 @@ void DrawMenu()
 				if (cfg_AimbotNoSpread)
 				{
 					DWORD old;
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
-					memcpy(NoSpreadAddress, &NoSpread[1], sizeof(uint8_t));
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), old, NULL);
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, PAGE_EXECUTE_READWRITE, &old);
+					memcpy(NoSpreadAddress, &NoSpreadCheat, sizeof(uint8_t) * 8);
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, old, NULL);
 				}
 				else
 				{
 					DWORD old;
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
-					memcpy(NoSpreadAddress, &NoSpread[0], sizeof(uint8_t));
-					VirtualProtect(NoSpreadAddress, sizeof(uint8_t), old, NULL);
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, PAGE_EXECUTE_READWRITE, &old);
+					memcpy(NoSpreadAddress, &NoSpreadOriginal, sizeof(uint8_t) * 8);
+					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, old, NULL);
 				}
 			}
 			if (ZeroGUI::Checkbox((char*)"Enable No Recoil", &cfg_AimbotNoRecoil))
@@ -1644,7 +1644,7 @@ DWORD WINAPI Init(HMODULE Module)
 			return 1;
 		}
 		SpreadPtr = GameModule.dwBase + SpreadPtr;
-		NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) + 0x3);// +0x16);
+		NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) - 0x8);// +0x16);
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found NoSpread at " << std::hex << SpreadPtr << std::dec << "\n";
 		Sleep(1000);

@@ -54,12 +54,10 @@ const char* GObjectsMask = "xx?xxxxxxxxxxxxxxxx";
 // old pattern is 48 8B 86 D0 00 00 00 F3 44 0F 11 86 - 0x9
 //const char* NoSpreadSig = "\xE8\x00\x00\x00\x00\x48\x8B\x86\xD0\x00\x00\x00\x48\x8B\x98";
 //const char* NoSpreadMask = "x????xxxxxxxxxx";
-//const char* NoSpreadSig = "\x48\x8B\x86\xD0\x00\x00\x00\xF3\x44\x0F\x11\x86";
-//const char* NoSpreadMask = "xxxxxxxxxxxx";
-const char* NoSpreadSig = "\xF3\x0F\x5C\xF1\xF3\x0F\x5F\xF2";
-const char* NoSpreadMask = "xxxxxxxx";
-//uint8_t NoSpreadOriginal[9] = { 0xF3, 0x41, 0x0F, 0x5D, 0xF6, 0x44, 0x0F, 0x28, 0xC6 };
-//uint8_t NoSpreadCheat[9] = { 0xF3, 0x45, 0x0F, 0x5C, 0xC9, 0x90, 0x90, 0x90, 0x90 };
+const char* NoSpreadSig = "\x48\x8B\x86\x00\x00\x00\x00\xF3\x0F\x11\xBE";
+const char* NoSpreadMask = "xxx????xxxx";
+uint8_t NoSpreadOriginal[9] = { 0xF3, 0x41, 0x0F, 0x5D, 0xC4, 0x0F, 0x28, 0xF8 };
+uint8_t NoSpreadCheat[9] = { 0xF3, 0x45, 0x0F, 0x5C, 0xC9, 0x90, 0x90, 0x90 };
 uint8_t* NoSpreadAddress = 0;
 //  Original 84 C0 74 1F 48 8B BE E8 00 00 00
 const char* NoRecoilSig = "\x84\xC0\x74\x00\x48\x8B\xBE\x00\x00\x00\x00\x8B\x9E";
@@ -180,7 +178,6 @@ bool cfg_AimbotNoRecoil = false;
 bool cfg_AimbotRapidFire = false;
 uint8_t Recoil[2] = { 0x74, 0x75 };
 uint8_t RapidFire[2] = { 0x72, 0x77 };
-uint8_t NoSpread[2] = { 0xF1, 0xF6 };
 
 
 /*
