@@ -65,8 +65,8 @@ const char* NoRecoilMask = "xxx?xxx????xx";
 uint8_t* NoRecoilAddress = 0;
 //const char* RapidFireSig = "\x72\x00\xF3\x0F\x10\x87\x00\x00\x00\x00\x48";
 // char* RapidFireMask = "x?xxxx????x";
-const char* RapidFireSig = "\x48\x8b\xcf\xf3\x0f\x5c\xc1";
-const char* RapidFireMask = "xxxxxxx";
+const char* RapidFireSig = "\x72\x00\xF3\x0F\x10\x87\x00\x00\x00\x00\x48\x8B\xCF";
+const char* RapidFireMask = "x?xxxx????xxx";
 uint8_t* RapidFireAddress = 0;
 
 

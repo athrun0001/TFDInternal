@@ -710,7 +710,7 @@ void ItemESPVacuum()
 								static_cast<TFD_SDK::AM1FieldInteractableActorMiniGame*>(Actor)->MiniGameDifficulty = TFD_SDK::EM1MiniGameDifficulty::Normal;
 								if (WorldToScreen(WorldPositiona, &ScreenPosa))
 								{
-									ZeroGUI::TextCenter((char*)"Coded Vault", TFD_SDK::FVector2D{ ScreenPosa.X, ScreenPosa.Y + 20 }, TFD_SDK::FLinearColor{ 0.7f, 0.0f, 1.0f, 1.0f }, false);
+									ZeroGUI::TextCenter((char*)"Encrypted Vault", TFD_SDK::FVector2D{ ScreenPosa.X, ScreenPosa.Y + 20 }, TFD_SDK::FLinearColor{ 0.7f, 0.0f, 1.0f, 1.0f }, false);
 									if (cfg_DrawItemLines)
 										ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPosa.X, ScreenPosa.Y }, ColorRare);
 								}
@@ -742,7 +742,7 @@ void ItemESPVacuum()
 									if (WorldToScreen(WorldPosition, &ScreenPos))
 									{
 
-										ZeroGUI::TextCenter((char*)"Supplies", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										ZeroGUI::TextCenter((char*)"Munition", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
 										if (cfg_DrawItemLines)
 											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
 									}
@@ -1199,7 +1199,7 @@ void DrawMenu()
 			ZeroGUI::Text((char*)"Loot Vacuum Toggle:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Loot Vacuum Hotkey", TFD_SDK::FVector2D{ 110, 25 }, &cfg_LootVacuumKey);
-			ZeroGUI::Checkbox((char*)"Draw Coded Vaults", &cfg_DrawVaults);
+			ZeroGUI::Checkbox((char*)"Draw Coded Vaults/Munitions/Resource Boxes", &cfg_DrawVaults);
 		}
 		if (tab == 2)
 		{
@@ -1670,7 +1670,7 @@ DWORD WINAPI Init(HMODULE Module)
 			return 1;
 		}
 		RapidFirePtr = GameModule.dwBase + RapidFirePtr;
-		RapidFireAddress = (reinterpret_cast<uint8_t*>(RapidFirePtr) - 0xA);
+		RapidFireAddress = (reinterpret_cast<uint8_t*>(RapidFirePtr));
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found RapidFire at " << std::hex << RapidFirePtr << std::dec << "\n";
 		Sleep(1000);
