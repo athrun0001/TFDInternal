@@ -689,4 +689,23 @@ namespace TFD_SDK
 
 		return Parms.ReturnValue;
 	}
+	void UM1MissionTaskServiceInteraction::ServerRequestMissionTargetBeginInteraction(class AM1MissionTargetInteraction* InActor, class AM1PlayerControllerInGame* InAcceptor)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1MissionTaskServiceInteraction", "ServerRequestMissionTargetBeginInteraction");
+
+		TFD_SDK::M1MissionTaskServiceInteraction_ServerRequestMissionTargetBeginInteraction Parms{};
+
+		Parms.InActor = InActor;
+		Parms.InAcceptor = InAcceptor;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
 }

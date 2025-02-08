@@ -163,7 +163,9 @@ namespace TFD_SDK
 	class AController : public AActor
 	{
 	public:
-		uint8 Pad_75A[0x40]; // 0x248 40
+		uint8 Pad_PlaterState[0x8]; // 0x248 40
+		class APlayerState* PlayerState;                                       // 0x0250(0x0008)(BlueprintVisible, BlueprintReadOnly, Net, ZeroConstructor, RepNotify, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		uint8 Pad_Pawn[0x30]; // 0x248 40
 		class APawn* Pawn; // 0x0288(0x0008)
 		uint8 Pad_Character[0x8]; // 0x290 8
 		class ACharacter* Character; // 0x0298(0x0008)
@@ -1168,6 +1170,241 @@ namespace TFD_SDK
 			return GetDefaultObjImpl<ABP_INTER_MilitarySupplies_C>();
 		}
 	};
+
+
+	// start building here
+	class APlayerState : public AInfo
+	{
+	public:
+		uint8                                         Pad_APlayerState_Class[0x118];                     // 0x0248(0x0004)(BlueprintVisible, BlueprintReadOnly, Net, ZeroConstructor, IsPlainOldData, RepNotify, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"PlayerState">();
+		}
+		static class APlayerState* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<APlayerState>();
+		}
+	};
+
+	class UM1MissionTaskService : public UObject
+	{
+	public:
+		uint8                                         Pad_28[0x10];                                      // 0x0028(0x0010)(Fixing Size After Last Property [ Dumper-7 ])
+		bool                                          bInitialReplication;                               // 0x0038(0x0001)(Net, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		bool                                          bJoined;                                           // 0x0039(0x0001)(Net, ZeroConstructor, IsPlainOldData, RepNotify, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+		uint8                                         Pad_3A[0x6];                                       // 0x003A(0x0006)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionTaskService">();
+		}
+		static class UM1MissionTaskService* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<UM1MissionTaskService>();
+		}
+	};
+
+	class AM1TaskEventActor : public AActor
+	{
+	public:
+		uint8                                         Pad_AM1TaskEventActor_Class[0x210];                // 0x0248(0x001A)(Fixing Size After Last Property [ Dumper-7 ])
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1TaskEventActor">();
+		}
+		static class AM1TaskEventActor* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<AM1TaskEventActor>();
+		}
+	};
+	#pragma pack(push, 0x1)
+	class alignas(0x10) AM1MissionTaskActor : public AM1TaskEventActor
+	{
+	public:
+		uint8                                         Pad_AM1MissionTaskActor_Class[0x370];              // 0x0458(0x00C0)(Fixing Size After Last Property [ Dumper-7 ])
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionTaskActor">();
+		}
+		static class AM1MissionTaskActor* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<AM1MissionTaskActor>();
+		}
+	};
+	#pragma pack(pop)
+
+	struct FM1MissionTaskLink final
+	{
+	public:
+		class FName                                   TaskName;                                          // 0x0000(0x0008)(Edit, ZeroConstructor, EditConst, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		int32                                         LinkIndex;                                         // 0x0008(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+		class AM1MissionTaskActor* InstancedTaskActor;								 // 0x0010(0x0008)(Edit, ZeroConstructor, EditConst, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		TSubclassOf<class AM1MissionTaskActor>        TaskActorClass;                                    // 0x0018(0x0008)(Edit, ZeroConstructor, EditConst, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+	static_assert(alignof(FM1MissionTaskLink) == 0x000008, "Wrong alignment on FM1MissionTaskLink");
+	static_assert(sizeof(FM1MissionTaskLink) == 0x000020, "Wrong size on FM1MissionTaskLink");
+	static_assert(offsetof(FM1MissionTaskLink, TaskName) == 0x000000, "Member 'FM1MissionTaskLink::TaskName' has a wrong offset!");
+	static_assert(offsetof(FM1MissionTaskLink, LinkIndex) == 0x000008, "Member 'FM1MissionTaskLink::LinkIndex' has a wrong offset!");
+	static_assert(offsetof(FM1MissionTaskLink, InstancedTaskActor) == 0x000010, "Member 'FM1MissionTaskLink::InstancedTaskActor' has a wrong offset!");
+	static_assert(offsetof(FM1MissionTaskLink, TaskActorClass) == 0x000018, "Member 'FM1MissionTaskLink::TaskActorClass' has a wrong offset!");
+
+	class AM1MissionActor : public AActor
+	{
+	public:
+		uint8                                         Pad_TaskLinks[0x38];								 // 0x0248(0x0008)(ExportObject, ZeroConstructor, Transient, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		TArray<struct FM1MissionTaskLink>             TaskLinks;                                         // 0x0278(0x0010)(Edit, EditFixedSize, ZeroConstructor, EditConst, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_AM1MissionActor_Class[0x2C8];                  // 0x0288(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionActor">();
+		}
+		static class AM1MissionActor* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<AM1MissionActor>();
+		}
+	};
+
+	class UM1MissionControlComponent final : public UActorComponent
+	{
+	public:
+		uint8                                         Pad_SubServices[0x20];                             // 0x00A8(0x0010)(Fixing Size After Last Property [ Dumper-7 ])
+		TArray<class UM1MissionTaskService*>          SubServices;                                       // 0x00C8(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_ActivatedMissions[0x140];                      // 0x00D8(0x0004)(Net, NoDestructor, NativeAccessSpecifierPrivate)
+		TArray<class AM1MissionActor*>                ActivatedMissions;                                 // 0x0218(0x0010)(Net, ZeroConstructor, RepNotify, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_UM1MissionControlComponent_Class[0x588];       // 0x0228(0x0010)(Net, ZeroConstructor, RepNotify, NativeAccessSpecifierPrivate)
+
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionControlComponent">();
+		}
+		static class UM1MissionControlComponent* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<UM1MissionControlComponent>();
+		}
+	};
+
+	class AM1PlayerState final : public APlayerState
+	{
+	public:
+		class UM1MissionControlComponent* MissionControlComponent;                           // 0x0360(0x0008)(Edit, ExportObject, ZeroConstructor, EditConst, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8										  Pad_AM1PlayerState_Class[0x78];                    // 0x0368(0x0010)(Net, Transient, RepNotify, NoDestructor, NativeAccessSpecifierPrivate)
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1PlayerState">();
+		}
+		static class AM1PlayerState* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<AM1PlayerState>();
+		}
+	};
+
+	class AM1StatBasedActor : public AM1Actor
+	{
+	public:
+		uint8                                         Pad_AM1StatBasedActor_Class[0x10];                  // 0x0330(0x0008)(ExportObject, ZeroConstructor, Transient, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1StatBasedActor">();
+		}
+		static class AM1StatBasedActor* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<AM1StatBasedActor>();
+		}
+	};
+
+	class AM1MissionTargetActor : public AM1StatBasedActor
+	{
+	public:
+		uint8                                         Pad_AM1MissionTargetActor_Class[0x278];                                     // 0x0340(0x0060)(Fixing Size After Last Property [ Dumper-7 ])
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionTargetActor">();
+		}
+		static class AM1MissionTargetActor* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<AM1MissionTargetActor>();
+		}
+	};
+
+	class AM1MissionTargetInteraction final : public AM1MissionTargetActor
+	{
+	public:
+		uint8                                         Pad_AM1MissionTargetInteraction_Class[0x28];                                      // 0x05A0(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionTargetInteraction">();
+		}
+		static class AM1MissionTargetInteraction* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<AM1MissionTargetInteraction>();
+		}
+	};
+
+	struct M1MissionTaskServiceInteraction_ServerRequestMissionTargetBeginInteraction final
+	{
+	public:
+		class AM1MissionTargetInteraction* InActor;                                         // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		class AM1PlayerControllerInGame* InAcceptor;                                        // 0x0008(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+
+	class UM1MissionTaskServiceInteraction final : public UM1MissionTaskService
+	{
+	public:
+		void ServerRequestMissionTargetBeginInteraction(class AM1MissionTargetInteraction* InActor, class AM1PlayerControllerInGame* InAcceptor);
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionTaskServiceInteraction">();
+		}
+		static class UM1MissionTaskServiceInteraction* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<UM1MissionTaskServiceInteraction>();
+		}
+	};
+
+	class AM1MissionTaskActorDestructionVulgusPost : public AM1MissionTaskActor
+	{
+	public:
+		uint8                                         Pad_MissionTargets[0x18];										 // 0x0790(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPrivate)
+		TArray<class AM1MissionTargetInteraction*>    MissionTargets;											     // 0x07A8(0x0010)(Edit, ZeroConstructor, EditConst, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_AM1MissionTaskActorDestructionVulgusPost_Class[0x40];      // 0x07B8(0x0008)(Edit, ZeroConstructor, EditConst, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionTaskActorDestructionVulgusPost">();
+		}
+		static class AM1MissionTaskActorDestructionVulgusPost* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<AM1MissionTaskActorDestructionVulgusPost>();
+		}
+	};
+
+	// end code
 
 	struct M1PrivateOnlineServiceComponent_ServerChangePlayer final
 	{

@@ -66,6 +66,7 @@ bool CheckPointers()
 									if (PC->Character && PC->Character->IsA(TFD_SDK::AM1Player::StaticClass()) && PC->ActorManager_Subsystem && PC->ActorManager_Subsystem->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass()))
 									{
 										PlayerController = PC;
+										PlayerState = PC->PlayerState;
 										LocalPlayer = GWorld->OwningGameInstance->LocalPlayers[0];
 										LocalCharacter = static_cast<TFD_SDK::AM1Player*>(PlayerController->Character);
 										Actors = PC->ActorManager_Subsystem;
@@ -92,6 +93,7 @@ bool CheckPointers()
 		}
 	}
 	PlayerController = nullptr;
+	PlayerState = nullptr;
 	LocalPlayer = nullptr;
 	LocalCharacter = nullptr;
 	Actors = nullptr;
@@ -318,6 +320,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					GWorld->PersistentLevel->WorldSettings->TimeDilation = cfg_TimeScale;
 				else
 					GWorld->PersistentLevel->WorldSettings->TimeDilation = 1.0f;
+					
 			}
 
 			if (IsKeyPressed(VK_DOWN))
@@ -336,6 +339,10 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			}
 
 
+			if (IsKeyPressed(cfg_InstantInfilKey))
+			{
+				InstantInfiltration();
+			}
 
 			if (cfg_HotSwapOverlay)
 			{
@@ -918,6 +925,43 @@ void ItemESPVacuum()
 	}
 }
 
+void InstantInfiltration()
+{
+	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*> (PlayerState);
+	if (PlayerStateAM1 && PlayerStateAM1->MissionControlComponent) {
+		TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
+			if (MCC->ActivatedMissions.Num() > 0) {
+				for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions) {
+					if (!MissionActor || MissionActor->TaskLinks.Num() == 0) continue;
+
+					//TFD_SDK::UM1DataMission* MissionData = MissionActor->MissionData;
+					//TFD_SDK::TArray<TFD_SDK::FM1MissionTaskLink> TaskLinks = MissionActor->TaskLinks;
+					TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
+					if (!TaskActor) continue;
+					//TFD_SDK::TArray<TFD_SDK::UM1MissionTaskService*> MCCSubs = MCC->SubServices;
+
+					for (TFD_SDK::UM1MissionTaskService* MCCSub : MCC->SubServices) {
+						if (MCCSub && MCCSub->bJoined) {
+							TFD_SDK::UM1MissionTaskServiceInteraction* MCCInt = static_cast<TFD_SDK::UM1MissionTaskServiceInteraction*> (MCCSub);
+							if (!MCCInt) continue;
+							TFD_SDK::AM1MissionTaskActorDestructionVulgusPost* VPost = static_cast<TFD_SDK::AM1MissionTaskActorDestructionVulgusPost*> (TaskActor);
+							if (!VPost) continue;
+							for (TFD_SDK::AM1MissionTargetInteraction* MissionTarget : VPost->MissionTargets) {
+								if (MissionTarget) {
+									MCCInt->ServerRequestMissionTargetBeginInteraction(MissionTarget, PlayerIngameController);
+									Sleep(500);
+								}
+							}
+							break;
+						}
+					}
+					Sleep(1500);
+					
+				}
+			}
+	}
+}
+
 HRESULT UpdateControllerState()
 {
 	DWORD dwResult;
@@ -1309,6 +1353,10 @@ void DrawMenu()
 			ZeroGUI::Text((char*)"Timescale Hold:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Timescale Hold Hotkey:", TFD_SDK::FVector2D{ 110, 25 }, &cfg_TimeScaleHoldKey);
+
+			ZeroGUI::Text((char*)"Instant Infiltration:");
+			ZeroGUI::SameLine();
+			ZeroGUI::Hotkey((char*)"Instant Infiltration Hotkey", TFD_SDK::FVector2D{ 110, 25 }, & cfg_InstantInfilKey);
 		}
 		if (tab == 4)
 		{
@@ -1366,6 +1414,8 @@ void LoadCFG()
 		cfg_HotSwapKey = (int)ini.GetDoubleValue("Extra", "HotSwapKey");
 		cfg_HotSwapOverlay = ini.GetBoolValue("Extra", "HotSwapOverlay");
 
+		cfg_InstantInfilKey = (int)ini.GetDoubleValue("Extra", "InstantInfilKey");
+
 		HotSwapCharacters[0] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot1", 0);
 		HotSwapCharacters[1] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot2", 0);
 		HotSwapCharacters[2] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot3", 0);
@@ -1417,6 +1467,8 @@ void SaveCFG()
 
 	ini.SetDoubleValue("Extra", "HotSwapKey", cfg_HotSwapKey);
 	ini.SetBoolValue("Extra", "HotSwapOverlay", cfg_HotSwapOverlay);
+
+	ini.SetDoubleValue("Extra", "InstantInfilKey", cfg_InstantInfilKey);
 
 	ini.SetDoubleValue("Extra", "HotSwapSlot1", HotSwapCharacters[0]);
 	ini.SetDoubleValue("Extra", "HotSwapSlot2", HotSwapCharacters[1]);

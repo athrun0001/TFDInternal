@@ -93,6 +93,7 @@ TFD_SDK::AM1PlayerControllerInGame* PlayerIngameController;
 TFD_SDK::AM1Player* LocalCharacter;
 TFD_SDK::UGameViewportClient* LocalView;
 TFD_SDK::UM1ActorManagerSubsystem* Actors;
+TFD_SDK::APlayerState* PlayerState;
 bool isGUIInit = false;
 void LoadCFG();
 void SaveCFG();
@@ -147,6 +148,7 @@ TFD_SDK::FVector2D cfg_ESPBox = { 20, 40 };
 *  Item ESP and Vacuum
 */
 void ItemESPVacuum();
+
 bool cfg_EnableItemESP = false;
 bool cfg_DrawItemBoxes = false;
 bool cfg_DrawItemNames = false;
@@ -156,6 +158,7 @@ bool cfg_LootVacuum = false;
 float cfg_LootVacuumRange = 1000.0f;
 int cfg_LootVacuumKey = 0x54;
 
+void InstantInfiltration();
 void EverythingESP();
 
 /*
@@ -191,6 +194,7 @@ bool cfg_HotSwapOverlay = false;
 int HotSwapIndex = 0;
 std::vector<int> HotSwapCharacters = { 0, 0, 0, 0 };
 int cfg_HotSwapKey = VK_TAB;
+int cfg_InstantInfilKey = VK_HOME;
 float cfg_TimeScale = 1.0f;
 int cfg_TimeScaleKey = VK_F2;
 int cfg_TimeScaleHoldKey = VK_CONTROL;
