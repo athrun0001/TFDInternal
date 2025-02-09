@@ -930,35 +930,29 @@ void InstantInfiltration()
 	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*> (PlayerState);
 	if (PlayerStateAM1 && PlayerStateAM1->MissionControlComponent) {
 		TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
-			if (MCC->ActivatedMissions.Num() > 0) {
-				for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions) {
-					if (!MissionActor || MissionActor->TaskLinks.Num() == 0) continue;
-
-					//TFD_SDK::UM1DataMission* MissionData = MissionActor->MissionData;
-					//TFD_SDK::TArray<TFD_SDK::FM1MissionTaskLink> TaskLinks = MissionActor->TaskLinks;
-					TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
-					if (!TaskActor) continue;
-					//TFD_SDK::TArray<TFD_SDK::UM1MissionTaskService*> MCCSubs = MCC->SubServices;
-
-					for (TFD_SDK::UM1MissionTaskService* MCCSub : MCC->SubServices) {
-						if (MCCSub && MCCSub->bJoined) {
-							TFD_SDK::UM1MissionTaskServiceInteraction* MCCInt = static_cast<TFD_SDK::UM1MissionTaskServiceInteraction*> (MCCSub);
-							if (!MCCInt) continue;
-							TFD_SDK::AM1MissionTaskActorDestructionVulgusPost* VPost = static_cast<TFD_SDK::AM1MissionTaskActorDestructionVulgusPost*> (TaskActor);
-							if (!VPost) continue;
-							for (TFD_SDK::AM1MissionTargetInteraction* MissionTarget : VPost->MissionTargets) {
-								if (MissionTarget) {
-									MCCInt->ServerRequestMissionTargetBeginInteraction(MissionTarget, PlayerIngameController);
-									Sleep(500);
-								}
+		if (MCC->ActivatedMissions.Num() > 0) {
+			for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions) {
+				if (!MissionActor || MissionActor->TaskLinks.Num() == 0) continue;
+				TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
+				if (!TaskActor) continue;
+				for (TFD_SDK::UM1MissionTaskService* MCCSub : MCC->SubServices) {
+					if (MCCSub && MCCSub->bJoined) {
+						TFD_SDK::UM1MissionTaskServiceInteraction* MCCInt = static_cast<TFD_SDK::UM1MissionTaskServiceInteraction*> (MCCSub);
+						if (!MCCInt) continue;
+						TFD_SDK::AM1MissionTaskActorDestructionVulgusPost* VPost = static_cast<TFD_SDK::AM1MissionTaskActorDestructionVulgusPost*> (TaskActor);
+						if (!VPost) continue;
+						for (TFD_SDK::AM1MissionTargetInteraction* MissionTarget : VPost->MissionTargets) {
+							if (MissionTarget) {
+								MCCInt->ServerRequestMissionTargetBeginInteraction(MissionTarget, PlayerIngameController);
+								Sleep(100);
 							}
-							break;
 						}
+						break;
 					}
-					Sleep(1500);
-					
 				}
+
 			}
+		}
 	}
 }
 
