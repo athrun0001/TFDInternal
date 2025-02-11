@@ -942,7 +942,7 @@ void InstantInfiltration()
 						TFD_SDK::AM1MissionTaskActorDestructionVulgusPost* VPost = static_cast<TFD_SDK::AM1MissionTaskActorDestructionVulgusPost*> (TaskActor);
 						if (!VPost) continue;
 						for (TFD_SDK::AM1MissionTargetInteraction* MissionTarget : VPost->MissionTargets) {
-							if (MissionTarget) {
+							if (MissionTarget && MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Deactivated && MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Destructed) {
 								MCCInt->ServerRequestMissionTargetBeginInteraction(MissionTarget, PlayerIngameController);
 								Sleep(100);
 							}

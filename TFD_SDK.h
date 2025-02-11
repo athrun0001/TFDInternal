@@ -1331,10 +1331,26 @@ namespace TFD_SDK
 		}
 	};
 
+	enum class EM1MissionTargetState : uint8
+	{
+		Default = 0,
+		BeingSpawned = 1,
+		Spawned = 2,
+		Destructed = 3,
+		BeingDespawned = 4,
+		Interaction = 5,
+		Idle = 6,
+		Respawn = 7,
+		Deactivated = 8,
+		EM1MissionTargetState_MAX = 9,
+	};
+
 	class AM1MissionTargetActor : public AM1StatBasedActor
 	{
 	public:
-		uint8                                         Pad_AM1MissionTargetActor_Class[0x278];                                     // 0x0340(0x0060)(Fixing Size After Last Property [ Dumper-7 ])
+		uint8										  Pax_CurrentState[0x103];
+		EM1MissionTargetState                         CurrentState;																  // 0x0443(0x0001)
+		uint8                                         Pad_AM1MissionTargetActor_Class[0x174];                                     // 0x0340(0x0060)(Fixing Size After Last Property [ Dumper-7 ])
 
 	public:
 		static class UClass* StaticClass()
