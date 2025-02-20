@@ -10,7 +10,7 @@ namespace TFD_SDK
 	class UEngine : public UObject
 	{
 	public:
-		uint8 Pad_4D3[0x30];
+		uint8 Pad_4D3[0x30]; // 0x28 30
 		class UFont* SmallFont; // 0x0058(0x0008)
 		uint8 Pad_UEngine_Class[0xFD8];
 	public:
@@ -551,9 +551,9 @@ namespace TFD_SDK
 		class UM1CharacterInfoWidgetComponent* InfoWidgetComponent; // 0x830(0x0008) Need this
 		uint8 Pad_CharacterAttribute[0x40]; // 0x838
 		class UM1CharacterAttribute* CharacterAttribute;// 0x0878(0x0008)
-		uint8 Pad_CharacterId[0x1F0]; // 0x880
-		struct FM1TemplateId CharacterId; // 0x0A70(0x0004) Need this
-		uint8 Pad_AM1CharClass[0x1EC]; // 0xA74
+		uint8 Pad_CharacterId[0x200]; // 0x880
+		struct FM1TemplateId CharacterId; // 0x0A80(0x0004) Need this
+		uint8 Pad_AM1CharClass[0x1EC]; // 0xA84
 
 		bool IsDead() const;
 
@@ -570,19 +570,19 @@ namespace TFD_SDK
 	// These show as errors but are correct when compiled
 	static_assert(offsetof(AM1Character, Pad_InfoWidget) == 0x4F8, "Bad alignment");
 	static_assert(offsetof(AM1Character, InfoWidgetComponent) == 0x830, "Bad alignment");
-	static_assert(offsetof(AM1Character, CharacterId) == 0xA70, "Bad alignment");
+	static_assert(offsetof(AM1Character, CharacterId) == 0xA80, "Bad alignment");
 
 	// 0x0660 (0x1210 - 0x0BB0)
 	class AM1Player : public AM1Character
 	{
 	public:
-		uint8 Pad_WeaponSlot[0x278]; // 0xC60
-		class UM1WeaponSlotControlComponent* WeaponSlotControl; // 0x0ED8(0x0008) Need this
-		uint8 Pad_PlayerName[0x88]; // 0xEE0
-		class FString PlayerName; // 0x0F68(0x0010) Need this
-		uint8 Pad_PlayerInput[0x52]; // 0xF78
-		bool bPlayerInputEnabled; // 0x0FCA(0x0001) Need this
-		uint8 Pad_AM1PlayerClass[0x345]; // 0xFCB
+		uint8 Pad_WeaponSlot[0x278]; // 0xC70
+		class UM1WeaponSlotControlComponent* WeaponSlotControl; // 0x0EE8(0x0008) Need this
+		uint8 Pad_PlayerName[0x88]; // 0xEF0
+		class FString PlayerName; // 0x0F78(0x0010) Need this
+		uint8 Pad_PlayerInput[0x52]; // 0xF88
+		bool bPlayerInputEnabled; // 0x0FDA(0x0001) Need this
+		uint8 Pad_AM1PlayerClass[0x355]; // 0xFDB
 
 		void RequestTeleportAtSequence(const struct FVector& InLocation, const struct FRotator& InRotation);
 
@@ -597,17 +597,17 @@ namespace TFD_SDK
 		}
 	};
 	// These show as errors but are correct when compiled
-	static_assert(offsetof(AM1Player, Pad_WeaponSlot) == 0xC60, "Bad alignment");
-	static_assert(offsetof(AM1Player, WeaponSlotControl) == 0xED8, "Bad alignment");
-	static_assert(offsetof(AM1Player, PlayerName) == 0xF68, "Bad alignment");
-	static_assert(offsetof(AM1Player, bPlayerInputEnabled) == 0xFCA, "Bad alignment");
+	static_assert(offsetof(AM1Player, Pad_WeaponSlot) == 0xC70, "Bad alignment");
+	static_assert(offsetof(AM1Player, WeaponSlotControl) == 0xEE8, "Bad alignment");
+	static_assert(offsetof(AM1Player, PlayerName) == 0xF78, "Bad alignment");
+	static_assert(offsetof(AM1Player, bPlayerInputEnabled) == 0xFDA, "Bad alignment");
 
 	// 0x01D0 (0x0D80 - 0x0BB0)
 #pragma pack(push, 0x1)
 	class alignas(0x10) AM1Monster : public AM1Character
 	{
 	public:
-		uint8 Pad_AM1Monster_Class[0x1E8]; // 0xAB0
+		uint8 Pad_AM1Monster_Class[0x1E8]; // 0xC70
 		static class UClass* StaticClass()
 		{
 			return StaticClassImpl<"M1Monster">();
@@ -622,7 +622,7 @@ namespace TFD_SDK
 	class AM1Fellow final : public AM1Character
 	{
 	public:
-		uint8 Pad_AM1Fellow_Class[0x130]; // 0xAB0
+		uint8 Pad_AM1Fellow_Class[0x130]; // 0xC70
 
 	public:
 		static class UClass* StaticClass()
@@ -652,7 +652,7 @@ namespace TFD_SDK
 	class UM1CharacterComponent : public UM1ActorComponent
 	{
 	public:
-		class AM1Character* Character_Owner;
+		class AM1Character* Character_Owner;  // 0x00C8(0x0008)
 	};
 	// 0x0108 (0x01D8 - 0x00D0)
 	class UM1WeaponSlotControlComponent final : public UM1CharacterComponent
@@ -689,7 +689,7 @@ namespace TFD_SDK
 	class AM1Weapon : public AM1Actor
 	{
 	public:
-		uint8 Pad_RoundsComponent[0x30];
+		uint8 Pad_RoundsComponent[0x30];	
 		class UM1WeaponRoundsComponent* RoundsComponent; // 0x0360(0x0008)
 		uint8 Pad_AM1Weapon_Class[0x120]; // 0x0368
 	};
@@ -704,7 +704,7 @@ namespace TFD_SDK
 	{
 	public:
 		uint8 Pad_CurrentRounds[0x1C];
-		int32 CurrentRounds; // 0x00EC(0x0004)
+		int32 CurrentRounds; // 0x00F4(0x0004)
 		uint8 Pad_UM1WeaponRoundsComponent_Class[0x10];
 
 		void ClientFillCurrentRoundByServer();
@@ -757,7 +757,7 @@ namespace TFD_SDK
 	{
 	public:
 		uint8 Pad_ActorWidget[0x48];
-		TWeakObjectPtr<class UM1UIActorWidget> ActorWidget; // 0x0230(0x0008)
+		TWeakObjectPtr<class UM1UIActorWidget> ActorWidget; // 0x0238(0x0008)
 		uint8 Pad_UM1ActorWidgetComponent_Class[0x1E0];
 	};
 	// 0x0030 (0x0440 - 0x0410)
@@ -771,7 +771,7 @@ namespace TFD_SDK
 	{
 	public:
 		uint8 Pad_TB_Name[0x8];
-		class UM1TextBlock* TB_Name; // 0x0740(0x0008)
+		class UM1TextBlock* TB_Name; // 0x0748(0x0008)
 		uint8 Pad_UM1UICharacterInfoBase_Class[0xA8];
 
 	public:
@@ -837,7 +837,7 @@ namespace TFD_SDK
 	class AM1FieldInteractableActorMiniGame final : public AM1FieldInteractableActor_Interaction
 	{
 	public:
-		EM1MiniGameDifficulty MiniGameDifficulty; // 0x0440(0x0001)
+		EM1MiniGameDifficulty MiniGameDifficulty; // 0x0450(0x0001)
 		uint8 Pad_451[0x7];
 
 	public:
@@ -995,6 +995,8 @@ namespace TFD_SDK
 	class ABP_EquipTier03DroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
+		uint8                                         Pad_ABP_EquipTier03DroppedItem_C[0x8];
+	public:
 		static class UClass* StaticClass()
 		{
 			return StaticBPGeneratedClassImpl<"BP_EquipTier03DroppedItem_C">();
@@ -1093,6 +1095,8 @@ namespace TFD_SDK
 
 	class ABP_EmberDroppedItem_C final : public ABP_DroppedItemBase_C
 	{
+	public:
+		uint8                                         Pad_ABP_EmberDroppedItem_C[0x15];
 	public:
 		static class UClass* StaticClass()
 		{
@@ -1262,8 +1266,8 @@ namespace TFD_SDK
 	{
 	public:
 		uint8                                         Pad_TaskLinks[0x38];								 // 0x0248(0x0008)(ExportObject, ZeroConstructor, Transient, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		TArray<struct FM1MissionTaskLink>             TaskLinks;                                         // 0x0278(0x0010)(Edit, EditFixedSize, ZeroConstructor, EditConst, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_AM1MissionActor_Class[0x2C8];                  // 0x0288(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+		TArray<struct FM1MissionTaskLink>             TaskLinks;                                         // 0x0280(0x0010)(Edit, EditFixedSize, ZeroConstructor, EditConst, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_AM1MissionActor_Class[0x2D8];                  // 0x0288(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
 
 
 	public:
@@ -1349,7 +1353,7 @@ namespace TFD_SDK
 	{
 	public:
 		uint8										  Pax_CurrentState[0x103];
-		EM1MissionTargetState                         CurrentState;																  // 0x0443(0x0001)
+		EM1MissionTargetState                         CurrentState; //0x443 1																  // 0x0443(0x0001)
 		uint8                                         Pad_AM1MissionTargetActor_Class[0x174];                                     // 0x0340(0x0060)(Fixing Size After Last Property [ Dumper-7 ])
 
 	public:
@@ -1406,7 +1410,7 @@ namespace TFD_SDK
 	{
 	public:
 		uint8                                         Pad_MissionTargets[0x18];										 // 0x0790(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPrivate)
-		TArray<class AM1MissionTargetInteraction*>    MissionTargets;											     // 0x07A8(0x0010)(Edit, ZeroConstructor, EditConst, NativeAccessSpecifierPrivate)
+		TArray<class AM1MissionTargetInteraction*>    MissionTargets;	//0x7E0 10										     // 0x07A8(0x0010)(Edit, ZeroConstructor, EditConst, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_AM1MissionTaskActorDestructionVulgusPost_Class[0x40];      // 0x07B8(0x0008)(Edit, ZeroConstructor, EditConst, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 
 	public:
