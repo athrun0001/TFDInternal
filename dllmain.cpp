@@ -944,7 +944,7 @@ void InstantInfiltration()
 						for (TFD_SDK::AM1MissionTargetInteraction* MissionTarget : VPost->MissionTargets) {
 							if (MissionTarget && MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Deactivated && MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Destructed) {
 								MCCInt->ServerRequestMissionTargetBeginInteraction(MissionTarget, PlayerIngameController);
-								Sleep(100);
+								//Sleep(100);
 							}
 						}
 						break;
