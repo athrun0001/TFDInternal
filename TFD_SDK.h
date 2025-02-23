@@ -1226,12 +1226,84 @@ namespace TFD_SDK
 			return GetDefaultObjImpl<AM1TaskEventActor>();
 		}
 	};
+
+	// 0x0000 (0x0028 - 0x0028)
+	class UM1EditableByMetaObject : public UObject
+	{
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1EditableByMetaObject">();
+		}
+		static class UM1EditableByMetaObject* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<UM1EditableByMetaObject>();
+		}
+	};
+
+	// 0x0188 (0x01B0 - 0x0028)
+	class UM1TaskEvent : public UM1EditableByMetaObject
+	{
+	public:
+		uint8                                         Pad_bHasRun[0x168];                                 // 0x0028
+		bool                                          bHasRun;                                            // 0x0190(0x0001)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_UM1TaskEvent[0x1F];                             // 0x0191
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1TaskEvent">();
+		}
+		static class UM1TaskEvent* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<UM1TaskEvent>();
+		}
+	};
+
+	// 0x0070 (0x0098 - 0x0028)
+	class UMissionGraphTaskNode : public UObject
+	{
+	public:
+		uint8                                         Pad_UM1TaskEvent[0x70];                            
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"MissionGraphTaskNode">();
+		}
+		static class UMissionGraphTaskNode* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<UMissionGraphTaskNode>();
+		}
+	};
+
+	// 0x0230 (0x02C8 - 0x0098)
+	class UM1MissionTask final : public UMissionGraphTaskNode
+	{
+	public:
+		uint8                                         Pad_BeginEvents[0xE8];                             // 0x0098
+		TArray<class UM1TaskEvent*>                   BeginEvents;                                       // 0x0180(0x0010)(Edit, ExportObject, ZeroConstructor, ContainsInstancedReference, UObjectWrapper, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_UM1MissionTask[0x138];                            // 0x0190
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionTask">();
+		}
+		static class UM1MissionTask* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<UM1MissionTask>();
+		}
+	};
+
 	// 0x0378 (0x07D0 - 0x0458)
 	#pragma pack(push, 0x1)
 	class alignas(0x10) AM1MissionTaskActor : public AM1TaskEventActor
 	{
 	public:
-		uint8                                         Pad_AM1MissionTaskActor_Class[0x378];              // 0x0458(0x00C0)(Fixing Size After Last Property [ Dumper-7 ])
+		uint8                                         Pad_MissionTask[0xF8];							 // 0x0458(0x00C0)(Fixing Size After Last Property [ Dumper-7 ])
+		class UM1MissionTask*						  MissionTask;                                       // 0x0550(0x0008)(Edit, ExportObject, ZeroConstructor, DisableEditOnTemplate, EditConst, InstancedReference, NoDestructor, PersistentInstance, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_AM1MissionTaskActor[0x278];				     // 0x0558(0x00C0)(Fixing Size After Last Property [ Dumper-7 ])
 
 	public:
 		static class UClass* StaticClass()
@@ -1280,6 +1352,26 @@ namespace TFD_SDK
 			return GetDefaultObjImpl<AM1MissionActor>();
 		}
 	};
+
+	// 0x0320 (0x0348 - 0x0028)
+	class UM1MissionResult final : public UObject
+	{
+	public:
+		uint8                                         Pad_MissionTemplateId[0x10];                       // 0x0028
+		struct FM1TemplateId                          MissionTemplateId;                                 // 0x0038(0x0004)(NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_UM1MissionResult[0x30C];                       // 0x003C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionResult">();
+		}
+		static class UM1MissionResult* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<UM1MissionResult>();
+		}
+	};
+
 	// 0x0708 (0x07B0 - 0x00A8)
 	class UM1MissionControlComponent final : public UActorComponent
 	{
@@ -1288,8 +1380,13 @@ namespace TFD_SDK
 		TArray<class UM1MissionTaskService*>          SubServices;                                       // 0x00C8(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_ActivatedMissions[0x140];                      // 0x00D8
 		TArray<class AM1MissionActor*>                ActivatedMissions;                                 // 0x0218(0x0010)(Net, ZeroConstructor, RepNotify, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_UM1MissionControlComponent_Class[0x588];       // 0x0228
+		uint8                                         Pad_MissionResult[0x378];                          // 0x0228
+		class UM1MissionResult*						  MissionResult;                                     // 0x05A0(0x0008)(ZeroConstructor, Transient, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_UM1MissionControlComponent_Class[0x208];       // 0x05A8
 
+	public:
+		void ServerStartMissionByTemplateID(const struct FM1TemplateId& InTemplateId);
+		void ServerRunTaskActor(class AM1MissionTaskActor* InActor);
 
 	public:
 		static class UClass* StaticClass()
@@ -1388,6 +1485,19 @@ namespace TFD_SDK
 	public:
 		class AM1MissionTargetInteraction* InActor;                                         // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		class AM1PlayerControllerInGame* InAcceptor;                                        // 0x0008(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+
+	struct M1MissionControlComponent_ServerStartMissionByTemplateID final
+	{
+	public:
+		struct FM1TemplateId                          InTemplateId;                                      // 0x0000(0x0004)(ConstParm, Parm, ReferenceParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+
+	// 0x0008 (0x0008 - 0x0000)
+	struct M1MissionControlComponent_ServerRunTaskActor final
+	{
+	public:
+		class AM1MissionTaskActor* InActor;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
 
 	class UM1MissionTaskServiceInteraction final : public UM1MissionTaskService

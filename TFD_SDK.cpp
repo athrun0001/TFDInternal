@@ -708,4 +708,43 @@ namespace TFD_SDK
 
 		Func->FunctionFlags = Flgs;
 	}
+
+	void UM1MissionControlComponent::ServerStartMissionByTemplateID(const struct FM1TemplateId& InTemplateId)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1MissionControlComponent", "ServerStartMissionByTemplateID");
+
+		TFD_SDK::M1MissionControlComponent_ServerStartMissionByTemplateID Parms{};
+
+		Parms.InTemplateId = std::move(InTemplateId);
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
+
+
+	void UM1MissionControlComponent::ServerRunTaskActor(class AM1MissionTaskActor* InActor)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1MissionControlComponent", "ServerRunTaskActor");
+
+		TFD_SDK::M1MissionControlComponent_ServerRunTaskActor Parms{};
+
+		Parms.InActor = InActor;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
 }

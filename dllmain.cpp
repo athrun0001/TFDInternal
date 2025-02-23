@@ -344,6 +344,11 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				InstantInfiltration();
 			}
 
+			if (IsKeyPressed(cfg_RestartMissionKey))
+			{
+				RestartLastMission();
+			}
+
 			if (cfg_HotSwapOverlay)
 			{
 				for (int i = 0; i < 4; i++)
@@ -956,6 +961,34 @@ void InstantInfiltration()
 	}
 }
 
+void RestartLastMission()
+{
+	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*> (PlayerState);
+	if (PlayerStateAM1 && PlayerStateAM1->MissionControlComponent) {
+		TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
+		if (MCC) {
+			TFD_SDK::FM1TemplateId TemplateId;
+			TFD_SDK::UM1MissionResult* MResult = MCC->MissionResult;
+			if (MResult->MissionTemplateId.ID > 0) {
+			     TemplateId.ID = MResult->MissionTemplateId.ID;
+			}
+			MCC->ServerStartMissionByTemplateID(TemplateId);
+			if (MCC->ActivatedMissions.Num() > 0) {
+				for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions) {
+					if (!MissionActor || MissionActor->TaskLinks.Num() == 0) continue;
+					TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
+					if (!TaskActor) continue;
+					TFD_SDK::UM1MissionTask* MissionData = TaskActor->MissionTask;
+					     TFD_SDK::UM1TaskEvent* TEvent = MissionData->BeginEvents[0];
+					     if (TEvent && !TEvent->bHasRun) {
+					         MCC->ServerRunTaskActor(TaskActor);
+					     }
+				}
+			}
+		}
+	}
+}
+
 HRESULT UpdateControllerState()
 {
 	DWORD dwResult;
@@ -1351,6 +1384,10 @@ void DrawMenu()
 			ZeroGUI::Text((char*)"Instant Infiltration:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Instant Infiltration Hotkey", TFD_SDK::FVector2D{ 110, 25 }, & cfg_InstantInfilKey);
+
+			ZeroGUI::Text((char*)"Restart Last Mission:");
+			ZeroGUI::SameLine();
+			ZeroGUI::Hotkey((char*)"Restart Last Mission Hotkey", TFD_SDK::FVector2D{ 110, 25 }, & cfg_RestartMissionKey);
 		}
 		if (tab == 4)
 		{
@@ -1409,6 +1446,7 @@ void LoadCFG()
 		cfg_HotSwapOverlay = ini.GetBoolValue("Extra", "HotSwapOverlay");
 
 		cfg_InstantInfilKey = (int)ini.GetDoubleValue("Extra", "InstantInfilKey");
+		cfg_RestartMissionKey = (int)ini.GetDoubleValue("Extra", "RestartMissionKey");
 
 		HotSwapCharacters[0] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot1", 0);
 		HotSwapCharacters[1] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot2", 0);
@@ -1463,6 +1501,7 @@ void SaveCFG()
 	ini.SetBoolValue("Extra", "HotSwapOverlay", cfg_HotSwapOverlay);
 
 	ini.SetDoubleValue("Extra", "InstantInfilKey", cfg_InstantInfilKey);
+	ini.SetDoubleValue("Extra", "RestartMissionKey", cfg_RestartMissionKey);
 
 	ini.SetDoubleValue("Extra", "HotSwapSlot1", HotSwapCharacters[0]);
 	ini.SetDoubleValue("Extra", "HotSwapSlot2", HotSwapCharacters[1]);
