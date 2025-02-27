@@ -749,7 +749,7 @@ namespace TFD_SDK
 		uint8 Pad_UM1UIActorWidget_Class[0x30];
 	};
 
-	// 0x0220 (0x0410 - 0x01F0)
+	// 0x0230 (0x0420 - 0x01F0)
 	class UM1ActorWidgetComponent : public USceneComponent
 	{
 	public:
@@ -763,13 +763,13 @@ namespace TFD_SDK
 	public:
 		uint8 Pad_UM1CharacterInfoWidgetComponent_Class[0x30];
 	};
-	// 0x00B8 (0x07F8 - 0x0740)
+	// 0x00C0 (0x0800 - 0x0740)
 	class UM1UICharacterInfoBase : public UM1UIActorWidget
 	{
 	public:
 		uint8 Pad_TB_Name[0x8]; // 0x0740
 		class UM1TextBlock* TB_Name; // 0x0748(0x0008)
-		uint8 Pad_UM1UICharacterInfoBase_Class[0xA8]; // 0x0750
+		uint8 Pad_UM1UICharacterInfoBase_Class[0xB0]; // 0x0750
 
 	public:
 		static class UClass* StaticClass()
@@ -992,7 +992,7 @@ namespace TFD_SDK
 	class ABP_EquipTier03DroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
-		uint8                                         Pad_ABP_EquipTier03DroppedItem_C[0x8];
+		uint8                                         Pad_ABP_EquipTier03DroppedItem_C[0x10];
 	public:
 		static class UClass* StaticClass()
 		{
@@ -1595,7 +1595,7 @@ namespace TFD_SDK
 		class FName                                   BoneName;                                          // 0x008C(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		class FName                                   MyBoneName;                                        // 0x0094(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x00B0 (0x00B0 - 0x0000)
 	struct Actor_K2_SetActorLocation final
 	{
 	public:
@@ -1607,7 +1607,7 @@ namespace TFD_SDK
 		bool                                          ReturnValue;
 		uint8                                         Pad_358[0x2];
 	};
-
+	// 0x0010 (0x0010 - 0x0000)
 	struct Actor_GetDistanceTo final
 	{
 	public:
@@ -1615,19 +1615,19 @@ namespace TFD_SDK
 		float                                         ReturnValue;                                       // 0x0008(0x0004)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		uint8                                         Pad_373[0x4];                                      // 0x000C(0x0004)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
-
+	// 0x000C (0x000C - 0x0000)
 	struct Actor_K2_GetActorLocation final
 	{
 	public:
 		struct FVector                                ReturnValue;                                       // 0x0000(0x000C)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x000C (0x000C - 0x0000)
 	struct Controller_SetControlRotation final
 	{
 	public:
 		struct FRotator                               NewRotation;                                       // 0x0000(0x000C)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
 	};
-
+	// 0x0018 (0x0018 - 0x0000)
 	struct Controller_LineOfSightTo final
 	{
 	public:
@@ -1637,19 +1637,19 @@ namespace TFD_SDK
 		bool                                          ReturnValue;                                       // 0x0015(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		uint8                                         Pad_767[0x2];                                      // 0x0016(0x0002)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
-
+	// 0x000C (0x000C - 0x0000)
 	struct PlayerCameraManager_GetCameraLocation final
 	{
 	public:
 		struct FVector                                ReturnValue;                                       // 0x0000(0x000C)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x000C (0x000C - 0x0000)
 	struct PlayerCameraManager_GetCameraRotation final
 	{
 	public:
 		struct FRotator                               ReturnValue;                                       // 0x0000(0x000C)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
 	};
-
+	// 0x000C (0x000C - 0x0000)
 	struct PlayerController_GetMousePosition final
 	{
 	public:
@@ -1658,26 +1658,26 @@ namespace TFD_SDK
 		bool                                          ReturnValue;                                       // 0x0008(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		uint8                                         Pad_7B4[0x3];                                      // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
-
+	// 0x0001 (0x0001 - 0x0000)
 	struct ActorComponent_IsActive final
 	{
 	public:
 		bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x0030 (0x0030 - 0x0000)
 	struct SceneComponent_K2_GetComponentToWorld final
 	{
 	public:
 		struct FTransform                             ReturnValue;                                       // 0x0000(0x0030)(Parm, OutParm, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x000C (0x000C - 0x0000)
 	struct SkinnedMeshComponent_GetBoneName final
 	{
 	public:
 		int32                                         BoneIndex;                                         // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		class FName                                   ReturnValue;                                       // 0x0004(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x0018 (0x0018 - 0x0000)
 	struct GameplayStatics_GetPlayerController final
 	{
 	public:
@@ -1686,7 +1686,7 @@ namespace TFD_SDK
 		uint8                                         Pad_CD8[0x4];                                      // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
 		class APlayerController*					  ReturnValue;                                       // 0x0010(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x0020 (0x0020 - 0x0000)
 	struct GameplayStatics_ProjectWorldToScreen final
 	{
 	public:
@@ -1697,28 +1697,28 @@ namespace TFD_SDK
 		bool                                          ReturnValue;                                       // 0x001D(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		uint8                                         Pad_CF4[0x2];                                      // 0x001E(0x0002)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
-
+	// 0x0010 (0x0010 - 0x0000)
 	struct GameplayStatics_GetWorldDeltaSeconds final
 	{
 	public:
 		const class UObject*						  WorldContextObject;                                // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		double                                        ReturnValue;                                       // 0x0008(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x0070 (0x0070 - 0x0000)
 	struct KismetMathLibrary_Conv_MatrixToTransform final
 	{
 	public:
 		struct FMatrix                                InMatrix;                                          // 0x0000(0x0040)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
 		struct FTransform                             ReturnValue;                                       // 0x0040(0x0030)(Parm, OutParm, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x0070 (0x0070 - 0x0000)
 	struct KismetMathLibrary_Conv_TransformToMatrix final
 	{
 	public:
 		struct FTransform                             Transform;                                         // 0x0000(0x0030)(ConstParm, Parm, OutParm, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		struct FMatrix                                ReturnValue;                                       // 0x0030(0x0040)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
 	};
-
+	// 0x0024 (0x0024 - 0x0000)
 	struct KismetMathLibrary_FindLookAtRotation final
 	{
 	public:
@@ -1726,7 +1726,7 @@ namespace TFD_SDK
 		struct FVector                                Target;                                            // 0x000C(0x000C)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		struct FRotator                               ReturnValue;                                       // 0x0018(0x000C)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
 	};
-
+	// 0x00C0 (0x00C0 - 0x0000)
 	struct KismetMathLibrary_Multiply_MatrixMatrix final
 	{
 	public:
@@ -1734,7 +1734,7 @@ namespace TFD_SDK
 		struct FMatrix                                B;                                                 // 0x0040(0x0040)(ConstParm, Parm, OutParm, ZeroConstructor, ReferenceParm, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
 		struct FMatrix                                ReturnValue;                                       // 0x0080(0x0040)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
 	};
-
+	// 0x002C (0x002C - 0x0000)
 	struct KismetMathLibrary_RInterpTo final
 	{
 	public:
@@ -1744,7 +1744,7 @@ namespace TFD_SDK
 		float                                         InterpSpeed;                                       // 0x001C(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		struct FRotator                               ReturnValue;                                       // 0x0020(0x000C)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
 	};
-
+	// 0x0018 (0x0018 - 0x0000)
 	struct KismetMathLibrary_Distance2D final
 	{
 	public:
@@ -1752,7 +1752,7 @@ namespace TFD_SDK
 		struct FVector2D                              V2;                                                // 0x0008(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		double                                        ReturnValue;                                       // 0x0010(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x0024 (0x0024 - 0x0000)
 	struct Canvas_K2_DrawLine final
 	{
 	public:
@@ -1761,11 +1761,11 @@ namespace TFD_SDK
 		float                                         Thickness;                                         // 0x0010(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		struct FLinearColor                           RenderColor;                                       // 0x0014(0x0010)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x0068 (0x0068 - 0x0000)
 	struct Canvas_K2_DrawText final
 	{
 	public:
-		class UFont* RenderFont;                                        // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		class UFont*								  RenderFont;                                        // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		class FString                                 RenderText;                                        // 0x0008(0x0010)(Parm, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		struct FVector2D                              ScreenPosition;                                    // 0x0018(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		struct FVector2D                              Scale;                                             // 0x0020(0x0008)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
@@ -1779,13 +1779,13 @@ namespace TFD_SDK
 		uint8                                         Pad_E8E[0x1];                                      // 0x0057(0x0001)(Fixing Size After Last Property [ Dumper-7 ])
 		struct FLinearColor                           OutlineColor;                                      // 0x0058(0x0010)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x0001 (0x0001 - 0x0000)
 	struct M1DropContainer_IsObtained final
 	{
 	public:
 		bool                                          ReturnValue;                                       // 0x0000(0x0001)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
+	// 0x0004 (0x0004 - 0x0000)
 	struct SkinnedMeshComponent_GetNumBones final
 	{
 	public:
