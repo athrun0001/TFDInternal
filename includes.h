@@ -160,6 +160,7 @@ int cfg_LootVacuumKey = 0x54;
 
 void InstantInfiltration();
 void RestartLastMission();
+void LeaveMission();
 
 /*
 *  Aimbot
@@ -196,6 +197,7 @@ std::vector<int> HotSwapCharacters = { 0, 0, 0, 0 };
 int cfg_HotSwapKey = VK_TAB;
 int cfg_InstantInfilKey = VK_HOME;
 int cfg_RestartMissionKey = VK_END;
+int cfg_LeaveMissionKey = VK_PRIOR;
 float cfg_TimeScale = 1.0f;
 int cfg_TimeScaleKey = VK_F2;
 int cfg_TimeScaleHoldKey = VK_CONTROL;

@@ -349,6 +349,11 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				RestartLastMission();
 			}
 
+			if (IsKeyPressed(cfg_LeaveMissionKey))
+			{
+				LeaveMission();
+			}
+
 			if (cfg_HotSwapOverlay)
 			{
 				for (int i = 0; i < 4; i++)
@@ -989,6 +994,17 @@ void RestartLastMission()
 	}
 }
 
+void LeaveMission()
+{
+	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*> (PlayerState);
+	if (PlayerStateAM1 && PlayerStateAM1->MissionControlComponent) {
+		TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
+		if (MCC->ActivatedMissions.Num() > 0) {
+			MCC->ServerLeaveMission(TFD_SDK::EM1MissionEndReason::ExplicitGiveUp);
+		}
+	}
+}
+
 HRESULT UpdateControllerState()
 {
 	DWORD dwResult;
@@ -1245,7 +1261,7 @@ void DrawMenu()
 		if (ZeroGUI::ButtonTab((char*)"Items", TFD_SDK::FVector2D{ 110, 25 }, tab == 1)) tab = 1;
 		if (ZeroGUI::ButtonTab((char*)"Aimbot", TFD_SDK::FVector2D{ 110, 25 }, tab == 2)) tab = 2;
 		if (ZeroGUI::ButtonTab((char*)"Extras", TFD_SDK::FVector2D{ 110, 25 }, tab == 3)) tab = 3;
-		//if (ZeroGUI::ButtonTab((char*)"Stuff", TFD_SDK::FVector2D{ 110, 25 }, tab == 4)) tab = 4;
+		if (ZeroGUI::ButtonTab((char*)"Mission", TFD_SDK::FVector2D{ 110, 25 }, tab == 4)) tab = 4;
 		//if (ZeroGUI::ButtonTab((char*)"Tools", TFD_SDK::FVector2D{ 110, 25 }, tab == 3)) tab = 3;
 		ZeroGUI::NextColumn(130.0f);
 
@@ -1381,13 +1397,7 @@ void DrawMenu()
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Timescale Hold Hotkey:", TFD_SDK::FVector2D{ 110, 25 }, &cfg_TimeScaleHoldKey);
 
-			ZeroGUI::Text((char*)"Instant Infiltration:");
-			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Instant Infiltration Hotkey", TFD_SDK::FVector2D{ 110, 25 }, & cfg_InstantInfilKey);
-
-			ZeroGUI::Text((char*)"Restart Last Mission:");
-			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Restart Last Mission Hotkey", TFD_SDK::FVector2D{ 110, 25 }, & cfg_RestartMissionKey);
+			
 		}
 		if (tab == 4)
 		{
@@ -1396,6 +1406,17 @@ void DrawMenu()
 			//{
 			//	GWorld->PersistentLevel->WorldSettings->bEnableAISystem = 0;
 			//}
+			ZeroGUI::Text((char*)"Instant Outpost Infil:");
+			ZeroGUI::SameLine();
+			ZeroGUI::Hotkey((char*)"Instant Outpost Infil Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_InstantInfilKey);
+
+			ZeroGUI::Text((char*)"Restart Last Mission:");
+			ZeroGUI::SameLine();
+			ZeroGUI::Hotkey((char*)"Restart Last Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_RestartMissionKey);
+
+			ZeroGUI::Text((char*)"Leave Mission:");
+			ZeroGUI::SameLine();
+			ZeroGUI::Hotkey((char*)"Leave Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_LeaveMissionKey);
 		}
 	}
 }
@@ -1445,9 +1466,6 @@ void LoadCFG()
 		cfg_HotSwapKey = (int)ini.GetDoubleValue("Extra", "HotSwapKey");
 		cfg_HotSwapOverlay = ini.GetBoolValue("Extra", "HotSwapOverlay");
 
-		cfg_InstantInfilKey = (int)ini.GetDoubleValue("Extra", "InstantInfilKey");
-		cfg_RestartMissionKey = (int)ini.GetDoubleValue("Extra", "RestartMissionKey");
-
 		HotSwapCharacters[0] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot1", 0);
 		HotSwapCharacters[1] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot2", 0);
 		HotSwapCharacters[2] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot3", 0);
@@ -1456,6 +1474,10 @@ void LoadCFG()
 		cfg_TimeScale = ini.GetDoubleValue("Extra", "Timescale");
 		cfg_TimeScaleKey = (int)ini.GetDoubleValue("Extra", "TimescaleKey");
 		cfg_TimeScaleHoldKey = (int)ini.GetDoubleValue("Extra", "TimescaleHoldKey");
+
+		cfg_InstantInfilKey = (int)ini.GetDoubleValue("Mission", "InstantInfilKey");
+		cfg_RestartMissionKey = (int)ini.GetDoubleValue("Mission", "RestartMissionKey");
+		cfg_LeaveMissionKey = (int)ini.GetDoubleValue("Mission", "LeaveMissionKey");
 	}
 }
 
@@ -1500,8 +1522,7 @@ void SaveCFG()
 	ini.SetDoubleValue("Extra", "HotSwapKey", cfg_HotSwapKey);
 	ini.SetBoolValue("Extra", "HotSwapOverlay", cfg_HotSwapOverlay);
 
-	ini.SetDoubleValue("Extra", "InstantInfilKey", cfg_InstantInfilKey);
-	ini.SetDoubleValue("Extra", "RestartMissionKey", cfg_RestartMissionKey);
+	
 
 	ini.SetDoubleValue("Extra", "HotSwapSlot1", HotSwapCharacters[0]);
 	ini.SetDoubleValue("Extra", "HotSwapSlot2", HotSwapCharacters[1]);
@@ -1511,6 +1532,10 @@ void SaveCFG()
 	ini.SetDoubleValue("Extra", "Timescale", cfg_TimeScale);
 	ini.SetDoubleValue("Extra", "TimescaleKey", cfg_TimeScaleKey);
 	ini.SetDoubleValue("Extra", "TimescaleHoldKey", cfg_TimeScaleHoldKey);
+
+	ini.SetDoubleValue("Mission", "InstantInfilKey", cfg_InstantInfilKey);
+	ini.SetDoubleValue("Mission", "RestartMissionKey", cfg_RestartMissionKey);
+	ini.SetDoubleValue("Mission", "LeaveMissionKey", cfg_LeaveMissionKey);
 
 	ini.SaveFile("cfg.ini");
 }

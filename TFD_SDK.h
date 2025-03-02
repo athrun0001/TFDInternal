@@ -1372,6 +1372,21 @@ namespace TFD_SDK
 		}
 	};
 
+	enum class EM1MissionEndReason : uint8
+	{
+		None = 0,
+		Completed = 1,
+		ByTaskFailure = 2,
+		ConnectionClose = 3,
+		ExplicitGiveUp = 4,
+		OutOfPlayableArea = 5,
+		EndPlayByDataLayerUnload = 6,
+		InterruptedByOtherMission = 7,
+		LeaveMissionByTeleport = 8,
+		LimitTimeOver = 9,
+		EM1MissionEndReason_MAX = 10,
+	};
+
 	// 0x0708 (0x07B0 - 0x00A8)
 	class UM1MissionControlComponent final : public UActorComponent
 	{
@@ -1387,6 +1402,7 @@ namespace TFD_SDK
 	public:
 		void ServerStartMissionByTemplateID(const struct FM1TemplateId& InTemplateId);
 		void ServerRunTaskActor(class AM1MissionTaskActor* InActor);
+		void ServerLeaveMission(EM1MissionEndReason InReason);
 
 	public:
 		static class UClass* StaticClass()
@@ -1498,6 +1514,13 @@ namespace TFD_SDK
 	{
 	public:
 		class AM1MissionTaskActor* InActor;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+
+	// 0x0001 (0x0001 - 0x0000)
+	struct M1MissionControlComponent_ServerLeaveMission final
+	{
+	public:
+		EM1MissionEndReason                           InReason;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
 
 	class UM1MissionTaskServiceInteraction final : public UM1MissionTaskService

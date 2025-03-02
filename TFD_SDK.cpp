@@ -747,4 +747,23 @@ namespace TFD_SDK
 
 		Func->FunctionFlags = Flgs;
 	}
+
+	void UM1MissionControlComponent::ServerLeaveMission(EM1MissionEndReason InReason)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1MissionControlComponent", "ServerLeaveMission");
+
+		TFD_SDK::M1MissionControlComponent_ServerLeaveMission Parms{};
+
+		Parms.InReason = InReason;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
 }
