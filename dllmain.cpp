@@ -937,88 +937,112 @@ void ItemESPVacuum()
 
 void InstantInfiltration()
 {
-	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*> (PlayerState);
-	if (PlayerStateAM1 && PlayerStateAM1->MissionControlComponent) {
-		TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
-		if (MCC->ActivatedMissions.Num() > 0) {
-			for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions) {
-				if (!MissionActor || MissionActor->TaskLinks.Num() == 0) continue;
-				TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
-				if (!TaskActor) continue;
-				for (TFD_SDK::UM1MissionTaskService* MCCSub : MCC->SubServices) {
-					if (MCCSub && MCCSub->bJoined) {
-						TFD_SDK::UM1MissionTaskServiceInteraction* MCCInt = static_cast<TFD_SDK::UM1MissionTaskServiceInteraction*> (MCCSub);
-						if (!MCCInt) continue;
-						TFD_SDK::AM1MissionTaskActorDestructionVulgusPost* VPost = static_cast<TFD_SDK::AM1MissionTaskActorDestructionVulgusPost*> (TaskActor);
-						if (!VPost) continue;
-						for (TFD_SDK::AM1MissionTargetInteraction* MissionTarget : VPost->MissionTargets) {
-							if (MissionTarget && MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Deactivated && MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Destructed) {
-								MCCInt->ServerRequestMissionTargetBeginInteraction(MissionTarget, PlayerIngameController);
-								//Sleep(100);
-							}
-						}
-						break;
-					}
-				}
+	if (!PlayerState || !PlayerIngameController)
+		return;
 
+	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*>(PlayerState);
+	if (!PlayerStateAM1 || !PlayerStateAM1->MissionControlComponent)
+		return;
+
+	TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
+	if (MCC->ActivatedMissions.Num() == 0)
+		return;
+
+	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
+	{
+		if (!MissionActor || MissionActor->TaskLinks.Num() == 0)
+			continue;
+
+		TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
+		if (!TaskActor)
+			continue;
+
+		for (TFD_SDK::UM1MissionTaskService* MCCSub : MCC->SubServices)
+		{
+			if (!MCCSub || !MCCSub->bJoined)
+				continue;
+
+			TFD_SDK::UM1MissionTaskServiceInteraction* MCCInt = static_cast<TFD_SDK::UM1MissionTaskServiceInteraction*>(MCCSub);
+			if (!MCCInt)
+				continue;
+
+			TFD_SDK::AM1MissionTaskActorDestructionVulgusPost* VPost = static_cast<TFD_SDK::AM1MissionTaskActorDestructionVulgusPost*>(TaskActor);
+			if (!VPost)
+				continue;
+
+			for (TFD_SDK::AM1MissionTargetInteraction* MissionTarget : VPost->MissionTargets)
+			{
+				if (MissionTarget && MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Deactivated &&
+					MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Destructed)
+					MCCInt->ServerRequestMissionTargetBeginInteraction(MissionTarget, PlayerIngameController);
 			}
+			break;
 		}
 	}
 }
 
 void RestartLastMission()
 {
-	// Validate PlayerState
+	if (!PlayerState)
+		return;
+
 	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*>(PlayerState);
-	if (!PlayerStateAM1 || !PlayerStateAM1->MissionControlComponent) return;
+	if (!PlayerStateAM1 || !PlayerStateAM1->MissionControlComponent)
+		return;
 
-	// Validate Mission Control Component
-	TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
-	if (!MCC) return;
+	TFD_SDK::UM1MissionControlComponent*MCC = PlayerStateAM1->MissionControlComponent;
+	if (!MCC)
+		return;
 
-	// Get Last Mission Template ID Safely
+	// Get the last mission template ID
 	TFD_SDK::FM1TemplateId TemplateId;
-	TFD_SDK::UM1MissionResult* MResult = MCC->MissionResult;
-	if (MResult && MResult->MissionTemplateId.ID > 0) {
-		TemplateId.ID = MResult->MissionTemplateId.ID;
-	}
-	else {
-		return;  // No valid mission to restart
-	}
+	if (MCC->MissionResult && MCC->MissionResult->MissionTemplateId.ID > 0)
+		TemplateId.ID = MCC->MissionResult->MissionTemplateId.ID;
+	else
+		return;
 
-	// Restart Mission
-	MCC->ServerStartMissionByTemplateID(TemplateId);
+	// Restart and Process active missions
+	if (MCC->ActivatedMissions.Num() == 0)
+		MCC->ServerStartMissionByTemplateID(TemplateId);
 
-	// Validate Activated Missions
-	if (MCC->ActivatedMissions.Num() == 0) return;
-
-	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions) {
-		if (!MissionActor || MissionActor->TaskLinks.Num() == 0) continue;
+	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
+	{
+		if (!MissionActor || MissionActor->TaskLinks.Num() == 0)
+			continue;
 
 		TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
-		if (!TaskActor) continue;
+		if (!TaskActor)
+			continue;
 
 		TFD_SDK::UM1MissionTask* MissionData = TaskActor->MissionTask;
-		if (!MissionData || MissionData->BeginEvents.Num() == 0) continue;
+		if (!MissionData || MissionData->BeginEvents.Num() == 0)
+			continue;
 
-		// Run all untriggered begin events
-		for (TFD_SDK::UM1TaskEvent* TEvent : MissionData->BeginEvents) {
-			if (TEvent && !TEvent->bHasRun) {
+		for (TFD_SDK::UM1TaskEvent* TEvent : MissionData->BeginEvents)
+		{
+			if (TEvent && !TEvent->bHasRun)
 				MCC->ServerRunTaskActor(TaskActor);
-			}
 		}
 	}
 }
 
 void LeaveMission()
 {
-	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*> (PlayerState);
-	if (PlayerStateAM1 && PlayerStateAM1->MissionControlComponent) {
-		TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
-		if (MCC->ActivatedMissions.Num() > 0) {
-			MCC->ServerLeaveMission(TFD_SDK::EM1MissionEndReason::ExplicitGiveUp);
-		}
-	}
+	if (!PlayerState)
+		return;
+
+	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*>(PlayerState);
+	if (!PlayerStateAM1 || !PlayerStateAM1->MissionControlComponent)
+		return;
+
+	TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
+	if (!MCC)
+		return;
+
+	if (MCC->ActivatedMissions.Num() == 0)
+		return;
+
+	MCC->ServerLeaveMission(TFD_SDK::EM1MissionEndReason::ExplicitGiveUp);
 }
 
 HRESULT UpdateControllerState()
