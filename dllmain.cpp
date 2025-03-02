@@ -968,27 +968,43 @@ void InstantInfiltration()
 
 void RestartLastMission()
 {
-	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*> (PlayerState);
-	if (PlayerStateAM1 && PlayerStateAM1->MissionControlComponent) {
-		TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
-		if (MCC) {
-			TFD_SDK::FM1TemplateId TemplateId;
-			TFD_SDK::UM1MissionResult* MResult = MCC->MissionResult;
-			if (MResult->MissionTemplateId.ID > 0) {
-			     TemplateId.ID = MResult->MissionTemplateId.ID;
-			}
-			MCC->ServerStartMissionByTemplateID(TemplateId);
-			if (MCC->ActivatedMissions.Num() > 0) {
-				for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions) {
-					if (!MissionActor || MissionActor->TaskLinks.Num() == 0) continue;
-					TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
-					if (!TaskActor) continue;
-					TFD_SDK::UM1MissionTask* MissionData = TaskActor->MissionTask;
-					     TFD_SDK::UM1TaskEvent* TEvent = MissionData->BeginEvents[0];
-					     if (TEvent && !TEvent->bHasRun) {
-					         MCC->ServerRunTaskActor(TaskActor);
-					     }
-				}
+	// Validate PlayerState
+	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*>(PlayerState);
+	if (!PlayerStateAM1 || !PlayerStateAM1->MissionControlComponent) return;
+
+	// Validate Mission Control Component
+	TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
+	if (!MCC) return;
+
+	// Get Last Mission Template ID Safely
+	TFD_SDK::FM1TemplateId TemplateId;
+	TFD_SDK::UM1MissionResult* MResult = MCC->MissionResult;
+	if (MResult && MResult->MissionTemplateId.ID > 0) {
+		TemplateId.ID = MResult->MissionTemplateId.ID;
+	}
+	else {
+		return;  // No valid mission to restart
+	}
+
+	// Restart Mission
+	MCC->ServerStartMissionByTemplateID(TemplateId);
+
+	// Validate Activated Missions
+	if (MCC->ActivatedMissions.Num() == 0) return;
+
+	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions) {
+		if (!MissionActor || MissionActor->TaskLinks.Num() == 0) continue;
+
+		TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
+		if (!TaskActor) continue;
+
+		TFD_SDK::UM1MissionTask* MissionData = TaskActor->MissionTask;
+		if (!MissionData || MissionData->BeginEvents.Num() == 0) continue;
+
+		// Run all untriggered begin events
+		for (TFD_SDK::UM1TaskEvent* TEvent : MissionData->BeginEvents) {
+			if (TEvent && !TEvent->bHasRun) {
+				MCC->ServerRunTaskActor(TaskActor);
 			}
 		}
 	}
