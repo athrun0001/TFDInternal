@@ -1780,7 +1780,7 @@ DWORD WINAPI Init(HMODULE Module)
 		//int32_t GObjOffsetRelative = *reinterpret_cast<int32_t*>(GObjOffsetAddress);
 		//uintptr_t GObjAddress = (GObjsPtr + 7) + GObjOffsetRelative;
 		//uintptr_t GObjeOffset = GObjAddress - GameModule.dwBase;
-		TFD_SDK::Offsets::GObjects = 0x09CCEA10;
+		TFD_SDK::Offsets::GObjects = 0x09E77390;
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found GObjects at: " << std::hex << GObjsPtr << std::dec << "\n";
 		Sleep(1000);
