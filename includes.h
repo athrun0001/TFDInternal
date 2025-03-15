@@ -54,19 +54,19 @@ const char* GObjectsMask = "xx?xxxxxxxxxxxxxxxx";
 // old pattern is 48 8B 86 D0 00 00 00 F3 44 0F 11 86 - 0x9
 //const char* NoSpreadSig = "\xE8\x00\x00\x00\x00\x48\x8B\x86\xD0\x00\x00\x00\x48\x8B\x98";
 //const char* NoSpreadMask = "x????xxxxxxxxxx";
-const char* NoSpreadSig = "\x48\x8B\x86\x00\x00\x00\x00\xF3\x0F\x11\xBE";
-const char* NoSpreadMask = "xxx????xxxx";
+const char* NoSpreadSig = "\x48\x8B\x86\xD0\x00\x00\x00\xF3\x0F\x11\xBE";
+const char* NoSpreadMask = "xxxxxxxxxxx";
 uint8_t NoSpreadOriginal[9] = { 0xF3, 0x41, 0x0F, 0x5D, 0xC4, 0x0F, 0x28, 0xF8 };
 uint8_t NoSpreadCheat[9] = { 0xF3, 0x45, 0x0F, 0x5C, 0xC9, 0x90, 0x90, 0x90 };
 uint8_t* NoSpreadAddress = 0;
 //  Original 84 C0 74 1F 48 8B BE E8 00 00 00
-const char* NoRecoilSig = "\x84\xC0\x74\x00\x48\x8B\xBE\x00\x00\x00\x00\x8B\x9E";
-const char* NoRecoilMask = "xxx?xxx????xx";
+const char* NoRecoilSig = "\x84\xC0\x74\x1F\x48\x8B\xBE\xF0\x00\x00\x00\x8B\x9E";
+const char* NoRecoilMask = "xxxxxxxxxxxxx";
 uint8_t* NoRecoilAddress = 0;
 //const char* RapidFireSig = "\x72\x00\xF3\x0F\x10\x87\x00\x00\x00\x00\x48";
 // char* RapidFireMask = "x?xxxx????x";
-const char* RapidFireSig = "\x72\x00\xF3\x0F\x10\x87\x00\x00\x00\x00\x48\x8B\xCF";
-const char* RapidFireMask = "x?xxxx????xxx";
+const char* RapidFireSig = "\x72\x30\xF3\x0F\x10\x87\x3C\x01\x00\x00\x48\x8B\xCF";
+const char* RapidFireMask = "xxxxxxxxxxxxx";
 uint8_t* RapidFireAddress = 0;
 
 
