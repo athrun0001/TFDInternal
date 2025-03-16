@@ -733,6 +733,19 @@ void ItemESPVacuum()
 								}
 								continue;
 							}
+						/*		else
+								{
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
+									{
+											ZeroGUI::TextCenter((char*)Actor->GetFullName().c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+									}
+								}*/
+						}
+
+						if (cfg_DrawResourceBox)
+						{
 							if (Actor->IsA(TFD_SDK::AM1FieldInteractableActor_Hit::StaticClass()))
 							{
 								if (Actor->GetFullName().contains("VulgusBox"))
@@ -746,11 +759,14 @@ void ItemESPVacuum()
 										if (cfg_DrawItemLines)
 											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
 									}
-
 								}
 								continue;
 							}
-							else if (Actor->IsA(TFD_SDK::AM1FieldInteractableActor_Interaction::StaticClass()))
+						}
+
+						if (Actor->IsA(TFD_SDK::AM1FieldInteractableActor_Interaction::StaticClass()))
+						{
+							if (cfg_DrawMunition)
 							{
 								if (Actor->GetFullName().contains("MilitarySupplies"))
 								{
@@ -763,9 +779,63 @@ void ItemESPVacuum()
 										if (cfg_DrawItemLines)
 											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
 									}
-
+									continue;
 								}
-								continue;
+							}
+							if (cfg_DrawVoidVesselBox)
+							{
+								if (Actor->GetFullName().contains("CompanionVault_TypeB_Item_C"))
+								{
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
+									{
+
+										ZeroGUI::TextCenter((char*)"Experimental Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										if (cfg_DrawItemLines)
+											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
+									}
+									continue;
+								}
+								if (Actor->GetFullName().contains("CompanionVault_TypeA_Broken_C"))
+								{
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
+									{
+
+										ZeroGUI::TextCenter((char*)"Broken Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										if (cfg_DrawItemLines)
+											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
+									}
+									continue;
+								}
+								if (Actor->GetFullName().contains("CompanionVault_TypeA_C"))
+								{
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
+									{
+
+										ZeroGUI::TextCenter((char*)"Special Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										if (cfg_DrawItemLines)
+											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
+									}
+									continue;
+								}
+								if (Actor->GetFullName().contains("CompanionVault_TypeB_Data_C"))
+								{
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
+									{
+
+										ZeroGUI::TextCenter((char*)"Genetic Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										if (cfg_DrawItemLines)
+											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
+									}
+									continue;
+								}
 							}
 						}
 
@@ -1326,7 +1396,10 @@ void DrawMenu()
 			ZeroGUI::Text((char*)"Loot Vacuum Toggle:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Loot Vacuum Hotkey", TFD_SDK::FVector2D{ 110, 25 }, &cfg_LootVacuumKey);
-			ZeroGUI::Checkbox((char*)"Draw Coded Vaults/Munitions/Resource Boxes", &cfg_DrawVaults);
+			ZeroGUI::Checkbox((char*)"Draw Encrypted Vaults", &cfg_DrawVaults);
+			ZeroGUI::Checkbox((char*)"Draw Munition", &cfg_DrawMunition);
+			ZeroGUI::Checkbox((char*)"Draw Resource Box", &cfg_DrawResourceBox);
+			ZeroGUI::Checkbox((char*)"Draw Void Vessel Box", &cfg_DrawVoidVesselBox);
 		}
 		if (tab == 2)
 		{
@@ -1487,6 +1560,9 @@ void LoadCFG()
 		cfg_LootVacuumRange = ini.GetDoubleValue("Extra", "VacuumRange");
 		cfg_LootVacuumKey = (int)ini.GetDoubleValue("Extra", "VacuumKey");
 		cfg_DrawVaults = ini.GetBoolValue("ESP", "EnableCodedVaults");
+		cfg_DrawMunition = ini.GetBoolValue("ESP", "EnableMunition");
+		cfg_DrawResourceBox = ini.GetBoolValue("ESP", "EnableResourceBoxes");
+		cfg_DrawVoidVesselBox = ini.GetBoolValue("ESP", "EnableVoidVesselBoxes");
 
 		cfg_EnableAimbotHold = ini.GetBoolValue("Aimbot", "EnableAimbotHold");
 		cfg_EnableAimbotToggle = ini.GetBoolValue("Aimbot", "EnableAimbotToggle");
@@ -1538,6 +1614,9 @@ void SaveCFG()
 	ini.SetBoolValue("ESP", "EnableItemNames", cfg_DrawItemNames);
 	ini.SetBoolValue("ESP", "EnableItemLines", cfg_DrawItemLines);
 	ini.SetBoolValue("ESP", "EnableCodedVaults", cfg_DrawVaults);
+	ini.SetBoolValue("ESP", "EnableMunition", cfg_DrawMunition);
+	ini.SetBoolValue("ESP", "EnableResourceBoxes", cfg_DrawResourceBox);
+	ini.SetBoolValue("ESP", "EnableVoidVesselBoxes", cfg_DrawVoidVesselBox);
 
 	ini.SetBoolValue("Aimbot", "EnableAimbotHold", cfg_EnableAimbotHold);
 	ini.SetBoolValue("Aimbot", "EnableAimbotToggle", cfg_EnableAimbotToggle);
