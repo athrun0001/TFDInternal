@@ -240,12 +240,16 @@ namespace ZeroGUI
 	void TextLeft(char* name, FVector2D pos, FLinearColor color, bool outline)
 	{
 		int length = strlen(name) + 1;
-		canvas->K2_DrawText(CurrentFont, FString{ s2wc(name) }, pos, FVector2D{ 0.97f, 0.97f }, color, false, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, false, true, true, Colors::Text_Outline);
+		wchar_t* wcName = s2wc(name);
+		canvas->K2_DrawText(CurrentFont, FString{ wcName }, pos, FVector2D{ 0.97f, 0.97f }, color, false, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, false, true, true, Colors::Text_Outline);
+		delete[] wcName; // Free the allocated memory
 	}
 	void TextCenter(char* name, FVector2D pos, FLinearColor color, bool outline)
 	{
 		int length = strlen(name) + 1;
-		canvas->K2_DrawText(CurrentFont, FString{ s2wc(name) }, pos, FVector2D{ 0.97f, 0.97f }, color, false, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, true, true, true, Colors::Text_Outline);
+		wchar_t* wcName = s2wc(name);
+		canvas->K2_DrawText(CurrentFont, FString{ wcName }, pos, FVector2D{ 0.97f, 0.97f }, color, false, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, true, true, true, Colors::Text_Outline);
+		delete[] wcName; // Free the allocated memory
 	}
 
 	void GetColor(FLinearColor* color, float* r, float* g, float* b, float* a)
