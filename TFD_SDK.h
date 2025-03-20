@@ -454,11 +454,11 @@ namespace TFD_SDK
 	public:
 		uint8 Pad_UM1ActorComp_Class[0x20];
 	};
-	// 0x0930 (0x09F8 - 0x00C8)
+	// 0x0948 (0x0A10 - 0x00C8)
 	class UM1PrivateOnlineServiceComponent final : public UM1ActorComponent
 	{
 	public:
-		uint8 Pad_UM1PrivateOnlineServiceComponent_Class[0x930]; // 0xC8
+		uint8 Pad_UM1PrivateOnlineServiceComponent_Class[0x948]; // 0xC8
 		void ServerChangePlayer(const struct FM1TemplateId& InCharacterTid);
 	};
 	// 0x0080 (0x0128 - 0x00A8)
@@ -533,17 +533,17 @@ namespace TFD_SDK
 			return GetDefaultObjImpl<UM1MonsterAttribute>();
 		}
 	};
-	// 0x0790 (0x0C90 - 0x0500)
+	// 0x07C0 (0x0CC0 - 0x0500)
 	class AM1Character : public ACharacter
 	{
 	public:
-		uint8 Pad_InfoWidget[0x330]; // 0x500
-		class UM1CharacterInfoWidgetComponent* InfoWidgetComponent; // 0x830(0x0008) Need this
-		uint8 Pad_CharacterAttribute[0x40]; // 0x838
-		class UM1CharacterAttribute* CharacterAttribute;// 0x0878(0x0008)
-		uint8 Pad_CharacterId[0x218]; // 0x880
-		struct FM1TemplateId CharacterId; // 0x0A98(0x0004) Need this
-		uint8 Pad_AM1CharClass[0x1F4]; // 0xA9C
+		uint8 Pad_InfoWidget[0x368]; // 0x500
+		class UM1CharacterInfoWidgetComponent* InfoWidgetComponent; // 0x868(0x0008) Need this
+		uint8 Pad_CharacterAttribute[0x40]; // 0x870
+		class UM1CharacterAttribute* CharacterAttribute;// 0x08B0(0x0008)
+		uint8 Pad_CharacterId[0x218]; // 0x8B8
+		struct FM1TemplateId CharacterId; // 0x0AD0(0x0004) Need this
+		uint8 Pad_AM1CharClass[0x1EC]; // 0xAD4
 
 		bool IsDead() const;
 
@@ -559,19 +559,19 @@ namespace TFD_SDK
 	};
 	// These show as errors but are correct when compiled
 	static_assert(offsetof(AM1Character, Pad_InfoWidget) == 0x500, "Bad alignment");
-	static_assert(offsetof(AM1Character, InfoWidgetComponent) == 0x830, "Bad alignment");
-	static_assert(offsetof(AM1Character, CharacterId) == 0xA98, "Bad alignment");
-	// 0x0750 (0x13E0 - 0x0C90)
+	static_assert(offsetof(AM1Character, InfoWidgetComponent) == 0x868, "Bad alignment");
+	static_assert(offsetof(AM1Character, CharacterId) == 0xAD0, "Bad alignment");
+	// 0x0760 (0x1420 - 0x0CC0)
 	class AM1Player : public AM1Character
 	{
 	public:
-		uint8 Pad_WeaponSlot[0x2B8]; // 0xC90
-		class UM1WeaponSlotControlComponent* WeaponSlotControl; // 0x0F48(0x0008) Need this
-		uint8 Pad_PlayerName[0x88]; // 0xF50
-		class FString PlayerName; // 0x0FD8(0x0010) Need this
-		uint8 Pad_PlayerInput[0x52]; // 0xFE8
-		bool bPlayerInputEnabled; // 0x103A(0x0001) Need this
-		uint8 Pad_AM1PlayerClass[0x3A5]; // 0x103B
+		uint8 Pad_WeaponSlot[0x2C8]; // 0xCC0
+		class UM1WeaponSlotControlComponent* WeaponSlotControl; // 0x0F88(0x0008) Need this
+		uint8 Pad_PlayerName[0x88]; // 0xF90
+		class FString PlayerName; // 0x01018(0x0010) Need this
+		uint8 Pad_PlayerInput[0x52]; // 0x1028
+		bool bPlayerInputEnabled; // 0x107A(0x0001) Need this
+		uint8 Pad_AM1PlayerClass[0x3A5]; // 0x107B
 
 		void RequestTeleportAtSequence(const struct FVector& InLocation, const struct FRotator& InRotation);
 
@@ -586,15 +586,15 @@ namespace TFD_SDK
 		}
 	};
 	// These show as errors but are correct when compiled
-	static_assert(offsetof(AM1Player, Pad_WeaponSlot) == 0xC90, "Bad alignment");
-	static_assert(offsetof(AM1Player, WeaponSlotControl) == 0xF48, "Bad alignment");
-	static_assert(offsetof(AM1Player, PlayerName) == 0xFD8, "Bad alignment");
-	static_assert(offsetof(AM1Player, bPlayerInputEnabled) == 0x103A, "Bad alignment");
-	// 0x01F0 (0x0E80 - 0x0C90)
+	static_assert(offsetof(AM1Player, Pad_WeaponSlot) == 0xCC0, "Bad alignment");
+	static_assert(offsetof(AM1Player, WeaponSlotControl) == 0xF88, "Bad alignment");
+	static_assert(offsetof(AM1Player, PlayerName) == 0x1018, "Bad alignment");
+	static_assert(offsetof(AM1Player, bPlayerInputEnabled) == 0x107A, "Bad alignment");
+	// 0x01F0 (0x0EB8 - 0x0CC0)
 	class AM1Monster : public AM1Character
 	{
 	public:
-		uint8 Pad_AM1Monster_Class[0x1F0]; // 0xC70
+		uint8 Pad_AM1Monster_Class[0x1F0]; // 0xCC0
 		static class UClass* StaticClass()
 		{
 			return StaticClassImpl<"M1Monster">();
@@ -604,7 +604,7 @@ namespace TFD_SDK
 			return GetDefaultObjImpl<AM1Monster>();
 		}
 	};
-	// 0x0130 (0x0DC0 - 0x0C90)
+	// 0x0130 (0x0DF0 - 0x0CC0)
 	class AM1Fellow final : public AM1Character
 	{
 	public:
@@ -1441,13 +1441,13 @@ namespace TFD_SDK
 		Deactivated = 8,
 		EM1MissionTargetState_MAX = 9,
 	};
-	// 0x0280 (0x05C0 - 0x0340)
+	// 0x0288 (0x05C8 - 0x0340)
 	class AM1MissionTargetActor : public AM1StatBasedActor
 	{
 	public:
 		uint8										  Pax_CurrentState[0x10B];													// 0x0340					
 		EM1MissionTargetState                         CurrentState; 															// 0x044B(0x0001)
-		uint8                                         Pad_AM1MissionTargetActor_Class[0x174];                                   // 0x044C
+		uint8                                         Pad_AM1MissionTargetActor_Class[0x17C];                                   // 0x044C
 
 	public:
 		static class UClass* StaticClass()
@@ -1459,11 +1459,11 @@ namespace TFD_SDK
 			return GetDefaultObjImpl<AM1MissionTargetActor>();
 		}
 	};
-	// 0x0028 (0x05E8 - 0x05C0)
+	// 0x0028 (0x05F0 - 0x05C8)
 	class AM1MissionTargetInteraction final : public AM1MissionTargetActor
 	{
 	public:
-		uint8                                         Pad_AM1MissionTargetInteraction_Class[0x28];                                      // 0x05A0(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+		uint8                                         Pad_AM1MissionTargetInteraction_Class[0x28];                                      // 0x05C8(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
 
 	public:
 		static class UClass* StaticClass()
