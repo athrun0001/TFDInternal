@@ -134,7 +134,7 @@ namespace TFD_SDK
 		return Parms.ReturnValue;
 	}
 
-	void AM1Player::RequestTeleportAtSequence(const struct FVector& InLocation, const struct FRotator& InRotation)
+	/*void AM1Player::RequestTeleportAtSequence(const struct FVector& InLocation, const struct FRotator& InRotation)
 	{
 		static class UFunction* Func = nullptr;
 
@@ -152,7 +152,7 @@ namespace TFD_SDK
 		UObject::ProcessEvent(Func, &Parms);
 
 		Func->FunctionFlags = Flgs;
-	}
+	}*/
 
 	bool AActor::K2_SetActorLocation(const struct FVector& NewLocation, bool bSweep, struct FHitResult* SweepHitResult, bool bTeleport)
 	{
@@ -578,7 +578,7 @@ namespace TFD_SDK
 		return Parms.ReturnValue;
 	}
 
-	double UKismetMathLibrary::Distance2D(const struct FVector2D& V1, const struct FVector2D& V2)
+	double UKismetMathLibrary::Distance2D(const struct FVector2D& v1, const struct FVector2D& v2)
 	{
 		static class UFunction* Func = nullptr;
 
@@ -587,8 +587,8 @@ namespace TFD_SDK
 
 		KismetMathLibrary_Distance2D Parms{};
 
-		Parms.V1 = std::move(V1);
-		Parms.V2 = std::move(V2);
+		Parms.v1 = std::move(v1);
+		Parms.v2 = std::move(v2);
 
 		auto Flgs = Func->FunctionFlags;
 		Func->FunctionFlags |= 0x400;
@@ -671,7 +671,7 @@ namespace TFD_SDK
 		return Parms.ReturnValue;
 	}
 
-	int32 USkinnedMeshComponent::GetNumBones() const
+	/*int32 USkinnedMeshComponent::GetNumBones() const
 	{
 		static class UFunction* Func = nullptr;
 
@@ -688,7 +688,7 @@ namespace TFD_SDK
 		Func->FunctionFlags = Flgs;
 
 		return Parms.ReturnValue;
-	}
+	}*/
 	void UM1MissionTaskServiceInteraction::ServerRequestMissionTargetBeginInteraction(class AM1MissionTargetInteraction* InActor, class AM1PlayerControllerInGame* InAcceptor)
 	{
 		static class UFunction* Func = nullptr;
@@ -696,7 +696,7 @@ namespace TFD_SDK
 		if (Func == nullptr)
 			Func = Class->GetFunction("M1MissionTaskServiceInteraction", "ServerRequestMissionTargetBeginInteraction");
 
-		TFD_SDK::M1MissionTaskServiceInteraction_ServerRequestMissionTargetBeginInteraction Parms{};
+		M1MissionTaskServiceInteraction_ServerRequestMissionTargetBeginInteraction Parms{};
 
 		Parms.InActor = InActor;
 		Parms.InAcceptor = InAcceptor;
@@ -716,7 +716,7 @@ namespace TFD_SDK
 		if (Func == nullptr)
 			Func = Class->GetFunction("M1MissionControlComponent", "ServerStartMissionByTemplateID");
 
-		TFD_SDK::M1MissionControlComponent_ServerStartMissionByTemplateID Parms{};
+		M1MissionControlComponent_ServerStartMissionByTemplateID Parms{};
 
 		Parms.InTemplateId = std::move(InTemplateId);
 
@@ -736,7 +736,7 @@ namespace TFD_SDK
 		if (Func == nullptr)
 			Func = Class->GetFunction("M1MissionControlComponent", "ServerRunTaskActor");
 
-		TFD_SDK::M1MissionControlComponent_ServerRunTaskActor Parms{};
+		M1MissionControlComponent_ServerRunTaskActor Parms{};
 
 		Parms.InActor = InActor;
 
@@ -755,7 +755,7 @@ namespace TFD_SDK
 		if (Func == nullptr)
 			Func = Class->GetFunction("M1MissionControlComponent", "ServerLeaveMission");
 
-		TFD_SDK::M1MissionControlComponent_ServerLeaveMission Parms{};
+		M1MissionControlComponent_ServerLeaveMission Parms{};
 
 		Parms.InReason = InReason;
 

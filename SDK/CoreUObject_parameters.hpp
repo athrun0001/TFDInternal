@@ -14,13 +14,13 @@
 namespace SDK::Params
 {
 
-// Function CoreUObject.Object.ExecuteUbergraph
-// 0x0004 (0x0004 - 0x0000)
-struct Object_ExecuteUbergraph final
-{
-public:
-	int32                                         EntryPoint;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-};
+	// Function CoreUObject.Object.ExecuteUbergraph
+	// 0x0004 (0x0004 - 0x0000)
+	struct Object_ExecuteUbergraph final
+	{
+	public:
+		int32                                         EntryPoint;                                        // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
 
 }
 
