@@ -1143,6 +1143,7 @@ void Aimbot()
 		{
 			currentTargetID = 0;
 			Aimbot_BoneIndex = -1;
+			Aimbot_Target = nullptr;
 			return;
 		}
 		if (cfg_AimbotController)
@@ -1162,6 +1163,7 @@ void Aimbot()
 			{
 				currentTargetID = 0;
 				Aimbot_BoneIndex = -1;
+				Aimbot_Target = nullptr;
 				return;
 			}
 		}
@@ -1170,6 +1172,7 @@ void Aimbot()
 	{
 		currentTargetID = 0;
 		Aimbot_BoneIndex = -1;
+		Aimbot_Target = nullptr;
 		return;
 	}
 
@@ -1268,7 +1271,7 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 							{
 								if (p->Mesh->BoneArray.IsValidIndex(j))
 								{
-									if (p->Mesh->GetBoneName(j).ToString().contains("Weakness") || p->Mesh->GetBoneName(j).ToString().contains("-Head") || p->Mesh->GetBoneName(j).ToString().contains("_head"))
+									if (p->Mesh->GetBoneName(j).ToString().contains("Weakness") || p->Mesh->GetBoneName(j).ToString().contains("-Head") || p->Mesh->GetBoneName(j).ToString().contains("_head") || p->Mesh->GetBoneName(j).ToString() == "Bn_Shape_Bip001_Spine2")
 									{
 										bones.push_back(j);
 									}
