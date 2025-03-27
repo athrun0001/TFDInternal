@@ -507,7 +507,7 @@ namespace TFD_SDK
 		struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		EM1EquipmentSlotType                          SlotType;                                          // 0x000C(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-		class AM1Weapon* Weapon;                                            // 0x0010(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		class AM1Weapon*							  Weapon;                                            // 0x0010(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
 	// 0x0040 (0x0040 - 0x0000)
 	struct FM1ActivatedWeaponSlot final
@@ -1137,7 +1137,7 @@ namespace TFD_SDK
 		LimitTimeOver = 10,
 		EM1MissionEndReason_MAX = 11,
 	};
-	// 0x0720 (0x07C8 - 0x00A8)
+	// 0x0728 (0x07D0 - 0x00A8)
 	class UM1MissionControlComponent final : public UActorComponent
 	{
 	public:
@@ -1147,7 +1147,7 @@ namespace TFD_SDK
 		TArray<class AM1MissionActor*>                ActivatedMissions;                                 // 0x0218(0x0010)(Net, ZeroConstructor, RepNotify, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_MissionResult[0x390];                          // 0x0228
 		class UM1MissionResult*						  MissionResult;                                     // 0x05B8(0x0008)(ZeroConstructor, Transient, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_UM1MissionControlComponent_Class[0x208];       // 0x05C0
+		uint8                                         Pad_UM1MissionControlComponent_Class[0x210];       // 0x05C0
 
 	public:
 		void ServerStartMissionByTemplateID(const struct FM1TemplateId& InTemplateId);
