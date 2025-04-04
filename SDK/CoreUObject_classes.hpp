@@ -67,6 +67,14 @@ namespace SDK
 			InSDKUtils::CallGameFunction(InSDKUtils::GetVirtualFunction<void(*)(const UObject*, class UFunction*, void*)>(this, Offsets::ProcessEventIdx), this, Function, Parms);
 		}
 	};
+	static_assert(alignof(UObject) == 0x000008, "Wrong alignment on UObject");
+	static_assert(sizeof(UObject) == 0x000028, "Wrong size on UObject");
+	static_assert(offsetof(UObject, VTable) == 0x000000, "Member 'UObject::VTable' has a wrong offset!");
+	static_assert(offsetof(UObject, Flags) == 0x000008, "Member 'UObject::Flags' has a wrong offset!");
+	static_assert(offsetof(UObject, Index) == 0x00000C, "Member 'UObject::Index' has a wrong offset!");
+	static_assert(offsetof(UObject, Class) == 0x000010, "Member 'UObject::Class' has a wrong offset!");
+	static_assert(offsetof(UObject, Name) == 0x000018, "Member 'UObject::Name' has a wrong offset!");
+	static_assert(offsetof(UObject, Outer) == 0x000020, "Member 'UObject::Outer' has a wrong offset!");
 
 	// Class CoreUObject.PackageMap
 	// 0x00B8 (0x00E0 - 0x0028)
@@ -85,6 +93,8 @@ namespace SDK
 			return GetDefaultObjImpl<UPackageMap>();
 		}
 	};
+	static_assert(alignof(UPackageMap) == 0x000008, "Wrong alignment on UPackageMap");
+	static_assert(sizeof(UPackageMap) == 0x0000E0, "Wrong size on UPackageMap");
 
 	// Class CoreUObject.GCObjectReferencer
 	// 0x0018 (0x0040 - 0x0028)
@@ -103,6 +113,8 @@ namespace SDK
 			return GetDefaultObjImpl<UGCObjectReferencer>();
 		}
 	};
+	static_assert(alignof(UGCObjectReferencer) == 0x000008, "Wrong alignment on UGCObjectReferencer");
+	static_assert(sizeof(UGCObjectReferencer) == 0x000040, "Wrong size on UGCObjectReferencer");
 
 	// Class CoreUObject.Field
 	// 0x0008 (0x0030 - 0x0028)
@@ -121,6 +133,9 @@ namespace SDK
 			return GetDefaultObjImpl<UField>();
 		}
 	};
+	static_assert(alignof(UField) == 0x000008, "Wrong alignment on UField");
+	static_assert(sizeof(UField) == 0x000030, "Wrong size on UField");
+	static_assert(offsetof(UField, Next) == 0x000028, "Member 'UField::Next' has a wrong offset!");
 
 	// Class CoreUObject.Enum
 	// 0x0038 (0x0068 - 0x0030)
@@ -141,10 +156,13 @@ namespace SDK
 			return GetDefaultObjImpl<UEnum>();
 		}
 	};
+	static_assert(alignof(UEnum) == 0x000008, "Wrong alignment on UEnum");
+	static_assert(sizeof(UEnum) == 0x000068, "Wrong size on UEnum");
+	static_assert(offsetof(UEnum, Names) == 0x000040, "Member 'UEnum::Names' has a wrong offset!");
 
 	// Class CoreUObject.Interface
-	// 0x0000 (0x0028 - 0x0028)
-	class IInterface : public UObject
+	// 0x-028 (0x0000 - 0x0028)
+	class IInterface final : public UObject
 	{
 	public:
 		static class UClass* StaticClass()
@@ -156,6 +174,8 @@ namespace SDK
 			return GetDefaultObjImpl<IInterface>();
 		}
 	};
+	static_assert(alignof(IInterface) == 0x000008, "Wrong alignment on IInterface");
+	static_assert(sizeof(IInterface) == 0x000028, "Wrong size on IInterface");
 
 	// Class CoreUObject.Property
 	// 0x0040 (0x0070 - 0x0030)
@@ -174,6 +194,8 @@ namespace SDK
 			return GetDefaultObjImpl<UProperty>();
 		}
 	};
+	static_assert(alignof(UProperty) == 0x000008, "Wrong alignment on UProperty");
+	static_assert(sizeof(UProperty) == 0x000070, "Wrong size on UProperty");
 
 	// Class CoreUObject.NumericProperty
 	// 0x0000 (0x0070 - 0x0070)
@@ -189,6 +211,8 @@ namespace SDK
 			return GetDefaultObjImpl<UNumericProperty>();
 		}
 	};
+	static_assert(alignof(UNumericProperty) == 0x000008, "Wrong alignment on UNumericProperty");
+	static_assert(sizeof(UNumericProperty) == 0x000070, "Wrong size on UNumericProperty");
 
 	// Class CoreUObject.UInt32Property
 	// 0x0000 (0x0070 - 0x0070)
@@ -204,6 +228,8 @@ namespace SDK
 			return GetDefaultObjImpl<UUInt32Property>();
 		}
 	};
+	static_assert(alignof(UUInt32Property) == 0x000008, "Wrong alignment on UUInt32Property");
+	static_assert(sizeof(UUInt32Property) == 0x000070, "Wrong size on UUInt32Property");
 
 	// Class CoreUObject.Package
 	// 0x0068 (0x0090 - 0x0028)
@@ -222,6 +248,8 @@ namespace SDK
 			return GetDefaultObjImpl<UPackage>();
 		}
 	};
+	static_assert(alignof(UPackage) == 0x000008, "Wrong alignment on UPackage");
+	static_assert(sizeof(UPackage) == 0x000090, "Wrong size on UPackage");
 
 	// Class CoreUObject.UInt64Property
 	// 0x0000 (0x0070 - 0x0070)
@@ -237,6 +265,8 @@ namespace SDK
 			return GetDefaultObjImpl<UUInt64Property>();
 		}
 	};
+	static_assert(alignof(UUInt64Property) == 0x000008, "Wrong alignment on UUInt64Property");
+	static_assert(sizeof(UUInt64Property) == 0x000070, "Wrong size on UUInt64Property");
 
 	// Class CoreUObject.ObjectRedirector
 	// 0x0008 (0x0030 - 0x0028)
@@ -255,6 +285,8 @@ namespace SDK
 			return GetDefaultObjImpl<UObjectRedirector>();
 		}
 	};
+	static_assert(alignof(UObjectRedirector) == 0x000008, "Wrong alignment on UObjectRedirector");
+	static_assert(sizeof(UObjectRedirector) == 0x000030, "Wrong size on UObjectRedirector");
 
 	// Class CoreUObject.Struct
 	// 0x0080 (0x00B0 - 0x0030)
@@ -282,6 +314,13 @@ namespace SDK
 			return GetDefaultObjImpl<UStruct>();
 		}
 	};
+	static_assert(alignof(UStruct) == 0x000008, "Wrong alignment on UStruct");
+	static_assert(sizeof(UStruct) == 0x0000B0, "Wrong size on UStruct");
+	static_assert(offsetof(UStruct, Super) == 0x000040, "Member 'UStruct::Super' has a wrong offset!");
+	static_assert(offsetof(UStruct, Children) == 0x000048, "Member 'UStruct::Children' has a wrong offset!");
+	static_assert(offsetof(UStruct, ChildProperties) == 0x000050, "Member 'UStruct::ChildProperties' has a wrong offset!");
+	static_assert(offsetof(UStruct, Size) == 0x000058, "Member 'UStruct::Size' has a wrong offset!");
+	static_assert(offsetof(UStruct, MinAlignemnt) == 0x00005C, "Member 'UStruct::MinAlignemnt' has a wrong offset!");
 
 	// Class CoreUObject.TextProperty
 	// 0x0000 (0x0070 - 0x0070)
@@ -297,6 +336,8 @@ namespace SDK
 			return GetDefaultObjImpl<UTextProperty>();
 		}
 	};
+	static_assert(alignof(UTextProperty) == 0x000008, "Wrong alignment on UTextProperty");
+	static_assert(sizeof(UTextProperty) == 0x000070, "Wrong size on UTextProperty");
 
 	// Class CoreUObject.Class
 	// 0x0160 (0x0210 - 0x00B0)
@@ -322,6 +363,10 @@ namespace SDK
 			return GetDefaultObjImpl<UClass>();
 		}
 	};
+	static_assert(alignof(UClass) == 0x000008, "Wrong alignment on UClass");
+	static_assert(sizeof(UClass) == 0x000210, "Wrong size on UClass");
+	static_assert(offsetof(UClass, CastFlags) == 0x0000D8, "Member 'UClass::CastFlags' has a wrong offset!");
+	static_assert(offsetof(UClass, DefaultObject) == 0x000110, "Member 'UClass::DefaultObject' has a wrong offset!");
 
 	// Class CoreUObject.TextBuffer
 	// 0x0028 (0x0050 - 0x0028)
@@ -340,6 +385,8 @@ namespace SDK
 			return GetDefaultObjImpl<UTextBuffer>();
 		}
 	};
+	static_assert(alignof(UTextBuffer) == 0x000008, "Wrong alignment on UTextBuffer");
+	static_assert(sizeof(UTextBuffer) == 0x000050, "Wrong size on UTextBuffer");
 
 	// Class CoreUObject.ScriptStruct
 	// 0x0010 (0x00C0 - 0x00B0)
@@ -358,6 +405,8 @@ namespace SDK
 			return GetDefaultObjImpl<UScriptStruct>();
 		}
 	};
+	static_assert(alignof(UScriptStruct) == 0x000008, "Wrong alignment on UScriptStruct");
+	static_assert(sizeof(UScriptStruct) == 0x0000C0, "Wrong size on UScriptStruct");
 
 	// Class CoreUObject.Function
 	// 0x0030 (0x00E0 - 0x00B0)
@@ -380,6 +429,10 @@ namespace SDK
 			return GetDefaultObjImpl<UFunction>();
 		}
 	};
+	static_assert(alignof(UFunction) == 0x000008, "Wrong alignment on UFunction");
+	static_assert(sizeof(UFunction) == 0x0000E0, "Wrong size on UFunction");
+	static_assert(offsetof(UFunction, FunctionFlags) == 0x0000B0, "Member 'UFunction::FunctionFlags' has a wrong offset!");
+	static_assert(offsetof(UFunction, ExecFunction) == 0x0000D8, "Member 'UFunction::ExecFunction' has a wrong offset!");
 
 	// Class CoreUObject.DelegateFunction
 	// 0x0000 (0x00E0 - 0x00E0)
@@ -395,6 +448,8 @@ namespace SDK
 			return GetDefaultObjImpl<UDelegateFunction>();
 		}
 	};
+	static_assert(alignof(UDelegateFunction) == 0x000008, "Wrong alignment on UDelegateFunction");
+	static_assert(sizeof(UDelegateFunction) == 0x0000E0, "Wrong size on UDelegateFunction");
 
 	// Class CoreUObject.SparseDelegateFunction
 	// 0x0010 (0x00F0 - 0x00E0)
@@ -413,6 +468,8 @@ namespace SDK
 			return GetDefaultObjImpl<USparseDelegateFunction>();
 		}
 	};
+	static_assert(alignof(USparseDelegateFunction) == 0x000008, "Wrong alignment on USparseDelegateFunction");
+	static_assert(sizeof(USparseDelegateFunction) == 0x0000F0, "Wrong size on USparseDelegateFunction");
 
 	// Class CoreUObject.DynamicClass
 	// 0x0080 (0x0290 - 0x0210)
@@ -431,6 +488,8 @@ namespace SDK
 			return GetDefaultObjImpl<UDynamicClass>();
 		}
 	};
+	static_assert(alignof(UDynamicClass) == 0x000008, "Wrong alignment on UDynamicClass");
+	static_assert(sizeof(UDynamicClass) == 0x000290, "Wrong size on UDynamicClass");
 
 	// Class CoreUObject.LinkerPlaceholderClass
 	// 0x01C0 (0x03D0 - 0x0210)
@@ -449,6 +508,8 @@ namespace SDK
 			return GetDefaultObjImpl<ULinkerPlaceholderClass>();
 		}
 	};
+	static_assert(alignof(ULinkerPlaceholderClass) == 0x000008, "Wrong alignment on ULinkerPlaceholderClass");
+	static_assert(sizeof(ULinkerPlaceholderClass) == 0x0003D0, "Wrong size on ULinkerPlaceholderClass");
 
 	// Class CoreUObject.LinkerPlaceholderExportObject
 	// 0x00D0 (0x00F8 - 0x0028)
@@ -467,6 +528,8 @@ namespace SDK
 			return GetDefaultObjImpl<ULinkerPlaceholderExportObject>();
 		}
 	};
+	static_assert(alignof(ULinkerPlaceholderExportObject) == 0x000008, "Wrong alignment on ULinkerPlaceholderExportObject");
+	static_assert(sizeof(ULinkerPlaceholderExportObject) == 0x0000F8, "Wrong size on ULinkerPlaceholderExportObject");
 
 	// Class CoreUObject.LinkerPlaceholderFunction
 	// 0x01C0 (0x02A0 - 0x00E0)
@@ -485,6 +548,8 @@ namespace SDK
 			return GetDefaultObjImpl<ULinkerPlaceholderFunction>();
 		}
 	};
+	static_assert(alignof(ULinkerPlaceholderFunction) == 0x000008, "Wrong alignment on ULinkerPlaceholderFunction");
+	static_assert(sizeof(ULinkerPlaceholderFunction) == 0x0002A0, "Wrong size on ULinkerPlaceholderFunction");
 
 	// Class CoreUObject.MetaData
 	// 0x00A0 (0x00C8 - 0x0028)
@@ -503,6 +568,8 @@ namespace SDK
 			return GetDefaultObjImpl<UMetaData>();
 		}
 	};
+	static_assert(alignof(UMetaData) == 0x000008, "Wrong alignment on UMetaData");
+	static_assert(sizeof(UMetaData) == 0x0000C8, "Wrong size on UMetaData");
 
 	// Class CoreUObject.EnumProperty
 	// 0x0010 (0x0080 - 0x0070)
@@ -521,6 +588,8 @@ namespace SDK
 			return GetDefaultObjImpl<UEnumProperty>();
 		}
 	};
+	static_assert(alignof(UEnumProperty) == 0x000008, "Wrong alignment on UEnumProperty");
+	static_assert(sizeof(UEnumProperty) == 0x000080, "Wrong size on UEnumProperty");
 
 	// Class CoreUObject.ArrayProperty
 	// 0x0008 (0x0078 - 0x0070)
@@ -539,6 +608,8 @@ namespace SDK
 			return GetDefaultObjImpl<UArrayProperty>();
 		}
 	};
+	static_assert(alignof(UArrayProperty) == 0x000008, "Wrong alignment on UArrayProperty");
+	static_assert(sizeof(UArrayProperty) == 0x000078, "Wrong size on UArrayProperty");
 
 	// Class CoreUObject.ObjectPropertyBase
 	// 0x0008 (0x0078 - 0x0070)
@@ -557,6 +628,8 @@ namespace SDK
 			return GetDefaultObjImpl<UObjectPropertyBase>();
 		}
 	};
+	static_assert(alignof(UObjectPropertyBase) == 0x000008, "Wrong alignment on UObjectPropertyBase");
+	static_assert(sizeof(UObjectPropertyBase) == 0x000078, "Wrong size on UObjectPropertyBase");
 
 	// Class CoreUObject.BoolProperty
 	// 0x0008 (0x0078 - 0x0070)
@@ -575,6 +648,8 @@ namespace SDK
 			return GetDefaultObjImpl<UBoolProperty>();
 		}
 	};
+	static_assert(alignof(UBoolProperty) == 0x000008, "Wrong alignment on UBoolProperty");
+	static_assert(sizeof(UBoolProperty) == 0x000078, "Wrong size on UBoolProperty");
 
 	// Class CoreUObject.ByteProperty
 	// 0x0008 (0x0078 - 0x0070)
@@ -593,6 +668,8 @@ namespace SDK
 			return GetDefaultObjImpl<UByteProperty>();
 		}
 	};
+	static_assert(alignof(UByteProperty) == 0x000008, "Wrong alignment on UByteProperty");
+	static_assert(sizeof(UByteProperty) == 0x000078, "Wrong size on UByteProperty");
 
 	// Class CoreUObject.ObjectProperty
 	// 0x0000 (0x0078 - 0x0078)
@@ -608,6 +685,8 @@ namespace SDK
 			return GetDefaultObjImpl<UObjectProperty>();
 		}
 	};
+	static_assert(alignof(UObjectProperty) == 0x000008, "Wrong alignment on UObjectProperty");
+	static_assert(sizeof(UObjectProperty) == 0x000078, "Wrong size on UObjectProperty");
 
 	// Class CoreUObject.ClassProperty
 	// 0x0008 (0x0080 - 0x0078)
@@ -626,6 +705,8 @@ namespace SDK
 			return GetDefaultObjImpl<UClassProperty>();
 		}
 	};
+	static_assert(alignof(UClassProperty) == 0x000008, "Wrong alignment on UClassProperty");
+	static_assert(sizeof(UClassProperty) == 0x000080, "Wrong size on UClassProperty");
 
 	// Class CoreUObject.DelegateProperty
 	// 0x0008 (0x0078 - 0x0070)
@@ -644,6 +725,8 @@ namespace SDK
 			return GetDefaultObjImpl<UDelegateProperty>();
 		}
 	};
+	static_assert(alignof(UDelegateProperty) == 0x000008, "Wrong alignment on UDelegateProperty");
+	static_assert(sizeof(UDelegateProperty) == 0x000078, "Wrong size on UDelegateProperty");
 
 	// Class CoreUObject.DoubleProperty
 	// 0x0000 (0x0070 - 0x0070)
@@ -659,6 +742,8 @@ namespace SDK
 			return GetDefaultObjImpl<UDoubleProperty>();
 		}
 	};
+	static_assert(alignof(UDoubleProperty) == 0x000008, "Wrong alignment on UDoubleProperty");
+	static_assert(sizeof(UDoubleProperty) == 0x000070, "Wrong size on UDoubleProperty");
 
 	// Class CoreUObject.FloatProperty
 	// 0x0000 (0x0070 - 0x0070)
@@ -674,6 +759,8 @@ namespace SDK
 			return GetDefaultObjImpl<UFloatProperty>();
 		}
 	};
+	static_assert(alignof(UFloatProperty) == 0x000008, "Wrong alignment on UFloatProperty");
+	static_assert(sizeof(UFloatProperty) == 0x000070, "Wrong size on UFloatProperty");
 
 	// Class CoreUObject.IntProperty
 	// 0x0000 (0x0070 - 0x0070)
@@ -689,6 +776,8 @@ namespace SDK
 			return GetDefaultObjImpl<UIntProperty>();
 		}
 	};
+	static_assert(alignof(UIntProperty) == 0x000008, "Wrong alignment on UIntProperty");
+	static_assert(sizeof(UIntProperty) == 0x000070, "Wrong size on UIntProperty");
 
 	// Class CoreUObject.Int8Property
 	// 0x0000 (0x0070 - 0x0070)
@@ -704,6 +793,8 @@ namespace SDK
 			return GetDefaultObjImpl<UInt8Property>();
 		}
 	};
+	static_assert(alignof(UInt8Property) == 0x000008, "Wrong alignment on UInt8Property");
+	static_assert(sizeof(UInt8Property) == 0x000070, "Wrong size on UInt8Property");
 
 	// Class CoreUObject.Int16Property
 	// 0x0000 (0x0070 - 0x0070)
@@ -719,6 +810,8 @@ namespace SDK
 			return GetDefaultObjImpl<UInt16Property>();
 		}
 	};
+	static_assert(alignof(UInt16Property) == 0x000008, "Wrong alignment on UInt16Property");
+	static_assert(sizeof(UInt16Property) == 0x000070, "Wrong size on UInt16Property");
 
 	// Class CoreUObject.Int64Property
 	// 0x0000 (0x0070 - 0x0070)
@@ -734,6 +827,8 @@ namespace SDK
 			return GetDefaultObjImpl<UInt64Property>();
 		}
 	};
+	static_assert(alignof(UInt64Property) == 0x000008, "Wrong alignment on UInt64Property");
+	static_assert(sizeof(UInt64Property) == 0x000070, "Wrong size on UInt64Property");
 
 	// Class CoreUObject.InterfaceProperty
 	// 0x0008 (0x0078 - 0x0070)
@@ -752,6 +847,8 @@ namespace SDK
 			return GetDefaultObjImpl<UInterfaceProperty>();
 		}
 	};
+	static_assert(alignof(UInterfaceProperty) == 0x000008, "Wrong alignment on UInterfaceProperty");
+	static_assert(sizeof(UInterfaceProperty) == 0x000078, "Wrong size on UInterfaceProperty");
 
 	// Class CoreUObject.LazyObjectProperty
 	// 0x0000 (0x0078 - 0x0078)
@@ -767,6 +864,8 @@ namespace SDK
 			return GetDefaultObjImpl<ULazyObjectProperty>();
 		}
 	};
+	static_assert(alignof(ULazyObjectProperty) == 0x000008, "Wrong alignment on ULazyObjectProperty");
+	static_assert(sizeof(ULazyObjectProperty) == 0x000078, "Wrong size on ULazyObjectProperty");
 
 	// Class CoreUObject.MapProperty
 	// 0x0028 (0x0098 - 0x0070)
@@ -785,6 +884,8 @@ namespace SDK
 			return GetDefaultObjImpl<UMapProperty>();
 		}
 	};
+	static_assert(alignof(UMapProperty) == 0x000008, "Wrong alignment on UMapProperty");
+	static_assert(sizeof(UMapProperty) == 0x000098, "Wrong size on UMapProperty");
 
 	// Class CoreUObject.MulticastDelegateProperty
 	// 0x0008 (0x0078 - 0x0070)
@@ -803,6 +904,8 @@ namespace SDK
 			return GetDefaultObjImpl<UMulticastDelegateProperty>();
 		}
 	};
+	static_assert(alignof(UMulticastDelegateProperty) == 0x000008, "Wrong alignment on UMulticastDelegateProperty");
+	static_assert(sizeof(UMulticastDelegateProperty) == 0x000078, "Wrong size on UMulticastDelegateProperty");
 
 	// Class CoreUObject.MulticastInlineDelegateProperty
 	// 0x0000 (0x0078 - 0x0078)
@@ -818,6 +921,8 @@ namespace SDK
 			return GetDefaultObjImpl<UMulticastInlineDelegateProperty>();
 		}
 	};
+	static_assert(alignof(UMulticastInlineDelegateProperty) == 0x000008, "Wrong alignment on UMulticastInlineDelegateProperty");
+	static_assert(sizeof(UMulticastInlineDelegateProperty) == 0x000078, "Wrong size on UMulticastInlineDelegateProperty");
 
 	// Class CoreUObject.MulticastSparseDelegateProperty
 	// 0x0000 (0x0078 - 0x0078)
@@ -833,6 +938,8 @@ namespace SDK
 			return GetDefaultObjImpl<UMulticastSparseDelegateProperty>();
 		}
 	};
+	static_assert(alignof(UMulticastSparseDelegateProperty) == 0x000008, "Wrong alignment on UMulticastSparseDelegateProperty");
+	static_assert(sizeof(UMulticastSparseDelegateProperty) == 0x000078, "Wrong size on UMulticastSparseDelegateProperty");
 
 	// Class CoreUObject.NameProperty
 	// 0x0000 (0x0070 - 0x0070)
@@ -848,6 +955,8 @@ namespace SDK
 			return GetDefaultObjImpl<UNameProperty>();
 		}
 	};
+	static_assert(alignof(UNameProperty) == 0x000008, "Wrong alignment on UNameProperty");
+	static_assert(sizeof(UNameProperty) == 0x000070, "Wrong size on UNameProperty");
 
 	// Class CoreUObject.SetProperty
 	// 0x0020 (0x0090 - 0x0070)
@@ -866,6 +975,8 @@ namespace SDK
 			return GetDefaultObjImpl<USetProperty>();
 		}
 	};
+	static_assert(alignof(USetProperty) == 0x000008, "Wrong alignment on USetProperty");
+	static_assert(sizeof(USetProperty) == 0x000090, "Wrong size on USetProperty");
 
 	// Class CoreUObject.SoftObjectProperty
 	// 0x0000 (0x0078 - 0x0078)
@@ -881,6 +992,8 @@ namespace SDK
 			return GetDefaultObjImpl<USoftObjectProperty>();
 		}
 	};
+	static_assert(alignof(USoftObjectProperty) == 0x000008, "Wrong alignment on USoftObjectProperty");
+	static_assert(sizeof(USoftObjectProperty) == 0x000078, "Wrong size on USoftObjectProperty");
 
 	// Class CoreUObject.SoftClassProperty
 	// 0x0008 (0x0080 - 0x0078)
@@ -899,6 +1012,8 @@ namespace SDK
 			return GetDefaultObjImpl<USoftClassProperty>();
 		}
 	};
+	static_assert(alignof(USoftClassProperty) == 0x000008, "Wrong alignment on USoftClassProperty");
+	static_assert(sizeof(USoftClassProperty) == 0x000080, "Wrong size on USoftClassProperty");
 
 	// Class CoreUObject.StrProperty
 	// 0x0000 (0x0070 - 0x0070)
@@ -914,6 +1029,8 @@ namespace SDK
 			return GetDefaultObjImpl<UStrProperty>();
 		}
 	};
+	static_assert(alignof(UStrProperty) == 0x000008, "Wrong alignment on UStrProperty");
+	static_assert(sizeof(UStrProperty) == 0x000070, "Wrong size on UStrProperty");
 
 	// Class CoreUObject.StructProperty
 	// 0x0008 (0x0078 - 0x0070)
@@ -932,6 +1049,8 @@ namespace SDK
 			return GetDefaultObjImpl<UStructProperty>();
 		}
 	};
+	static_assert(alignof(UStructProperty) == 0x000008, "Wrong alignment on UStructProperty");
+	static_assert(sizeof(UStructProperty) == 0x000078, "Wrong size on UStructProperty");
 
 	// Class CoreUObject.UInt16Property
 	// 0x0000 (0x0070 - 0x0070)
@@ -947,6 +1066,8 @@ namespace SDK
 			return GetDefaultObjImpl<UUInt16Property>();
 		}
 	};
+	static_assert(alignof(UUInt16Property) == 0x000008, "Wrong alignment on UUInt16Property");
+	static_assert(sizeof(UUInt16Property) == 0x000070, "Wrong size on UUInt16Property");
 
 	// Class CoreUObject.WeakObjectProperty
 	// 0x0000 (0x0078 - 0x0078)
@@ -962,6 +1083,8 @@ namespace SDK
 			return GetDefaultObjImpl<UWeakObjectProperty>();
 		}
 	};
+	static_assert(alignof(UWeakObjectProperty) == 0x000008, "Wrong alignment on UWeakObjectProperty");
+	static_assert(sizeof(UWeakObjectProperty) == 0x000078, "Wrong size on UWeakObjectProperty");
 
 	// Class CoreUObject.PropertyWrapper
 	// 0x0008 (0x0030 - 0x0028)
@@ -980,6 +1103,8 @@ namespace SDK
 			return GetDefaultObjImpl<UPropertyWrapper>();
 		}
 	};
+	static_assert(alignof(UPropertyWrapper) == 0x000008, "Wrong alignment on UPropertyWrapper");
+	static_assert(sizeof(UPropertyWrapper) == 0x000030, "Wrong size on UPropertyWrapper");
 
 	// Class CoreUObject.MulticastDelegatePropertyWrapper
 	// 0x0000 (0x0030 - 0x0030)
@@ -995,6 +1120,8 @@ namespace SDK
 			return GetDefaultObjImpl<UMulticastDelegatePropertyWrapper>();
 		}
 	};
+	static_assert(alignof(UMulticastDelegatePropertyWrapper) == 0x000008, "Wrong alignment on UMulticastDelegatePropertyWrapper");
+	static_assert(sizeof(UMulticastDelegatePropertyWrapper) == 0x000030, "Wrong size on UMulticastDelegatePropertyWrapper");
 
 	// Class CoreUObject.MulticastInlineDelegatePropertyWrapper
 	// 0x0000 (0x0030 - 0x0030)
@@ -1010,6 +1137,8 @@ namespace SDK
 			return GetDefaultObjImpl<UMulticastInlineDelegatePropertyWrapper>();
 		}
 	};
+	static_assert(alignof(UMulticastInlineDelegatePropertyWrapper) == 0x000008, "Wrong alignment on UMulticastInlineDelegatePropertyWrapper");
+	static_assert(sizeof(UMulticastInlineDelegatePropertyWrapper) == 0x000030, "Wrong size on UMulticastInlineDelegatePropertyWrapper");
 
 }
 

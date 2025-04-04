@@ -178,6 +178,11 @@ namespace TFD_SDK
 	public:
 		class USkeletalMeshComponent* Mesh; // 0x02B8(0x0008)
 		uint8 Pad_ACharacter_Class[0x240]; // 0x2C0
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"Character">();
+		}
 	};
 #pragma pack(pop)
 	static_assert(offsetof(ACharacter, Mesh) == 0x2B8, "Bad alignment");
@@ -1036,6 +1041,11 @@ namespace TFD_SDK
 	{
 	public:
 		uint8                                         Pad_APlayerState_Class[0x118];                     // 0x0248(0x0004)(BlueprintVisible, BlueprintReadOnly, Net, ZeroConstructor, IsPlainOldData, RepNotify, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"PlayerState">();
+		}
 	};
 	// 0x0018 (0x0040 - 0x0028)
 	class UM1MissionTaskService : public UObject
