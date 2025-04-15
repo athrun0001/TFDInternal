@@ -15,50 +15,29 @@ jobs:
     steps:
     # Step 1: Check out the code
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # Step 2: Set up MSBuild environment
     - name: Set up MSBuild
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v2
 
     # Step 3: Build the project
     - name: Build Solution
       run: msbuild DescendantInternal.sln /p:Configuration=Release
 
+    # Step 4: List Files in Release Directory
     - name: List Files in Output Directory
       run: dir x64\Release
 
-    # Step 4: Archive build artifacts (optional)
-    - name: Archive Build Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-artifacts
-        path: x64\Release
-        
-    # Step 1: Check out the code (required for versioning or tag creation)
-    #- name: Checkout code
-    #  uses: actions/checkout@v3
-
-    # Step 2: Create a release
-    - name: Create GitHub Release
-      id: create_release
-      uses: actions/create-release@v1
+    # Step 5: Create GitHub Release and Upload Asset
+    - name: Create GitHub Release with Asset
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: v1.0.${{ github.run_number }} # Replace with your versioning logic
-        release_name: Release v1.0.${{ github.run_number }}
+        name: Release v1.0.${{ github.run_number }}
         body: ${{ github.event.head_commit.message }}
         draft: false
         prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-
-    # Step 3: Upload build artifacts to the release
-    - name: Upload Release Assets
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: x64\Release\DescendantInternal.dll
-        asset_name: DescendantInternal.dll
-        asset_content_type: application/octet-stream
+        files: x64/Release/DescendantInternal.dll
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
