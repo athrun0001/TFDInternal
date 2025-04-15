@@ -15,11 +15,11 @@ jobs:
     steps:
     # Step 1: Check out the code
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # Step 2: Set up MSBuild environment
     - name: Set up MSBuild
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v2
 
     # Step 3: Build the project
     - name: Build Solution
@@ -31,7 +31,7 @@ jobs:
 
     # Step 5: Create GitHub Release and Upload Asset
     - name: Create GitHub Release with Asset
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: v1.0.${{ github.run_number }} # Replace with your versioning logic
         name: Release v1.0.${{ github.run_number }}
