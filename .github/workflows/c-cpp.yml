@@ -44,6 +44,6 @@ jobs:
         body: ${{ github.event.head_commit.message }}
         draft: false
         prerelease: false
-        files: x64\Release\DescendantInternal.dll
+        files: x64/Release/DescendantInternal.dll
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
