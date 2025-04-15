@@ -25,16 +25,10 @@ jobs:
     - name: Build Solution
       run: msbuild DescendantInternal.sln /p:Configuration=Release
 
+    # Step 4: List Files in Release Directory
     - name: List Files in Output Directory
       run: dir x64\Release
 
-    # Step 4: Archive build artifacts (optional)
-    - name: Archive Build Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-artifacts
-        path: x64\Release
-        
     # Step 5: Create GitHub Release and Upload Asset
     - name: Create GitHub Release with Asset
       uses: softprops/action-gh-release@v1
