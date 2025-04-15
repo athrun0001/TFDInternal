@@ -883,6 +883,103 @@ namespace ZeroGUI
 		}
 	}
 
+	void Combobox1(char* name, FVector2D size, int* value, const std::vector<const char*>& items)
+	{
+		elements_count++;
+
+		FVector2D padding = { 5.0f, 10.0f };
+		FVector2D pos = { menu_pos.X + padding.X + offset_x, menu_pos.Y + padding.Y + offset_y };
+
+		if (sameLine)
+		{
+			pos.X = last_element_pos.X + last_element_size.X + padding.X;
+			pos.Y = last_element_pos.Y;
+		}
+
+		if (pushY)
+		{
+			pos.Y = pushYvalue;
+			pushY = false;
+			pushYvalue = 0.0f;
+			offset_y = pos.Y - menu_pos.Y;
+		}
+
+		bool isHovered = MouseInZone(pos, size);
+
+		// Background
+		if (isHovered || checkbox_enabled[elements_count])
+		{
+			drawFilledRect(pos, size.X, size.Y, Colors::Combobox_Hovered);
+			hover_element = true;
+		}
+		else
+		{
+			drawFilledRect(pos, size.X, size.Y, Colors::Combobox_Idle);
+		}
+
+		if (!sameLine)
+			offset_y += size.Y + padding.Y;
+
+		// Label text
+		FVector2D textPos = { pos.X + size.X + 5.0f, pos.Y + size.Y / 2.0f };
+		TextLeft(name, textPos, FLinearColor{ 1, 1, 1, 1 }, false);
+
+		// Display selected item
+		if (*value >= 0 && *value < items.size())
+		{
+			FVector2D selectedTextPos = { pos.X + size.X / 2.0f, pos.Y + size.Y / 2.0f };
+			TextCenter((char*)items[*value], selectedTextPos, FLinearColor{ 1, 1, 1, 1 }, false);
+		}
+
+		FVector2D element_pos = pos;
+		bool isHovered2 = false;
+
+		if (checkbox_enabled[elements_count])
+		{
+			for (int num = 0; num < items.size(); ++num)
+			{
+				element_pos.Y += 25.0f;
+				isHovered2 = MouseInZone(element_pos, FVector2D{ size.X, 25.0f });
+
+				if (isHovered2)
+				{
+					hover_element = true;
+					PostRenderer::drawFilledRect(element_pos, size.X, 25.0f, Colors::Combobox_Hovered);
+
+					if (mouseDown)
+					{
+						*value = num;
+						checkbox_enabled[elements_count] = false;
+					}
+				}
+				else
+				{
+					PostRenderer::drawFilledRect(element_pos, size.X, 25.0f, Colors::Combobox_Idle);
+				}
+
+				PostRenderer::TextLeft((char*)items[num], FVector2D{ element_pos.X + 5.0f, element_pos.Y + 15.0f }, FLinearColor{ 1, 1, 1, 1 }, false);
+			}
+
+			current_element_size.X = element_pos.X + 5.0f;
+			current_element_size.Y = element_pos.Y + 5.0f;
+		}
+
+		sameLine = false;
+		last_element_pos = pos;
+		last_element_size = size;
+		if (first_element_pos.X == 0.0f)
+			first_element_pos = pos;
+
+		if (isHovered && mouseDown)
+		{
+			checkbox_enabled[elements_count] = !checkbox_enabled[elements_count];
+		}
+
+		if (!isHovered && !isHovered2 && mouseDown)
+		{
+			checkbox_enabled[elements_count] = false;
+		}
+	}
 
 	std::string VirtualKeyCodeToString(UCHAR virtualKey)
 	{

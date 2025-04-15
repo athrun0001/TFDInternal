@@ -81,24 +81,24 @@ namespace TFD_SDK
 	}
 
 
-	void UM1PrivateOnlineServiceComponent::ServerChangePlayer(const struct FM1TemplateId& InCharacterTid)
-	{
-		static class UFunction* Func = nullptr;
+	//void UM1PrivateOnlineServiceComponent::ServerChangePlayer(const struct FM1TemplateId& InCharacterTid)
+	//{
+	//	static class UFunction* Func = nullptr;
 
-		if (Func == nullptr)
-			Func = Class->GetFunction("M1PrivateOnlineServiceComponent", "ServerChangePlayer");
+	//	if (Func == nullptr)
+	//		Func = Class->GetFunction("M1PrivateOnlineServiceComponent", "ServerChangePlayer");
 
-		M1PrivateOnlineServiceComponent_ServerChangePlayer Parms{};
+	//	M1PrivateOnlineServiceComponent_ServerChangePlayer Parms{};
 
-		Parms.InCharacterTid = std::move(InCharacterTid);
+	//	Parms.InCharacterTid = std::move(InCharacterTid);
 
-		auto Flgs = Func->FunctionFlags;
-		Func->FunctionFlags |= 0x400;
+	//	auto Flgs = Func->FunctionFlags;
+	//	Func->FunctionFlags |= 0x400;
 
-		UObject::ProcessEvent(Func, &Parms);
+	//	UObject::ProcessEvent(Func, &Parms);
 
-		Func->FunctionFlags = Flgs;
-	}
+	//	Func->FunctionFlags = Flgs;
+	//}
 
 	void UM1WeaponRoundsComponent::ClientFillCurrentRoundByServer()
 	{
@@ -758,6 +758,24 @@ namespace TFD_SDK
 		M1MissionControlComponent_ServerLeaveMission Parms{};
 
 		Parms.InReason = InReason;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
+	void UM1PrivateOnlineServicePreset::ServerRequestApplyPreset(int32 InPresetIndex)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1PrivateOnlineServicePreset", "ServerRequestApplyPreset");
+
+		M1PrivateOnlineServicePreset_ServerRequestApplyPreset Parms{};
+
+		Parms.InPresetIndex = InPresetIndex;
 
 		auto Flgs = Func->FunctionFlags;
 		Func->FunctionFlags |= 0x400;

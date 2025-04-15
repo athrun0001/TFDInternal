@@ -10,85 +10,118 @@
 
 bool CheckPointers()
 {
-	if (!GEngine)
-		GEngine = TFD_SDK::UEngine::GetEngine();
-	if (GEngine)
+if (!GEngine)
+	GEngine = TFD_SDK::UEngine::GetEngine();
+if (GEngine)
+{
+	GWorld = nullptr;
+	for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
 	{
-		GWorld = nullptr;
-		for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
+		TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
+
+		if (!Obj)
+			continue;
+
+		if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
+			Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
+			Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
+			Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
+			Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
+			continue;
+
+		if (Obj->Flags & TFD_SDK::EObjectFlags::LoadCompleted && Obj->IsA(TFD_SDK::UWorld::StaticClass()) && !Obj->IsDefaultObject())
 		{
-			TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
-
-			if (!Obj)
-				continue;
-
-			if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
-				Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
-				Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
-				Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
-				Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
-				continue;
-
-			if (Obj->Flags & TFD_SDK::EObjectFlags::LoadCompleted && Obj->IsA(TFD_SDK::UWorld::StaticClass()) && !Obj->IsDefaultObject())
+			TFD_SDK::UWorld* World = static_cast<TFD_SDK::UWorld*>(Obj);
+			if (World->OwningGameInstance)
 			{
-				TFD_SDK::UWorld* World = static_cast<TFD_SDK::UWorld*>(Obj);
-				if (World->OwningGameInstance)
+				if (World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 				{
-					if (World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+					std::string Name = World->Name.ToString();
+					if (Name != "" && Name != "None" && Name.empty() != true)
 					{
-						std::string Name = World->Name.ToString();
-						if (Name != "" && Name != "None" && Name.empty() != true)
-						{
-							GWorld = World;
-							break;
-						}
+						GWorld = World;
+						break;
 					}
 				}
 			}
 		}
-		if (GWorld && isGUIInit)
+		if (Obj->IsA(TFD_SDK::UM1Account::StaticClass()))
 		{
-			if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
+			TFD_SDK::UM1Account* Account = static_cast<TFD_SDK::UM1Account*>(Obj);
+			if (Account->Preset)
 			{
-				if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+				if (Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()) && !Account->Preset->IsDefaultObject())
 				{
-					std::string Name = GWorld->Name.ToString();
-					if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
+					Account->Preset->PresetSlotByIndex;
+                       if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()) && !Account->Preset->IsDefaultObject())  
+                       {  
+                           //int i = 0;
+						   AccountPresets = static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset);
+						   if (Presets.empty() || (!Presets.empty() &&Presets.size() != AccountPresets->PresetSlotByIndex.Num()))
+						   {
+							   Presets.clear();
+							   for (const auto& Pair : AccountPresets->PresetSlotByIndex)
+							   {
+								   UC::int32 Key = Pair.Key();
+								   TFD_SDK::FM1PresetSlot Value = Pair.Value();
+
+								   // Add Value.PresetName.ToString() to Presets array
+								   // Perform operations with Key and Value  
+								   // Example:  
+								   /*char SlotText[128];
+								   sprintf_s(SlotText, sizeof(SlotText), "Key: %d Value1: %s Value2: %d", Key, Value.PresetName.ToString().c_str(), Value.PresetIndex);
+								   ZeroGUI::TextLeft((char*)SlotText, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
+								   i++;*/
+								   Presets.push_back(Value.PresetName.ToString());
+							   }
+						   }
+                       }
+				}
+			}
+		}
+	}
+	if (GWorld && isGUIInit)
+	{
+		if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
+		{
+			if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+			{
+				std::string Name = GWorld->Name.ToString();
+				if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
+				{
+					if (GWorld->OwningGameInstance->LocalPlayers && GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
 					{
-						if (GWorld->OwningGameInstance->LocalPlayers && GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
+						if (
+							GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController
+							&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass())
+							&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::APlayerController::StaticClass()))
 						{
-							if (
-								GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController
-								&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass())
-								&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::APlayerController::StaticClass()))
+							TFD_SDK::AM1PlayerController* PC = static_cast<TFD_SDK::AM1PlayerController*>(GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController);
+							if (PC->Character
+								&& PC->Character->IsA(TFD_SDK::AM1Player::StaticClass())
+								&& PC->Character->IsA(TFD_SDK::ACharacter::StaticClass())
+								&& PC->ActorManager_Subsystem
+								&& PC->ActorManager_Subsystem->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass())
+								&& PC->PlayerState
+								&& PC->PlayerState->IsA(TFD_SDK::APlayerState::StaticClass()))
 							{
-								TFD_SDK::AM1PlayerController* PC = static_cast<TFD_SDK::AM1PlayerController*>(GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController);
-								if (PC->Character
-									&& PC->Character->IsA(TFD_SDK::AM1Player::StaticClass())
-									&& PC->Character->IsA(TFD_SDK::ACharacter::StaticClass())
-									&& PC->ActorManager_Subsystem
-									&& PC->ActorManager_Subsystem->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass())
-									&& PC->PlayerState
-									&& PC->PlayerState->IsA(TFD_SDK::APlayerState::StaticClass()))
+								PlayerController = PC;
+								PlayerState = PC->PlayerState;
+								LocalPlayer = GWorld->OwningGameInstance->LocalPlayers[0];
+								LocalCharacter = static_cast<TFD_SDK::AM1Player*>(PlayerController->Character);
+								Actors = PC->ActorManager_Subsystem;
+								ZeroGUI::controller = GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController;
+								if (PlayerController->IsA(TFD_SDK::AM1PlayerControllerInGame::StaticClass()))
 								{
-									PlayerController = PC;
-									PlayerState = PC->PlayerState;
-									LocalPlayer = GWorld->OwningGameInstance->LocalPlayers[0];
-									LocalCharacter = static_cast<TFD_SDK::AM1Player*>(PlayerController->Character);
-									Actors = PC->ActorManager_Subsystem;
-									ZeroGUI::controller = GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController;
-									if (PlayerController->IsA(TFD_SDK::AM1PlayerControllerInGame::StaticClass()))
-									{
-										PlayerIngameController = static_cast<TFD_SDK::AM1PlayerControllerInGame*>(PlayerController);
-										inGame = true;
-									}
-									else
-									{
-										inGame = false;
-										PlayerIngameController = nullptr;
-									}
-									return true;
+									PlayerIngameController = static_cast<TFD_SDK::AM1PlayerControllerInGame*>(PlayerController);
+									inGame = true;
 								}
+								else
+								{
+									inGame = false;
+									PlayerIngameController = nullptr;
+								}
+								return true;
 							}
 						}
 					}
@@ -96,14 +129,15 @@ bool CheckPointers()
 			}
 		}
 	}
-	PlayerController = nullptr;
-	PlayerState = nullptr;
-	LocalPlayer = nullptr;
-	LocalCharacter = nullptr;
-	Actors = nullptr;
-	PlayerIngameController = nullptr;
-	inGame = false;
-	return false;
+}
+PlayerController = nullptr;
+PlayerState = nullptr;
+LocalPlayer = nullptr;
+LocalCharacter = nullptr;
+Actors = nullptr;
+PlayerIngameController = nullptr;
+inGame = false;
+return false;
 }
 
 bool WorldToScreen(const TFD_SDK::FVector& worldLoc, TFD_SDK::FVector2D* screenPos)
@@ -294,14 +328,14 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (cfg_EnableAimbotToggle && IsKeyPressed(cfg_AimbotToggleKey))
 				cfg_EnableAimbot = !cfg_EnableAimbot;
 
-			if (IsKeyPressed(cfg_HotSwapKey))
+			/*if (IsKeyPressed(cfg_HotSwapKey))
 			{
 				if (HotSwapCharacters[HotSwapIndex] != 0)
 				{
 					TFD_SDK::FM1TemplateId id = { HotSwapCharacters[HotSwapIndex] };
 					PlayerController->PrivateOnlineServiceComponent->ServerChangePlayer(id);
 				}
-			}
+			}*/
 			static bool timeEnable = false;
 			static bool isTimeHeld = false;
 			if (!timeEnable && IsKeyHeld(cfg_TimeScaleHoldKey))
@@ -358,12 +392,26 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				LeaveMission();
 			}
 
+			if (IsKeyPressed(cfg_SwitchPreset))
+			{
+				SwitchPreset();
+			}
+
+			if (IsKeyPressed(cfg_RefreshPresetList))
+			{
+				RefreshPresetList();
+			}
+
 			if (cfg_HotSwapOverlay)
 			{
 				for (int i = 0; i < 4; i++)
 				{
-					char buffer[12];
-					sprintf_s(buffer, "%d", HotSwapCharacters[i]);
+					char buffer[100];
+					if (!Presets.empty() && HotSwapPreset[i] != -1)
+						sprintf_s(buffer, "Preset: %s", Presets[HotSwapPreset[i]].c_str());
+					else
+						sprintf_s(buffer, "Preset: None");
+
 					if (i == HotSwapIndex)
 						ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
 					else
@@ -460,7 +508,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			{
 				DrawMenu();
 			}
-
+			ZeroGUI::Render();
 			ZeroGUI::Draw_Cursor(cfg_DrawMenu);
 
 
@@ -1133,6 +1181,39 @@ void LeaveMission()
 	MCC->ServerLeaveMission(TFD_SDK::EM1MissionEndReason::ExplicitGiveUp);
 }
 
+void SwitchPreset()
+{
+	if (HotSwapPreset[HotSwapIndex] != -1)
+	{
+		//TFD_SDK::FM1TemplateId id = { HotSwapCharacters[HotSwapIndex] };
+		//PlayerController->PrivateOnlineServiceComponent->ServerChangePlayer(id);
+		if (PlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
+		{
+			for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : PlayerController->PrivateOnlineServiceComponent->SubServices)
+			{
+				if (Subserv->IsA(TFD_SDK::UM1PrivateOnlineServicePreset::StaticClass()) && Subserv->bIsReady == true)
+				{
+					TFD_SDK::UM1PrivateOnlineServicePreset* SubservPreset = static_cast<TFD_SDK::UM1PrivateOnlineServicePreset*>(Subserv);
+					SubservPreset->ServerRequestApplyPreset(HotSwapPreset[HotSwapIndex]);
+					break;
+				}
+			}
+		}
+	}
+}
+
+void RefreshPresetList()
+{
+	HotSwapPreset = { -1, -1, -1, -1 };
+	Presets.clear();
+	for (const auto& Pair : AccountPresets->PresetSlotByIndex)
+	{
+		UC::int32 Key = Pair.Key();
+		TFD_SDK::FM1PresetSlot Value = Pair.Value();
+		Presets.push_back(Value.PresetName.ToString());
+	}
+}
+
 HRESULT UpdateControllerState()
 {
 	DWORD dwResult;
@@ -1393,6 +1474,7 @@ void DrawMenu()
 		if (ZeroGUI::ButtonTab((char*)"Aimbot", TFD_SDK::FVector2D{ 110, 25 }, tab == 2)) tab = 2;
 		if (ZeroGUI::ButtonTab((char*)"Extras", TFD_SDK::FVector2D{ 110, 25 }, tab == 3)) tab = 3;
 		if (ZeroGUI::ButtonTab((char*)"Mission", TFD_SDK::FVector2D{ 110, 25 }, tab == 4)) tab = 4;
+		if (ZeroGUI::ButtonTab((char*)"Preset", TFD_SDK::FVector2D{ 110, 25 }, tab == 5)) tab = 5;
 		//if (ZeroGUI::ButtonTab((char*)"Tools", TFD_SDK::FVector2D{ 110, 25 }, tab == 3)) tab = 3;
 		ZeroGUI::NextColumn(130.0f);
 
@@ -1504,23 +1586,10 @@ void DrawMenu()
 			if (ZeroGUI::Checkbox((char*)"Enable Bones Cache", &cfg_CacheEnemyBones) && cfg_CacheEnemyBones)
 				WriteEnemyBonesData();
 
-			ZeroGUI::Checkbox((char*)"Show Swap Slot Overlay", &cfg_HotSwapOverlay);
-			ZeroGUI::Text((char*)"Use the Up and Down keys to change slots.");
-			char SlotText[64];
-			sprintf_s(SlotText, "Character ID for Slot %d: %d", HotSwapIndex, HotSwapCharacters[HotSwapIndex]);
-			ZeroGUI::Text((char*)SlotText);
-			if (ZeroGUI::Button((char*)"Set Character Slot", TFD_SDK::FVector2D{ 120, 30 }))
-			{
-				HotSwapCharacters[HotSwapIndex] = LocalCharacter->CharacterId.ID;
-			}
+			
+			/*ZeroGUI::Text((char*)"Hot Swap Key:");
 			ZeroGUI::SameLine();
-			if (ZeroGUI::Button((char*)"Clear Character Slot", TFD_SDK::FVector2D{ 120, 30 }))
-			{
-				HotSwapCharacters[HotSwapIndex] = 0;
-			}
-			ZeroGUI::Text((char*)"Hot Swap Key:");
-			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Hot Swap Hotkey", TFD_SDK::FVector2D{ 110, 25 }, &cfg_HotSwapKey);
+			ZeroGUI::Hotkey((char*)"Hot Swap Hotkey", TFD_SDK::FVector2D{ 110, 25 }, &cfg_HotSwapKey);*/
 
 			ZeroGUI::SliderFloat((char*)"Timescale:", &cfg_TimeScale, 1.0f, 10.0f);
 			ZeroGUI::Text((char*)"Timescale Toggle:");
@@ -1552,6 +1621,40 @@ void DrawMenu()
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Leave Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_LeaveMissionKey);
 		}
+		if (tab == 5)
+		{
+			//ZeroGUI::Combobox((char*)"Select Preset", TFD_SDK::FVector2D{ 130, 25 }, 0, "Zero", NULL);
+
+        // Fix the issue by passing the address of the integer variable instead of the integer itself.  
+			ZeroGUI::Checkbox((char*)"Show Swap Slot Overlay", &cfg_HotSwapOverlay);
+			ZeroGUI::Text((char*)"Use the Up and Down keys to change slots.");
+			char SlotText[64];
+			sprintf_s(SlotText, "Preset Name for Slot %d: %s", HotSwapIndex, HotSwapPreset[HotSwapIndex] != -1 ? Presets[HotSwapPreset[HotSwapIndex]].c_str() : "None");
+			ZeroGUI::Text((char*)SlotText);
+			if (ZeroGUI::Button((char*)"Clear Preset Slot", TFD_SDK::FVector2D{ 120, 30 }))
+			{
+				HotSwapPreset[HotSwapIndex] = -1;
+			}
+			ZeroGUI::Text((char*)"Switch Preset:");
+			ZeroGUI::SameLine();
+			ZeroGUI::Hotkey((char*)"Switch Preset Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_SwitchPreset);
+
+			ZeroGUI::Text((char*)"Refresh Preset:");
+			ZeroGUI::SameLine();
+			ZeroGUI::Hotkey((char*)"Refresh Preset Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_RefreshPresetList);
+			
+			std::vector<const char*> cstrPresets;
+			cstrPresets.reserve(Presets.size());
+			for (const auto& preset : Presets) {
+				cstrPresets.push_back(preset.c_str());
+			}
+			 // Declare an integer variable to hold the value.  
+			ZeroGUI::Combobox1((char*)"Select Preset 1", TFD_SDK::FVector2D{ 130, 25 }, &HotSwapPreset[0], cstrPresets);
+			ZeroGUI::Combobox1((char*)"Select Preset 2", TFD_SDK::FVector2D{ 130, 25 }, &HotSwapPreset[1], cstrPresets);
+			ZeroGUI::Combobox1((char*)"Select Preset 3", TFD_SDK::FVector2D{ 130, 25 }, &HotSwapPreset[2], cstrPresets);
+			ZeroGUI::Combobox1((char*)"Select Preset 4", TFD_SDK::FVector2D{ 130, 25 }, &HotSwapPreset[3], cstrPresets);
+		}
+
 	}
 }
 
@@ -1600,13 +1703,20 @@ void LoadCFG()
 		cfg_CacheEnemyNames = ini.GetBoolValue("Extra", "CacheNames");
 		cfg_CacheEnemyBones = ini.GetBoolValue("Extra", "CacheBones");
 
-		cfg_HotSwapKey = (int)ini.GetDoubleValue("Extra", "HotSwapKey");
-		cfg_HotSwapOverlay = ini.GetBoolValue("Extra", "HotSwapOverlay");
+		//cfg_HotSwapKey = (int)ini.GetDoubleValue("Extra", "HotSwapKey");
+		
 
-		HotSwapCharacters[0] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot1", 0);
+		/*HotSwapCharacters[0] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot1", 0);
 		HotSwapCharacters[1] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot2", 0);
 		HotSwapCharacters[2] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot3", 0);
-		HotSwapCharacters[3] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot4", 0);
+		HotSwapCharacters[3] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot4", 0);*/
+		cfg_HotSwapOverlay = ini.GetBoolValue("Preset", "HotSwapOverlay");
+		cfg_SwitchPreset = (int)ini.GetDoubleValue("Preset", "SwitchPresetKey");
+		cfg_RefreshPresetList = (int)ini.GetDoubleValue("Preset", "RefreshPresetKey");
+		HotSwapPreset[0] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset1", 0);
+		HotSwapPreset[1] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset2", 0);
+		HotSwapPreset[2] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset3", 0);
+		HotSwapPreset[3] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset4", 0);
 
 		cfg_TimeScale = ini.GetDoubleValue("Extra", "Timescale");
 		cfg_TimeScaleKey = (int)ini.GetDoubleValue("Extra", "TimescaleKey");
@@ -1659,16 +1769,23 @@ void SaveCFG()
 	ini.SetBoolValue("Extra", "CacheNames", cfg_CacheEnemyNames);
 	ini.SetBoolValue("Extra", "CacheBones", cfg_CacheEnemyBones);
 
-	ini.SetDoubleValue("Extra", "HotSwapKey", cfg_HotSwapKey);
-	ini.SetBoolValue("Extra", "HotSwapOverlay", cfg_HotSwapOverlay);
+	//ini.SetDoubleValue("Extra", "HotSwapKey", cfg_HotSwapKey);
+	
 
 	
 
-	ini.SetDoubleValue("Extra", "HotSwapSlot1", HotSwapCharacters[0]);
+	/*ini.SetDoubleValue("Extra", "HotSwapSlot1", HotSwapCharacters[0]);
 	ini.SetDoubleValue("Extra", "HotSwapSlot2", HotSwapCharacters[1]);
 	ini.SetDoubleValue("Extra", "HotSwapSlot3", HotSwapCharacters[2]);
-	ini.SetDoubleValue("Extra", "HotSwapSlot4", HotSwapCharacters[3]);
-
+	ini.SetDoubleValue("Extra", "HotSwapSlot4", HotSwapCharacters[3]);*/
+	ini.SetBoolValue("Preset", "HotSwapOverlay", cfg_HotSwapOverlay);
+	ini.SetDoubleValue("Preset", "SwitchPresetKey", cfg_SwitchPreset);
+	ini.SetDoubleValue("Preset", "RefreshPresetKey", cfg_RefreshPresetList);
+	ini.SetDoubleValue("Preset", "HotSwapPreset1", HotSwapPreset[0]);
+	ini.SetDoubleValue("Preset", "HotSwapPreset2", HotSwapPreset[1]);
+	ini.SetDoubleValue("Preset", "HotSwapPreset3", HotSwapPreset[2]);
+	ini.SetDoubleValue("Preset", "HotSwapPreset4", HotSwapPreset[3]);
+	
 	ini.SetDoubleValue("Extra", "Timescale", cfg_TimeScale);
 	ini.SetDoubleValue("Extra", "TimescaleKey", cfg_TimeScaleKey);
 	ini.SetDoubleValue("Extra", "TimescaleHoldKey", cfg_TimeScaleHoldKey);

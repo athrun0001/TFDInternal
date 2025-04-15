@@ -362,12 +362,51 @@ namespace TFD_SDK
 	public:
 		uint8 Pad_UM1ActorComp_Class[0x20];
 	};
+	// 0x0018 (0x0040 - 0x0028)
+	class UM1PrivateOnlineSubService : public UObject
+	{
+	public:
+		uint8                                         Pad_28[0x10];                                      // 0x0028(0x0010)(Fixing Size After Last Property [ Dumper-7 ])
+		bool                                          bIsReady;                                          // 0x0038(0x0001)(Net, ZeroConstructor, IsPlainOldData, RepNotify, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1PrivateOnlineSubService">();
+		}
+	};
+	// 0x0060 (0x00A0 - 0x0040)
+	class UM1PrivateOnlineServicePreset final : public UM1PrivateOnlineSubService
+	{
+	public:
+		uint8                                         Pad_40[0x60];                                      // 0x0040(0x0060)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+	public:
+		void ServerRequestApplyPreset(int32 InPresetIndex);
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1PrivateOnlineServicePreset">();
+		}
+	};
+	// 0x0004 (0x0004 - 0x0000)
+	struct M1PrivateOnlineServicePreset_ServerRequestApplyPreset final
+	{
+	public:
+		int32                                         InPresetIndex;                                     // 0x0000(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
 	// 0x0948 (0x0A10 - 0x00C8)
 	class UM1PrivateOnlineServiceComponent final : public UM1ActorComponent
 	{
 	public:
-		uint8 Pad_UM1PrivateOnlineServiceComponent_Class[0x948]; // 0xC8
-		void ServerChangePlayer(const struct FM1TemplateId& InCharacterTid);
+		TArray<class UM1PrivateOnlineSubService*>     SubServices;        // 0x00C8(0x0010)(ExportObject, ZeroConstructor, Transient, ContainsInstancedReference, NativeAccessSpecifierPrivate)
+		uint8 Pad_UM1PrivateOnlineServiceComponent_Class[0x938]; // 0xC8
+		//void ServerChangePlayer(const struct FM1TemplateId& InCharacterTid);
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1PrivateOnlineServiceComponent">();
+		}
 	};
 	// 0x0080 (0x0128 - 0x00A8)
 	class UM1HeartbeatTesterComponent final : public UActorComponent
@@ -1244,13 +1283,85 @@ namespace TFD_SDK
 		TArray<class AM1MissionTargetInteraction*>    MissionTargets;											     // 0x07F0(0x0010)(Edit, ZeroConstructor, EditConst, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_AM1MissionTaskActorDestructionVulgusPost_Class[0x40];      // 0x0800
 	};
+
+
+	enum class EM1PresetSlotType : uint8
+	{
+		Ranged_0 = 0,
+		Ranged_1 = 1,
+		Ranged_2 = 2,
+		Reactor = 9,
+		Necklace = 10,
+		Earring = 11,
+		Ring = 12,
+		Bracelet = 13,
+		Face = 20,
+		Hair = 21,
+		Fellow = 70,
+		PlayerCharacter = 80,
+		AltWeapon = 90,
+		PickupWeapon = 91,
+		Max = 99,
+	};
+	// 0x0028 (0x0028 - 0x0000)
+	struct FM1PresetItem final
+	{
+	public:
+		EM1PresetSlotType                             PresetSlotType;                                    // 0x0000(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+		int64                                         ItemUid;                                           // 0x0008(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		int32                                         RuneLoadoutSlotIndex;                              // 0x0010(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		int32                                         CustomizeLoadoutSlotIndex;                         // 0x0014(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		int32                                         TuningboardLoadoutSlotIndex;                       // 0x0018(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		EM1ItemType                                   ItemType;                                          // 0x001C(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		uint8                                         Pad_1D[0x3];                                       // 0x001D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
+		struct FM1TemplateId                          ItemTid;                                           // 0x0020(0x0004)(NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		int32                                         Level;                                             // 0x0024(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+	// 0x0068 (0x0068 - 0x0000)
+	struct FM1PresetSlot final
+	{
+	public:
+		int32                                         PresetIndex;                                       // 0x0000(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
+		class FString                                 PresetName;                                        // 0x0008(0x0010)(ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		TMap<EM1PresetSlotType, struct FM1PresetItem> PresetItemBySlotType;                              // 0x0018(0x0050)(NativeAccessSpecifierPublic)
+	};
+	// 0x0050 (0x0078 - 0x0028)
+	class UM1AccountPreset final : public UObject
+	{
+	public:
+		TMap<int32, struct FM1PresetSlot>             PresetSlotByIndex;                                 // 0x0028(0x0050)(NativeAccessSpecifierPrivate)
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1AccountPreset">();
+		}
+	};
+
+	// 0x03A0 (0x03C8 - 0x0028)
+	class UM1Account final : public UObject
+	{
+	public:
+		uint8                                         Pad_3C0[0x2B8];                                      // 0x0028(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+		class UM1AccountPreset* Preset;																	 // 0x02E0(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_3C1[0xE0];                                      // 0x02E8(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1Account">();
+		}
+	};
+
 	// end code
 	// 0x0004 (0x0004 - 0x0000)
-	struct M1PrivateOnlineServiceComponent_ServerChangePlayer final
+	/*struct M1PrivateOnlineServiceComponent_ServerChangePlayer final
 	{
 	public:
 		struct FM1TemplateId InCharacterTid;
-	};
+	};*/
 	// 0x0001 (0x0001 - 0x0000)
 	struct M1Character_IsDead final
 	{
