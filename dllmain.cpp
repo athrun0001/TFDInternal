@@ -397,20 +397,15 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				SwitchPreset();
 			}
 
-			if (IsKeyPressed(cfg_RefreshPresetList))
-			{
-				RefreshPresetList();
-			}
-
 			if (cfg_HotSwapOverlay)
 			{
 				for (int i = 0; i < 4; i++)
 				{
 					char buffer[100];
 					if (!Presets.empty() && HotSwapPreset[i] != -1)
-						sprintf_s(buffer, "Preset: %s", Presets[HotSwapPreset[i]].c_str());
+						sprintf_s(buffer, "Preset %d: %s", i+1, Presets[HotSwapPreset[i]].c_str());
 					else
-						sprintf_s(buffer, "Preset: None");
+						sprintf_s(buffer, "Preset %d: None",i+1);
 
 					if (i == HotSwapIndex)
 						ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
@@ -1635,14 +1630,13 @@ void DrawMenu()
 			{
 				HotSwapPreset[HotSwapIndex] = -1;
 			}
+			if (ZeroGUI::Button((char*)"Refresh Preset List", TFD_SDK::FVector2D{ 120, 30 }))
+			{
+				RefreshPresetList();
+			}
 			ZeroGUI::Text((char*)"Switch Preset:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Switch Preset Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_SwitchPreset);
-
-			ZeroGUI::Text((char*)"Refresh Preset:");
-			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Refresh Preset Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_RefreshPresetList);
-			
 			std::vector<const char*> cstrPresets;
 			cstrPresets.reserve(Presets.size());
 			for (const auto& preset : Presets) {
@@ -1712,7 +1706,6 @@ void LoadCFG()
 		HotSwapCharacters[3] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot4", 0);*/
 		cfg_HotSwapOverlay = ini.GetBoolValue("Preset", "HotSwapOverlay");
 		cfg_SwitchPreset = (int)ini.GetDoubleValue("Preset", "SwitchPresetKey");
-		cfg_RefreshPresetList = (int)ini.GetDoubleValue("Preset", "RefreshPresetKey");
 		HotSwapPreset[0] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset1", 0);
 		HotSwapPreset[1] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset2", 0);
 		HotSwapPreset[2] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset3", 0);
@@ -1780,7 +1773,6 @@ void SaveCFG()
 	ini.SetDoubleValue("Extra", "HotSwapSlot4", HotSwapCharacters[3]);*/
 	ini.SetBoolValue("Preset", "HotSwapOverlay", cfg_HotSwapOverlay);
 	ini.SetDoubleValue("Preset", "SwitchPresetKey", cfg_SwitchPreset);
-	ini.SetDoubleValue("Preset", "RefreshPresetKey", cfg_RefreshPresetList);
 	ini.SetDoubleValue("Preset", "HotSwapPreset1", HotSwapPreset[0]);
 	ini.SetDoubleValue("Preset", "HotSwapPreset2", HotSwapPreset[1]);
 	ini.SetDoubleValue("Preset", "HotSwapPreset3", HotSwapPreset[2]);

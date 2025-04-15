@@ -207,7 +207,6 @@ int cfg_InstantInfilKey = VK_HOME;
 int cfg_RestartMissionKey = VK_END;
 int cfg_LeaveMissionKey = VK_PRIOR;
 int cfg_SwitchPreset = VK_NEXT;
-int cfg_RefreshPresetList = VK_UP;
 float cfg_TimeScale = 1.0f;
 int cfg_TimeScaleKey = VK_F2;
 int cfg_TimeScaleHoldKey = VK_CONTROL;
