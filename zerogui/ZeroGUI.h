@@ -449,7 +449,7 @@ namespace ZeroGUI
 
 		sameLine = false;
 		last_element_pos = pos;
-		//last_element_size = size;
+		last_element_size.X = 125.0f;
 		if (first_element_pos.X == 0.0f)
 			first_element_pos = pos;
 	}
