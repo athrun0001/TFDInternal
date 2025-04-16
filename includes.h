@@ -168,6 +168,7 @@ void RestartLastMission();
 void LeaveMission();
 void SwitchPreset();
 void RefreshPresetList();
+UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> SortPresetMapByIndex(const UC::TMap<UC::int32, TFD_SDK::FM1PresetSlot>& PresetMap);
 
 /*
 *  Aimbot

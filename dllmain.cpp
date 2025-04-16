@@ -45,37 +45,58 @@ if (GEngine)
 				}
 			}
 		}
-		if (Obj->IsA(TFD_SDK::UM1Account::StaticClass()))
+		if (Obj->IsA(TFD_SDK::UM1Account::StaticClass()) && !Obj->IsDefaultObject())
 		{
 			TFD_SDK::UM1Account* Account = static_cast<TFD_SDK::UM1Account*>(Obj);
 			if (Account->Preset)
 			{
 				if (Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()) && !Account->Preset->IsDefaultObject())
 				{
-					Account->Preset->PresetSlotByIndex;
-                       if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()) && !Account->Preset->IsDefaultObject())  
-                       {  
-                           //int i = 0;
-						   AccountPresets = static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset);
-						   if (Presets.empty() || (!Presets.empty() &&Presets.size() != AccountPresets->PresetSlotByIndex.Num()))
-						   {
-							   Presets.clear();
-							   for (const auto& Pair : AccountPresets->PresetSlotByIndex)
-							   {
-								   UC::int32 Key = Pair.Key();
-								   TFD_SDK::FM1PresetSlot Value = Pair.Value();
+					//int l = 0;
+					AccountPresets = static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset);
+					if (Presets.empty())
+					{
+						UC::int32 MaxIndex = 0;
+						for (const auto& Pair : AccountPresets->PresetSlotByIndex)
+						{
+							TFD_SDK::FM1PresetSlot Value = Pair.Value();
+							if (MaxIndex < Value.PresetIndex)
+							{
+								MaxIndex = Value.PresetIndex;
+							}
+						}
 
-								   // Add Value.PresetName.ToString() to Presets array
-								   // Perform operations with Key and Value  
-								   // Example:  
-								   /*char SlotText[128];
-								   sprintf_s(SlotText, sizeof(SlotText), "Key: %d Value1: %s Value2: %d", Key, Value.PresetName.ToString().c_str(), Value.PresetIndex);
-								   ZeroGUI::TextLeft((char*)SlotText, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
-								   i++;*/
-								   Presets.push_back(Value.PresetName.ToString());
-							   }
-						   }
-                       }
+						//UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> SortedPresets = SortPresetMapByIndex(AccountPresets->PresetSlotByIndex);
+
+						for (const auto& Pair : AccountPresets->PresetSlotByIndex)
+						{
+							UC::int32 Key = Pair.Key();
+							TFD_SDK::FM1PresetSlot Value = Pair.Value();
+
+							// Add Value.PresetName.ToString() to Presets array
+							// Perform operations with Key and Value  
+							// Example:  
+							/*char SlotText[150];
+							sprintf_s(SlotText, sizeof(SlotText), "Key: %d Value1: %d Value2: %s", Key, Value.PresetIndex, Value.PresetName.ToString().c_str());
+							ZeroGUI::TextLeft((char*)SlotText, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * l) }, ColorWhite, false);
+							l++;*/
+
+							bool bFound = false;
+							for (int j = 0; j <= MaxIndex; j++)
+							{
+								if (j == Value.PresetIndex)
+								{
+									Presets.push_back(Value.PresetName.ToString());
+									bFound = true;
+									break;
+								}
+							}
+							if (!bFound)
+							{
+								Presets.push_back("None");
+							}
+						}
+                    }
 				}
 			}
 		}
@@ -1178,7 +1199,7 @@ void LeaveMission()
 
 void SwitchPreset()
 {
-	if (HotSwapPreset[HotSwapIndex] != -1)
+	if (HotSwapPreset[HotSwapIndex] != -1 || (HotSwapPreset[HotSwapIndex] == -1 && Presets[HotSwapPreset[HotSwapIndex]].c_str() != "None"))
 	{
 		//TFD_SDK::FM1TemplateId id = { HotSwapCharacters[HotSwapIndex] };
 		//PlayerController->PrivateOnlineServiceComponent->ServerChangePlayer(id);
@@ -1200,13 +1221,68 @@ void SwitchPreset()
 void RefreshPresetList()
 {
 	HotSwapPreset = { -1, -1, -1, -1 };
+
+	UC::int32 MaxIndex = 0;
+	for (const auto& Pair : AccountPresets->PresetSlotByIndex)
+	{
+		TFD_SDK::FM1PresetSlot Value = Pair.Value();
+		if (MaxIndex < Value.PresetIndex)
+		{
+			MaxIndex = Value.PresetIndex;
+		}
+	}
+	//UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> SortedPresets = SortPresetMapByIndex(AccountPresets->PresetSlotByIndex);
 	Presets.clear();
 	for (const auto& Pair : AccountPresets->PresetSlotByIndex)
 	{
-		UC::int32 Key = Pair.Key();
 		TFD_SDK::FM1PresetSlot Value = Pair.Value();
-		Presets.push_back(Value.PresetName.ToString());
+		bool bFound = false;
+		for (int j = 0; j <= MaxIndex; j++)
+		{
+			if (j == Value.PresetIndex)
+			{
+				Presets.push_back(Value.PresetName.ToString());
+				bFound = true;
+				break;
+			}
+		}
+		if (!bFound)
+		{
+			Presets.push_back("None");
+		}
 	}
+
+}
+
+UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> SortPresetMapByIndex(const UC::TMap<UC::int32, TFD_SDK::FM1PresetSlot>& PresetMap)
+{
+	UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> Sorted;
+
+	// Extract
+	for (const auto& Pair : PresetMap)
+	{
+		Sorted.Add(Pair);
+	}
+
+	// Manual Bubble Sort by PresetIndex
+	const UC::int32 Count = Sorted.Num();
+	for (UC::int32 i = 0; i < Count - 1; ++i)
+	{
+		for (UC::int32 j = 0; j < Count - i - 1; ++j)
+		{
+			UC::int32 A = Sorted[j].Second.PresetIndex;
+			UC::int32 B = Sorted[j + 1].Second.PresetIndex;
+
+			if (A > B) // ascending sort
+			{
+				auto Temp = Sorted[j];
+				Sorted[j] = Sorted[j + 1];
+				Sorted[j + 1] = Temp;
+			}
+		}
+	}
+
+	return Sorted;
 }
 
 HRESULT UpdateControllerState()
