@@ -52,49 +52,22 @@ if (GEngine)
 			{
 				if (Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()) && !Account->Preset->IsDefaultObject())
 				{
-					//int l = 0;
+					
 					AccountPresets = static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset);
 					if (Presets.empty())
 					{
-						UC::int32 MaxIndex = 0;
+						//int l = 0;
 						for (const auto& Pair : AccountPresets->PresetSlotByIndex)
 						{
 							TFD_SDK::FM1PresetSlot Value = Pair.Value();
-							if (MaxIndex < Value.PresetIndex)
-							{
-								MaxIndex = Value.PresetIndex;
-							}
-						}
+							if (!Value.PresetName.ToString().empty())
+								Presets.push_back("[" + std::to_string(Value.PresetIndex) + "] " + Value.PresetName.ToString());
 
-						//UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> SortedPresets = SortPresetMapByIndex(AccountPresets->PresetSlotByIndex);
-
-						for (const auto& Pair : AccountPresets->PresetSlotByIndex)
-						{
-							UC::int32 Key = Pair.Key();
-							TFD_SDK::FM1PresetSlot Value = Pair.Value();
-
-							// Add Value.PresetName.ToString() to Presets array
-							// Perform operations with Key and Value  
-							// Example:  
-							/*char SlotText[150];
+							/*char SlotText[200];
 							sprintf_s(SlotText, sizeof(SlotText), "Key: %d Value1: %d Value2: %s", Key, Value.PresetIndex, Value.PresetName.ToString().c_str());
-							ZeroGUI::TextLeft((char*)SlotText, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * l) }, ColorWhite, false);
+							ZeroGUI::TextLeft((char*)SlotText, TFD_SDK::FVector2D{ 500, 25.0f + (12.0f * l) }, ColorWhite, false);
 							l++;*/
 
-							bool bFound = false;
-							for (int j = 0; j <= MaxIndex; j++)
-							{
-								if (j == Value.PresetIndex)
-								{
-									Presets.push_back(Value.PresetName.ToString());
-									bFound = true;
-									break;
-								}
-							}
-							if (!bFound)
-							{
-								Presets.push_back("None");
-							}
 						}
                     }
 				}
@@ -1199,8 +1172,20 @@ void LeaveMission()
 
 void SwitchPreset()
 {
-	if (HotSwapPreset[HotSwapIndex] != -1 || (HotSwapPreset[HotSwapIndex] == -1 && Presets[HotSwapPreset[HotSwapIndex]].c_str() != "None"))
+	;
+
+	UC::int32 PresetIndex;
+
+	if (HotSwapPreset[HotSwapIndex] != -1)
 	{
+		size_t start = Presets[HotSwapPreset[HotSwapIndex]].find('[');
+		size_t end = Presets[HotSwapPreset[HotSwapIndex]].find(']');
+
+		if (start != std::string::npos && end != std::string::npos && end > start)
+		{
+			PresetIndex = std::stoi(Presets[HotSwapPreset[HotSwapIndex]].substr(start + 1, end - start - 1));
+		}
+
 		//TFD_SDK::FM1TemplateId id = { HotSwapCharacters[HotSwapIndex] };
 		//PlayerController->PrivateOnlineServiceComponent->ServerChangePlayer(id);
 		if (PlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
@@ -1210,7 +1195,7 @@ void SwitchPreset()
 				if (Subserv->IsA(TFD_SDK::UM1PrivateOnlineServicePreset::StaticClass()) && Subserv->bIsReady == true)
 				{
 					TFD_SDK::UM1PrivateOnlineServicePreset* SubservPreset = static_cast<TFD_SDK::UM1PrivateOnlineServicePreset*>(Subserv);
-					SubservPreset->ServerRequestApplyPreset(HotSwapPreset[HotSwapIndex]);
+					SubservPreset->ServerRequestApplyPreset(PresetIndex);
 					break;
 				}
 			}
@@ -1221,37 +1206,13 @@ void SwitchPreset()
 void RefreshPresetList()
 {
 	HotSwapPreset = { -1, -1, -1, -1 };
-
-	UC::int32 MaxIndex = 0;
-	for (const auto& Pair : AccountPresets->PresetSlotByIndex)
-	{
-		TFD_SDK::FM1PresetSlot Value = Pair.Value();
-		if (MaxIndex < Value.PresetIndex)
-		{
-			MaxIndex = Value.PresetIndex;
-		}
-	}
-	//UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> SortedPresets = SortPresetMapByIndex(AccountPresets->PresetSlotByIndex);
 	Presets.clear();
 	for (const auto& Pair : AccountPresets->PresetSlotByIndex)
 	{
 		TFD_SDK::FM1PresetSlot Value = Pair.Value();
-		bool bFound = false;
-		for (int j = 0; j <= MaxIndex; j++)
-		{
-			if (j == Value.PresetIndex)
-			{
-				Presets.push_back(Value.PresetName.ToString());
-				bFound = true;
-				break;
-			}
-		}
-		if (!bFound)
-		{
-			Presets.push_back("None");
-		}
+		if (!Value.PresetName.ToString().empty())
+			Presets.push_back("[" + std::to_string(Value.PresetIndex) + "] " + Value.PresetName.ToString());
 	}
-
 }
 
 UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> SortPresetMapByIndex(const UC::TMap<UC::int32, TFD_SDK::FM1PresetSlot>& PresetMap)
