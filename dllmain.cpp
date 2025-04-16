@@ -45,29 +45,21 @@ if (GEngine)
 				}
 			}
 		}
-		if (Obj->IsA(TFD_SDK::UM1Account::StaticClass()) && !Obj->IsDefaultObject())
+		if (Presets.empty() && Obj->IsA(TFD_SDK::UM1Account::StaticClass()) && !Obj->IsDefaultObject())
 		{
 			TFD_SDK::UM1Account* Account = static_cast<TFD_SDK::UM1Account*>(Obj);
-			if (Account->Preset)
-			{
-				if (Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()) && !Account->Preset->IsDefaultObject())
+			if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()) && !Account->Preset->IsDefaultObject())
+			{	//int l = 0;
+				AccountPresets = static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset);
+				for (const auto& Pair : AccountPresets->PresetSlotByIndex)
 				{
-					AccountPresets = static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset);
-					if (Presets.empty())
-					{
-						//int l = 0;
-						for (const auto& Pair : AccountPresets->PresetSlotByIndex)
-						{
-							TFD_SDK::FM1PresetSlot Value = Pair.Value();
-							if (!Value.PresetName.ToString().empty())
-								Presets.push_back("[" + std::to_string(Value.PresetIndex) + "] " + Value.PresetName.ToString());
-
-							/*char SlotText[200];
-							sprintf_s(SlotText, sizeof(SlotText), "Key: %d Value1: %d Value2: %s", Key, Value.PresetIndex, Value.PresetName.ToString().c_str());
-							ZeroGUI::TextLeft((char*)SlotText, TFD_SDK::FVector2D{ 500, 25.0f + (12.0f * l) }, ColorWhite, false);
-							l++;*/
-						}
-                    }
+					TFD_SDK::FM1PresetSlot Value = Pair.Value();
+					if (!Value.PresetName.ToString().empty())
+						Presets.push_back("[" + std::to_string(Value.PresetIndex) + "] " + Value.PresetName.ToString());
+					/*char SlotText[200];
+					sprintf_s(SlotText, sizeof(SlotText), "Key: %d Value1: %d Value2: %s", Key, Value.PresetIndex, Value.PresetName.ToString().c_str());
+					ZeroGUI::TextLeft((char*)SlotText, TFD_SDK::FVector2D{ 500, 25.0f + (12.0f * l) }, ColorWhite, false);
+					l++;*/
 				}
 			}
 		}
@@ -1180,18 +1172,14 @@ void SwitchPreset()
 		{
 			PresetIndex = std::stoi(Presets[HotSwapPreset[HotSwapIndex]].substr(start + 1, end - start - 1));
 		}
-		if (PlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
+		if (PresetIndex >= 0 && PlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
 		{
 			for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : PlayerController->PrivateOnlineServiceComponent->SubServices)
 			{
 				if (Subserv->IsA(TFD_SDK::UM1PrivateOnlineServicePreset::StaticClass()) && Subserv->bIsReady == true)
 				{
-					TFD_SDK::UM1PrivateOnlineServicePreset* SubservPreset = static_cast<TFD_SDK::UM1PrivateOnlineServicePreset*>(Subserv);
-					if (PresetIndex >= 0)
-					{
-						SubservPreset->ServerRequestApplyPreset(PresetIndex);
-						break;
-					}
+					static_cast<TFD_SDK::UM1PrivateOnlineServicePreset*>(Subserv)->ServerRequestApplyPreset(PresetIndex);
+					break;
 				}
 			}
 		}
