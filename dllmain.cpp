@@ -52,7 +52,6 @@ if (GEngine)
 			{
 				if (Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()) && !Account->Preset->IsDefaultObject())
 				{
-					
 					AccountPresets = static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset);
 					if (Presets.empty())
 					{
@@ -67,7 +66,6 @@ if (GEngine)
 							sprintf_s(SlotText, sizeof(SlotText), "Key: %d Value1: %d Value2: %s", Key, Value.PresetIndex, Value.PresetName.ToString().c_str());
 							ZeroGUI::TextLeft((char*)SlotText, TFD_SDK::FVector2D{ 500, 25.0f + (12.0f * l) }, ColorWhite, false);
 							l++;*/
-
 						}
                     }
 				}
@@ -1172,22 +1170,16 @@ void LeaveMission()
 
 void SwitchPreset()
 {
-	;
-
-	UC::int32 PresetIndex;
+	UC::int32 PresetIndex = -1;
 
 	if (HotSwapPreset[HotSwapIndex] != -1)
 	{
 		size_t start = Presets[HotSwapPreset[HotSwapIndex]].find('[');
 		size_t end = Presets[HotSwapPreset[HotSwapIndex]].find(']');
-
 		if (start != std::string::npos && end != std::string::npos && end > start)
 		{
 			PresetIndex = std::stoi(Presets[HotSwapPreset[HotSwapIndex]].substr(start + 1, end - start - 1));
 		}
-
-		//TFD_SDK::FM1TemplateId id = { HotSwapCharacters[HotSwapIndex] };
-		//PlayerController->PrivateOnlineServiceComponent->ServerChangePlayer(id);
 		if (PlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
 		{
 			for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : PlayerController->PrivateOnlineServiceComponent->SubServices)
@@ -1195,8 +1187,11 @@ void SwitchPreset()
 				if (Subserv->IsA(TFD_SDK::UM1PrivateOnlineServicePreset::StaticClass()) && Subserv->bIsReady == true)
 				{
 					TFD_SDK::UM1PrivateOnlineServicePreset* SubservPreset = static_cast<TFD_SDK::UM1PrivateOnlineServicePreset*>(Subserv);
-					SubservPreset->ServerRequestApplyPreset(PresetIndex);
-					break;
+					if (PresetIndex >= 0)
+					{
+						SubservPreset->ServerRequestApplyPreset(PresetIndex);
+						break;
+					}
 				}
 			}
 		}
@@ -1679,11 +1674,10 @@ void DrawMenu()
 			for (const auto& preset : Presets) {
 				cstrPresets.push_back(preset.c_str());
 			}
-			 // Declare an integer variable to hold the value.  
-			ZeroGUI::Combobox1((char*)"Select Preset 1", TFD_SDK::FVector2D{ 130, 25 }, &HotSwapPreset[0], cstrPresets);
-			ZeroGUI::Combobox1((char*)"Select Preset 2", TFD_SDK::FVector2D{ 130, 25 }, &HotSwapPreset[1], cstrPresets);
-			ZeroGUI::Combobox1((char*)"Select Preset 3", TFD_SDK::FVector2D{ 130, 25 }, &HotSwapPreset[2], cstrPresets);
-			ZeroGUI::Combobox1((char*)"Select Preset 4", TFD_SDK::FVector2D{ 130, 25 }, &HotSwapPreset[3], cstrPresets);
+			ZeroGUI::Combobox1((char*)"Select Preset 1", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[0], cstrPresets);
+			ZeroGUI::Combobox1((char*)"Select Preset 2", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[1], cstrPresets);
+			ZeroGUI::Combobox1((char*)"Select Preset 3", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[2], cstrPresets);
+			ZeroGUI::Combobox1((char*)"Select Preset 4", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[3], cstrPresets);
 		}
 
 	}
