@@ -167,7 +167,7 @@ void InstantInfiltration();
 void RestartLastMission();
 void LeaveMission();
 void SwitchPreset();
-void RefreshPresetList();
+void RefreshPresetList(bool);
 UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> SortPresetMapByIndex(const UC::TMap<UC::int32, TFD_SDK::FM1PresetSlot>& PresetMap);
 
 /*

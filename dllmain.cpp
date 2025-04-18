@@ -45,23 +45,11 @@ if (GEngine)
 				}
 			}
 		}
-		if (Presets.empty() && Obj->IsA(TFD_SDK::UM1Account::StaticClass()) && !Obj->IsDefaultObject())
+		if (Presets.empty() && Obj->IsA(TFD_SDK::UM1Account::StaticClass()))
 		{
 			TFD_SDK::UM1Account* Account = static_cast<TFD_SDK::UM1Account*>(Obj);
-			if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()) && !Account->Preset->IsDefaultObject())
-			{	//int l = 0;
+			if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()))
 				AccountPresets = static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset);
-				for (const auto& Pair : AccountPresets->PresetSlotByIndex)
-				{
-					TFD_SDK::FM1PresetSlot Value = Pair.Value();
-					if (!Value.PresetName.ToString().empty())
-						Presets.push_back("[" + std::to_string(Value.PresetIndex) + "] " + Value.PresetName.ToString());
-					/*char SlotText[200];
-					sprintf_s(SlotText, sizeof(SlotText), "Key: %d Value1: %d Value2: %s", Key, Value.PresetIndex, Value.PresetName.ToString().c_str());
-					ZeroGUI::TextLeft((char*)SlotText, TFD_SDK::FVector2D{ 500, 25.0f + (12.0f * l) }, ColorWhite, false);
-					l++;*/
-				}
-			}
 		}
 	}
 	if (GWorld && isGUIInit)
@@ -380,6 +368,8 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			{
 				SwitchPreset();
 			}
+
+			RefreshPresetList(false);
 
 			if (cfg_HotSwapOverlay)
 			{
@@ -1186,15 +1176,21 @@ void SwitchPreset()
 	}
 }
 
-void RefreshPresetList()
+void RefreshPresetList(bool isrefresh = false)
 {
-	HotSwapPreset = { -1, -1, -1, -1 };
-	Presets.clear();
-	for (const auto& Pair : AccountPresets->PresetSlotByIndex)
+	if (isrefresh)
 	{
-		TFD_SDK::FM1PresetSlot Value = Pair.Value();
-		if (!Value.PresetName.ToString().empty())
-			Presets.push_back("[" + std::to_string(Value.PresetIndex) + "] " + Value.PresetName.ToString());
+		HotSwapPreset = { -1, -1, -1, -1 };
+		Presets.clear();
+	}
+	if (Presets.empty())
+	{
+		for (const auto& Pair : AccountPresets->PresetSlotByIndex)
+		{
+			TFD_SDK::FM1PresetSlot Value = Pair.Value();
+			if (!Value.PresetName.ToString().empty())
+				Presets.push_back("[" + std::to_string(Value.PresetIndex) + "] " + Value.PresetName.ToString());
+		}
 	}
 }
 
@@ -1490,7 +1486,6 @@ void DrawMenu()
 		if (ZeroGUI::ButtonTab((char*)"Extras", TFD_SDK::FVector2D{ 110, 25 }, tab == 3)) tab = 3;
 		if (ZeroGUI::ButtonTab((char*)"Mission", TFD_SDK::FVector2D{ 110, 25 }, tab == 4)) tab = 4;
 		if (ZeroGUI::ButtonTab((char*)"Preset", TFD_SDK::FVector2D{ 110, 25 }, tab == 5)) tab = 5;
-		//if (ZeroGUI::ButtonTab((char*)"Tools", TFD_SDK::FVector2D{ 110, 25 }, tab == 3)) tab = 3;
 		ZeroGUI::NextColumn(130.0f);
 
 		if (tab == 0)
@@ -1614,8 +1609,6 @@ void DrawMenu()
 			ZeroGUI::Text((char*)"Timescale Hold:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Timescale Hold Hotkey:", TFD_SDK::FVector2D{ 110, 25 }, &cfg_TimeScaleHoldKey);
-
-			
 		}
 		if (tab == 4)
 		{
@@ -1652,7 +1645,7 @@ void DrawMenu()
 			}
 			if (ZeroGUI::Button((char*)"Refresh Preset List", TFD_SDK::FVector2D{ 120, 30 }))
 			{
-				RefreshPresetList();
+				RefreshPresetList(true);
 			}
 			ZeroGUI::Text((char*)"Switch Preset:");
 			ZeroGUI::SameLine();
