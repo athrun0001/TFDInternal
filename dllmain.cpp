@@ -1154,7 +1154,7 @@ void SwitchPreset()
 {
 	UC::int32 PresetIndex = -1;
 
-	if (HotSwapPreset[HotSwapIndex] != -1)
+	if (HotSwapPreset[HotSwapIndex] != -1 && !Presets.empty())
 	{
 		size_t start = Presets[HotSwapPreset[HotSwapIndex]].find('[');
 		size_t end = Presets[HotSwapPreset[HotSwapIndex]].find(']');
@@ -1650,15 +1650,18 @@ void DrawMenu()
 			ZeroGUI::Text((char*)"Switch Preset:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Switch Preset Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_SwitchPreset);
-			std::vector<const char*> cstrPresets;
-			cstrPresets.reserve(Presets.size());
-			for (const auto& preset : Presets) {
-				cstrPresets.push_back(preset.c_str());
+			if (!Presets.empty())
+			{
+				std::vector<const char*> cstrPresets;
+				cstrPresets.reserve(Presets.size());
+				for (const auto& preset : Presets) {
+					cstrPresets.push_back(preset.c_str());
+				}
+				ZeroGUI::Combobox1((char*)"Select Preset 1", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[0], cstrPresets);
+				ZeroGUI::Combobox1((char*)"Select Preset 2", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[1], cstrPresets);
+				ZeroGUI::Combobox1((char*)"Select Preset 3", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[2], cstrPresets);
+				ZeroGUI::Combobox1((char*)"Select Preset 4", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[3], cstrPresets);
 			}
-			ZeroGUI::Combobox1((char*)"Select Preset 1", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[0], cstrPresets);
-			ZeroGUI::Combobox1((char*)"Select Preset 2", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[1], cstrPresets);
-			ZeroGUI::Combobox1((char*)"Select Preset 3", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[2], cstrPresets);
-			ZeroGUI::Combobox1((char*)"Select Preset 4", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[3], cstrPresets);
 		}
 
 	}
