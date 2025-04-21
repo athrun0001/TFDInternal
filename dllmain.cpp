@@ -376,7 +376,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				for (int i = 0; i < 4; i++)
 				{
 					char buffer[100];
-					if (!Presets.empty() && HotSwapPreset[i] != -1)
+					if (!Presets.empty() && HotSwapPreset[i] != -1 && HotSwapPreset[i] < Presets.size())
 						sprintf_s(buffer, "Preset %d: %s", i+1, Presets[HotSwapPreset[i]].c_str());
 					else
 						sprintf_s(buffer, "Preset %d: None",i+1);
@@ -1154,7 +1154,7 @@ void SwitchPreset()
 {
 	UC::int32 PresetIndex = -1;
 
-	if (HotSwapPreset[HotSwapIndex] != -1 && !Presets.empty())
+	if (HotSwapPreset[HotSwapIndex] != -1 && !Presets.empty() && HotSwapPreset[HotSwapIndex] < Presets.size())
 	{
 		size_t start = Presets[HotSwapPreset[HotSwapIndex]].find('[');
 		size_t end = Presets[HotSwapPreset[HotSwapIndex]].find(']');
@@ -1637,7 +1637,7 @@ void DrawMenu()
 			ZeroGUI::Checkbox((char*)"Show Swap Slot Overlay", &cfg_HotSwapOverlay);
 			ZeroGUI::Text((char*)"Use the Up and Down keys to change slots.");
 			char SlotText[64];
-			sprintf_s(SlotText, "Preset Name for Slot %d: %s", HotSwapIndex, HotSwapPreset[HotSwapIndex] != -1 ? Presets[HotSwapPreset[HotSwapIndex]].c_str() : "None");
+			sprintf_s(SlotText, "Preset Name for Slot %d: %s", HotSwapIndex, HotSwapPreset[HotSwapIndex] != -1 && HotSwapPreset[HotSwapIndex] < Presets.size() && !Presets.empty() ? Presets[HotSwapPreset[HotSwapIndex]].c_str() : "None");
 			ZeroGUI::Text((char*)SlotText);
 			if (ZeroGUI::Button((char*)"Clear Preset Slot", TFD_SDK::FVector2D{ 120, 30 }))
 			{
