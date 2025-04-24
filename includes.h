@@ -187,7 +187,7 @@ int Aimbot_BoneIndex = -1;
 bool cfg_AimbotNoSpread = false;
 bool cfg_AimbotController = false;
 bool cfg_AimbotNoRecoil = false;
-bool cfg_AimbotRapidFire = false;
+//bool cfg_AimbotRapidFire = false;
 uint8_t Recoil[2] = { 0x74, 0x75 };
 uint8_t RapidFire[2] = { 0x72, 0x77 };
 
