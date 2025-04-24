@@ -65,8 +65,8 @@ const char* NoRecoilMask = "xxx?xxx????xx";
 uint8_t* NoRecoilAddress = 0;
 //const char* RapidFireSig = "\x72\x00\xF3\x0F\x10\x87\x00\x00\x00\x00\x48";
 // char* RapidFireMask = "x?xxxx????x";
-const char* RapidFireSig = "\x72\x00\xF3\x0F\x10\x87\x00\x00\x00\x00\x48\x8B\xCF";
-const char* RapidFireMask = "x?xxxx????xxx";
+const char* RapidFireSig = "\x72\x00\xF3\x0F\x10\x87\x00\x00\x00\x00\xF3\x0F\x5C\xC1";
+const char* RapidFireMask = "x?xxxx????xxxx";
 uint8_t* RapidFireAddress = 0;
 
 
@@ -187,7 +187,7 @@ int Aimbot_BoneIndex = -1;
 bool cfg_AimbotNoSpread = false;
 bool cfg_AimbotController = false;
 bool cfg_AimbotNoRecoil = false;
-//bool cfg_AimbotRapidFire = false;
+bool cfg_AimbotRapidFire = false;
 uint8_t Recoil[2] = { 0x74, 0x75 };
 uint8_t RapidFire[2] = { 0x72, 0x77 };
 
