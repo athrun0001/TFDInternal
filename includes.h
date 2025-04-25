@@ -83,9 +83,9 @@ uintptr_t FindSignature(int procID, sigmod mod, const char* sig, const char* mas
 std::vector<int> Worlds;
 
 bool CheckPointers();
-std::vector<std::string> Presets;
+//std::vector<std::string> Presets;
 TFD_SDK::UWorld* GWorld;
-TFD_SDK::UM1AccountPreset* AccountPresets;
+//TFD_SDK::UM1AccountPreset* AccountPresets;
 TFD_SDK::UWorld* OriginalWorld;
 TFD_SDK::UEngine* GEngine;
 TFD_SDK::ULocalPlayer* LocalPlayer;
@@ -166,8 +166,8 @@ int cfg_LootVacuumKey = 0x54;
 void InstantInfiltration();
 void RestartLastMission();
 void LeaveMission();
-void SwitchPreset();
-void RefreshPresetList(bool);
+//void SwitchPreset();
+//void RefreshPresetList(bool);
 UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> SortPresetMapByIndex(const UC::TMap<UC::int32, TFD_SDK::FM1PresetSlot>& PresetMap);
 
 /*
@@ -199,10 +199,10 @@ bool cfg_NoReload = false;
 bool cfg_CacheEnemyNames = false;
 bool cfg_CacheEnemyBones = false;
 void InstantReload();
-bool cfg_HotSwapOverlay = false;
-int HotSwapIndex = 0;
+//bool cfg_HotSwapOverlay = false;
+//int HotSwapIndex = 0;
 //std::vector<int> HotSwapCharacters = { 0, 0, 0, 0 };
-std::vector<int> HotSwapPreset = { -1, -1, -1, -1 };
+//std::vector<int> HotSwapPreset = { -1, -1, -1, -1 };
 //int cfg_HotSwapKey = VK_TAB;
 int cfg_InstantInfilKey = VK_HOME;
 int cfg_RestartMissionKey = VK_END;
