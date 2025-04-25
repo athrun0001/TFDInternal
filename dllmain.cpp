@@ -45,12 +45,6 @@ if (GEngine)
 				}
 			}
 		}
-		/*if (Presets.empty() && Obj->IsA(TFD_SDK::UM1Account::StaticClass()))
-		{
-			TFD_SDK::UM1Account* Account = static_cast<TFD_SDK::UM1Account*>(Obj);
-			if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()))
-				AccountPresets = static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset);
-		}*/
 	}
 	if (GWorld && isGUIInit)
 	{
@@ -333,7 +327,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					
 			}
 
-			/*if (IsKeyPressed(VK_DOWN))
+			if (IsKeyPressed(VK_DOWN))
 			{
 				if (HotSwapIndex == 3)
 					HotSwapIndex = 0;
@@ -346,7 +340,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					HotSwapIndex = 3;
 				else
 					HotSwapIndex -= 1;
-			}*/
+			}
 
 
 			if (IsKeyPressed(cfg_InstantInfilKey))
@@ -364,14 +358,14 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				LeaveMission();
 			}
 
-			/*if (IsKeyPressed(cfg_SwitchPreset))
+			if (IsKeyPressed(cfg_SwitchPreset))
 			{
 				SwitchPreset();
-			}*/
+			}
 
-			//RefreshPresetList(false);
+			RefreshPresetList(false);
 
-			/*if (cfg_HotSwapOverlay)
+			if (cfg_HotSwapOverlay)
 			{
 				for (int i = 0; i < 4; i++)
 				{
@@ -386,7 +380,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					else
 						ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
 				}
-			}*/
+			}
 			// This code is for testing controller input detection
 			/*char sz[4][1024];
 			for (DWORD i = 0; i < 4; i++)
@@ -609,7 +603,7 @@ void PlayerEnemyESP()
 						{
 							if (cfg_DrawPlayerNames)
 							{
-								if (player->PlayerName && player->PlayerName.ToString() != "")
+								if (player->PlayerName && player->PlayerName.ToString() != "" && LocalCharacter->PlayerName.ToString() != player->PlayerName.ToString())
 								{
 									std::string Name = player->PlayerName.ToString();
 									ZeroGUI::TextCenter((char*)Name.c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen, false);
@@ -621,7 +615,7 @@ void PlayerEnemyESP()
 								if (ODistance > 0)
 									ZeroGUI::DrawRectangle(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, TFD_SDK::FVector2D{ cfg_ESPBox.X / ODistance, cfg_ESPBox.Y / ODistance }, ColorGreen);
 							}
-							if (cfg_DrawPlayerLines)
+							if (cfg_DrawPlayerLines && LocalCharacter->PlayerName.ToString() != player->PlayerName.ToString())
 								ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen);
 						}
 
@@ -1150,49 +1144,72 @@ void LeaveMission()
 	MCC->ServerLeaveMission(TFD_SDK::EM1MissionEndReason::ExplicitGiveUp);
 }
 
-//void SwitchPreset()
-//{
-//	UC::int32 PresetIndex = -1;
-//
-//	if (HotSwapPreset[HotSwapIndex] != -1 && !Presets.empty() && HotSwapPreset[HotSwapIndex] < Presets.size())
-//	{
-//		size_t start = Presets[HotSwapPreset[HotSwapIndex]].find('[');
-//		size_t end = Presets[HotSwapPreset[HotSwapIndex]].find(']');
-//		if (start != std::string::npos && end != std::string::npos && end > start)
-//		{
-//			PresetIndex = std::stoi(Presets[HotSwapPreset[HotSwapIndex]].substr(start + 1, end - start - 1));
-//		}
-//		if (PresetIndex >= 0 && PlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
-//		{
-//			for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : PlayerController->PrivateOnlineServiceComponent->SubServices)
-//			{
-//				if (Subserv->IsA(TFD_SDK::UM1PrivateOnlineServicePreset::StaticClass()) && Subserv->bIsReady == true)
-//				{
-//					static_cast<TFD_SDK::UM1PrivateOnlineServicePreset*>(Subserv)->ServerRequestApplyPreset(PresetIndex);
-//					break;
-//				}
-//			}
-//		}
-//	}
-//}
+void SwitchPreset()
+{
+	UC::int32 PresetIndex = -1;
 
-//void RefreshPresetList(bool isrefresh = false)
-//{
-//	if (isrefresh)
-//	{
-//		HotSwapPreset = { -1, -1, -1, -1 };
-//		Presets.clear();
-//	}
-//	if (Presets.empty())
-//	{
-//		for (const auto& Pair : AccountPresets->PresetSlotByIndex)
-//		{
-//			TFD_SDK::FM1PresetSlot Value = Pair.Value();
-//			if (!Value.PresetName.ToString().empty())
-//				Presets.push_back("[" + std::to_string(Value.PresetIndex) + "] " + Value.PresetName.ToString());
-//		}
-//	}
-//}
+	if (HotSwapPreset[HotSwapIndex] != -1 && !Presets.empty() && HotSwapPreset[HotSwapIndex] < Presets.size())
+	{
+		size_t start = Presets[HotSwapPreset[HotSwapIndex]].find('[');
+		size_t end = Presets[HotSwapPreset[HotSwapIndex]].find(']');
+		if (start != std::string::npos && end != std::string::npos && end > start)
+		{
+			PresetIndex = std::stoi(Presets[HotSwapPreset[HotSwapIndex]].substr(start + 1, end - start - 1));
+		}
+		if (PresetIndex >= 0 && PlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
+		{
+			for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : PlayerController->PrivateOnlineServiceComponent->SubServices)
+			{
+				if (Subserv->IsA(TFD_SDK::UM1PrivateOnlineServicePreset::StaticClass()) && Subserv->bIsReady == true)
+				{
+					static_cast<TFD_SDK::UM1PrivateOnlineServicePreset*>(Subserv)->ServerRequestApplyPreset(PresetIndex);
+					break;
+				}
+			}
+		}
+	}
+}
+
+void RefreshPresetList(bool isrefresh = false)
+{
+	if (isrefresh)
+	{
+		HotSwapPreset = { -1, -1, -1, -1 };
+		Presets.clear();
+	}
+
+	if (Presets.empty())
+	{
+		for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
+		{
+			TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
+
+			if (!Obj)
+				continue;
+
+			if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
+				Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
+				Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
+				Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
+				Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
+				continue;
+
+			if (Obj->IsA(TFD_SDK::UM1Account::StaticClass()))
+			{
+				TFD_SDK::UM1Account* Account = static_cast<TFD_SDK::UM1Account*>(Obj);
+				if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()))
+					for (const auto& Pair : static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset)->PresetSlotByIndex)
+					{
+						TFD_SDK::FM1PresetSlot Value = Pair.Value();
+						if (!Value.PresetName.ToString().empty())
+							Presets.push_back("[" + std::to_string(Value.PresetIndex) + "] " + Value.PresetName.ToString());
+					}
+				if (!Presets.empty())
+					break;
+			}
+		}
+	}
+}
 
 UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> SortPresetMapByIndex(const UC::TMap<UC::int32, TFD_SDK::FM1PresetSlot>& PresetMap)
 {
@@ -1485,7 +1502,7 @@ void DrawMenu()
 		if (ZeroGUI::ButtonTab((char*)"Aimbot", TFD_SDK::FVector2D{ 110, 25 }, tab == 2)) tab = 2;
 		if (ZeroGUI::ButtonTab((char*)"Extras", TFD_SDK::FVector2D{ 110, 25 }, tab == 3)) tab = 3;
 		if (ZeroGUI::ButtonTab((char*)"Mission", TFD_SDK::FVector2D{ 110, 25 }, tab == 4)) tab = 4;
-		//if (ZeroGUI::ButtonTab((char*)"Preset", TFD_SDK::FVector2D{ 110, 25 }, tab == 5)) tab = 5;
+		if (ZeroGUI::ButtonTab((char*)"Preset", TFD_SDK::FVector2D{ 110, 25 }, tab == 5)) tab = 5;
 		ZeroGUI::NextColumn(130.0f);
 
 		if (tab == 0)
@@ -1629,39 +1646,39 @@ void DrawMenu()
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Leave Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_LeaveMissionKey);
 		}
-		//if (tab == 5)
-		//{
-		//	//ZeroGUI::Combobox((char*)"Select Preset", TFD_SDK::FVector2D{ 130, 25 }, 0, "Zero", NULL);
-		//	// Fix the issue by passing the address of the integer variable instead of the integer itself.  
-		//	ZeroGUI::Checkbox((char*)"Show Swap Slot Overlay", &cfg_HotSwapOverlay);
-		//	ZeroGUI::Text((char*)"Use the Up and Down keys to change slots.");
-		//	char SlotText[64];
-		//	sprintf_s(SlotText, "Preset Name for Slot %d: %s", HotSwapIndex, HotSwapPreset[HotSwapIndex] != -1 && HotSwapPreset[HotSwapIndex] < Presets.size() && !Presets.empty() ? Presets[HotSwapPreset[HotSwapIndex]].c_str() : "None");
-		//	ZeroGUI::Text((char*)SlotText);
-		//	if (ZeroGUI::Button((char*)"Clear Preset Slot", TFD_SDK::FVector2D{ 120, 30 }))
-		//	{
-		//		HotSwapPreset[HotSwapIndex] = -1;
-		//	}
-		//	if (ZeroGUI::Button((char*)"Refresh Preset List", TFD_SDK::FVector2D{ 120, 30 }))
-		//	{
-		//		RefreshPresetList(true);
-		//	}
-		//	ZeroGUI::Text((char*)"Switch Preset:");
-		//	ZeroGUI::SameLine();
-		//	ZeroGUI::Hotkey((char*)"Switch Preset Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_SwitchPreset);
-		//	if (!Presets.empty())
-		//	{
-		//		std::vector<const char*> cstrPresets;
-		//		cstrPresets.reserve(Presets.size());
-		//		for (const auto& preset : Presets) {
-		//			cstrPresets.push_back(preset.c_str());
-		//		}
-		//		ZeroGUI::Combobox1((char*)"Select Preset 1", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[0], cstrPresets);
-		//		ZeroGUI::Combobox1((char*)"Select Preset 2", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[1], cstrPresets);
-		//		ZeroGUI::Combobox1((char*)"Select Preset 3", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[2], cstrPresets);
-		//		ZeroGUI::Combobox1((char*)"Select Preset 4", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[3], cstrPresets);
-		//	}
-		//}
+		if (tab == 5)
+		{
+			//ZeroGUI::Combobox((char*)"Select Preset", TFD_SDK::FVector2D{ 130, 25 }, 0, "Zero", NULL);
+			// Fix the issue by passing the address of the integer variable instead of the integer itself.  
+			ZeroGUI::Checkbox((char*)"Show Swap Slot Overlay", &cfg_HotSwapOverlay);
+			ZeroGUI::Text((char*)"Use the Up and Down keys to change slots.");
+			char SlotText[64];
+			sprintf_s(SlotText, "Preset Name for Slot %d: %s", HotSwapIndex, HotSwapPreset[HotSwapIndex] != -1 && HotSwapPreset[HotSwapIndex] < Presets.size() && !Presets.empty() ? Presets[HotSwapPreset[HotSwapIndex]].c_str() : "None");
+			ZeroGUI::Text((char*)SlotText);
+			if (ZeroGUI::Button((char*)"Clear Preset Slot", TFD_SDK::FVector2D{ 120, 30 }))
+			{
+				HotSwapPreset[HotSwapIndex] = -1;
+			}
+			if (ZeroGUI::Button((char*)"Refresh Preset List", TFD_SDK::FVector2D{ 120, 30 }))
+			{
+				RefreshPresetList(true);
+			}
+			ZeroGUI::Text((char*)"Switch Preset:");
+			ZeroGUI::SameLine();
+			ZeroGUI::Hotkey((char*)"Switch Preset Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_SwitchPreset);
+			if (!Presets.empty())
+			{
+				std::vector<const char*> cstrPresets;
+				cstrPresets.reserve(Presets.size());
+				for (const auto& preset : Presets) {
+					cstrPresets.push_back(preset.c_str());
+				}
+				ZeroGUI::Combobox1((char*)"Select Preset 1", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[0], cstrPresets);
+				ZeroGUI::Combobox1((char*)"Select Preset 2", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[1], cstrPresets);
+				ZeroGUI::Combobox1((char*)"Select Preset 3", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[2], cstrPresets);
+				ZeroGUI::Combobox1((char*)"Select Preset 4", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[3], cstrPresets);
+			}
+		}
 	}
 }
 
@@ -1717,12 +1734,12 @@ void LoadCFG()
 		HotSwapCharacters[1] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot2", 0);
 		HotSwapCharacters[2] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot3", 0);
 		HotSwapCharacters[3] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot4", 0);*/
-		/*cfg_HotSwapOverlay = ini.GetBoolValue("Preset", "HotSwapOverlay");
+		cfg_HotSwapOverlay = ini.GetBoolValue("Preset", "HotSwapOverlay");
 		cfg_SwitchPreset = (int)ini.GetDoubleValue("Preset", "SwitchPresetKey");
 		HotSwapPreset[0] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset1", 0);
 		HotSwapPreset[1] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset2", 0);
 		HotSwapPreset[2] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset3", 0);
-		HotSwapPreset[3] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset4", 0);*/
+		HotSwapPreset[3] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset4", 0);
 
 		cfg_TimeScale = ini.GetDoubleValue("Extra", "Timescale");
 		cfg_TimeScaleKey = (int)ini.GetDoubleValue("Extra", "TimescaleKey");
@@ -1784,12 +1801,12 @@ void SaveCFG()
 	ini.SetDoubleValue("Extra", "HotSwapSlot2", HotSwapCharacters[1]);
 	ini.SetDoubleValue("Extra", "HotSwapSlot3", HotSwapCharacters[2]);
 	ini.SetDoubleValue("Extra", "HotSwapSlot4", HotSwapCharacters[3]);*/
-	/*ini.SetBoolValue("Preset", "HotSwapOverlay", cfg_HotSwapOverlay);
+	ini.SetBoolValue("Preset", "HotSwapOverlay", cfg_HotSwapOverlay);
 	ini.SetDoubleValue("Preset", "SwitchPresetKey", cfg_SwitchPreset);
 	ini.SetDoubleValue("Preset", "HotSwapPreset1", HotSwapPreset[0]);
 	ini.SetDoubleValue("Preset", "HotSwapPreset2", HotSwapPreset[1]);
 	ini.SetDoubleValue("Preset", "HotSwapPreset3", HotSwapPreset[2]);
-	ini.SetDoubleValue("Preset", "HotSwapPreset4", HotSwapPreset[3]);*/
+	ini.SetDoubleValue("Preset", "HotSwapPreset4", HotSwapPreset[3]);
 	
 	ini.SetDoubleValue("Extra", "Timescale", cfg_TimeScale);
 	ini.SetDoubleValue("Extra", "TimescaleKey", cfg_TimeScaleKey);
