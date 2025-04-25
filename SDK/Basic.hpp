@@ -11,11 +11,11 @@
 #define VC_EXTRALEAN
 #define WIN32_LEAN_AND_MEAN
 
-#include <string>
-#include <iostream>
+//#include <string>
+//#include <iostream>
 #include <Windows.h>
 #include <functional>
-#include <type_traits>
+//#include <type_traits>
 
 //#include "../PropertyFixup.hpp"
 #include "../UnrealContainers.hpp"
@@ -34,12 +34,12 @@ namespace SDK
 	*/
 	namespace Offsets
 	{
-		static int32 GObjects          = 0x0;
-		static int32 AppendString      = 0x0;
-		static int32 GNames            = 0x0;
-		static int32 GWorld            = 0x0;
-		static int32 ProcessEvent      = 0x0;
-		static int32 ProcessEventIdx   = 0x0000004D;
+		static int32 GObjects = 0x0;
+		static int32 AppendString = 0x0;
+		static int32 GNames = 0x0;
+		static int32 GWorld = 0x0;
+		static int32 ProcessEvent = 0x0;
+		static int32 ProcessEventIdx = 0x0000004D;
 	}
 
 	namespace InSDKUtils
@@ -554,7 +554,7 @@ namespace SDK
 
 	// Predefined struct FText
 	// 0x0018 (0x0018 - 0x0000)
-	class alignas(8) FText final
+	class FText final
 	{
 	public:
 		class FTextImpl::FTextData* TextData;                                          // 0x0000(0x0008)(NOT AUTO-GENERATED PROPERTY)
@@ -842,6 +842,7 @@ namespace SDK
 			return IsSet();
 		}
 	};
+
 
 	// Predefined struct FScriptDelegate
 	// 0x0010 (0x0010 - 0x0000)
@@ -1369,7 +1370,7 @@ inline bool operator&(EEnumClass Left, EEnumClass Right)																								
 	class FOptionalProperty final : public FProperty
 	{
 	public:
-		class FProperty*                             ValueProperty;                                     // 0x0078(0x0008)(NOT AUTO-GENERATED PROPERTY)
+		class FProperty* ValueProperty;                                     // 0x0078(0x0008)(NOT AUTO-GENERATED PROPERTY)
 	};
 	static_assert(alignof(FOptionalProperty) == 0x000008, "Wrong alignment on FOptionalProperty");
 	static_assert(sizeof(FOptionalProperty) == 0x000080, "Wrong size on FOptionalProperty");
@@ -1388,7 +1389,7 @@ inline bool operator&(EEnumClass Left, EEnumClass Right)																								
 			uint8 Pad[Size];
 
 		public:
-			UnderlayingStructType& GetTyped()       { return reinterpret_cast<UnderlayingStructType&>(*this); }
+			UnderlayingStructType& GetTyped() { return reinterpret_cast<UnderlayingStructType&>(*this); }
 			const UnderlayingStructType& GetTyped() const { return reinterpret_cast<const UnderlayingStructType&>(*this); }
 		};
 
@@ -1402,7 +1403,7 @@ inline bool operator&(EEnumClass Left, EEnumClass Right)																								
 			uint8 Pad[Size];
 
 		public:
-			UnderlayingClassType*       GetTyped()       { return reinterpret_cast<UnderlayingClassType*>(this); }
+			UnderlayingClassType* GetTyped() { return reinterpret_cast<UnderlayingClassType*>(this); }
 			const UnderlayingClassType* GetTyped() const { return reinterpret_cast<const UnderlayingClassType*>(this); }
 		};
 

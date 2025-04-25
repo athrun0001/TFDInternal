@@ -80,26 +80,6 @@ namespace TFD_SDK
 		}
 	}
 
-
-	//void UM1PrivateOnlineServiceComponent::ServerChangePlayer(const struct FM1TemplateId& InCharacterTid)
-	//{
-	//	static class UFunction* Func = nullptr;
-
-	//	if (Func == nullptr)
-	//		Func = Class->GetFunction("M1PrivateOnlineServiceComponent", "ServerChangePlayer");
-
-	//	M1PrivateOnlineServiceComponent_ServerChangePlayer Parms{};
-
-	//	Parms.InCharacterTid = std::move(InCharacterTid);
-
-	//	auto Flgs = Func->FunctionFlags;
-	//	Func->FunctionFlags |= 0x400;
-
-	//	UObject::ProcessEvent(Func, &Parms);
-
-	//	Func->FunctionFlags = Flgs;
-	//}
-
 	void UM1WeaponRoundsComponent::ClientFillCurrentRoundByServer()
 	{
 		static class UFunction* Func = nullptr;
@@ -133,26 +113,6 @@ namespace TFD_SDK
 
 		return Parms.ReturnValue;
 	}
-
-	/*void AM1Player::RequestTeleportAtSequence(const struct FVector& InLocation, const struct FRotator& InRotation)
-	{
-		static class UFunction* Func = nullptr;
-
-		if (Func == nullptr)
-			Func = Class->GetFunction("M1Player", "RequestTeleportAtSequence");
-
-		M1Player_RequestTeleportAtSequence Parms{};
-
-		Parms.InLocation = std::move(InLocation);
-		Parms.InRotation = std::move(InRotation);
-
-		auto Flgs = Func->FunctionFlags;
-		Func->FunctionFlags |= 0x400;
-
-		UObject::ProcessEvent(Func, &Parms);
-
-		Func->FunctionFlags = Flgs;
-	}*/
 
 	bool AActor::K2_SetActorLocation(const struct FVector& NewLocation, bool bSweep, struct FHitResult* SweepHitResult, bool bTeleport)
 	{
@@ -671,24 +631,6 @@ namespace TFD_SDK
 		return Parms.ReturnValue;
 	}
 
-	/*int32 USkinnedMeshComponent::GetNumBones() const
-	{
-		static class UFunction* Func = nullptr;
-
-		if (Func == nullptr)
-			Func = Class->GetFunction("SkinnedMeshComponent", "GetNumBones");
-
-		SkinnedMeshComponent_GetNumBones Parms{};
-
-		auto Flgs = Func->FunctionFlags;
-		Func->FunctionFlags |= 0x400;
-
-		UObject::ProcessEvent(Func, &Parms);
-
-		Func->FunctionFlags = Flgs;
-
-		return Parms.ReturnValue;
-	}*/
 	void UM1MissionTaskServiceInteraction::ServerRequestMissionTargetBeginInteraction(class AM1MissionTargetInteraction* InActor, class AM1PlayerControllerInGame* InAcceptor)
 	{
 		static class UFunction* Func = nullptr;
@@ -728,7 +670,6 @@ namespace TFD_SDK
 		Func->FunctionFlags = Flgs;
 	}
 
-
 	void UM1MissionControlComponent::ServerRunTaskActor(class AM1MissionTaskActor* InActor)
 	{
 		static class UFunction* Func = nullptr;
@@ -766,6 +707,7 @@ namespace TFD_SDK
 
 		Func->FunctionFlags = Flgs;
 	}
+
 	void UM1PrivateOnlineServicePreset::ServerRequestApplyPreset(int32 InPresetIndex)
 	{
 		static class UFunction* Func = nullptr;
