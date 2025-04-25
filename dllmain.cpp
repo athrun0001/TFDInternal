@@ -1056,6 +1056,9 @@ void InstantInfiltration()
 		if (!TaskActor)
 			continue;
 
+		if (!TaskActor->IsA(TFD_SDK::AM1MissionTaskActorDestructionVulgusPost::StaticClass()))
+			continue;
+
 		for (TFD_SDK::UM1MissionTaskService* MCCSub : MCC->SubServices)
 		{
 			if (!MCCSub || !MCCSub->bJoined)

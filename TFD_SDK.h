@@ -1366,6 +1366,11 @@ namespace TFD_SDK
 		uint8                                         Pad_MissionTargets[0x10];										 // 0x07E0
 		TArray<class AM1MissionTargetInteraction*>    MissionTargets;											     // 0x07F0(0x0010)(Edit, ZeroConstructor, EditConst, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_AM1MissionTaskActorDestructionVulgusPost_Class[0x40];      // 0x0800
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionTaskActorDestructionVulgusPost">();
+		}
 	};
 	// 0x0050 (0x0078 - 0x0028)
 	class UM1AccountPreset final : public UObject
