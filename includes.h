@@ -167,7 +167,7 @@ void RestartLastMission();
 void LeaveMission();
 void SwitchPreset();
 void RefreshPresetList(bool);
-UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> SortPresetMapByIndex(const UC::TMap<UC::int32, TFD_SDK::FM1PresetSlot>& PresetMap);
+void EncryptedVaultDrops();
 
 /*
 *  Aimbot
@@ -210,6 +210,7 @@ int cfg_SwitchPreset = VK_NEXT;
 float cfg_TimeScale = 1.0f;
 int cfg_TimeScaleKey = VK_F2;
 int cfg_TimeScaleHoldKey = VK_CONTROL;
+int cfg_EncryptedVaultDropsKey = VK_LEFT;
 
 void WriteEnemyNamesData();
 std::unordered_map<int, std::string> ReadEnemyNamesData();

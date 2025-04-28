@@ -969,6 +969,21 @@ namespace TFD_SDK
 			return StaticClassImpl<"M1FieldInteractableActorMiniGame">();
 		}
 	};
+	// 0x0030 (0x0278 - 0x0248)
+	class AM1MiniGameActor final : public AActor
+	{
+	public:
+		uint8				  Pad_AM1MiniGameActor[0x30];                                     // 0x0248
+
+	public:
+		void ServerDropItems(class AController* InInstigator);
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MiniGameActor">();
+		}
+	};
 	// 0x0398 (0x05E0 - 0x0248)
 	class alignas(0x10) AM1DropContainer : public AActor
 	{
@@ -1666,5 +1681,11 @@ namespace TFD_SDK
 	{
 	public:
 		EM1MissionEndReason                           InReason;                                          // 0x0000(0x0001)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+	// 0x0008 (0x0008 - 0x0000)
+	struct M1MiniGameActor_ServerDropItems final
+	{
+	public:
+		class AController* InInstigator;                                      // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
 }
