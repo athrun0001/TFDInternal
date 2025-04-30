@@ -192,16 +192,16 @@ namespace TFD_SDK
 		struct FM1TemplateId                          TemplateId;                                        // 0x0008(0x0004)(NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		EM1EquipmentSlotType                          SlotType;                                          // 0x000C(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		uint8                                         Pad_D[0x3];                                        // 0x000D(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-		class AM1Weapon* Weapon;                                            // 0x0010(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		class AM1Weapon*							  Weapon;                                            // 0x0010(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
 	// 0x0090 (0x0090 - 0x0000)
 	struct FM1ActivatedWeaponSlot final
 	{
 	public:
-		uint8											 Pad_0[0x8];                                        // 0x0000(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
-		struct FM1WeaponSlot							 WeaponSlot;                                        // 0x0008(0x0018)(NoDestructor, NativeAccessSpecifierPublic)
-		TMap<EM1BattleKey, class UM1WeaponInputContext*> InputContexts;                                     // 0x0020(0x0050)(Transient, UObjectWrapper, NativeAccessSpecifierPublic)
-		uint8											 Pad_70[0x20];                                      // 0x0070(0x0020)(Fixing Struct Size After Last Property [ Dumper-7 ])
+		uint8                                         Pad_0[0x8];                                        // 0x0000(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+		struct FM1WeaponSlot                          WeaponSlot;                                        // 0x0008(0x0018)(NoDestructor, NativeAccessSpecifierPublic)
+		TMap<EM1BattleKey, class UM1WeaponInputContext*> InputContexts;                                  // 0x0020(0x0050)(Transient, UObjectWrapper, NativeAccessSpecifierPublic)
+		uint8                                         Pad_70[0x20];                                      // 0x0070(0x0020)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
 	// 0x0020 (0x0020 - 0x0000)
 	struct FFontOutlineSettings final
@@ -242,7 +242,7 @@ namespace TFD_SDK
 	public:
 		bool                                          bPublicItem;                                       // 0x0000(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
-		class AActor* ItemOwner;                                         // 0x0008(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		class AActor*								  ItemOwner;                                         // 0x0008(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		int32                                         Count;                                             // 0x0010(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		struct FM1ItemTidBox                          ItemBox;                                           // 0x0014(0x0008)(NoDestructor, NativeAccessSpecifierPublic)
 		uint8                                         Pad_1C[0x4];                                       // 0x001C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
@@ -256,7 +256,7 @@ namespace TFD_SDK
 		class FName                                   TaskName;                                          // 0x0000(0x0008)(Edit, ZeroConstructor, EditConst, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		int32                                         LinkIndex;                                         // 0x0008(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_C[0x4];                                        // 0x000C(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
-		class AM1MissionTaskActor* InstancedTaskActor;                                // 0x0010(0x0008)(Edit, ZeroConstructor, EditConst, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		class AM1MissionTaskActor*					  InstancedTaskActor;                                // 0x0010(0x0008)(Edit, ZeroConstructor, EditConst, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		TSubclassOf<class AM1MissionTaskActor>        TaskActorClass;                                    // 0x0018(0x0008)(Edit, ZeroConstructor, EditConst, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
 	// 0x0028 (0x0028 - 0x0000)
@@ -293,7 +293,6 @@ namespace TFD_SDK
 		uint8 Pad_UEngine_Class[0xFD8]; // 0x0060
 	public:
 		static class UEngine* GetEngine();
-
 	public:
 		static class UClass* StaticClass()
 		{
@@ -362,6 +361,11 @@ namespace TFD_SDK
 		uint8 Pad_LocalPlayers[0x10]; // 0x28 
 		TArray<class ULocalPlayer*>  LocalPlayers; // 0x0038(0x0010)
 		uint8 Pad_UGameInstance_Class[0x178]; // 0x48 
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"GameInstance">();
+		}
 	};
 	// 0x0020 (0x0048 - 0x0028)
 	class UPlayer : public UObject
@@ -370,6 +374,11 @@ namespace TFD_SDK
 		uint8 Pad_PlayerController[0x8]; // 0x28
 		class APlayerController* PlayerController; // 0x0030(0x0008)
 		uint8 Pad_UPlayer_Class[0x10]; // 0x38
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"Player">();
+		}
 	};
 	// 0x0010 (0x0038 - 0x0028)
 	class UScriptViewportClient : public UObject
@@ -389,6 +398,11 @@ namespace TFD_SDK
 		uint8 Pad_ViewportClient[0x30]; // 0x48
 		class UGameViewportClient* ViewportClient; // 0x0078(0x0008)
 		uint8 Pad_ULocalPlayer_Class[0x1F8]; // 0x80
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"LocalPlayer">();
+		}
 	};
 	// 0x0088 (0x02D0 - 0x0248)
 	class AController : public AActor
@@ -475,6 +489,11 @@ namespace TFD_SDK
 	public:
 		void Deactivate();
 		bool IsActive() const;
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"ActorComponent">();
+		}
 	};
 	// 0x0148 (0x01F0 - 0x00A8)
 	class alignas(0x10) USceneComponent : public UActorComponent
@@ -667,6 +686,11 @@ namespace TFD_SDK
 	{
 	public:
 		uint8 Pad_2F4E[0x80];// 0x00A8
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1HeartbeatTesterComponent">();
+		}
 	};
 	// 0x04A8 (0x0DB8 - 0x0910)
 	class AM1PlayerControllerInGame : public AM1PlayerController
@@ -1316,13 +1340,13 @@ namespace TFD_SDK
 		TArray<struct FM1MissionTaskLink>             TaskLinks;                                         // 0x0290(0x0010)(Edit, EditFixedSize, ZeroConstructor, EditConst, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_AM1MissionActor_Class[0x338];                  // 0x02A0
 	};
-	// 0x0328 (0x0350 - 0x0028)
+	// 0x0330 (0x0358 - 0x0028)
 	class UM1MissionResult final : public UObject
 	{
 	public:
 		uint8                                         Pad_MissionTemplateId[0x10];                       // 0x0028
 		struct FM1TemplateId                          MissionTemplateId;                                 // 0x0038(0x0004)(NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_UM1MissionResult[0x314];                       // 0x003C
+		uint8                                         Pad_UM1MissionResult[0x31C];                       // 0x003C
 	};
 	// 0x0730 (0x07D8 - 0x00A8)
 	class UM1MissionControlComponent final : public UActorComponent
@@ -1429,6 +1453,7 @@ namespace TFD_SDK
 	struct FVector_NetQuantizeNormal final : public FVector
 	{
 	};
+	// 0x0018 (0x0018 - 0x0000)
 	struct FActorInstanceHandle final
 	{
 	public:
@@ -1686,6 +1711,6 @@ namespace TFD_SDK
 	struct M1MiniGameActor_ServerDropItems final
 	{
 	public:
-		class AController* InInstigator;                                      // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		class AController*							  InInstigator;                                      // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
 }

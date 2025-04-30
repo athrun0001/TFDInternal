@@ -50,15 +50,17 @@ if (GEngine)
 	{
 		if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
 		{
-			if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+			if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass())
+				&& GWorld->OwningGameInstance->IsA(TFD_SDK::UGameInstance::StaticClass()))
 			{
 				std::string Name = GWorld->Name.ToString();
 				if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
 				{
 					if (GWorld->OwningGameInstance->LocalPlayers && GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
 					{
-						if (
-							GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController
+						if (GWorld->OwningGameInstance->LocalPlayers[0]->IsA(TFD_SDK::ULocalPlayer::StaticClass())
+							&& GWorld->OwningGameInstance->LocalPlayers[0]->IsA(TFD_SDK::UPlayer::StaticClass())
+							&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController
 							&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass())
 							&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::APlayerController::StaticClass()))
 						{
@@ -212,7 +214,8 @@ static __int64 YourHookProc(void* self, void* Canvas)
 		{
 
 			int State = -1;
-			if (GWorld && GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+			if (GWorld && GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass())
+				&& GWorld->OwningGameInstance->IsA(TFD_SDK::UGameInstance::StaticClass()))
 			{
 				State = (int)(static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState);
 			}
@@ -220,7 +223,10 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (State != (int)TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay) // Game isn't ready, don't do anything or it will likely crash
 				return M1org(self, Canvas);
 
-			if (inGame && PlayerIngameController)
+			if (inGame && PlayerIngameController
+				&& PlayerIngameController->HeartbeatTesterComponent
+				&& PlayerIngameController->HeartbeatTesterComponent->IsA(TFD_SDK::UM1HeartbeatTesterComponent::StaticClass())
+				&& PlayerIngameController->HeartbeatTesterComponent->IsA(TFD_SDK::UActorComponent::StaticClass()))
 			{
 				if (PlayerIngameController->HeartbeatTesterComponent && PlayerIngameController->HeartbeatTesterComponent->IsActive())
 					PlayerIngameController->HeartbeatTesterComponent->Deactivate();
@@ -2060,7 +2066,7 @@ DWORD WINAPI Init(HMODULE Module)
 		//int32_t GObjOffsetRelative = *reinterpret_cast<int32_t*>(GObjOffsetAddress);
 		//uintptr_t GObjAddress = (GObjsPtr + 7) + GObjOffsetRelative;
 		//uintptr_t GObjeOffset = GObjAddress - GameModule.dwBase;
-		TFD_SDK::Offsets::GObjects = 0x9f25450;
+		TFD_SDK::Offsets::GObjects = 0x09F24450;
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found GObjects at: " << std::hex << GObjsPtr << std::dec << "\n";
 		Sleep(1000);

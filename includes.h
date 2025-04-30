@@ -80,8 +80,6 @@ uintptr_t FindSignature(int procID, sigmod mod, const char* sig, const char* mas
 /*
 *  Data
 */
-std::vector<int> Worlds;
-
 bool CheckPointers();
 std::vector<std::string> Presets;
 TFD_SDK::UWorld* GWorld;

@@ -12,7 +12,6 @@
 #define WIN32_LEAN_AND_MEAN
 
 //#include <string>
-//#include <iostream>
 #include <Windows.h>
 #include <functional>
 //#include <type_traits>

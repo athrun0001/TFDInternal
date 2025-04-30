@@ -183,7 +183,7 @@ namespace SDK
 		}
 	};
 	static_assert(alignof(IInterface) == 0x000008, "Wrong alignment on IInterface");
-	static_assert(sizeof(IInterface) == 0x0000028, "Wrong size on IInterface");
+	static_assert(sizeof(IInterface) == 0x000028, "Wrong size on IInterface");
 
 	// Class CoreUObject.Package
 	// 0x0068 (0x0090 - 0x0028)
