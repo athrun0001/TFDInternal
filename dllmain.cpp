@@ -567,15 +567,6 @@ void InstantReload()
 
 void PlayerEnemyESP()
 {
-	if (!GWorld || !PlayerController 
-		|| !PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass()) 
-		|| !PlayerController->IsA(TFD_SDK::APlayerController::StaticClass()) 
-		|| !PlayerController->ActorManager_Subsystem  
-		|| !PlayerController->ActorManager_Subsystem->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass()) 
-		|| !Actors 
-		|| !Actors->Characters)
-		return;
-
 	if (cfg_DrawPlayerNames || cfg_DrawPlayerBoxes || cfg_DrawEnemyNames || cfg_DrawEnemyBoxes || cfg_DrawPlayerLines || cfg_DrawEnemyLines)
 	{
 		if (Actors->Characters.IsValid() && Actors->Characters.Num() > 0)
@@ -1227,6 +1218,7 @@ void RefreshPresetList(bool isrefresh = false)
 
 void EncryptedVaultDrops()
 {
+	bool vaultfound = false;
 	if (GWorld->Levels.IsValid())
 	{
 		for (int i = 0; i < GWorld->Levels.Num(); ++i)
@@ -1243,11 +1235,28 @@ void EncryptedVaultDrops()
 						continue;
 					if (Actor->IsA(TFD_SDK::AM1MiniGameActor::StaticClass()))
 					{
+						
 						TFD_SDK::AM1MiniGameActor* Vault = static_cast<TFD_SDK::AM1MiniGameActor*>(Actor);
-						Vault->ServerDropItems(static_cast<TFD_SDK::AController*>(PlayerController));
+						if (cfg_EncryptedVaultRewardType == 0)
+						{
+							TFD_SDK::FM1MiniGameResult Minigame_Result;
+							Minigame_Result.FieldDifficultyTemplateId = Vault->FieldDifficultyTid;
+							Minigame_Result.MiniGameTemplateId = Vault->MiniGameTid;
+							Minigame_Result.Result = TFD_SDK::EM1MiniGameResult::Success;
+
+							Vault->ServerOnMiniGameEnded(Minigame_Result);
+							Vault->ClientStopMiniGame();
+						}
+						if (cfg_EncryptedVaultRewardType == 1)
+							Vault->ServerDropItems(static_cast<TFD_SDK::AController*>(PlayerController));
+						vaultfound = true;
 					}
+					if (vaultfound)
+						break;
 				}
 			}
+			if (vaultfound)
+				break;
 		}
 	}
 }
@@ -1574,7 +1583,9 @@ void DrawMenu()
 			ZeroGUI::Text((char*)"Encrypted Vault Drops key:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Encrypted Vault Drops key", TFD_SDK::FVector2D{ 110, 25 }, &cfg_EncryptedVaultDropsKey);
-			ZeroGUI::Text((char*)"Press the key as many as you want while in vault minigame.");
+			ZeroGUI::Combobox((char*)"Vault Drop Reward Type", TFD_SDK::FVector2D{ 160, 25 }, &cfg_EncryptedVaultRewardType, "Safe", "Risky", NULL);
+			ZeroGUI::Text((char*)"[Safe]: Press key once in vault minigame");
+			ZeroGUI::Text((char*)"[Risky]: Press key as many as you want in vault minigame.");
 		}
 		if (tab == 2)
 		{
@@ -1757,6 +1768,7 @@ void LoadCFG()
 		cfg_DrawResourceBox = ini.GetBoolValue("ESP", "EnableResourceBoxes");
 		cfg_DrawVoidVesselBox = ini.GetBoolValue("ESP", "EnableVoidVesselBoxes");
 		cfg_EncryptedVaultDropsKey = (int)ini.GetDoubleValue("ESP", "EncryptedVaultDropsKey");	
+		cfg_EncryptedVaultRewardType = (int)ini.GetDoubleValue("ESP", "EncryptedVaultRewardType");
 
 		cfg_EnableAimbotHold = ini.GetBoolValue("Aimbot", "EnableAimbotHold");
 		cfg_EnableAimbotToggle = ini.GetBoolValue("Aimbot", "EnableAimbotToggle");
@@ -1818,6 +1830,7 @@ void SaveCFG()
 	ini.SetBoolValue("ESP", "EnableResourceBoxes", cfg_DrawResourceBox);
 	ini.SetBoolValue("ESP", "EnableVoidVesselBoxes", cfg_DrawVoidVesselBox);
 	ini.SetDoubleValue("ESP", "EncryptedVaultDropsKey", cfg_EncryptedVaultDropsKey);
+	ini.SetDoubleValue("ESP", "EncryptedVaultRewardType", cfg_EncryptedVaultRewardType);
 
 	ini.SetBoolValue("Aimbot", "EnableAimbotHold", cfg_EnableAimbotHold);
 	ini.SetBoolValue("Aimbot", "EnableAimbotToggle", cfg_EnableAimbotToggle);

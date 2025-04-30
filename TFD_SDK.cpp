@@ -745,4 +745,38 @@ namespace TFD_SDK
 
 		Func->FunctionFlags = Flgs;
 	}
+
+	void AM1MiniGameActor::ServerOnMiniGameEnded(const struct FM1MiniGameResult& InResult)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1MiniGameActor", "ServerOnMiniGameEnded");
+
+		M1MiniGameActor_ServerOnMiniGameEnded Parms{};
+
+		Parms.InResult = std::move(InResult);
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
+
+	void AM1MiniGameActor::ClientStopMiniGame()
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1MiniGameActor", "ClientStopMiniGame");
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, nullptr);
+
+		Func->FunctionFlags = Flgs;
+	}
 }

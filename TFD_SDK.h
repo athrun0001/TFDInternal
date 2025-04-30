@@ -177,6 +177,16 @@ namespace TFD_SDK
 		PickupWeapon = 91,
 		Max = 99,
 	};
+	// NumValues: 0x0006
+	enum class EM1MiniGameResult : uint8
+	{
+		Unknown = 0,
+		Fail = 1,
+		Success = 2,
+		Cancel = 3,
+		ForceCancel = 4,
+		EM1MiniGameResult_MAX = 5,
+	};
 
 	// 0x0004 (0x0004 - 0x0000)
 	struct FM1TemplateId final
@@ -282,6 +292,15 @@ namespace TFD_SDK
 		uint8                                         Pad_4[0x4];                                        // 0x0004(0x0004)(Fixing Size After Last Property [ Dumper-7 ])
 		class FString                                 PresetName;                                        // 0x0008(0x0010)(ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		TMap<EM1PresetSlotType, struct FM1PresetItem> PresetItemBySlotType;                              // 0x0018(0x0050)(NativeAccessSpecifierPublic)
+	};
+	// 0x000C (0x000C - 0x0000)
+	struct FM1MiniGameResult final
+	{
+	public:
+		struct FM1TemplateId                          MiniGameTemplateId;                                // 0x0000(0x0004)(NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		struct FM1TemplateId                          FieldDifficultyTemplateId;                         // 0x0004(0x0004)(NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		EM1MiniGameResult                             Result;                                            // 0x0008(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
 
 	// 0x1010 (0x1038 - 0x0028)
@@ -997,10 +1016,14 @@ namespace TFD_SDK
 	class AM1MiniGameActor final : public AActor
 	{
 	public:
-		uint8				  Pad_AM1MiniGameActor[0x30];                                     // 0x0248
+		struct FM1TemplateId                          MiniGameTid;                                       // 0x0248(0x0004)(Net, Transient, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		struct FM1TemplateId                          FieldDifficultyTid;                                // 0x024C(0x0004)(Net, Transient, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8										  Pad_AM1MiniGameActor[0x28];                        // 0x0250
 
 	public:
 		void ServerDropItems(class AController* InInstigator);
+		void ServerOnMiniGameEnded(const struct FM1MiniGameResult& InResult);
+		void ClientStopMiniGame();
 
 	public:
 		static class UClass* StaticClass()
@@ -1712,5 +1735,11 @@ namespace TFD_SDK
 	{
 	public:
 		class AController*							  InInstigator;                                      // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+	// 0x000C (0x000C - 0x0000)
+	struct M1MiniGameActor_ServerOnMiniGameEnded final
+	{
+	public:
+		struct FM1MiniGameResult                      InResult;                                          // 0x0000(0x000C)(ConstParm, Parm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
 	};
 }

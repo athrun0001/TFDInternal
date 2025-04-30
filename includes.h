@@ -209,6 +209,7 @@ float cfg_TimeScale = 1.0f;
 int cfg_TimeScaleKey = VK_F2;
 int cfg_TimeScaleHoldKey = VK_CONTROL;
 int cfg_EncryptedVaultDropsKey = VK_LEFT;
+int cfg_EncryptedVaultRewardType = 0;
 
 void WriteEnemyNamesData();
 std::unordered_map<int, std::string> ReadEnemyNamesData();
