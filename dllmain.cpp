@@ -1,6 +1,6 @@
 
 #include "includes.h"
-//#include <process.h>
+#include <process.h>
 //#include <thread>
 //#include <fstream>
 
@@ -1984,10 +1984,10 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 	{
 	case DLL_PROCESS_ATTACH:
 		DisableThreadLibraryCalls(hModule);
-		CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Init, hModule, 0, 0);
-		//HANDLE hThread = (HANDLE)_beginthreadex(nullptr, 0, reinterpret_cast<unsigned(__stdcall*)(void*)>(Init), hModule, 0, nullptr);
-		//if (hThread)
-		//	CloseHandle(hThread);  // Close immediately unless you need to wait on it
+		//CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Init, hModule, 0, 0);
+		HANDLE hThread = (HANDLE)_beginthreadex(nullptr, 0, reinterpret_cast<unsigned(__stdcall*)(void*)>(Init), hModule, 0, nullptr);
+		if (hThread)
+			CloseHandle(hThread);  // Close immediately unless you need to wait on it
 		return true;
 	}
 	return false;
