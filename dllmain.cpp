@@ -232,7 +232,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				&& PlayerIngameController->HeartbeatTesterComponent->IsA(TFD_SDK::UM1HeartbeatTesterComponent::StaticClass())
 				&& PlayerIngameController->HeartbeatTesterComponent->IsA(TFD_SDK::UActorComponent::StaticClass()))
 			{
-				if (PlayerIngameController->HeartbeatTesterComponent && PlayerIngameController->HeartbeatTesterComponent->IsActive())
+				if (PlayerIngameController->HeartbeatTesterComponent->IsActive())
 					PlayerIngameController->HeartbeatTesterComponent->Deactivate();
 			}
 
