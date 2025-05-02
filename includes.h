@@ -80,10 +80,10 @@ uintptr_t FindSignature(int procID, sigmod mod, const char* sig, const char* mas
 /*
 *  Data
 */
+
 bool CheckPointers();
 std::vector<std::string> Presets;
 TFD_SDK::UWorld* GWorld;
-TFD_SDK::UWorld* OriginalWorld;
 TFD_SDK::UEngine* GEngine;
 TFD_SDK::ULocalPlayer* LocalPlayer;
 TFD_SDK::AM1PlayerController* PlayerController;
@@ -164,7 +164,7 @@ void InstantInfiltration();
 void RestartLastMission();
 void LeaveMission();
 void SwitchPreset();
-void RefreshPresetList(bool);
+void RefreshPresetList(bool isrefresh);
 void EncryptedVaultDrops();
 
 /*

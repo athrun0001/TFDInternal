@@ -1,5 +1,6 @@
 
 #include "includes.h"
+//#include <process.h>
 //#include <thread>
 //#include <fstream>
 
@@ -53,43 +54,46 @@ if (GEngine)
 			if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass())
 				&& GWorld->OwningGameInstance->IsA(TFD_SDK::UGameInstance::StaticClass()))
 			{
-				std::string Name = GWorld->Name.ToString();
-				if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
+				if (static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
 				{
-					if (GWorld->OwningGameInstance->LocalPlayers && GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
+					std::string Name = GWorld->Name.ToString();
+					if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
 					{
-						if (GWorld->OwningGameInstance->LocalPlayers[0]->IsA(TFD_SDK::ULocalPlayer::StaticClass())
-							&& GWorld->OwningGameInstance->LocalPlayers[0]->IsA(TFD_SDK::UPlayer::StaticClass())
-							&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController
-							&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass())
-							&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::APlayerController::StaticClass()))
+						if (GWorld->OwningGameInstance->LocalPlayers && GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
 						{
-							TFD_SDK::AM1PlayerController* PC = static_cast<TFD_SDK::AM1PlayerController*>(GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController);
-							if (PC->Character
-								&& PC->Character->IsA(TFD_SDK::AM1Player::StaticClass())
-								&& PC->Character->IsA(TFD_SDK::ACharacter::StaticClass())
-								&& PC->ActorManager_Subsystem
-								&& PC->ActorManager_Subsystem->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass())
-								&& PC->PlayerState
-								&& PC->PlayerState->IsA(TFD_SDK::APlayerState::StaticClass()))
+							if (GWorld->OwningGameInstance->LocalPlayers[0]->IsA(TFD_SDK::ULocalPlayer::StaticClass())
+								&& GWorld->OwningGameInstance->LocalPlayers[0]->IsA(TFD_SDK::UPlayer::StaticClass())
+								&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController
+								&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass())
+								&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::APlayerController::StaticClass()))
 							{
-								PlayerController = PC;
-								PlayerState = PC->PlayerState;
-								LocalPlayer = GWorld->OwningGameInstance->LocalPlayers[0];
-								LocalCharacter = static_cast<TFD_SDK::AM1Player*>(PlayerController->Character);
-								Actors = PC->ActorManager_Subsystem;
-								ZeroGUI::controller = GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController;
-								if (PlayerController->IsA(TFD_SDK::AM1PlayerControllerInGame::StaticClass()))
+								TFD_SDK::AM1PlayerController* PC = static_cast<TFD_SDK::AM1PlayerController*>(GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController);
+								if (PC->Character
+									&& PC->Character->IsA(TFD_SDK::AM1Player::StaticClass())
+									&& PC->Character->IsA(TFD_SDK::ACharacter::StaticClass())
+									&& PC->ActorManager_Subsystem
+									&& PC->ActorManager_Subsystem->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass())
+									&& PC->PlayerState
+									&& PC->PlayerState->IsA(TFD_SDK::APlayerState::StaticClass()))
 								{
-									PlayerIngameController = static_cast<TFD_SDK::AM1PlayerControllerInGame*>(PlayerController);
-									inGame = true;
+									PlayerController = PC;
+									PlayerState = PC->PlayerState;
+									LocalPlayer = GWorld->OwningGameInstance->LocalPlayers[0];
+									LocalCharacter = static_cast<TFD_SDK::AM1Player*>(PlayerController->Character);
+									Actors = PC->ActorManager_Subsystem;
+									ZeroGUI::controller = GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController;
+									if (PlayerController->IsA(TFD_SDK::AM1PlayerControllerInGame::StaticClass()))
+									{
+										PlayerIngameController = static_cast<TFD_SDK::AM1PlayerControllerInGame*>(PlayerController);
+										inGame = true;
+									}
+									else
+									{
+										inGame = false;
+										PlayerIngameController = nullptr;
+									}
+									return true;
 								}
-								else
-								{
-									inGame = false;
-									PlayerIngameController = nullptr;
-								}
-								return true;
 							}
 						}
 					}
@@ -121,7 +125,6 @@ bool WorldToScreen(const TFD_SDK::FVector& worldLoc, TFD_SDK::FVector2D* screenP
 	return isOnScreen;
 }
 
-
 //static __int64 YourHookProc_old(void* self, void* Canvas)
 //{
 //	if (Canvas)
@@ -140,7 +143,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 		if (!isGUIInit)
 		{
 			ZeroMemory(g_Controllers, sizeof(CONTROLLER_STATE) * 4);
-			CheckPointers();
+			if (!GEngine)
+				GEngine = TFD_SDK::UEngine::GetEngine();
+			//CheckPointers();
 			TFD_SDK::UCanvas* myCanvas = static_cast<TFD_SDK::UCanvas*>(Canvas);
 			if (myCanvas->SizeX != lastScreenSize)
 			{
@@ -212,16 +217,15 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 		if (CheckPointers())
 		{
+			//int State = -1;
+			//if (GWorld && GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass())
+			//	&& GWorld->OwningGameInstance->IsA(TFD_SDK::UGameInstance::StaticClass()))
+			//{
+			//	State = (int)(static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState);
+			//}
 
-			int State = -1;
-			if (GWorld && GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass())
-				&& GWorld->OwningGameInstance->IsA(TFD_SDK::UGameInstance::StaticClass()))
-			{
-				State = (int)(static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState);
-			}
-
-			if (State != (int)TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay) // Game isn't ready, don't do anything or it will likely crash
-				return M1org(self, Canvas);
+			//if (State != (int)TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay) // Game isn't ready, don't do anything or it will likely crash
+			//	return M1org(self, Canvas);
 
 			if (inGame && PlayerIngameController
 				&& PlayerIngameController->HeartbeatTesterComponent
@@ -576,7 +580,7 @@ void PlayerEnemyESP()
 			{
 				if (!GWorld 
 					|| !PlayerController 
-					|| !PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass()) 
+					|| !PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass())  
 					|| !PlayerController->IsA(TFD_SDK::APlayerController::StaticClass()) 
 					|| !PlayerController->ActorManager_Subsystem  
 					|| !PlayerController->ActorManager_Subsystem->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass()) 
@@ -731,6 +735,7 @@ void PlayerEnemyESP()
 		}
 	}
 }
+
 void ItemESPVacuum()
 {
 	if (cfg_DrawItemBoxes || cfg_DrawItemNames || cfg_DrawItemLines || cfg_LootVacuum || cfg_DrawVaults)
@@ -1261,37 +1266,6 @@ void EncryptedVaultDrops()
 	}
 }
 
-UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> SortPresetMapByIndex(const UC::TMap<UC::int32, TFD_SDK::FM1PresetSlot>& PresetMap)
-{
-	UC::TArray<UC::TPair<UC::int32, TFD_SDK::FM1PresetSlot>> Sorted;
-
-	// Extract
-	for (const auto& Pair : PresetMap)
-	{
-		Sorted.Add(Pair);
-	}
-
-	// Manual Bubble Sort by PresetIndex
-	const UC::int32 Count = Sorted.Num();
-	for (UC::int32 i = 0; i < Count - 1; ++i)
-	{
-		for (UC::int32 j = 0; j < Count - i - 1; ++j)
-		{
-			UC::int32 A = Sorted[j].Second.PresetIndex;
-			UC::int32 B = Sorted[j + 1].Second.PresetIndex;
-
-			if (A > B) // ascending sort
-			{
-				auto Temp = Sorted[j];
-				Sorted[j] = Sorted[j + 1];
-				Sorted[j + 1] = Temp;
-			}
-		}
-	}
-
-	return Sorted;
-}
-
 HRESULT UpdateControllerState()
 {
 	DWORD dwResult;
@@ -1308,7 +1282,6 @@ HRESULT UpdateControllerState()
 
 	return S_OK;
 }
-
 
 void Aimbot()
 {
@@ -1537,9 +1510,6 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 	}
 	return ret;
 }
-
-
-
 
 void DrawMenu()
 {
@@ -1879,8 +1849,8 @@ void SaveCFG()
 	ini.SaveFile("cfg.ini");
 }
 
-
-void WriteEnemyNamesData() {
+void WriteEnemyNamesData() 
+{
 	std::ofstream outFile("NameCache.dat", std::ios::binary);
 
 	if (!outFile) {
@@ -1906,7 +1876,8 @@ void WriteEnemyNamesData() {
 	outFile.close();
 }
 
-std::unordered_map<int, std::string> ReadEnemyNamesData() {
+std::unordered_map<int, std::string> ReadEnemyNamesData() 
+{
 	std::unordered_map<int, std::string> map;
 	std::ifstream inFile("NameCache.dat", std::ios::binary);
 
@@ -1941,7 +1912,8 @@ std::unordered_map<int, std::string> ReadEnemyNamesData() {
 	return map;
 }
 
-void WriteEnemyBonesData() {
+void WriteEnemyBonesData() 
+{
 	std::ofstream outFile("BoneCache.dat", std::ios::binary);
 
 	if (!outFile) {
@@ -1968,7 +1940,8 @@ void WriteEnemyBonesData() {
 	outFile.close();
 }
 
-std::unordered_map<int, std::vector<int>> ReadEnemyBonesData() {
+std::unordered_map<int, std::vector<int>> ReadEnemyBonesData() 
+{
 	std::unordered_map<int, std::vector<int>> map;
 	std::ifstream inFile("BoneCache.dat", std::ios::binary);
 
@@ -2005,17 +1978,16 @@ std::unordered_map<int, std::vector<int>> ReadEnemyBonesData() {
 	return map;
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule,
-	DWORD  ul_reason_for_call,
-	LPVOID lpReserved
-)
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
 {
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
 		DisableThreadLibraryCalls(hModule);
 		CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Init, hModule, 0, 0);
-
+		//HANDLE hThread = (HANDLE)_beginthreadex(nullptr, 0, reinterpret_cast<unsigned(__stdcall*)(void*)>(Init), hModule, 0, nullptr);
+		//if (hThread)
+		//	CloseHandle(hThread);  // Close immediately unless you need to wait on it
 		return true;
 	}
 	return false;
@@ -2051,7 +2023,7 @@ DWORD WINAPI Init(HMODULE Module)
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found Module\n";
 #endif // IS_DEBUG
-		uintptr_t GNamePtr = FindSignature(procID, GameModule, GNamesSig, GNamesMask);
+		/*uintptr_t GNamePtr = FindSignature(procID, GameModule, GNamesSig, GNamesMask);
 		if (!GNamePtr)
 		{
 			throw std::runtime_error("Unable to find GNames.");
@@ -2062,7 +2034,8 @@ DWORD WINAPI Init(HMODULE Module)
 		int32_t GNameOffsetRelative = *reinterpret_cast<int32_t*>(GNameOffsetAddress);
 		uintptr_t GNameAddress = (GNamePtr + 7) + GNameOffsetRelative;
 		uintptr_t GNameOffset = GNameAddress - GameModule.dwBase;
-		TFD_SDK::Offsets::GNames = GNameOffset;
+		TFD_SDK::Offsets::GNames = GNameOffset;*/
+		TFD_SDK::Offsets::GNames = 0x0A245380;
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found GNames at: " << std::hex << GNameOffset << "\n";
 		Sleep(1000);

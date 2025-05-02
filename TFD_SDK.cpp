@@ -44,6 +44,13 @@ namespace TFD_SDK
 				if (!Obj)
 					continue;
 
+				if (Obj->Flags & EObjectFlags::BeginDestroyed ||
+					Obj->Flags & EObjectFlags::BeingRegenerated ||
+					Obj->Flags & EObjectFlags::FinishDestroyed ||
+					Obj->Flags & EObjectFlags::NeedInitialization ||
+					Obj->Flags & EObjectFlags::WillBeLoaded)
+					continue;
+
 				if (Obj->Flags & EObjectFlags::LoadCompleted && Obj->IsA(UWorld::StaticClass()) && !Obj->IsDefaultObject())
 				{
 					
@@ -68,7 +75,7 @@ namespace TFD_SDK
 			}
 			else
 			{
-				if (!(Obj->Flags & TFD_SDK::EObjectFlags::LoadCompleted) || !Obj->IsA(UWorld::StaticClass()) || Obj->IsDefaultObject())
+				if (!(Obj->Flags & EObjectFlags::LoadCompleted && Obj->IsA(UWorld::StaticClass()) && !Obj->IsDefaultObject()))
 				{
 					//std::cout << "DescentInternal - World Obj Not World or is DefaultObject: " << std::hex << World << std::dec << "\n";
 					World = nullptr;
