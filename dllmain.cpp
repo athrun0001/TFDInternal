@@ -33,9 +33,10 @@ if (GEngine)
 		if (Obj->Flags & TFD_SDK::EObjectFlags::LoadCompleted && Obj->IsA(TFD_SDK::UWorld::StaticClass()) && !Obj->IsDefaultObject())
 		{
 			TFD_SDK::UWorld* World = static_cast<TFD_SDK::UWorld*>(Obj);
-			if (World->OwningGameInstance)
+			if (World && World->OwningGameInstance && World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 			{
-				if (World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+				TFD_SDK::UM1GameInstance* OwnGameInstance = static_cast<TFD_SDK::UM1GameInstance*>(World->OwningGameInstance);
+				if (OwnGameInstance && OwnGameInstance->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
 				{
 					std::string Name = World->Name.ToString();
 					if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
@@ -53,9 +54,9 @@ if (GEngine)
 		{
 			if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 			{*/
-				TFD_SDK::UM1GameInstance* OwnGameInstance = static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance);
+				/*TFD_SDK::UM1GameInstance* OwnGameInstance = static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance);
 				if (OwnGameInstance && OwnGameInstance->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
-				{
+				{*/
 					/*std::string Name = GWorld->Name.ToString();
 					if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
 					{*/
@@ -92,7 +93,7 @@ if (GEngine)
 							}
 						}
 					//}
-				}
+				//}
 		/*	}
 		}*/
 	}
