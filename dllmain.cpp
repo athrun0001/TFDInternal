@@ -1397,7 +1397,7 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 					//if (!p->IsA(TFD_SDK::AM1Monster::StaticClass()) && !p->CharacterAttribute->IsA(TFD_SDK::UM1MonsterAttribute::StaticClass()))
 					//if (!p->CharacterAttribute->IsA(TFD_SDK::UM1MonsterAttribute::StaticClass()))
 					//	continue;
-					if (p->IsA(TFD_SDK::AM1Monster::StaticClass()) || p->CharacterAttribute->IsA(TFD_SDK::UM1MonsterAttribute::StaticClass()))
+					if (p->IsA(TFD_SDK::AM1Monster::StaticClass()) || (p->CharacterAttribute && p->CharacterAttribute->IsA(TFD_SDK::UM1MonsterAttribute::StaticClass())))
 					{
 						if (!PlayerController->LineOfSightTo(p, TFD_SDK::FVector{ 0, 0, 0 }, false))
 						{
