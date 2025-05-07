@@ -46,12 +46,12 @@ if (GEngine)
 	}
 	if (GWorld && isGUIInit)
 	{
-		//if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
-		//{
-			/*if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
-			{*/
-				//TFD_SDK::UM1GameInstance* OwnGameInstance = static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance);
-				if (static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
+		if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
+		{
+			if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+			{
+				TFD_SDK::UM1GameInstance* OwnGameInstance = static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance);
+				if (OwnGameInstance->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
 				{
 					std::string Name = GWorld->Name.ToString();
 					if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
@@ -90,8 +90,8 @@ if (GEngine)
 						}
 					}
 				}
-			//}
-		//}
+			}
+		}
 	}
 }
 PlayerController = nullptr;
