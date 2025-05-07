@@ -491,47 +491,69 @@ void InstantReload()
 {
 	if (!LocalCharacter)
 		return;
+
+	static bool foundWeapon = false;
 	static TFD_SDK::UM1WeaponSlotControlComponent* WeaponSlot = nullptr;
-
-	for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
+	if (!foundWeapon)
 	{
-		TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
-
-		if (!Obj)
-			continue;
-
-		if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
-			Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
-			Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
-			Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
-			Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
-			continue;
-
-		if (Obj->IsA(TFD_SDK::UM1WeaponSlotControlComponent::StaticClass()))
+		for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
 		{
-			TFD_SDK::UM1WeaponSlotControlComponent* Wep = static_cast<TFD_SDK::UM1WeaponSlotControlComponent*>(Obj);
-			if (!Wep)
+			TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
+
+			if (!Obj)
 				continue;
-			if (!Wep->Player_Owner)
+
+			if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
+				Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
+				Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
+				Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
+				Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
 				continue;
-			if (Wep->Player_Owner == LocalCharacter)
+
+			if (Obj->IsA(TFD_SDK::UM1WeaponSlotControlComponent::StaticClass()))
 			{
-				WeaponSlot = Wep;
-				break;
+				TFD_SDK::UM1WeaponSlotControlComponent* Wep = static_cast<TFD_SDK::UM1WeaponSlotControlComponent*>(Obj);
+				if (!Wep)
+					continue;
+				if (!Wep->Player_Owner)
+					continue;
+				if (Wep->Player_Owner == LocalCharacter)
+				{
+					WeaponSlot = Wep;
+					foundWeapon = true;
+					break;
+				}
 			}
 		}
 	}
-
-	if (!WeaponSlot)
-		return;
-
-	if (WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon)
+	else
 	{
-		if (WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent)
+		if (!WeaponSlot || !WeaponSlot->Player_Owner || WeaponSlot->Player_Owner != LocalCharacter)
 		{
-			if (WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent->CurrentRounds < 3)
+			foundWeapon = false;
+			return;
+		}
+		else
+		{
+			if (WeaponSlot->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
+				WeaponSlot->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
+				WeaponSlot->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
+				WeaponSlot->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
+				WeaponSlot->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
 			{
-				WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent->ClientFillCurrentRoundByServer();
+				foundWeapon = false;
+				WeaponSlot = nullptr;
+				return;
+			}
+			if (WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon)
+			{
+				if (WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent)
+				{
+					if (WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent->CurrentRounds < 3)
+					{
+						WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent->ClientFillCurrentRoundByServer();
+					}
+				}
 			}
 		}
 	}
