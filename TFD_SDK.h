@@ -380,11 +380,6 @@ namespace TFD_SDK
 		uint8 Pad_LocalPlayers[0x10]; // 0x28 
 		TArray<class ULocalPlayer*>  LocalPlayers; // 0x0038(0x0010)
 		uint8 Pad_UGameInstance_Class[0x178]; // 0x48 
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"GameInstance">();
-		}
 	};
 	// 0x0020 (0x0048 - 0x0028)
 	class UPlayer : public UObject
@@ -393,11 +388,6 @@ namespace TFD_SDK
 		uint8 Pad_PlayerController[0x8]; // 0x28
 		class APlayerController* PlayerController; // 0x0030(0x0008)
 		uint8 Pad_UPlayer_Class[0x10]; // 0x38
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"Player">();
-		}
 	};
 	// 0x0010 (0x0038 - 0x0028)
 	class UScriptViewportClient : public UObject
@@ -417,11 +407,6 @@ namespace TFD_SDK
 		uint8 Pad_ViewportClient[0x30]; // 0x48
 		class UGameViewportClient* ViewportClient; // 0x0078(0x0008)
 		uint8 Pad_ULocalPlayer_Class[0x1F8]; // 0x80
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"LocalPlayer">();
-		}
 	};
 	// 0x0088 (0x02D0 - 0x0248)
 	class AController : public AActor
@@ -460,12 +445,6 @@ namespace TFD_SDK
 
 	public:
 		bool GetMousePosition(float* LocationX, float* LocationY) const;
-
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"PlayerController">();
-		}
 	};
 	// 0x0008 (0x0030 - 0x0028)
 	class USubsystem : public UObject
@@ -490,11 +469,6 @@ namespace TFD_SDK
 	public:
 		class USkeletalMeshComponent* Mesh; // 0x02B8(0x0008)
 		uint8 Pad_ACharacter_Class[0x240]; // 0x2C0
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"Character">();
-		}
 	};
 #pragma pack(pop)
 	static_assert(offsetof(ACharacter, Mesh) == 0x2B8, "Bad alignment");
@@ -508,11 +482,6 @@ namespace TFD_SDK
 	public:
 		void Deactivate();
 		bool IsActive() const;
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"ActorComponent">();
-		}
 	};
 	// 0x0148 (0x01F0 - 0x00A8)
 	class alignas(0x10) USceneComponent : public UActorComponent
@@ -667,11 +636,6 @@ namespace TFD_SDK
 		uint8                                         Pad_28[0x10];                                      // 0x0028(0x0010)(Fixing Size After Last Property [ Dumper-7 ])
 		bool                                          bIsReady;                                          // 0x0038(0x0001)(Net, ZeroConstructor, IsPlainOldData, RepNotify, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"M1PrivateOnlineSubService">();
-		}
 	};
 	// 0x0060 (0x00A0 - 0x0040)
 	class UM1PrivateOnlineServicePreset final : public UM1PrivateOnlineSubService
@@ -705,11 +669,6 @@ namespace TFD_SDK
 	{
 	public:
 		uint8 Pad_2F4E[0x80];// 0x00A8
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"M1HeartbeatTesterComponent">();
-		}
 	};
 	// 0x04A8 (0x0DB8 - 0x0910)
 	class AM1PlayerControllerInGame : public AM1PlayerController
@@ -731,12 +690,6 @@ namespace TFD_SDK
 	public:
 		TArray<class AM1Character*> Characters; // 0x0030(0x0010)
 		uint8 Pad_UM1ActorManagerSubsystem_Class[0x140];// 0x0040
-
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"M1ActorManagerSubsystem">();
-		}
 	};
 	// 0x0118 (0x0140 - 0x0028)
 	class UM1CharacterAttribute : public UObject
@@ -854,12 +807,6 @@ namespace TFD_SDK
 	{
 	public:
 		uint8 Pad_AM1Actor_Class[0xE8];
-
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"M1Actor">();
-		}
 	};
 	// 0x0160 (0x0490 - 0x0330)
 	class AM1Weapon : public AM1Actor
@@ -888,7 +835,7 @@ namespace TFD_SDK
 		uint8 Pad_CurrentRounds[0x14]; // 0x00D8
 		int32 CurrentRounds; // 0x00EC(0x0004)
 		uint8 Pad_UM1WeaponRoundsComponent_Class[0x10]; // 0x00F0
-
+	public:
 		void ClientFillCurrentRoundByServer();
 	};
 	// 0x0448 (0x0778 - 0x0330)
@@ -1260,49 +1207,24 @@ namespace TFD_SDK
 	// 0x0000 (0x0458 - 0x0458)
 	class ABP_FieldInteractableBase_Hit_C : public AM1FieldInteractableActor_Hit
 	{
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticBPGeneratedClassImpl<"BP_FieldInteractableBase_Hit_C">();
-		}
 	};
 	// 0x0000 (0x0458 - 0x0458)
 	class ABP_INTER_VulgusBox_C final : public ABP_FieldInteractableBase_Hit_C
 	{
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticBPGeneratedClassImpl<"BP_INTER_VulgusBox_C">();
-		}
 	};
 	// 0x0000 (0x0450 - 0x0450)
 	class ABP_FieldInteractableBase_Interaction_C : public AM1FieldInteractableActor_Interaction
 	{
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticBPGeneratedClassImpl<"BP_FieldInteractableBase_Interaction_C">();
-		}
 	};
 	// 0x0000 (0x0450 - 0x0450)
 	class ABP_INTER_MilitarySupplies_C final : public ABP_FieldInteractableBase_Interaction_C
 	{
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticBPGeneratedClassImpl<"BP_INTER_MilitarySupplies_C">();
-		}
 	};
 	// 0x0118 (0x0360 - 0x0248)
 	class APlayerState : public AInfo
 	{
 	public:
 		uint8                                         Pad_APlayerState_Class[0x118];                     // 0x0248(0x0004)(BlueprintVisible, BlueprintReadOnly, Net, ZeroConstructor, IsPlainOldData, RepNotify, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"PlayerState">();
-		}
 	};
 	// 0x0018 (0x0040 - 0x0028)
 	class UM1MissionTaskService : public UObject
