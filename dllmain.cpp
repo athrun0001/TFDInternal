@@ -48,43 +48,49 @@ if (GEngine)
 	{
 		if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
 		{
-			if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+			if (GWorld->OwningGameInstance)
 			{
-				TFD_SDK::UM1GameInstance* OwnGameInstance = static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance);
-				if (OwnGameInstance->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
+				if (GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 				{
-					std::string Name = GWorld->Name.ToString();
-					if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
+					TFD_SDK::UM1GameInstance* OwnGameInstance = static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance);
+					if (OwnGameInstance)
 					{
-						if (GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
+						if (OwnGameInstance->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
 						{
-							if (GWorld->OwningGameInstance->LocalPlayers[0]
-								&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController
-								&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass()))
+							std::string Name = GWorld->Name.ToString();
+							if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
 							{
-								TFD_SDK::AM1PlayerController* PC = static_cast<TFD_SDK::AM1PlayerController*>(GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController);
-								if (PC->Character
-									&& PC->Character->IsA(TFD_SDK::AM1Player::StaticClass())
-									&& PC->ActorManager_Subsystem
-									&& PC->PlayerState)
+								if (OwnGameInstance->LocalPlayers.Num() > 0)
 								{
-									PlayerController = PC;
-									PlayerState = PC->PlayerState;
-									LocalPlayer = GWorld->OwningGameInstance->LocalPlayers[0];
-									LocalCharacter = static_cast<TFD_SDK::AM1Player*>(PC->Character);
-									Actors = PC->ActorManager_Subsystem;
-									ZeroGUI::controller = GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController;
-									if (PlayerController->IsA(TFD_SDK::AM1PlayerControllerInGame::StaticClass()))
+									if (OwnGameInstance->LocalPlayers[0]
+										&& OwnGameInstance->LocalPlayers[0]->PlayerController
+										&& OwnGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass()))
 									{
-										PlayerIngameController = static_cast<TFD_SDK::AM1PlayerControllerInGame*>(PlayerController);
-										inGame = true;
+										TFD_SDK::AM1PlayerController* PC = static_cast<TFD_SDK::AM1PlayerController*>(OwnGameInstance->LocalPlayers[0]->PlayerController);
+										if (PC->Character
+											&& PC->Character->IsA(TFD_SDK::AM1Player::StaticClass())
+											&& PC->ActorManager_Subsystem
+											&& PC->PlayerState)
+										{
+											PlayerController = PC;
+											PlayerState = PC->PlayerState;
+											LocalPlayer = OwnGameInstance->LocalPlayers[0];
+											LocalCharacter = static_cast<TFD_SDK::AM1Player*>(PC->Character);
+											Actors = PC->ActorManager_Subsystem;
+											ZeroGUI::controller = OwnGameInstance->LocalPlayers[0]->PlayerController;
+											if (PlayerController->IsA(TFD_SDK::AM1PlayerControllerInGame::StaticClass()))
+											{
+												PlayerIngameController = static_cast<TFD_SDK::AM1PlayerControllerInGame*>(PlayerController);
+												inGame = true;
+											}
+											else
+											{
+												inGame = false;
+												PlayerIngameController = nullptr;
+											}
+											return true;
+										}
 									}
-									else
-									{
-										inGame = false;
-										PlayerIngameController = nullptr;
-									}
-									return true;
 								}
 							}
 						}
