@@ -11,55 +11,54 @@
 
 bool CheckPointers()
 {
-if (!GEngine)
-	GEngine = TFD_SDK::UEngine::GetEngine();
-if (GEngine)
-{
-	GWorld = nullptr;
-	for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
+	if (!GEngine)
+		GEngine = TFD_SDK::UEngine::GetEngine();
+	if (GEngine)
 	{
-		TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
-
-		if (!Obj)
-			continue;
-
-		if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
-			Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
-			Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
-			Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
-			Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
-			continue;
-
-		if (Obj->Flags & TFD_SDK::EObjectFlags::LoadCompleted && Obj->IsA(TFD_SDK::UWorld::StaticClass()) && !Obj->IsDefaultObject())
+		GWorld = nullptr;
+		for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
 		{
-			TFD_SDK::UWorld* World = static_cast<TFD_SDK::UWorld*>(Obj);
-			if (World)
+			TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
+
+			if (!Obj)
+				continue;
+
+			if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
+				Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
+				Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
+				Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
+				Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
+				continue;
+
+			if (Obj->Flags & TFD_SDK::EObjectFlags::LoadCompleted && Obj->IsA(TFD_SDK::UWorld::StaticClass()) && !Obj->IsDefaultObject())
 			{
+				TFD_SDK::UWorld* World = static_cast<TFD_SDK::UWorld*>(Obj);
 				if (World->OwningGameInstance)
 				{
 					if (World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 					{
-						GWorld = World;
-						break;
+						std::string Name = World->Name.ToString();
+						if (Name != "" && Name != "None" && Name.empty() != true)
+						{
+							GWorld = World;
+							break;
+						}
 					}
 				}
 			}
 		}
-	}
-	if (GWorld && isGUIInit)
-	{
-		if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
+		if (GWorld && isGUIInit)
 		{
-			if (GWorld->OwningGameInstance)
+			if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
 			{
-				if (GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+				if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 				{
 					if (static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
 					{
 						std::string Name = GWorld->Name.ToString();
 						if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
 						{
-							if (GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
+							if (GWorld->OwningGameInstance->LocalPlayers.IsValid())
 							{
 								if (GWorld->OwningGameInstance->LocalPlayers[0]
 									&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController
@@ -97,15 +96,14 @@ if (GEngine)
 			}
 		}
 	}
-}
-PlayerController = nullptr;
-PlayerState = nullptr;
-LocalPlayer = nullptr;
-LocalCharacter = nullptr;
-Actors = nullptr;
-PlayerIngameController = nullptr;
-inGame = false;
-return false;
+	PlayerController = nullptr;
+	PlayerState = nullptr;
+	LocalPlayer = nullptr;
+	LocalCharacter = nullptr;
+	Actors = nullptr;
+	PlayerIngameController = nullptr;
+	inGame = false;
+	return false;
 }
 
 bool WorldToScreen(const TFD_SDK::FVector& worldLoc, TFD_SDK::FVector2D* screenPos)
@@ -330,7 +328,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					GWorld->PersistentLevel->WorldSettings->TimeDilation = cfg_TimeScale;
 				else
 					GWorld->PersistentLevel->WorldSettings->TimeDilation = 1.0f;
-					
+
 			}
 
 			if (IsKeyPressed(VK_DOWN))
@@ -382,9 +380,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				{
 					char buffer[100];
 					if (!Presets.empty() && HotSwapPreset[i] != -1 && HotSwapPreset[i] < Presets.size())
-						sprintf_s(buffer, "Preset %d: %s", i+1, Presets[HotSwapPreset[i]].c_str());
+						sprintf_s(buffer, "Preset %d: %s", i + 1, Presets[HotSwapPreset[i]].c_str());
 					else
-						sprintf_s(buffer, "Preset %d: None",i+1);
+						sprintf_s(buffer, "Preset %d: None", i + 1);
 
 					if (i == HotSwapIndex)
 						ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
@@ -496,72 +494,72 @@ void InstantReload()
 	if (!LocalCharacter)
 		return;
 
-		static bool foundWeapon = false;
-		static TFD_SDK::UM1WeaponSlotControlComponent* WeaponSlot = nullptr;
-		if (!foundWeapon)
+	static bool foundWeapon = false;
+	static TFD_SDK::UM1WeaponSlotControlComponent* WeaponSlot = nullptr;
+	if (!foundWeapon)
+	{
+		for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
 		{
-			for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
+			TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
+
+			if (!Obj)
+				continue;
+
+			if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
+				Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
+				Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
+				Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
+				Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
+				continue;
+
+			if (Obj->IsA(TFD_SDK::UM1WeaponSlotControlComponent::StaticClass()))
 			{
-				TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
-
-				if (!Obj)
-					continue;
-
-				if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
-					Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
-					Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
-					Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
-					Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
-					continue;
-
-				if (Obj->IsA(TFD_SDK::UM1WeaponSlotControlComponent::StaticClass()))
-				{
-					TFD_SDK::UM1WeaponSlotControlComponent* Wep = static_cast<TFD_SDK::UM1WeaponSlotControlComponent*>(Obj);
+				TFD_SDK::UM1WeaponSlotControlComponent* Wep = static_cast<TFD_SDK::UM1WeaponSlotControlComponent*>(Obj);
 				if (!Wep)
 					continue;
 				if (!Wep->Player_Owner)
 					continue;
-							if (Wep->Player_Owner == LocalCharacter)
-							{
-								WeaponSlot = Wep;
-								foundWeapon = true;
-								break;
-							}
-						}
-					}
+				if (Wep->Player_Owner == LocalCharacter)
+				{
+					WeaponSlot = Wep;
+					foundWeapon = true;
+					break;
 				}
+			}
+		}
+	}
+	else
+	{
+		if (!WeaponSlot || !WeaponSlot->Player_Owner || WeaponSlot->Player_Owner != LocalCharacter)
+		{
+			foundWeapon = false;
+			return;
+		}
 		else
 		{
-			if (!WeaponSlot || !WeaponSlot->Player_Owner || WeaponSlot->Player_Owner != LocalCharacter)
+			if (WeaponSlot->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
+				WeaponSlot->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
+				WeaponSlot->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
+				WeaponSlot->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
+				WeaponSlot->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
 			{
 				foundWeapon = false;
+				WeaponSlot = nullptr;
 				return;
 			}
-			else
+			if (WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon)
 			{
-				if (WeaponSlot->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
-					WeaponSlot->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
-					WeaponSlot->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
-					WeaponSlot->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
-					WeaponSlot->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
+				if (WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent)
 				{
-					foundWeapon = false;
-					WeaponSlot = nullptr;
-					return;
-				}
-				if (WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon)
-				{
-					if (WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent)
+					if (WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent->CurrentRounds < 3)
 					{
-						if (WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent->CurrentRounds < 3)
-						{
-							WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent->ClientFillCurrentRoundByServer();
-						}
+						WeaponSlot->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent->ClientFillCurrentRoundByServer();
 					}
 				}
 			}
 		}
 	}
+}
 
 void PlayerEnemyESP()
 {
@@ -571,471 +569,477 @@ void PlayerEnemyESP()
 			|| !Actors
 			|| !LocalCharacter
 			|| !LocalPlayer
+			|| !LocalPlayer->PlayerController
 			|| !LocalPlayer->PlayerController->Pawn
 			)
 			return;
-			if (Actors->Characters.IsValid() && Actors->Characters.Num() > 0)
+		if (Actors->Characters.IsValid() && Actors->Characters.Num() > 0)
+		{
+			int StartNumber = Actors->Characters.Num();
+			for (int i = 0; i < Actors->Characters.Num(); i++)
 			{
-				int StartNumber = Actors->Characters.Num();
-				for (int i = 0; i < Actors->Characters.Num(); i++)
+				if (Actors->Characters.Num() != StartNumber)
+					return;
+				if (!Actors->Characters.IsValidIndex(i))
+					continue;
+				TFD_SDK::AM1Character* p = Actors->Characters[i];
+				if (p)
 				{
-					if (Actors->Characters.Num() != StartNumber)
-						return;
-					if (!Actors->Characters.IsValidIndex(i))
+					if (p->IsDead())
 						continue;
-					TFD_SDK::AM1Character* p = Actors->Characters[i];
-					if (p)
+					if (p->IsA(TFD_SDK::AM1Player::StaticClass()))
 					{
-						if (p->IsDead())
-							continue;
-						if (p->IsA(TFD_SDK::AM1Player::StaticClass()))
+						TFD_SDK::AM1Player* player = static_cast<TFD_SDK::AM1Player*>(p);
+						//if (player->bPlayerInputEnabled)
+						//{
+						//	continue;
+						//}
+						if (player)
 						{
-							TFD_SDK::AM1Player* player = static_cast<TFD_SDK::AM1Player*>(p);
-							//if (player->bPlayerInputEnabled)
-							//{
-							//	continue;
-							//}
-							if (player)
-							{
-								TFD_SDK::FVector2D ScreenPos = { -1, -1 };
-								if (WorldToScreen(p->K2_GetActorLocation(), &ScreenPos))
-								{
-
-									if (cfg_DrawPlayerNames && player->PlayerName && player->PlayerName.ToString() != "" && LocalCharacter->PlayerName.ToString() != player->PlayerName.ToString())
-									{
-										std::string Name = player->PlayerName.ToString();
-										ZeroGUI::TextCenter((char*)Name.c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen, false);
-									}
-
-									if (cfg_DrawPlayerBoxes)
-									{
-										float ODistance = p->GetDistanceTo(LocalPlayer->PlayerController->Pawn) / cfg_DistanceScale;
-										if (ODistance > 0)
-											ZeroGUI::DrawRectangle(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, TFD_SDK::FVector2D{ cfg_ESPBox.X / ODistance, cfg_ESPBox.Y / ODistance }, ColorGreen);
-									}
-									if (cfg_DrawPlayerLines && LocalCharacter->PlayerName.ToString() != player->PlayerName.ToString())
-										ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen);
-								}
-							}
-						}
-						else if (p->IsA(TFD_SDK::AM1Monster::StaticClass()) || (p->CharacterAttribute && p->CharacterAttribute->IsA(TFD_SDK::UM1MonsterAttribute::StaticClass())))
-						{
-							//TFD_SDK::AM1Monster* monster = static_cast<TFD_SDK::AM1Monster*>(p);
 							TFD_SDK::FVector2D ScreenPos = { -1, -1 };
 							if (WorldToScreen(p->K2_GetActorLocation(), &ScreenPos))
 							{
-								TFD_SDK::FLinearColor color = ColorDarkRed;
-								if (PlayerController->LineOfSightTo(p, TFD_SDK::FVector{ 0, 0, 0 }, false))
-									color = ColorRed;
 
-								// Finding fucking new bone targets
-								//if (p->Mesh && p->Mesh->BoneArray.IsValid() && p->Mesh->BoneArray.Num() > 0)
-								//{
-								//	TFD_SDK::FMatrix ComponentMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(p->Mesh->K2_GetComponentToWorld());
-								//	//std::vector<int> indexes = IDBoneMap[p->CharacterId.ID];
-								//	for (int j = 0; j < p->Mesh->BoneArray.Num(); j++)
-								//	{
-								//		if (p->Mesh->BoneArray.IsValidIndex(j))
-								//		{
-								//			TFD_SDK::FTransform bone = p->Mesh->BoneArray[j];
-								//			TFD_SDK::FMatrix BoneMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(bone);
-								//			TFD_SDK::FMatrix WorldMatrix = TFD_SDK::UKismetMathLibrary::Multiply_MatrixMatrix(BoneMatrix, ComponentMatrix);
-								//			TFD_SDK::FTransform WorldPosition = TFD_SDK::UKismetMathLibrary::Conv_MatrixToTransform(WorldMatrix);
-								//			TFD_SDK::FVector2D BoneScreenPos = { -1, -1 };
-								//			if (WorldToScreen(WorldPosition.Translation, &BoneScreenPos))
-								//			{
-								//				ZeroGUI::TextCenter((char*)p->Mesh->GetBoneName(j).ToString().c_str(), BoneScreenPos, TFD_SDK::FLinearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, true);
-								//			}
-								//		}
-								//	}
-								//}
-
-
-								// Was used to detect 'monster' actors
-								/*if (monster->Children.Num() > 0)
+								if (cfg_DrawPlayerNames && player->PlayerName && player->PlayerName.ToString() != "" && LocalCharacter->PlayerName.ToString() != player->PlayerName.ToString())
 								{
-									for (int a = 0; a < monster->Children.Num(); a++)
-									{
-										if (monster->Children[a]->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
-										{
-											TFD_SDK::FVector2D ScreenPos = { -1, -1 };
-											if (WorldToScreen(monster->Children[a]->K2_GetActorLocation(), &ScreenPos))
-											{
-												ZeroGUI::TextCenter((char*)monster->Children[a]->Class->GetFullName().c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 50 }, ColorGreen, false);
-											}
-										}
-									}
-
-
-								}*/
-
-
-								if (cfg_DrawEnemyNames)
-								{
-									// This draws ALL of the bone names for ALL enemies
-									//	for (int j = 0; j < p->Mesh->BoneArray.Num(); j++)
-									//	{
-									//		TFD_SDK::FMatrix ComponentMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(monster->Mesh->K2_GetComponentToWorld());
-									//		TFD_SDK::FTransform bone = monster->Mesh->BoneArray[j];
-									//		TFD_SDK::FMatrix BoneMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(bone);
-									//		TFD_SDK::FMatrix WorldMatrix = TFD_SDK::UKismetMathLibrary::Multiply_MatrixMatrix(BoneMatrix, ComponentMatrix);
-									//		TFD_SDK::FTransform WorldPosition = TFD_SDK::UKismetMathLibrary::Conv_MatrixToTransform(WorldMatrix);
-									//		TFD_SDK::FVector2D BoneScreenPos = { -1, -1 };
-									//		if (WorldToScreen(WorldPosition.Translation, &BoneScreenPos))
-									//		{
-									//			ZeroGUI::TextCenter((char*)monster->Mesh->GetBoneName(j).ToString().c_str(), BoneScreenPos, TFD_SDK::FLinearColor{ 1.0f, 0.0f, 1.0f, 1.0f }, false);
-									//		}
-									//	}
-									if (!IDNameMap.contains(p->CharacterId.ID))
-									{
-										if (p->InfoWidgetComponent)
-										{
-											TFD_SDK::UM1UIActorWidget* Base = p->InfoWidgetComponent->ActorWidget.Get();
-											if (Base)
-											{
-												if (Base->IsA(TFD_SDK::UM1UICharacterInfoBase::StaticClass()))
-												{
-													TFD_SDK::UM1UICharacterInfoBase* Info = static_cast<TFD_SDK::UM1UICharacterInfoBase*>(Base);
-													if (Info)
-													{
-														std::string name = Info->TB_Name->Text.ToString();
-														int id = p->CharacterId.ID;
-														IDNameMap.insert({ id, name });
-														NamesChanged = true;
-													}
-												}
-
-											}
-										}
-									}
-									else
-									{
-										ZeroGUI::TextCenter((char*)IDNameMap[(int)p->CharacterId.ID].c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color, false);
-									}
+									std::string Name = player->PlayerName.ToString();
+									ZeroGUI::TextCenter((char*)Name.c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen, false);
 								}
-								if (cfg_DrawEnemyBoxes)
+
+								if (cfg_DrawPlayerBoxes)
 								{
 									float ODistance = p->GetDistanceTo(LocalPlayer->PlayerController->Pawn) / cfg_DistanceScale;
 									if (ODistance > 0)
+										ZeroGUI::DrawRectangle(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, TFD_SDK::FVector2D{ cfg_ESPBox.X / ODistance, cfg_ESPBox.Y / ODistance }, ColorGreen);
+								}
+								if (cfg_DrawPlayerLines && LocalCharacter->PlayerName.ToString() != player->PlayerName.ToString())
+									ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen);
+							}
+						}
+					}
+					else if (p->IsA(TFD_SDK::AM1Monster::StaticClass()) || (p->CharacterAttribute && p->CharacterAttribute->IsA(TFD_SDK::UM1MonsterAttribute::StaticClass())))
+					{
+						//TFD_SDK::AM1Monster* monster = static_cast<TFD_SDK::AM1Monster*>(p);
+						TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+						if (WorldToScreen(p->K2_GetActorLocation(), &ScreenPos))
+						{
+							TFD_SDK::FLinearColor color = ColorDarkRed;
+							if (PlayerController->LineOfSightTo(p, TFD_SDK::FVector{ 0, 0, 0 }, false))
+								color = ColorRed;
+
+							// Finding fucking new bone targets
+							//if (p->Mesh && p->Mesh->BoneArray.IsValid() && p->Mesh->BoneArray.Num() > 0)
+							//{
+							//	TFD_SDK::FMatrix ComponentMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(p->Mesh->K2_GetComponentToWorld());
+							//	//std::vector<int> indexes = IDBoneMap[p->CharacterId.ID];
+							//	for (int j = 0; j < p->Mesh->BoneArray.Num(); j++)
+							//	{
+							//		if (p->Mesh->BoneArray.IsValidIndex(j))
+							//		{
+							//			TFD_SDK::FTransform bone = p->Mesh->BoneArray[j];
+							//			TFD_SDK::FMatrix BoneMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(bone);
+							//			TFD_SDK::FMatrix WorldMatrix = TFD_SDK::UKismetMathLibrary::Multiply_MatrixMatrix(BoneMatrix, ComponentMatrix);
+							//			TFD_SDK::FTransform WorldPosition = TFD_SDK::UKismetMathLibrary::Conv_MatrixToTransform(WorldMatrix);
+							//			TFD_SDK::FVector2D BoneScreenPos = { -1, -1 };
+							//			if (WorldToScreen(WorldPosition.Translation, &BoneScreenPos))
+							//			{
+							//				ZeroGUI::TextCenter((char*)p->Mesh->GetBoneName(j).ToString().c_str(), BoneScreenPos, TFD_SDK::FLinearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, true);
+							//			}
+							//		}
+							//	}
+							//}
+
+
+							// Was used to detect 'monster' actors
+							/*if (monster->Children.Num() > 0)
+							{
+								for (int a = 0; a < monster->Children.Num(); a++)
+								{
+									if (monster->Children[a]->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
 									{
-										ZeroGUI::DrawRectangle(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, TFD_SDK::FVector2D{ cfg_ESPBox.X / ODistance, cfg_ESPBox.Y / ODistance }, color);
+										TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+										if (WorldToScreen(monster->Children[a]->K2_GetActorLocation(), &ScreenPos))
+										{
+											ZeroGUI::TextCenter((char*)monster->Children[a]->Class->GetFullName().c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 50 }, ColorGreen, false);
+										}
 									}
 								}
-								if (cfg_DrawEnemyLines)
-									ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color);
+
+
+							}*/
+
+
+							if (cfg_DrawEnemyNames)
+							{
+								// This draws ALL of the bone names for ALL enemies
+								//	for (int j = 0; j < p->Mesh->BoneArray.Num(); j++)
+								//	{
+								//		TFD_SDK::FMatrix ComponentMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(monster->Mesh->K2_GetComponentToWorld());
+								//		TFD_SDK::FTransform bone = monster->Mesh->BoneArray[j];
+								//		TFD_SDK::FMatrix BoneMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(bone);
+								//		TFD_SDK::FMatrix WorldMatrix = TFD_SDK::UKismetMathLibrary::Multiply_MatrixMatrix(BoneMatrix, ComponentMatrix);
+								//		TFD_SDK::FTransform WorldPosition = TFD_SDK::UKismetMathLibrary::Conv_MatrixToTransform(WorldMatrix);
+								//		TFD_SDK::FVector2D BoneScreenPos = { -1, -1 };
+								//		if (WorldToScreen(WorldPosition.Translation, &BoneScreenPos))
+								//		{
+								//			ZeroGUI::TextCenter((char*)monster->Mesh->GetBoneName(j).ToString().c_str(), BoneScreenPos, TFD_SDK::FLinearColor{ 1.0f, 0.0f, 1.0f, 1.0f }, false);
+								//		}
+								//	}
+								if (!IDNameMap.contains(p->CharacterId.ID))
+								{
+									if (p->InfoWidgetComponent)
+									{
+										TFD_SDK::UM1UIActorWidget* Base = p->InfoWidgetComponent->ActorWidget.Get();
+										if (Base)
+										{
+											if (Base->IsA(TFD_SDK::UM1UICharacterInfoBase::StaticClass()))
+											{
+												TFD_SDK::UM1UICharacterInfoBase* Info = static_cast<TFD_SDK::UM1UICharacterInfoBase*>(Base);
+												if (Info)
+												{
+													std::string name = Info->TB_Name->Text.ToString();
+													int id = p->CharacterId.ID;
+													IDNameMap.insert({ id, name });
+													NamesChanged = true;
+												}
+											}
+
+										}
+									}
+								}
+								else
+								{
+									ZeroGUI::TextCenter((char*)IDNameMap[(int)p->CharacterId.ID].c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color, false);
+								}
 							}
+							if (cfg_DrawEnemyBoxes)
+							{
+								float ODistance = p->GetDistanceTo(LocalPlayer->PlayerController->Pawn) / cfg_DistanceScale;
+								if (ODistance > 0)
+								{
+									ZeroGUI::DrawRectangle(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, TFD_SDK::FVector2D{ cfg_ESPBox.X / ODistance, cfg_ESPBox.Y / ODistance }, color);
+								}
+							}
+							if (cfg_DrawEnemyLines)
+								ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color);
 						}
 					}
 				}
 			}
 		}
 	}
+}
 
 void ItemESPVacuum()
 {
-	if (!LocalCharacter 
-		|| !LocalPlayer->PlayerController->Pawn 
+	if (!LocalCharacter
+		|| !LocalPlayer
+		|| !LocalPlayer->PlayerController
+		|| !LocalPlayer->PlayerController->Pawn
 		|| !GWorld)
 		return;
 	if (cfg_DrawItemBoxes || cfg_DrawItemNames || cfg_DrawItemLines || cfg_LootVacuum || cfg_DrawVaults)
 	{
-			if (GWorld->Levels.IsValid())
+		if (GWorld->Levels.IsValid())
+		{
+			for (int i = 0; i < GWorld->Levels.Num(); ++i)
 			{
-				for (int i = 0; i < GWorld->Levels.Num(); ++i)
+				if (GWorld->Levels.IsValidIndex(i))
 				{
-					if (GWorld->Levels.IsValidIndex(i))
+					TFD_SDK::ULevel* Level = GWorld->Levels[i];
+					if (!Level) continue;
+
+					for (int j = 0; j < Level->Actors.Num(); ++j)
 					{
-						TFD_SDK::ULevel* Level = GWorld->Levels[i];
-						if (!Level) continue;
-
-						for (int j = 0; j < Level->Actors.Num(); ++j)
+						TFD_SDK::AActor* Actor = (TFD_SDK::AActor*)Level->Actors[j];
+						if (!Actor)
+							continue;
+						if (cfg_DrawVaults)
 						{
-							TFD_SDK::AActor* Actor = (TFD_SDK::AActor*)Level->Actors[j];
-							if (!Actor)
-								continue;
-							if (cfg_DrawVaults)
+							if (Actor->IsA(TFD_SDK::AM1FieldInteractableActorMiniGame::StaticClass()))
 							{
-								if (Actor->IsA(TFD_SDK::AM1FieldInteractableActorMiniGame::StaticClass()))
+								TFD_SDK::FVector2D ScreenPosa = { -1, -1 };
+								TFD_SDK::FVector WorldPositiona = Actor->K2_GetActorLocation();
+								//static_cast<TFD_SDK::AM1FieldInteractableActorMiniGame*>(Actor)->MiniGameDifficulty = TFD_SDK::EM1MiniGameDifficulty::Normal;
+								if (WorldToScreen(WorldPositiona, &ScreenPosa))
 								{
-									TFD_SDK::FVector2D ScreenPosa = { -1, -1 };
-									TFD_SDK::FVector WorldPositiona = Actor->K2_GetActorLocation();
-									//static_cast<TFD_SDK::AM1FieldInteractableActorMiniGame*>(Actor)->MiniGameDifficulty = TFD_SDK::EM1MiniGameDifficulty::Normal;
-									if (WorldToScreen(WorldPositiona, &ScreenPosa))
+									ZeroGUI::TextCenter((char*)"Encrypted Vault", TFD_SDK::FVector2D{ ScreenPosa.X, ScreenPosa.Y + 20 }, TFD_SDK::FLinearColor{ 0.7f, 0.0f, 1.0f, 1.0f }, false);
+									if (cfg_DrawItemLines)
+										ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPosa.X, ScreenPosa.Y }, ColorRare);
+								}
+								continue;
+							}
+							/*		else
 									{
-										ZeroGUI::TextCenter((char*)"Encrypted Vault", TFD_SDK::FVector2D{ ScreenPosa.X, ScreenPosa.Y + 20 }, TFD_SDK::FLinearColor{ 0.7f, 0.0f, 1.0f, 1.0f }, false);
+										TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+										TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+										if (WorldToScreen(WorldPosition, &ScreenPos))
+										{
+												ZeroGUI::TextCenter((char*)Actor->GetFullName().c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										}
+									}*/
+						}
+
+						if (cfg_DrawResourceBox)
+						{
+							if (Actor->IsA(TFD_SDK::AM1FieldInteractableActor_Hit::StaticClass()))
+							{
+								if (Actor->GetFullName().contains("VulgusBox"))
+								{
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
+									{
+
+										ZeroGUI::TextCenter((char*)"Resource Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
 										if (cfg_DrawItemLines)
-											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPosa.X, ScreenPosa.Y }, ColorRare);
+											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
 									}
-									continue;
 								}
-								/*		else
-										{
-											TFD_SDK::FVector2D ScreenPos = { -1, -1 };
-											TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
-											if (WorldToScreen(WorldPosition, &ScreenPos))
-											{
-													ZeroGUI::TextCenter((char*)Actor->GetFullName().c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
-											}
-										}*/
+								continue;
 							}
+						}
 
-							if (cfg_DrawResourceBox)
+						if (Actor->IsA(TFD_SDK::AM1FieldInteractableActor_Interaction::StaticClass()))
+						{
+							if (cfg_DrawMunition)
 							{
-								if (Actor->IsA(TFD_SDK::AM1FieldInteractableActor_Hit::StaticClass()))
+								if (Actor->GetFullName().contains("MilitarySupplies"))
 								{
-									if (Actor->GetFullName().contains("VulgusBox"))
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
 									{
-										TFD_SDK::FVector2D ScreenPos = { -1, -1 };
-										TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
-										if (WorldToScreen(WorldPosition, &ScreenPos))
-										{
 
-											ZeroGUI::TextCenter((char*)"Resource Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
-											if (cfg_DrawItemLines)
-												ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
-										}
+										ZeroGUI::TextCenter((char*)"Munition", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										if (cfg_DrawItemLines)
+											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
 									}
 									continue;
 								}
 							}
-
-							if (Actor->IsA(TFD_SDK::AM1FieldInteractableActor_Interaction::StaticClass()))
+							if (cfg_DrawVoidVesselBox)
 							{
-								if (cfg_DrawMunition)
+								if (Actor->GetFullName().contains("CompanionVault_TypeB_Item_C"))
 								{
-									if (Actor->GetFullName().contains("MilitarySupplies"))
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
 									{
-										TFD_SDK::FVector2D ScreenPos = { -1, -1 };
-										TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
-										if (WorldToScreen(WorldPosition, &ScreenPos))
-										{
 
-											ZeroGUI::TextCenter((char*)"Munition", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
-											if (cfg_DrawItemLines)
-												ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
-										}
-										continue;
+										ZeroGUI::TextCenter((char*)"Experimental Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										if (cfg_DrawItemLines)
+											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
 									}
+									continue;
 								}
-								if (cfg_DrawVoidVesselBox)
+								if (Actor->GetFullName().contains("CompanionVault_TypeA_Broken_C"))
 								{
-									if (Actor->GetFullName().contains("CompanionVault_TypeB_Item_C"))
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
 									{
-										TFD_SDK::FVector2D ScreenPos = { -1, -1 };
-										TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
-										if (WorldToScreen(WorldPosition, &ScreenPos))
-										{
 
-											ZeroGUI::TextCenter((char*)"Experimental Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
-											if (cfg_DrawItemLines)
-												ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
-										}
-										continue;
+										ZeroGUI::TextCenter((char*)"Broken Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										if (cfg_DrawItemLines)
+											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
 									}
-									if (Actor->GetFullName().contains("CompanionVault_TypeA_Broken_C"))
+									continue;
+								}
+								if (Actor->GetFullName().contains("CompanionVault_TypeA_C"))
+								{
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
 									{
-										TFD_SDK::FVector2D ScreenPos = { -1, -1 };
-										TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
-										if (WorldToScreen(WorldPosition, &ScreenPos))
-										{
 
-											ZeroGUI::TextCenter((char*)"Broken Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
-											if (cfg_DrawItemLines)
-												ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
-										}
-										continue;
+										ZeroGUI::TextCenter((char*)"Special Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										if (cfg_DrawItemLines)
+											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
 									}
-									if (Actor->GetFullName().contains("CompanionVault_TypeA_C"))
+									continue;
+								}
+								if (Actor->GetFullName().contains("CompanionVault_TypeB_Data_C"))
+								{
+									TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+									TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+									if (WorldToScreen(WorldPosition, &ScreenPos))
 									{
-										TFD_SDK::FVector2D ScreenPos = { -1, -1 };
-										TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
-										if (WorldToScreen(WorldPosition, &ScreenPos))
-										{
 
-											ZeroGUI::TextCenter((char*)"Special Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
-											if (cfg_DrawItemLines)
-												ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
-										}
-										continue;
+										ZeroGUI::TextCenter((char*)"Genetic Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
+										if (cfg_DrawItemLines)
+											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
 									}
-									if (Actor->GetFullName().contains("CompanionVault_TypeB_Data_C"))
-									{
-										TFD_SDK::FVector2D ScreenPos = { -1, -1 };
-										TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
-										if (WorldToScreen(WorldPosition, &ScreenPos))
-										{
-
-											ZeroGUI::TextCenter((char*)"Genetic Box", TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y - 20 }, ColorWhite, true);
-											if (cfg_DrawItemLines)
-												ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
-										}
-										continue;
-									}
+									continue;
 								}
 							}
+						}
 
-							if (!Actor->IsA(TFD_SDK::AM1DroppedItem::StaticClass()))
-								continue;
+						if (!Actor->IsA(TFD_SDK::AM1DroppedItem::StaticClass()))
+							continue;
 
-							TFD_SDK::AM1DroppedItem* Item = static_cast<TFD_SDK::AM1DroppedItem*>(Actor);
-							if (!Item)
-								continue;
-							if (Item->IsObtained() || Item->bBeingPickedLocally || Item->bTriedSetToObtained || Item->bObtainRequestedOnClient)
-								continue;
+						TFD_SDK::AM1DroppedItem* Item = static_cast<TFD_SDK::AM1DroppedItem*>(Actor);
+						if (!Item)
+							continue;
+						if (Item->IsObtained() || Item->bBeingPickedLocally || Item->bTriedSetToObtained || Item->bObtainRequestedOnClient)
+							continue;
 
-							TFD_SDK::FVector2D ScreenPos = { -1, -1 };
-							TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
+						TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+						TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
 
-							if (cfg_LootVacuum)
+						if (cfg_LootVacuum)
+						{
+							TFD_SDK::FVector player = LocalCharacter->K2_GetActorLocation();
+							float Distance = WorldPosition.GetDistanceTo(player);
+							if (Distance > 150 && Distance < cfg_LootVacuumRange)
+								Item->K2_SetActorLocation(player, false, nullptr, true);
+						}
+
+						if (WorldToScreen(WorldPosition, &ScreenPos))
+						{
+							TFD_SDK::FLinearColor color = ColorWhite;
+							std::string Text = "Unknown";
+							switch (Item->DropItemInfo.ItemBox.Type)
 							{
-								TFD_SDK::FVector player = LocalCharacter->K2_GetActorLocation();
-								float Distance = WorldPosition.GetDistanceTo(player);
-								if (Distance > 150 && Distance < cfg_LootVacuumRange)
-									Item->K2_SetActorLocation(player, false, nullptr, true);
+							case TFD_SDK::EM1ItemType::InstantUse:
+							{
+								if (Item->IsA(TFD_SDK::ABP_AmmoEnhancedDroppedItem_C::StaticClass()))
+									Text = "Enhanced Ammo";
+								else if (Item->IsA(TFD_SDK::ABP_AmmoGeneralDroppedItem_C::StaticClass()))
+									Text = "General Ammo";
+								else if (Item->IsA(TFD_SDK::ABP_AmmoHighpowerDroppedItem_C::StaticClass()))
+									Text = "Highpower Ammo";
+								else if (Item->IsA(TFD_SDK::ABP_AmmoImpactDroppedItem_C::StaticClass()))
+									Text = "Impact Ammo";
+								else if (Item->IsA(TFD_SDK::ABP_HealthOrbDroppedItem_C::StaticClass()))
+								{
+									color = ColorRed;
+									Text = "Health";
+								}
+								else if (Item->IsA(TFD_SDK::ABP_ManaOrbDroppedItem_C::StaticClass()))
+								{
+									color = ColorMana;
+									Text = "Mana";
+								}
+								break;
+							}
+							case TFD_SDK::EM1ItemType::Equipment:
+							{
+								if (Item->IsA(TFD_SDK::ABP_EquipTier01DroppedItem_C::StaticClass()))
+								{
+									color = ColorUncommon;
+									Text = "T1 Item";
+								}
+								else if (Item->IsA(TFD_SDK::ABP_EquipTier02DroppedItem_C::StaticClass()))
+								{
+									color = ColorRare;
+									Text = "T2 Item";
+								}
+								else if (Item->IsA(TFD_SDK::ABP_EquipTier03DroppedItem_C::StaticClass()))
+								{
+									color = ColorGold;
+									Text = "T3 Item";
+								}
+								break;
+							}
+							case TFD_SDK::EM1ItemType::Consumable:
+							{
+								if (Item->IsA(TFD_SDK::ABP_ResourceTier01DroppedItem_C::StaticClass()))
+								{
+									color = ColorUncommon;
+									Text = "T1 Resource";
+								}
+								else if (Item->IsA(TFD_SDK::ABP_ResourceTier02DroppedItem_C::StaticClass()))
+								{
+									color = ColorRare;
+									Text = "T2 Resource";
+								}
+								else if (Item->IsA(TFD_SDK::ABP_ResourceTier03DroppedItem_C::StaticClass()))
+								{
+									color = ColorGold;
+									Text = "T3 Resource";
+								}
+								break;
+							}
+							case TFD_SDK::EM1ItemType::Rune:
+							{
+								if (Item->IsA(TFD_SDK::ABP_RuneTier01DroppedItem_C::StaticClass()))
+								{
+									color = ColorUncommon;
+									Text = "T1 Rune";
+								}
+								else if (Item->IsA(TFD_SDK::ABP_RuneTier02DroppedItem_C::StaticClass()))
+								{
+									color = ColorRare;
+									Text = "T2 Rune";
+								}
+								else if (Item->IsA(TFD_SDK::ABP_RuneTier03DroppedItem_C::StaticClass()))
+								{
+									color = ColorGold;
+									Text = "T3 Rune";
+								}
+								else if (Item->IsA(TFD_SDK::ABP_RuneTier04DroppedItem_C::StaticClass()))
+								{
+									color = ColorUltimate;
+									Text = "T4 Rune";
+								}
+								break;
+							}
+							case TFD_SDK::EM1ItemType::Currency:
+							{
+								if (Item->IsA(TFD_SDK::ABP_GoldDroppedItem_C::StaticClass()))
+								{
+									color = ColorGold;
+									Text = "Gold";
+								}
+								else if (Item->IsA(TFD_SDK::ABP_KuiperShardDroppedItem_C::StaticClass()))
+								{
+									color = ColorMana;
+									Text = "Kuiper Shard";
+								}
+								break;
+							}
+							default:
+							{
+								if (Item->IsA(TFD_SDK::ABP_BuffOrbDroppedItem_C::StaticClass()))
+									Text = "Buff Orb";
+								else if (Item->IsA(TFD_SDK::ABP_EmberDroppedItem_C::StaticClass()))
+									Text = "Ember";
+								break;
 							}
 
-							if (WorldToScreen(WorldPosition, &ScreenPos))
+							}
+
+							if (cfg_DrawItemNames)
 							{
-								TFD_SDK::FLinearColor color = ColorWhite;
-								std::string Text = "Unknown";
-								switch (Item->DropItemInfo.ItemBox.Type)
+								// Idk what the fuck these items are and I don't think I've ever even seen them in-game
+								if (Text == "Unknown" || Text == "Buff Orb" || Text == "Ember")
 								{
-								case TFD_SDK::EM1ItemType::InstantUse:
-								{
-									if (Item->IsA(TFD_SDK::ABP_AmmoEnhancedDroppedItem_C::StaticClass()))
-										Text = "Enhanced Ammo";
-									else if (Item->IsA(TFD_SDK::ABP_AmmoGeneralDroppedItem_C::StaticClass()))
-										Text = "General Ammo";
-									else if (Item->IsA(TFD_SDK::ABP_AmmoHighpowerDroppedItem_C::StaticClass()))
-										Text = "Highpower Ammo";
-									else if (Item->IsA(TFD_SDK::ABP_AmmoImpactDroppedItem_C::StaticClass()))
-										Text = "Impact Ammo";
-									else if (Item->IsA(TFD_SDK::ABP_HealthOrbDroppedItem_C::StaticClass()))
-									{
-										color = ColorRed;
-										Text = "Health";
-									}
-									else if (Item->IsA(TFD_SDK::ABP_ManaOrbDroppedItem_C::StaticClass()))
-									{
-										color = ColorMana;
-										Text = "Mana";
-									}
-									break;
+									int type = (int)Item->DropItemInfo.ItemBox.Type;
+									char buffer[32];
+									sprintf_s(buffer, "Unkown Type %d", type);
+									ZeroGUI::TextCenter(buffer, TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y + 20 }, TFD_SDK::FLinearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, false);
 								}
-								case TFD_SDK::EM1ItemType::Equipment:
-								{
-									if (Item->IsA(TFD_SDK::ABP_EquipTier01DroppedItem_C::StaticClass()))
-									{
-										color = ColorUncommon;
-										Text = "T1 Item";
-									}
-									else if (Item->IsA(TFD_SDK::ABP_EquipTier02DroppedItem_C::StaticClass()))
-									{
-										color = ColorRare;
-										Text = "T2 Item";
-									}
-									else if (Item->IsA(TFD_SDK::ABP_EquipTier03DroppedItem_C::StaticClass()))
-									{
-										color = ColorGold;
-										Text = "T3 Item";
-									}
-									break;
-								}
-								case TFD_SDK::EM1ItemType::Consumable:
-								{
-									if (Item->IsA(TFD_SDK::ABP_ResourceTier01DroppedItem_C::StaticClass()))
-									{
-										color = ColorUncommon;
-										Text = "T1 Resource";
-									}
-									else if (Item->IsA(TFD_SDK::ABP_ResourceTier02DroppedItem_C::StaticClass()))
-									{
-										color = ColorRare;
-										Text = "T2 Resource";
-									}
-									else if (Item->IsA(TFD_SDK::ABP_ResourceTier03DroppedItem_C::StaticClass()))
-									{
-										color = ColorGold;
-										Text = "T3 Resource";
-									}
-									break;
-								}
-								case TFD_SDK::EM1ItemType::Rune:
-								{
-									if (Item->IsA(TFD_SDK::ABP_RuneTier01DroppedItem_C::StaticClass()))
-									{
-										color = ColorUncommon;
-										Text = "T1 Rune";
-									}
-									else if (Item->IsA(TFD_SDK::ABP_RuneTier02DroppedItem_C::StaticClass()))
-									{
-										color = ColorRare;
-										Text = "T2 Rune";
-									}
-									else if (Item->IsA(TFD_SDK::ABP_RuneTier03DroppedItem_C::StaticClass()))
-									{
-										color = ColorGold;
-										Text = "T3 Rune";
-									}
-									else if (Item->IsA(TFD_SDK::ABP_RuneTier04DroppedItem_C::StaticClass()))
-									{
-										color = ColorUltimate;
-										Text = "T4 Rune";
-									}
-									break;
-								}
-								case TFD_SDK::EM1ItemType::Currency:
-								{
-									if (Item->IsA(TFD_SDK::ABP_GoldDroppedItem_C::StaticClass()))
-									{
-										color = ColorGold;
-										Text = "Gold";
-									}
-									else if (Item->IsA(TFD_SDK::ABP_KuiperShardDroppedItem_C::StaticClass()))
-									{
-										color = ColorMana;
-										Text = "Kuiper Shard";
-									}
-									break;
-								}
-								default:
-								{
-									if (Item->IsA(TFD_SDK::ABP_BuffOrbDroppedItem_C::StaticClass()))
-										Text = "Buff Orb";
-									else if (Item->IsA(TFD_SDK::ABP_EmberDroppedItem_C::StaticClass()))
-										Text = "Ember";
-									break;
-								}
+								ZeroGUI::TextCenter((char*)Text.c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color, true);
+							}
 
-								}
-
-								if (cfg_DrawItemNames)
-								{
-									// Idk what the fuck these items are and I don't think I've ever even seen them in-game
-									if (Text == "Unknown" || Text == "Buff Orb" || Text == "Ember")
-									{
-										int type = (int)Item->DropItemInfo.ItemBox.Type;
-										char buffer[32];
-										sprintf_s(buffer, "Unkown Type %d", type);
-										ZeroGUI::TextCenter(buffer, TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y + 20 }, TFD_SDK::FLinearColor{ 1.0f, 1.0f, 1.0f, 1.0f }, false);
-									}
-									ZeroGUI::TextCenter((char*)Text.c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color, true);
-								}
-
-								if (cfg_DrawItemBoxes)
-								{
-									float ODistance = Item->GetDistanceTo(LocalPlayer->PlayerController->Pawn) / cfg_DistanceScale;
-									if (ODistance > 0)
-										ZeroGUI::DrawRectangle(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, TFD_SDK::FVector2D{ 10 / ODistance, 10 / ODistance }, color);
-								}
-								if (cfg_DrawItemLines)
-									ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color);
+							if (cfg_DrawItemBoxes)
+							{
+								float ODistance = Item->GetDistanceTo(LocalPlayer->PlayerController->Pawn) / cfg_DistanceScale;
+								if (ODistance > 0)
+									ZeroGUI::DrawRectangle(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, TFD_SDK::FVector2D{ 10 / ODistance, 10 / ODistance }, color);
+							}
+							if (cfg_DrawItemLines)
+								ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color);
 
 						}
 					}
+
 				}
+
 			}
 		}
+
 	}
 }
 
@@ -1101,7 +1105,7 @@ void RestartLastMission()
 	if (!PlayerStateAM1 || !PlayerStateAM1->MissionControlComponent)
 		return;
 
-	TFD_SDK::UM1MissionControlComponent*MCC = PlayerStateAM1->MissionControlComponent;
+	TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
 	if (!MCC || !MCC->MissionResult)
 		return;
 
@@ -1162,7 +1166,7 @@ void LeaveMission()
 
 void SwitchPreset()
 {
-	if (!PlayerController->PrivateOnlineServiceComponent)
+	if (!PlayerController || !PlayerController->PrivateOnlineServiceComponent)
 		return;
 	UC::int32 PresetIndex = -1;
 
@@ -1220,20 +1224,19 @@ void RefreshPresetList(bool isrefresh = false)
 				if (!Account)
 					return;
 				if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()))
-				{
 					for (const auto& Pair : static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset)->PresetSlotByIndex)
 					{
 						TFD_SDK::FM1PresetSlot Value = Pair.Value();
 						if (!Value.PresetName.ToString().empty())
 							Presets.push_back("[" + std::to_string(Value.PresetIndex) + "] " + Value.PresetName.ToString());
 					}
-					if (!Presets.empty())
-						break;
-				}
+				if (!Presets.empty())
+					break;
 			}
 		}
 	}
 }
+
 void EncryptedVaultDrops()
 {
 	if (!GWorld || !PlayerController)
@@ -1368,7 +1371,7 @@ void Aimbot()
 
 				}
 			}
-			
+
 		}
 		else if (Aimbot_Target->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
 		{
@@ -1532,7 +1535,7 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 			}
 		}
 	}
-	
+
 	return ret;
 }
 
@@ -1664,7 +1667,7 @@ void DrawMenu()
 			if (ZeroGUI::Checkbox((char*)"Enable Bones Cache", &cfg_CacheEnemyBones) && cfg_CacheEnemyBones)
 				WriteEnemyBonesData();
 
-			
+
 			/*ZeroGUI::Text((char*)"Hot Swap Key:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Hot Swap Hotkey", TFD_SDK::FVector2D{ 110, 25 }, &cfg_HotSwapKey);*/
@@ -1687,15 +1690,15 @@ void DrawMenu()
 			//}
 			ZeroGUI::Text((char*)"Instant Outpost Infil:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Instant Outpost Infil Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_InstantInfilKey);
+			ZeroGUI::Hotkey((char*)"Instant Outpost Infil Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_InstantInfilKey);
 
 			ZeroGUI::Text((char*)"Restart Last Mission:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Restart Last Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_RestartMissionKey);
+			ZeroGUI::Hotkey((char*)"Restart Last Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_RestartMissionKey);
 
 			ZeroGUI::Text((char*)"Leave Mission:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Leave Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_LeaveMissionKey);
+			ZeroGUI::Hotkey((char*)"Leave Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_LeaveMissionKey);
 		}
 		if (tab == 5)
 		{
@@ -1716,7 +1719,7 @@ void DrawMenu()
 			}
 			ZeroGUI::Text((char*)"Switch Preset:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Switch Preset Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_SwitchPreset);
+			ZeroGUI::Hotkey((char*)"Switch Preset Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_SwitchPreset);
 			if (!Presets.empty())
 			{
 				std::vector<const char*> cstrPresets;
@@ -1762,7 +1765,7 @@ void LoadCFG()
 		cfg_DrawMunition = ini.GetBoolValue("ESP", "EnableMunition");
 		cfg_DrawResourceBox = ini.GetBoolValue("ESP", "EnableResourceBoxes");
 		cfg_DrawVoidVesselBox = ini.GetBoolValue("ESP", "EnableVoidVesselBoxes");
-		cfg_EncryptedVaultDropsKey = (int)ini.GetDoubleValue("ESP", "EncryptedVaultDropsKey");	
+		cfg_EncryptedVaultDropsKey = (int)ini.GetDoubleValue("ESP", "EncryptedVaultDropsKey");
 		cfg_EncryptedVaultRewardType = (int)ini.GetDoubleValue("ESP", "EncryptedVaultRewardType");
 
 		cfg_EnableAimbotHold = ini.GetBoolValue("Aimbot", "EnableAimbotHold");
@@ -1781,7 +1784,7 @@ void LoadCFG()
 		cfg_CacheEnemyBones = ini.GetBoolValue("Extra", "CacheBones");
 
 		//cfg_HotSwapKey = (int)ini.GetDoubleValue("Extra", "HotSwapKey");
-		
+
 
 		/*HotSwapCharacters[0] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot1", 0);
 		HotSwapCharacters[1] = (int)ini.GetDoubleValue("Extra", "HotSwapSlot2", 0);
@@ -1848,9 +1851,9 @@ void SaveCFG()
 	ini.SetBoolValue("Extra", "CacheBones", cfg_CacheEnemyBones);
 
 	//ini.SetDoubleValue("Extra", "HotSwapKey", cfg_HotSwapKey);
-	
 
-	
+
+
 
 	/*ini.SetDoubleValue("Extra", "HotSwapSlot1", HotSwapCharacters[0]);
 	ini.SetDoubleValue("Extra", "HotSwapSlot2", HotSwapCharacters[1]);
@@ -1862,7 +1865,7 @@ void SaveCFG()
 	ini.SetDoubleValue("Preset", "HotSwapPreset2", HotSwapPreset[1]);
 	ini.SetDoubleValue("Preset", "HotSwapPreset3", HotSwapPreset[2]);
 	ini.SetDoubleValue("Preset", "HotSwapPreset4", HotSwapPreset[3]);
-	
+
 	ini.SetDoubleValue("Extra", "Timescale", cfg_TimeScale);
 	ini.SetDoubleValue("Extra", "TimescaleKey", cfg_TimeScaleKey);
 	ini.SetDoubleValue("Extra", "TimescaleHoldKey", cfg_TimeScaleHoldKey);
@@ -1874,7 +1877,7 @@ void SaveCFG()
 	ini.SaveFile("cfg.ini");
 }
 
-void WriteEnemyNamesData() 
+void WriteEnemyNamesData()
 {
 	std::ofstream outFile("NameCache.dat", std::ios::binary);
 
@@ -1901,7 +1904,7 @@ void WriteEnemyNamesData()
 	outFile.close();
 }
 
-std::unordered_map<int, std::string> ReadEnemyNamesData() 
+std::unordered_map<int, std::string> ReadEnemyNamesData()
 {
 	std::unordered_map<int, std::string> map;
 	std::ifstream inFile("NameCache.dat", std::ios::binary);
@@ -1937,7 +1940,7 @@ std::unordered_map<int, std::string> ReadEnemyNamesData()
 	return map;
 }
 
-void WriteEnemyBonesData() 
+void WriteEnemyBonesData()
 {
 	std::ofstream outFile("BoneCache.dat", std::ios::binary);
 
@@ -1965,7 +1968,7 @@ void WriteEnemyBonesData()
 	outFile.close();
 }
 
-std::unordered_map<int, std::vector<int>> ReadEnemyBonesData() 
+std::unordered_map<int, std::vector<int>> ReadEnemyBonesData()
 {
 	std::unordered_map<int, std::vector<int>> map;
 	std::ifstream inFile("BoneCache.dat", std::ios::binary);
