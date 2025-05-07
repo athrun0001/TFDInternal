@@ -35,31 +35,30 @@ if (GEngine)
 			TFD_SDK::UWorld* World = static_cast<TFD_SDK::UWorld*>(Obj);
 			if (World && World->OwningGameInstance && World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 			{
-				TFD_SDK::UM1GameInstance* OwnGameInstance = static_cast<TFD_SDK::UM1GameInstance*>(World->OwningGameInstance);
-				if (OwnGameInstance && OwnGameInstance->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
-				{
-					std::string Name = World->Name.ToString();
+				/*if (static_cast<TFD_SDK::UM1GameInstance*>(World->OwningGameInstance)->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
+				{*/
+					/*std::string Name = World->Name.ToString();
 					if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
-					{
-						GWorld = World;
-						break;
-					}
-				}
+					{*/
+				GWorld = World;
+				break;
+					//}
+				/*}*/
 			}
 		}
 	}
 	if (GWorld && isGUIInit)
 	{
-		/*if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
-		{
-			if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+		//if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
+		//{
+			/*if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 			{*/
-				/*TFD_SDK::UM1GameInstance* OwnGameInstance = static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance);
-				if (OwnGameInstance && OwnGameInstance->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
-				{*/
-					/*std::string Name = GWorld->Name.ToString();
+				//TFD_SDK::UM1GameInstance* OwnGameInstance = static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance);
+				if (static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
+				{
+					std::string Name = GWorld->Name.ToString();
 					if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
-					{*/
+					{
 						if (GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
 						{
 							if (GWorld->OwningGameInstance->LocalPlayers[0]
@@ -92,10 +91,10 @@ if (GEngine)
 								}
 							}
 						}
-					//}
-				//}
-		/*	}
-		}*/
+					}
+				}
+			//}
+		//}
 	}
 }
 PlayerController = nullptr;
