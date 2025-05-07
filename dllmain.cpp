@@ -35,15 +35,12 @@ if (GEngine)
 			TFD_SDK::UWorld* World = static_cast<TFD_SDK::UWorld*>(Obj);
 			if (World && World->OwningGameInstance && World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 			{
-				/*if (static_cast<TFD_SDK::UM1GameInstance*>(World->OwningGameInstance)->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
+				/*std::string Name = World->Name.ToString();
+				if (Name != "" && Name != "None" && Name.empty() != true)
 				{*/
-					/*std::string Name = World->Name.ToString();
-					if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
-					{*/
 				GWorld = World;
 				break;
-					//}
-				/*}*/
+				//}
 			}
 		}
 	}
