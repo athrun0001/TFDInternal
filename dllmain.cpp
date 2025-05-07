@@ -33,14 +33,14 @@ if (GEngine)
 		if (Obj->Flags & TFD_SDK::EObjectFlags::LoadCompleted && Obj->IsA(TFD_SDK::UWorld::StaticClass()) && !Obj->IsDefaultObject())
 		{
 			TFD_SDK::UWorld* World = static_cast<TFD_SDK::UWorld*>(Obj);
-			if (World->OwningGameInstance && World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+			if (World->OwningGameInstance)
 			{
-				/*std::string Name = World->Name.ToString();
-				if (Name != "" && Name != "None" && Name.empty() != true)
-				{*/
-				GWorld = World;
-				break;
-				//}
+				if (World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+				{
+					GWorld = World;
+					break;
+				}
+				
 			}
 		}
 	}
