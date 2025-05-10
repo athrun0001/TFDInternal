@@ -58,7 +58,7 @@ bool CheckPointers()
 					{
 						if ((int)(static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState) == 10)
 						{
-							if (GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
+							if (GWorld->OwningGameInstance->LocalPlayers && GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
 							{
 								if (GWorld->OwningGameInstance->LocalPlayers[0]
 									&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController
@@ -126,7 +126,7 @@ bool WorldToScreen(const TFD_SDK::FVector& worldLoc, TFD_SDK::FVector2D* screenP
 	//	screenPos->Y *= (1080.0f / ZeroGUI::canvas->SizeY);
 	//}
 	bool inView = false;
-	if (LocalPlayerController)
+	if (LocalPlayerController && myCanvas)
 	{
 		inView = TFD_SDK::UGameplayStatics::ProjectWorldToScreen(LocalPlayerController, worldLoc, screenPos, true);
 		if (inView && screenPos->X > 0 && screenPos->X < myCanvas->SizeX && screenPos->Y > 0 && screenPos->Y < myCanvas->SizeY)
@@ -203,6 +203,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				VirtualProtect(RapidFireAddress, sizeof(uint8_t), old, NULL);
 			}
 
+			
 
 			isGUIInit = true;
 		}
@@ -308,6 +309,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			//		}
 			//	}
 			//}
+			RefreshPresetList(false);
 
 			if (IsKeyPressed(cfg_LootVacuumKey))
 				cfg_LootVacuum = !cfg_LootVacuum;
@@ -393,8 +395,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				EncryptedVaultDrops();
 			}
 
-			RefreshPresetList(false);
-
 			if (cfg_HotSwapOverlay)
 			{
 				if (ShowHotSwapOverlay)
@@ -402,7 +402,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - ShowHotSwapOverlayStartTime).count() > 3)
 						ShowHotSwapOverlay = false;
 				}
-				if (ShowHotSwapOverlay)
+				if (ShowHotSwapOverlay && !Presets.empty())
 				{
 					for (int i = 0; i < 4; i++)
 					{
@@ -511,7 +511,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			}
 			ZeroGUI::Render();
 			ZeroGUI::Draw_Cursor(cfg_DrawMenu);
-
 
 		}
 	}
