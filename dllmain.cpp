@@ -333,6 +333,8 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 			if (IsKeyPressed(VK_DOWN))
 			{
+				ShowHotSwapOverlay = true;
+				ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 				if (HotSwapIndex == 3)
 					HotSwapIndex = 0;
 				else
@@ -340,6 +342,8 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			}
 			if (IsKeyPressed(VK_UP))
 			{
+				ShowHotSwapOverlay = true;
+				ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 				if (HotSwapIndex == 0)
 					HotSwapIndex = 3;
 				else
@@ -376,18 +380,26 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 			if (cfg_HotSwapOverlay)
 			{
-				for (int i = 0; i < 4; i++)
+				if (ShowHotSwapOverlay)
 				{
-					char buffer[100];
-					if (!Presets.empty() && HotSwapPreset[i] != -1 && HotSwapPreset[i] < Presets.size())
-						sprintf_s(buffer, "Preset %d: %s", i + 1, Presets[HotSwapPreset[i]].c_str());
-					else
-						sprintf_s(buffer, "Preset %d: None", i + 1);
+					if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - ShowHotSwapOverlayStartTime).count() > 3)
+						ShowHotSwapOverlay = false;
+				}
+				if (ShowHotSwapOverlay)
+				{
+					for (int i = 0; i < 4; i++)
+					{
+						char buffer[100];
+						if (!Presets.empty() && HotSwapPreset[i] != -1 && HotSwapPreset[i] < Presets.size())
+							sprintf_s(buffer, "Preset %d: %s", i + 1, Presets[HotSwapPreset[i]].c_str());
+						else
+							sprintf_s(buffer, "Preset %d: None", i + 1);
 
-					if (i == HotSwapIndex)
-						ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
-					else
-						ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
+						if (i == HotSwapIndex)
+							ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
+						else
+							ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
+					}
 				}
 			}
 			// This code is for testing controller input detection

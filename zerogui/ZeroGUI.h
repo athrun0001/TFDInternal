@@ -3,13 +3,12 @@
 #include "../SDK/Basic.hpp"
 #include "../SDK/CoreUObject_classes.hpp"
 #include "../SDK/CoreUObject_structs.hpp"
-wchar_t* s2wc(const char* c)
+std::unique_ptr<wchar_t[]> s2wc(const char* c)
 {
 	const size_t cSize = strlen(c) + 1;
-	wchar_t* wc = new wchar_t[cSize];
-#pragma warning(suppress : 4996)
-	mbstowcs(wc, c, cSize);
-
+	std::unique_ptr<wchar_t[]> wc(new wchar_t[cSize]);
+	size_t convertedChars = 0;
+	mbstowcs_s(&convertedChars, wc.get(), cSize, c, _TRUNCATE);
 	return wc;
 }
 
@@ -240,16 +239,16 @@ namespace ZeroGUI
 	void TextLeft(char* name, FVector2D pos, FLinearColor color, bool outline)
 	{
 		int length = strlen(name) + 1;
-		wchar_t* wcName = s2wc(name);
-		canvas->K2_DrawText(CurrentFont, FString{ wcName }, pos, FVector2D{ 0.97f, 0.97f }, color, false, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, false, true, true, Colors::Text_Outline);
-		delete[] wcName; // Free the allocated memory
+		std::unique_ptr<wchar_t[]> wcName = s2wc(name);
+		canvas->K2_DrawText(CurrentFont, FString(wcName.get()), pos, FVector2D{ 0.97f, 0.97f }, color, 0.0f, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, false, true, true, Colors::Text_Outline);
+		//delete[] wcName; // Free the allocated memory
 	}
 	void TextCenter(char* name, FVector2D pos, FLinearColor color, bool outline)
 	{
 		int length = strlen(name) + 1;
-		wchar_t* wcName = s2wc(name);
-		canvas->K2_DrawText(CurrentFont, FString{ wcName }, pos, FVector2D{ 0.97f, 0.97f }, color, false, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, true, true, true, Colors::Text_Outline);
-		delete[] wcName; // Free the allocated memory
+		std::unique_ptr<wchar_t[]> wcName = s2wc(name);
+		canvas->K2_DrawText(CurrentFont, FString(wcName.get()), pos, FVector2D{ 0.97f, 0.97f }, color, 0.0f, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, true, true, true, Colors::Text_Outline);
+		//delete[] wcName; // Free the allocated memory
 	}
 
 	void GetColor(FLinearColor* color, float* r, float* g, float* b, float* a)

@@ -12,6 +12,7 @@
 #include <XInput.h>
 #pragma comment(lib,"xinput.lib")
 //#include "TFD_SDK.h"
+#include <chrono>
 
 
 #define IsKeyPressed(key) GetAsyncKeyState(key) & 1 && GetAsyncKeyState(key) & 0x8000
@@ -210,6 +211,8 @@ int cfg_TimeScaleKey = VK_F2;
 int cfg_TimeScaleHoldKey = VK_CONTROL;
 int cfg_EncryptedVaultDropsKey = VK_LEFT;
 int cfg_EncryptedVaultRewardType = 0;
+bool ShowHotSwapOverlay = false;
+std::chrono::steady_clock::time_point ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 
 void WriteEnemyNamesData();
 std::unordered_map<int, std::string> ReadEnemyNamesData();
