@@ -41,6 +41,7 @@ bool CheckPointers()
 						if (Name != "" && Name != "None")
 						{
 							GWorld = World;
+							ZeroGUI::TextLeft((char*)"World Loaded", TFD_SDK::FVector2D{ 50, 25.0f + (12.0f * 0) }, ColorRed, false);
 							break;
 						}
 					}
@@ -96,6 +97,7 @@ bool CheckPointers()
 											//inGame = false;
 											PlayerIngameController = nullptr;
 										}
+										ZeroGUI::TextLeft((char*)"CheckPointers Loaded", TFD_SDK::FVector2D{ 50, 25.0f + (12.0f * 2) }, ColorRed, false);
 										return true;
 									}
 								}
@@ -178,6 +180,8 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			{
 				IDBoneMap = ReadEnemyBonesData();
 			}
+
+			PresetsMap = ReadPresetsData();
 
 			if (cfg_AimbotNoSpread)
 			{
@@ -309,7 +313,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			//		}
 			//	}
 			//}
-			RefreshPresetList(false);
 
 			if (IsKeyPressed(cfg_LootVacuumKey))
 				cfg_LootVacuum = !cfg_LootVacuum;
@@ -402,13 +405,13 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - ShowHotSwapOverlayStartTime).count() > 3)
 						ShowHotSwapOverlay = false;
 				}
-				if (ShowHotSwapOverlay && !Presets.empty())
+				if (ShowHotSwapOverlay && !PresetsMap.empty())
 				{
 					for (int i = 0; i < 4; i++)
 					{
 						char buffer[100];
-						if (HotSwapPreset[i] != -1 && HotSwapPreset[i] < Presets.size())
-							sprintf_s(buffer, "Preset %d: %s", i + 1, Presets[HotSwapPreset[i]].c_str());
+						if (HotSwapPreset[i] != -1)
+							sprintf_s(buffer, "Preset %d: %s", i + 1, PresetsMap[HotSwapPreset[i]].c_str());
 						else
 							sprintf_s(buffer, "Preset %d: None", i + 1);
 
@@ -503,7 +506,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					LocalCharacter->RequestTeleportAtSequence(Pos, Rotation);
 				}
 			}*/
-
 
 			if (cfg_DrawMenu)
 			{
@@ -1191,14 +1193,9 @@ void SwitchPreset()
 		return;
 	UC::int32 PresetIndex = -1;
 
-	if (HotSwapPreset[HotSwapIndex] != -1 && !Presets.empty() && HotSwapPreset[HotSwapIndex] < Presets.size())
+	if (HotSwapPreset[HotSwapIndex] != -1 && !PresetsMap.empty())
 	{
-		size_t start = Presets[HotSwapPreset[HotSwapIndex]].find('[');
-		size_t end = Presets[HotSwapPreset[HotSwapIndex]].find(']');
-		if (start != std::string::npos && end != std::string::npos && end > start)
-		{
-			PresetIndex = std::stoi(Presets[HotSwapPreset[HotSwapIndex]].substr(start + 1, end - start - 1));
-		}
+		PresetIndex = HotSwapPreset[HotSwapIndex];
 		if (PresetIndex >= 0 && LocalPlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
 		{
 			for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : LocalPlayerController->PrivateOnlineServiceComponent->SubServices)
@@ -1215,47 +1212,45 @@ void SwitchPreset()
 	}
 }
 
-void RefreshPresetList(bool isrefresh = false)
+void RefreshPresetList()
 {
-	if (isrefresh)
-	{
-		HotSwapPreset = { -1, -1, -1, -1 };
-		Presets.clear();
-	}
+	HotSwapPreset = { -1, -1, -1, -1 };
+	PresetsMap.clear();
 
-	if (Presets.empty())
+	for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
 	{
-		for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
+		TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
+		if (!Obj)
+			continue;
+
+		if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
+			Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
+			Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
+			Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
+			Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
+			continue;
+
+		if (Obj->IsA(TFD_SDK::UM1Account::StaticClass()))
 		{
-			TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
-
-			if (!Obj)
-				continue;
-
-			if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
-				Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
-				Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
-				Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
-				Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
-				continue;
-
-			if (Obj->IsA(TFD_SDK::UM1Account::StaticClass()))
+			TFD_SDK::UM1Account* Account = static_cast<TFD_SDK::UM1Account*>(Obj);
+			if (!Account)
+				return;
+			if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()))
 			{
-				TFD_SDK::UM1Account* Account = static_cast<TFD_SDK::UM1Account*>(Obj);
-				if (!Account)
-					return;
-				if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()))
-					for (const auto& Pair : static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset)->PresetSlotByIndex)
+				for (const auto& Pair : static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset)->PresetSlotByIndex)
+				{
+					TFD_SDK::FM1PresetSlot Value = Pair.Value();
+					if (!Value.PresetName.ToString().empty())
 					{
-						TFD_SDK::FM1PresetSlot Value = Pair.Value();
-						if (!Value.PresetName.ToString().empty())
-							Presets.push_back("[" + std::to_string(Value.PresetIndex) + "] " + Value.PresetName.ToString());
+						PresetsMap.insert({ Value.PresetIndex,  Value.PresetName.ToString() });
 					}
-				if (!Presets.empty())
-					break;
+				}
+				ZeroGUI::TextLeft((char*)"Presets Loaded", TFD_SDK::FVector2D{ 50, 25.0f + (12.0f * 4) }, ColorRed, false);
+				break;
 			}
 		}
 	}
+
 }
 
 void EncryptedVaultDrops()
@@ -1728,7 +1723,7 @@ void DrawMenu()
 			ZeroGUI::Checkbox((char*)"Show Swap Slot Overlay", &cfg_HotSwapOverlay);
 			ZeroGUI::Text((char*)"Use the Up and Down keys to change slots.");
 			char SlotText[64];
-			sprintf_s(SlotText, "Preset Name for Slot %d: %s", HotSwapIndex, HotSwapPreset[HotSwapIndex] != -1 && HotSwapPreset[HotSwapIndex] < Presets.size() && !Presets.empty() ? Presets[HotSwapPreset[HotSwapIndex]].c_str() : "None");
+			sprintf_s(SlotText, "Preset Name for Slot %d: %s", HotSwapIndex, HotSwapPreset[HotSwapIndex] != -1 && !PresetsMap.empty() ? PresetsMap[HotSwapPreset[HotSwapIndex]].c_str() : "None");
 			ZeroGUI::Text((char*)SlotText);
 			if (ZeroGUI::Button((char*)"Clear Preset Slot", TFD_SDK::FVector2D{ 120, 30 }))
 			{
@@ -1736,22 +1731,18 @@ void DrawMenu()
 			}
 			if (ZeroGUI::Button((char*)"Refresh Preset List", TFD_SDK::FVector2D{ 120, 30 }))
 			{
-				RefreshPresetList(true);
+				RefreshPresetList();
+				WritePresetsData();
 			}
 			ZeroGUI::Text((char*)"Switch Preset:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Switch Preset Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_SwitchPreset);
-			if (!Presets.empty())
+			if (!PresetsMap.empty())
 			{
-				std::vector<const char*> cstrPresets;
-				cstrPresets.reserve(Presets.size());
-				for (const auto& preset : Presets) {
-					cstrPresets.push_back(preset.c_str());
-				}
-				ZeroGUI::Combobox1((char*)"Select Preset 1", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[0], cstrPresets);
-				ZeroGUI::Combobox1((char*)"Select Preset 2", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[1], cstrPresets);
-				ZeroGUI::Combobox1((char*)"Select Preset 3", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[2], cstrPresets);
-				ZeroGUI::Combobox1((char*)"Select Preset 4", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[3], cstrPresets);
+				ZeroGUI::Combobox1((char*)"Select Preset 1", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[0], PresetsMap);
+				ZeroGUI::Combobox1((char*)"Select Preset 2", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[1], PresetsMap);
+				ZeroGUI::Combobox1((char*)"Select Preset 3", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[2], PresetsMap);
+				ZeroGUI::Combobox1((char*)"Select Preset 4", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[3], PresetsMap);
 			}
 		}
 	}
@@ -1896,6 +1887,69 @@ void SaveCFG()
 	ini.SetDoubleValue("Mission", "LeaveMissionKey", cfg_LeaveMissionKey);
 
 	ini.SaveFile("cfg.ini");
+}
+
+void WritePresetsData()
+{
+	std::ofstream outFile("Presets.dat", std::ios::binary);
+
+	if (!outFile) {
+		return;
+	}
+	outFile.clear();
+	size_t size = PresetsMap.size();
+	outFile.write(reinterpret_cast<const char*>(&size), sizeof(size));
+
+	// Write each key-value pair
+	for (const auto& pair : PresetsMap) {
+		// Write the key
+		outFile.write(reinterpret_cast<const char*>(&pair.first), sizeof(pair.first));
+
+		// Write the length of the string value
+		size_t strLength = pair.second.size();
+		outFile.write(reinterpret_cast<const char*>(&strLength), sizeof(strLength));
+
+		// Write the string value
+		outFile.write(pair.second.data(), strLength);
+	}
+
+	outFile.close();
+}
+
+std::unordered_map<int, std::string> ReadPresetsData()
+{
+	std::unordered_map<int, std::string> map;
+	std::ifstream inFile("Presets.dat", std::ios::binary);
+
+	if (!inFile) {
+		return map;
+	}
+
+	// Read the size of the map
+	size_t size = 0;
+	inFile.read(reinterpret_cast<char*>(&size), sizeof(size));
+
+	for (size_t i = 0; i < size; ++i) {
+		int key;
+		size_t strLength;
+		std::string value;
+
+		// Read the key
+		inFile.read(reinterpret_cast<char*>(&key), sizeof(key));
+
+		// Read the length of the string value
+		inFile.read(reinterpret_cast<char*>(&strLength), sizeof(strLength));
+
+		// Read the string value
+		value.resize(strLength);
+		inFile.read(&value[0], strLength);
+
+		// Insert into the map
+		map[key] = value;
+	}
+
+	inFile.close();
+	return map;
 }
 
 void WriteEnemyNamesData()

@@ -83,7 +83,7 @@ uintptr_t FindSignature(int procID, sigmod mod, const char* sig, const char* mas
 */
 
 bool CheckPointers();
-std::vector<std::string> Presets;
+//std::vector<std::string> Presets;
 TFD_SDK::UWorld* GWorld;
 TFD_SDK::UEngine* GEngine;
 //TFD_SDK::ULocalPlayer* LocalPlayer;
@@ -166,7 +166,7 @@ void InstantInfiltration();
 void RestartLastMission();
 void LeaveMission();
 void SwitchPreset();
-void RefreshPresetList(bool isrefresh);
+void RefreshPresetList();
 void EncryptedVaultDrops();
 
 /*
@@ -219,9 +219,13 @@ void WriteEnemyNamesData();
 std::unordered_map<int, std::string> ReadEnemyNamesData();
 void WriteEnemyBonesData();
 std::unordered_map<int, std::vector<int>> ReadEnemyBonesData();
+void WritePresetsData();
+std::unordered_map<int, std::string> ReadPresetsData();
 
 std::unordered_map<int, std::vector<int>> IDBoneMap = { };
 bool BonesChanged = false;
+
+std::unordered_map<int, std::string> PresetsMap = { };
 
 std::unordered_map<int, std::string> IDNameMap =
 {

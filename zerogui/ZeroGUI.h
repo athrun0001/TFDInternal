@@ -882,7 +882,7 @@ namespace ZeroGUI
 		}
 	}
 
-	void Combobox1(char* name, FVector2D size, int* value, const std::vector<const char*>& items)
+	void Combobox1(char* name, FVector2D size, int* value, const std::unordered_map<int, std::string>& items)
 	{
 		elements_count++;
 
@@ -924,10 +924,10 @@ namespace ZeroGUI
 		TextLeft(name, textPos, FLinearColor{ 1, 1, 1, 1 }, false);
 
 		// Display selected item
-		if (*value >= 0 && *value < items.size())
+		if (items.find(*value) != items.end())
 		{
 			FVector2D selectedTextPos = { pos.X + size.X / 2.0f, pos.Y + size.Y / 2.0f };
-			TextCenter((char*)items[*value], selectedTextPos, FLinearColor{ 1, 1, 1, 1 }, false);
+			TextCenter((char*)items.at(*value).c_str(), selectedTextPos, FLinearColor{ 1, 1, 1, 1 }, false);
 		}
 
 		FVector2D element_pos = pos;
@@ -935,7 +935,7 @@ namespace ZeroGUI
 
 		if (checkbox_enabled[elements_count])
 		{
-			for (int num = 0; num < items.size(); ++num)
+			for (const auto& [key, item] : items)
 			{
 				element_pos.Y += 25.0f;
 				isHovered2 = MouseInZone(element_pos, FVector2D{ size.X, 25.0f });
@@ -947,7 +947,7 @@ namespace ZeroGUI
 
 					if (mouseDown)
 					{
-						*value = num;
+						*value = key;
 						checkbox_enabled[elements_count] = false;
 					}
 				}
@@ -956,7 +956,7 @@ namespace ZeroGUI
 					PostRenderer::drawFilledRect(element_pos, size.X, 25.0f, Colors::Combobox_Idle);
 				}
 
-				PostRenderer::TextLeft((char*)items[num], FVector2D{ element_pos.X + 5.0f, element_pos.Y + 15.0f }, FLinearColor{ 1, 1, 1, 1 }, false);
+				PostRenderer::TextLeft((char*)item.c_str(), FVector2D{ element_pos.X + 5.0f, element_pos.Y + 15.0f }, FLinearColor{ 1, 1, 1, 1 }, false);
 			}
 
 			current_element_size.X = element_pos.X + 5.0f;
