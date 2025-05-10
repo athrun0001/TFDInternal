@@ -187,6 +187,248 @@ namespace TFD_SDK
 		ForceCancel = 4,
 		EM1MiniGameResult_MAX = 5,
 	};
+	// NumValues: 0x00EE
+	enum class EM1StatType : uint8
+	{
+		Stat_MaxHp = 0,
+		Stat_KnockbackSpeed = 1,
+		Stat_KnockbackTime = 2,
+		Stat_KnockdownTime = 3,
+		Stat_RangeMax = 4,
+		Stat_GravityScaleCoefficient = 5,
+		Stat_CrosshairSizeMax = 6,
+		Stat_Impulse = 7,
+		Stat_AimOnDelay = 8,
+		Stat_AimOffDelay = 9,
+		Stat_JumpZVelocity = 10,
+		Stat_CurrentEnergyShield = 11,
+		Stat_InteractionRevive = 12,
+		Stat_RunSpeed = 13,
+		Stat_SprintSpeed = 14,
+		Stat_ZoomMoveSpeed = 15,
+		Stat_RoundsPerMagazine = 16,
+		Stat_ReloadRounds = 17,
+		Stat_FireInterval = 18,
+		Stat_MaxMp = 19,
+		Stat_MaxEnergyShield = 20,
+		Stat_ATK = 21,
+		Stat_ATKMin = 22,
+		Stat_ATKMax = 23,
+		Stat_DEF = 24,
+		Stat_CriticalChance = 25,
+		Stat_CriticalATKIncrease = 26,
+		Stat_ShellCount = 27,
+		Stat_RoundsConsume = 28,
+		Stat_AimMoveSpeed = 29,
+		Stat_WeaknessDamageIncrease = 30,
+		Stat_SpreadZoomSize_Deprecated = 31,
+		Stat_CrosshairMoveSizeModifier = 32,
+		Stat_CrosshairFireSizeModifier = 33,
+		Stat_CrosshairZoomFireSizeModifier = 34,
+		Stat_CrosshairRecoverySpeed = 35,
+		Stat_CrosshairChangeSpeed = 36,
+		Stat_ClimbSpeed = 37,
+		Stat_StressMaxRate_Deprecated = 38,
+		Stat_StressDamageRate = 39,
+		Stat_StressDecreaseRate = 40,
+		Stat_NonCombatEntryTime_Deprecated = 41,
+		Stat_StressDecreaseStartTime = 42,
+		Stat_WalkSpeed = 43,
+		Stat_MoveDestructivePower = 44,
+		Stat_WeaponProjHitRadiusCoefficient = 45,
+		Stat_EvadeTime = 46,
+		Stat_EvadeRecoveryTime = 47,
+		Stat_Domination = 48,
+		Stat_Manipulation = 49,
+		Stat_Fortitude = 50,
+		Stat_CrosshairSizeMin = 51,
+		Stat_ReloadSpeed = 52,
+		Stat_ReloadCompleteDelay = 53,
+		Stat_ReduceRangeStart = 54,
+		Stat_ReduceRangeEnd = 55,
+		Stat_ATKReductionByRange = 56,
+		Stat_ATKExplosion = 57,
+		Stat_ATKBlazer = 58,
+		Stat_ATKGlacier = 59,
+		Stat_ATKElectricity = 60,
+		Stat_ATKDemonic = 61,
+		Stat_DEFBlazer = 62,
+		Stat_DEFGlacier = 63,
+		Stat_DEFElectricity = 64,
+		Stat_DEFDemonic = 65,
+		Stat_RESCriticalChance = 66,
+		Stat_ReloadTime = 67,
+		Stat_Burst = 68,
+		Stat_Crush = 69,
+		Stat_Piercing = 70,
+		Stat_FireBurstInterval = 71,
+		Stat_ATKReductionByExplosionRange = 72,
+		Stat_ZoomOutDelay = 73,
+		Stat_Penetration = 74,
+		Stat_PenetrationDefence = 75,
+		Stat_WeaponDestructivePower = 76,
+		Stat_SkillDestructivePower = 77,
+		Stat_FireIncreaseSpread_Deprecated = 78,
+		Stat_LifeTime_Deprecated = 79,
+		Stat_BonusLifeTime_Deprecated = 80,
+		Stat_RangeMin_Deprecated = 81,
+		Stat_WireCooltimeCoefficient = 82,
+		Stat_WireChargingTimeCoefficient = 83,
+		Stat_KnockbackAttackRate = 84,
+		Stat_KnockbackDefenceResistance = 85,
+		Stat_KnockbackTimeResistance = 86,
+		Stat_KnockbackSpeedResistance = 87,
+		Stat_KnockdownAttackRate = 88,
+		Stat_KnockdownXSpeed = 89,
+		Stat_KnockdownZSpeed = 90,
+		Stat_KnockdownDefenceResistance = 91,
+		Stat_KnockdownXSpeedResistance = 92,
+		Stat_KnockdownZSpeedResistance = 93,
+		Stat_KnockdownTimeResistance = 94,
+		Stat_MeleeSpecialAttackReduceCoolTime_Deprecated = 95,
+		Stat_HitStopAttackPoint = 96,
+		Stat_HitStopDefencePoint = 97,
+		Stat_BerserkMoveSpeed = 98,
+		Stat_BerserkMaxRate = 99,
+		Stat_BerserkDamageRate = 100,
+		Stat_BerserkDecreaseStartTime = 101,
+		Stat_BerserkDecreaseRate = 102,
+		Stat_BerserkMaintenanceTime = 103,
+		Stat_NaturalRecoveryTickTimeHp = 104,
+		Stat_NaturalRecoveryTickTimeMp = 105,
+		Stat_NaturalRecoveryTickTimeEnergyShield = 106,
+		Stat_NaturalRecoveryHp = 107,
+		Stat_NaturalRecoveryMp = 108,
+		Stat_NaturalRecoveryEnergyShield = 109,
+		Stat_InBattleNaturalRecoveryHp = 110,
+		Stat_InBattleNaturalRecoveryMp = 111,
+		Stat_InBattleNaturalRecoveryEnergyShield = 112,
+		Stat_CurrentHp = 113,
+		Stat_CurrentMp = 114,
+		Stat_MaxCommonGauge = 115,
+		Stat_CurrentCommonGauge = 116,
+		Stat_DEFInflection_VarX1_Deprecated = 117,
+		Stat_DEFInflection_VarX2_Deprecated = 118,
+		Stat_DEFInflection_VarX3_Deprecated = 119,
+		Stat_WireStackCountIncrease = 120,
+		Stat_RecoilCoefficient = 121,
+		Stat_SkillCooltimeCoefficient = 122,
+		Stat_SkillCostCoefficient = 123,
+		Stat_SkillATKCoefficient = 124,
+		Stat_FinalDamageCoefficient_Deprecated = 125,
+		Stat_HpOrbRecoveryCoefficient_Deprecated = 126,
+		Stat_MpOrbRecoveryCoefficient_Deprecated = 127,
+		Stat_EmptyRoundsReloadTimeSpeed = 128,
+		Stat_SkillDurationIncrease = 129,
+		Stat_SkillDurationDecrease = 130,
+		Stat_SkillScaleCoefficient = 131,
+		Stat_WeaponChangingSpeed = 132,
+		Stat_MaxGeneralRoundsCoefficient = 133,
+		Stat_MaxEnhancedRoundsCoefficient = 134,
+		Stat_MaxImpactRoundsCoefficient = 135,
+		Stat_MaxHighpowerRoundsCoefficient = 136,
+		Stat_NaturalRecoveryTickPR_Deprecated = 137,
+		Stat_InBattleNaturalRecoveryPR_Deprecated = 138,
+		Stat_NaturalRecoveryPR_Deprecated = 139,
+		Stat_CrosshairJumpSizeModifier = 140,
+		Stat_PhysicalATK = 141,
+		Stat_NatureATK = 142,
+		Stat_GiveHpRecoveryCoefficient = 143,
+		Stat_TakeHpRecoveryCoefficient = 144,
+		Stat_GiveMpRecoveryCoefficient = 145,
+		Stat_TakeMpRecoveryCoefficient = 146,
+		Stat_RWATKCoefficient = 147,
+		Stat_GiveFinalDamageCoefficient = 148,
+		Stat_TakeFinalDamageCoefficient = 149,
+		Stat_LevelFactor = 150,
+		Stat_SkillATKCorrection = 151,
+		Stat_ItemLevelCorrection = 152,
+		Stat_MaxStressGauge = 153,
+		Stat_CurrentStressGauge = 154,
+		Stat_MaxBerserkGauge = 155,
+		Stat_CurrentBerserkGauge = 156,
+		Stat_SkillATKPower = 157,
+		Stat_SkillPowerCoefficient = 158,
+		Stat_SkillPlainPowerCoefficient = 159,
+		Stat_SkillBlazerPowerCoefficient = 160,
+		Stat_SkillGlacierPowerCoefficient = 161,
+		Stat_SkillElectricityPowerCoefficient = 162,
+		Stat_SkillDemonicPowerCoefficient = 163,
+		Stat_SkillFusionPowerCoefficient = 164,
+		Stat_SkillSingularPowerCoefficient = 165,
+		Stat_SkillDimensionPowerCoefficient = 166,
+		Stat_SkillTechPowerCoefficient = 167,
+		Stat_SkillPlainATKCoefficient = 168,
+		Stat_SkillBlazerATKCoefficient = 169,
+		Stat_SkillGlacierATKCoefficient = 170,
+		Stat_SkillElectricityATKCoefficient = 171,
+		Stat_SkillDemonicATKCoefficient = 172,
+		Stat_SkillFusionATKCoefficient = 173,
+		Stat_SkillSingularATKCoefficient = 174,
+		Stat_SkillDimensionATKCoefficient = 175,
+		Stat_SkillTechATKCoefficient = 176,
+		Stat_SkillCriticalChance = 178,
+		Stat_SkillCriticalATKIncrease = 179,
+		Stat_SkillRESCriticalChance = 180,
+		Stat_DEFSkill = 181,
+		Stat_DEFPlain = 182,
+		Stat_Accuracy = 183,
+		Stat_ZoomAccuracy = 184,
+		Stat_InvokeChanceElementalSE = 185,
+		Stat_GiveShieldRecoveryCoefficient = 186,
+		Stat_TakeShieldRecoveryCoefficient = 187,
+		Stat_MaxSprintSpeed = 188,
+		Stat_WeaponProjHitRadius = 189,
+		Stat_DBNORescueTime = 190,
+		Stat_RuneDropCoefficient = 191,
+		Stat_EquipmentDropCoefficient = 192,
+		Stat_ConsumableDropCoefficient = 193,
+		Stat_GoldDropCoefficient = 194,
+		Stat_QulipothiumDropCoefficient = 195,
+		Stat_CharEXPCoefficient = 196,
+		Stat_ProficiencyCoefficient = 197,
+		Stat_TypeBossATKBonus = 198,
+		Stat_TypeDarknessATKBonus = 199,
+		Stat_TypeTruthATKBonus = 200,
+		Stat_TypeImmortalATKBonus = 201,
+		Stat_DBNODurationCoefficient = 202,
+		Stat_LootDistanceCoefficient = 203,
+		Stat_DoubleJumpZVelocity = 204,
+		Stat_EciveSearchDistanceCoefficient = 205,
+		Stat_EciveSearchRemainTimeCoefficient = 206,
+		Stat_SubSkillATKPower = 207,
+		Stat_SubSkillATKCoefficient = 208,
+		Stat_TakeWeaknessDamageCoefficient_Deprecated = 209,
+		Stat_RWChargeRateCoefficient = 210,
+		Stat_RWDischargeRateCoefficient = 211,
+		Stat_TypeBossSkillATKBonus = 212,
+		Stat_TypeDarknessSkillATKBonus = 213,
+		Stat_TypeTruthSkillATKBonus = 214,
+		Stat_TypeImmortalSkillATKBonus = 215,
+		Stat_BurstDelay = 216,
+		Stat_DefaultStressStopDuration = 217,
+		Stat_FieldTimingRing_LimitTimeRatio = 218,
+		Stat_FieldTimingRing_NeedleRotationTimeRatio = 219,
+		Stat_FieldTimingRing_ReduceSuccessCount = 220,
+		Stat_FieldTimingRing_IncreaseTimingAngleMax = 221,
+		Stat_FieldTimingRing_FailTimeRatio = 222,
+		Stat_SkillVelocityAndRangeCoefficient = 223,
+		Stat_StressMaxHpRandMinRate = 224,
+		Stat_StressMaxHpRandMaxRate = 225,
+		Stat_StressMaxHpCurrentRate = 226,
+		Stat_ActionSpeedCoeffcient = 227,
+		Stat_ProjectilePenetration = 228,
+		Stat_ProjectilePenetrationDefence = 229,
+		Stat_RageMaxRate = 230,
+		Stat_RageDamageRate = 231,
+		Stat_RageDecreaseRate = 232,
+		Stat_MaxRageGauge = 233,
+		Stat_CurrentRageGauge = 234,
+		Stat_MultiHitChance = 235,
+		Stat_AdvantageCoefficient = 236,
+		Stat_MultiHitDamageIncrease = 237,
+		MAX = 238,
+	};
 
 	// 0x0004 (0x0004 - 0x0000)
 	struct FM1TemplateId final
@@ -301,6 +543,12 @@ namespace TFD_SDK
 		struct FM1TemplateId                          FieldDifficultyTemplateId;                         // 0x0004(0x0004)(NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		EM1MiniGameResult                             Result;                                            // 0x0008(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	};
+	// 0x0008 (0x0008 - 0x0000)
+	struct FM1ScaledInteger final
+	{
+	public:
+		int64                                         Value;                                             // 0x0000(0x0008)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 	};
 
 	// 0x1010 (0x1038 - 0x0028)
@@ -690,6 +938,11 @@ namespace TFD_SDK
 	public:
 		TArray<class AM1Character*> Characters; // 0x0030(0x0010)
 		uint8 Pad_UM1ActorManagerSubsystem_Class[0x140];// 0x0040
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1ActorManagerSubsystem">();
+		}
 	};
 	// 0x0118 (0x0140 - 0x0028)
 	class UM1CharacterAttribute : public UObject
@@ -709,13 +962,25 @@ namespace TFD_SDK
 			return StaticClassImpl<"M1MonsterAttribute">();
 		}
 	};
+	// 0x0448 (0x0510 - 0x00C8)
+	class UM1StatComponent : public UM1ActorComponent
+	{
+	public:
+		uint8                                         Pad_230[0x448];                                    // 0x00C8
+
+	public:
+		struct FM1ScaledInteger GetStatValue(const EM1StatType InStatType) const;
+
+	};
 	// 0x0760 (0x0C60 - 0x0500)
 	class AM1Character : public ACharacter
 	{
 	public:
 		uint8 Pad_InfoWidget[0x340]; // 0x500
 		class UM1CharacterInfoWidgetComponent* InfoWidgetComponent; // 0x0840(0x0008) Need this
-		uint8 Pad_CharacterAttribute[0x40]; // 0x0848
+		uint8 Pad_StatComponent[0x18]; // 0x0848
+		class UM1StatComponent* StatComponent;                                     // 0x0860(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+		uint8 Pad_CharacterAttribute[0x20]; // 0x0868
 		class UM1CharacterAttribute* CharacterAttribute;// 0x0888(0x0008)
 		uint8 Pad_CharacterId[0x218]; // 0x0890
 		struct FM1TemplateId CharacterId; // 0x0AA8(0x0004) Need this
@@ -1316,6 +1581,11 @@ namespace TFD_SDK
 	public:
 		class UM1MissionControlComponent*			  MissionControlComponent;                           // 0x0360(0x0008)(Edit, ExportObject, ZeroConstructor, EditConst, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8										  Pad_AM1PlayerState_Class[0x80];                    // 0x0368
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1PlayerState">();
+		}
 	};
 	// 0x0010 (0x0340 - 0x0330)
 	class AM1StatBasedActor : public AM1Actor
@@ -1663,5 +1933,13 @@ namespace TFD_SDK
 	{
 	public:
 		struct FM1MiniGameResult                      InResult;                                          // 0x0000(0x000C)(ConstParm, Parm, ReferenceParm, NoDestructor, NativeAccessSpecifierPublic)
+	};
+	// 0x0010 (0x0010 - 0x0000)
+	struct M1StatComponent_GetStatValue final
+	{
+	public:
+		EM1StatType                                   InStatType;                                        // 0x0000(0x0001)(ConstParm, Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
+		struct FM1ScaledInteger                       ReturnValue;                                       // 0x0008(0x0008)(Parm, OutParm, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
 }

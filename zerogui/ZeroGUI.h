@@ -124,7 +124,7 @@ namespace ZeroGUI
 
 	TFD_SDK::UCanvas* canvas;
 	TFD_SDK::UEngine* engine;
-	TFD_SDK::APlayerController* controller;
+	TFD_SDK::AM1PlayerController* controller;
 	TFD_SDK::UFont* CurrentFont;
 
 
@@ -159,7 +159,7 @@ namespace ZeroGUI
 		engine = _engine;
 	}
 
-	void SetController(TFD_SDK::APlayerController* cont)
+	void SetController(TFD_SDK::AM1PlayerController* cont)
 	{
 		controller = cont;
 	}

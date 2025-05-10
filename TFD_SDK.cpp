@@ -44,13 +44,6 @@ namespace TFD_SDK
 				if (!Obj)
 					continue;
 
-				if (Obj->Flags & EObjectFlags::BeginDestroyed ||
-					Obj->Flags & EObjectFlags::BeingRegenerated ||
-					Obj->Flags & EObjectFlags::FinishDestroyed ||
-					Obj->Flags & EObjectFlags::NeedInitialization ||
-					Obj->Flags & EObjectFlags::WillBeLoaded)
-					continue;
-
 				if (Obj->Flags & EObjectFlags::LoadCompleted && Obj->IsA(UWorld::StaticClass()) && !Obj->IsDefaultObject())
 				{
 					
@@ -75,7 +68,7 @@ namespace TFD_SDK
 			}
 			else
 			{
-				if (!(Obj->Flags & EObjectFlags::LoadCompleted && Obj->IsA(UWorld::StaticClass()) && !Obj->IsDefaultObject()))
+				if (!(Obj->Flags & SDK::EObjectFlags::LoadCompleted) || !Obj->IsA(UWorld::StaticClass()) || Obj->IsDefaultObject())
 				{
 					//std::cout << "DescentInternal - World Obj Not World or is DefaultObject: " << std::hex << World << std::dec << "\n";
 					World = nullptr;
@@ -785,5 +778,26 @@ namespace TFD_SDK
 		UObject::ProcessEvent(Func, nullptr);
 
 		Func->FunctionFlags = Flgs;
+	}
+
+	struct FM1ScaledInteger UM1StatComponent::GetStatValue(const EM1StatType InStatType) const
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1StatComponent", "GetStatValue");
+
+		M1StatComponent_GetStatValue Parms{};
+
+		Parms.InStatType = InStatType;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+
+		return Parms.ReturnValue;
 	}
 }

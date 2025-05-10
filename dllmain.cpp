@@ -38,7 +38,7 @@ bool CheckPointers()
 					if (World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 					{
 						std::string Name = World->Name.ToString();
-						if (Name != "" && Name != "None" && Name.empty() != true)
+						if (Name != "" && Name != "None")
 						{
 							GWorld = World;
 							break;
@@ -49,16 +49,16 @@ bool CheckPointers()
 		}
 		if (GWorld && isGUIInit)
 		{
-			if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
+			std::string Name = GWorld->Name.ToString();
+			if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition")
 			{
-				if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+				if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
 				{
-					if (static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
+					if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
 					{
-						std::string Name = GWorld->Name.ToString();
-						if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition" && Name.empty() != true)
+						if ((int)(static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState) == 10)
 						{
-							if (GWorld->OwningGameInstance->LocalPlayers.IsValid())
+							if (GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
 							{
 								if (GWorld->OwningGameInstance->LocalPlayers[0]
 									&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController
@@ -68,22 +68,32 @@ bool CheckPointers()
 									if (PC->Character
 										&& PC->Character->IsA(TFD_SDK::AM1Player::StaticClass())
 										&& PC->ActorManager_Subsystem
-										&& PC->PlayerState)
+										&& PC->ActorManager_Subsystem->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass()))
 									{
-										PlayerController = PC;
-										PlayerState = PC->PlayerState;
-										LocalPlayer = GWorld->OwningGameInstance->LocalPlayers[0];
-										LocalCharacter = static_cast<TFD_SDK::AM1Player*>(PC->Character);
-										Actors = PC->ActorManager_Subsystem;
-										ZeroGUI::controller = GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController;
-										if (PlayerController->IsA(TFD_SDK::AM1PlayerControllerInGame::StaticClass()))
+										LocalPlayerController = PC;
+										/*LocalPlayer = GWorld->OwningGameInstance->LocalPlayers[0];*/
+										LocalPlayerCharacter = static_cast<TFD_SDK::AM1Player*>(PC->Character);
+										//Actors = PC->ActorManager_Subsystem;
+										//ZeroGUI::controller = GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController;
+										ZeroGUI::SetController(LocalPlayerController);
+										if (PC->PlayerState
+											&& PC->PlayerState->IsA(TFD_SDK::AM1PlayerState::StaticClass()))
 										{
-											PlayerIngameController = static_cast<TFD_SDK::AM1PlayerControllerInGame*>(PlayerController);
-											inGame = true;
+											PlayerState = static_cast<TFD_SDK::AM1PlayerState*>(PC->PlayerState);
 										}
 										else
 										{
-											inGame = false;
+											PlayerState = nullptr;
+										}
+
+										if (LocalPlayerController->IsA(TFD_SDK::AM1PlayerControllerInGame::StaticClass()))
+										{
+											PlayerIngameController = static_cast<TFD_SDK::AM1PlayerControllerInGame*>(LocalPlayerController);
+											//inGame = true;
+										}
+										else
+										{
+											//inGame = false;
 											PlayerIngameController = nullptr;
 										}
 										return true;
@@ -96,11 +106,11 @@ bool CheckPointers()
 			}
 		}
 	}
-	PlayerController = nullptr;
+	LocalPlayerController = nullptr;
 	PlayerState = nullptr;
-	LocalPlayer = nullptr;
-	LocalCharacter = nullptr;
-	Actors = nullptr;
+	//LocalPlayer = nullptr;
+	LocalPlayerCharacter = nullptr;
+	//Actors = nullptr;
 	PlayerIngameController = nullptr;
 	inGame = false;
 	return false;
@@ -115,10 +125,16 @@ bool WorldToScreen(const TFD_SDK::FVector& worldLoc, TFD_SDK::FVector2D* screenP
 	//	screenPos->X *= (1920.0f / ZeroGUI::canvas->SizeX);
 	//	screenPos->Y *= (1080.0f / ZeroGUI::canvas->SizeY);
 	//}
-	bool isOnScreen = false;
-	if (PlayerController)
-		isOnScreen = TFD_SDK::UGameplayStatics::ProjectWorldToScreen(PlayerController, worldLoc, screenPos, true);
-	return isOnScreen;
+	bool inView = false;
+	if (LocalPlayerController)
+	{
+		inView = TFD_SDK::UGameplayStatics::ProjectWorldToScreen(LocalPlayerController, worldLoc, screenPos, true);
+		if (inView && screenPos->X > 0 && screenPos->X < myCanvas->SizeX && screenPos->Y > 0 && screenPos->Y < myCanvas->SizeY)
+			inView = true;
+		else
+			inView = false;
+	}
+	return inView;
 }
 
 //static __int64 YourHookProc_old(void* self, void* Canvas)
@@ -136,21 +152,22 @@ static __int64 YourHookProc(void* self, void* Canvas)
 {
 	if (Canvas)
 	{
+		myCanvas = static_cast<TFD_SDK::UCanvas*>(Canvas);
 		if (!isGUIInit)
 		{
 			ZeroMemory(g_Controllers, sizeof(CONTROLLER_STATE) * 4);
 			if (!GEngine)
 				GEngine = TFD_SDK::UEngine::GetEngine();
 			//CheckPointers();
-			TFD_SDK::UCanvas* myCanvas = static_cast<TFD_SDK::UCanvas*>(Canvas);
 			if (myCanvas->SizeX != lastScreenSize)
 			{
 				updateMiddle = true;
 				lastScreenSize = myCanvas->SizeX;
 			}
 			ZeroGUI::CurrentFont = GEngine->SmallFont;
-			ZeroGUI::canvas = myCanvas;
-			ZeroGUI::engine = GEngine;
+			//ZeroGUI::canvas = myCanvas;
+			//ZeroGUI::engine = GEngine;
+			ZeroGUI::SetupCanvas(myCanvas, GEngine);
 
 			if (cfg_CacheEnemyNames)
 			{
@@ -192,12 +209,12 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 		if (updateMiddle)
 		{
-			TFD_SDK::UCanvas* myCanvas = static_cast<TFD_SDK::UCanvas*>(Canvas);
+			/*TFD_SDK::UCanvas* myCanvas = static_cast<TFD_SDK::UCanvas*>(Canvas);
 			float aspectRatioX = myCanvas->SizeX / myCanvas->ClipX;
-			float aspectRatioY = myCanvas->SizeY / myCanvas->ClipY;
+			float aspectRatioY = myCanvas->SizeY / myCanvas->ClipY;*/
 
-			ScreenMiddle.X = (myCanvas->SizeX / 2.0f) / aspectRatioX;
-			ScreenMiddle.Y = (myCanvas->SizeY / 2.0f) / aspectRatioY;
+			ScreenMiddle.X = (myCanvas->SizeX / 2.0f) / (myCanvas->SizeX / myCanvas->ClipX);
+			ScreenMiddle.Y = (myCanvas->SizeY / 2.0f) / (myCanvas->SizeY / myCanvas->ClipY);
 			updateMiddle = false;
 		}
 
@@ -223,12 +240,12 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			//if (State != (int)TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay) // Game isn't ready, don't do anything or it will likely crash
 			//	return M1org(self, Canvas);
 
-			if (inGame && PlayerIngameController
+			/*if (inGame && PlayerIngameController
 				&& PlayerIngameController->HeartbeatTesterComponent)
 			{
 				if (PlayerIngameController->HeartbeatTesterComponent->IsActive())
 					PlayerIngameController->HeartbeatTesterComponent->Deactivate();
-			}
+			}*/
 
 
 
@@ -503,11 +520,10 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 void InstantReload()
 {
-	if (!LocalCharacter)
+	if (!LocalPlayerCharacter)
 		return;
 
-	static bool foundWeapon = false;
-	static TFD_SDK::UM1WeaponSlotControlComponent* WeaponSlot = nullptr;
+	static bool foundWeapon = false; 
 	if (!foundWeapon)
 	{
 		for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
@@ -531,7 +547,7 @@ void InstantReload()
 					continue;
 				if (!Wep->Player_Owner)
 					continue;
-				if (Wep->Player_Owner == LocalCharacter)
+				if (Wep->Player_Owner == LocalPlayerCharacter)
 				{
 					WeaponSlot = Wep;
 					foundWeapon = true;
@@ -542,7 +558,7 @@ void InstantReload()
 	}
 	else
 	{
-		if (!WeaponSlot || !WeaponSlot->Player_Owner || WeaponSlot->Player_Owner != LocalCharacter)
+		if (!WeaponSlot || !WeaponSlot->Player_Owner || (WeaponSlot->Player_Owner && WeaponSlot->Player_Owner != LocalPlayerCharacter))
 		{
 			foundWeapon = false;
 			return;
@@ -577,13 +593,13 @@ void PlayerEnemyESP()
 {
 	if (cfg_DrawPlayerNames || cfg_DrawPlayerBoxes || cfg_DrawEnemyNames || cfg_DrawEnemyBoxes || cfg_DrawPlayerLines || cfg_DrawEnemyLines)
 	{
-		if (!PlayerController
-			|| !Actors
-			|| !LocalCharacter
-			|| !LocalPlayer
-			|| !LocalPlayer->PlayerController
-			|| !LocalPlayer->PlayerController->Pawn
+		if (!LocalPlayerController
+			|| !LocalPlayerController->ActorManager_Subsystem
+			|| !LocalPlayerCharacter
 			)
+			return;
+		TFD_SDK::UM1ActorManagerSubsystem* Actors = LocalPlayerController->ActorManager_Subsystem;
+		if (!Actors)
 			return;
 		if (Actors->Characters.IsValid() && Actors->Characters.Num() > 0)
 		{
@@ -597,6 +613,8 @@ void PlayerEnemyESP()
 				TFD_SDK::AM1Character* p = Actors->Characters[i];
 				if (p)
 				{
+					if (p == LocalPlayerCharacter)
+						continue;
 					if (p->IsDead())
 						continue;
 					if (p->IsA(TFD_SDK::AM1Player::StaticClass()))
@@ -611,20 +629,22 @@ void PlayerEnemyESP()
 							TFD_SDK::FVector2D ScreenPos = { -1, -1 };
 							if (WorldToScreen(p->K2_GetActorLocation(), &ScreenPos))
 							{
-
-								if (cfg_DrawPlayerNames && player->PlayerName && player->PlayerName.ToString() != "" && LocalCharacter->PlayerName.ToString() != player->PlayerName.ToString())
+								if (cfg_DrawPlayerNames && player->PlayerName)
 								{
-									std::string Name = player->PlayerName.ToString();
-									ZeroGUI::TextCenter((char*)Name.c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen, false);
+									std::string playerNameStr = player->PlayerName.ToString();
+									if (!playerNameStr.empty())
+									{
+										ZeroGUI::TextCenter((char*)playerNameStr.c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen, false);
+									}
 								}
 
 								if (cfg_DrawPlayerBoxes)
 								{
-									float ODistance = p->GetDistanceTo(LocalPlayer->PlayerController->Pawn) / cfg_DistanceScale;
+									float ODistance = LocalPlayerCharacter->K2_GetActorLocation().GetDistanceTo(p->K2_GetActorLocation()) / 100.00f;
 									if (ODistance > 0)
 										ZeroGUI::DrawRectangle(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, TFD_SDK::FVector2D{ cfg_ESPBox.X / ODistance, cfg_ESPBox.Y / ODistance }, ColorGreen);
 								}
-								if (cfg_DrawPlayerLines && LocalCharacter->PlayerName.ToString() != player->PlayerName.ToString())
+								if (cfg_DrawPlayerLines)
 									ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen);
 							}
 						}
@@ -635,9 +655,9 @@ void PlayerEnemyESP()
 						TFD_SDK::FVector2D ScreenPos = { -1, -1 };
 						if (WorldToScreen(p->K2_GetActorLocation(), &ScreenPos))
 						{
-							TFD_SDK::FLinearColor color = ColorDarkRed;
+							/*TFD_SDK::FLinearColor color = ColorDarkRed;
 							if (PlayerController->LineOfSightTo(p, TFD_SDK::FVector{ 0, 0, 0 }, false))
-								color = ColorRed;
+								color = ColorRed;*/
 
 							// Finding fucking new bone targets
 							//if (p->Mesh && p->Mesh->BoneArray.IsValid() && p->Mesh->BoneArray.Num() > 0)
@@ -699,41 +719,41 @@ void PlayerEnemyESP()
 								//	}
 								if (!IDNameMap.contains(p->CharacterId.ID))
 								{
-									if (p->InfoWidgetComponent)
+									if (!p->InfoWidgetComponent || !p->InfoWidgetComponent->ActorWidget.Get())
+										continue;
+									TFD_SDK::UM1UIActorWidget* Base = p->InfoWidgetComponent->ActorWidget.Get();
+									if (Base)
 									{
-										TFD_SDK::UM1UIActorWidget* Base = p->InfoWidgetComponent->ActorWidget.Get();
-										if (Base)
+										if (Base->IsA(TFD_SDK::UM1UICharacterInfoBase::StaticClass()))
 										{
-											if (Base->IsA(TFD_SDK::UM1UICharacterInfoBase::StaticClass()))
+											TFD_SDK::UM1UICharacterInfoBase* Info = static_cast<TFD_SDK::UM1UICharacterInfoBase*>(Base);
+											if (Info)
 											{
-												TFD_SDK::UM1UICharacterInfoBase* Info = static_cast<TFD_SDK::UM1UICharacterInfoBase*>(Base);
-												if (Info)
-												{
-													std::string name = Info->TB_Name->Text.ToString();
-													int id = p->CharacterId.ID;
-													IDNameMap.insert({ id, name });
-													NamesChanged = true;
-												}
+												std::string name = Info->TB_Name->Text.ToString();
+												int id = p->CharacterId.ID;
+												IDNameMap.insert({ id, name });
+												NamesChanged = true;
 											}
-
 										}
+
 									}
+
 								}
 								else
 								{
-									ZeroGUI::TextCenter((char*)IDNameMap[(int)p->CharacterId.ID].c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color, false);
+									ZeroGUI::TextCenter((char*)IDNameMap[(int)p->CharacterId.ID].c_str(), TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorRed, false);
 								}
 							}
 							if (cfg_DrawEnemyBoxes)
 							{
-								float ODistance = p->GetDistanceTo(LocalPlayer->PlayerController->Pawn) / cfg_DistanceScale;
+								float ODistance = LocalPlayerCharacter->K2_GetActorLocation().GetDistanceTo(p->K2_GetActorLocation()) / 100.00f;
 								if (ODistance > 0)
 								{
-									ZeroGUI::DrawRectangle(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, TFD_SDK::FVector2D{ cfg_ESPBox.X / ODistance, cfg_ESPBox.Y / ODistance }, color);
+									ZeroGUI::DrawRectangle(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, TFD_SDK::FVector2D{ cfg_ESPBox.X / ODistance, cfg_ESPBox.Y / ODistance }, ColorRed);
 								}
 							}
 							if (cfg_DrawEnemyLines)
-								ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color);
+								ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorRed);
 						}
 					}
 				}
@@ -744,14 +764,16 @@ void PlayerEnemyESP()
 
 void ItemESPVacuum()
 {
-	if (!LocalCharacter
-		|| !LocalPlayer
-		|| !LocalPlayer->PlayerController
-		|| !LocalPlayer->PlayerController->Pawn
+	if (!LocalPlayerCharacter
+		|| !LocalPlayerController->Pawn
 		|| !GWorld)
 		return;
 	if (cfg_DrawItemBoxes || cfg_DrawItemNames || cfg_DrawItemLines || cfg_LootVacuum || cfg_DrawVaults)
 	{
+		/*float hp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
+		float maxhp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxHp).Value / 10000.0f;
+		float mana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentMp).Value / 10000.0f;
+		float maxmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxMp).Value / 10000.0f;*/
 		if (GWorld->Levels.IsValid())
 		{
 			for (int i = 0; i < GWorld->Levels.Num(); ++i)
@@ -759,8 +781,8 @@ void ItemESPVacuum()
 				if (GWorld->Levels.IsValidIndex(i))
 				{
 					TFD_SDK::ULevel* Level = GWorld->Levels[i];
-					if (!Level) continue;
-
+					if (!Level)
+						continue;
 					for (int j = 0; j < Level->Actors.Num(); ++j)
 					{
 						TFD_SDK::AActor* Actor = (TFD_SDK::AActor*)Level->Actors[j];
@@ -807,8 +829,8 @@ void ItemESPVacuum()
 										if (cfg_DrawItemLines)
 											ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorWhite);
 									}
+									continue;
 								}
-								continue;
 							}
 						}
 
@@ -901,7 +923,7 @@ void ItemESPVacuum()
 
 						if (cfg_LootVacuum)
 						{
-							TFD_SDK::FVector player = LocalCharacter->K2_GetActorLocation();
+							TFD_SDK::FVector player = LocalPlayerCharacter->K2_GetActorLocation();
 							float Distance = WorldPosition.GetDistanceTo(player);
 							if (Distance > 150 && Distance < cfg_LootVacuumRange)
 								Item->K2_SetActorLocation(player, false, nullptr, true);
@@ -1037,7 +1059,7 @@ void ItemESPVacuum()
 
 							if (cfg_DrawItemBoxes)
 							{
-								float ODistance = Item->GetDistanceTo(LocalPlayer->PlayerController->Pawn) / cfg_DistanceScale;
+								float ODistance = Item->GetDistanceTo(LocalPlayerController->Pawn) / cfg_DistanceScale;
 								if (ODistance > 0)
 									ZeroGUI::DrawRectangle(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, TFD_SDK::FVector2D{ 10 / ODistance, 10 / ODistance }, color);
 							}
@@ -1057,14 +1079,10 @@ void ItemESPVacuum()
 
 void InstantInfiltration()
 {
-	if (!PlayerState || !PlayerIngameController)
+	if (!PlayerState || !PlayerState->MissionControlComponent || !PlayerIngameController)
 		return;
 
-	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*>(PlayerState);
-	if (!PlayerStateAM1 || !PlayerStateAM1->MissionControlComponent)
-		return;
-
-	TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
+	TFD_SDK::UM1MissionControlComponent* MCC = PlayerState->MissionControlComponent;
 	if (!MCC)
 		return;
 	if (MCC->ActivatedMissions.Num() == 0)
@@ -1110,14 +1128,10 @@ void InstantInfiltration()
 
 void RestartLastMission()
 {
-	if (!PlayerState)
+	if (!PlayerState || !PlayerState->MissionControlComponent)
 		return;
 
-	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*>(PlayerState);
-	if (!PlayerStateAM1 || !PlayerStateAM1->MissionControlComponent)
-		return;
-
-	TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
+	TFD_SDK::UM1MissionControlComponent* MCC = PlayerState->MissionControlComponent;
 	if (!MCC || !MCC->MissionResult)
 		return;
 
@@ -1159,14 +1173,10 @@ void RestartLastMission()
 
 void LeaveMission()
 {
-	if (!PlayerState)
+	if (!PlayerState || !PlayerState->MissionControlComponent)
 		return;
 
-	TFD_SDK::AM1PlayerState* PlayerStateAM1 = static_cast<TFD_SDK::AM1PlayerState*>(PlayerState);
-	if (!PlayerStateAM1 || !PlayerStateAM1->MissionControlComponent)
-		return;
-
-	TFD_SDK::UM1MissionControlComponent* MCC = PlayerStateAM1->MissionControlComponent;
+	TFD_SDK::UM1MissionControlComponent* MCC = PlayerState->MissionControlComponent;
 	if (!MCC)
 		return;
 
@@ -1178,7 +1188,7 @@ void LeaveMission()
 
 void SwitchPreset()
 {
-	if (!PlayerController || !PlayerController->PrivateOnlineServiceComponent)
+	if (!LocalPlayerController || !LocalPlayerController->PrivateOnlineServiceComponent)
 		return;
 	UC::int32 PresetIndex = -1;
 
@@ -1190,9 +1200,9 @@ void SwitchPreset()
 		{
 			PresetIndex = std::stoi(Presets[HotSwapPreset[HotSwapIndex]].substr(start + 1, end - start - 1));
 		}
-		if (PresetIndex >= 0 && PlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
+		if (PresetIndex >= 0 && LocalPlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
 		{
-			for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : PlayerController->PrivateOnlineServiceComponent->SubServices)
+			for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : LocalPlayerController->PrivateOnlineServiceComponent->SubServices)
 			{
 				if (!Subserv)
 					return;
@@ -1251,7 +1261,7 @@ void RefreshPresetList(bool isrefresh = false)
 
 void EncryptedVaultDrops()
 {
-	if (!GWorld || !PlayerController)
+	if (!GWorld || !LocalPlayerController)
 		return;
 	bool vaultfound = false;
 	if (GWorld->Levels.IsValid())
@@ -1284,7 +1294,7 @@ void EncryptedVaultDrops()
 							Vault->ClientStopMiniGame();
 						}
 						if (cfg_EncryptedVaultRewardType == 1)
-							Vault->ServerDropItems(static_cast<TFD_SDK::AController*>(PlayerController));
+							Vault->ServerDropItems(static_cast<TFD_SDK::AController*>(LocalPlayerController));
 						vaultfound = true;
 					}
 					if (vaultfound)
@@ -1316,7 +1326,7 @@ HRESULT UpdateControllerState()
 
 void Aimbot()
 {
-	if (!PlayerController || !PlayerController->PlayerCameraManager || !GWorld)
+	if (!LocalPlayerController || !LocalPlayerController->PlayerCameraManager || !GWorld)
 		return;
 	static int currentTargetID;
 
@@ -1326,7 +1336,7 @@ void Aimbot()
 		{
 			currentTargetID = 0;
 			Aimbot_BoneIndex = -1;
-			Aimbot_Target = nullptr;
+			//Aimbot_Target = nullptr;
 			return;
 		}
 		if (cfg_AimbotController)
@@ -1346,7 +1356,7 @@ void Aimbot()
 			{
 				currentTargetID = 0;
 				Aimbot_BoneIndex = -1;
-				Aimbot_Target = nullptr;
+				//Aimbot_Target = nullptr;
 				return;
 			}
 		}
@@ -1355,7 +1365,7 @@ void Aimbot()
 	{
 		currentTargetID = 0;
 		Aimbot_BoneIndex = -1;
-		Aimbot_Target = nullptr;
+		//Aimbot_Target = nullptr;
 		return;
 	}
 
@@ -1366,7 +1376,7 @@ void Aimbot()
 			TFD_SDK::AM1Character* AimTarget = static_cast<TFD_SDK::AM1Character*>(Aimbot_Target);
 			if (AimTarget)
 			{
-				if (!AimTarget->IsDead() && PlayerController->LineOfSightTo(AimTarget, TFD_SDK::FVector{ 0, 0, 0 }, false))
+				if (!AimTarget->IsDead() && LocalPlayerController->LineOfSightTo(AimTarget, TFD_SDK::FVector{ 0, 0, 0 }, false))
 				{
 					if (AimTarget->Mesh && AimTarget->Mesh->BoneArray.IsValid() && AimTarget->Mesh->BoneArray.IsValidIndex(Aimbot_BoneIndex))
 					{
@@ -1375,9 +1385,9 @@ void Aimbot()
 						TFD_SDK::FMatrix BoneMatrix = TFD_SDK::UKismetMathLibrary::Conv_TransformToMatrix(bone);
 						TFD_SDK::FMatrix WorldMatrix = TFD_SDK::UKismetMathLibrary::Multiply_MatrixMatrix(BoneMatrix, ComponentMatrix);
 						TFD_SDK::FTransform WorldPosition = TFD_SDK::UKismetMathLibrary::Conv_MatrixToTransform(WorldMatrix);
-						TFD_SDK::FRotator Angles = TFD_SDK::UKismetMathLibrary::FindLookAtRotation(PlayerController->PlayerCameraManager->GetCameraLocation(), WorldPosition.Translation);
-						PlayerController->SetControlRotation(
-							TFD_SDK::UKismetMathLibrary::RInterpTo(PlayerController->PlayerCameraManager->GetCameraRotation(), Angles, ((TFD_SDK::UGameplayStatics*)TFD_SDK::UGameplayStatics::StaticClass())->GetWorldDeltaSeconds(GWorld), cfg_AimbotSmoothing));
+						TFD_SDK::FRotator Angles = TFD_SDK::UKismetMathLibrary::FindLookAtRotation(LocalPlayerController->PlayerCameraManager->GetCameraLocation(), WorldPosition.Translation);
+						LocalPlayerController->SetControlRotation(
+							TFD_SDK::UKismetMathLibrary::RInterpTo(LocalPlayerController->PlayerCameraManager->GetCameraRotation(), Angles, ((TFD_SDK::UGameplayStatics*)TFD_SDK::UGameplayStatics::StaticClass())->GetWorldDeltaSeconds(GWorld), cfg_AimbotSmoothing));
 						return;
 					}
 
@@ -1388,9 +1398,9 @@ void Aimbot()
 		else if (Aimbot_Target->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
 		{
 
-			TFD_SDK::FRotator Angles = TFD_SDK::UKismetMathLibrary::FindLookAtRotation(PlayerController->PlayerCameraManager->GetCameraLocation(), Aimbot_Target->K2_GetActorLocation());
-			PlayerController->SetControlRotation(
-				TFD_SDK::UKismetMathLibrary::RInterpTo(PlayerController->PlayerCameraManager->GetCameraRotation(), Angles, ((TFD_SDK::UGameplayStatics*)TFD_SDK::UGameplayStatics::StaticClass())->GetWorldDeltaSeconds(GWorld), cfg_AimbotSmoothing));
+			TFD_SDK::FRotator Angles = TFD_SDK::UKismetMathLibrary::FindLookAtRotation(LocalPlayerController->PlayerCameraManager->GetCameraLocation(), Aimbot_Target->K2_GetActorLocation());
+			LocalPlayerController->SetControlRotation(
+				TFD_SDK::UKismetMathLibrary::RInterpTo(LocalPlayerController->PlayerCameraManager->GetCameraRotation(), Angles, ((TFD_SDK::UGameplayStatics*)TFD_SDK::UGameplayStatics::StaticClass())->GetWorldDeltaSeconds(GWorld), cfg_AimbotSmoothing));
 			// This draws the class name of the aimbot target
 			//ZeroGUI::TextCenter((char*)Aimbot_Target->Class->Super->GetFullName().c_str(), TFD_SDK::FVector2D{ 200, 200 }, TFD_SDK::FLinearColor{ 0.0f, 0.0f, 1.0f, 1.0f }, false);
 			return;
@@ -1411,18 +1421,18 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 	Aimbot_BoneIndex = -1;
 
 
-	if (Actors && PlayerController)
+	if (LocalPlayerController->ActorManager_Subsystem && LocalPlayerController)
 	{
-		if (Actors->Characters.IsValid() && Actors->Characters.Num() > 0)
+		if (LocalPlayerController->ActorManager_Subsystem->Characters.IsValid() && LocalPlayerController->ActorManager_Subsystem->Characters.Num() > 0)
 		{
-			int StartNumber = Actors->Characters.Num();
-			for (int i = 0; i < Actors->Characters.Num(); i++)
+			int StartNumber = LocalPlayerController->ActorManager_Subsystem->Characters.Num();
+			for (int i = 0; i < LocalPlayerController->ActorManager_Subsystem->Characters.Num(); i++)
 			{
-				if (Actors->Characters.Num() != StartNumber)
+				if (LocalPlayerController->ActorManager_Subsystem->Characters.Num() != StartNumber)
 					return nullptr;
-				if (!Actors->Characters.IsValidIndex(i))
+				if (!LocalPlayerController->ActorManager_Subsystem->Characters.IsValidIndex(i))
 					continue;
-				TFD_SDK::AM1Character* p = Actors->Characters[i];
+				TFD_SDK::AM1Character* p = LocalPlayerController->ActorManager_Subsystem->Characters[i];
 				if (p)
 				{
 					if (p->IsDead())
@@ -1432,7 +1442,7 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 					//	continue;
 					if (p->IsA(TFD_SDK::AM1Monster::StaticClass()) || (p->CharacterAttribute && p->CharacterAttribute->IsA(TFD_SDK::UM1MonsterAttribute::StaticClass())))
 					{
-						if (!PlayerController->LineOfSightTo(p, TFD_SDK::FVector{ 0, 0, 0 }, false))
+						if (!LocalPlayerController->LineOfSightTo(p, TFD_SDK::FVector{ 0, 0, 0 }, false))
 						{
 							if (p->Children.Num() > 0)
 							{
@@ -1441,7 +1451,7 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 								{
 									if (p->Children[c]->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
 										if (p->Children[c]->Class->GetFullName().contains("Immunity") || p->Children[c]->Class->GetFullName().contains("JudgementEye"))
-											if (PlayerController->LineOfSightTo(p->Children[c], TFD_SDK::FVector{ 0, 0, 0 }, false))
+											if (LocalPlayerController->LineOfSightTo(p->Children[c], TFD_SDK::FVector{ 0, 0, 0 }, false))
 												any = true;
 								}
 								if (!any)
@@ -2193,20 +2203,20 @@ DWORD WINAPI Init(HMODULE Module)
 		TFD_SDK::UWorld* world = TFD_SDK::UWorld::GetWorld();
 		if (world && world->IsA(TFD_SDK::UWorld::StaticClass()))
 		{
-			if (!GWorld)
+			/*if (!GWorld)
 			{
 				GWorld = world;
 				uintptr_t GWorldOffset = (uintptr_t)world - GameModule.dwBase;
 				TFD_SDK::Offsets::GWorld = GWorldOffset;
-			}
-			TFD_SDK::ULocalPlayer* LocalPl = (TFD_SDK::ULocalPlayer*)((TFD_SDK::UGameplayStatics*)TFD_SDK::UGameplayStatics::StaticClass())->GetPlayerController(GWorld, 0)->Player;
+			}*/
+			TFD_SDK::ULocalPlayer* LocalPl = (TFD_SDK::ULocalPlayer*)((TFD_SDK::UGameplayStatics*)TFD_SDK::UGameplayStatics::StaticClass())->GetPlayerController(world, 0)->Player;
 			if (LocalPl && LocalPl->ViewportClient)
 			{
-				if (!LocalPlayer)
+	/*			if (!LocalPlayer)
 				{
 					LocalPlayer = LocalPl;
-				}
-				TFD_SDK::UGameViewportClient* ViewportClient = LocalPlayer->ViewportClient;
+				}*/
+				TFD_SDK::UGameViewportClient* ViewportClient = LocalPl->ViewportClient;
 				if (ViewportClient)
 				{
 					if (!LocalView)

@@ -86,14 +86,14 @@ bool CheckPointers();
 std::vector<std::string> Presets;
 TFD_SDK::UWorld* GWorld;
 TFD_SDK::UEngine* GEngine;
-TFD_SDK::ULocalPlayer* LocalPlayer;
-TFD_SDK::AM1PlayerController* PlayerController;
+//TFD_SDK::ULocalPlayer* LocalPlayer;
+TFD_SDK::AM1PlayerController* LocalPlayerController;
 bool inGame = false;
 TFD_SDK::AM1PlayerControllerInGame* PlayerIngameController;
-TFD_SDK::AM1Player* LocalCharacter;
+TFD_SDK::AM1Player* LocalPlayerCharacter;
 TFD_SDK::UGameViewportClient* LocalView;
-TFD_SDK::UM1ActorManagerSubsystem* Actors;
-TFD_SDK::APlayerState* PlayerState;
+//TFD_SDK::UM1ActorManagerSubsystem* Actors;
+TFD_SDK::AM1PlayerState* PlayerState;
 bool isGUIInit = false;
 void LoadCFG();
 void SaveCFG();
@@ -101,7 +101,8 @@ CSimpleIniA ini;
 float lastScreenSize = 0;
 bool updateMiddle = true;
 TFD_SDK::FVector2D ScreenMiddle = { 0, 0 };
-
+TFD_SDK::UCanvas* myCanvas;
+TFD_SDK::UM1WeaponSlotControlComponent* WeaponSlot = nullptr;
 /*
 *  Overlay
 */
