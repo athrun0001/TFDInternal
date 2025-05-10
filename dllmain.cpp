@@ -407,7 +407,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					for (int i = 0; i < 4; i++)
 					{
 						char buffer[100];
-						if (!Presets.empty() && HotSwapPreset[i] != -1 && HotSwapPreset[i] < Presets.size())
+						if (HotSwapPreset[i] != -1 && HotSwapPreset[i] < Presets.size())
 							sprintf_s(buffer, "Preset %d: %s", i + 1, Presets[HotSwapPreset[i]].c_str());
 						else
 							sprintf_s(buffer, "Preset %d: None", i + 1);
