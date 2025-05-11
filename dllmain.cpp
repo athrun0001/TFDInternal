@@ -376,7 +376,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				InstantInfiltration();
 			}
 
-			if (IsKeyPressed(cfg_RestartMissionKey))
+			if (IsKeyPressed(cfg_RestartMissionKey) || isRestartMission)
 			{
 				RestartLastMission();
 			}
@@ -1142,8 +1142,12 @@ void RestartLastMission()
 		return;
 
 	// Restart and Process active missions
-	if (MCC->ActivatedMissions.Num() == 0)
+	if (MCC->ActivatedMissions.Num() == 0 && !isRestartMission)
+	{
 		MCC->ServerStartMissionByTemplateID(TemplateId);
+		isRestartMission = true;
+	}
+		
 
 	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
 	{
@@ -1167,6 +1171,7 @@ void RestartLastMission()
 			if (!TEvent->bHasRun)
 				MCC->ServerRunTaskActor(TaskActor);
 		}
+		isRestartMission = false;
 	}
 }
 
