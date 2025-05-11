@@ -12,6 +12,7 @@
 #include <XInput.h>
 #pragma comment(lib,"xinput.lib")
 //#include "TFD_SDK.h"
+#include <chrono>
 
 
 #define IsKeyPressed(key) GetAsyncKeyState(key) & 1 && GetAsyncKeyState(key) & 0x8000
@@ -82,17 +83,17 @@ uintptr_t FindSignature(int procID, sigmod mod, const char* sig, const char* mas
 */
 
 bool CheckPointers();
-std::vector<std::string> Presets;
+//std::vector<std::string> Presets;
 TFD_SDK::UWorld* GWorld;
 TFD_SDK::UEngine* GEngine;
-TFD_SDK::ULocalPlayer* LocalPlayer;
-TFD_SDK::AM1PlayerController* PlayerController;
+//TFD_SDK::ULocalPlayer* LocalPlayer;
+TFD_SDK::AM1PlayerController* LocalPlayerController;
 bool inGame = false;
 TFD_SDK::AM1PlayerControllerInGame* PlayerIngameController;
-TFD_SDK::AM1Player* LocalCharacter;
+TFD_SDK::AM1Player* LocalPlayerCharacter;
 TFD_SDK::UGameViewportClient* LocalView;
-TFD_SDK::UM1ActorManagerSubsystem* Actors;
-TFD_SDK::APlayerState* PlayerState;
+//TFD_SDK::UM1ActorManagerSubsystem* Actors;
+TFD_SDK::AM1PlayerState* PlayerState;
 bool isGUIInit = false;
 void LoadCFG();
 void SaveCFG();
@@ -100,7 +101,8 @@ CSimpleIniA ini;
 float lastScreenSize = 0;
 bool updateMiddle = true;
 TFD_SDK::FVector2D ScreenMiddle = { 0, 0 };
-
+TFD_SDK::UCanvas* myCanvas;
+TFD_SDK::UM1WeaponSlotControlComponent* WeaponSlot = nullptr;
 /*
 *  Overlay
 */
@@ -164,7 +166,7 @@ void InstantInfiltration();
 void RestartLastMission();
 void LeaveMission();
 void SwitchPreset();
-void RefreshPresetList(bool isrefresh);
+void RefreshPresetList();
 void EncryptedVaultDrops();
 
 /*
@@ -210,14 +212,20 @@ int cfg_TimeScaleKey = VK_F2;
 int cfg_TimeScaleHoldKey = VK_CONTROL;
 int cfg_EncryptedVaultDropsKey = VK_LEFT;
 int cfg_EncryptedVaultRewardType = 0;
+bool ShowHotSwapOverlay = false;
+std::chrono::steady_clock::time_point ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 
 void WriteEnemyNamesData();
 std::unordered_map<int, std::string> ReadEnemyNamesData();
 void WriteEnemyBonesData();
 std::unordered_map<int, std::vector<int>> ReadEnemyBonesData();
+void WritePresetsData();
+std::unordered_map<int, std::string> ReadPresetsData();
 
 std::unordered_map<int, std::vector<int>> IDBoneMap = { };
 bool BonesChanged = false;
+
+std::unordered_map<int, std::string> PresetsMap = { };
 
 std::unordered_map<int, std::string> IDNameMap =
 {

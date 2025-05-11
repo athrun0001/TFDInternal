@@ -3,13 +3,12 @@
 #include "../SDK/Basic.hpp"
 #include "../SDK/CoreUObject_classes.hpp"
 #include "../SDK/CoreUObject_structs.hpp"
-wchar_t* s2wc(const char* c)
+std::unique_ptr<wchar_t[]> s2wc(const char* c)
 {
 	const size_t cSize = strlen(c) + 1;
-	wchar_t* wc = new wchar_t[cSize];
-#pragma warning(suppress : 4996)
-	mbstowcs(wc, c, cSize);
-
+	std::unique_ptr<wchar_t[]> wc(new wchar_t[cSize]);
+	size_t convertedChars = 0;
+	mbstowcs_s(&convertedChars, wc.get(), cSize, c, _TRUNCATE);
 	return wc;
 }
 
@@ -125,7 +124,7 @@ namespace ZeroGUI
 
 	TFD_SDK::UCanvas* canvas;
 	TFD_SDK::UEngine* engine;
-	TFD_SDK::APlayerController* controller;
+	TFD_SDK::AM1PlayerController* controller;
 	TFD_SDK::UFont* CurrentFont;
 
 
@@ -160,7 +159,7 @@ namespace ZeroGUI
 		engine = _engine;
 	}
 
-	void SetController(TFD_SDK::APlayerController* cont)
+	void SetController(TFD_SDK::AM1PlayerController* cont)
 	{
 		controller = cont;
 	}
@@ -240,16 +239,16 @@ namespace ZeroGUI
 	void TextLeft(char* name, FVector2D pos, FLinearColor color, bool outline)
 	{
 		int length = strlen(name) + 1;
-		wchar_t* wcName = s2wc(name);
-		canvas->K2_DrawText(CurrentFont, FString{ wcName }, pos, FVector2D{ 0.97f, 0.97f }, color, false, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, false, true, true, Colors::Text_Outline);
-		delete[] wcName; // Free the allocated memory
+		std::unique_ptr<wchar_t[]> wcName = s2wc(name);
+		canvas->K2_DrawText(CurrentFont, FString(wcName.get()), pos, FVector2D{ 0.97f, 0.97f }, color, 0.0f, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, false, true, true, Colors::Text_Outline);
+		//delete[] wcName; // Free the allocated memory
 	}
 	void TextCenter(char* name, FVector2D pos, FLinearColor color, bool outline)
 	{
 		int length = strlen(name) + 1;
-		wchar_t* wcName = s2wc(name);
-		canvas->K2_DrawText(CurrentFont, FString{ wcName }, pos, FVector2D{ 0.97f, 0.97f }, color, false, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, true, true, true, Colors::Text_Outline);
-		delete[] wcName; // Free the allocated memory
+		std::unique_ptr<wchar_t[]> wcName = s2wc(name);
+		canvas->K2_DrawText(CurrentFont, FString(wcName.get()), pos, FVector2D{ 0.97f, 0.97f }, color, 0.0f, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, true, true, true, Colors::Text_Outline);
+		//delete[] wcName; // Free the allocated memory
 	}
 
 	void GetColor(FLinearColor* color, float* r, float* g, float* b, float* a)
@@ -883,7 +882,7 @@ namespace ZeroGUI
 		}
 	}
 
-	void Combobox1(char* name, FVector2D size, int* value, const std::vector<const char*>& items)
+	void Combobox1(char* name, FVector2D size, int* value, const std::unordered_map<int, std::string>& items)
 	{
 		elements_count++;
 
@@ -925,10 +924,10 @@ namespace ZeroGUI
 		TextLeft(name, textPos, FLinearColor{ 1, 1, 1, 1 }, false);
 
 		// Display selected item
-		if (*value >= 0 && *value < items.size())
+		if (items.find(*value) != items.end())
 		{
 			FVector2D selectedTextPos = { pos.X + size.X / 2.0f, pos.Y + size.Y / 2.0f };
-			TextCenter((char*)items[*value], selectedTextPos, FLinearColor{ 1, 1, 1, 1 }, false);
+			TextCenter((char*)items.at(*value).c_str(), selectedTextPos, FLinearColor{ 1, 1, 1, 1 }, false);
 		}
 
 		FVector2D element_pos = pos;
@@ -936,7 +935,7 @@ namespace ZeroGUI
 
 		if (checkbox_enabled[elements_count])
 		{
-			for (int num = 0; num < items.size(); ++num)
+			for (const auto& [key, item] : items)
 			{
 				element_pos.Y += 25.0f;
 				isHovered2 = MouseInZone(element_pos, FVector2D{ size.X, 25.0f });
@@ -948,7 +947,7 @@ namespace ZeroGUI
 
 					if (mouseDown)
 					{
-						*value = num;
+						*value = key;
 						checkbox_enabled[elements_count] = false;
 					}
 				}
@@ -957,7 +956,7 @@ namespace ZeroGUI
 					PostRenderer::drawFilledRect(element_pos, size.X, 25.0f, Colors::Combobox_Idle);
 				}
 
-				PostRenderer::TextLeft((char*)items[num], FVector2D{ element_pos.X + 5.0f, element_pos.Y + 15.0f }, FLinearColor{ 1, 1, 1, 1 }, false);
+				PostRenderer::TextLeft((char*)item.c_str(), FVector2D{ element_pos.X + 5.0f, element_pos.Y + 15.0f }, FLinearColor{ 1, 1, 1, 1 }, false);
 			}
 
 			current_element_size.X = element_pos.X + 5.0f;
