@@ -41,7 +41,6 @@ bool CheckPointers()
 						if (Name != "" && Name != "None")
 						{
 							GWorld = World;
-							ZeroGUI::TextLeft((char*)"World Loaded", TFD_SDK::FVector2D{ 50, 25.0f + (12.0f * 0) }, ColorRed, false);
 							break;
 						}
 					}
@@ -97,7 +96,6 @@ bool CheckPointers()
 											//inGame = false;
 											PlayerIngameController = nullptr;
 										}
-										ZeroGUI::TextLeft((char*)"CheckPointers Loaded", TFD_SDK::FVector2D{ 50, 25.0f + (12.0f * 2) }, ColorRed, false);
 										return true;
 									}
 								}
@@ -1245,7 +1243,6 @@ void RefreshPresetList()
 						PresetsMap.insert({ Value.PresetIndex,  Value.PresetName.ToString() });
 					}
 				}
-				ZeroGUI::TextLeft((char*)"Presets Loaded", TFD_SDK::FVector2D{ 50, 25.0f + (12.0f * 4) }, ColorRed, false);
 				break;
 			}
 		}
