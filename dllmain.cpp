@@ -396,30 +396,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				EncryptedVaultDrops();
 			}
 
-			if (cfg_HotSwapOverlay)
-			{
-				if (ShowHotSwapOverlay)
-				{
-					if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - ShowHotSwapOverlayStartTime).count() > 3)
-						ShowHotSwapOverlay = false;
-				}
-				if (ShowHotSwapOverlay && !PresetsMap.empty())
-				{
-					for (int i = 0; i < 4; i++)
-					{
-						char buffer[100];
-						if (HotSwapPreset[i] != -1)
-							sprintf_s(buffer, "Preset %d: %s", i + 1, PresetsMap[HotSwapPreset[i]].c_str());
-						else
-							sprintf_s(buffer, "Preset %d: None", i + 1);
-
-						if (i == HotSwapIndex)
-							ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
-						else
-							ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
-					}
-				}
-			}
+			
 			// This code is for testing controller input detection
 			/*char sz[4][1024];
 			for (DWORD i = 0; i < 4; i++)
@@ -504,6 +481,31 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					LocalCharacter->RequestTeleportAtSequence(Pos, Rotation);
 				}
 			}*/
+
+			if (cfg_HotSwapOverlay)
+			{
+				if (ShowHotSwapOverlay)
+				{
+					if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - ShowHotSwapOverlayStartTime).count() > 3)
+						ShowHotSwapOverlay = false;
+				}
+				if (ShowHotSwapOverlay && !PresetsMap.empty())
+				{
+					for (int i = 0; i < 4; i++)
+					{
+						char buffer[100];
+						if (HotSwapPreset[i] != -1)
+							sprintf_s(buffer, "Preset %d: %s", i + 1, PresetsMap[HotSwapPreset[i]].c_str());
+						else
+							sprintf_s(buffer, "Preset %d: None", i + 1);
+
+						if (i == HotSwapIndex)
+							ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
+						else
+							ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
+					}
+				}
+			}
 
 			if (cfg_DrawMenu)
 			{
