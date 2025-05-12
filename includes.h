@@ -214,7 +214,6 @@ int cfg_EncryptedVaultDropsKey = VK_LEFT;
 int cfg_EncryptedVaultRewardType = 0;
 bool ShowHotSwapOverlay = false;
 std::chrono::steady_clock::time_point ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
-bool isRestartMission = false;
 
 void WriteEnemyNamesData();
 std::unordered_map<int, std::string> ReadEnemyNamesData();

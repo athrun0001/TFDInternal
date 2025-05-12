@@ -379,7 +379,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				InstantInfiltration();
 			}
 
-			if (IsKeyPressed(cfg_RestartMissionKey) || isRestartMission)
+			if (IsKeyPressed(cfg_RestartMissionKey))
 			{
 				RestartLastMission();
 			}
@@ -1150,36 +1150,38 @@ void RestartLastMission()
 		return;
 
 	// Restart and Process active missions
-	if (MCC->ActivatedMissions.Num() == 0 && !isRestartMission)
-	{
+	if (MCC->ActivatedMissions.Num() == 0)
 		MCC->ServerStartMissionByTemplateID(TemplateId);
-		isRestartMission = true;
-	}
 		
-
 	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
 	{
 		if (!MissionActor)
 			continue;
 		if (MissionActor->TaskLinks.Num() == 0)
 			continue;
-		TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
-		if (!TaskActor)
-			continue;
-		TFD_SDK::UM1MissionTask* MissionData = TaskActor->MissionTask;
-		if (!MissionData)
-			continue;
-		if (MissionData->BeginEvents.Num() == 0)
-			continue;
-
-		for (TFD_SDK::UM1TaskEvent* TEvent : MissionData->BeginEvents)
+		
+		for (TFD_SDK::FM1MissionTaskLink TaskLink : MissionActor->TaskLinks)
 		{
-			if (!TEvent)
+			if (TaskLink.TaskName.ToString().contains("Move"))
+				MCC->ServerRunTaskActor(TaskLink.InstancedTaskActor);
+			/*TFD_SDK::AM1MissionTaskActor* TaskActor = TaskLink.InstancedTaskActor;
+			if (!TaskActor)
+				continue;*/
+				
+			/*TFD_SDK::UM1MissionTask* MissionData = TaskActor->MissionTask;
+			if (!MissionData)
 				continue;
-			if (!TEvent->bHasRun)
-				MCC->ServerRunTaskActor(TaskActor);
+			if (MissionData->BeginEvents.Num() == 0)
+				continue;
+
+			for (TFD_SDK::UM1TaskEvent* TEvent : MissionData->BeginEvents)
+			{
+				if (!TEvent)
+					continue;
+				if (!TEvent->bHasRun)
+						
+			}*/
 		}
-		isRestartMission = false;
 	}
 }
 
