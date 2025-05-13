@@ -199,6 +199,7 @@ bool cfg_CacheEnemyNames = false;
 bool cfg_CacheEnemyBones = false;
 void InstantReload();
 bool cfg_HotSwapOverlay = false;
+bool cfg_EnableAutoRestartMission = false;
 int HotSwapIndex = 0;
 //std::vector<int> HotSwapCharacters = { 0, 0, 0, 0 };
 std::vector<int> HotSwapPreset = { -1, -1, -1, -1 };
@@ -213,6 +214,7 @@ int cfg_TimeScaleHoldKey = VK_CONTROL;
 int cfg_EncryptedVaultDropsKey = VK_LEFT;
 int cfg_EncryptedVaultRewardType = 0;
 bool ShowHotSwapOverlay = false;
+bool isRestartMission = false;
 std::chrono::steady_clock::time_point ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 
 void WriteEnemyNamesData();

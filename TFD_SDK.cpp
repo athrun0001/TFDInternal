@@ -800,4 +800,23 @@ namespace TFD_SDK
 
 		return Parms.ReturnValue;
 	}
+
+	struct FRotator AActor::K2_GetActorRotation() const
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("Actor", "K2_GetActorRotation");
+
+		Actor_K2_GetActorRotation Parms{};
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+
+		return Parms.ReturnValue;
+	}
 }

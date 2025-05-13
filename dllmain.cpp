@@ -379,14 +379,15 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				InstantInfiltration();
 			}
 
-			if (IsKeyPressed(cfg_RestartMissionKey))
-			{
-				RestartLastMission();
-			}
-
 			if (IsKeyPressed(cfg_LeaveMissionKey))
 			{
 				LeaveMission();
+				cfg_EnableAutoRestartMission = false;
+			}
+
+			if (IsKeyPressed(cfg_RestartMissionKey) || isRestartMission || cfg_EnableAutoRestartMission)
+			{
+				RestartLastMission();
 			}
 
 			if (IsKeyPressed(cfg_SwitchPreset))
@@ -1099,10 +1100,10 @@ void InstantInfiltration()
 	{
 		if (!MissionActor)
 			continue;
-		if (MissionActor->TaskLinks.Num() == 0)
+		if (!MissionActor->ProgressInfo.ActivatedTaskActor)
 			continue;
 
-		TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
+		TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->ProgressInfo.ActivatedTaskActor;
 		if (!TaskActor)
 			continue;
 
@@ -1136,52 +1137,44 @@ void InstantInfiltration()
 void RestartLastMission()
 {
 	if (!PlayerState || !PlayerState->MissionControlComponent)
+	{
+		isRestartMission = false;
 		return;
+	};
 
 	TFD_SDK::UM1MissionControlComponent* MCC = PlayerState->MissionControlComponent;
 	if (!MCC || !MCC->MissionResult)
+	{
+		isRestartMission = false;
 		return;
+	}
 
 	// Get the last mission template ID
 	TFD_SDK::FM1TemplateId TemplateId;
 	if (MCC->MissionResult->MissionTemplateId.ID > 0)
 		TemplateId.ID = MCC->MissionResult->MissionTemplateId.ID;
 	else
+	{
+		isRestartMission = false;
 		return;
-
+	}
+		
 	// Restart and Process active missions
 	if (MCC->ActivatedMissions.Num() == 0)
+	{
 		MCC->ServerStartMissionByTemplateID(TemplateId);
+		isRestartMission = true;
+	}
 		
 	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
 	{
-		if (!MissionActor)
-			continue;
-		if (MissionActor->TaskLinks.Num() == 0)
-			continue;
-		
-		for (TFD_SDK::FM1MissionTaskLink TaskLink : MissionActor->TaskLinks)
-		{
-			if (TaskLink.TaskName.ToString().contains("Move"))
-				MCC->ServerRunTaskActor(TaskLink.InstancedTaskActor);
-			/*TFD_SDK::AM1MissionTaskActor* TaskActor = TaskLink.InstancedTaskActor;
-			if (!TaskActor)
-				continue;*/
-				
-			/*TFD_SDK::UM1MissionTask* MissionData = TaskActor->MissionTask;
-			if (!MissionData)
-				continue;
-			if (MissionData->BeginEvents.Num() == 0)
-				continue;
-
-			for (TFD_SDK::UM1TaskEvent* TEvent : MissionData->BeginEvents)
-			{
-				if (!TEvent)
-					continue;
-				if (!TEvent->bHasRun)
-						
-			}*/
-		}
+		if (MissionActor 
+			&& MissionActor->ProgressInfo.ActivatedTaskActor
+			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask
+			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move"))
+			MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
+		else
+			isRestartMission = false;
 	}
 }
 
@@ -1198,6 +1191,7 @@ void LeaveMission()
 		return;
 
 	MCC->ServerLeaveMission(TFD_SDK::EM1MissionEndReason::ExplicitGiveUp);
+	isRestartMission = false;
 }
 
 void SwitchPreset()
@@ -1720,10 +1714,14 @@ void DrawMenu()
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Instant Outpost Infil Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_InstantInfilKey);
 
-			ZeroGUI::Text((char*)"Restart Last Mission:");
-			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Restart Last Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_RestartMissionKey);
-
+			ZeroGUI::Checkbox((char*)"Auto Restart Mission", &cfg_EnableAutoRestartMission);
+			if (!cfg_EnableAutoRestartMission)
+			{
+				ZeroGUI::Text((char*)"Restart Last Mission:");
+				ZeroGUI::SameLine();
+				ZeroGUI::Hotkey((char*)"Restart Last Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_RestartMissionKey);
+			}
+			
 			ZeroGUI::Text((char*)"Leave Mission:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Leave Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_LeaveMissionKey);
@@ -1828,6 +1826,7 @@ void LoadCFG()
 		cfg_InstantInfilKey = (int)ini.GetDoubleValue("Mission", "InstantInfilKey");
 		cfg_RestartMissionKey = (int)ini.GetDoubleValue("Mission", "RestartMissionKey");
 		cfg_LeaveMissionKey = (int)ini.GetDoubleValue("Mission", "LeaveMissionKey");
+		cfg_EnableAutoRestartMission = ini.GetBoolValue("Mission", "EnableAutoRestartMisson");
 	}
 }
 
@@ -1897,6 +1896,7 @@ void SaveCFG()
 	ini.SetDoubleValue("Mission", "InstantInfilKey", cfg_InstantInfilKey);
 	ini.SetDoubleValue("Mission", "RestartMissionKey", cfg_RestartMissionKey);
 	ini.SetDoubleValue("Mission", "LeaveMissionKey", cfg_LeaveMissionKey);
+	ini.SetBoolValue("Mission", "EnableAutoRestartMisson", cfg_EnableAutoRestartMission);
 
 	ini.SaveFile("cfg.ini");
 }
