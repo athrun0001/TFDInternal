@@ -340,9 +340,11 @@ bool NamesChanged = false;
 std::unordered_map<std::string,bool> MoveMissionTaskExceptionSet =
 {
 	{"Kingston_F_Hard_D2|MoveD2-10a",true},
-	{"TheFortress_F_Hard_D1|MoveD1_Hard_10",true}
+	{"TheFortress_F_Hard_D1|MoveD1_Hard_10",true},
+	{"VoidVessel_Normal_D1|Move04a",true}
 };
 
 std::unordered_map<std::string,bool> MissionTaskExceptionSet =
 {
+	{"VoidVessel_Normal_D1|Extermination02",true}
 };
