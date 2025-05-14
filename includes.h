@@ -81,7 +81,7 @@ uintptr_t FindSignature(int procID, sigmod mod, const char* sig, const char* mas
 /*
 *  Data
 */
-
+bool IsValidUWorld();
 bool CheckPointers();
 //std::vector<std::string> Presets;
 TFD_SDK::UWorld* GWorld;
@@ -92,7 +92,7 @@ bool inGame = false;
 TFD_SDK::AM1PlayerControllerInGame* PlayerIngameController;
 TFD_SDK::AM1Player* LocalPlayerCharacter;
 TFD_SDK::UGameViewportClient* LocalView;
-//TFD_SDK::UM1ActorManagerSubsystem* Actors;
+TFD_SDK::UM1ActorManagerSubsystem* Actors;
 TFD_SDK::AM1PlayerState* PlayerState;
 bool isGUIInit = false;
 void LoadCFG();
@@ -168,6 +168,8 @@ void LeaveMission();
 void SwitchPreset();
 void RefreshPresetList();
 void EncryptedVaultDrops();
+void MissionTaskActortESP();
+void MissionTaskTeleporter();
 
 /*
 *  Aimbot
@@ -200,6 +202,7 @@ bool cfg_CacheEnemyBones = false;
 void InstantReload();
 bool cfg_HotSwapOverlay = false;
 bool cfg_EnableAutoRestartMission = false;
+bool cfg_EnableMissionTaskTeleporter = false;
 int HotSwapIndex = 0;
 //std::vector<int> HotSwapCharacters = { 0, 0, 0, 0 };
 std::vector<int> HotSwapPreset = { -1, -1, -1, -1 };
@@ -215,7 +218,11 @@ int cfg_EncryptedVaultDropsKey = VK_LEFT;
 int cfg_EncryptedVaultRewardType = 0;
 bool ShowHotSwapOverlay = false;
 bool isRestartMission = false;
+
+UC::int32 MissionTaskIndex = 0;
+
 std::chrono::steady_clock::time_point ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
+std::chrono::steady_clock::time_point AutoTeleportStartTime = std::chrono::steady_clock::now();
 
 void WriteEnemyNamesData();
 std::unordered_map<int, std::string> ReadEnemyNamesData();
@@ -329,3 +336,13 @@ std::unordered_map<int, std::string> IDNameMap =
 { 510000302, "KingFisher" }
 };
 bool NamesChanged = false;
+
+std::unordered_map<std::string,bool> MoveMissionTaskExceptionSet =
+{
+	{"Kingston_F_Hard_D2|MoveD2-10a",true},
+	{"TheFortress_F_Hard_D1|MoveD1_Hard_10",true}
+};
+
+std::unordered_map<std::string,bool> MissionTaskExceptionSet =
+{
+};

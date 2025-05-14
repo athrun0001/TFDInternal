@@ -819,4 +819,24 @@ namespace TFD_SDK
 
 		return Parms.ReturnValue;
 	}
+
+	void UM1TeleportHandlerComponent::ServerMoveToTeleportToLocation(const struct FVector& InLocation, const struct FRotator& InRotation)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1TeleportHandlerComponent", "ServerMoveToTeleportToLocation");
+
+		M1TeleportHandlerComponent_ServerMoveToTeleportToLocation Parms{};
+
+		Parms.InLocation = std::move(InLocation);
+		Parms.InRotation = std::move(InRotation);
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
 }

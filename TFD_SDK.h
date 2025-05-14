@@ -680,6 +680,11 @@ namespace TFD_SDK
 		uint8 Pad_ViewportClient[0x30]; // 0x48
 		class UGameViewportClient* ViewportClient; // 0x0078(0x0008)
 		uint8 Pad_ULocalPlayer_Class[0x1F8]; // 0x80
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"LocalPlayer">();
+		}
 	};
 	// 0x0088 (0x02D0 - 0x0248)
 	class AController : public AActor
@@ -1028,7 +1033,10 @@ namespace TFD_SDK
 	class AM1Player : public AM1Character
 	{
 	public:
-		uint8 Pad_WeaponSlot[0x2D8]; // 0x0C60
+
+		uint8 Pad_TeleportHandler[0x2C0]; // 0x0C60
+		class UM1TeleportHandlerComponent* TeleportHandler;  // 0x0F20(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8 Pad_WeaponSlot[0x10]; // 0x0F28
 		class UM1WeaponSlotControlComponent* WeaponSlotControl; // 0x0F38(0x0008) Need this
 		uint8 Pad_PlayerName[0x88]; // 0x0F40
 		class FString PlayerName; // 0x0FC8(0x0010) Need this
@@ -1044,7 +1052,7 @@ namespace TFD_SDK
 		}
 	};
 	// These show as errors but are correct when compiled
-	static_assert(offsetof(AM1Player, Pad_WeaponSlot) == 0xC60, "Bad alignment");
+	static_assert(offsetof(AM1Player, Pad_WeaponSlot) == 0xF28, "Bad alignment");
 	static_assert(offsetof(AM1Player, WeaponSlotControl) == 0xF38, "Bad alignment");
 	static_assert(offsetof(AM1Player, PlayerName) == 0xFC8, "Bad alignment");
 	static_assert(offsetof(AM1Player, bPlayerInputEnabled) == 0x102A, "Bad alignment");
@@ -1076,6 +1084,14 @@ namespace TFD_SDK
 	{
 	public:
 		class AM1Character* Character_Owner;  // 0x00C8(0x0008)
+	};
+	// 0x0130 (0x0200 - 0x00D0)
+	class alignas(0x10) UM1TeleportHandlerComponent final : public UM1CharacterComponent
+	{
+	public:
+		uint8                                         Pad_1C9[0x130];                                     // 0x01C9(0x0037)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	public:
+		void ServerMoveToTeleportToLocation(const struct FVector& InLocation, const struct FRotator& InRotation);
 	};
 	// 0x0158 (0x0228 - 0x00D0)
 	class UM1WeaponSlotControlComponent final : public UM1CharacterComponent
@@ -1556,6 +1572,14 @@ namespace TFD_SDK
 		class FName                                   TaskName;                                          // 0x0098(0x0008)(Edit, ZeroConstructor, EditConst, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_UM1MissionTask[0x230];                         // 0x00A0
 	};
+	// 0x0018 (0x0260 - 0x0248)
+	class AM1MissionTaskMoveWayPoint : public AActor
+	{
+	public:
+		uint8                                         Pad_Index_0[0x10];                                 // 0x0248
+		int32                                         Index_0;                                           // 0x0258(0x0004)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_AM1MissionTaskMoveWayPoint[0x4];               // 0x025C
+	};
 	// 0x0388 (0x07E0 - 0x0458)
 #pragma pack(push, 0x1)
 	class alignas(0x10) AM1MissionTaskActor : public AM1TaskEventActor
@@ -1563,14 +1587,38 @@ namespace TFD_SDK
 	public:
 		uint8                                         Pad_MissionTask[0x108];							 // 0x0458
 		class UM1MissionTask*						  MissionTask;                                       // 0x0560(0x0008)(Edit, ExportObject, ZeroConstructor, DisableEditOnTemplate, EditConst, InstancedReference, NoDestructor, PersistentInstance, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_AM1MissionTaskActor[0x278];				     // 0x0568
+		uint8                                         Pad_WayPoints[0x80];								 // 0x0568
+		TArray<class AM1MissionTaskMoveWayPoint*>     WayPoints;                                         // 0x05E8(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_AM1MissionTaskActor[0x1E8];				     // 0x05F8
 	};
 #pragma pack(pop)
+	// 0x0008 (0x0030 - 0x0028)
+	class UDataAsset : public UObject
+	{
+	public:
+		uint8                                         Pad_UDataAsset[0x8];                               // 0x0028
+	};
+	// 0x0068 (0x0098 - 0x0030)
+	class UMissionGraph : public UDataAsset
+	{
+	public:
+		uint8                                         Pad_UMissionGraph[0x68];                           // 0x0030(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	};
+	// 0x0150 (0x01E8 - 0x0098)
+	class UM1DataMission final : public UMissionGraph
+	{
+	public:
+		uint8                                         Pad_MissionDataRowName[0x20];                       // 0x0098(0x0002)(Fixing Size After Last Property [ Dumper-7 ])
+		class FName                                   MissionDataRowName;                                 // 0x00B8(0x0008)(Edit, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		uint8                                         Pad_UM1DataMission[0x128];                          // 0x00C0(0x0008)(Fixing Size After Last Property [ Dumper-7 ])
+	};
 	// 0x0390 (0x05D8 - 0x0248)
 	class AM1MissionActor : public AActor
 	{
 	public:
-		uint8                                         Pad_ProgressInfo[0x120];						     // 0x0248
+		uint8                                         Pad_MissionData[0x30];						     // 0x0248
+		class UM1DataMission*						  MissionData;                                       // 0x0278(0x0008)(Edit, ZeroConstructor, EditConst, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+		uint8                                         Pad_ProgressInfo[0xE8];						     // 0x0280
 		struct FM1MissionProgressInfo                 ProgressInfo;                                      // 0x0368(0x0060)(Net, Transient, RepNotify, ContainsInstancedReference, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_AM1MissionActor_Class[0x210];                  // 0x03C8
 	};
@@ -1972,5 +2020,13 @@ namespace TFD_SDK
 	{
 	public:
 		struct FRotator                               ReturnValue;                                       // 0x0000(0x000C)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
+	};
+
+	// 0x0018 (0x0018 - 0x0000)
+	struct M1TeleportHandlerComponent_ServerMoveToTeleportToLocation final
+	{
+	public:
+		struct FVector                                InLocation;                                        // 0x0000(0x000C)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		struct FRotator                               InRotation;                                        // 0x000C(0x000C)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
 	};
 }
