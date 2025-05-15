@@ -829,10 +829,12 @@ void ItemESPVacuum()
 		|| !LocalPlayerController->Pawn
 		|| !GWorld)
 		return;
-	float hp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
-	float maxhp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxHp).Value / 10000.0f;
-	float mana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentMp).Value / 10000.0f;
-	float maxmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxMp).Value / 10000.0f;
+	currenthp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
+	maxhp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxHp).Value / 10000.0f;
+	currentmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentMp).Value / 10000.0f;
+	maxmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxMp).Value / 10000.0f;
+	hp_used = false;
+	mp_used = false;
 	if (cfg_DrawItemBoxes || cfg_DrawItemNames || cfg_DrawItemLines || cfg_LootVacuum || cfg_DrawVaults)
 	{
 		/*float hp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
@@ -1130,11 +1132,30 @@ void ItemESPVacuum()
 						if (cfg_LootVacuum)
 						{
 
-							if (hp >= maxhp * 0.7f && Item->IsA(TFD_SDK::ABP_HealthOrbDroppedItem_C::StaticClass()))
-								continue;
-							if (mana >= maxmana * 0.7f && Item->IsA(TFD_SDK::ABP_ManaOrbDroppedItem_C::StaticClass()))
-								continue;
-
+							if (Item->IsA(TFD_SDK::ABP_HealthOrbDroppedItem_C::StaticClass()))
+							{
+								if (currenthp < maxhp * 0.7f)
+								{
+									if (hp_used == true)
+										continue;
+									else
+										hp_used == true;
+								}
+								else
+									continue;
+							}
+							if (Item->IsA(TFD_SDK::ABP_ManaOrbDroppedItem_C::StaticClass()))
+							{
+								if (currentmana < maxmana * 0.7f)
+								{
+									if (mp_used == true)
+										continue;
+									else
+										mp_used == true;
+								}
+								else
+									continue;
+							}
 							TFD_SDK::FVector player = LocalPlayerCharacter->K2_GetActorLocation();
 							float Distance = WorldPosition.GetDistanceTo(player);
 							if (Distance > 150 && Distance < cfg_LootVacuumRange)
