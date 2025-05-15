@@ -981,6 +981,7 @@ namespace TFD_SDK
 		uint8 PadHeartbeat[0x208]; // 0x0910
 		class UM1HeartbeatTesterComponent* HeartbeatTesterComponent; // 0x0B18(0x0008)
 		uint8 Pad_AM1PlayerControllerInGame_Class[0x298];// 0x0B20
+		void ServerRequestFieldObjectDropItems(class AM1FieldInteractableActor* InActor);
 
 	public:
 		static class UClass* StaticClass()
@@ -1265,6 +1266,9 @@ namespace TFD_SDK
 	{
 	public:
 		uint8 Pad_AM1FieldIntActor_Class[0x108]; // 0x0330
+	public:
+		static UClass* StaticClass() { return StaticClassImpl<"M1FieldInteractableActor">(); }
+		static AM1FieldInteractableActor* GetDefaultObj() { return GetDefaultObjImpl<AM1FieldInteractableActor>(); }
 	};
 	// 0x0018 (0x0450 - 0x0438)
 	class AM1FieldInteractableActor_Interaction : public AM1FieldInteractableActor
@@ -2055,5 +2059,10 @@ namespace TFD_SDK
 	public:
 		struct FVector                                InLocation;                                        // 0x0000(0x000C)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		struct FRotator                               InRotation;                                        // 0x000C(0x000C)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
+	};
+	struct M1PlayerControllerInGame_ServerRequestFieldObjectDropItems final
+	{
+	public:
+		class  AM1FieldInteractableActor* InActor;
 	};
 }

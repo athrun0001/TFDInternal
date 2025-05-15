@@ -565,6 +565,11 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					MissionTaskTeleporter();
 			}
 
+			if (IsKeyPressed(cfg_ContainerDropKey))
+			{
+				ContainerDrop();
+			}
+
 			//MissionTaskActortESP();
 			
 			if (cfg_DrawMenu)
@@ -1537,6 +1542,53 @@ void EncryptedVaultDrops()
 	}
 }
 
+void ContainerDrop()
+{
+	if (!GWorld || !GWorld->Levels.IsValid() || !PlayerIngameController || !LocalPlayerCharacter)
+		return;
+
+	for (int i = 0; i < GWorld->Levels.Num(); ++i)
+	{
+		if (!GWorld->Levels.IsValidIndex(i))
+			continue;
+
+		TFD_SDK::ULevel* Level = GWorld->Levels[i];
+		if (!Level)
+			continue;
+
+		for (int j = 0; j < Level->Actors.Num(); ++j)
+		{
+			TFD_SDK::AActor* Actor = (TFD_SDK::AActor*)Level->Actors[j];
+			if (!Actor || !Actor->IsA(TFD_SDK::AM1FieldInteractableActor::StaticClass()))
+				continue;
+
+			TFD_SDK::AM1FieldInteractableActor* Interactable = static_cast<TFD_SDK::AM1FieldInteractableActor*>(Actor);
+			if (!Interactable)
+				continue;
+			{
+				TFD_SDK::FVector WorldPosition = Interactable->K2_GetActorLocation();
+				TFD_SDK::FVector PlayerPosition = LocalPlayerCharacter->K2_GetActorLocation();
+				float Distance = WorldPosition.GetDistanceTo(PlayerPosition);
+				if (Distance <= cfg_ContainersRange)
+				{
+					if (cfg_ChangeDropCount = false)
+					{
+						PlayerIngameController->ServerRequestFieldObjectDropItems(Interactable);
+						Sleep(10);
+					}
+					if (cfg_ChangeDropCount = true)
+					{
+						for (int count = 0; count < cfg_DropCount; ++count)
+						{
+							PlayerIngameController->ServerRequestFieldObjectDropItems(Interactable);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 HRESULT UpdateControllerState()
 {
 	DWORD dwResult;
@@ -1803,6 +1855,7 @@ void DrawMenu()
 		if (ZeroGUI::ButtonTab((char*)"Extras", TFD_SDK::FVector2D{ 110, 25 }, tab == 3)) tab = 3;
 		if (ZeroGUI::ButtonTab((char*)"Mission", TFD_SDK::FVector2D{ 110, 25 }, tab == 4)) tab = 4;
 		if (ZeroGUI::ButtonTab((char*)"Preset", TFD_SDK::FVector2D{ 110, 25 }, tab == 5)) tab = 5;
+		if (ZeroGUI::ButtonTab((char*)"Tivmo tuff", TFD_SDK::FVector2D{ 110, 25 }, tab == 6)) tab = 6;
 		ZeroGUI::NextColumn(130.0f);
 
 		if (tab == 0)
@@ -1999,6 +2052,24 @@ void DrawMenu()
 				ZeroGUI::Combobox1((char*)"Select Preset 6", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[5], PresetsMap);
 			}
 		}
+		if (tab == 6)
+		{
+			ZeroGUI::Text((char*)"Drop Hotkey:");
+			ZeroGUI::SameLine();
+			ZeroGUI::Hotkey((char*)"Container Drop Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_ContainerDropKey);
+			ZeroGUI::SliderFloat((char*)"Range", &cfg_ContainersRange, 200.0f, 5000.0f);
+			ZeroGUI::Checkbox((char*)"Specify Drop Calls Made", &cfg_ChangeDropCount);
+			ZeroGUI::SliderInt((char*)"Custom Drop Count", &cfg_DropCount, 0, 250);
+			if (ZeroGUI::Button((char*)"+5", TFD_SDK::FVector2D{ 30, 30 }))
+			{
+				cfg_DropCount += 5;
+			}
+			ZeroGUI::SameLine();
+			if (ZeroGUI::Button((char*)"-5", TFD_SDK::FVector2D{ 30, 30 }))
+			{
+				cfg_DropCount -= 5;
+			}
+		}
 	}
 }
 
@@ -2078,6 +2149,11 @@ void LoadCFG()
 		cfg_EnableAutoInstantInfil = ini.GetBoolValue("Mission", "EnableAutoInstantInfil");
 		cfg_RestartType = ini.GetDoubleValue("Mission", "RestartType");
 		cfg_EnableMissionTaskTeleporter = ini.GetBoolValue("Mission", "EnableMissionTaskTeleporter");
+
+		cfg_ContainerDropKey = (int)ini.GetDoubleValue("TivmoTuff", "ContainerDropKey");
+		cfg_ContainersRange = ini.GetDoubleValue("TivmoTuff", "ContainersRange");
+		cfg_ChangeDropCount = ini.GetBoolValue("TivmoTuff", "ChangeDropCount");
+		cfg_DropCount = (int)ini.GetDoubleValue("TivmoTuff", "DropCount");
 	}
 }
 
@@ -2155,6 +2231,11 @@ void SaveCFG()
 	ini.SetBoolValue("Mission", "EnableAutoInstantInfil", cfg_EnableAutoInstantInfil);
 	ini.SetDoubleValue("Mission", "RestartType", cfg_RestartType);
 	ini.SetBoolValue("Mission", "EnableMissionTaskTeleporter", cfg_EnableMissionTaskTeleporter);
+
+	ini.SetDoubleValue("TivmoTuff", "ContainerDropKey", cfg_ContainerDropKey);
+	ini.SetDoubleValue("TivmoTuff", "ContainersRange", cfg_ContainersRange);
+	ini.SetBoolValue("TivmoTuff", "ChangeDropCount", cfg_ChangeDropCount);
+	ini.SetDoubleValue("TivmoTuff", "DropCount", cfg_DropCount);
 
 	ini.SaveFile("cfg.ini");
 }
