@@ -161,6 +161,8 @@ bool cfg_DrawVoidVesselBox = false;
 bool cfg_LootVacuum = false;
 float cfg_LootVacuumRange = 1000.0f;
 int cfg_LootVacuumKey = 0x54;
+float cfg_HPThreshold = 50.0f;
+float cfg_MPThreshold = 50.0f;
 
 void InstantInfiltration();
 void RestartLastMission();
@@ -206,7 +208,7 @@ bool cfg_EnableAutoInstantInfil = false;
 bool cfg_EnableMissionTaskTeleporter = false;
 int HotSwapIndex = 0;
 //std::vector<int> HotSwapCharacters = { 0, 0, 0, 0 };
-std::vector<int> HotSwapPreset = { -1, -1, -1, -1 };
+std::vector<int> HotSwapPreset = { -1, -1, -1, -1, -1, -1 };
 int cfg_HotSwapKey = VK_TAB;
 int cfg_InstantInfilKey = VK_HOME;
 int cfg_RestartMissionKey = VK_END;
@@ -220,6 +222,7 @@ int cfg_EncryptedVaultRewardType = 0;
 bool ShowHotSwapOverlay = false;
 bool isRestartMission = false;
 int cfg_RestartType = 0;
+
 
 UC::int32 MissionTaskIndex = 0;
 

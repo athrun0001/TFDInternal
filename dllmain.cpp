@@ -401,7 +401,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			{
 				ShowHotSwapOverlay = true;
 				ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
-				if (HotSwapIndex == 3)
+				if (HotSwapIndex == 5)
 					HotSwapIndex = 0;
 				else
 					HotSwapIndex += 1;
@@ -411,7 +411,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				ShowHotSwapOverlay = true;
 				ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 				if (HotSwapIndex == 0)
-					HotSwapIndex = 3;
+					HotSwapIndex = 5;
 				else
 					HotSwapIndex -= 1;
 			}
@@ -542,7 +542,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				{
 					if (!PresetsMap.empty())
 					{
-						for (int i = 0; i < 4; i++)
+						for (int i = 0; i < 6; i++)
 						{
 							char buffer[100];
 							if (HotSwapPreset[i] != -1)
@@ -1134,7 +1134,7 @@ void ItemESPVacuum()
 
 							if (Item->IsA(TFD_SDK::ABP_HealthOrbDroppedItem_C::StaticClass()))
 							{
-								if (currenthp < maxhp * 0.7f)
+								if (currenthp < (maxhp * (cfg_HPThreshold / 100.0f)))
 								{
 									if (hp_used == true)
 										continue;
@@ -1146,7 +1146,7 @@ void ItemESPVacuum()
 							}
 							if (Item->IsA(TFD_SDK::ABP_ManaOrbDroppedItem_C::StaticClass()))
 							{
-								if (currentmana < maxmana * 0.7f)
+								if (currentmana < (maxmana * (cfg_MPThreshold / 100.0f)))
 								{
 									if (mp_used == true)
 										continue;
@@ -1451,7 +1451,7 @@ void SwitchPreset()
 
 void RefreshPresetList()
 {
-	HotSwapPreset = { -1, -1, -1, -1 };
+	HotSwapPreset = { -1, -1, -1, -1, -1, -1 };
 	PresetsMap.clear();
 
 	for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
@@ -1793,7 +1793,7 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 
 void DrawMenu()
 {
-	if (ZeroGUI::Window((char*)"DescendantInternal - UnknownCheats.me", &cfg_WindowPos, TFD_SDK::FVector2D{ 500.0f, 600.0f }, cfg_DrawMenu))
+	if (ZeroGUI::Window((char*)"DescendantInternal - UnknownCheats.me", &cfg_WindowPos, TFD_SDK::FVector2D{ 500.0f, 650.0f }, cfg_DrawMenu))
 	{
 
 		static int tab = 0;
@@ -1823,6 +1823,8 @@ void DrawMenu()
 			ZeroGUI::Checkbox((char*)"Draw Item Lines", &cfg_DrawItemLines);
 			ZeroGUI::Checkbox((char*)"Enable Loot Vacuum", &cfg_LootVacuum);
 			ZeroGUI::SliderFloat((char*)"Loot Vacuum Range", &cfg_LootVacuumRange, 151.0f, 200000.0f);
+			ZeroGUI::SliderFloat((char*)"Vacuum HP Loot when Current HP below %", &cfg_HPThreshold, 0.0f, 100.0f);
+			ZeroGUI::SliderFloat((char*)"Vacuum MP Loot when Current MP below %", &cfg_MPThreshold, 0.0f, 100.0f);
 			ZeroGUI::Text((char*)"Loot Vacuum Toggle:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Loot Vacuum Hotkey", TFD_SDK::FVector2D{ 110, 25 }, &cfg_LootVacuumKey);
@@ -1993,6 +1995,8 @@ void DrawMenu()
 				ZeroGUI::Combobox1((char*)"Select Preset 2", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[1], PresetsMap);
 				ZeroGUI::Combobox1((char*)"Select Preset 3", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[2], PresetsMap);
 				ZeroGUI::Combobox1((char*)"Select Preset 4", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[3], PresetsMap);
+				ZeroGUI::Combobox1((char*)"Select Preset 5", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[4], PresetsMap);
+				ZeroGUI::Combobox1((char*)"Select Preset 6", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[5], PresetsMap);
 			}
 		}
 	}
@@ -2022,6 +2026,8 @@ void LoadCFG()
 		cfg_DrawItemLines = ini.GetBoolValue("ESP", "EnableItemLines");
 		cfg_LootVacuum = ini.GetBoolValue("Extra", "EnableVacuum");
 		cfg_LootVacuumRange = ini.GetDoubleValue("Extra", "VacuumRange");
+		cfg_HPThreshold = ini.GetDoubleValue("ESP", "HPThreshold");
+		cfg_MPThreshold = ini.GetDoubleValue("ESP", "MPThreshold");
 		cfg_LootVacuumKey = (int)ini.GetDoubleValue("Extra", "VacuumKey");
 		cfg_DrawVaults = ini.GetBoolValue("ESP", "EnableCodedVaults");
 		cfg_DrawMunition = ini.GetBoolValue("ESP", "EnableMunition");
@@ -2058,6 +2064,8 @@ void LoadCFG()
 		HotSwapPreset[1] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset2", 0);
 		HotSwapPreset[2] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset3", 0);
 		HotSwapPreset[3] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset4", 0);
+		HotSwapPreset[4] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset5", 0);
+		HotSwapPreset[5] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset6", 0);
 
 		cfg_TimeScale = ini.GetDoubleValue("Extra", "Timescale");
 		cfg_TimeScaleKey = (int)ini.GetDoubleValue("Extra", "TimescaleKey");
@@ -2095,6 +2103,8 @@ void SaveCFG()
 	ini.SetBoolValue("ESP", "EnableVoidVesselBoxes", cfg_DrawVoidVesselBox);
 	ini.SetDoubleValue("ESP", "EncryptedVaultDropsKey", cfg_EncryptedVaultDropsKey);
 	ini.SetDoubleValue("ESP", "EncryptedVaultRewardType", cfg_EncryptedVaultRewardType);
+	ini.SetDoubleValue("ESP", "HPThreshold", cfg_HPThreshold);
+	ini.SetDoubleValue("ESP", "MPThreshold", cfg_MPThreshold);
 
 	ini.SetBoolValue("Aimbot", "EnableAimbotHold", cfg_EnableAimbotHold);
 	ini.SetBoolValue("Aimbot", "EnableAimbotToggle", cfg_EnableAimbotToggle);
@@ -2131,6 +2141,8 @@ void SaveCFG()
 	ini.SetDoubleValue("Preset", "HotSwapPreset2", HotSwapPreset[1]);
 	ini.SetDoubleValue("Preset", "HotSwapPreset3", HotSwapPreset[2]);
 	ini.SetDoubleValue("Preset", "HotSwapPreset4", HotSwapPreset[3]);
+	ini.SetDoubleValue("Preset", "HotSwapPreset5", HotSwapPreset[4]);
+	ini.SetDoubleValue("Preset", "HotSwapPreset6", HotSwapPreset[5]);
 
 	ini.SetDoubleValue("Extra", "Timescale", cfg_TimeScale);
 	ini.SetDoubleValue("Extra", "TimescaleKey", cfg_TimeScaleKey);
