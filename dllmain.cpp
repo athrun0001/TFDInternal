@@ -1822,7 +1822,7 @@ void DrawMenu()
 			ZeroGUI::Checkbox((char*)"Draw Item Names", &cfg_DrawItemNames);
 			ZeroGUI::Checkbox((char*)"Draw Item Lines", &cfg_DrawItemLines);
 			ZeroGUI::Checkbox((char*)"Enable Loot Vacuum", &cfg_LootVacuum);
-			ZeroGUI::SliderFloat((char*)"Loot Vacuum Range", &cfg_LootVacuumRange, 151.0f, 20000.0f);
+			ZeroGUI::SliderFloat((char*)"Loot Vacuum Range", &cfg_LootVacuumRange, 151.0f, 200000.0f);
 			ZeroGUI::Text((char*)"Loot Vacuum Toggle:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Loot Vacuum Hotkey", TFD_SDK::FVector2D{ 110, 25 }, &cfg_LootVacuumKey);
