@@ -7,15 +7,51 @@
 // Uncomment the line below for console window + some debug prints
 //#define IS_DEBUG
 
+bool IsValidUWorld()
+{
+	GWorld = nullptr;
+	for (int i = 0; i < SDK::UObject::GObjects->Num(); i++)
+	{
+		SDK::UObject* Obj = SDK::UObject::GObjects->GetByIndex(i);
 
+		if (!Obj)
+			continue;
+
+		if (Obj->Flags & SDK::EObjectFlags::BeginDestroyed ||
+			Obj->Flags & SDK::EObjectFlags::BeingRegenerated ||
+			Obj->Flags & SDK::EObjectFlags::FinishDestroyed ||
+			Obj->Flags & SDK::EObjectFlags::NeedInitialization ||
+			Obj->Flags & SDK::EObjectFlags::WillBeLoaded)
+			continue;
+
+		if (Obj->Flags & SDK::EObjectFlags::LoadCompleted && Obj->IsA(TFD_SDK::UWorld::StaticClass()) && !Obj->IsDefaultObject())
+		{
+			TFD_SDK::UWorld* World = static_cast<TFD_SDK::UWorld*>(Obj);
+			if (World->OwningGameInstance)
+			{
+				if (World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+				{
+					std::string Name = World->Name.ToString();
+					if (Name != "" && Name != "None")
+					{
+						GWorld = World;
+						return true;
+					}
+				}
+			}
+		}
+	}
+	return false;
+}
 
 bool CheckPointers()
 {
-	if (!GEngine)
+	/*if (!GEngine)
 		GEngine = TFD_SDK::UEngine::GetEngine();
 	if (GEngine)
 	{
-		GWorld = nullptr;
+	}*/
+		/*GWorld = nullptr;
 		for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
 		{
 			TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
@@ -46,59 +82,68 @@ bool CheckPointers()
 					}
 				}
 			}
-		}
-		if (GWorld && isGUIInit)
+		}*/
+	if (IsValidUWorld() && isGUIInit)
+	{
+		std::string Name = GWorld->Name.ToString();
+		if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition")
 		{
-			std::string Name = GWorld->Name.ToString();
-			if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition")
+			if (GWorld->OwningGameInstance->LocalPlayers)
 			{
-				if (GWorld->IsA(TFD_SDK::UWorld::StaticClass()) && !GWorld->IsDefaultObject())
+				if (GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
 				{
-					if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+					if (GWorld->OwningGameInstance->LocalPlayers[0])
 					{
-						if ((int)(static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState) == 10)
+						if (GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController)
 						{
-							if (GWorld->OwningGameInstance->LocalPlayers && GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
+							if (GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass()))
 							{
-								if (GWorld->OwningGameInstance->LocalPlayers[0]
-									&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController
-									&& GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->IsA(TFD_SDK::AM1PlayerController::StaticClass()))
+								TFD_SDK::AM1PlayerController* PC = static_cast<TFD_SDK::AM1PlayerController*>(GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController);
+								ZeroGUI::SetController(PC);
+								LocalPlayerController = PC;
+								/*LocalPlayer = GWorld->OwningGameInstance->LocalPlayers[0];*/
+								if (PC->Character)
 								{
-									TFD_SDK::AM1PlayerController* PC = static_cast<TFD_SDK::AM1PlayerController*>(GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController);
-									if (PC->Character
-										&& PC->Character->IsA(TFD_SDK::AM1Player::StaticClass())
-										&& PC->ActorManager_Subsystem
-										&& PC->ActorManager_Subsystem->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass()))
-									{
-										LocalPlayerController = PC;
-										/*LocalPlayer = GWorld->OwningGameInstance->LocalPlayers[0];*/
+									if (PC->Character->IsA(TFD_SDK::AM1Player::StaticClass()))
 										LocalPlayerCharacter = static_cast<TFD_SDK::AM1Player*>(PC->Character);
-										//Actors = PC->ActorManager_Subsystem;
-										//ZeroGUI::controller = GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController;
-										ZeroGUI::SetController(LocalPlayerController);
-										if (PC->PlayerState
-											&& PC->PlayerState->IsA(TFD_SDK::AM1PlayerState::StaticClass()))
-										{
-											PlayerState = static_cast<TFD_SDK::AM1PlayerState*>(PC->PlayerState);
-										}
-										else
-										{
-											PlayerState = nullptr;
-										}
-
-										if (LocalPlayerController->IsA(TFD_SDK::AM1PlayerControllerInGame::StaticClass()))
-										{
-											PlayerIngameController = static_cast<TFD_SDK::AM1PlayerControllerInGame*>(LocalPlayerController);
-											//inGame = true;
-										}
-										else
-										{
-											//inGame = false;
-											PlayerIngameController = nullptr;
-										}
-										return true;
-									}
+									else
+										LocalPlayerCharacter = nullptr;
 								}
+								else
+									LocalPlayerCharacter = nullptr;
+
+								if (PC->ActorManager_Subsystem)
+								{
+									if (PC->ActorManager_Subsystem->IsA(TFD_SDK::UM1ActorManagerSubsystem::StaticClass()))
+										Actors = PC->ActorManager_Subsystem;
+									else
+										Actors = nullptr;
+								}
+								else
+									Actors = nullptr;
+
+								//Actors = PC->ActorManager_Subsystem;
+								//ZeroGUI::controller = GWorld->OwningGameInstance->LocalPlayers[0]->PlayerController;
+								
+								if (PC->PlayerState
+									&& PC->PlayerState->IsA(TFD_SDK::AM1PlayerState::StaticClass()))
+								{
+									PlayerState = static_cast<TFD_SDK::AM1PlayerState*>(PC->PlayerState);
+								}
+								else
+								{
+									PlayerState = nullptr;
+								}
+
+								if (LocalPlayerController->IsA(TFD_SDK::AM1PlayerControllerInGame::StaticClass()))
+								{
+									PlayerIngameController = static_cast<TFD_SDK::AM1PlayerControllerInGame*>(LocalPlayerController);
+								}
+								else
+								{
+									PlayerIngameController = nullptr;
+								}
+								return true;
 							}
 						}
 					}
@@ -110,8 +155,9 @@ bool CheckPointers()
 	PlayerState = nullptr;
 	//LocalPlayer = nullptr;
 	LocalPlayerCharacter = nullptr;
-	//Actors = nullptr;
+	Actors = nullptr;
 	PlayerIngameController = nullptr;
+	ZeroGUI::SetController(nullptr);
 	inGame = false;
 	return false;
 }
@@ -165,9 +211,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				lastScreenSize = myCanvas->SizeX;
 			}
 			ZeroGUI::CurrentFont = GEngine->SmallFont;
-			//ZeroGUI::canvas = myCanvas;
+			ZeroGUI::canvas = myCanvas;
 			//ZeroGUI::engine = GEngine;
-			ZeroGUI::SetupCanvas(myCanvas, GEngine);
+			//ZeroGUI::SetupCanvas(myCanvas, GEngine);
 
 			if (cfg_CacheEnemyNames)
 			{
@@ -179,8 +225,11 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				IDBoneMap = ReadEnemyBonesData();
 			}
 
-			PresetsMap = ReadPresetsData();
-
+			if (PresetsMap.empty())
+			{
+				PresetsMap = ReadPresetsData();
+			}
+			
 			if (cfg_AimbotNoSpread)
 			{
 				DWORD old;
@@ -205,19 +254,17 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				VirtualProtect(RapidFireAddress, sizeof(uint8_t), old, NULL);
 			}
 
-			
-
 			isGUIInit = true;
 		}
 
 		if (updateMiddle)
 		{
-			/*TFD_SDK::UCanvas* myCanvas = static_cast<TFD_SDK::UCanvas*>(Canvas);
+			TFD_SDK::UCanvas* myCanvas = static_cast<TFD_SDK::UCanvas*>(Canvas);
 			float aspectRatioX = myCanvas->SizeX / myCanvas->ClipX;
-			float aspectRatioY = myCanvas->SizeY / myCanvas->ClipY;*/
+			float aspectRatioY = myCanvas->SizeY / myCanvas->ClipY;
 
-			ScreenMiddle.X = (myCanvas->SizeX / 2.0f) / (myCanvas->SizeX / myCanvas->ClipX);
-			ScreenMiddle.Y = (myCanvas->SizeY / 2.0f) / (myCanvas->SizeY / myCanvas->ClipY);
+			ScreenMiddle.X = (myCanvas->SizeX / 2.0f) / aspectRatioX;
+			ScreenMiddle.Y = (myCanvas->SizeY / 2.0f) / aspectRatioY;
 			updateMiddle = false;
 		}
 
@@ -233,15 +280,14 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 		if (CheckPointers())
 		{
-			//int State = -1;
-			//if (GWorld && GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass())
-			//	&& GWorld->OwningGameInstance->IsA(TFD_SDK::UGameInstance::StaticClass()))
-			//{
-			//	State = (int)(static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState);
-			//}
+			int State = -1;
+			if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+			{
+				State = (int)(static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState);
+			}
 
-			//if (State != (int)TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay) // Game isn't ready, don't do anything or it will likely crash
-			//	return M1org(self, Canvas);
+			if (State != (int)TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay) // Game isn't ready, don't do anything or it will likely crash
+				return M1org(self, Canvas);
 
 			/*if (inGame && PlayerIngameController
 				&& PlayerIngameController->HeartbeatTesterComponent)
@@ -355,7 +401,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			{
 				ShowHotSwapOverlay = true;
 				ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
-				if (HotSwapIndex == 3)
+				if (HotSwapIndex == 5)
 					HotSwapIndex = 0;
 				else
 					HotSwapIndex += 1;
@@ -365,25 +411,28 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				ShowHotSwapOverlay = true;
 				ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 				if (HotSwapIndex == 0)
-					HotSwapIndex = 3;
+					HotSwapIndex = 5;
 				else
 					HotSwapIndex -= 1;
 			}
 
 
-			if (IsKeyPressed(cfg_InstantInfilKey))
+			if (IsKeyPressed(cfg_InstantInfilKey) || cfg_EnableAutoInstantInfil)
 			{
-				InstantInfiltration();
-			}
-
-			if (IsKeyPressed(cfg_RestartMissionKey) || isRestartMission)
-			{
-				RestartLastMission();
+				if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoInstantInfilStartTime).count() >= 1)
+					InstantInfiltration();
 			}
 
 			if (IsKeyPressed(cfg_LeaveMissionKey))
 			{
 				LeaveMission();
+				cfg_EnableAutoRestartMission = false;
+			}
+
+			if (IsKeyPressed(cfg_RestartMissionKey) || isRestartMission || cfg_EnableAutoRestartMission)
+			{
+				if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoRestartMissionStartTime).count() >= 1)
+					RestartLastMission();
 			}
 
 			if (IsKeyPressed(cfg_SwitchPreset))
@@ -396,30 +445,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				EncryptedVaultDrops();
 			}
 
-			if (cfg_HotSwapOverlay)
-			{
-				if (ShowHotSwapOverlay)
-				{
-					if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - ShowHotSwapOverlayStartTime).count() > 3)
-						ShowHotSwapOverlay = false;
-				}
-				if (ShowHotSwapOverlay && !PresetsMap.empty())
-				{
-					for (int i = 0; i < 4; i++)
-					{
-						char buffer[100];
-						if (HotSwapPreset[i] != -1)
-							sprintf_s(buffer, "Preset %d: %s", i + 1, PresetsMap[HotSwapPreset[i]].c_str());
-						else
-							sprintf_s(buffer, "Preset %d: None", i + 1);
-
-						if (i == HotSwapIndex)
-							ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
-						else
-							ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
-					}
-				}
-			}
+			
 			// This code is for testing controller input detection
 			/*char sz[4][1024];
 			for (DWORD i = 0; i < 4; i++)
@@ -505,6 +531,42 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				}
 			}*/
 
+			if (cfg_HotSwapOverlay)
+			{
+				if (ShowHotSwapOverlay)
+				{
+					if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - ShowHotSwapOverlayStartTime).count() > 3)
+						ShowHotSwapOverlay = false;
+				}
+				if (ShowHotSwapOverlay)
+				{
+					if (!PresetsMap.empty())
+					{
+						for (int i = 0; i < 6; i++)
+						{
+							char buffer[100];
+							if (HotSwapPreset[i] != -1)
+								sprintf_s(buffer, "Preset %d: %s", i + 1, PresetsMap[HotSwapPreset[i]].c_str());
+							else
+								sprintf_s(buffer, "Preset %d: None", i + 1);
+
+							if (i == HotSwapIndex)
+								ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
+							else
+								ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
+						}
+					}
+				}
+			}
+
+			if (cfg_EnableMissionTaskTeleporter)
+			{
+				if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoTeleportStartTime).count() >= 1)
+					MissionTaskTeleporter();
+			}
+
+			//MissionTaskActortESP();
+			
 			if (cfg_DrawMenu)
 			{
 				DrawMenu();
@@ -557,7 +619,7 @@ void InstantReload()
 	}
 	else
 	{
-		if (!WeaponSlot || !WeaponSlot->Player_Owner || (WeaponSlot->Player_Owner && WeaponSlot->Player_Owner != LocalPlayerCharacter))
+		if (!WeaponSlot || !WeaponSlot->Player_Owner || (WeaponSlot->Player_Owner != LocalPlayerCharacter))
 		{
 			foundWeapon = false;
 			return;
@@ -593,13 +655,13 @@ void PlayerEnemyESP()
 	if (cfg_DrawPlayerNames || cfg_DrawPlayerBoxes || cfg_DrawEnemyNames || cfg_DrawEnemyBoxes || cfg_DrawPlayerLines || cfg_DrawEnemyLines)
 	{
 		if (!LocalPlayerController
-			|| !LocalPlayerController->ActorManager_Subsystem
 			|| !LocalPlayerCharacter
+			|| !Actors
 			)
 			return;
-		TFD_SDK::UM1ActorManagerSubsystem* Actors = LocalPlayerController->ActorManager_Subsystem;
-		if (!Actors)
-			return;
+		//TFD_SDK::UM1ActorManagerSubsystem* Actors = LocalPlayerController->ActorManager_Subsystem;
+		//if (!Actors)
+		//	return;
 		if (Actors->Characters.IsValid() && Actors->Characters.Num() > 0)
 		{
 			int StartNumber = Actors->Characters.Num();
@@ -767,6 +829,12 @@ void ItemESPVacuum()
 		|| !LocalPlayerController->Pawn
 		|| !GWorld)
 		return;
+	currenthp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
+	maxhp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxHp).Value / 10000.0f;
+	currentmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentMp).Value / 10000.0f;
+	maxmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxMp).Value / 10000.0f;
+	hp_used = false;
+	mp_used = false;
 	if (cfg_DrawItemBoxes || cfg_DrawItemNames || cfg_DrawItemLines || cfg_LootVacuum || cfg_DrawVaults)
 	{
 		/*float hp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
@@ -920,13 +988,7 @@ void ItemESPVacuum()
 						TFD_SDK::FVector2D ScreenPos = { -1, -1 };
 						TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
 
-						if (cfg_LootVacuum)
-						{
-							TFD_SDK::FVector player = LocalPlayerCharacter->K2_GetActorLocation();
-							float Distance = WorldPosition.GetDistanceTo(player);
-							if (Distance > 150 && Distance < cfg_LootVacuumRange)
-								Item->K2_SetActorLocation(player, false, nullptr, true);
-						}
+						
 
 						if (WorldToScreen(WorldPosition, &ScreenPos))
 						{
@@ -934,112 +996,112 @@ void ItemESPVacuum()
 							std::string Text = "Unknown";
 							switch (Item->DropItemInfo.ItemBox.Type)
 							{
-							case TFD_SDK::EM1ItemType::InstantUse:
-							{
-								if (Item->IsA(TFD_SDK::ABP_AmmoEnhancedDroppedItem_C::StaticClass()))
-									Text = "Enhanced Ammo";
-								else if (Item->IsA(TFD_SDK::ABP_AmmoGeneralDroppedItem_C::StaticClass()))
-									Text = "General Ammo";
-								else if (Item->IsA(TFD_SDK::ABP_AmmoHighpowerDroppedItem_C::StaticClass()))
-									Text = "Highpower Ammo";
-								else if (Item->IsA(TFD_SDK::ABP_AmmoImpactDroppedItem_C::StaticClass()))
-									Text = "Impact Ammo";
-								else if (Item->IsA(TFD_SDK::ABP_HealthOrbDroppedItem_C::StaticClass()))
+								case TFD_SDK::EM1ItemType::InstantUse:
 								{
-									color = ColorRed;
-									Text = "Health";
+									if (Item->IsA(TFD_SDK::ABP_AmmoEnhancedDroppedItem_C::StaticClass()))
+										Text = "Enhanced Ammo";
+									else if (Item->IsA(TFD_SDK::ABP_AmmoGeneralDroppedItem_C::StaticClass()))
+										Text = "General Ammo";
+									else if (Item->IsA(TFD_SDK::ABP_AmmoHighpowerDroppedItem_C::StaticClass()))
+										Text = "Highpower Ammo";
+									else if (Item->IsA(TFD_SDK::ABP_AmmoImpactDroppedItem_C::StaticClass()))
+										Text = "Impact Ammo";
+									else if (Item->IsA(TFD_SDK::ABP_HealthOrbDroppedItem_C::StaticClass()))
+									{
+										color = ColorRed;
+										Text = "Health";
+									}
+									else if (Item->IsA(TFD_SDK::ABP_ManaOrbDroppedItem_C::StaticClass()))
+									{
+										color = ColorMana;
+										Text = "Mana";
+									}
+									break;
 								}
-								else if (Item->IsA(TFD_SDK::ABP_ManaOrbDroppedItem_C::StaticClass()))
+								case TFD_SDK::EM1ItemType::Equipment:
 								{
-									color = ColorMana;
-									Text = "Mana";
+									if (Item->IsA(TFD_SDK::ABP_EquipTier01DroppedItem_C::StaticClass()))
+									{
+										color = ColorUncommon;
+										Text = "T1 Item";
+									}
+									else if (Item->IsA(TFD_SDK::ABP_EquipTier02DroppedItem_C::StaticClass()))
+									{
+										color = ColorRare;
+										Text = "T2 Item";
+									}
+									else if (Item->IsA(TFD_SDK::ABP_EquipTier03DroppedItem_C::StaticClass()))
+									{
+										color = ColorGold;
+										Text = "T3 Item";
+									}
+									break;
 								}
-								break;
-							}
-							case TFD_SDK::EM1ItemType::Equipment:
-							{
-								if (Item->IsA(TFD_SDK::ABP_EquipTier01DroppedItem_C::StaticClass()))
+								case TFD_SDK::EM1ItemType::Consumable:
 								{
-									color = ColorUncommon;
-									Text = "T1 Item";
+									if (Item->IsA(TFD_SDK::ABP_ResourceTier01DroppedItem_C::StaticClass()))
+									{
+										color = ColorUncommon;
+										Text = "T1 Resource";
+									}
+									else if (Item->IsA(TFD_SDK::ABP_ResourceTier02DroppedItem_C::StaticClass()))
+									{
+										color = ColorRare;
+										Text = "T2 Resource";
+									}
+									else if (Item->IsA(TFD_SDK::ABP_ResourceTier03DroppedItem_C::StaticClass()))
+									{
+										color = ColorGold;
+										Text = "T3 Resource";
+									}
+									break;
 								}
-								else if (Item->IsA(TFD_SDK::ABP_EquipTier02DroppedItem_C::StaticClass()))
+								case TFD_SDK::EM1ItemType::Rune:
 								{
-									color = ColorRare;
-									Text = "T2 Item";
+									if (Item->IsA(TFD_SDK::ABP_RuneTier01DroppedItem_C::StaticClass()))
+									{
+										color = ColorUncommon;
+										Text = "T1 Rune";
+									}
+									else if (Item->IsA(TFD_SDK::ABP_RuneTier02DroppedItem_C::StaticClass()))
+									{
+										color = ColorRare;
+										Text = "T2 Rune";
+									}
+									else if (Item->IsA(TFD_SDK::ABP_RuneTier03DroppedItem_C::StaticClass()))
+									{
+										color = ColorGold;
+										Text = "T3 Rune";
+									}
+									else if (Item->IsA(TFD_SDK::ABP_RuneTier04DroppedItem_C::StaticClass()))
+									{
+										color = ColorUltimate;
+										Text = "T4 Rune";
+									}
+									break;
 								}
-								else if (Item->IsA(TFD_SDK::ABP_EquipTier03DroppedItem_C::StaticClass()))
+								case TFD_SDK::EM1ItemType::Currency:
 								{
-									color = ColorGold;
-									Text = "T3 Item";
+									if (Item->IsA(TFD_SDK::ABP_GoldDroppedItem_C::StaticClass()))
+									{
+										color = ColorGold;
+										Text = "Gold";
+									}
+									else if (Item->IsA(TFD_SDK::ABP_KuiperShardDroppedItem_C::StaticClass()))
+									{
+										color = ColorMana;
+										Text = "Kuiper Shard";
+									}
+									break;
 								}
-								break;
-							}
-							case TFD_SDK::EM1ItemType::Consumable:
-							{
-								if (Item->IsA(TFD_SDK::ABP_ResourceTier01DroppedItem_C::StaticClass()))
+								default:
 								{
-									color = ColorUncommon;
-									Text = "T1 Resource";
+									if (Item->IsA(TFD_SDK::ABP_BuffOrbDroppedItem_C::StaticClass()))
+										Text = "Buff Orb";
+									else if (Item->IsA(TFD_SDK::ABP_EmberDroppedItem_C::StaticClass()))
+										Text = "Ember";
+									break;
 								}
-								else if (Item->IsA(TFD_SDK::ABP_ResourceTier02DroppedItem_C::StaticClass()))
-								{
-									color = ColorRare;
-									Text = "T2 Resource";
-								}
-								else if (Item->IsA(TFD_SDK::ABP_ResourceTier03DroppedItem_C::StaticClass()))
-								{
-									color = ColorGold;
-									Text = "T3 Resource";
-								}
-								break;
-							}
-							case TFD_SDK::EM1ItemType::Rune:
-							{
-								if (Item->IsA(TFD_SDK::ABP_RuneTier01DroppedItem_C::StaticClass()))
-								{
-									color = ColorUncommon;
-									Text = "T1 Rune";
-								}
-								else if (Item->IsA(TFD_SDK::ABP_RuneTier02DroppedItem_C::StaticClass()))
-								{
-									color = ColorRare;
-									Text = "T2 Rune";
-								}
-								else if (Item->IsA(TFD_SDK::ABP_RuneTier03DroppedItem_C::StaticClass()))
-								{
-									color = ColorGold;
-									Text = "T3 Rune";
-								}
-								else if (Item->IsA(TFD_SDK::ABP_RuneTier04DroppedItem_C::StaticClass()))
-								{
-									color = ColorUltimate;
-									Text = "T4 Rune";
-								}
-								break;
-							}
-							case TFD_SDK::EM1ItemType::Currency:
-							{
-								if (Item->IsA(TFD_SDK::ABP_GoldDroppedItem_C::StaticClass()))
-								{
-									color = ColorGold;
-									Text = "Gold";
-								}
-								else if (Item->IsA(TFD_SDK::ABP_KuiperShardDroppedItem_C::StaticClass()))
-								{
-									color = ColorMana;
-									Text = "Kuiper Shard";
-								}
-								break;
-							}
-							default:
-							{
-								if (Item->IsA(TFD_SDK::ABP_BuffOrbDroppedItem_C::StaticClass()))
-									Text = "Buff Orb";
-								else if (Item->IsA(TFD_SDK::ABP_EmberDroppedItem_C::StaticClass()))
-									Text = "Ember";
-								break;
-							}
 
 							}
 
@@ -1066,8 +1128,40 @@ void ItemESPVacuum()
 								ZeroGUI::DrawActorLine(TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, color);
 
 						}
-					}
 
+						if (cfg_LootVacuum)
+						{
+
+							if (Item->IsA(TFD_SDK::ABP_HealthOrbDroppedItem_C::StaticClass()))
+							{
+								if (currenthp < (maxhp * (cfg_HPThreshold / 100.0f)))
+								{
+									if (hp_used == true)
+										continue;
+									else
+										hp_used = true;
+								}
+								else
+									continue;
+							}
+							if (Item->IsA(TFD_SDK::ABP_ManaOrbDroppedItem_C::StaticClass()))
+							{
+								if (currentmana < (maxmana * (cfg_MPThreshold / 100.0f)))
+								{
+									if (mp_used == true)
+										continue;
+									else
+										mp_used = true;
+								}
+								else
+									continue;
+							}
+							TFD_SDK::FVector player = LocalPlayerCharacter->K2_GetActorLocation();
+							float Distance = WorldPosition.GetDistanceTo(player);
+							if (Distance > 150 && Distance < cfg_LootVacuumRange)
+								Item->K2_SetActorLocation(player, false, nullptr, true);
+						}
+					}
 				}
 
 			}
@@ -1091,10 +1185,10 @@ void InstantInfiltration()
 	{
 		if (!MissionActor)
 			continue;
-		if (MissionActor->TaskLinks.Num() == 0)
+		if (!MissionActor->ProgressInfo.ActivatedTaskActor)
 			continue;
 
-		TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
+		TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->ProgressInfo.ActivatedTaskActor;
 		if (!TaskActor)
 			continue;
 
@@ -1114,11 +1208,16 @@ void InstantInfiltration()
 			if (!VPost)
 				continue;
 
+			
 			for (TFD_SDK::AM1MissionTargetInteraction* MissionTarget : VPost->MissionTargets)
 			{
 				if (MissionTarget && MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Deactivated &&
 					MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Destructed)
+				{
+					AutoInstantInfilStartTime = std::chrono::steady_clock::now();
 					MCCInt->ServerRequestMissionTargetBeginInteraction(MissionTarget, PlayerIngameController);
+				}
+					
 			}
 			break;
 		}
@@ -1128,50 +1227,184 @@ void InstantInfiltration()
 void RestartLastMission()
 {
 	if (!PlayerState || !PlayerState->MissionControlComponent)
+	{
+		isRestartMission = false;
 		return;
+	};
 
 	TFD_SDK::UM1MissionControlComponent* MCC = PlayerState->MissionControlComponent;
 	if (!MCC || !MCC->MissionResult)
+	{
+		isRestartMission = false;
 		return;
+	}
 
 	// Get the last mission template ID
 	TFD_SDK::FM1TemplateId TemplateId;
-	if (MCC->MissionResult->MissionTemplateId.ID > 0)
+	if (MCC->MissionResult->MissionTemplateId.ID > 0
+		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::DestructionVulgusPost
+		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::VoidFragment)
 		TemplateId.ID = MCC->MissionResult->MissionTemplateId.ID;
 	else
-		return;
-
-	// Restart and Process active missions
-	if (MCC->ActivatedMissions.Num() == 0 && !isRestartMission)
 	{
-		MCC->ServerStartMissionByTemplateID(TemplateId);
+		isRestartMission = false;
+		return;
+	}
+		
+	// Restart and Process active missions
+	if (MCC->ActivatedMissions.Num() == 0)
+	{
+		if (cfg_RestartType == 0)
+			MCC->ServerRestartLastPlayedMission();
+		if (cfg_RestartType == 1)
+			MCC->ServerStartMissionByTemplateID(TemplateId);
+		AutoRestartMissionStartTime = std::chrono::steady_clock::now();
 		isRestartMission = true;
 	}
+		
+	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
+	{
+		if (MissionActor 
+			&& MissionActor->ProgressInfo.ActivatedTaskActor
+			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask
+			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move"))
+			MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
+		else
+			isRestartMission = false;
+		break;
+	}
+}
+
+void MissionTaskTeleporter()
+{
+	if (!PlayerState || !PlayerState->MissionControlComponent)
+		return;
+
+	TFD_SDK::UM1MissionControlComponent* MCC = PlayerState->MissionControlComponent;
+	if (!MCC)
+		return;
+
+	if (MCC->ActivatedMissions.Num() == 0)
+		MissionTaskIndex = 0;
 		
 
 	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
 	{
-		if (!MissionActor)
-			continue;
-		if (MissionActor->TaskLinks.Num() == 0)
-			continue;
-		TFD_SDK::AM1MissionTaskActor* TaskActor = MissionActor->TaskLinks[0].InstancedTaskActor;
-		if (!TaskActor)
-			continue;
-		TFD_SDK::UM1MissionTask* MissionData = TaskActor->MissionTask;
-		if (!MissionData)
-			continue;
-		if (MissionData->BeginEvents.Num() == 0)
-			continue;
-
-		for (TFD_SDK::UM1TaskEvent* TEvent : MissionData->BeginEvents)
+		if (MissionActor
+			&& MissionActor->ProgressInfo.ActivatedTaskActor
+			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask)
 		{
-			if (!TEvent)
-				continue;
-			if (!TEvent->bHasRun)
-				MCC->ServerRunTaskActor(TaskActor);
+			if (MissionActor->ProgressInfo.ActivatedTaskIndex > 0)
+			{
+				AutoTeleportStartTime = std::chrono::steady_clock::now();
+				//float ODistance = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation()) / 100.00f;
+				if (!MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move")
+					&& !MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString().contains("Move"))
+					return;
+			}
+			
+			std::string mtt = MissionActor->MissionData->MissionDataRowName.ToString() + "|" + MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
+
+			if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move") && MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
+			{
+				AutoTeleportStartTime = std::chrono::steady_clock::now();
+				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
+				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+				
+				if (MoveMissionTaskExceptionSet.contains(mtt))
+				{
+					if (MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints.Num() > 0)
+					{
+						int WayPointCount = MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints.Num();
+						for (int wpi = 0; wpi < WayPointCount; wpi++)
+						{
+							if (MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->Index_0 == (WayPointCount - 1))
+							{
+								LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorRotation());
+								break;
+							}
+						}
+					}
+					else
+						LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorRotation());
+				}
+				return;
+			}
+
+			if (MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex
+				&& MissionActor->ProgressInfo.ActivatedTaskIndex > 1)
+			{
+				
+				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
+				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+				if (!MissionTaskExceptionSet.contains(mtt))
+				{
+					if (MissionActor->ProgressInfo.LastTaskActor->WayPoints.Num() > 0)
+					{
+						int WayPointCount = MissionActor->ProgressInfo.LastTaskActor->WayPoints.Num();
+						for (int wpi = 0; wpi < WayPointCount; wpi++)
+						{
+							if (MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->Index_0 == (WayPointCount - 1))
+							{
+								LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorRotation());
+								break;
+							}
+						}
+					}
+					else
+						LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->K2_GetActorRotation());
+				}
+				return;
+			}
 		}
-		isRestartMission = false;
+	}
+}
+
+void MissionTaskActortESP()
+{
+	if (!PlayerState || !PlayerState->MissionControlComponent)
+		return;
+
+	TFD_SDK::UM1MissionControlComponent* MCC = PlayerState->MissionControlComponent;
+	if (!MCC)
+		return;
+
+	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
+	{
+		if (MissionActor && MissionActor->ProgressInfo.ActivatedTaskActor)
+		{
+
+			TFD_SDK::FVector2D ScreenPos = { -1, -1 };
+			
+			char buffer1[300];
+			if (WorldToScreen(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), &ScreenPos))
+			{
+				float ODistance = 0;
+				if (MissionActor->ProgressInfo.ActivatedTaskIndex > 0)
+				{
+					ODistance = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation()) / 100.00f;
+				}
+				std::string MissionTaskActorESPStr = MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
+				std::string MissionName = MissionActor->MissionData->MissionDataRowName.ToString().c_str();
+				sprintf_s(buffer1, "MissionName: %s | TaskName: %s | Status: %i | Task Index: %i |  Distance: %f", MissionName.c_str(), MissionTaskActorESPStr.c_str(), (int)MissionActor->ProgressInfo.MissionActorState, MissionActor->ProgressInfo.ActivatedTaskIndex, ODistance);
+				if (!MissionTaskActorESPStr.empty())
+				{
+					ZeroGUI::TextCenter((char*)buffer1, TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen, false);
+				}
+				for (TFD_SDK::AM1MissionTaskMoveWayPoint* MTMWP : MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints)
+				{
+					TFD_SDK::FVector2D ScreenPosWP = { -1, -1 };
+					if (WorldToScreen(MTMWP->K2_GetActorLocation(), &ScreenPosWP))
+					{
+						sprintf_s(buffer1, "MissionName: %s | TaskName: %s | Status: %i | Task Index: %i |  WayPoint Index: %i", MissionName.c_str(), MissionTaskActorESPStr.c_str(), (int)MissionActor->ProgressInfo.MissionActorState, MissionActor->ProgressInfo.ActivatedTaskIndex, MTMWP->Index_0);
+						if (!MissionTaskActorESPStr.empty())
+						{
+							ZeroGUI::TextCenter((char*)buffer1, TFD_SDK::FVector2D{ ScreenPosWP.X, ScreenPosWP.Y }, ColorMana, false);
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -1188,6 +1421,7 @@ void LeaveMission()
 		return;
 
 	MCC->ServerLeaveMission(TFD_SDK::EM1MissionEndReason::ExplicitGiveUp);
+	isRestartMission = false;
 }
 
 void SwitchPreset()
@@ -1217,7 +1451,7 @@ void SwitchPreset()
 
 void RefreshPresetList()
 {
-	HotSwapPreset = { -1, -1, -1, -1 };
+	HotSwapPreset = { -1, -1, -1, -1, -1, -1 };
 	PresetsMap.clear();
 
 	for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
@@ -1417,18 +1651,18 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 	Aimbot_BoneIndex = -1;
 
 
-	if (LocalPlayerController->ActorManager_Subsystem && LocalPlayerController)
+	if (Actors && LocalPlayerController)
 	{
-		if (LocalPlayerController->ActorManager_Subsystem->Characters.IsValid() && LocalPlayerController->ActorManager_Subsystem->Characters.Num() > 0)
+		if (Actors->Characters.IsValid() && Actors->Characters.Num() > 0)
 		{
-			int StartNumber = LocalPlayerController->ActorManager_Subsystem->Characters.Num();
-			for (int i = 0; i < LocalPlayerController->ActorManager_Subsystem->Characters.Num(); i++)
+			int StartNumber = Actors->Characters.Num();
+			for (int i = 0; i < Actors->Characters.Num(); i++)
 			{
-				if (LocalPlayerController->ActorManager_Subsystem->Characters.Num() != StartNumber)
+				if (Actors->Characters.Num() != StartNumber)
 					return nullptr;
-				if (!LocalPlayerController->ActorManager_Subsystem->Characters.IsValidIndex(i))
+				if (!Actors->Characters.IsValidIndex(i))
 					continue;
-				TFD_SDK::AM1Character* p = LocalPlayerController->ActorManager_Subsystem->Characters[i];
+				TFD_SDK::AM1Character* p = Actors->Characters[i];
 				if (p)
 				{
 					if (p->IsDead())
@@ -1559,7 +1793,7 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 
 void DrawMenu()
 {
-	if (ZeroGUI::Window((char*)"DescendantInternal - UnknownCheats.me", &cfg_WindowPos, TFD_SDK::FVector2D{ 500.0f, 600.0f }, cfg_DrawMenu))
+	if (ZeroGUI::Window((char*)"DescendantInternal - UnknownCheats.me", &cfg_WindowPos, TFD_SDK::FVector2D{ 500.0f, 650.0f }, cfg_DrawMenu))
 	{
 
 		static int tab = 0;
@@ -1588,7 +1822,9 @@ void DrawMenu()
 			ZeroGUI::Checkbox((char*)"Draw Item Names", &cfg_DrawItemNames);
 			ZeroGUI::Checkbox((char*)"Draw Item Lines", &cfg_DrawItemLines);
 			ZeroGUI::Checkbox((char*)"Enable Loot Vacuum", &cfg_LootVacuum);
-			ZeroGUI::SliderFloat((char*)"Loot Vacuum Range", &cfg_LootVacuumRange, 151.0f, 20000.0f);
+			ZeroGUI::SliderFloat((char*)"Loot Vacuum Range", &cfg_LootVacuumRange, 151.0f, 200000.0f);
+			ZeroGUI::SliderFloat((char*)"Vacuum HP Loot when Current HP below %", &cfg_HPThreshold, 0.0f, 100.0f);
+			ZeroGUI::SliderFloat((char*)"Vacuum MP Loot when Current MP below %", &cfg_MPThreshold, 0.0f, 100.0f);
 			ZeroGUI::Text((char*)"Loot Vacuum Toggle:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Loot Vacuum Hotkey", TFD_SDK::FVector2D{ 110, 25 }, &cfg_LootVacuumKey);
@@ -1706,17 +1942,31 @@ void DrawMenu()
 			//{
 			//	GWorld->PersistentLevel->WorldSettings->bEnableAISystem = 0;
 			//}
-			ZeroGUI::Text((char*)"Instant Outpost Infil:");
-			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Instant Outpost Infil Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_InstantInfilKey);
+			ZeroGUI::Checkbox((char*)"Auto Instant Outpost Infil", &cfg_EnableAutoInstantInfil);
 
-			ZeroGUI::Text((char*)"Restart Last Mission:");
-			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Restart Last Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_RestartMissionKey);
-
+			if (!cfg_EnableAutoInstantInfil)
+			{
+				ZeroGUI::Text((char*)"Instant Outpost Infil:");
+				ZeroGUI::SameLine();
+				ZeroGUI::Hotkey((char*)"Instant Outpost Infil Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_InstantInfilKey);
+			}
+			
+			ZeroGUI::Checkbox((char*)"Auto Restart Mission", &cfg_EnableAutoRestartMission);
+			
+			if (!cfg_EnableAutoRestartMission)
+			{
+				ZeroGUI::Text((char*)"Restart Last Mission:");
+				ZeroGUI::SameLine();
+				ZeroGUI::Hotkey((char*)"Restart Last Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_RestartMissionKey);
+			}
+			ZeroGUI::Combobox((char*)"Restart Type", TFD_SDK::FVector2D{ 160, 25 }, & cfg_RestartType, "From Starting Point", "Current Position", NULL);
+			
 			ZeroGUI::Text((char*)"Leave Mission:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Leave Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_LeaveMissionKey);
+
+			ZeroGUI::Checkbox((char*)"Auto Mission Task Teleport", &cfg_EnableMissionTaskTeleporter);
+
 		}
 		if (tab == 5)
 		{
@@ -1745,6 +1995,8 @@ void DrawMenu()
 				ZeroGUI::Combobox1((char*)"Select Preset 2", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[1], PresetsMap);
 				ZeroGUI::Combobox1((char*)"Select Preset 3", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[2], PresetsMap);
 				ZeroGUI::Combobox1((char*)"Select Preset 4", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[3], PresetsMap);
+				ZeroGUI::Combobox1((char*)"Select Preset 5", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[4], PresetsMap);
+				ZeroGUI::Combobox1((char*)"Select Preset 6", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[5], PresetsMap);
 			}
 		}
 	}
@@ -1774,6 +2026,8 @@ void LoadCFG()
 		cfg_DrawItemLines = ini.GetBoolValue("ESP", "EnableItemLines");
 		cfg_LootVacuum = ini.GetBoolValue("Extra", "EnableVacuum");
 		cfg_LootVacuumRange = ini.GetDoubleValue("Extra", "VacuumRange");
+		cfg_HPThreshold = ini.GetDoubleValue("ESP", "HPThreshold");
+		cfg_MPThreshold = ini.GetDoubleValue("ESP", "MPThreshold");
 		cfg_LootVacuumKey = (int)ini.GetDoubleValue("Extra", "VacuumKey");
 		cfg_DrawVaults = ini.GetBoolValue("ESP", "EnableCodedVaults");
 		cfg_DrawMunition = ini.GetBoolValue("ESP", "EnableMunition");
@@ -1810,6 +2064,8 @@ void LoadCFG()
 		HotSwapPreset[1] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset2", 0);
 		HotSwapPreset[2] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset3", 0);
 		HotSwapPreset[3] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset4", 0);
+		HotSwapPreset[4] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset5", 0);
+		HotSwapPreset[5] = (int)ini.GetDoubleValue("Preset", "HotSwapPreset6", 0);
 
 		cfg_TimeScale = ini.GetDoubleValue("Extra", "Timescale");
 		cfg_TimeScaleKey = (int)ini.GetDoubleValue("Extra", "TimescaleKey");
@@ -1818,6 +2074,10 @@ void LoadCFG()
 		cfg_InstantInfilKey = (int)ini.GetDoubleValue("Mission", "InstantInfilKey");
 		cfg_RestartMissionKey = (int)ini.GetDoubleValue("Mission", "RestartMissionKey");
 		cfg_LeaveMissionKey = (int)ini.GetDoubleValue("Mission", "LeaveMissionKey");
+		cfg_EnableAutoRestartMission = ini.GetBoolValue("Mission", "EnableAutoRestartMisson");
+		cfg_EnableAutoInstantInfil = ini.GetBoolValue("Mission", "EnableAutoInstantInfil");
+		cfg_RestartType = ini.GetDoubleValue("Mission", "RestartType");
+		cfg_EnableMissionTaskTeleporter = ini.GetBoolValue("Mission", "EnableMissionTaskTeleporter");
 	}
 }
 
@@ -1843,6 +2103,8 @@ void SaveCFG()
 	ini.SetBoolValue("ESP", "EnableVoidVesselBoxes", cfg_DrawVoidVesselBox);
 	ini.SetDoubleValue("ESP", "EncryptedVaultDropsKey", cfg_EncryptedVaultDropsKey);
 	ini.SetDoubleValue("ESP", "EncryptedVaultRewardType", cfg_EncryptedVaultRewardType);
+	ini.SetDoubleValue("ESP", "HPThreshold", cfg_HPThreshold);
+	ini.SetDoubleValue("ESP", "MPThreshold", cfg_MPThreshold);
 
 	ini.SetBoolValue("Aimbot", "EnableAimbotHold", cfg_EnableAimbotHold);
 	ini.SetBoolValue("Aimbot", "EnableAimbotToggle", cfg_EnableAimbotToggle);
@@ -1879,6 +2141,8 @@ void SaveCFG()
 	ini.SetDoubleValue("Preset", "HotSwapPreset2", HotSwapPreset[1]);
 	ini.SetDoubleValue("Preset", "HotSwapPreset3", HotSwapPreset[2]);
 	ini.SetDoubleValue("Preset", "HotSwapPreset4", HotSwapPreset[3]);
+	ini.SetDoubleValue("Preset", "HotSwapPreset5", HotSwapPreset[4]);
+	ini.SetDoubleValue("Preset", "HotSwapPreset6", HotSwapPreset[5]);
 
 	ini.SetDoubleValue("Extra", "Timescale", cfg_TimeScale);
 	ini.SetDoubleValue("Extra", "TimescaleKey", cfg_TimeScaleKey);
@@ -1887,6 +2151,10 @@ void SaveCFG()
 	ini.SetDoubleValue("Mission", "InstantInfilKey", cfg_InstantInfilKey);
 	ini.SetDoubleValue("Mission", "RestartMissionKey", cfg_RestartMissionKey);
 	ini.SetDoubleValue("Mission", "LeaveMissionKey", cfg_LeaveMissionKey);
+	ini.SetBoolValue("Mission", "EnableAutoRestartMisson", cfg_EnableAutoRestartMission);
+	ini.SetBoolValue("Mission", "EnableAutoInstantInfil", cfg_EnableAutoInstantInfil);
+	ini.SetDoubleValue("Mission", "RestartType", cfg_RestartType);
+	ini.SetBoolValue("Mission", "EnableMissionTaskTeleporter", cfg_EnableMissionTaskTeleporter);
 
 	ini.SaveFile("cfg.ini");
 }
