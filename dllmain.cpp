@@ -1139,7 +1139,7 @@ void ItemESPVacuum()
 									if (hp_used == true)
 										continue;
 									else
-										hp_used == true;
+										hp_used = true;
 								}
 								else
 									continue;
@@ -1151,7 +1151,7 @@ void ItemESPVacuum()
 									if (mp_used == true)
 										continue;
 									else
-										mp_used == true;
+										mp_used = true;
 								}
 								else
 									continue;

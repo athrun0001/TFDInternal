@@ -462,6 +462,7 @@ namespace TFD_SDK
 		EM1MissionSubType_MAX = 19,
 	};
 
+
 	// 0x0004 (0x0004 - 0x0000)
 	struct FM1TemplateId final
 	{
@@ -598,6 +599,7 @@ namespace TFD_SDK
 		double                                        PenaltyTime;                                       // 0x0048(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_50[0x10];                                      // 0x0050(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
+
 
 	// 0x1010 (0x1038 - 0x0028)
 	class UEngine : public UObject
@@ -2041,14 +2043,12 @@ namespace TFD_SDK
 		uint8                                         Pad_1[0x7];                                        // 0x0001(0x0007)(Fixing Size After Last Property [ Dumper-7 ])
 		struct FM1ScaledInteger                       ReturnValue;                                       // 0x0008(0x0008)(Parm, OutParm, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
-
 	// 0x000C (0x000C - 0x0000)
 	struct Actor_K2_GetActorRotation final
 	{
 	public:
 		struct FRotator                               ReturnValue;                                       // 0x0000(0x000C)(Parm, OutParm, ZeroConstructor, ReturnParm, IsPlainOldData, NoDestructor, NativeAccessSpecifierPublic)
 	};
-
 	// 0x0018 (0x0018 - 0x0000)
 	struct M1TeleportHandlerComponent_ServerMoveToTeleportToLocation final
 	{
