@@ -417,9 +417,10 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			}
 
 
-			if (IsKeyPressed(cfg_InstantInfilKey))
+			if (IsKeyPressed(cfg_InstantInfilKey) || cfg_EnableAutoInstantInfil)
 			{
-				InstantInfiltration();
+				if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoInstantInfilStartTime).count() >= 1)
+					InstantInfiltration();
 			}
 
 			if (IsKeyPressed(cfg_LeaveMissionKey))
@@ -430,7 +431,8 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 			if (IsKeyPressed(cfg_RestartMissionKey) || isRestartMission || cfg_EnableAutoRestartMission)
 			{
-				RestartLastMission();
+				if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoRestartMissionStartTime).count() >= 1)
+					RestartLastMission();
 			}
 
 			if (IsKeyPressed(cfg_SwitchPreset))
@@ -563,7 +565,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					MissionTaskTeleporter();
 			}
 
-			MissionTaskActortESP();
+			//MissionTaskActortESP();
 			
 			if (cfg_DrawMenu)
 			{
@@ -1185,11 +1187,16 @@ void InstantInfiltration()
 			if (!VPost)
 				continue;
 
+			
 			for (TFD_SDK::AM1MissionTargetInteraction* MissionTarget : VPost->MissionTargets)
 			{
 				if (MissionTarget && MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Deactivated &&
 					MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Destructed)
+				{
+					AutoInstantInfilStartTime = std::chrono::steady_clock::now();
 					MCCInt->ServerRequestMissionTargetBeginInteraction(MissionTarget, PlayerIngameController);
+				}
+					
 			}
 			break;
 		}
@@ -1213,7 +1220,9 @@ void RestartLastMission()
 
 	// Get the last mission template ID
 	TFD_SDK::FM1TemplateId TemplateId;
-	if (MCC->MissionResult->MissionTemplateId.ID > 0)
+	if (MCC->MissionResult->MissionTemplateId.ID > 0
+		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::DestructionVulgusPost
+		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::VoidFragment)
 		TemplateId.ID = MCC->MissionResult->MissionTemplateId.ID;
 	else
 	{
@@ -1224,7 +1233,11 @@ void RestartLastMission()
 	// Restart and Process active missions
 	if (MCC->ActivatedMissions.Num() == 0)
 	{
-		MCC->ServerStartMissionByTemplateID(TemplateId);
+		if (cfg_RestartType == 0)
+			MCC->ServerRestartLastPlayedMission();
+		if (cfg_RestartType == 1)
+			MCC->ServerStartMissionByTemplateID(TemplateId);
+		AutoRestartMissionStartTime = std::chrono::steady_clock::now();
 		isRestartMission = true;
 	}
 		
@@ -1906,17 +1919,24 @@ void DrawMenu()
 			//{
 			//	GWorld->PersistentLevel->WorldSettings->bEnableAISystem = 0;
 			//}
-			ZeroGUI::Text((char*)"Instant Outpost Infil:");
-			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Instant Outpost Infil Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_InstantInfilKey);
+			ZeroGUI::Checkbox((char*)"Auto Instant Outpost Infil", &cfg_EnableAutoInstantInfil);
 
+			if (!cfg_EnableAutoInstantInfil)
+			{
+				ZeroGUI::Text((char*)"Instant Outpost Infil:");
+				ZeroGUI::SameLine();
+				ZeroGUI::Hotkey((char*)"Instant Outpost Infil Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_InstantInfilKey);
+			}
+			
 			ZeroGUI::Checkbox((char*)"Auto Restart Mission", &cfg_EnableAutoRestartMission);
+			
 			if (!cfg_EnableAutoRestartMission)
 			{
 				ZeroGUI::Text((char*)"Restart Last Mission:");
 				ZeroGUI::SameLine();
 				ZeroGUI::Hotkey((char*)"Restart Last Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_RestartMissionKey);
 			}
+			ZeroGUI::Combobox((char*)"Restart Type", TFD_SDK::FVector2D{ 160, 25 }, & cfg_RestartType, "From Starting Point", "Current Position", NULL);
 			
 			ZeroGUI::Text((char*)"Leave Mission:");
 			ZeroGUI::SameLine();
@@ -2026,6 +2046,8 @@ void LoadCFG()
 		cfg_RestartMissionKey = (int)ini.GetDoubleValue("Mission", "RestartMissionKey");
 		cfg_LeaveMissionKey = (int)ini.GetDoubleValue("Mission", "LeaveMissionKey");
 		cfg_EnableAutoRestartMission = ini.GetBoolValue("Mission", "EnableAutoRestartMisson");
+		cfg_EnableAutoInstantInfil = ini.GetBoolValue("Mission", "EnableAutoInstantInfil");
+		cfg_RestartType = ini.GetDoubleValue("Mission", "RestartType");
 		cfg_EnableMissionTaskTeleporter = ini.GetBoolValue("Mission", "EnableMissionTaskTeleporter");
 	}
 }
@@ -2097,6 +2119,8 @@ void SaveCFG()
 	ini.SetDoubleValue("Mission", "RestartMissionKey", cfg_RestartMissionKey);
 	ini.SetDoubleValue("Mission", "LeaveMissionKey", cfg_LeaveMissionKey);
 	ini.SetBoolValue("Mission", "EnableAutoRestartMisson", cfg_EnableAutoRestartMission);
+	ini.SetBoolValue("Mission", "EnableAutoInstantInfil", cfg_EnableAutoInstantInfil);
+	ini.SetDoubleValue("Mission", "RestartType", cfg_RestartType);
 	ini.SetBoolValue("Mission", "EnableMissionTaskTeleporter", cfg_EnableMissionTaskTeleporter);
 
 	ini.SaveFile("cfg.ini");

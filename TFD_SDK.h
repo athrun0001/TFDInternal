@@ -437,6 +437,30 @@ namespace TFD_SDK
 		Deactivated = 2,
 		EM1MissionActorState_MAX = 3,
 	};
+	// NumValues: 0x0014
+	enum class EM1MissionSubType : uint8
+	{
+		Default = 0,
+		Destruction = 1,
+		Defense = 2,
+		Supply = 3,
+		Collection = 4,
+		Assasination = 5,
+		Extermination = 6,
+		Occupation = 7,
+		WaveDefense = 8,
+		ContinuousSurvival = 9,
+		DataCollection = 10,
+		Explosion = 11,
+		Steal = 12,
+		Escort = 13,
+		MultiCollection = 14,
+		MultiAssasination = 15,
+		VoidFragment = 16,
+		VoidFusion = 17,
+		DestructionVulgusPost = 18,
+		EM1MissionSubType_MAX = 19,
+	};
 
 	// 0x0004 (0x0004 - 0x0000)
 	struct FM1TemplateId final
@@ -1628,7 +1652,9 @@ namespace TFD_SDK
 	public:
 		uint8                                         Pad_MissionTemplateId[0x10];                       // 0x0028
 		struct FM1TemplateId                          MissionTemplateId;                                 // 0x0038(0x0004)(NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_UM1MissionResult[0x31C];                       // 0x003C
+		uint8                                         Pad_MissionSubType[0x2D];                          // 0x003C
+		EM1MissionSubType                             MissionSubType;                                    // 0x0069(0x0001)(ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_UM1MissionResult[0x2EE];                       // 0x006A
 	};
 	// 0x0730 (0x07D8 - 0x00A8)
 	class UM1MissionControlComponent final : public UActorComponent
@@ -1644,6 +1670,7 @@ namespace TFD_SDK
 
 	public:
 		void ServerStartMissionByTemplateID(const struct FM1TemplateId& InTemplateId);
+		void ServerRestartLastPlayedMission();
 		void ServerRunTaskActor(class AM1MissionTaskActor* InActor);
 		void ServerLeaveMission(EM1MissionEndReason InReason);
 	};

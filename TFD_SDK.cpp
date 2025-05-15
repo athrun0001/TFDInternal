@@ -839,4 +839,19 @@ namespace TFD_SDK
 
 		Func->FunctionFlags = Flgs;
 	}
+
+	void UM1MissionControlComponent::ServerRestartLastPlayedMission()
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1MissionControlComponent", "ServerRestartLastPlayedMission");
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, nullptr);
+
+		Func->FunctionFlags = Flgs;
+	}
 }
