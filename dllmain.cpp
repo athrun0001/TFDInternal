@@ -2046,12 +2046,18 @@ void DrawMenu()
 			ZeroGUI::SliderInt((char*)"Custom Drop Count", &cfg_DropCount, 0, 250);
 			if (ZeroGUI::Button((char*)"+5", TFD_SDK::FVector2D{ 30, 30 }))
 			{
-				cfg_DropCount += 5;
+				if (cfg_DropCount < 246)
+					cfg_DropCount += 5;
+				else
+					cfg_DropCount = 250;
 			}
 			ZeroGUI::SameLine();
 			if (ZeroGUI::Button((char*)"-5", TFD_SDK::FVector2D{ 30, 30 }))
 			{
-				cfg_DropCount -= 5;
+				if (cfg_DropCount > 4)
+					cfg_DropCount -= 5;
+				else
+					cfg_DropCount = 0;
 			}
 		}
 	}
