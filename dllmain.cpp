@@ -204,6 +204,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			ZeroMemory(g_Controllers, sizeof(CONTROLLER_STATE) * 4);
 			if (!GEngine)
 				GEngine = TFD_SDK::UEngine::GetEngine();
+
+			TFD_SDK::UEngine* Engine = TFD_SDK::UEngine::GetEngine();
+			
 			//CheckPointers();
 			if (myCanvas->SizeX != lastScreenSize)
 			{

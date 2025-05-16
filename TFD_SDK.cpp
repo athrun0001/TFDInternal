@@ -873,4 +873,97 @@ namespace TFD_SDK
 
 		Func->FunctionFlags = Flgs;
 	}
+
+	class FName UKismetStringLibrary::Conv_StringToName(const class FString& InString)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = StaticClass()->GetFunction("KismetStringLibrary", "Conv_StringToName");
+
+		KismetStringLibrary_Conv_StringToName Parms{};
+
+		Parms.InString = std::move(InString);
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		GetDefaultObj()->ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+
+		return Parms.ReturnValue;
+	}
+
+	void APlayerController::EnableCheats()
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("PlayerController", "EnableCheats");
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, nullptr);
+
+		Func->FunctionFlags = Flgs;
+	}
+
+	class UObject* UGameplayStatics::SpawnObject(TSubclassOf<class UObject> ObjectClass, class UObject* Outer_0)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = StaticClass()->GetFunction("GameplayStatics", "SpawnObject");
+
+		GameplayStatics_SpawnObject Parms{};
+
+		Parms.ObjectClass = ObjectClass;
+		Parms.Outer_0 = Outer_0;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		GetDefaultObj()->ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+
+		return Parms.ReturnValue;
+	}
+
+	void UM1MissionControlComponent::ServerStartMission(class AM1MissionActor* InMission, bool InForceStart)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1MissionControlComponent", "ServerStartMission");
+
+		M1MissionControlComponent_ServerStartMission Parms{};
+
+		Parms.InMission = InMission;
+		Parms.InForceStart = InForceStart;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
+
+	void UM1Cheat::ToggleUI()
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1Cheat", "ToggleUI");
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, nullptr);
+
+		Func->FunctionFlags = Flgs;
+	}
 }
