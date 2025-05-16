@@ -397,7 +397,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					GWorld->PersistentLevel->WorldSettings->TimeDilation = cfg_TimeScale;
 				else
 					GWorld->PersistentLevel->WorldSettings->TimeDilation = 1.0f;
-
 			}
 
 			if (IsKeyPressed(VK_DOWN))
@@ -419,12 +418,11 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					HotSwapIndex -= 1;
 			}
 
+			if (IsKeyPressed(cfg_InstantInfilKey))
+				cfg_EnableAutoInstantInfil = !cfg_EnableAutoInstantInfil;
 
-			if (IsKeyPressed(cfg_InstantInfilKey) || cfg_EnableAutoInstantInfil)
-			{
-				if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoInstantInfilStartTime).count() >= 1)
-					InstantInfiltration();
-			}
+			if (cfg_EnableAutoInstantInfil)
+				InstantInfiltration();
 
 			if (IsKeyPressed(cfg_LeaveMissionKey))
 			{
@@ -432,23 +430,19 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				cfg_EnableAutoRestartMission = false;
 			}
 
-			if (IsKeyPressed(cfg_RestartMissionKey) || isRestartMission || cfg_EnableAutoRestartMission)
-			{
-				if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoRestartMissionStartTime).count() >= 1)
-					RestartLastMission();
-			}
+			if (IsKeyPressed(cfg_RestartMissionKey))
+				cfg_EnableAutoRestartMission = !cfg_EnableAutoRestartMission;
+
+			if (isRestartMission || cfg_EnableAutoRestartMission)
+				RestartLastMission();
 
 			if (IsKeyPressed(cfg_SwitchPreset))
-			{
 				SwitchPreset();
-			}
 
 			if (IsKeyPressed(cfg_EncryptedVaultDropsKey))
-			{
 				EncryptedVaultDrops();
-			}
 
-			
+
 			// This code is for testing controller input detection
 			/*char sz[4][1024];
 			for (DWORD i = 0; i < 4; i++)
@@ -487,24 +481,17 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 
 			if (cfg_EnablePlayerEnemyESP)
-			{
 				PlayerEnemyESP();
-			}
 
 			if (cfg_EnableItemESP || cfg_LootVacuum)
-			{
 				ItemESPVacuum();
-			}
+
 
 			if (cfg_EnableAimbotHold || cfg_EnableAimbotToggle)
-			{
 				Aimbot();
-			}
 
 			if (cfg_NoReload)
-			{
 				InstantReload();
-			}
 
 			if (cfg_CacheEnemyNames && NamesChanged)
 			{
@@ -564,21 +551,17 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 			if (cfg_EnableMissionTaskTeleporter)
 			{
-				if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoTeleportStartTime).count() >= 1)
-					MissionTaskTeleporter();
+				MissionTaskTeleporter();
 			}
 
 			if (IsKeyPressed(cfg_ContainerDropKey))
-			{
 				ContainerDrop();
-			}
 
 			//MissionTaskActortESP();
 			
 			if (cfg_DrawMenu)
-			{
 				DrawMenu();
-			}
+
 			ZeroGUI::Render();
 			ZeroGUI::Draw_Cursor(cfg_DrawMenu);
 
@@ -996,8 +979,6 @@ void ItemESPVacuum()
 						TFD_SDK::FVector2D ScreenPos = { -1, -1 };
 						TFD_SDK::FVector WorldPosition = Actor->K2_GetActorLocation();
 
-						
-
 						if (WorldToScreen(WorldPosition, &ScreenPos))
 						{
 							TFD_SDK::FLinearColor color = ColorWhite;
@@ -1171,15 +1152,16 @@ void ItemESPVacuum()
 						}
 					}
 				}
-
 			}
 		}
-
 	}
 }
 
 void InstantInfiltration()
 {
+	if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoInstantInfilStartTime).count() < 1)
+		return;
+
 	if (!PlayerState || !PlayerState->MissionControlComponent || !PlayerIngameController)
 		return;
 
@@ -1234,6 +1216,9 @@ void InstantInfiltration()
 
 void RestartLastMission()
 {
+	if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoRestartMissionStartTime).count() < 1)
+		return;
+
 	if (!PlayerState || !PlayerState->MissionControlComponent)
 	{
 		isRestartMission = false;
@@ -1285,6 +1270,9 @@ void RestartLastMission()
 
 void MissionTaskTeleporter()
 {
+	if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoTeleportStartTime).count() < 1)
+		return;
+
 	if (!PlayerState || !PlayerState->MissionControlComponent)
 		return;
 
@@ -1999,22 +1987,15 @@ void DrawMenu()
 			//	GWorld->PersistentLevel->WorldSettings->bEnableAISystem = 0;
 			//}
 			ZeroGUI::Checkbox((char*)"Auto Instant Outpost Infil", &cfg_EnableAutoInstantInfil);
+			ZeroGUI::Text((char*)"Instant Infil Toggle Key:");
+			ZeroGUI::SameLine();
+			ZeroGUI::Hotkey((char*)"Instant Outpost Infil Toggle Key", TFD_SDK::FVector2D{ 130, 25 }, & cfg_InstantInfilKey);
 
-			if (!cfg_EnableAutoInstantInfil)
-			{
-				ZeroGUI::Text((char*)"Instant Outpost Infil:");
-				ZeroGUI::SameLine();
-				ZeroGUI::Hotkey((char*)"Instant Outpost Infil Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_InstantInfilKey);
-			}
-			
 			ZeroGUI::Checkbox((char*)"Auto Restart Mission", &cfg_EnableAutoRestartMission);
-			
-			if (!cfg_EnableAutoRestartMission)
-			{
-				ZeroGUI::Text((char*)"Restart Last Mission:");
-				ZeroGUI::SameLine();
-				ZeroGUI::Hotkey((char*)"Restart Last Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, & cfg_RestartMissionKey);
-			}
+			ZeroGUI::Text((char*)"Restart Mission Toggle Key:");
+			ZeroGUI::SameLine();
+			ZeroGUI::Hotkey((char*)"Restart Last Mission Toggle Key", TFD_SDK::FVector2D{ 130, 25 }, & cfg_RestartMissionKey);
+		
 			ZeroGUI::Combobox((char*)"Restart Type", TFD_SDK::FVector2D{ 160, 25 }, & cfg_RestartType, "From Starting Point", "Current Position", NULL);
 			
 			ZeroGUI::Text((char*)"Leave Mission:");
