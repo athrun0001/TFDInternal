@@ -194,6 +194,17 @@ bool cfg_AimbotRapidFire = false;
 uint8_t Recoil[2] = { 0x74, 0x75 };
 uint8_t RapidFire[2] = { 0x72, 0x77 };
 
+/*
+* Tivmo Autism
+*/
+
+int cfg_ContainerDropKey = VK_RIGHT;
+void ContainerDrop();
+float cfg_ContainersRange = 250.0f;
+bool cfg_ChangeDropCount = false;
+int cfg_DropCount = 1;
+
+
 
 /*
 *  Extras

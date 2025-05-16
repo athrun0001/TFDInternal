@@ -854,4 +854,23 @@ namespace TFD_SDK
 
 		Func->FunctionFlags = Flgs;
 	}
+
+	void AM1PlayerControllerInGame::ServerRequestFieldObjectDropItems(class AM1FieldInteractableActor* InActor)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1PlayerControllerInGame", "ServerRequestFieldObjectDropItems");
+
+		M1PlayerControllerInGame_ServerRequestFieldObjectDropItems Parms{};
+
+		Parms.InActor = InActor;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
 }
