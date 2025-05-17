@@ -820,12 +820,12 @@ void ItemESPVacuum()
 		|| !LocalPlayerController->Pawn
 		|| !GWorld)
 		return;
-	currenthp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
-	maxhp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxHp).Value / 10000.0f;
-	currentmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentMp).Value / 10000.0f;
-	maxmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxMp).Value / 10000.0f;
-	hp_used = false;
-	mp_used = false;
+	float currenthp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
+	float maxhp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxHp).Value / 10000.0f;
+	float currentmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentMp).Value / 10000.0f;
+	float maxmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxMp).Value / 10000.0f;
+	bool hp_used = false;
+	bool mp_used = false;
 	if (cfg_DrawItemBoxes || cfg_DrawItemNames || cfg_DrawItemLines || cfg_LootVacuum || cfg_DrawVaults)
 	{
 		/*float hp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
@@ -1125,10 +1125,18 @@ void ItemESPVacuum()
 							{
 								if (currenthp < (maxhp * (cfg_HPThreshold / 100.0f)))
 								{
-									if (hp_used == true)
-										continue;
+									if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - HPLootStartTime).count() > 1)
+									{
+										if (hp_used == true)
+											continue;
+										else
+										{
+											hp_used = true;
+											HPLootStartTime = std::chrono::steady_clock::now();
+										}
+									}
 									else
-										hp_used = true;
+										continue;
 								}
 								else
 									continue;
@@ -1137,10 +1145,18 @@ void ItemESPVacuum()
 							{
 								if (currentmana < (maxmana * (cfg_MPThreshold / 100.0f)))
 								{
-									if (mp_used == true)
-										continue;
+									if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - MPLootStartTime).count() > 1)
+									{
+										if (mp_used == true)
+											continue;
+										else
+										{
+											mp_used = true;
+											MPLootStartTime = std::chrono::steady_clock::now();
+										}
+									}
 									else
-										mp_used = true;
+										continue;
 								}
 								else
 									continue;
