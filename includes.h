@@ -170,8 +170,10 @@ void LeaveMission();
 void SwitchPreset();
 void RefreshPresetList();
 void EncryptedVaultDrops();
-void MissionTaskActortESP();
 void MissionTaskTeleporter();
+//void MissionTaskActortESP();
+//void MissionActorESP();
+//void MissionTaskTeleporterDebugger();
 
 /*
 *  Aimbot
