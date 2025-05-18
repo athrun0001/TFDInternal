@@ -576,16 +576,6 @@ namespace TFD_SDK
 		double                                        PenaltyTime;                                       // 0x0048(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_50[0x10];                                      // 0x0050(0x0010)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
-	// 0x0014 (0x0014 - 0x0000)
-	struct FM1CoolTimer final
-	{
-	public:
-		class FName                                   CoolTimeContext;                                   // 0x0000(0x0008)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		bool                                          bActivated;                                        // 0x0008(0x0001)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_9[0x3];                                        // 0x0009(0x0003)(Fixing Size After Last Property [ Dumper-7 ])
-		float                                         CoolTimeDuration;                                  // 0x000C(0x0004)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		float                                         RemainingCoolTime;                                 // 0x0010(0x0004)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-	};
 
 	
 	// 0x0220 (0x0248 - 0x0028)
@@ -713,9 +703,9 @@ namespace TFD_SDK
 	class UM1Account final : public UObject
 	{
 	public:
-		uint8                                         Pad_3C0[0x2C0];                                       // 0x0028(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
-		class UM1AccountPreset*						  Preset;												// 0x02E8(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_3C1[0xE0];                                        // 0x02F0(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+		uint8                                         Pad_Preset[0x2C0];                                        // 0x0028(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+		class UM1AccountPreset*						  Preset;													// 0x02E8(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_UM1Account[0xE0];                                     // 0x02F0(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
 
 	public:
 		static class UClass* StaticClass()
@@ -890,8 +880,7 @@ namespace TFD_SDK
 	public:
 		uint8                                         Pad_MissionDataRowName[0x20];                       // 0x0098
 		class FName                                   MissionDataRowName;                                 // 0x00B8(0x0008)(Edit, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-		EM1MissionSubType                             MissionSubType;                                     // 0x00C0(0x0001)(Edit, ZeroConstructor, DisableEditOnInstance, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-		uint8                                         Pad_UM1DataMission[0x127];                          // 0x00C1
+		uint8                                         Pad_UM1DataMission[0x128];                          // 0x00C0
 	};
 	// 0x0238 (0x02D0 - 0x0098)
 	class UM1MissionTask final : public UMissionGraphTaskNode
@@ -913,11 +902,9 @@ namespace TFD_SDK
 	public:
 		uint8                                         Pad_SubServices[0x20];                             // 0x00A8
 		TArray<class UM1MissionTaskService*>          SubServices;                                       // 0x00C8(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_AvailableMissions[0x130];                      // 0x00D8
-		TArray<class AM1MissionActor*>                AvailableMissions;                                 // 0x0208(0x0010)(Net, ZeroConstructor, RepNotify, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_ActivatedMissions[0x140];                      // 0x00D8
 		TArray<class AM1MissionActor*>                ActivatedMissions;                                 // 0x0218(0x0010)(Net, ZeroConstructor, RepNotify, NativeAccessSpecifierPrivate)
-		TArray<class AM1MissionActor*>                LastActivatedMissions;                             // 0x0228(0x0010)(Net, ZeroConstructor, RepNotify, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_MissionResult[0x380];                          // 0x0238
+		uint8                                         Pad_MissionResult[0x390];                          // 0x0228
 		class UM1MissionResult*						  MissionResult;                                     // 0x05B8(0x0008)(ZeroConstructor, Transient, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_UM1MissionControlComponent_Class[0x218];       // 0x05C0
 
@@ -941,13 +928,6 @@ namespace TFD_SDK
 	{
 	public:
 		uint8 Pad_UM1CharacterComponent[0x8];  // 0x00C8
-	};
-	// 0x00B0 (0x0178 - 0x00C8)
-	class UM1CoolTimeComponent final : public UM1ActorComponent
-	{
-	public:
-		TArray<struct FM1CoolTimer>                   CoolTimers;                                        // 0x00C8(0x0010)(Net, ZeroConstructor, Transient, RepNotify, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_D8[0xA0];                                      // 0x00D8(0x00A0)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
 	// 0x09D8 (0x0AA0 - 0x00C8)
 	class UM1PrivateOnlineServiceComponent final : public UM1ActorComponent
@@ -1141,9 +1121,7 @@ namespace TFD_SDK
 		TArray<struct FM1MissionTaskLink>             TaskLinks;                                         // 0x0290(0x0010)(Edit, EditFixedSize, ZeroConstructor, EditConst, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_ProgressInfo[0xC8];						     // 0x02A0
 		struct FM1MissionProgressInfo                 ProgressInfo;                                      // 0x0368(0x0060)(Net, Transient, RepNotify, ContainsInstancedReference, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_CoolTimeComponent[0x1C8];						 // 0x03C8
-		class UM1CoolTimeComponent*					  CoolTimeComponent;                                 // 0x0590(0x0008)(Edit, ExportObject, ZeroConstructor, EditConst, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_AM1MissionActor_Class[0x40];                   // 0x0598
+		uint8                                         Pad_AM1MissionActor_Class[0x210];                   // 0x03C8
 	};
 	// 0x0018 (0x0260 - 0x0248)
 	class AM1MissionTaskMoveWayPoint : public AActor

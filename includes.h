@@ -173,7 +173,6 @@ void EncryptedVaultDrops();
 void MissionTaskTeleporter();
 void MissionTaskActortESP();
 void MissionTaskTeleporterDebugger();
-//void MissionActorESP();
 
 /*
 *  Aimbot
@@ -252,6 +251,13 @@ void WriteEnemyBonesData();
 std::unordered_map<int, std::vector<int>> ReadEnemyBonesData();
 void WritePresetsData();
 std::unordered_map<int, std::string> ReadPresetsData();
+
+float currenthp;
+float maxhp;
+float currentmana;
+float maxmana;
+bool hp_used = false;
+bool mp_used = false;
 
 std::unordered_map<int, std::vector<int>> IDBoneMap = { };
 bool BonesChanged = false;

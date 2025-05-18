@@ -550,9 +550,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			}
 
 			if (cfg_EnableMissionTaskTeleporter)
-			{
 				MissionTaskTeleporter();
-			}
 
 			if (IsKeyPressed(cfg_ContainerDropKey))
 				ContainerDrop();
@@ -824,12 +822,12 @@ void ItemESPVacuum()
 		|| !LocalPlayerController->Pawn
 		|| !GWorld)
 		return;
-	float currenthp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
-	float maxhp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxHp).Value / 10000.0f;
-	float currentmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentMp).Value / 10000.0f;
-	float maxmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxMp).Value / 10000.0f;
-	bool hp_used = false;
-	bool mp_used = false;
+	currenthp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
+	maxhp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxHp).Value / 10000.0f;
+	currentmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentMp).Value / 10000.0f;
+	maxmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxMp).Value / 10000.0f;
+	hp_used = false;
+	mp_used = false;
 	if (cfg_DrawItemBoxes || cfg_DrawItemNames || cfg_DrawItemLines || cfg_LootVacuum || cfg_DrawVaults)
 	{
 		/*float hp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
@@ -1495,111 +1493,6 @@ void MissionTaskActortESP()
 				}
 			}
 		}
-	}
-}
-
-std::string MissionActorStateToString(TFD_SDK::EM1MissionActorState state)
-{
-	switch (state)
-	{
-	case TFD_SDK::EM1MissionActorState::None: return "None";
-	case TFD_SDK::EM1MissionActorState::Activated: return "Activated";
-	case TFD_SDK::EM1MissionActorState::Deactivated: return "Deactivated";
-	case TFD_SDK::EM1MissionActorState::EM1MissionActorState_MAX: return "EM1MissionActorState_MAX";
-	default: return "Unknown";
-	}
-}
-
-std::string MissionSubTypeToString(TFD_SDK::EM1MissionSubType subtype)
-{
-	switch (subtype)
-	{
-	case TFD_SDK::EM1MissionSubType::Default: return "Default";
-	case TFD_SDK::EM1MissionSubType::Destruction: return "Destruction";
-	case TFD_SDK::EM1MissionSubType::Defense: return "Defense";
-	case TFD_SDK::EM1MissionSubType::Supply: return "Supply";
-	case TFD_SDK::EM1MissionSubType::Collection: return "Collection";
-	case TFD_SDK::EM1MissionSubType::Assasination: return "Assasination";
-	case TFD_SDK::EM1MissionSubType::Extermination: return "Extermination";
-	case TFD_SDK::EM1MissionSubType::Occupation: return "Occupation";
-	case TFD_SDK::EM1MissionSubType::WaveDefense: return "WaveDefense";
-	case TFD_SDK::EM1MissionSubType::ContinuousSurvival: return "ContinuousSurvival";
-	case TFD_SDK::EM1MissionSubType::DataCollection: return "DataCollection";
-	case TFD_SDK::EM1MissionSubType::Explosion: return "Explosion";
-	case TFD_SDK::EM1MissionSubType::Steal: return "Steal";
-	case TFD_SDK::EM1MissionSubType::Escort: return "Escort";
-	case TFD_SDK::EM1MissionSubType::MultiCollection: return "MultiCollection";
-	case TFD_SDK::EM1MissionSubType::MultiAssasination: return "MultiAssasination";
-	case TFD_SDK::EM1MissionSubType::VoidFragment: return "VoidFragment";
-	case TFD_SDK::EM1MissionSubType::VoidFusion: return "VoidFusion";
-	case TFD_SDK::EM1MissionSubType::DestructionVulgusPost: return "DestructionVulgusPost";
-	case TFD_SDK::EM1MissionSubType::EM1MissionSubType_MAX: return "EM1MissionSubType_MAX";
-	default: return "Unknown";
-	}
-}
-
-void MissionActorESP()
-{
-	if (!PlayerState || !PlayerState->MissionControlComponent)
-		return;
-
-	TFD_SDK::UM1MissionControlComponent* MCC = PlayerState->MissionControlComponent;
-	if (!MCC)
-		return;
-
-	char buffer[300];
-	int i = 0;
-	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->AvailableMissions)
-	{
-		if (!MissionActor)
-			continue;
-		if (!MissionActor->MissionData)
-			continue;	
-		std::string MissionName = MissionActor->MissionData->MissionDataRowName.ToString().c_str();
-		std::string MissionActorState = MissionActorStateToString(MissionActor->ProgressInfo.MissionActorState);
-		std::string MissionSubType = MissionSubTypeToString(MissionActor->MissionData->MissionSubType);
-		sprintf_s(buffer, "MissionDataRowName: %s | MissionSubType: %s | MissionActorState : %s" , MissionName.c_str(), MissionSubType.c_str(), MissionActorState.c_str());
-		ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 450, 25.0f + (12.0f * i) }, ColorRed, false);
-		if (MissionActor->CoolTimeComponent)
-		{
-			for (const TFD_SDK::FM1CoolTimer& ct : MissionActor->CoolTimeComponent->CoolTimers)
-			{
-				i += 1;
-				bool Activated = ct.bActivated;
-				float CoolTimeDuration = ct.CoolTimeDuration;
-				float CoolTimeRemaining = ct.RemainingCoolTime;
-				std::string CoolTimeContext = ct.CoolTimeContext.ToString();
-				sprintf_s(buffer, "CoolTimeContext: %s | Activated: %i | CoolTimeDuration : %f | CoolTimeRemaining : %f", CoolTimeContext.c_str(), Activated, CoolTimeDuration, CoolTimeRemaining);
-				ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 550, 25.0f + (12.0f * i) }, ColorMana, false);
-			}
-		}
-		i += 1;
-	}
-	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->LastActivatedMissions)
-	{
-		if (!MissionActor)
-			continue;
-		if (!MissionActor->MissionData)
-			continue;
-		std::string MissionName = MissionActor->MissionData->MissionDataRowName.ToString().c_str();
-		std::string MissionActorState = MissionActorStateToString(MissionActor->ProgressInfo.MissionActorState);
-		std::string MissionSubType = MissionSubTypeToString(MissionActor->MissionData->MissionSubType);
-		sprintf_s(buffer, "MissionDataRowName: %s | MissionSubType: %s | MissionActorState : %s", MissionName.c_str(), MissionSubType.c_str(), MissionActorState.c_str());
-		ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 450, 25.0f + (12.0f * i) }, ColorGreen, false);
-		if (MissionActor->CoolTimeComponent)
-		{
-			for (const TFD_SDK::FM1CoolTimer& ct : MissionActor->CoolTimeComponent->CoolTimers)
-			{
-				i += 1;
-				bool Activated = ct.bActivated;
-				float CoolTimeDuration = ct.CoolTimeDuration;
-				float CoolTimeRemaining = ct.RemainingCoolTime;
-				std::string CoolTimeContext = ct.CoolTimeContext.ToString();
-				sprintf_s(buffer, "CoolTimeContext: %s | Activated: %i | CoolTimeDuration : %f | CoolTimeRemaining : %f", CoolTimeContext.c_str(), Activated, CoolTimeDuration, CoolTimeRemaining);
-				ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 550, 25.0f + (12.0f * i) }, ColorMana, false);
-			}
-		}
-		i += 1;
 	}
 }
 
