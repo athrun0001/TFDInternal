@@ -1360,8 +1360,8 @@ void MissionTaskTeleporter()
 			if (MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex
 				&& MissionActor->ProgressInfo.ActivatedTaskIndex > 1)
 			{
-				AutoTeleportStartTime = std::chrono::steady_clock::now();
-				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
+				//AutoTeleportStartTime = std::chrono::steady_clock::now();
+				//MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
 				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
 				std::string mtt = MissionActor->MissionData->MissionDataRowName.ToString() + "|" + MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
 				if (!MissionTaskExceptionSet.contains(mtt))

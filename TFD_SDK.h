@@ -850,6 +850,12 @@ namespace TFD_SDK
 		uint8                                         Pad_UMissionGraph[0x68];                           // 0x0030(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
 
+	// 0x0378 (0x03B0 - 0x0038)
+	class UGameViewportClient : public UScriptViewportClient
+	{
+		uint8 Pad_UGameViewportClient_Class[0x378]; // 0x0038 378
+	};
+
 	// 0x0000 (0x0040 - 0x0040)
 	class UM1MissionTaskServiceInteraction final : public UM1MissionTaskService
 	{
@@ -869,12 +875,6 @@ namespace TFD_SDK
 		{
 			return StaticClassImpl<"M1PrivateOnlineServicePreset">();
 		}
-	};
-
-	// 0x0378 (0x03B0 - 0x0038)
-	class UGameViewportClient : public UScriptViewportClient
-	{
-		uint8 Pad_UGameViewportClient_Class[0x378]; // 0x0038 378
 	};
 
 	// 0x0230 (0x0278 - 0x0048)
