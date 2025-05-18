@@ -171,8 +171,8 @@ void SwitchPreset();
 void RefreshPresetList();
 void EncryptedVaultDrops();
 void MissionTaskTeleporter();
-void MissionTaskActortESP();
-void MissionTaskTeleporterDebugger();
+//void MissionTaskActortESP();
+//void MissionTaskTeleporterDebugger();
 
 /*
 *  Aimbot
@@ -367,7 +367,8 @@ std::unordered_map<std::string,bool> MoveMissionTaskExceptionSet =
 {
 	{"Kingston_F_Hard_D2|MoveD2-10a",true},
 	{"TheFortress_F_Hard_D1|MoveD1_Hard_10",true},
-	{"VoidVessel_Normal_D1|Move04a",true}
+	{"VoidVessel_Normal_D1|Move04a",true},
+	{"CorrodedLand_Invasion_D1|Move-2",false}
 };
 
 std::unordered_map<std::string,bool> MissionTaskExceptionSet =
