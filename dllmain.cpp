@@ -853,7 +853,6 @@ void ItemESPVacuum()
 							{
 								TFD_SDK::FVector2D ScreenPosa = { -1, -1 };
 								TFD_SDK::FVector WorldPositiona = Actor->K2_GetActorLocation();
-								//static_cast<TFD_SDK::AM1FieldInteractableActorMiniGame*>(Actor)->MiniGameDifficulty = TFD_SDK::EM1MiniGameDifficulty::Normal;
 								if (WorldToScreen(WorldPositiona, &ScreenPosa))
 								{
 									ZeroGUI::TextCenter((char*)"Encrypted Vault", TFD_SDK::FVector2D{ ScreenPosa.X, ScreenPosa.Y + 20 }, TFD_SDK::FLinearColor{ 0.7f, 0.0f, 1.0f, 1.0f }, false);

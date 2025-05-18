@@ -767,7 +767,7 @@ namespace TFD_SDK
 	class UMissionGraphTaskNode : public UObject
 	{
 	public:
-		uint8                                         Pad_UM1TaskEvent[0x70];
+		uint8                                         Pad_UMissionGraphTaskNode[0x70];
 	};
 	// 0x0020 (0x0048 - 0x0028)
 	class UPlayer : public UObject
@@ -776,6 +776,12 @@ namespace TFD_SDK
 		uint8 Pad_PlayerController[0x8]; // 0x28
 		class APlayerController* PlayerController; // 0x0030(0x0008)
 		uint8 Pad_UPlayer_Class[0x10]; // 0x38
+	};
+	// 0x0010 (0x0038 - 0x0028)
+	class UScriptViewportClient : public UObject
+	{
+	public:
+		uint8 Pad_UScriptViewportClient_Class[0x10]; // 0x0028(0x0010)
 	};
 	// 0x0008 (0x0030 - 0x0028)
 	class USubsystem : public UObject
@@ -863,6 +869,12 @@ namespace TFD_SDK
 		{
 			return StaticClassImpl<"M1PrivateOnlineServicePreset">();
 		}
+	};
+
+	// 0x0378 (0x03B0 - 0x0038)
+	class UGameViewportClient : public UScriptViewportClient
+	{
+		uint8 Pad_UGameViewportClient_Class[0x378]; // 0x0038 378
 	};
 
 	// 0x0230 (0x0278 - 0x0048)
