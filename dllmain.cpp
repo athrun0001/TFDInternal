@@ -1315,8 +1315,8 @@ void MissionTaskTeleporter()
 				//AutoTeleportStartTime = std::chrono::steady_clock::now();
 				if (MissionActor->MissionData->MissionDataRowName.ToString().contains("400"))
 					return;
-				if (!MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move")
-					&& !MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString().contains("Move"))
+				if (!MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move") && !MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Interact")
+					&& !MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString().contains("Move") && !MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString().contains("Interact"))
 					return;
 				if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("PlayerSet")
 					|| MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("FadeIn"))
@@ -1324,8 +1324,7 @@ void MissionTaskTeleporter()
 			}
 			
 			
-			float ODistanceLocalCharacter = 0.0f;
-			float ODistanceTask = 0.0f;
+			
 
 			if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move") && MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
 			{
@@ -1357,6 +1356,14 @@ void MissionTaskTeleporter()
 				return;
 			}
 
+			if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Interact") && MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
+			{
+				LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorRotation());
+				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+				return;
+			}
+
+
 			if (MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex
 				&& MissionActor->ProgressInfo.ActivatedTaskIndex > 1)
 			{
@@ -1366,6 +1373,8 @@ void MissionTaskTeleporter()
 				std::string mtt = MissionActor->MissionData->MissionDataRowName.ToString() + "|" + MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
 				if (!MissionTaskExceptionSet.contains(mtt))
 				{
+					float ODistanceLocalCharacter = 0.0f;
+					float ODistanceTask = 0.0f;
 					if (MissionActor->ProgressInfo.LastTaskActor->WayPoints.Num() > 0)
 					{
 						int WayPointCount = MissionActor->ProgressInfo.LastTaskActor->WayPoints.Num();
@@ -1445,11 +1454,11 @@ void MissionTaskActortESP()
 
 	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
 	{
-		if (MissionActor && MissionActor->MissionData)
+		if (MissionActor && MissionActor->MissionData && MissionActor->TaskLinks)
 		{
 			int n = 0;
 			char buffer0[300];
-			for (TFD_SDK::FM1MissionTaskLink& TL : MissionActor->TaskLinks)
+			for (TFD_SDK::FM1MissionTaskLink TL : MissionActor->TaskLinks)
 			{
 				if (!TL.InstancedTaskActor || !TL.InstancedTaskActor->MissionTask)
 					continue;
@@ -1470,7 +1479,7 @@ void MissionTaskActortESP()
 		}
 
 
-		if (MissionActor 
+		/*if (MissionActor 
 			&& MissionActor->ProgressInfo.ActivatedTaskActor 
 			&& MissionActor->MissionData)
 		{
@@ -1502,11 +1511,11 @@ void MissionTaskActortESP()
 			std::string MissionName = MissionActor->MissionData->MissionDataRowName.ToString().c_str();
 			sprintf_s(buffer1, "MissionName: %s | CurrentTaskName: %s | Status: %i | Task Index: %i |  Distance: %f", MissionName.c_str(), MissionTaskActorESPStr.c_str(), (int)MissionActor->ProgressInfo.MissionActorState, MissionActor->ProgressInfo.ActivatedTaskIndex, ODistance);
 			ZeroGUI::TextLeft((char*)buffer1, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
-			
 			i += 1;
+			
 			if (!MissionTaskActorESPStr.empty() && WorldToScreen(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), &ScreenPos))
 				ZeroGUI::TextCenter((char*)buffer1, TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen, false);
-
+				
 			for (TFD_SDK::AM1MissionTaskMoveWayPoint* MTMWP : MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints)
 			{
 				if (!MTMWP)
@@ -1516,11 +1525,10 @@ void MissionTaskActortESP()
 				ZeroGUI::TextLeft((char*)buffer1, TFD_SDK::FVector2D{ 350, 25.0f + (12.0f * i) }, ColorGold, false);
 				i += 1;
 				if (!MissionTaskActorESPStr.empty() && WorldToScreen(MTMWP->K2_GetActorLocation(), &ScreenPosWP))
-				{
 					ZeroGUI::TextCenter((char*)buffer1, TFD_SDK::FVector2D{ ScreenPosWP.X, ScreenPosWP.Y }, ColorMana, false);
-				}
+
 			}
-		}
+		}*/
 	}
 }
 
