@@ -171,9 +171,9 @@ void SwitchPreset();
 void RefreshPresetList();
 void EncryptedVaultDrops();
 void MissionTaskTeleporter();
-//void MissionTaskActortESP();
+void MissionTaskActortESP();
+void MissionTaskTeleporterDebugger();
 //void MissionActorESP();
-//void MissionTaskTeleporterDebugger();
 
 /*
 *  Aimbot

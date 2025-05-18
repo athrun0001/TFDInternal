@@ -557,10 +557,10 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (IsKeyPressed(cfg_ContainerDropKey))
 				ContainerDrop();
 
-			//if (IsKeyPressed(VK_LEFT))
-				//MissionTaskTeleporterDebugger();
+			if (IsKeyPressed(VK_LEFT))
+				MissionTaskTeleporterDebugger();
 
-			//MissionTaskActortESP();
+			MissionTaskActortESP();
 			//MissionActorESP();
 			
 			if (cfg_DrawMenu)
@@ -1353,8 +1353,8 @@ void MissionTaskTeleporter()
 				&& MissionActor->ProgressInfo.ActivatedTaskIndex > 1)
 			{
 				
-				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
-				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+				//MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
+				//MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
 				if (!MissionTaskExceptionSet.contains(mtt))
 				{
 					if (MissionActor->ProgressInfo.LastTaskActor->WayPoints.Num() > 0)
@@ -1481,7 +1481,7 @@ void MissionTaskActortESP()
 			i += 1;
 			if (!MissionTaskActorESPStr.empty() && WorldToScreen(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), &ScreenPos))
 			{
-				//ZeroGUI::TextCenter((char*)buffer1, TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen, false);
+				ZeroGUI::TextCenter((char*)buffer1, TFD_SDK::FVector2D{ ScreenPos.X, ScreenPos.Y }, ColorGreen, false);
 			}
 			for (TFD_SDK::AM1MissionTaskMoveWayPoint* MTMWP : MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints)
 			{
@@ -1491,7 +1491,7 @@ void MissionTaskActortESP()
 				i += 1;
 				if (!MissionTaskActorESPStr.empty() && WorldToScreen(MTMWP->K2_GetActorLocation(), &ScreenPosWP))
 				{
-					//ZeroGUI::TextCenter((char*)buffer1, TFD_SDK::FVector2D{ ScreenPosWP.X, ScreenPosWP.Y }, ColorMana, false);
+					ZeroGUI::TextCenter((char*)buffer1, TFD_SDK::FVector2D{ ScreenPosWP.X, ScreenPosWP.Y }, ColorMana, false);
 				}
 			}
 		}
