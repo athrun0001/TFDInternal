@@ -205,7 +205,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (!GEngine)
 				GEngine = TFD_SDK::UEngine::GetEngine();
 
-			TFD_SDK::UEngine* Engine = TFD_SDK::UEngine::GetEngine();
+			//TFD_SDK::UEngine* Engine = TFD_SDK::UEngine::GetEngine();
 			
 			//CheckPointers();
 			if (myCanvas->SizeX != lastScreenSize)
@@ -1258,10 +1258,10 @@ void RestartLastMission()
 		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::DestructionVulgusPost
 		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::VoidFragment)
 		TemplateId = MCC->MissionResult->MissionTemplateId;
-		else
+	else
 	{
 		isRestartMission = false;
-			return;
+		return;
 	}
 
 	// Restart and Process active missions
