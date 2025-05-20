@@ -10,7 +10,7 @@
 bool IsValidUWorld()
 {
 	GWorld = nullptr;
-	/*for (int i = 0; i < SDK::UObject::GObjects->Num(); i++)
+	for (int i = 0; i < SDK::UObject::GObjects->Num(); i++)
 	{
 		SDK::UObject* Obj = SDK::UObject::GObjects->GetByIndex(i);
 
@@ -27,26 +27,6 @@ bool IsValidUWorld()
 		if (Obj->Flags & SDK::EObjectFlags::LoadCompleted && Obj->IsA(TFD_SDK::UWorld::StaticClass()) && !Obj->IsDefaultObject())
 		{
 			TFD_SDK::UWorld* World = static_cast<TFD_SDK::UWorld*>(Obj);
-			if (World->OwningGameInstance)
-			{
-				if (World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
-				{
-					std::string Name = World->Name.ToString();
-					if (Name != "" && Name != "None")
-					{
-						GWorld = World;
-						return true;
-					}
-				}
-			}
-		}
-	}*/
-
-	TFD_SDK::UWorld* World = *reinterpret_cast<TFD_SDK::UWorld**>(BASE + TFD_SDK::Offsets::GWorld);
-	if (World)
-	{
-		if (World->IsA(TFD_SDK::UWorld::StaticClass()))
-		{
 			if (World->OwningGameInstance)
 			{
 				if (World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
@@ -2612,7 +2592,6 @@ DWORD WINAPI Init(HMODULE Module)
 	Sleep(1000);
 	if (GameModule.dwBase)
 	{
-		BASE = GameModule.dwBase;
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found Module\n";
 #endif // IS_DEBUG

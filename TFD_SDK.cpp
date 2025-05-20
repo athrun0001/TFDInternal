@@ -1,4 +1,4 @@
-#include "SDK/Basic.hpp"
+//#include "SDK/Basic.hpp"
 #include "TFD_SDK.h"
 //#include "SDK/M1_parameters.hpp"
 
@@ -30,62 +30,54 @@ namespace TFD_SDK
 		return GEngine;
 	}
 
-	//class UWorld* UWorld::GetWorld()
-	//{
-	//	static UWorld* World = nullptr;
-	//	static int WorldIndex = -1;
-
-	//	if (World == nullptr)
-	//	{
-	//		for (int i = 0; i < UObject::GObjects->Num(); i++)
-	//		{
-	//			UObject* Obj = UObject::GObjects->GetByIndex(i);
-
-	//			if (!Obj)
-	//				continue;
-
-	//			if (Obj->Flags & EObjectFlags::LoadCompleted && Obj->IsA(UWorld::StaticClass()) && !Obj->IsDefaultObject())
-	//			{
-	//				
-	//				WorldIndex = i;
-	//				World = static_cast<UWorld*>(Obj);
-	//				//std::cout << "DescentInternal - World Found: " << std::hex << World << std::dec << " with Index: " << WorldIndex << "\n";
-	//				break;
-	//			}
-	//		}
-	//		return World;
-	//	}
-	//	else
-	//	{
-	//		UObject* Obj = UObject::GObjects->GetByIndex(WorldIndex);
-
-	//		if (!Obj)
-	//		{
-	//			//std::cout << "DescentInternal - World Obj Invalid: " << std::hex << World << std::dec << "\n";
-	//			World = nullptr;
-	//			WorldIndex = -1;
-	//			return World;
-	//		}
-	//		else
-	//		{
-	//			if (!(Obj->Flags & SDK::EObjectFlags::LoadCompleted) || !Obj->IsA(UWorld::StaticClass()) || Obj->IsDefaultObject())
-	//			{
-	//				//std::cout << "DescentInternal - World Obj Not World or is DefaultObject: " << std::hex << World << std::dec << "\n";
-	//				World = nullptr;
-	//				WorldIndex = -1;
-	//				return World;
-	//			}
-	//		}
-	//		return World;
-	//	}
-	//}
-
 	class UWorld* UWorld::GetWorld()
 	{
-		if  (Offsets::GWorld != 0)
-			return *reinterpret_cast<UWorld**>(InSDKUtils::GetImageBase() + Offsets::GWorld);
+		static UWorld* World = nullptr;
+		static int WorldIndex = -1;
 
-		return nullptr;
+		if (World == nullptr)
+		{
+			for (int i = 0; i < UObject::GObjects->Num(); i++)
+			{
+				UObject* Obj = UObject::GObjects->GetByIndex(i);
+
+				if (!Obj)
+					continue;
+
+				if (Obj->Flags & EObjectFlags::LoadCompleted && Obj->IsA(UWorld::StaticClass()) && !Obj->IsDefaultObject())
+				{
+					
+					WorldIndex = i;
+					World = static_cast<UWorld*>(Obj);
+					//std::cout << "DescentInternal - World Found: " << std::hex << World << std::dec << " with Index: " << WorldIndex << "\n";
+					break;
+				}
+			}
+			return World;
+		}
+		else
+		{
+			UObject* Obj = UObject::GObjects->GetByIndex(WorldIndex);
+
+			if (!Obj)
+			{
+				//std::cout << "DescentInternal - World Obj Invalid: " << std::hex << World << std::dec << "\n";
+				World = nullptr;
+				WorldIndex = -1;
+				return World;
+			}
+			else
+			{
+				if (!(Obj->Flags & SDK::EObjectFlags::LoadCompleted) || !Obj->IsA(UWorld::StaticClass()) || Obj->IsDefaultObject())
+				{
+					//std::cout << "DescentInternal - World Obj Not World or is DefaultObject: " << std::hex << World << std::dec << "\n";
+					World = nullptr;
+					WorldIndex = -1;
+					return World;
+				}
+			}
+			return World;
+		}
 	}
 
 	void UM1WeaponRoundsComponent::ClientFillCurrentRoundByServer()
