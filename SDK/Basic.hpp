@@ -33,11 +33,11 @@ namespace SDK
 	*/
 	namespace Offsets
 	{
-		static int32 GObjects = 0x0;
-		static int32 AppendString = 0x0;
-		static int32 GNames = 0x0;
-		static int32 GWorld = 0x0;
-		static int32 ProcessEvent = 0x0;
+		static int32 GObjects = 0x09F24450;
+		static int32 AppendString = 0x00000000;
+		static int32 GNames = 0x0A245380;
+		static int32 GWorld = 0x0A243738;
+		static int32 ProcessEvent = 0x040FDA90;
 		static int32 ProcessEventIdx = 0x0000004D;
 	}
 

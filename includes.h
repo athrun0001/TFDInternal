@@ -27,6 +27,7 @@ struct CONTROLLER_STATE
 CONTROLLER_STATE g_Controllers[4];
 HRESULT UpdateControllerState();
 
+static uintptr_t BASE = 0x0;
 /*
 *  Hooks
 */
