@@ -1449,10 +1449,11 @@ void MissionTaskTeleporterDebugger()
 		{
 			if (MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
 			{
-				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
+				if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move"))
+					MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
+				else
+					LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->K2_GetActorRotation());
 				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
-				if (!MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move"))
-					LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorRotation());
 				return;
 			}
 		}
@@ -1498,7 +1499,7 @@ void MissionTaskActortESP()
 		}
 
 
-		/*if (MissionActor 
+		if (MissionActor 
 			&& MissionActor->ProgressInfo.ActivatedTaskActor 
 			&& MissionActor->MissionData)
 		{
@@ -1547,7 +1548,7 @@ void MissionTaskActortESP()
 					ZeroGUI::TextCenter((char*)buffer1, TFD_SDK::FVector2D{ ScreenPosWP.X, ScreenPosWP.Y }, ColorMana, false);
 
 			}
-		}*/
+		}
 	}
 }
 
