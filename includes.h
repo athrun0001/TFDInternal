@@ -24,6 +24,7 @@ struct CONTROLLER_STATE
 	bool bConnected;
 };
 
+uintptr_t dwBase;
 CONTROLLER_STATE g_Controllers[4];
 HRESULT UpdateControllerState();
 
@@ -368,7 +369,8 @@ std::unordered_map<std::string,bool> MoveMissionTaskExceptionSet =
 	{"Kingston_F_Hard_D2|MoveD2-10a",true},
 	{"TheFortress_F_Hard_D1|MoveD1_Hard_10",true},
 	{"VoidVessel_Normal_D1|Move04a",true},
-	{"CorrodedLand_Invasion_D1|Move-2",false}
+	{"CorrodedLand_Invasion_D1|Move-2",false},
+	{"TheFortress_Invasion_D2|Move_4a",true}
 };
 
 std::unordered_map<std::string,bool> MissionTaskExceptionSet =

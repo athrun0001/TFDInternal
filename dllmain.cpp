@@ -10,7 +10,7 @@
 bool IsValidUWorld()
 {
 	GWorld = nullptr;
-	for (int i = 0; i < SDK::UObject::GObjects->Num(); i++)
+	/*for (int i = 0; i < SDK::UObject::GObjects->Num(); i++)
 	{
 		SDK::UObject* Obj = SDK::UObject::GObjects->GetByIndex(i);
 
@@ -36,6 +36,29 @@ bool IsValidUWorld()
 					{
 						GWorld = World;
 						return true;
+					}
+				}
+			}
+		}
+	}*/
+	 
+	TFD_SDK::UWorld* World = *reinterpret_cast<TFD_SDK::UWorld**>(dwBase + TFD_SDK::Offsets::GWorld);
+	if (World)
+	{
+		if (World->IsA(TFD_SDK::UWorld::StaticClass()))
+		{
+			if (World->OwningGameInstance)
+			{
+				if (World->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+				{
+					std::string Name = World->Name.ToString();
+					if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition")
+					{
+						if (static_cast<TFD_SDK::UM1GameInstance*>(World->OwningGameInstance)->ConnectionState == TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay)
+						{
+							GWorld = World;
+							return true;
+						}
 					}
 				}
 			}
@@ -85,9 +108,9 @@ bool CheckPointers()
 		}*/
 	if (IsValidUWorld() && isGUIInit)
 	{
-		std::string Name = GWorld->Name.ToString();
+		/*std::string Name = GWorld->Name.ToString();
 		if (Name != "" && Name != "None" && Name != "Lobby_P" && Name != "Level_Transition")
-		{
+		{*/
 			if (GWorld->OwningGameInstance->LocalPlayers)
 			{
 				if (GWorld->OwningGameInstance->LocalPlayers.Num() > 0)
@@ -149,7 +172,7 @@ bool CheckPointers()
 					}
 				}
 			}
-		}
+		//}
 	}
 	LocalPlayerController = nullptr;
 	PlayerState = nullptr;
@@ -283,14 +306,14 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 		if (CheckPointers())
 		{
-			int State = -1;
-			if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
-			{
-				State = (int)(static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState);
-			}
+			//int State = -1;
+			//if (GWorld->OwningGameInstance && GWorld->OwningGameInstance->IsA(TFD_SDK::UM1GameInstance::StaticClass()))
+			//{
+			//	State = (int)(static_cast<TFD_SDK::UM1GameInstance*>(GWorld->OwningGameInstance)->ConnectionState);
+			//}
 
-			if (State != (int)TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay) // Game isn't ready, don't do anything or it will likely crash
-				return M1org(self, Canvas);
+			//if (State != (int)TFD_SDK::EM1OnlineServiceConnectionState::ReceivedPawnAndOkay) // Game isn't ready, don't do anything or it will likely crash
+			//	return M1org(self, Canvas);
 
 			/*if (inGame && PlayerIngameController
 				&& PlayerIngameController->HeartbeatTesterComponent)
@@ -1323,9 +1346,6 @@ void MissionTaskTeleporter()
 					return;
 			}
 			
-			
-			
-
 			if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move") && MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
 			{
 				AutoTeleportStartTime = std::chrono::steady_clock::now();
@@ -1362,7 +1382,6 @@ void MissionTaskTeleporter()
 				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
 				return;
 			}
-
 
 			if (MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex
 				&& MissionActor->ProgressInfo.ActivatedTaskIndex > 1)
@@ -2592,6 +2611,7 @@ DWORD WINAPI Init(HMODULE Module)
 	Sleep(1000);
 	if (GameModule.dwBase)
 	{
+		dwBase = GameModule.dwBase;
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found Module\n";
 #endif // IS_DEBUG
@@ -2629,7 +2649,7 @@ DWORD WINAPI Init(HMODULE Module)
 		std::cout << "DescentInternal - Found GObjects at: " << std::hex << GObjsPtr << std::dec << "\n";
 		Sleep(1000);
 #endif // IS_DEBUG
-		//TFD_SDK::Offsets::GObjects = 0x9B29CF0;
+		TFD_SDK::Offsets::GWorld = 0x0A243738;
 
 		uintptr_t SpreadPtr = FindSignature(procID, GameModule, NoSpreadSig, NoSpreadMask);
 		if (!SpreadPtr)
