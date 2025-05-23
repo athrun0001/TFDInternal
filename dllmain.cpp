@@ -587,6 +587,22 @@ void InstantReload()
 	if (!LocalPlayerCharacter)
 		return;
 
+	if (LocalPlayerCharacter->WeaponSlotControl)
+	{
+		if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon)
+		{
+			if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent)
+			{
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent->CurrentRounds < 3)
+				{
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent->ClientFillCurrentRoundByServer();
+				}
+			}
+		}
+	}
+
+	/*if (!LocalPlayerCharacter)
+		return;
 	static bool foundWeapon = false; 
 	if (!foundWeapon)
 	{
@@ -650,7 +666,7 @@ void InstantReload()
 				}
 			}
 		}
-	}
+	}*/
 }
 
 void PlayerEnemyESP()
