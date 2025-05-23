@@ -62,9 +62,9 @@ uint8_t NoSpreadOriginal[9] = { 0xF3, 0x41, 0x0F, 0x5D, 0xC4, 0x0F, 0x28, 0xF8 }
 uint8_t NoSpreadCheat[9] = { 0xF3, 0x45, 0x0F, 0x5C, 0xC9, 0x90, 0x90, 0x90 };
 uint8_t* NoSpreadAddress = 0;
 //  Original 84 C0 74 1F 48 8B BE E8 00 00 00
-//const char* NoRecoilSig = "\x84\xC0\x74\x00\x48\x8B\xBE\x00\x00\x00\x00\x8B\x9E";
-//const char* NoRecoilMask = "xxx?xxx????xx";
-//uint8_t* NoRecoilAddress = 0;
+const char* NoRecoilSig = "\x84\xC0\x74\x00\x48\x8B\xBD\x00\x00\x00\x00\x8B\x9D";
+const char* NoRecoilMask = "xxx?xxx????xx";
+uint8_t* NoRecoilAddress = 0;
 //const char* RapidFireSig = "\x72\x00\xF3\x0F\x10\x87\x00\x00\x00\x00\x48";
 // char* RapidFireMask = "x?xxxx????x";
 const char* RapidFireSig = "\x72\x00\xF3\x0F\x10\x87\x00\x00\x00\x00\xF3\x0F\x5C\xC1";
@@ -191,9 +191,9 @@ TFD_SDK::AActor* Aimbot_Target;
 int Aimbot_BoneIndex = -1;
 bool cfg_AimbotNoSpread = false;
 bool cfg_AimbotController = false;
-//bool cfg_AimbotNoRecoil = false;
+bool cfg_AimbotNoRecoil = false;
 bool cfg_AimbotRapidFire = false;
-//uint8_t Recoil[2] = { 0x74, 0x75 };
+uint8_t Recoil[2] = { 0x74, 0x75 };
 uint8_t RapidFire[2] = { 0x72, 0x77 };
 
 /*
