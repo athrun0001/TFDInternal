@@ -24,6 +24,7 @@ struct CONTROLLER_STATE
 	bool bConnected;
 };
 
+uintptr_t dwBase;
 CONTROLLER_STATE g_Controllers[4];
 HRESULT UpdateControllerState();
 
@@ -61,7 +62,7 @@ uint8_t NoSpreadOriginal[9] = { 0xF3, 0x41, 0x0F, 0x5D, 0xC4, 0x0F, 0x28, 0xF8 }
 uint8_t NoSpreadCheat[9] = { 0xF3, 0x45, 0x0F, 0x5C, 0xC9, 0x90, 0x90, 0x90 };
 uint8_t* NoSpreadAddress = 0;
 //  Original 84 C0 74 1F 48 8B BE E8 00 00 00
-const char* NoRecoilSig = "\x84\xC0\x74\x00\x48\x8B\xBE\x00\x00\x00\x00\x8B\x9E";
+const char* NoRecoilSig = "\x84\xC0\x74\x00\x48\x8B\xBD\x00\x00\x00\x00\x8B\x9D";
 const char* NoRecoilMask = "xxx?xxx????xx";
 uint8_t* NoRecoilAddress = 0;
 //const char* RapidFireSig = "\x72\x00\xF3\x0F\x10\x87\x00\x00\x00\x00\x48";
@@ -170,8 +171,9 @@ void LeaveMission();
 void SwitchPreset();
 void RefreshPresetList();
 void EncryptedVaultDrops();
-void MissionTaskActortESP();
 void MissionTaskTeleporter();
+//void MissionTaskActortESP();
+//void MissionTaskTeleporterDebugger();
 
 /*
 *  Aimbot
@@ -241,6 +243,8 @@ std::chrono::steady_clock::time_point ShowHotSwapOverlayStartTime = std::chrono:
 std::chrono::steady_clock::time_point AutoTeleportStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point AutoRestartMissionStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point AutoInstantInfilStartTime = std::chrono::steady_clock::now();
+std::chrono::steady_clock::time_point HPLootStartTime = std::chrono::steady_clock::now();
+std::chrono::steady_clock::time_point MPLootStartTime = std::chrono::steady_clock::now();
 
 void WriteEnemyNamesData();
 std::unordered_map<int, std::string> ReadEnemyNamesData();
@@ -364,7 +368,9 @@ std::unordered_map<std::string,bool> MoveMissionTaskExceptionSet =
 {
 	{"Kingston_F_Hard_D2|MoveD2-10a",true},
 	{"TheFortress_F_Hard_D1|MoveD1_Hard_10",true},
-	{"VoidVessel_Normal_D1|Move04a",true}
+	{"VoidVessel_Normal_D1|Move04a",true},
+	{"CorrodedLand_Invasion_D1|Move-2",false},
+	{"TheFortress_Invasion_D2|Move_4a",true}
 };
 
 std::unordered_map<std::string,bool> MissionTaskExceptionSet =

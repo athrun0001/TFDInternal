@@ -285,40 +285,6 @@ namespace TFD_SDK
 		return Parms.ReturnValue;
 	}
 
-	void UActorComponent::Deactivate()
-	{
-		static class UFunction* Func = nullptr;
-
-		if (Func == nullptr)
-			Func = Class->GetFunction("ActorComponent", "Deactivate");
-
-		auto Flgs = Func->FunctionFlags;
-		Func->FunctionFlags |= 0x400;
-
-		UObject::ProcessEvent(Func, nullptr);
-
-		Func->FunctionFlags = Flgs;
-	}
-
-	bool UActorComponent::IsActive() const
-	{
-		static class UFunction* Func = nullptr;
-
-		if (Func == nullptr)
-			Func = Class->GetFunction("ActorComponent", "IsActive");
-
-		ActorComponent_IsActive Parms{};
-
-		auto Flgs = Func->FunctionFlags;
-		Func->FunctionFlags |= 0x400;
-
-		UObject::ProcessEvent(Func, &Parms);
-
-		Func->FunctionFlags = Flgs;
-
-		return Parms.ReturnValue;
-	}
-
 	struct FTransform USceneComponent::K2_GetComponentToWorld() const
 	{
 		static class UFunction* Func = nullptr;
