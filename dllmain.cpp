@@ -424,8 +424,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 			if (IsKeyPressed(VK_DOWN))
 			{
-				ShowHotSwapOverlay = true;
-				ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 				if (HotSwapIndex == 5)
 					HotSwapIndex = 0;
 				else
@@ -433,8 +431,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			}
 			if (IsKeyPressed(VK_UP))
 			{
-				ShowHotSwapOverlay = true;
-				ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 				if (HotSwapIndex == 0)
 					HotSwapIndex = 5;
 				else
@@ -546,28 +542,20 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 			if (cfg_HotSwapOverlay)
 			{
-				if (ShowHotSwapOverlay)
+				if (!PresetsMap.empty())
 				{
-					if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - ShowHotSwapOverlayStartTime).count() > 3)
-						ShowHotSwapOverlay = false;
-				}
-				if (ShowHotSwapOverlay)
-				{
-					if (!PresetsMap.empty())
+					for (int i = 0; i < 6; i++)
 					{
-						for (int i = 0; i < 6; i++)
-						{
-							char buffer[100];
-							if (HotSwapPreset[i] != -1)
-								sprintf_s(buffer, "Preset %d: %s", i + 1, PresetsMap[HotSwapPreset[i]].c_str());
-							else
-								sprintf_s(buffer, "Preset %d: None", i + 1);
+						char buffer[100];
+						if (HotSwapPreset[i] != -1)
+							sprintf_s(buffer, "Preset %d: %s", i + 1, PresetsMap[HotSwapPreset[i]].c_str());
+						else
+							sprintf_s(buffer, "Preset %d: None", i + 1);
 
-							if (i == HotSwapIndex)
-								ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
-							else
-								ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
-						}
+						if (i == HotSwapIndex)
+							ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
+						else
+							ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
 					}
 				}
 			}
@@ -1198,14 +1186,12 @@ void ItemESPVacuum()
 
 void InstantInfiltration()
 {
-	if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoInstantInfilStartTime).count() < 1)
-		return;
 
 	if (!PlayerState || !PlayerState->MissionControlComponent || !PlayerIngameController)
 		return;
 
 	TFD_SDK::UM1MissionControlComponent* MCC = PlayerState->MissionControlComponent;
-	if (!MCC)
+	if (!MCC || !MCC->ActivatedMissions || !MCC->SubServices)
 		return;
 	if (MCC->ActivatedMissions.Num() == 0)
 		return;
@@ -1236,17 +1222,17 @@ void InstantInfiltration()
 			TFD_SDK::AM1MissionTaskActorDestructionVulgusPost* VPost = static_cast<TFD_SDK::AM1MissionTaskActorDestructionVulgusPost*>(TaskActor);
 			if (!VPost)
 				continue;
-
 			
 			for (TFD_SDK::AM1MissionTargetInteraction* MissionTarget : VPost->MissionTargets)
 			{
 				if (MissionTarget && MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Deactivated &&
-					MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Destructed)
+					MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Destructed &&
+					std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoInstantInfilStartTime).count() > 500)
 				{
 					AutoInstantInfilStartTime = std::chrono::steady_clock::now();
 					MCCInt->ServerRequestMissionTargetBeginInteraction(MissionTarget, PlayerIngameController);
+					return;
 				}
-					
 			}
 			break;
 		}
@@ -1255,9 +1241,6 @@ void InstantInfiltration()
 
 void RestartLastMission()
 {
-	if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoRestartMissionStartTime).count() < 1)
-		return;
-
 	if (!PlayerState || !PlayerState->MissionControlComponent)
 	{
 		isRestartMission = false;
@@ -1271,32 +1254,24 @@ void RestartLastMission()
 		return;
 	}
 	
-	// Get the last mission template ID
-	TFD_SDK::FM1TemplateId TemplateId;
-	if (MCC->MissionResult->MissionTemplateId.ID > 0
-		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::DestructionVulgusPost
-		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::VoidFragment)
-		TemplateId = MCC->MissionResult->MissionTemplateId;
-	else
-	{
-		isRestartMission = false;
-		return;
-	}
 
-	// Restart and Process active missions
-	if (MCC->ActivatedMissions.Num() == 0)
+	if (MCC->ActivatedMissions.Num() == 0 &&
+		MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::DestructionVulgusPost
+		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::VoidFragment 
+		&& std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoRestartMissionStartTime).count() > 1000)
 	{
 		if (cfg_RestartType == 0)
 			MCC->ServerRestartLastPlayedMission();
-		if (cfg_RestartType == 1)
-			MCC->ServerStartMissionByTemplateID(TemplateId);
+		if (cfg_RestartType == 1 )
+			MCC->ServerStartMissionByTemplateID(MCC->MissionResult->MissionTemplateId);
 		AutoRestartMissionStartTime = std::chrono::steady_clock::now();
 		isRestartMission = true;
+		return;
 	}
-	
+
 	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
 	{
-		if (MissionActor 
+		if (MissionActor
 			&& MissionActor->ProgressInfo.ActivatedTaskActor
 			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask
 			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move"))
@@ -1305,13 +1280,11 @@ void RestartLastMission()
 			isRestartMission = false;
 		break;
 	}
+
 }
 
 void MissionTaskTeleporter()
 {
-	if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoTeleportStartTime).count() <= 1000)
-		return;
-
 	if (!PlayerState || !PlayerState->MissionControlComponent || !LocalPlayerCharacter)
 		return;
 
@@ -1346,7 +1319,8 @@ void MissionTaskTeleporter()
 					return;
 			}
 			
-			if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move") && MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
+			if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move") && MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex
+				&& std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoTeleportStartTime).count() > 1000)
 			{
 				AutoTeleportStartTime = std::chrono::steady_clock::now();
 				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
@@ -2743,7 +2717,7 @@ DWORD WINAPI Init(HMODULE Module)
 	bool isPostRenderHooked = false;
 	do
 	{
-		TFD_SDK::UWorld* world = TFD_SDK::UWorld::GetWorld();
+		TFD_SDK::UWorld* world = TFD_SDK::UWorld::GetWorld(dwBase);
 		if (world && world->IsA(TFD_SDK::UWorld::StaticClass()))
 		{
 			/*if (!GWorld)

@@ -232,14 +232,12 @@ int cfg_TimeScaleKey = VK_F2;
 int cfg_TimeScaleHoldKey = VK_CONTROL;
 int cfg_EncryptedVaultDropsKey = VK_LEFT;
 int cfg_EncryptedVaultRewardType = 0;
-bool ShowHotSwapOverlay = false;
 bool isRestartMission = false;
 int cfg_RestartType = 0;
 
 
 UC::int32 MissionTaskIndex = 0;
 
-std::chrono::steady_clock::time_point ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point AutoTeleportStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point AutoRestartMissionStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point AutoInstantInfilStartTime = std::chrono::steady_clock::now();

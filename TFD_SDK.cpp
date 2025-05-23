@@ -30,8 +30,11 @@ namespace TFD_SDK
 		return GEngine;
 	}
 
-	class UWorld* UWorld::GetWorld()
+	class UWorld* UWorld::GetWorld(uintptr_t dwBase)
 	{
+		if (TFD_SDK::Offsets::GWorld != 0)
+			return *reinterpret_cast<TFD_SDK::UWorld**>(dwBase + TFD_SDK::Offsets::GWorld);;
+
 		static UWorld* World = nullptr;
 		static int WorldIndex = -1;
 
