@@ -1273,6 +1273,8 @@ void RestartLastMission()
 		return;
 	}
 	
+	if (MCC->ActivatedMissions.Num() > 0 && isRestartMission == false)
+		return;
 
 	if (MCC->ActivatedMissions.Num() == 0 &&
 		MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::DestructionVulgusPost
@@ -1692,23 +1694,22 @@ void ContainerDrop()
 			TFD_SDK::AM1FieldInteractableActor* Interactable = static_cast<TFD_SDK::AM1FieldInteractableActor*>(Actor);
 			if (!Interactable)
 				continue;
+
+			TFD_SDK::FVector WorldPosition = Interactable->K2_GetActorLocation();
+			TFD_SDK::FVector PlayerPosition = LocalPlayerCharacter->K2_GetActorLocation();
+			float Distance = WorldPosition.GetDistanceTo(PlayerPosition);
+			if (Distance <= cfg_ContainersRange)
 			{
-				TFD_SDK::FVector WorldPosition = Interactable->K2_GetActorLocation();
-				TFD_SDK::FVector PlayerPosition = LocalPlayerCharacter->K2_GetActorLocation();
-				float Distance = WorldPosition.GetDistanceTo(PlayerPosition);
-				if (Distance <= cfg_ContainersRange)
+				if (cfg_ChangeDropCount = false)
 				{
-					if (cfg_ChangeDropCount = false)
+					PlayerIngameController->ServerRequestFieldObjectDropItems(Interactable);
+					Sleep(10);
+				}
+				if (cfg_ChangeDropCount = true)
+				{
+					for (int count = 0; count < cfg_DropCount; ++count)
 					{
 						PlayerIngameController->ServerRequestFieldObjectDropItems(Interactable);
-						Sleep(10);
-					}
-					if (cfg_ChangeDropCount = true)
-					{
-						for (int count = 0; count < cfg_DropCount; ++count)
-						{
-							PlayerIngameController->ServerRequestFieldObjectDropItems(Interactable);
-						}
 					}
 				}
 			}
