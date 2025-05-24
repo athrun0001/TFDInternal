@@ -1257,6 +1257,9 @@ void InstantInfiltration()
 
 void RestartLastMission()
 {
+	if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoRestartMissionStartTime).count() <= 1000)
+		return;
+
 	if (!PlayerState || !PlayerState->MissionControlComponent)
 	{
 		isRestartMission = false;
@@ -1273,8 +1276,7 @@ void RestartLastMission()
 
 	if (MCC->ActivatedMissions.Num() == 0 &&
 		MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::DestructionVulgusPost
-		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::VoidFragment 
-		&& std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoRestartMissionStartTime).count() > 1000)
+		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::VoidFragment)
 	{
 		if (cfg_RestartType == 0)
 			MCC->ServerRestartLastPlayedMission();
@@ -1301,6 +1303,9 @@ void RestartLastMission()
 
 void MissionTaskTeleporter()
 {
+	if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoTeleportStartTime).count() <= 1000)
+		return;
+
 	if (!PlayerState || !PlayerState->MissionControlComponent || !LocalPlayerCharacter)
 		return;
 
@@ -1336,12 +1341,11 @@ void MissionTaskTeleporter()
 			}
 			
 			if ((MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move") || MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Interact"))
-				&& MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex
-				&& std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoTeleportStartTime).count() > 1000)
+				&& MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
 			{
-				AutoTeleportStartTime = std::chrono::steady_clock::now();
 				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
 				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+				AutoTeleportStartTime = std::chrono::steady_clock::now();
 				std::string mtt = MissionActor->MissionData->MissionDataRowName.ToString() + "|" + MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
 				if (MoveMissionTaskExceptionSet.contains(mtt))
 				{
