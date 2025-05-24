@@ -424,8 +424,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 			if (IsKeyPressed(VK_DOWN))
 			{
-				ShowHotSwapOverlay = true;
-				ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 				if (HotSwapIndex == 5)
 					HotSwapIndex = 0;
 				else
@@ -433,8 +431,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			}
 			if (IsKeyPressed(VK_UP))
 			{
-				ShowHotSwapOverlay = true;
-				ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 				if (HotSwapIndex == 0)
 					HotSwapIndex = 5;
 				else
@@ -546,28 +542,20 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 			if (cfg_HotSwapOverlay)
 			{
-				if (ShowHotSwapOverlay)
+				if (!PresetsMap.empty())
 				{
-					if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - ShowHotSwapOverlayStartTime).count() > 3)
-						ShowHotSwapOverlay = false;
-				}
-				if (ShowHotSwapOverlay)
-				{
-					if (!PresetsMap.empty())
+					for (int i = 0; i < 6; i++)
 					{
-						for (int i = 0; i < 6; i++)
-						{
-							char buffer[100];
-							if (HotSwapPreset[i] != -1)
-								sprintf_s(buffer, "Preset %d: %s", i + 1, PresetsMap[HotSwapPreset[i]].c_str());
-							else
-								sprintf_s(buffer, "Preset %d: None", i + 1);
+						char buffer[100];
+						if (HotSwapPreset[i] != -1)
+							sprintf_s(buffer, "Preset %d: %s", i + 1, PresetsMap[HotSwapPreset[i]].c_str());
+						else
+							sprintf_s(buffer, "Preset %d: None", i + 1);
 
-							if (i == HotSwapIndex)
-								ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
-							else
-								ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
-						}
+						if (i == HotSwapIndex)
+							ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
+						else
+							ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorWhite, false);
 					}
 				}
 			}
@@ -599,6 +587,22 @@ void InstantReload()
 	if (!LocalPlayerCharacter)
 		return;
 
+	if (LocalPlayerCharacter->WeaponSlotControl)
+	{
+		if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon)
+		{
+			if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent)
+			{
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent->CurrentRounds < 3)
+				{
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->RoundsComponent->ClientFillCurrentRoundByServer();
+				}
+			}
+		}
+	}
+
+	/*if (!LocalPlayerCharacter)
+		return;
 	static bool foundWeapon = false; 
 	if (!foundWeapon)
 	{
@@ -662,7 +666,7 @@ void InstantReload()
 				}
 			}
 		}
-	}
+	}*/
 }
 
 void PlayerEnemyESP()
@@ -1198,14 +1202,12 @@ void ItemESPVacuum()
 
 void InstantInfiltration()
 {
-	if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoInstantInfilStartTime).count() < 1)
-		return;
 
 	if (!PlayerState || !PlayerState->MissionControlComponent || !PlayerIngameController)
 		return;
 
 	TFD_SDK::UM1MissionControlComponent* MCC = PlayerState->MissionControlComponent;
-	if (!MCC)
+	if (!MCC || !MCC->ActivatedMissions || !MCC->SubServices)
 		return;
 	if (MCC->ActivatedMissions.Num() == 0)
 		return;
@@ -1236,17 +1238,17 @@ void InstantInfiltration()
 			TFD_SDK::AM1MissionTaskActorDestructionVulgusPost* VPost = static_cast<TFD_SDK::AM1MissionTaskActorDestructionVulgusPost*>(TaskActor);
 			if (!VPost)
 				continue;
-
 			
 			for (TFD_SDK::AM1MissionTargetInteraction* MissionTarget : VPost->MissionTargets)
 			{
 				if (MissionTarget && MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Deactivated &&
-					MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Destructed)
+					MissionTarget->CurrentState != TFD_SDK::EM1MissionTargetState::Destructed &&
+					std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoInstantInfilStartTime).count() > 500)
 				{
 					AutoInstantInfilStartTime = std::chrono::steady_clock::now();
 					MCCInt->ServerRequestMissionTargetBeginInteraction(MissionTarget, PlayerIngameController);
+					return;
 				}
-					
 			}
 			break;
 		}
@@ -1255,7 +1257,7 @@ void InstantInfiltration()
 
 void RestartLastMission()
 {
-	if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - AutoRestartMissionStartTime).count() < 1)
+	if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoRestartMissionStartTime).count() <= 1000)
 		return;
 
 	if (!PlayerState || !PlayerState->MissionControlComponent)
@@ -1271,32 +1273,23 @@ void RestartLastMission()
 		return;
 	}
 	
-	// Get the last mission template ID
-	TFD_SDK::FM1TemplateId TemplateId;
-	if (MCC->MissionResult->MissionTemplateId.ID > 0
-		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::DestructionVulgusPost
-		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::VoidFragment)
-		TemplateId = MCC->MissionResult->MissionTemplateId;
-	else
-	{
-		isRestartMission = false;
-		return;
-	}
 
-	// Restart and Process active missions
-	if (MCC->ActivatedMissions.Num() == 0)
+	if (MCC->ActivatedMissions.Num() == 0 &&
+		MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::DestructionVulgusPost
+		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::VoidFragment)
 	{
 		if (cfg_RestartType == 0)
 			MCC->ServerRestartLastPlayedMission();
-		if (cfg_RestartType == 1)
-			MCC->ServerStartMissionByTemplateID(TemplateId);
+		if (cfg_RestartType == 1 )
+			MCC->ServerStartMissionByTemplateID(MCC->MissionResult->MissionTemplateId);
 		AutoRestartMissionStartTime = std::chrono::steady_clock::now();
 		isRestartMission = true;
+		return;
 	}
-	
+
 	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
 	{
-		if (MissionActor 
+		if (MissionActor
 			&& MissionActor->ProgressInfo.ActivatedTaskActor
 			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask
 			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move"))
@@ -1305,6 +1298,7 @@ void RestartLastMission()
 			isRestartMission = false;
 		break;
 	}
+
 }
 
 void MissionTaskTeleporter()
@@ -1346,11 +1340,12 @@ void MissionTaskTeleporter()
 					return;
 			}
 			
-			if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move") && MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
+			if ((MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move") || MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Interact"))
+				&& MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
 			{
-				AutoTeleportStartTime = std::chrono::steady_clock::now();
 				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
 				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+				AutoTeleportStartTime = std::chrono::steady_clock::now();
 				std::string mtt = MissionActor->MissionData->MissionDataRowName.ToString() + "|" + MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
 				if (MoveMissionTaskExceptionSet.contains(mtt))
 				{
@@ -1373,13 +1368,6 @@ void MissionTaskTeleporter()
 						return;
 					}
 				}
-				return;
-			}
-
-			if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Interact") && MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
-			{
-				LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorRotation());
-				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
 				return;
 			}
 
@@ -2613,22 +2601,23 @@ DWORD WINAPI Init(HMODULE Module)
 	if (GameModule.dwBase)
 	{
 		dwBase = GameModule.dwBase;
+		dwSize = GameModule.dwSize;
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found Module\n";
 #endif // IS_DEBUG
-		/*uintptr_t GNamePtr = FindSignature(procID, GameModule, GNamesSig, GNamesMask);
+		uintptr_t GNamePtr = FindSignature(procID, dwBase, dwSize, GNamesSig, GNamesMask);
 		if (!GNamePtr)
 		{
 			throw std::runtime_error("Unable to find GNames.");
 			return 1;
 		}
-		GNamePtr = GameModule.dwBase + GNamePtr;
+		GNamePtr = dwBase + GNamePtr;
 		uintptr_t GNameOffsetAddress = GNamePtr + 3;
-		int32_t GNameOffsetRelative = *reinterpret_cast<int32_t*>(GNameOffsetAddress);
+		uintptr_t GNameOffsetRelative = *reinterpret_cast<uintptr_t*>(GNameOffsetAddress);
 		uintptr_t GNameAddress = (GNamePtr + 7) + GNameOffsetRelative;
-		uintptr_t GNameOffset = GNameAddress - GameModule.dwBase;
-		TFD_SDK::Offsets::GNames = GNameOffset;*/
-		TFD_SDK::Offsets::GNames = 0x0A33B180;
+		uintptr_t GNameOffset = GNameAddress - dwBase;
+		TFD_SDK::Offsets::GNames = GNameOffset;
+		//TFD_SDK::Offsets::GNames = 0x0A33B180;
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found GNames at: " << std::hex << GNameOffset << "\n";
 		Sleep(1000);
@@ -2645,14 +2634,29 @@ DWORD WINAPI Init(HMODULE Module)
 		//int32_t GObjOffsetRelative = *reinterpret_cast<int32_t*>(GObjOffsetAddress);
 		//uintptr_t GObjAddress = (GObjsPtr + 7) + GObjOffsetRelative;
 		//uintptr_t GObjeOffset = GObjAddress - GameModule.dwBase;
-		TFD_SDK::Offsets::GObjects = 0x0A019E50;
+
+		uintptr_t GObjsPtr = SearchForGObjects(dwBase);
+		if (!GObjsPtr)
+		{
+			throw std::runtime_error("Unable to find GObjects.");
+			return 1;
+		}
+		TFD_SDK::Offsets::GObjects = GObjsPtr;
+
+		//TFD_SDK::Offsets::GObjects = 0x0A019E50;
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found GObjects at: " << std::hex << GObjsPtr << std::dec << "\n";
 		Sleep(1000);
 #endif // IS_DEBUG
-		TFD_SDK::Offsets::GWorld = 0x0A339538;
+		SearchForGWorld(dwBase, dwSize);
+		if (!TFD_SDK::Offsets::GWorld)
+		{
+			throw std::runtime_error("Unable to find GWorld.");
+			return 1;
+		}
+		//TFD_SDK::Offsets::GWorld = 0x0A339538;
 
-		uintptr_t SpreadPtr = FindSignature(procID, GameModule, NoSpreadSig, NoSpreadMask);
+		uintptr_t SpreadPtr = FindSignature(procID, dwBase, dwSize, NoSpreadSig, NoSpreadMask);
 		if (!SpreadPtr)
 		{
 			throw std::runtime_error("Unable to find NoSpread.");
@@ -2665,7 +2669,7 @@ DWORD WINAPI Init(HMODULE Module)
 		Sleep(1000);
 #endif // IS_DEBUG
 
-		uintptr_t RecoilPtr = FindSignature(procID, GameModule, NoRecoilSig, NoRecoilMask);
+		uintptr_t RecoilPtr = FindSignature(procID, dwBase, dwSize, NoRecoilSig, NoRecoilMask);
 		if (!RecoilPtr)
 		{
 			throw std::runtime_error("Unable to find NoRecoil.");
@@ -2678,7 +2682,7 @@ DWORD WINAPI Init(HMODULE Module)
 		Sleep(1000);
 #endif // IS_DEBUG
 
-		uintptr_t RapidFirePtr = FindSignature(procID, GameModule, RapidFireSig, RapidFireMask);
+		uintptr_t RapidFirePtr = FindSignature(procID, dwBase, dwSize, RapidFireSig, RapidFireMask);
 		if (!RapidFirePtr)
 		{
 			throw std::runtime_error("Unable to find Rapidfire.");
@@ -2739,11 +2743,11 @@ DWORD WINAPI Init(HMODULE Module)
 
 	TFD_SDK::FName::InitInternal();
 	TFD_SDK::UObject::GObjects.InitGObjects();
-
+	Sleep(1000);
 	bool isPostRenderHooked = false;
 	do
 	{
-		TFD_SDK::UWorld* world = TFD_SDK::UWorld::GetWorld();
+		TFD_SDK::UWorld* world = TFD_SDK::UWorld::GetWorld(dwBase);
 		if (world && world->IsA(TFD_SDK::UWorld::StaticClass()))
 		{
 			/*if (!GWorld)
@@ -2752,6 +2756,7 @@ DWORD WINAPI Init(HMODULE Module)
 				uintptr_t GWorldOffset = (uintptr_t)world - GameModule.dwBase;
 				TFD_SDK::Offsets::GWorld = GWorldOffset;
 			}*/
+			Sleep(1000);
 			TFD_SDK::ULocalPlayer* LocalPl = (TFD_SDK::ULocalPlayer*)((TFD_SDK::UGameplayStatics*)TFD_SDK::UGameplayStatics::StaticClass())->GetPlayerController(world, 0)->Player;
 			if (LocalPl && LocalPl->ViewportClient)
 			{
@@ -2759,6 +2764,7 @@ DWORD WINAPI Init(HMODULE Module)
 				{
 					LocalPlayer = LocalPl;
 				}*/
+				Sleep(1000);
 				TFD_SDK::UGameViewportClient* ViewportClient = LocalPl->ViewportClient;
 				if (ViewportClient)
 				{
@@ -2766,9 +2772,11 @@ DWORD WINAPI Init(HMODULE Module)
 					{
 						LocalView = ViewportClient;
 					}
+					Sleep(1000);
 					ULONG64* Func = GetDrawTransitionVTableAddress(LocalView);
 					if (Func)
 					{
+						Sleep(1000);
 						M1org = (decltype(M1org))*Func;
 						__int64 ptr = (__int64)YourHookProc;
 						DWORD old;
@@ -2842,14 +2850,14 @@ bool MemoryCompare(const BYTE* bData, const BYTE* bSig, const char* szMask)
 }
 
 // This returns the OFFSET so you need to add the OFFSET + BASE for the desired address!!!
-uintptr_t FindSignature(int procID, sigmod mod, const char* sig, const char* mask)
+uintptr_t FindSignature(int procID, uintptr_t base, uintptr_t size, const char* sig, const char* mask)
 {
-	BYTE* data = new BYTE[mod.dwSize];
+	BYTE* data = new BYTE[size];
 	SIZE_T bytesRead;
 
-	Toolhelp32ReadProcessMemory(procID, (LPVOID)(mod.dwBase), data, mod.dwSize, &bytesRead);
+	Toolhelp32ReadProcessMemory(procID, (LPVOID)(base), data, size, &bytesRead);
 
-	for (uintptr_t i = 0; i < mod.dwSize; i++) {
+	for (uintptr_t i = 0; i < size; i++) {
 		if (MemoryCompare((const BYTE*)(data + i), (const BYTE*)sig, mask)) {
 			delete[] data;
 			return i;
@@ -2857,4 +2865,208 @@ uintptr_t FindSignature(int procID, sigmod mod, const char* sig, const char* mas
 	}
 	delete[] data;
 	return NULL;
+}
+
+std::pair<uintptr_t, DWORD> GetSectionByName(uintptr_t ImageBase, const std::string& ReqestedSectionName)
+{
+	if (ImageBase == 0)
+		return { NULL, 0 };
+
+	const PIMAGE_DOS_HEADER DosHeader = reinterpret_cast<PIMAGE_DOS_HEADER>(ImageBase);
+	const PIMAGE_NT_HEADERS NtHeaders = reinterpret_cast<PIMAGE_NT_HEADERS>(ImageBase + DosHeader->e_lfanew);
+
+	PIMAGE_SECTION_HEADER Sections = IMAGE_FIRST_SECTION(NtHeaders);
+
+	DWORD TextSize = 0;
+
+	for (int i = 0; i < NtHeaders->FileHeader.NumberOfSections; i++)
+	{
+		IMAGE_SECTION_HEADER& CurrentSection = Sections[i];
+
+		std::string SectionName = reinterpret_cast<const char*>(CurrentSection.Name);
+
+		if (SectionName == ReqestedSectionName)
+			return { (ImageBase + CurrentSection.VirtualAddress), CurrentSection.Misc.VirtualSize };
+	}
+
+	return { NULL, 0 };
+}
+
+bool IsBadReadPtr(const void* p)
+{
+	MEMORY_BASIC_INFORMATION mbi;
+
+	if (VirtualQuery(p, &mbi, sizeof(mbi)))
+	{
+		constexpr DWORD mask = (PAGE_READONLY | PAGE_READWRITE | PAGE_WRITECOPY | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY);
+		bool b = !(mbi.Protect & mask);
+		if (mbi.Protect & (PAGE_GUARD | PAGE_NOACCESS))
+			b = true;
+
+		return b;
+	}
+
+	return true;
+};
+
+bool IsAddressValidGObjects(const uintptr_t Address)
+{
+	FChunkedFixedUObjectArrayLayout Layout;
+	void* Objects = *reinterpret_cast<void**>(Address + Layout.ObjectsOffset);
+	const int MaxElements = *reinterpret_cast<const int*>(Address + Layout.MaxElementsOffset);
+	const int NumElements = *reinterpret_cast<const int*>(Address + Layout.NumElementsOffset);
+	const int MaxChunks = *reinterpret_cast<const int*>(Address + Layout.MaxChunksOffset);
+	const int NumChunks = *reinterpret_cast<const int*>(Address + Layout.NumChunksOffset);
+
+	void** ObjectsPtrButDecrypted = reinterpret_cast<void**>(SDK::TUObjectArray::DecryptPtr(Objects));
+
+	if (NumChunks > 0x14 || NumChunks < 0x1)
+		return false;
+
+	if (MaxChunks > 0x22F || MaxChunks < 0x6)
+		return false;
+
+	if (NumElements > MaxElements || NumChunks > MaxChunks)
+		return false;
+
+	const bool bNumChunksFitsNumElements = ((NumElements / 0x10000) + 1) == NumChunks || ((NumElements / 0x10400) + 1) == NumChunks;
+
+	if (!bNumChunksFitsNumElements)
+		return false;
+
+	const bool bMaxChunksFitsMaxElements = (MaxElements / 0x10000) == MaxChunks || (MaxElements / 0x10400) == MaxChunks;
+
+	if (!bMaxChunksFitsMaxElements)
+		return false;
+
+	if (!ObjectsPtrButDecrypted || IsBadReadPtr(ObjectsPtrButDecrypted))
+		return false;
+
+	for (int i = 0; i < NumChunks; i++)
+	{
+		if (!ObjectsPtrButDecrypted[i] || IsBadReadPtr(ObjectsPtrButDecrypted[i]))
+			return false;
+	}
+
+	return true;
+}
+
+uintptr_t SearchForGObjects(uintptr_t base)
+{
+	uintptr_t SearchBase;
+	DWORD SearchRange;
+	const auto [DataSection, DataSize] = GetSectionByName(base, ".data");
+
+	if (DataSection != 0x0 && DataSize != 0x0)
+	{
+		SearchBase = DataSection;
+		SearchRange = DataSize;
+	}
+	else
+	{
+		return 0;
+	}
+
+	SearchRange -= 0x50;
+
+	for (int i = 0; i < SearchRange; i += 0x4)
+	{
+		const uintptr_t CurrentAddress = SearchBase + i;
+
+		if (IsAddressValidGObjects(CurrentAddress))
+		{
+			return (SearchBase + i) - base;
+
+		}
+	}
+	return 0;
+}
+
+template<typename T>
+T* FindAlignedValueInProcessInRange(T Value, int32_t Alignment, uintptr_t StartAddress, uint32_t Range)
+{
+	constexpr int32_t ElementSize = sizeof(T);
+
+	for (uint32_t i = 0x0; i < Range; i += Alignment)
+	{
+		T* TypedPtr = reinterpret_cast<T*>(StartAddress + i);
+
+		if (*TypedPtr == Value)
+			return TypedPtr;
+	}
+
+	return nullptr;
+}
+
+template<typename T>
+T* FindAlignedValueInProcess(T Value, const std::string& Sectionname, int32_t Alignment, bool bSearchAllSections)
+{
+	uintptr_t SearchStart = dwBase;
+	uintptr_t SearchRange = dwSize;
+
+	if (!bSearchAllSections)
+	{
+		const auto [SectionStart, SectionSize] = GetSectionByName(dwBase, Sectionname);
+
+		if (SectionStart != 0x0 && SectionSize != 0x0)
+		{
+			SearchStart = SectionStart;
+			SearchRange = SectionSize;
+		}
+		else
+		{
+			bSearchAllSections = true;
+		}
+	}
+
+	T* Result = FindAlignedValueInProcessInRange(Value, Alignment, SearchStart, SearchRange);
+
+	if (!Result && SearchStart != dwBase)
+		return FindAlignedValueInProcess(Value, Sectionname, Alignment, true);
+
+	return Result;
+}
+
+void SearchForGWorld(uintptr_t base, uintptr_t size)
+{
+	uintptr_t SearchBase;
+	DWORD SearchRange;
+	const auto [DataSection, DataSize] = GetSectionByName(base, ".data");
+
+	if (DataSection != 0x0 && DataSize != 0x0)
+	{
+		SearchBase = DataSection;
+		SearchRange = DataSize;
+	}
+	else
+	{
+		return;
+	}
+
+	SearchRange -= 0x50;
+
+	for (int i = 0; i < SDK::UObject::GObjects->Num(); i++)
+	{
+		SDK::UObject* obj = SDK::UObject::GObjects->GetByIndex(i);
+
+		if (!obj || (obj->Flags & SDK::EObjectFlags::ClassDefaultObject))
+			continue;
+
+		if (obj->IsA(TFD_SDK::UWorld::StaticClass()))
+		{
+			void* worldPtr = static_cast<void*>(obj);
+#ifdef IS_DEBUG_VERSION
+			std::cout << "[Cheat] Found UWorld instance at: 0x" << std::hex << worldPtr << std::dec << " with name: " << obj->GetName() << "\n";
+#endif
+			void* Result = FindAlignedValueInProcess(worldPtr);
+
+			if (Result)
+			{
+				SDK::Offsets::GWorld = reinterpret_cast<uintptr_t>(Result) - base;
+				//std::cerr << std::format("GWorld-Offset: 0x{:X}\n\n", Off::InSDK::World::GWorld);
+				break;
+			}
+
+		}
+	}
 }

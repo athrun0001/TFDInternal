@@ -24,7 +24,7 @@ struct CONTROLLER_STATE
 	bool bConnected;
 };
 
-uintptr_t dwBase;
+
 CONTROLLER_STATE g_Controllers[4];
 HRESULT UpdateControllerState();
 
@@ -77,7 +77,7 @@ struct sigmod {
 	uintptr_t dwBase, dwSize;
 };
 bool MemoryCompare(const BYTE* bData, const BYTE* bSig, const char* szMask);
-uintptr_t FindSignature(int procID, sigmod mod, const char* sig, const char* mask);
+uintptr_t FindSignature(int procID, uintptr_t base, uintptr_t size, const char* sig, const char* mask);
 
 /*
 *  Data
@@ -232,14 +232,12 @@ int cfg_TimeScaleKey = VK_F2;
 int cfg_TimeScaleHoldKey = VK_CONTROL;
 int cfg_EncryptedVaultDropsKey = VK_LEFT;
 int cfg_EncryptedVaultRewardType = 0;
-bool ShowHotSwapOverlay = false;
 bool isRestartMission = false;
 int cfg_RestartType = 0;
 
 
 UC::int32 MissionTaskIndex = 0;
 
-std::chrono::steady_clock::time_point ShowHotSwapOverlayStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point AutoTeleportStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point AutoRestartMissionStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point AutoInstantInfilStartTime = std::chrono::steady_clock::now();
@@ -377,3 +375,25 @@ std::unordered_map<std::string,bool> MissionTaskExceptionSet =
 {
 	{"VoidVessel_Normal_D1|Extermination02",true}
 };
+
+uintptr_t dwBase = 0x0;
+uintptr_t dwSize = 0x0;
+
+const struct FChunkedFixedUObjectArrayLayout
+{
+	const int ObjectsOffset = 0x0;
+	const int MaxElementsOffset = 0x10;
+	const int NumElementsOffset = 0x14;
+	const int MaxChunksOffset = 0x18;
+	const int NumChunksOffset = 0x1C;
+};
+
+uintptr_t SearchForGObjects(uintptr_t base);
+void SearchForGWorld(uintptr_t base, uintptr_t size);
+template<typename T>
+T* FindAlignedValueInProcess(T Value, const std::string& Sectionname = ".data", int32_t Alignment = alignof(T), bool bSearchAllSections = false);
+template<typename T>
+T* FindAlignedValueInProcessInRange(T Value, int32_t Alignment, uintptr_t StartAddress, uint32_t Range);
+bool IsAddressValidGObjects(const uintptr_t Address);
+std::pair<uintptr_t, DWORD> GetSectionByName(uintptr_t ImageBase, const std::string& ReqestedSectionName);
+bool IsBadReadPtr(const void* p);

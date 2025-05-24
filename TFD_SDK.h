@@ -816,7 +816,7 @@ namespace TFD_SDK
 		uint8  Pad_UWorld_Class[0x758]; // 0x1C8 
 
 	public:
-		static class UWorld* GetWorld();
+		static class UWorld* GetWorld(uintptr_t dwBase);
 
 	public:
 		static class UClass* StaticClass()
@@ -1693,7 +1693,9 @@ namespace TFD_SDK
 
 		uint8 Pad_TeleportHandler[0x2B0]; // 0x0C60
 		class UM1TeleportHandlerComponent* TeleportHandler;  // 0x0F10(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		uint8 Pad_PlayerName[0xA0]; // 0x0F18
+		uint8 Pad_WeaponSlotControl[0x10]; // 0x0F18
+		class UM1WeaponSlotControlComponent* WeaponSlotControl;                                 // 0x0F28(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8 Pad_PlayerName[0x88]; // 0x0F30
 		class FString PlayerName; // 0x0FB8(0x0010) Need this
 		uint8 Pad_AM1PlayerClass[0x408]; // 0x0FC8
 
