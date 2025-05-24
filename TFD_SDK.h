@@ -920,8 +920,7 @@ namespace TFD_SDK
 		TArray<class UM1MissionTaskService*>          SubServices;                                       // 0x00C8(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_ActivatedMissions[0x140];                      // 0x00D8
 		TArray<class AM1MissionActor*>                ActivatedMissions;                                 // 0x0218(0x0010)(Net, ZeroConstructor, RepNotify, NativeAccessSpecifierPrivate)
-		TArray<class AM1MissionActor*>                LastActivatedMissions;                             // 0x0228(0x0010)(Net, ZeroConstructor, RepNotify, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_MissionResult[0x380];                          // 0x0238
+		uint8                                         Pad_MissionResult[0x390];                          // 0x0228
 		class UM1MissionResult*						  MissionResult;                                     // 0x05B8(0x0008)(ZeroConstructor, Transient, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_UM1MissionControlComponent_Class[0x218];       // 0x05C0
 
