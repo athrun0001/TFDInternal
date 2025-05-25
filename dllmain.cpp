@@ -1,6 +1,7 @@
 
 #include "includes.h"
 #include <process.h>
+#include <algorithm>
 //#include <thread>
 //#include <fstream>
 
@@ -1303,6 +1304,12 @@ void RestartLastMission()
 
 }
 
+std::string ToLower(const std::string& str) {
+	std::string lowerStr = str;
+	std::transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(), ::tolower);
+	return lowerStr;
+}
+
 void MissionTaskTeleporter()
 {
 	if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoTeleportStartTime).count() <= 1000)
@@ -1328,21 +1335,30 @@ void MissionTaskTeleporter()
 			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask
 			&& MissionActor->MissionData)
 		{
+			std::string activatedtaskname = ToLower(MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString());
 			
 			if (MissionActor->ProgressInfo.ActivatedTaskIndex > 0)
 			{
 				//AutoTeleportStartTime = std::chrono::steady_clock::now();
+				std::string lasttaskname = ToLower(MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString());
+
 				if (MissionActor->MissionData->MissionDataRowName.ToString().contains("400"))
 					return;
-				if (!MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move") && !MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Interact")
-					&& !MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString().contains("Move") && !MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString().contains("Interact"))
+				if (!activatedtaskname.contains("move")
+					&& !activatedtaskname.contains("interact")
+					&& !activatedtaskname.contains("hack")
+					&& !lasttaskname.contains("move")
+					&& !lasttaskname.contains("interact")
+					&& !lasttaskname.contains("hack"))
 					return;
-				if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("PlayerSet")
-					|| MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("FadeIn"))
+				if (activatedtaskname.contains("playerset")
+					|| activatedtaskname.contains("fadein"))
 					return;
 			}
 			
-			if ((MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move") || MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Interact"))
+			if ((activatedtaskname.contains("move")
+				|| activatedtaskname.contains("interact")
+				|| activatedtaskname.contains("hack"))
 				&& MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
 			{
 				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
@@ -1447,10 +1463,7 @@ void MissionTaskTeleporterDebugger()
 		return;
 
 	if (MCC->ActivatedMissions.Num() == 0)
-	{
-		MissionTaskIndex = 0;
 		return;	
-	}
 
 	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
 	{
@@ -1458,15 +1471,26 @@ void MissionTaskTeleporterDebugger()
 			&& MissionActor->ProgressInfo.ActivatedTaskActor
 			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask)
 		{
-			if (MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
+
+			/*if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move"))
+				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
+			else
+				LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->K2_GetActorRotation());*/
+
+			if (MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints.Num() > 0)
 			{
-				if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move"))
-					MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
-				else
-					LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->K2_GetActorRotation());
-				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
-				return;
+				int WayPointCount = MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints.Num();
+				for (int wpi = 0; wpi < WayPointCount; wpi++)
+				{
+					if (MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->Index_0 == (WayPointCount - 1))
+					{
+						LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorRotation());
+					}
+				}
 			}
+			else
+				LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorRotation());
+			return;
 		}
 	}
 }
