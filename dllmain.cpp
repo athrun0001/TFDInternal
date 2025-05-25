@@ -569,7 +569,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			/*if (IsKeyPressed(VK_LEFT))
 				MissionTaskTeleporterDebugger();*/
 
-			/*MissionTaskActortESP();*/
+			//MissionTaskActortESP();
 			
 			if (cfg_DrawMenu)
 				DrawMenu();
@@ -1380,6 +1380,29 @@ void MissionTaskTeleporter()
 				//MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
 				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
 				std::string mtt = MissionActor->MissionData->MissionDataRowName.ToString() + "|" + MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
+
+				if (ForceTeleportMissionTaskExceptionSet.contains(mtt))
+				{
+					bool UseWayPoint = ForceTeleportMissionTaskExceptionSet[mtt];
+					if (MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints.Num() > 0 && UseWayPoint)
+					{
+						int WayPointCount = MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints.Num();
+						for (int wpi = 0; wpi < WayPointCount; wpi++)
+						{
+							if (MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->Index_0 == (WayPointCount - 1))
+							{
+								LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorRotation());
+								return;
+							}
+						}
+					}
+					else
+					{
+						LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorRotation());
+						return;
+					}
+				}
+
 				if (!MissionTaskExceptionSet.contains(mtt))
 				{
 					float ODistanceLocalCharacter = 0.0f;
@@ -1395,7 +1418,6 @@ void MissionTaskTeleporter()
 								ODistanceTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation());
 								if (ODistanceTask < ODistanceLocalCharacter)
 									LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorRotation());
-								return;
 							}
 						}
 					}
@@ -1405,7 +1427,6 @@ void MissionTaskTeleporter()
 						ODistanceTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation());
 						if (ODistanceTask < ODistanceLocalCharacter)
 							LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->K2_GetActorRotation());
-						return;
 					}
 				}
 			}

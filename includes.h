@@ -376,6 +376,11 @@ std::unordered_map<std::string,bool> MissionTaskExceptionSet =
 	{"VoidVessel_Normal_D1|Extermination02",true}
 };
 
+std::unordered_map<std::string, bool> ForceTeleportMissionTaskExceptionSet =
+{
+	{"Kingston_Invasion_D2|Assassination_4",true}
+};
+
 uintptr_t dwBase = 0x0;
 uintptr_t dwSize = 0x0;
 
