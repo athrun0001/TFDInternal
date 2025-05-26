@@ -234,6 +234,7 @@ int cfg_EncryptedVaultDropsKey = VK_LEFT;
 int cfg_EncryptedVaultRewardType = 0;
 bool isRestartMission = false;
 int cfg_RestartType = 0;
+int cfg_TPMissionKey = 0x80;
 
 
 UC::int32 MissionTaskIndex = 0;
@@ -374,6 +375,11 @@ std::unordered_map<std::string,bool> MoveMissionTaskExceptionSet =
 std::unordered_map<std::string,bool> MissionTaskExceptionSet =
 {
 	{"VoidVessel_Normal_D1|Extermination02",true}
+};
+
+std::unordered_map<std::string, bool> ForceTeleportMissionTaskExceptionSet =
+{
+	{"Kingston_Invasion_D2|Assassination_4",true}
 };
 
 uintptr_t dwBase = 0x0;
