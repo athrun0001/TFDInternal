@@ -1276,17 +1276,28 @@ void RestartLastMission()
 		isRestartMission = false;
 		return;
 	}
+	if (MCC->AvailableMissions.Num() == 0 || MCC->MissionResult->MissionSubType == TFD_SDK::EM1MissionSubType::VoidFragment)
+	{
+		isRestartMission = false;
+		return;
+	}
 	
 	if (MCC->ActivatedMissions.Num() > 0 && isRestartMission == false)
 		return;
 
-	if (MCC->ActivatedMissions.Num() == 0 &&
-		MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::DestructionVulgusPost
-		&& MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::VoidFragment)
+	if (MCC->ActivatedMissions.Num() == 0)
 	{
-		if (cfg_RestartType == 0)
+		if (MCC->MissionResult->MissionSubType == TFD_SDK::EM1MissionSubType::DestructionVulgusPost)
+		{
+			for (TFD_SDK::AM1MissionActor* AMA : MCC->AvailableMissions)
+			{
+				if (AMA->MissionData->MissionSubType == TFD_SDK::EM1MissionSubType::DestructionVulgusPost && AMA->CoolTimeComponent->CoolTimers[0].bActivated)
+					return;
+			}
+		}
+		if (cfg_RestartType == 0 && MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::DestructionVulgusPost)
 			MCC->ServerRestartLastPlayedMission();
-		if (cfg_RestartType == 1 )
+		else
 			MCC->ServerStartMissionByTemplateID(MCC->MissionResult->MissionTemplateId);
 		AutoRestartMissionStartTime = std::chrono::steady_clock::now();
 		isRestartMission = true;
