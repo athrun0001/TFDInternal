@@ -234,6 +234,7 @@ int cfg_EncryptedVaultDropsKey = VK_LEFT;
 int cfg_EncryptedVaultRewardType = 0;
 bool isRestartMission = false;
 int cfg_RestartType = 0;
+int cfg_TPMissionKey = 0x80;
 
 
 UC::int32 MissionTaskIndex = 0;

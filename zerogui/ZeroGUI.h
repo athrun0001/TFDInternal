@@ -625,7 +625,7 @@ namespace ZeroGUI
 
 		FVector2D size = FVector2D{ 240, 50 };
 		FVector2D slider_size = FVector2D{ 200, 10 };
-		FVector2D padding = FVector2D{ 10, 15 };
+		FVector2D padding = FVector2D{ 10, 10 };
 		FVector2D pos = FVector2D{ menu_pos.X + padding.X + offset_x, menu_pos.Y + padding.Y + offset_y };
 		if (sameLine)
 		{
@@ -700,7 +700,7 @@ namespace ZeroGUI
 		FVector2D size = FVector2D{ 210, 40 };
 		FVector2D slider_size = FVector2D{ 170, 7 };
 		FVector2D adjust_zone = FVector2D{ 0, 20 };
-		FVector2D padding = FVector2D{ 10, 15 };
+		FVector2D padding = FVector2D{ 10, 10 };
 		FVector2D pos = FVector2D{ menu_pos.X + padding.X + offset_x, menu_pos.Y + padding.Y + offset_y };
 		if (sameLine)
 		{
@@ -1028,7 +1028,7 @@ namespace ZeroGUI
 	{
 		elements_count++;
 
-		FVector2D padding = FVector2D{ 5, 10 };
+		FVector2D padding = FVector2D{ 50, 10 };
 		FVector2D pos = FVector2D{ menu_pos.X + padding.X + offset_x, menu_pos.Y + padding.Y + offset_y };
 		if (sameLine)
 		{

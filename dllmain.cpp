@@ -561,6 +561,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				}
 			}
 
+			if (IsKeyPressed(cfg_TPMissionKey))
+				cfg_EnableMissionTaskTeleporter = !cfg_EnableMissionTaskTeleporter;
+
 			if (cfg_EnableMissionTaskTeleporter)
 				MissionTaskTeleporter();
 
@@ -2053,14 +2056,14 @@ void DrawMenu()
 			ZeroGUI::SliderFloat((char*)"Vacuum MP Loot when Current MP below %", &cfg_MPThreshold, 0.0f, 100.0f);
 			ZeroGUI::Text((char*)"Loot Vacuum Toggle:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Loot Vacuum Hotkey", TFD_SDK::FVector2D{ 110, 25 }, &cfg_LootVacuumKey);
+			ZeroGUI::Hotkey((char*)"Loot Vacuum Hotkey", TFD_SDK::FVector2D{ 100, 25 }, &cfg_LootVacuumKey);
 			ZeroGUI::Checkbox((char*)"Draw Encrypted Vaults", &cfg_DrawVaults);
 			ZeroGUI::Checkbox((char*)"Draw Munition", &cfg_DrawMunition);
 			ZeroGUI::Checkbox((char*)"Draw Resource Box", &cfg_DrawResourceBox);
 			ZeroGUI::Checkbox((char*)"Draw Void Vessel Box", &cfg_DrawVoidVesselBox);
 			ZeroGUI::Text((char*)"Encrypted Vault Drops key:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Encrypted Vault Drops key", TFD_SDK::FVector2D{ 110, 25 }, &cfg_EncryptedVaultDropsKey);
+			ZeroGUI::Hotkey((char*)"Encrypted Vault Drops key", TFD_SDK::FVector2D{ 100, 25 }, &cfg_EncryptedVaultDropsKey);
 			ZeroGUI::Combobox((char*)"Vault Drop Reward Type", TFD_SDK::FVector2D{ 160, 25 }, &cfg_EncryptedVaultRewardType, "Safe", "Risky", NULL);
 			ZeroGUI::Text((char*)"[Safe]: Press key once in vault minigame");
 			ZeroGUI::Text((char*)"[Risky]: Press key as many as you want in vault minigame.");
@@ -2074,7 +2077,7 @@ void DrawMenu()
 			}
 			ZeroGUI::Text((char*)"Aimbot Hold Key:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Aimbot Hold Key", TFD_SDK::FVector2D{ 110, 25 }, &cfg_AimbotHoldKey);
+			ZeroGUI::Hotkey((char*)"Aimbot Hold Key", TFD_SDK::FVector2D{ 100, 25 }, &cfg_AimbotHoldKey);
 			if (ZeroGUI::Checkbox((char*)"Enable Aimbot(Toggle)", &cfg_EnableAimbotToggle))
 			{
 				if (cfg_EnableAimbotToggle)
@@ -2082,7 +2085,7 @@ void DrawMenu()
 			}
 			ZeroGUI::Text((char*)"Aimbot Togle Key:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Aimbot Toggle Key", TFD_SDK::FVector2D{ 110, 25 }, &cfg_AimbotToggleKey);
+			ZeroGUI::Hotkey((char*)"Aimbot Toggle Key", TFD_SDK::FVector2D{ 100, 25 }, &cfg_AimbotToggleKey);
 			ZeroGUI::Checkbox((char*)"Enable Controller Support", &cfg_AimbotController);
 			ZeroGUI::Text((char*)"(Hold Mode with Left Trigger Only)");
 			ZeroGUI::SliderFloat((char*)"Aimbot Screen Distance", &cfg_AimbotFOV, 1.0f, 1000.0f);
@@ -2155,11 +2158,11 @@ void DrawMenu()
 			ZeroGUI::SliderFloat((char*)"Timescale:", &cfg_TimeScale, 1.0f, 10.0f);
 			ZeroGUI::Text((char*)"Timescale Toggle:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Timescale Hotkey:", TFD_SDK::FVector2D{ 110, 25 }, &cfg_TimeScaleKey);
+			ZeroGUI::Hotkey((char*)"Timescale Hotkey:", TFD_SDK::FVector2D{ 100, 25 }, &cfg_TimeScaleKey);
 
 			ZeroGUI::Text((char*)"Timescale Hold:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Timescale Hold Hotkey:", TFD_SDK::FVector2D{ 110, 25 }, &cfg_TimeScaleHoldKey);
+			ZeroGUI::Hotkey((char*)"Timescale Hold Hotkey:", TFD_SDK::FVector2D{ 100, 25 }, &cfg_TimeScaleHoldKey);
 		}
 		if (tab == 4)
 		{
@@ -2171,20 +2174,23 @@ void DrawMenu()
 			ZeroGUI::Checkbox((char*)"Auto Instant Outpost Infil", &cfg_EnableAutoInstantInfil);
 			ZeroGUI::Text((char*)"Instant Infil Toggle Key:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Instant Outpost Infil Toggle Key", TFD_SDK::FVector2D{ 130, 25 }, & cfg_InstantInfilKey);
+			ZeroGUI::Hotkey((char*)"Instant Outpost Infil Toggle Key", TFD_SDK::FVector2D{ 100, 25 }, & cfg_InstantInfilKey);
 
 			ZeroGUI::Checkbox((char*)"Auto Restart Mission", &cfg_EnableAutoRestartMission);
 			ZeroGUI::Text((char*)"Restart Mission Toggle Key:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Restart Last Mission Toggle Key", TFD_SDK::FVector2D{ 130, 25 }, & cfg_RestartMissionKey);
+			ZeroGUI::Hotkey((char*)"Restart Last Mission Toggle Key", TFD_SDK::FVector2D{ 100, 25 }, & cfg_RestartMissionKey);
 		
 			ZeroGUI::Combobox((char*)"Restart Type", TFD_SDK::FVector2D{ 160, 25 }, & cfg_RestartType, "From Starting Point", "Current Position", NULL);
 			
 			ZeroGUI::Text((char*)"Leave Mission:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Leave Mission Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_LeaveMissionKey);
+			ZeroGUI::Hotkey((char*)"Leave Mission Hotkey", TFD_SDK::FVector2D{ 100, 25 }, &cfg_LeaveMissionKey);
 
 			ZeroGUI::Checkbox((char*)"Auto Mission Task Teleport", &cfg_EnableMissionTaskTeleporter);
+			ZeroGUI::Text((char*)"Mission Teleport Toggle Key:");
+			ZeroGUI::SameLine();
+			ZeroGUI::Hotkey((char*)"Mission Teleport Toggle Key", TFD_SDK::FVector2D{ 100, 25 }, & cfg_TPMissionKey);
 
 		}
 		if (tab == 5)
@@ -2207,7 +2213,7 @@ void DrawMenu()
 			}
 			ZeroGUI::Text((char*)"Switch Preset:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Switch Preset Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_SwitchPreset);
+			ZeroGUI::Hotkey((char*)"Switch Preset Hotkey", TFD_SDK::FVector2D{ 100, 25 }, &cfg_SwitchPreset);
 			if (!PresetsMap.empty())
 			{
 				ZeroGUI::Combobox1((char*)"Select Preset 1", TFD_SDK::FVector2D{ 160, 25 }, &HotSwapPreset[0], PresetsMap);
@@ -2222,7 +2228,7 @@ void DrawMenu()
 		{
 			ZeroGUI::Text((char*)"Drop Hotkey:");
 			ZeroGUI::SameLine();
-			ZeroGUI::Hotkey((char*)"Container Drop Hotkey", TFD_SDK::FVector2D{ 130, 25 }, &cfg_ContainerDropKey);
+			ZeroGUI::Hotkey((char*)"Container Drop Hotkey", TFD_SDK::FVector2D{ 100, 25 }, &cfg_ContainerDropKey);
 			ZeroGUI::SliderFloat((char*)"Range", &cfg_ContainersRange, 200.0f, 5000.0f);
 			ZeroGUI::Checkbox((char*)"Specify Drop Calls Made", &cfg_ChangeDropCount);
 			ZeroGUI::SliderInt((char*)"Custom Drop Count", &cfg_DropCount, 0, 250);
@@ -2321,6 +2327,7 @@ void LoadCFG()
 		cfg_EnableAutoInstantInfil = ini.GetBoolValue("Mission", "EnableAutoInstantInfil");
 		cfg_RestartType = ini.GetDoubleValue("Mission", "RestartType");
 		cfg_EnableMissionTaskTeleporter = ini.GetBoolValue("Mission", "EnableMissionTaskTeleporter");
+		cfg_TPMissionKey = (int)ini.GetDoubleValue("Mission", "TPMissionKey");
 
 		cfg_ContainerDropKey = (int)ini.GetDoubleValue("TivmoTuff", "ContainerDropKey");
 		cfg_ContainersRange = ini.GetDoubleValue("TivmoTuff", "ContainersRange");
@@ -2403,6 +2410,7 @@ void SaveCFG()
 	ini.SetBoolValue("Mission", "EnableAutoInstantInfil", cfg_EnableAutoInstantInfil);
 	ini.SetDoubleValue("Mission", "RestartType", cfg_RestartType);
 	ini.SetBoolValue("Mission", "EnableMissionTaskTeleporter", cfg_EnableMissionTaskTeleporter);
+	ini.SetDoubleValue("Mission", "TPMissionKey", cfg_TPMissionKey);
 
 	ini.SetDoubleValue("TivmoTuff", "ContainerDropKey", cfg_ContainerDropKey);
 	ini.SetDoubleValue("TivmoTuff", "ContainersRange", cfg_ContainersRange);
