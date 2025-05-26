@@ -1,9 +1,6 @@
 name: Build and Release C++ Project
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
     types:
       - closed
