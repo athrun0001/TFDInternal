@@ -1682,6 +1682,52 @@ void RefreshPresetList()
 
 }
 
+void ResearchBookmarkedItems()
+{
+	if (!LocalPlayerController || !LocalPlayerController->PrivateOnlineServiceComponent)
+		return;
+
+
+	for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
+	{
+		TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
+		if (!Obj)
+			continue;
+
+		if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
+			Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
+			Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
+			Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
+			Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
+			continue;
+
+		if (Obj->IsA(TFD_SDK::UM1ResearchSystem::StaticClass()))
+		{
+			TFD_SDK::UM1ResearchSystem* RS = static_cast<TFD_SDK::UM1ResearchSystem*>(Obj);
+			if (!RS)
+				continue;
+			int i = 0;
+
+			if (LocalPlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
+			{
+				for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : LocalPlayerController->PrivateOnlineServiceComponent->SubServices)
+				{
+					if (!Subserv)
+						continue;
+					if (Subserv->IsA(TFD_SDK::UM1PrivateOnlineServiceResearch::StaticClass()) && Subserv->bIsReady == true)
+					{
+						for (const auto& RDTID : RS->BookmarkResearchTids)
+						{
+							static_cast<TFD_SDK::UM1PrivateOnlineServiceResearch*>(Subserv)->ServerRequestStartResearch(RDTID, 1);
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+
 void EncryptedVaultDrops()
 {
 	if (!GWorld || !LocalPlayerController)

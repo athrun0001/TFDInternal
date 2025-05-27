@@ -174,6 +174,7 @@ void EncryptedVaultDrops();
 void MissionTaskTeleporter();
 //void MissionTaskActortESP();
 //void MissionTaskTeleporterDebugger();
+//void ResearchBookmarkedItems();
 
 /*
 *  Aimbot

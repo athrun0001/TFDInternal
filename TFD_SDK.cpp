@@ -842,4 +842,23 @@ namespace TFD_SDK
 
 		Func->FunctionFlags = Flgs;
 	}
+	void UM1PrivateOnlineServiceResearch::ServerRequestStartResearch(const struct FM1TemplateId& InResearchTemplateId, int32 InRepeatCount)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1PrivateOnlineServiceResearch", "ServerRequestStartResearch");
+
+		M1PrivateOnlineServiceResearch_ServerRequestStartResearch Parms{};
+
+		Parms.InResearchTemplateId = std::move(InResearchTemplateId);
+		Parms.InRepeatCount = InRepeatCount;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
 }

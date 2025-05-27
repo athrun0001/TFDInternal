@@ -777,6 +777,20 @@ namespace TFD_SDK
 		bool                                          bIsReady;                                          // 0x0038(0x0001)(Net, ZeroConstructor, IsPlainOldData, RepNotify, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
+	// 0x0120 (0x0148 - 0x0028)
+	class UM1ResearchSystem final : public UObject
+	{
+	public:
+		uint8                                         Pad_BookmarkResearchTids[0xA0];                    // 0x0028
+		TArray<struct FM1TemplateId>                  BookmarkResearchTids;                              // 0x00C8(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_UM1ResearchSystem[0x70];                       // 0x00D8
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1ResearchSystem">();
+		}
+	};
 	// 0x0070 (0x0098 - 0x0028)
 	class UMissionGraphTaskNode : public UObject
 	{
@@ -869,7 +883,7 @@ namespace TFD_SDK
 	{
 		uint8 Pad_UGameViewportClient_Class[0x378]; // 0x0038 378
 	};
-
+	
 	// 0x0000 (0x0040 - 0x0040)
 	class UM1MissionTaskServiceInteraction final : public UM1MissionTaskService
 	{
@@ -888,6 +902,19 @@ namespace TFD_SDK
 		static class UClass* StaticClass()
 		{
 			return StaticClassImpl<"M1PrivateOnlineServicePreset">();
+		}
+	};
+	// 0x0060 (0x00A0 - 0x0040)
+	class UM1PrivateOnlineServiceResearch final : public UM1PrivateOnlineSubService
+	{
+	public:
+		uint8                                         Pad_40[0x60];                                      // 0x0040(0x0060)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	public:
+		void ServerRequestStartResearch(const struct FM1TemplateId& InResearchTemplateId, int32 InRepeatCount);
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1PrivateOnlineServiceResearch">();
 		}
 	};
 
@@ -2027,5 +2054,12 @@ namespace TFD_SDK
 	{
 	public:
 		class AM1FieldInteractableActor* InActor;                                           // 0x0000(0x0008)(Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+	// 0x0008 (0x0008 - 0x0000)
+	struct M1PrivateOnlineServiceResearch_ServerRequestStartResearch final
+	{
+	public:
+		struct FM1TemplateId                          InResearchTemplateId;                              // 0x0000(0x0004)(Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		int32                                         InRepeatCount;                                     // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
 }
