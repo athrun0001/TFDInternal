@@ -164,6 +164,7 @@ float cfg_LootVacuumRange = 1000.0f;
 int cfg_LootVacuumKey = 0x54;
 float cfg_HPThreshold = 50.0f;
 float cfg_MPThreshold = 50.0f;
+int cfg_ResearchQty = 1;
 
 void InstantInfiltration();
 void RestartLastMission();
@@ -174,7 +175,7 @@ void EncryptedVaultDrops();
 void MissionTaskTeleporter();
 //void MissionTaskActortESP();
 //void MissionTaskTeleporterDebugger();
-//void ResearchBookmarkedItems();
+void ResearchBookmarkedItems();
 
 /*
 *  Aimbot

@@ -1718,7 +1718,7 @@ void ResearchBookmarkedItems()
 					{
 						for (const auto& RDTID : RS->BookmarkResearchTids)
 						{
-							static_cast<TFD_SDK::UM1PrivateOnlineServiceResearch*>(Subserv)->ServerRequestStartResearch(RDTID, 1);
+							static_cast<TFD_SDK::UM1PrivateOnlineServiceResearch*>(Subserv)->ServerRequestStartResearch(RDTID, cfg_ResearchQty);
 						}
 					}
 				}
@@ -2220,6 +2220,12 @@ void DrawMenu()
 			ZeroGUI::Text((char*)"Timescale Hold:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Timescale Hold Hotkey:", TFD_SDK::FVector2D{ 100, 25 }, &cfg_TimeScaleHoldKey);
+
+			ZeroGUI::SliderInt((char*)"Research Qty", &cfg_ResearchQty, 1, 50);
+			if (ZeroGUI::Button((char*)"Start Research", TFD_SDK::FVector2D{ 120, 30 }))
+			{
+				ResearchBookmarkedItems();
+			}
 		}
 		if (tab == 4)
 		{
