@@ -2221,7 +2221,22 @@ void DrawMenu()
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Timescale Hold Hotkey:", TFD_SDK::FVector2D{ 100, 25 }, &cfg_TimeScaleHoldKey);
 
-			ZeroGUI::SliderInt((char*)"Research Qty", &cfg_ResearchQty, 1, 50);
+			ZeroGUI::SliderInt((char*)"Research Qty", &cfg_ResearchQty, 1, 2000);
+			if (ZeroGUI::Button((char*)"-1", TFD_SDK::FVector2D{ 30, 30 }))
+			{
+				if (cfg_ResearchQty > 2)
+					cfg_ResearchQty -= 1;
+				else
+					cfg_ResearchQty = 1;
+			}
+			ZeroGUI::SameLine();
+			if (ZeroGUI::Button((char*)"+1", TFD_SDK::FVector2D{ 30, 30 }))
+			{
+				if (cfg_ResearchQty < 2000)
+					cfg_ResearchQty += 1;
+				else
+					cfg_ResearchQty = 2000;
+			}
 			if (ZeroGUI::Button((char*)"Start Research", TFD_SDK::FVector2D{ 120, 30 }))
 			{
 				ResearchBookmarkedItems();
