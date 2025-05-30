@@ -1008,14 +1008,7 @@ namespace TFD_SDK
 	public:
 		uint8 Pad_ActiveSlot[0x20]; // 0x00D0
 		struct FM1ActivatedWeaponSlot ActivatedWeaponSlot; // 0x00F0(0x0090)
-		uint8 Pad_Player_Owner[0x30];// 0x0180
-		class AM1Player* Player_Owner; // 0x01B0(0x0008)
-		uint8 Pad_UM1WeaponSlotControlComponent_Class[0x70]; // 0x01B8
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"M1WeaponSlotControlComponent">();
-		}
+		uint8 Pad_UM1WeaponSlotControlComponent_Class[0xA8]; // 0x0180
 	};
 	// 0x0028 (0x0100 - 0x00D8)
 	class UM1WeaponRoundsComponent final : public UM1WeaponComponent

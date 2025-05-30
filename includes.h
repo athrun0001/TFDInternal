@@ -379,7 +379,10 @@ std::unordered_map<std::string,bool> MissionTaskExceptionSet =
 
 std::unordered_map<std::string, bool> ForceTeleportMissionTaskExceptionSet =
 {
-	{"Kingston_Invasion_D2|Assassination_4",true}
+	{"Kingston_Invasion_D2|Assassination_4",true},
+	{"SterileLand_Invasion_D2|CollectionReturnD2-I3",true},
+	{"SterileLand_Invasion_D2|CollectionReturnD2-I5",true },
+	{"Kingston_Invasion_D1|CollectionReturn_3",true},
 };
 
 uintptr_t dwBase = 0x0;
