@@ -2,14 +2,12 @@ name: Build and Release C++ Project
 
 on:
   pull_request:
-    types:
-      - closed
-    branches:
-      - master
-  workflow_dispatch:
+    types: [closed]
+    branches: [master]
 
 jobs:
   build:
+    if: github.event.pull_request.merged == true
     runs-on: windows-latest
 
     steps:
