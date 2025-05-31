@@ -164,6 +164,7 @@ float cfg_LootVacuumRange = 1000.0f;
 int cfg_LootVacuumKey = 0x54;
 float cfg_HPThreshold = 50.0f;
 float cfg_MPThreshold = 50.0f;
+int cfg_ResearchQty = 1;
 
 void InstantInfiltration();
 void RestartLastMission();
@@ -174,6 +175,7 @@ void EncryptedVaultDrops();
 void MissionTaskTeleporter();
 //void MissionTaskActortESP();
 //void MissionTaskTeleporterDebugger();
+void ResearchBookmarkedItems();
 
 /*
 *  Aimbot
@@ -363,7 +365,7 @@ std::unordered_map<int, std::string> IDNameMap =
 };
 bool NamesChanged = false;
 
-std::unordered_map<std::string,bool> MoveMissionTaskExceptionSet =
+std::unordered_map<std::string, bool> MoveMissionTaskExceptionSet =
 {
 	{"Kingston_F_Hard_D2|MoveD2-10a",true},
 	{"TheFortress_F_Hard_D1|MoveD1_Hard_10",true},
@@ -371,7 +373,7 @@ std::unordered_map<std::string,bool> MoveMissionTaskExceptionSet =
 	{"TheFortress_Invasion_D2|Move_4a",true}
 };
 
-std::unordered_map<std::string,bool> MissionTaskExceptionSet =
+std::unordered_map<std::string, bool> MissionTaskExceptionSet =
 {
 };
 

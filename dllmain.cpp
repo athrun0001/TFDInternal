@@ -1682,6 +1682,52 @@ void RefreshPresetList()
 
 }
 
+void ResearchBookmarkedItems()
+{
+	if (!LocalPlayerController || !LocalPlayerController->PrivateOnlineServiceComponent)
+		return;
+
+
+	for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
+	{
+		TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
+		if (!Obj)
+			continue;
+
+		if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
+			Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
+			Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
+			Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
+			Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
+			continue;
+
+		if (Obj->IsA(TFD_SDK::UM1ResearchSystem::StaticClass()))
+		{
+			TFD_SDK::UM1ResearchSystem* RS = static_cast<TFD_SDK::UM1ResearchSystem*>(Obj);
+			if (!RS)
+				continue;
+			int i = 0;
+
+			if (LocalPlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
+			{
+				for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : LocalPlayerController->PrivateOnlineServiceComponent->SubServices)
+				{
+					if (!Subserv)
+						continue;
+					if (Subserv->IsA(TFD_SDK::UM1PrivateOnlineServiceResearch::StaticClass()) && Subserv->bIsReady == true)
+					{
+						for (const auto& RDTID : RS->BookmarkResearchTids)
+						{
+							static_cast<TFD_SDK::UM1PrivateOnlineServiceResearch*>(Subserv)->ServerRequestStartResearch(RDTID, cfg_ResearchQty);
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+
 void EncryptedVaultDrops()
 {
 	if (!GWorld || !LocalPlayerController)
@@ -2174,6 +2220,27 @@ void DrawMenu()
 			ZeroGUI::Text((char*)"Timescale Hold:");
 			ZeroGUI::SameLine();
 			ZeroGUI::Hotkey((char*)"Timescale Hold Hotkey:", TFD_SDK::FVector2D{ 100, 25 }, &cfg_TimeScaleHoldKey);
+
+			ZeroGUI::SliderInt((char*)"Research Qty", &cfg_ResearchQty, 1, 2000);
+			if (ZeroGUI::Button((char*)"-1", TFD_SDK::FVector2D{ 30, 30 }))
+			{
+				if (cfg_ResearchQty > 2)
+					cfg_ResearchQty -= 1;
+				else
+					cfg_ResearchQty = 1;
+			}
+			ZeroGUI::SameLine();
+			if (ZeroGUI::Button((char*)"+1", TFD_SDK::FVector2D{ 30, 30 }))
+			{
+				if (cfg_ResearchQty < 2000)
+					cfg_ResearchQty += 1;
+				else
+					cfg_ResearchQty = 2000;
+			}
+			if (ZeroGUI::Button((char*)"Start Research", TFD_SDK::FVector2D{ 120, 30 }))
+			{
+				ResearchBookmarkedItems();
+			}
 		}
 		if (tab == 4)
 		{
