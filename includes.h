@@ -367,14 +367,12 @@ std::unordered_map<std::string,bool> MoveMissionTaskExceptionSet =
 {
 	{"Kingston_F_Hard_D2|MoveD2-10a",true},
 	{"TheFortress_F_Hard_D1|MoveD1_Hard_10",true},
-	{"VoidVessel_Normal_D1|Move04a",true},
 	{"CorrodedLand_Invasion_D1|Move-2",false},
 	{"TheFortress_Invasion_D2|Move_4a",true}
 };
 
 std::unordered_map<std::string,bool> MissionTaskExceptionSet =
 {
-	{"VoidVessel_Normal_D1|Extermination02",true}
 };
 
 std::unordered_map<std::string, bool> ForceTeleportMissionTaskExceptionSet =
@@ -383,6 +381,8 @@ std::unordered_map<std::string, bool> ForceTeleportMissionTaskExceptionSet =
 	{"SterileLand_Invasion_D2|CollectionReturnD2-I3",true},
 	{"SterileLand_Invasion_D2|CollectionReturnD2-I5",true },
 	{"Kingston_Invasion_D1|CollectionReturn_3",true},
+	{"VoidVessel_Normal_D1|Explosion01",true},
+	{"VoidVessel_Normal_D1|Extermination02",true }
 };
 
 uintptr_t dwBase = 0x0;
