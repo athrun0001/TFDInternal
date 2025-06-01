@@ -202,7 +202,7 @@ uint8_t RapidFire[2] = { 0x72, 0x77 };
 * Tivmo Autism
 */
 
-int cfg_ContainerDropKey = VK_RIGHT;
+int cfg_ContainerDropKey = VK_LEFT;
 void ContainerDrop();
 float cfg_ContainersRange = 250.0f;
 bool cfg_ChangeDropCount = false;
@@ -232,11 +232,11 @@ int cfg_SwitchPreset = VK_NEXT;
 float cfg_TimeScale = 1.0f;
 int cfg_TimeScaleKey = VK_F2;
 int cfg_TimeScaleHoldKey = VK_CONTROL;
-int cfg_EncryptedVaultDropsKey = VK_LEFT;
+int cfg_EncryptedVaultDropsKey = VK_RIGHT;
 int cfg_EncryptedVaultRewardType = 0;
 bool isRestartMission = false;
 int cfg_RestartType = 0;
-int cfg_TPMissionKey = 0x80;
+int cfg_TPMissionKey = 0x50;
 
 
 UC::int32 MissionTaskIndex = 0;
