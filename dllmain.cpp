@@ -257,13 +257,13 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				PresetsMap = ReadPresetsData();
 			}
 			
-			if (cfg_AimbotNoSpread)
+			/*if (cfg_AimbotNoSpread)
 			{
 				DWORD old;
 				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, PAGE_EXECUTE_READWRITE, &old);
 				memcpy(NoSpreadAddress, &NoSpreadCheat, sizeof(uint8_t) * 8);
 				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, old, NULL);
-			}
+			}*/
 
 			if (cfg_AimbotNoRecoil)
 			{
@@ -513,6 +513,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (cfg_NoReload)
 				InstantReload();
 
+			if (cfg_AimbotNoSpread)
+				NoSpread();
+
 			if (cfg_CacheEnemyNames && NamesChanged)
 			{
 				WriteEnemyNamesData();
@@ -671,6 +674,28 @@ void InstantReload()
 			}
 		}
 	}*/
+}
+
+void NoSpread()
+{
+	if (!LocalPlayerCharacter)
+		return;
+
+	if (LocalPlayerCharacter->WeaponSlotControl)
+	{
+		if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon)
+		{
+			if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent)
+			{
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->bApplySpreadSize == true)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->bApplySpreadSize = false;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase > 1.0f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase = 1.0f;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize > 1.0f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize = 1.0f;
+			}
+		}
+	}
 }
 
 void PlayerEnemyESP()
@@ -2147,7 +2172,8 @@ void DrawMenu()
 			ZeroGUI::Text((char*)"(Hold Mode with Left Trigger Only)");
 			ZeroGUI::SliderFloat((char*)"Aimbot Screen Distance", &cfg_AimbotFOV, 1.0f, 1000.0f);
 			ZeroGUI::SliderFloat((char*)"Aimbot Speed", &cfg_AimbotSmoothing, 1.0f, 100.0f);
-			if (ZeroGUI::Checkbox((char*)"Enable No Spread", &cfg_AimbotNoSpread))
+			ZeroGUI::Checkbox((char*)"Enable No Spread", &cfg_AimbotNoSpread);
+			/*if (ZeroGUI::Checkbox((char*)"Enable No Spread", &cfg_AimbotNoSpread))
 			{
 				if (cfg_AimbotNoSpread)
 				{
@@ -2163,7 +2189,7 @@ void DrawMenu()
 					memcpy(NoSpreadAddress, &NoSpreadOriginal, sizeof(uint8_t) * 8);
 					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, old, NULL);
 				}
-			}
+			}*/
 			if (ZeroGUI::Checkbox((char*)"Enable No Recoil", &cfg_AimbotNoRecoil))
 			{
 				if (cfg_AimbotNoRecoil)
@@ -2788,14 +2814,14 @@ DWORD WINAPI Init(HMODULE Module)
 		}
 		//TFD_SDK::Offsets::GWorld = 0x0A339538;
 
-		uintptr_t SpreadPtr = FindSignature(procID, dwBase, dwSize, NoSpreadSig, NoSpreadMask);
-		if (!SpreadPtr)
-		{
-			throw std::runtime_error("Unable to find NoSpread.");
-			return 1;
-		}
-		SpreadPtr = GameModule.dwBase + SpreadPtr;
-		NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) - 0x8);// +0x16);
+		//uintptr_t SpreadPtr = FindSignature(procID, dwBase, dwSize, NoSpreadSig, NoSpreadMask);
+		//if (!SpreadPtr)
+		//{
+		//	throw std::runtime_error("Unable to find NoSpread.");
+		//	return 1;
+		//}
+		//SpreadPtr = GameModule.dwBase + SpreadPtr;
+		//NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) - 0x8);// +0x16);
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found NoSpread at " << std::hex << SpreadPtr << std::dec << "\n";
 		Sleep(1000);

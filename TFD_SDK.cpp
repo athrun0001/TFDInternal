@@ -842,6 +842,7 @@ namespace TFD_SDK
 
 		Func->FunctionFlags = Flgs;
 	}
+
 	void UM1PrivateOnlineServiceResearch::ServerRequestStartResearch(const struct FM1TemplateId& InResearchTemplateId, int32 InRepeatCount)
 	{
 		static class UFunction* Func = nullptr;

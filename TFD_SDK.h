@@ -688,11 +688,11 @@ namespace TFD_SDK
 	public:
 		static struct FTransform Conv_MatrixToTransform(const struct FMatrix& InMatrix);
 		static struct FMatrix Conv_TransformToMatrix(const struct FTransform& Transform);
+		static double Distance2D(const struct FVector2D& v1, const struct FVector2D& v2);
 		static struct FRotator FindLookAtRotation(const struct FVector& Start, const struct FVector& Target);
 		static struct FMatrix Multiply_MatrixMatrix(const struct FMatrix& A, const struct FMatrix& B);
 		static struct FRotator RInterpTo(const struct FRotator& Current, const struct FRotator& Target, float DeltaTime, float InterpSpeed);
-		static double Distance2D(const struct FVector2D& v1, const struct FVector2D& v2);
-
+		
 	public:
 		static class UClass* StaticClass()
 		{
@@ -743,13 +743,13 @@ namespace TFD_SDK
 	class UM1ActionInputContext : public UObject
 	{
 	public:
-		uint8                                         Pad_28[0x8];                                       // 0x0028(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+		uint8                                         Pad_UM1ActionInputContext[0x8];                                       // 0x0028
 	};
 	// 0x0118 (0x0140 - 0x0028)
 	class UM1CharacterAttribute : public UObject
 	{
 	public:
-		uint8 UM1CharacterAttribute_Class[0x118]; // 0x0028
+		uint8 Pad_UM1CharacterAttribute_Class[0x118]; // 0x0028
 	};
 	// 0x0330 (0x0358 - 0x0028)
 	class UM1MissionResult final : public UObject
@@ -1037,6 +1037,18 @@ namespace TFD_SDK
 		struct FM1ActivatedWeaponSlot ActivatedWeaponSlot; // 0x00F0(0x0090)
 		uint8 Pad_UM1WeaponSlotControlComponent_Class[0xA8]; // 0x0180
 	};
+	// 0x0038 (0x0110 - 0x00D8)
+	class UM1WeaponSprayPatternComponent final : public UM1WeaponComponent
+	{
+	public:
+		uint8                                         Pad_CrosshairSizeBase[0xC];					  // 0x00D8
+		float										  CrosshairSizeBase;							  // 0x00E4(0x0004)
+		uint8                                         Pad_bApplySpreadSize[0x10];					  // 0x00E8
+		bool										  bApplySpreadSize;								  // 0x00F8(0x0001)
+		uint8                                         Pad_CurrentSpreadSize[0xF];					  // 0x00F9
+		float										  CurrentSpreadSize;						      // 0x0108(0x0004)                        
+		uint8                                         Pad_UM1WeaponSprayPatternComponent[0x4];        // 0x010C
+	};
 	// 0x0028 (0x0100 - 0x00D8)
 	class UM1WeaponRoundsComponent final : public UM1WeaponComponent
 	{
@@ -1297,7 +1309,8 @@ namespace TFD_SDK
 	class AM1Weapon : public AM1Actor
 	{
 	public:
-		uint8 Pad_RoundsComponent[0x38];	// 0x0330
+		uint8 Pad_RoundsComponent[0x30];	// 0x0330
+		class UM1WeaponSprayPatternComponent* SprayPatternComponent;                             // 0x0360(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
 		class UM1WeaponRoundsComponent* RoundsComponent; // 0x0368(0x0008)
 		uint8 Pad_AM1Weapon_Class[0x120]; // 0x0370
 	};
