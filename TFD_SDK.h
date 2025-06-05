@@ -1084,7 +1084,8 @@ namespace TFD_SDK
 		bool										  bAttacking;                                        // 0x0120(0x0001)
 		uint8                                         Pad_CurrFireParams[0x3];                           // 0x0121
 		TOptional<FM1WeaponFireParams>				  CurrFireParams;									 // 0x0124(0x001C)(Transient, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_UM1WeaponFireLoopComponent[0x28];              // 0x0140
+		float										  ElapsedTimeAfterFire;							     // 0x0140
+		uint8                                         Pad_UM1WeaponFireLoopComponent[0x24];              // 0x0144
 
 	public:
 		static class UClass* StaticClass()
@@ -1096,7 +1097,8 @@ namespace TFD_SDK
 	static_assert(offsetof(UM1WeaponFireLoopComponent, bAttacking) == 0x0120, "Bad alignment");
 	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_CurrFireParams) == 0x0121, "Bad alignment");
 	static_assert(offsetof(UM1WeaponFireLoopComponent, CurrFireParams) == 0x0124, "Bad alignment");
-	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_UM1WeaponFireLoopComponent) == 0x0140, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, ElapsedTimeAfterFire) == 0x0140, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_UM1WeaponFireLoopComponent) == 0x0144, "Bad alignment");
 	// 0x0158 (0x0228 - 0x00D0)
 	class UM1WeaponSlotControlComponent final : public UM1CharacterComponent
 	{

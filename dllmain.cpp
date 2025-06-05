@@ -776,7 +776,9 @@ void RapidFireOn()
 					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.IsSet())
 					{
 						float fireInterval = LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.GetValueRef().fireinterval;
+						float elapsedTime = LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->ElapsedTimeAfterFire;
 						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.GetValueRef().fireinterval = (fireInterval - (fireInterval * (cfg_FireRate/100.0f)));
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->ElapsedTimeAfterFire = (elapsedTime - (elapsedTime * (cfg_FireRate / 100.0f))); // Reset the fire time so it can fire immediately
 					}
 				}
 			}
