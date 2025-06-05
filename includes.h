@@ -165,6 +165,7 @@ int cfg_LootVacuumKey = 0x54;
 float cfg_HPThreshold = 50.0f;
 float cfg_MPThreshold = 50.0f;
 int cfg_ResearchQty = 1;
+float cfg_FireRate = 1.0f;
 
 void InstantInfiltration();
 void RestartLastMission();
@@ -178,6 +179,8 @@ void MissionTaskTeleporter();
 void ResearchBookmarkedItems();
 void NoSpread();
 void NoRecoil();
+//void CheckRapidOn();
+void RapidFireOn();
 /*
 *  Aimbot
 */

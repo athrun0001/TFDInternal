@@ -273,13 +273,13 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				VirtualProtect(NoRecoilAddress, sizeof(uint8_t), old, NULL);
 			}*/
 
-			if (cfg_AimbotRapidFire)
+			/*if (cfg_AimbotRapidFire)
 			{
 				DWORD old;
 				VirtualProtect(RapidFireAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
 				memcpy(RapidFireAddress, &RapidFire[1], sizeof(uint8_t));
 				VirtualProtect(RapidFireAddress, sizeof(uint8_t), old, NULL);
-			}
+			}*/
 
 			isGUIInit = true;
 		}
@@ -519,6 +519,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (cfg_AimbotNoRecoil)
 				NoRecoil();
 
+			if (cfg_AimbotRapidFire)
+				RapidFireOn();
+
 			if (cfg_CacheEnemyNames && NamesChanged)
 			{
 				WriteEnemyNamesData();
@@ -580,6 +583,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				MissionTaskTeleporterDebugger();*/
 
 			//MissionTaskActortESP();
+			//CheckRapidOn();
 			
 			if (cfg_DrawMenu)
 				DrawMenu();
@@ -726,6 +730,54 @@ void NoRecoil()
 						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilApplyInterpSpeed = 0.000001f;
 					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed > 0.000001f)
 						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed = 0.000001f;
+				}
+			}
+		}
+	}
+}
+
+void CheckRapidOn()
+{
+	if (!LocalPlayerCharacter)
+		return;
+	char buffer[300];
+	if (LocalPlayerCharacter->WeaponSlotControl)
+	{
+		if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon)
+		{
+			if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent)
+			{
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams)
+				{
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.IsSet())
+					{
+						sprintf_s(buffer, "Fire Interval: %f", LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.GetValueRef().fireinterval);
+						ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * 0) }, ColorRed, false);
+					}
+				}
+			}
+		}
+	}
+}
+
+void RapidFireOn()
+{
+	if (!LocalPlayerCharacter)
+		return;
+
+	if (LocalPlayerCharacter->WeaponSlotControl)
+	{
+		if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon)
+		{
+			if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent)
+			{
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams)
+				{
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.IsSet())
+					{
+						float fireInterval = LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.GetValueRef().fireinterval;
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.GetValueRef().fireinterval = (fireInterval - (fireInterval * (cfg_FireRate/100.0f)));
+					}
 				}
 			}
 		}
@@ -2242,7 +2294,9 @@ void DrawMenu()
 					VirtualProtect(NoRecoilAddress, sizeof(uint8_t), old, NULL);
 				}
 			}*/
-			if (ZeroGUI::Checkbox((char*)"Enable Rapidfire", &cfg_AimbotRapidFire))
+			ZeroGUI::Checkbox((char*)"Enable Rapidfire", &cfg_AimbotRapidFire);
+			ZeroGUI::SliderFloat((char*)"Rapid Fire Rate %", &cfg_FireRate, 1.0f, 90.0f);
+			/*if (ZeroGUI::Checkbox((char*)"Enable Rapidfire", &cfg_AimbotRapidFire))
 			{
 				if (cfg_AimbotRapidFire)
 				{
@@ -2258,7 +2312,7 @@ void DrawMenu()
 					memcpy(RapidFireAddress, &RapidFire[0], sizeof(uint8_t));
 					VirtualProtect(RapidFireAddress, sizeof(uint8_t), old, NULL);
 				}
-			}
+			}*/
 			ZeroGUI::Checkbox((char*)"Enable Auto-Reload", &cfg_NoReload);
 		}
 		if (tab == 3)
@@ -2875,14 +2929,14 @@ DWORD WINAPI Init(HMODULE Module)
 		Sleep(1000);
 #endif // IS_DEBUG
 
-		uintptr_t RapidFirePtr = FindSignature(procID, dwBase, dwSize, RapidFireSig, RapidFireMask);
+		/*uintptr_t RapidFirePtr = FindSignature(procID, dwBase, dwSize, RapidFireSig, RapidFireMask);
 		if (!RapidFirePtr)
 		{
 			throw std::runtime_error("Unable to find Rapidfire.");
 			return 1;
 		}
 		RapidFirePtr = GameModule.dwBase + RapidFirePtr;
-		RapidFireAddress = (reinterpret_cast<uint8_t*>(RapidFirePtr));
+		RapidFireAddress = (reinterpret_cast<uint8_t*>(RapidFirePtr));*/
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found RapidFire at " << std::hex << RapidFirePtr << std::dec << "\n";
 		Sleep(1000);

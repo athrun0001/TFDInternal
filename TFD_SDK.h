@@ -614,6 +614,29 @@ namespace TFD_SDK
 		float                                         RecoilResetTimeAfterFire;                          // 0x0024(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		TArray<struct FM1RecoilInfo>                  RecoilInfos;                                       // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
 	};
+	// 0x000C (0x000C - 0x0000)
+	struct FM1WeaponBurstFireParams final
+	{
+	public:
+		int32                                         Count;                                             // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         Delay;                                             // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         Interval;                                          // 0x0008(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+	// 0x0008 (0x0008 - 0x0000)
+	struct FM1WeaponFireAnimParams final
+	{
+	public:
+		float                                         PlayRate;                                          // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         PlayTime;                                          // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+	// 0x0018 (0x0018 - 0x0000)
+	struct FM1WeaponFireParams final
+	{
+	public:
+		float                                         fireinterval;                                      // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		struct FM1WeaponBurstFireParams               BurstFire;                                         // 0x0004(0x000C)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
+		struct FM1WeaponFireAnimParams                Anim;                                              // 0x0010(0x0008)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
+	};
 
 	
 	// 0x0220 (0x0248 - 0x0028)
@@ -1053,6 +1076,27 @@ namespace TFD_SDK
 	public:
 		void ServerMoveToTeleportToLocation(const struct FVector& InLocation, const struct FRotator& InRotation);
 	};
+	// 0x0090 (0x0168 - 0x00D8)
+	class UM1WeaponFireLoopComponent : public UM1WeaponComponent
+	{
+	public:
+		uint8                                         Pad_110[0x48];                                     // 0x00D8
+		bool										  bAttacking;                                        // 0x0120(0x0001)
+		uint8                                         Pad_CurrFireParams[0x3];                           // 0x0121
+		TOptional<FM1WeaponFireParams>				  CurrFireParams;									 // 0x0124(0x001C)(Transient, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_UM1WeaponFireLoopComponent[0x28];              // 0x0140
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1WeaponFireLoopComponent">();
+		}
+	};
+	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_110) == 0x00D8, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, bAttacking) == 0x0120, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_CurrFireParams) == 0x0121, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, CurrFireParams) == 0x0124, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_UM1WeaponFireLoopComponent) == 0x0140, "Bad alignment");
 	// 0x0158 (0x0228 - 0x00D0)
 	class UM1WeaponSlotControlComponent final : public UM1CharacterComponent
 	{
@@ -1334,7 +1378,9 @@ namespace TFD_SDK
 	class AM1Weapon : public AM1Actor
 	{
 	public:
-		uint8 Pad_RoundsComponent[0x30];	// 0x0330
+		uint8 Pad_FireLoopComponent[0x18];	// 0x0330
+		class UM1WeaponFireLoopComponent* FireLoopComponent;                                 // 0x0348(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+		uint8 Pad_SprayPatternComponent[0x10];	// 0x0350
 		class UM1WeaponSprayPatternComponent* SprayPatternComponent;                             // 0x0360(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
 		class UM1WeaponRoundsComponent* RoundsComponent; // 0x0368(0x0008)
 		uint8 Pad_AM1Weapon_Class[0x120]; // 0x0370
