@@ -590,6 +590,30 @@ namespace TFD_SDK
 		float                                         CoolTimeDuration;                                  // 0x000C(0x0004)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		float                                         RemainingCoolTime;                                 // 0x0010(0x0004)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 	};
+	// 0x0008 (0x0008 - 0x0000)
+	struct alignas(0x08) FTableRowBase
+	{
+	public:
+		uint8                                         Pad_0[0x8];                                        // 0x0000(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	};
+	// 0x0008 (0x0008 - 0x0000)
+	struct FM1RecoilInfo final
+	{
+	public:
+		float                                         Pitch;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         Yaw;                                               // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+	// 0x0030 (0x0038 - 0x0008)
+	struct FM1RangedWeaponRecoilData final : public FTableRowBase
+	{
+	public:
+		class FString                                 StringId;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         RecoilApplyInterpSpeed;                            // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         RecoilRecoverInterpSpeed;                          // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         RecoilRecoverStartDelay;                           // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         RecoilResetTimeAfterFire;                          // 0x0024(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		TArray<struct FM1RecoilInfo>                  RecoilInfos;                                       // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	};
 
 	
 	// 0x0220 (0x0248 - 0x0028)
@@ -1043,7 +1067,8 @@ namespace TFD_SDK
 	public:
 		uint8                                         Pad_CrosshairSizeBase[0xC];					  // 0x00D8
 		float										  CrosshairSizeBase;							  // 0x00E4(0x0004)
-		uint8                                         Pad_bApplySpreadSize[0x10];					  // 0x00E8
+		struct FM1RangedWeaponRecoilData*			  RecoilData;									  // 0x00E8(0x0008)
+		struct FM1RangedWeaponRecoilData*			  ZoomRecoilData;								  // 0x00E8(0x0008)
 		bool										  bApplySpreadSize;								  // 0x00F8(0x0001)
 		uint8                                         Pad_CurrentSpreadSize[0xF];					  // 0x00F9
 		float										  CurrentSpreadSize;						      // 0x0108(0x0004)                        

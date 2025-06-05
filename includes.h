@@ -177,6 +177,7 @@ void MissionTaskTeleporter();
 //void MissionTaskTeleporterDebugger();
 void ResearchBookmarkedItems();
 void NoSpread();
+void NoRecoil();
 /*
 *  Aimbot
 */

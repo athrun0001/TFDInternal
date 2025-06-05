@@ -265,13 +265,13 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, old, NULL);
 			}*/
 
-			if (cfg_AimbotNoRecoil)
+			/*if (cfg_AimbotNoRecoil)
 			{
 				DWORD old;
 				VirtualProtect(NoRecoilAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
 				memcpy(NoRecoilAddress, &Recoil[1], sizeof(uint8_t));
 				VirtualProtect(NoRecoilAddress, sizeof(uint8_t), old, NULL);
-			}
+			}*/
 
 			if (cfg_AimbotRapidFire)
 			{
@@ -516,6 +516,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (cfg_AimbotNoSpread)
 				NoSpread();
 
+			if (cfg_AimbotNoRecoil)
+				NoRecoil();
+
 			if (cfg_CacheEnemyNames && NamesChanged)
 			{
 				WriteEnemyNamesData();
@@ -693,6 +696,37 @@ void NoSpread()
 					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase = 1.0f;
 				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize > 1.0f)
 					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize = 1.0f;
+			}
+		}
+	}
+}
+
+void NoRecoil()
+{
+	if (!LocalPlayerCharacter)
+		return;
+	char buffer[300];
+	if (LocalPlayerCharacter->WeaponSlotControl)
+	{
+		if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon)
+		{
+			if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent)
+			{
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData)
+				{
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilApplyInterpSpeed > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilApplyInterpSpeed = 0.000001f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverInterpSpeed > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverInterpSpeed = 0.000001f;
+				}
+
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData)
+				{
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilApplyInterpSpeed > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilApplyInterpSpeed = 0.000001f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed = 0.000001f;
+				}
 			}
 		}
 	}
@@ -2190,7 +2224,8 @@ void DrawMenu()
 					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, old, NULL);
 				}
 			}*/
-			if (ZeroGUI::Checkbox((char*)"Enable No Recoil", &cfg_AimbotNoRecoil))
+			ZeroGUI::Checkbox((char*)"Enable No Recoil", &cfg_AimbotNoRecoil);
+			/*if (ZeroGUI::Checkbox((char*)"Enable No Recoil", &cfg_AimbotNoRecoil))
 			{
 				if (cfg_AimbotNoRecoil)
 				{
@@ -2206,7 +2241,7 @@ void DrawMenu()
 					memcpy(NoRecoilAddress, &Recoil[0], sizeof(uint8_t));
 					VirtualProtect(NoRecoilAddress, sizeof(uint8_t), old, NULL);
 				}
-			}
+			}*/
 			if (ZeroGUI::Checkbox((char*)"Enable Rapidfire", &cfg_AimbotRapidFire))
 			{
 				if (cfg_AimbotRapidFire)
@@ -2827,14 +2862,14 @@ DWORD WINAPI Init(HMODULE Module)
 		Sleep(1000);
 #endif // IS_DEBUG
 
-		uintptr_t RecoilPtr = FindSignature(procID, dwBase, dwSize, NoRecoilSig, NoRecoilMask);
+		/*uintptr_t RecoilPtr = FindSignature(procID, dwBase, dwSize, NoRecoilSig, NoRecoilMask);
 		if (!RecoilPtr)
 		{
 			throw std::runtime_error("Unable to find NoRecoil.");
 			return 1;
 		}
 		RecoilPtr = GameModule.dwBase + RecoilPtr;
-		NoRecoilAddress = reinterpret_cast<uint8_t*>(RecoilPtr + 2);
+		NoRecoilAddress = reinterpret_cast<uint8_t*>(RecoilPtr + 2);*/
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found NoRecoil at " << std::hex << RecoilPtr << std::dec << "\n";
 		Sleep(1000);
