@@ -1463,20 +1463,19 @@ void MissionTaskTeleporter()
 			&& MissionActor->MissionData)
 		{
 			std::string activatedtaskname = ToLower(MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString());
+			std::string lasttaskname = "";
 			
 			if (MissionActor->ProgressInfo.ActivatedTaskIndex > 0)
 			{
 				//AutoTeleportStartTime = std::chrono::steady_clock::now();
-				std::string lasttaskname = ToLower(MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString());
+				lasttaskname = ToLower(MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString());
 
 				if (MissionActor->MissionData->MissionDataRowName.ToString().contains("400"))
 					return;
 				if (!activatedtaskname.contains("move")
 					&& !activatedtaskname.contains("interact")
-					&& !activatedtaskname.contains("hack")
 					&& !lasttaskname.contains("move")
-					&& !lasttaskname.contains("interact")
-					&& !lasttaskname.contains("hack"))
+					&& !lasttaskname.contains("interact"))
 					return;
 				if (activatedtaskname.contains("playerset")
 					|| activatedtaskname.contains("fadein"))
@@ -1484,8 +1483,7 @@ void MissionTaskTeleporter()
 			}
 			
 			if ((activatedtaskname.contains("move")
-				|| activatedtaskname.contains("interact")
-				|| activatedtaskname.contains("hack"))
+				|| activatedtaskname.contains("interact"))
 				&& MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
 			{
 				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
@@ -1546,7 +1544,7 @@ void MissionTaskTeleporter()
 					}
 				}
 
-				if (!MissionTaskExceptionSet.contains(mtt))
+				if (!MissionTaskExceptionSet.contains(mtt) && !lasttaskname.contains("interact"))
 				{
 					float ODistanceLocalCharacter = 0.0f;
 					float ODistanceTask = 0.0f;
