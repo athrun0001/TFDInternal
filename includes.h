@@ -179,7 +179,6 @@ void MissionTaskTeleporter();
 void ResearchBookmarkedItems();
 void NoSpread();
 void NoRecoil();
-//void CheckRapidOn();
 void RapidFireOn();
 /*
 *  Aimbot

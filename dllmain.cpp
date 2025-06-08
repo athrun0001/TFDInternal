@@ -583,7 +583,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				MissionTaskTeleporterDebugger();*/
 
 			//MissionTaskActortESP();
-			//CheckRapidOn();
 			
 			if (cfg_DrawMenu)
 				DrawMenu();
@@ -730,30 +729,6 @@ void NoRecoil()
 						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilApplyInterpSpeed = 0.000001f;
 					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed > 0.000001f)
 						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed = 0.000001f;
-				}
-			}
-		}
-	}
-}
-
-void CheckRapidOn()
-{
-	if (!LocalPlayerCharacter)
-		return;
-	char buffer[300];
-	if (LocalPlayerCharacter->WeaponSlotControl)
-	{
-		if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon)
-		{
-			if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent)
-			{
-				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams)
-				{
-					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.IsSet())
-					{
-						sprintf_s(buffer, "Fire Interval: %f", LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.GetValueRef().fireinterval);
-						ZeroGUI::TextLeft((char*)buffer, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * 0) }, ColorRed, false);
-					}
 				}
 			}
 		}
@@ -1519,7 +1494,7 @@ void MissionTaskTeleporter()
 			{
 				//AutoTeleportStartTime = std::chrono::steady_clock::now();
 				//MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
-				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+				
 				std::string mtt = MissionActor->MissionData->MissionDataRowName.ToString() + "|" + MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
 
 				if (ForceTeleportMissionTaskExceptionSet.contains(mtt))
@@ -1533,6 +1508,8 @@ void MissionTaskTeleporter()
 							if (MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->Index_0 == (WayPointCount - 1))
 							{
 								LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorRotation());
+								MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+								AutoTeleportStartTime = std::chrono::steady_clock::now();
 								return;
 							}
 						}
@@ -1540,6 +1517,8 @@ void MissionTaskTeleporter()
 					else
 					{
 						LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorRotation());
+						MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+						AutoTeleportStartTime = std::chrono::steady_clock::now();
 						return;
 					}
 				}
@@ -1547,7 +1526,8 @@ void MissionTaskTeleporter()
 				if (!MissionTaskExceptionSet.contains(mtt) && !lasttaskname.contains("interact"))
 				{
 					float ODistanceLocalCharacter = 0.0f;
-					float ODistanceTask = 0.0f;
+					float ODistanceLastTask = 0.0f;
+					float ODistanceBetweenLastTaskLocalChar = 0.0f;
 					if (MissionActor->ProgressInfo.LastTaskActor->WayPoints.Num() > 0)
 					{
 						int WayPointCount = MissionActor->ProgressInfo.LastTaskActor->WayPoints.Num();
@@ -1556,18 +1536,30 @@ void MissionTaskTeleporter()
 							if (MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->Index_0 == (WayPointCount - 1))
 							{
 								ODistanceLocalCharacter = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(LocalPlayerCharacter->K2_GetActorLocation());
-								ODistanceTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation());
-								if (ODistanceTask < ODistanceLocalCharacter)
+								ODistanceLastTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation());
+								ODistanceBetweenLastTaskLocalChar = LocalPlayerCharacter->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation());
+								if (ODistanceLastTask < ODistanceLocalCharacter && ODistanceBetweenLastTaskLocalChar > 1500.0f)
+								{
 									LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorRotation());
+									MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+									AutoTeleportStartTime = std::chrono::steady_clock::now();
+								}
+									
 							}
 						}
 					}
 					else
 					{
 						ODistanceLocalCharacter = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(LocalPlayerCharacter->K2_GetActorLocation());
-						ODistanceTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation());
-						if (ODistanceTask < ODistanceLocalCharacter)
+						ODistanceLastTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation());
+						ODistanceBetweenLastTaskLocalChar = LocalPlayerCharacter->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation());
+						if (ODistanceLastTask < ODistanceLocalCharacter && ODistanceBetweenLastTaskLocalChar > 1500.0f)
+						{
 							LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->K2_GetActorRotation());
+							MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+							AutoTeleportStartTime = std::chrono::steady_clock::now();
+						}
+							
 					}
 				}
 			}
@@ -1622,7 +1614,7 @@ void MissionTaskTeleporterDebugger()
 
 void MissionTaskActortESP()
 {
-	if (!PlayerState || !PlayerState->MissionControlComponent)
+	if (!PlayerState || !PlayerState->MissionControlComponent || !LocalPlayerCharacter)
 		return;
 
 	TFD_SDK::UM1MissionControlComponent* MCC = PlayerState->MissionControlComponent;
@@ -1671,7 +1663,7 @@ void MissionTaskActortESP()
 			int i = 0;
 			if (MissionActor->ProgressInfo.ActivatedTaskIndex > 0)
 			{
-				ODistance = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation()) / 100.00f;
+				ODistance = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(LocalPlayerCharacter->K2_GetActorLocation());
 				std::string MissionTaskActorESPStr = MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString();
 				std::string MissionName = MissionActor->MissionData->MissionDataRowName.ToString().c_str();
 				sprintf_s(buffer1, "MissionName: %s | LastTaskName: %s", MissionName.c_str(), MissionTaskActorESPStr.c_str());
