@@ -8,6 +8,63 @@
 // Uncomment the line below for console window + some debug prints
 //#define IS_DEBUG
 
+
+bool g_KeyState[256] = {};
+bool g_KeyPressed[256] = {};
+WNDPROC oWndProc = nullptr;
+
+LRESULT CALLBACK MyWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (msg)
+	{
+	case WM_KEYDOWN:
+	case WM_SYSKEYDOWN:
+		if (!g_KeyState[wParam])
+			g_KeyPressed[wParam] = true;
+		g_KeyState[wParam] = true;
+		break;
+	case WM_KEYUP:
+	case WM_SYSKEYUP:
+		g_KeyState[wParam] = false;
+		break;
+	case WM_RBUTTONDOWN:
+		if (!g_KeyState[VK_RBUTTON])
+			g_KeyPressed[VK_RBUTTON] = true;
+		g_KeyState[VK_RBUTTON] = true;
+		break;
+	case WM_RBUTTONUP:
+		g_KeyState[VK_RBUTTON] = false;
+		break;
+	}
+
+	return CallWindowProc(oWndProc, hWnd, msg, wParam, lParam);
+}
+
+void ResetKeyPressed()
+{
+	for (int i = 0; i < 256; ++i)
+		g_KeyPressed[i] = false;
+}
+
+HWND FindGameWindow()
+{
+	HWND hwnd = nullptr;
+	DWORD pid = GetCurrentProcessId();
+
+	hwnd = GetTopWindow(0);
+	while (hwnd)
+	{
+		DWORD windowPid;
+		GetWindowThreadProcessId(hwnd, &windowPid);
+		if (windowPid == pid && IsWindowVisible(hwnd))
+			return hwnd;
+
+		hwnd = GetNextWindow(hwnd, GW_HWNDNEXT);
+	}
+
+	return nullptr;
+}
+
 bool IsValidUWorld()
 {
 	GWorld = nullptr;
@@ -592,6 +649,8 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 		}
 	}
+
+	ResetKeyPressed();
 	return M1org(self, Canvas);
 }
 
@@ -2797,17 +2856,26 @@ std::unordered_map<int, std::vector<int>> ReadEnemyBonesData()
 	return map;
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
+	{
 		DisableThreadLibraryCalls(hModule);
 		//CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Init, hModule, 0, 0);
 		HANDLE hThread = (HANDLE)_beginthreadex(nullptr, 0, reinterpret_cast<unsigned(__stdcall*)(void*)>(Init), hModule, 0, nullptr);
 		if (hThread)
 			CloseHandle(hThread);  // Close immediately unless you need to wait on it
 		return true;
+	}
+	case DLL_PROCESS_DETACH:
+		if (oWndProc)
+		{
+			HWND hWnd = FindGameWindow();
+			SetWindowLongPtr(hWnd, GWLP_WNDPROC, (LONG_PTR)oWndProc);
+		}
+		break;
 	}
 	return false;
 }
@@ -3037,6 +3105,13 @@ DWORD WINAPI Init(HMODULE Module)
 #endif // IS_DEBUG
 	ini.SetUnicode();
 	LoadCFG();
+
+	HWND hWnd = FindGameWindow();
+	if (hWnd && !oWndProc)
+	{
+		oWndProc = (WNDPROC)SetWindowLongPtr(hWnd, GWLP_WNDPROC, (LONG_PTR)MyWndProc);
+	}
+
 	return 1;
 }
 

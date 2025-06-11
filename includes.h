@@ -13,16 +13,31 @@
 #pragma comment(lib,"xinput.lib")
 //#include "TFD_SDK.h"
 #include <chrono>
+#include <windows.h>
+
+// Input tracking via WndProc
+extern bool g_KeyState[256];
+extern bool g_KeyPressed[256];
+extern WNDPROC oWndProc;
+
+LRESULT CALLBACK MyWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+void ResetKeyPressed();
+HWND FindGameWindow();
+
+#define IsKeyPressed(key) (g_KeyPressed[key])
+#define IsKeyHeld(key)    (g_KeyState[key])
 
 
-#define IsKeyPressed(key) GetAsyncKeyState(key) & 1 && GetAsyncKeyState(key) & 0x8000
-#define IsKeyHeld(key) (GetAsyncKeyState(key) & 0x8000)
+//#define IsKeyPressed(key) GetAsyncKeyState(key) & 1 && GetAsyncKeyState(key) & 0x8000
+//#define IsKeyHeld(key) (GetAsyncKeyState(key) & 0x8000)
 
 struct CONTROLLER_STATE
 {
 	XINPUT_STATE state;
 	bool bConnected;
 };
+
+
 
 
 CONTROLLER_STATE g_Controllers[4];
