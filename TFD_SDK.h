@@ -590,6 +590,53 @@ namespace TFD_SDK
 		float                                         CoolTimeDuration;                                  // 0x000C(0x0004)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		float                                         RemainingCoolTime;                                 // 0x0010(0x0004)(ZeroConstructor, Transient, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 	};
+	// 0x0008 (0x0008 - 0x0000)
+	struct alignas(0x08) FTableRowBase
+	{
+	public:
+		uint8                                         Pad_0[0x8];                                        // 0x0000(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	};
+	// 0x0008 (0x0008 - 0x0000)
+	struct FM1RecoilInfo final
+	{
+	public:
+		float                                         Pitch;                                             // 0x0000(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         Yaw;                                               // 0x0004(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+	// 0x0030 (0x0038 - 0x0008)
+	struct FM1RangedWeaponRecoilData final : public FTableRowBase
+	{
+	public:
+		class FString                                 StringId;                                          // 0x0008(0x0010)(Edit, ZeroConstructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         RecoilApplyInterpSpeed;                            // 0x0018(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         RecoilRecoverInterpSpeed;                          // 0x001C(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         RecoilRecoverStartDelay;                           // 0x0020(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         RecoilResetTimeAfterFire;                          // 0x0024(0x0004)(Edit, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		TArray<struct FM1RecoilInfo>                  RecoilInfos;                                       // 0x0028(0x0010)(Edit, ZeroConstructor, NativeAccessSpecifierPublic)
+	};
+	// 0x000C (0x000C - 0x0000)
+	struct FM1WeaponBurstFireParams final
+	{
+	public:
+		int32                                         Count;                                             // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         Delay;                                             // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         Interval;                                          // 0x0008(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+	// 0x0008 (0x0008 - 0x0000)
+	struct FM1WeaponFireAnimParams final
+	{
+	public:
+		float                                         PlayRate;                                          // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		float                                         PlayTime;                                          // 0x0004(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+	// 0x0018 (0x0018 - 0x0000)
+	struct FM1WeaponFireParams final
+	{
+	public:
+		float                                         fireinterval;                                      // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		struct FM1WeaponBurstFireParams               BurstFire;                                         // 0x0004(0x000C)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
+		struct FM1WeaponFireAnimParams                Anim;                                              // 0x0010(0x0008)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
+	};
 
 	
 	// 0x0220 (0x0248 - 0x0028)
@@ -688,11 +735,11 @@ namespace TFD_SDK
 	public:
 		static struct FTransform Conv_MatrixToTransform(const struct FMatrix& InMatrix);
 		static struct FMatrix Conv_TransformToMatrix(const struct FTransform& Transform);
+		static double Distance2D(const struct FVector2D& v1, const struct FVector2D& v2);
 		static struct FRotator FindLookAtRotation(const struct FVector& Start, const struct FVector& Target);
 		static struct FMatrix Multiply_MatrixMatrix(const struct FMatrix& A, const struct FMatrix& B);
 		static struct FRotator RInterpTo(const struct FRotator& Current, const struct FRotator& Target, float DeltaTime, float InterpSpeed);
-		static double Distance2D(const struct FVector2D& v1, const struct FVector2D& v2);
-
+		
 	public:
 		static class UClass* StaticClass()
 		{
@@ -743,13 +790,13 @@ namespace TFD_SDK
 	class UM1ActionInputContext : public UObject
 	{
 	public:
-		uint8                                         Pad_28[0x8];                                       // 0x0028(0x0008)(Fixing Struct Size After Last Property [ Dumper-7 ])
+		uint8                                         Pad_UM1ActionInputContext[0x8];                                       // 0x0028
 	};
 	// 0x0118 (0x0140 - 0x0028)
 	class UM1CharacterAttribute : public UObject
 	{
 	public:
-		uint8 UM1CharacterAttribute_Class[0x118]; // 0x0028
+		uint8 Pad_UM1CharacterAttribute_Class[0x118]; // 0x0028
 	};
 	// 0x0330 (0x0358 - 0x0028)
 	class UM1MissionResult final : public UObject
@@ -894,7 +941,7 @@ namespace TFD_SDK
 	class UM1PrivateOnlineServicePreset final : public UM1PrivateOnlineSubService
 	{
 	public:
-		uint8                                         Pad_40[0x60];                                      // 0x0040(0x0060)(Fixing Struct Size After Last Property [ Dumper-7 ])
+		uint8                                         Pad_UM1PrivateOnlineServicePreset[0x60];                                      // 0x0040(0x0060)(Fixing Struct Size After Last Property [ Dumper-7 ])
 
 	public:
 		void ServerRequestApplyPreset(int32 InPresetIndex);
@@ -908,7 +955,7 @@ namespace TFD_SDK
 	class UM1PrivateOnlineServiceResearch final : public UM1PrivateOnlineSubService
 	{
 	public:
-		uint8                                         Pad_40[0x60];                                      // 0x0040(0x0060)(Fixing Struct Size After Last Property [ Dumper-7 ])
+		uint8                                         Pad_UM1PrivateOnlineServiceResearch[0x60];                                      // 0x0040(0x0060)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	public:
 		void ServerRequestStartResearch(const struct FM1TemplateId& InResearchTemplateId, int32 InRepeatCount);
 	public:
@@ -988,8 +1035,8 @@ namespace TFD_SDK
 	class UM1CoolTimeComponent final : public UM1ActorComponent
 	{
 	public:
-		TArray<struct FM1CoolTimer>                   CoolTimers;                                        // 0x00C8(0x0010)(Net, ZeroConstructor, Transient, RepNotify, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_D8[0xA0];                                      // 0x00D8(0x00A0)(Fixing Struct Size After Last Property [ Dumper-7 ])
+		TArray<struct FM1CoolTimer>                   CoolTimers;															// 0x00C8(0x0010)(Net, ZeroConstructor, Transient, RepNotify, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_UM1CoolTimeComponent[0xA0];                                       // 0x00D8(0x00A0)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
 	// 0x0A08 (0x0AD0 - 0x00C8)
 	class UM1PrivateOnlineServiceComponent final : public UM1ActorComponent
@@ -1008,7 +1055,7 @@ namespace TFD_SDK
 	class UM1StatComponent : public UM1ActorComponent
 	{
 	public:
-		uint8                                         Pad_230[0x458];                                    // 0x00C8
+		uint8                                         Pad_UM1StatComponent[0x458];                                    // 0x00C8
 
 	public:
 		struct FM1ScaledInteger GetStatValue(const EM1StatType InStatType) const;
@@ -1025,10 +1072,33 @@ namespace TFD_SDK
 	class alignas(0x10) UM1TeleportHandlerComponent final : public UM1CharacterComponent
 	{
 	public:
-		uint8                                         Pad_1C9[0x130];                                     // 0x01C9(0x0037)(Fixing Struct Size After Last Property [ Dumper-7 ])
+		uint8                                         Pad_UM1TeleportHandlerComponent[0x130];                                     // 0x01C9(0x0037)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	public:
 		void ServerMoveToTeleportToLocation(const struct FVector& InLocation, const struct FRotator& InRotation);
 	};
+	// 0x0090 (0x0168 - 0x00D8)
+	class UM1WeaponFireLoopComponent : public UM1WeaponComponent
+	{
+	public:
+		uint8                                         Pad_110[0x48];                                     // 0x00D8
+		bool										  bAttacking;                                        // 0x0120(0x0001)
+		uint8                                         Pad_CurrFireParams[0x3];                           // 0x0121
+		TOptional<FM1WeaponFireParams>				  CurrFireParams;									 // 0x0124(0x001C)(Transient, NativeAccessSpecifierPrivate)
+		float										  ElapsedTimeAfterFire;							     // 0x0140(0x0004)
+		uint8                                         Pad_UM1WeaponFireLoopComponent[0x24];              // 0x0144
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1WeaponFireLoopComponent">();
+		}
+	};
+	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_110) == 0x00D8, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, bAttacking) == 0x0120, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_CurrFireParams) == 0x0121, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, CurrFireParams) == 0x0124, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, ElapsedTimeAfterFire) == 0x0140, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_UM1WeaponFireLoopComponent) == 0x0144, "Bad alignment");
 	// 0x0158 (0x0228 - 0x00D0)
 	class UM1WeaponSlotControlComponent final : public UM1CharacterComponent
 	{
@@ -1037,6 +1107,27 @@ namespace TFD_SDK
 		struct FM1ActivatedWeaponSlot ActivatedWeaponSlot; // 0x00F0(0x0090)
 		uint8 Pad_UM1WeaponSlotControlComponent_Class[0xA8]; // 0x0180
 	};
+	// 0x0038 (0x0110 - 0x00D8)
+	class UM1WeaponSprayPatternComponent final : public UM1WeaponComponent
+	{
+	public:
+		uint8                                         Pad_CrosshairSizeBase[0xC];					  // 0x00D8
+		float										  CrosshairSizeBase;							  // 0x00E4(0x0004)
+		struct FM1RangedWeaponRecoilData*			  RecoilData;									  // 0x00E8(0x0008)
+		struct FM1RangedWeaponRecoilData*			  ZoomRecoilData;								  // 0x00F0(0x0008)
+		bool										  bApplySpreadSize;								  // 0x00F8(0x0001)
+		uint8                                         Pad_CurrentSpreadSize[0xF];					  // 0x00F9
+		float										  CurrentSpreadSize;						      // 0x0108(0x0004)                        
+		uint8                                         Pad_UM1WeaponSprayPatternComponent[0x4];        // 0x010C
+	};
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, Pad_CrosshairSizeBase) == 0x00D8, "Bad alignment");
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, CrosshairSizeBase) == 0x00E4, "Bad alignment");
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, RecoilData) == 0x00E8, "Bad alignment");
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, ZoomRecoilData) == 0x00F0, "Bad alignment");
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, bApplySpreadSize) == 0x00F8, "Bad alignment");
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, Pad_CurrentSpreadSize) == 0x00F9, "Bad alignment");
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, CurrentSpreadSize) == 0x0108, "Bad alignment");
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, Pad_UM1WeaponSprayPatternComponent) == 0x010C, "Bad alignment");
 	// 0x0028 (0x0100 - 0x00D8)
 	class UM1WeaponRoundsComponent final : public UM1WeaponComponent
 	{
@@ -1167,7 +1258,7 @@ namespace TFD_SDK
 		}
 	};
 	// 0x0390 (0x05D8 - 0x0248)
-	class AM1MissionActor : public AActor
+	class AM1MissionActor final : public AActor
 	{
 	public:
 		uint8                                         Pad_MissionData[0x30];						     // 0x0248
@@ -1181,7 +1272,7 @@ namespace TFD_SDK
 		uint8                                         Pad_AM1MissionActor_Class[0x40];                   // 0x0598
 	};
 	// 0x0018 (0x0260 - 0x0248)
-	class AM1MissionTaskMoveWayPoint : public AActor
+	class AM1MissionTaskMoveWayPoint final : public AActor
 	{
 	public:
 		uint8                                         Pad_Index_0[0x10];                                 // 0x0248
@@ -1297,7 +1388,10 @@ namespace TFD_SDK
 	class AM1Weapon : public AM1Actor
 	{
 	public:
-		uint8 Pad_RoundsComponent[0x38];	// 0x0330
+		uint8 Pad_FireLoopComponent[0x18];	// 0x0330
+		class UM1WeaponFireLoopComponent* FireLoopComponent;                                 // 0x0348(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+		uint8 Pad_SprayPatternComponent[0x10];	// 0x0350
+		class UM1WeaponSprayPatternComponent* SprayPatternComponent;                             // 0x0360(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
 		class UM1WeaponRoundsComponent* RoundsComponent; // 0x0368(0x0008)
 		uint8 Pad_AM1Weapon_Class[0x120]; // 0x0370
 	};
@@ -1332,7 +1426,7 @@ namespace TFD_SDK
 	};
 
 	// 0x0020 (0x0458 - 0x0438)
-	class AM1FieldInteractableActor_Hit : public AM1FieldInteractableActor
+	class AM1FieldInteractableActor_Hit final : public AM1FieldInteractableActor
 	{
 	public:
 		uint8                                         AM1FieldInteractableActor_Hit_Class[0x20];
@@ -1641,7 +1735,7 @@ namespace TFD_SDK
 	};
 	
 	// 0x0028 (0x0768 - 0x0740)
-	class AM1MissionTargetInteraction : public AM1MissionTargetActor
+	class AM1MissionTargetInteraction final : public AM1MissionTargetActor
 	{
 	public:
 		uint8                                         Pad_AM1MissionTargetInteraction_Class[0x28];                                      // 0x0740
@@ -1728,7 +1822,7 @@ namespace TFD_SDK
 	};
 #pragma pack(pop)
 	// 0x0770 (0x13D0 - 0x0C60)
-	class AM1Player : public AM1Character
+	class AM1Player final : public AM1Character
 	{
 	public:
 

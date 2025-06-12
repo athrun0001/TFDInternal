@@ -14,16 +14,22 @@
 //#include "TFD_SDK.h"
 #include <chrono>
 
+// Input tracking via WndProc
+extern bool g_KeyState[256];
+extern bool g_KeyPressed[256];
+extern WNDPROC oWndProc;
 
-#define IsKeyPressed(key) GetAsyncKeyState(key) & 1 && GetAsyncKeyState(key) & 0x8000
-#define IsKeyHeld(key) (GetAsyncKeyState(key) & 0x8000)
+LRESULT CALLBACK MyWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+HWND FindGameWindow();
+
+//#define IsKeyPressed(key) GetAsyncKeyState(key) & 1 && GetAsyncKeyState(key) & 0x8000
+//#define IsKeyHeld(key) (GetAsyncKeyState(key) & 0x8000)
 
 struct CONTROLLER_STATE
 {
 	XINPUT_STATE state;
 	bool bConnected;
 };
-
 
 CONTROLLER_STATE g_Controllers[4];
 HRESULT UpdateControllerState();
@@ -165,6 +171,7 @@ int cfg_LootVacuumKey = 0x54;
 float cfg_HPThreshold = 50.0f;
 float cfg_MPThreshold = 50.0f;
 int cfg_ResearchQty = 1;
+float cfg_FireRate = 1.0f;
 
 void InstantInfiltration();
 void RestartLastMission();
@@ -176,7 +183,9 @@ void MissionTaskTeleporter();
 //void MissionTaskActortESP();
 //void MissionTaskTeleporterDebugger();
 void ResearchBookmarkedItems();
-
+void NoSpread();
+void NoRecoil();
+void RapidFireOn();
 /*
 *  Aimbot
 */
@@ -202,7 +211,7 @@ uint8_t RapidFire[2] = { 0x72, 0x77 };
 * Tivmo Autism
 */
 
-int cfg_ContainerDropKey = VK_RIGHT;
+int cfg_ContainerDropKey = VK_LEFT;
 void ContainerDrop();
 float cfg_ContainersRange = 250.0f;
 bool cfg_ChangeDropCount = false;
@@ -232,11 +241,11 @@ int cfg_SwitchPreset = VK_NEXT;
 float cfg_TimeScale = 1.0f;
 int cfg_TimeScaleKey = VK_F2;
 int cfg_TimeScaleHoldKey = VK_CONTROL;
-int cfg_EncryptedVaultDropsKey = VK_LEFT;
+int cfg_EncryptedVaultDropsKey = VK_RIGHT;
 int cfg_EncryptedVaultRewardType = 0;
 bool isRestartMission = false;
 int cfg_RestartType = 0;
-int cfg_TPMissionKey = 0x80;
+int cfg_TPMissionKey = 0x50;
 
 
 UC::int32 MissionTaskIndex = 0;

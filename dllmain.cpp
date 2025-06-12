@@ -8,6 +8,120 @@
 // Uncomment the line below for console window + some debug prints
 //#define IS_DEBUG
 
+WNDPROC oWndProc = nullptr;
+
+LRESULT CALLBACK MyWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (msg)
+	{
+		// KEYBOARD: Handle modifier keys and others
+		case WM_KEYDOWN:
+		case WM_SYSKEYDOWN:
+		{
+			int vk = (int)wParam;
+
+			// Distinguish left/right variants
+			if (vk == VK_CONTROL)
+				vk = (lParam & (1 << 24)) ? VK_RCONTROL : VK_LCONTROL;
+			else if (vk == VK_MENU)
+				vk = (lParam & (1 << 24)) ? VK_RMENU : VK_LMENU;
+			else if (vk == VK_SHIFT)
+				vk = MapVirtualKey((lParam >> 16) & 0xFF, MAPVK_VSC_TO_VK_EX);
+
+			if (!g_KeyState[vk])
+				g_KeyPressed[vk] = true;
+			g_KeyState[vk] = true;
+			break;
+		}
+
+		case WM_KEYUP:
+		case WM_SYSKEYUP:
+		{
+			int vk = (int)wParam;
+
+			if (vk == VK_CONTROL) // Distinguish left/right Ctrl keys
+				vk = (lParam & (1 << 24)) ? VK_RCONTROL : VK_LCONTROL;
+			else if (vk == VK_MENU) // Distinguish left/right Alt keys
+				vk = (lParam & (1 << 24)) ? VK_RMENU : VK_LMENU;
+			else if (vk == VK_SHIFT) // Distinguish left/right Shift keys
+				vk = MapVirtualKey((lParam >> 16) & 0xFF, MAPVK_VSC_TO_VK_EX);
+
+			g_KeyState[vk] = false;
+			break;
+		}
+
+		// MOUSE BUTTONS
+		case WM_LBUTTONDOWN:
+			if (!g_KeyState[VK_LBUTTON])
+				g_KeyPressed[VK_LBUTTON] = true;
+			g_KeyState[VK_LBUTTON] = true;
+			break;
+
+		case WM_LBUTTONUP:
+			g_KeyState[VK_LBUTTON] = false;
+			break;
+
+		case WM_RBUTTONDOWN:
+			if (!g_KeyState[VK_RBUTTON])
+				g_KeyPressed[VK_RBUTTON] = true;
+			g_KeyState[VK_RBUTTON] = true;
+			break;
+
+		case WM_RBUTTONUP:
+			g_KeyState[VK_RBUTTON] = false;
+			break;
+
+		case WM_MBUTTONDOWN:
+			if (!g_KeyState[VK_MBUTTON])
+				g_KeyPressed[VK_MBUTTON] = true;
+			g_KeyState[VK_MBUTTON] = true;
+			break;
+
+		case WM_MBUTTONUP:
+			g_KeyState[VK_MBUTTON] = false;
+			break;
+
+			// EXTRA MOUSE BUTTONS (XBUTTON1 = thumb back, XBUTTON2 = thumb forward)
+		case WM_XBUTTONDOWN:
+		{
+			int vk = (GET_XBUTTON_WPARAM(wParam) == XBUTTON1) ? VK_XBUTTON1 : VK_XBUTTON2;
+
+			if (!g_KeyState[vk])
+				g_KeyPressed[vk] = true;
+			g_KeyState[vk] = true;
+			break;
+		}
+
+		case WM_XBUTTONUP:
+		{
+			int vk = (GET_XBUTTON_WPARAM(wParam) == XBUTTON1) ? VK_XBUTTON1 : VK_XBUTTON2;
+			g_KeyState[vk] = false;
+			break;
+		}
+	}
+
+	return CallWindowProc(oWndProc, hWnd, msg, wParam, lParam);
+}
+
+HWND FindGameWindow()
+{
+	HWND hwnd = nullptr;
+	DWORD pid = GetCurrentProcessId();
+
+	hwnd = GetTopWindow(0);
+	while (hwnd)
+	{
+		DWORD windowPid;
+		GetWindowThreadProcessId(hwnd, &windowPid);
+		if (windowPid == pid && IsWindowVisible(hwnd))
+			return hwnd;
+
+		hwnd = GetNextWindow(hwnd, GW_HWNDNEXT);
+	}
+
+	return nullptr;
+}
+
 bool IsValidUWorld()
 {
 	GWorld = nullptr;
@@ -257,29 +371,29 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				PresetsMap = ReadPresetsData();
 			}
 			
-			if (cfg_AimbotNoSpread)
+			/*if (cfg_AimbotNoSpread)
 			{
 				DWORD old;
 				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, PAGE_EXECUTE_READWRITE, &old);
 				memcpy(NoSpreadAddress, &NoSpreadCheat, sizeof(uint8_t) * 8);
 				VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, old, NULL);
-			}
+			}*/
 
-			if (cfg_AimbotNoRecoil)
+			/*if (cfg_AimbotNoRecoil)
 			{
 				DWORD old;
 				VirtualProtect(NoRecoilAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
 				memcpy(NoRecoilAddress, &Recoil[1], sizeof(uint8_t));
 				VirtualProtect(NoRecoilAddress, sizeof(uint8_t), old, NULL);
-			}
+			}*/
 
-			if (cfg_AimbotRapidFire)
+			/*if (cfg_AimbotRapidFire)
 			{
 				DWORD old;
 				VirtualProtect(RapidFireAddress, sizeof(uint8_t), PAGE_EXECUTE_READWRITE, &old);
 				memcpy(RapidFireAddress, &RapidFire[1], sizeof(uint8_t));
 				VirtualProtect(RapidFireAddress, sizeof(uint8_t), old, NULL);
-			}
+			}*/
 
 			isGUIInit = true;
 		}
@@ -295,7 +409,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			updateMiddle = false;
 		}
 
-		if (IsKeyPressed(VK_INSERT))
+		if (Input::IsKeyPressed(VK_INSERT))
 		{
 			cfg_DrawMenu = !cfg_DrawMenu;
 			if (!cfg_DrawMenu)
@@ -385,10 +499,10 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			//	}
 			//}
 
-			if (IsKeyPressed(cfg_LootVacuumKey))
+			if (Input::IsKeyPressed(cfg_LootVacuumKey))
 				cfg_LootVacuum = !cfg_LootVacuum;
 
-			if (cfg_EnableAimbotToggle && IsKeyPressed(cfg_AimbotToggleKey))
+			if (cfg_EnableAimbotToggle && Input::IsKeyPressed(cfg_AimbotToggleKey))
 				cfg_EnableAimbot = !cfg_EnableAimbot;
 
 			/*if (IsKeyPressed(cfg_HotSwapKey))
@@ -401,7 +515,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			}*/
 			static bool timeEnable = false;
 			static bool isTimeHeld = false;
-			if (!timeEnable && IsKeyHeld(cfg_TimeScaleHoldKey))
+			if (!timeEnable && Input::IsKeyHeld(cfg_TimeScaleHoldKey))
 			{
 				if (!isTimeHeld)
 				{
@@ -409,12 +523,12 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					isTimeHeld = true;
 				}
 			}
-			if (isTimeHeld && !IsKeyHeld(cfg_TimeScaleHoldKey))
+			if (isTimeHeld && !Input::IsKeyHeld(cfg_TimeScaleHoldKey))
 			{
 				GWorld->PersistentLevel->WorldSettings->TimeDilation = 1.0f;
 				isTimeHeld = false;
 			}
-			if (IsKeyPressed(cfg_TimeScaleKey))
+			if (Input::IsKeyPressed(cfg_TimeScaleKey))
 			{
 				timeEnable = !timeEnable;
 				if (timeEnable)
@@ -423,14 +537,14 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					GWorld->PersistentLevel->WorldSettings->TimeDilation = 1.0f;
 			}
 
-			if (IsKeyPressed(VK_DOWN))
+			if (Input::IsKeyPressed(VK_DOWN))
 			{
 				if (HotSwapIndex == 5)
 					HotSwapIndex = 0;
 				else
 					HotSwapIndex += 1;
 			}
-			if (IsKeyPressed(VK_UP))
+			if (Input::IsKeyPressed(VK_UP))
 			{
 				if (HotSwapIndex == 0)
 					HotSwapIndex = 5;
@@ -438,28 +552,28 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					HotSwapIndex -= 1;
 			}
 
-			if (IsKeyPressed(cfg_InstantInfilKey))
+			if (Input::IsKeyPressed(cfg_InstantInfilKey))
 				cfg_EnableAutoInstantInfil = !cfg_EnableAutoInstantInfil;
 
 			if (cfg_EnableAutoInstantInfil)
 				InstantInfiltration();
 
-			if (IsKeyPressed(cfg_LeaveMissionKey))
+			if (Input::IsKeyPressed(cfg_LeaveMissionKey))
 			{
 				LeaveMission();
 				cfg_EnableAutoRestartMission = false;
 			}
 
-			if (IsKeyPressed(cfg_RestartMissionKey))
+			if (Input::IsKeyPressed(cfg_RestartMissionKey))
 				cfg_EnableAutoRestartMission = !cfg_EnableAutoRestartMission;
 
 			if (isRestartMission || cfg_EnableAutoRestartMission)
 				RestartLastMission();
 
-			if (IsKeyPressed(cfg_SwitchPreset))
+			if (Input::IsKeyPressed(cfg_SwitchPreset))
 				SwitchPreset();
 
-			if (IsKeyPressed(cfg_EncryptedVaultDropsKey))
+			if (Input::IsKeyPressed(cfg_EncryptedVaultDropsKey))
 				EncryptedVaultDrops();
 
 
@@ -513,6 +627,15 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (cfg_NoReload)
 				InstantReload();
 
+			if (cfg_AimbotNoSpread)
+				NoSpread();
+
+			if (cfg_AimbotNoRecoil)
+				NoRecoil();
+
+			if (cfg_AimbotRapidFire)
+				RapidFireOn();
+
 			if (cfg_CacheEnemyNames && NamesChanged)
 			{
 				WriteEnemyNamesData();
@@ -561,13 +684,13 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				}
 			}
 
-			if (IsKeyPressed(cfg_TPMissionKey))
+			if (Input::IsKeyPressed(cfg_TPMissionKey))
 				cfg_EnableMissionTaskTeleporter = !cfg_EnableMissionTaskTeleporter;
 
 			if (cfg_EnableMissionTaskTeleporter)
 				MissionTaskTeleporter();
 
-			if (IsKeyPressed(cfg_ContainerDropKey))
+			if (Input::IsKeyPressed(cfg_ContainerDropKey))
 				ContainerDrop();
 
 			/*if (IsKeyPressed(VK_LEFT))
@@ -583,6 +706,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 		}
 	}
+	Input::ResetKeyPressed();
 	return M1org(self, Canvas);
 }
 
@@ -671,6 +795,85 @@ void InstantReload()
 			}
 		}
 	}*/
+}
+
+void NoSpread()
+{
+	if (!LocalPlayerCharacter)
+		return;
+
+	if (LocalPlayerCharacter->WeaponSlotControl)
+	{
+		if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon)
+		{
+			if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent)
+			{
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->bApplySpreadSize == true)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->bApplySpreadSize = false;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase > 1.0f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase = 1.0f;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize > 1.0f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize = 1.0f;
+			}
+		}
+	}
+}
+
+void NoRecoil()
+{
+	if (!LocalPlayerCharacter)
+		return;
+	char buffer[300];
+	if (LocalPlayerCharacter->WeaponSlotControl)
+	{
+		if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon)
+		{
+			if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent)
+			{
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData)
+				{
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilApplyInterpSpeed > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilApplyInterpSpeed = 0.000001f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverInterpSpeed > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverInterpSpeed = 0.000001f;
+				}
+
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData)
+				{
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilApplyInterpSpeed > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilApplyInterpSpeed = 0.000001f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed = 0.000001f;
+				}
+			}
+		}
+	}
+}
+
+void RapidFireOn()
+{
+	if (!LocalPlayerCharacter)
+		return;
+
+	if (LocalPlayerCharacter->WeaponSlotControl)
+	{
+		if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon)
+		{
+			if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent)
+			{
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams)
+				{
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.IsSet())
+					{
+						float fireInterval = LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.GetValueRef().fireinterval;
+						float elapsedTime = LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->ElapsedTimeAfterFire;
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->CurrFireParams.GetValueRef().fireinterval = (fireInterval - (fireInterval * (cfg_FireRate/100.0f)));
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->FireLoopComponent->ElapsedTimeAfterFire = (elapsedTime - (elapsedTime * (cfg_FireRate / 100.0f))); // Reset the fire time so it can fire immediately
+					}
+				}
+			}
+		}
+	}
 }
 
 void PlayerEnemyESP()
@@ -1350,20 +1553,19 @@ void MissionTaskTeleporter()
 			&& MissionActor->MissionData)
 		{
 			std::string activatedtaskname = ToLower(MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString());
+			std::string lasttaskname = "";
 			
 			if (MissionActor->ProgressInfo.ActivatedTaskIndex > 0)
 			{
 				//AutoTeleportStartTime = std::chrono::steady_clock::now();
-				std::string lasttaskname = ToLower(MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString());
+				lasttaskname = ToLower(MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString());
 
 				if (MissionActor->MissionData->MissionDataRowName.ToString().contains("400"))
 					return;
 				if (!activatedtaskname.contains("move")
 					&& !activatedtaskname.contains("interact")
-					&& !activatedtaskname.contains("hack")
 					&& !lasttaskname.contains("move")
-					&& !lasttaskname.contains("interact")
-					&& !lasttaskname.contains("hack"))
+					&& !lasttaskname.contains("interact"))
 					return;
 				if (activatedtaskname.contains("playerset")
 					|| activatedtaskname.contains("fadein"))
@@ -1371,8 +1573,7 @@ void MissionTaskTeleporter()
 			}
 			
 			if ((activatedtaskname.contains("move")
-				|| activatedtaskname.contains("interact")
-				|| activatedtaskname.contains("hack"))
+				|| activatedtaskname.contains("interact"))
 				&& MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
 			{
 				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
@@ -1408,7 +1609,7 @@ void MissionTaskTeleporter()
 			{
 				//AutoTeleportStartTime = std::chrono::steady_clock::now();
 				//MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
-				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+				
 				std::string mtt = MissionActor->MissionData->MissionDataRowName.ToString() + "|" + MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
 
 				if (ForceTeleportMissionTaskExceptionSet.contains(mtt))
@@ -1422,6 +1623,8 @@ void MissionTaskTeleporter()
 							if (MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->Index_0 == (WayPointCount - 1))
 							{
 								LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorRotation());
+								MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+								AutoTeleportStartTime = std::chrono::steady_clock::now();
 								return;
 							}
 						}
@@ -1429,14 +1632,17 @@ void MissionTaskTeleporter()
 					else
 					{
 						LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorRotation());
+						MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+						AutoTeleportStartTime = std::chrono::steady_clock::now();
 						return;
 					}
 				}
 
-				if (!MissionTaskExceptionSet.contains(mtt))
+				if (!MissionTaskExceptionSet.contains(mtt) && !lasttaskname.contains("interact"))
 				{
 					float ODistanceLocalCharacter = 0.0f;
-					float ODistanceTask = 0.0f;
+					float ODistanceLastTask = 0.0f;
+					float ODistanceBetweenLastTaskLocalChar = 0.0f;
 					if (MissionActor->ProgressInfo.LastTaskActor->WayPoints.Num() > 0)
 					{
 						int WayPointCount = MissionActor->ProgressInfo.LastTaskActor->WayPoints.Num();
@@ -1445,18 +1651,30 @@ void MissionTaskTeleporter()
 							if (MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->Index_0 == (WayPointCount - 1))
 							{
 								ODistanceLocalCharacter = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(LocalPlayerCharacter->K2_GetActorLocation());
-								ODistanceTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation());
-								if (ODistanceTask < ODistanceLocalCharacter)
+								ODistanceLastTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation());
+								ODistanceBetweenLastTaskLocalChar = LocalPlayerCharacter->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation());
+								if (ODistanceLastTask < ODistanceLocalCharacter && ODistanceBetweenLastTaskLocalChar > 1500.0f)
+								{
 									LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorRotation());
+									MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+									AutoTeleportStartTime = std::chrono::steady_clock::now();
+								}
+									
 							}
 						}
 					}
 					else
 					{
 						ODistanceLocalCharacter = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(LocalPlayerCharacter->K2_GetActorLocation());
-						ODistanceTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation());
-						if (ODistanceTask < ODistanceLocalCharacter)
+						ODistanceLastTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation());
+						ODistanceBetweenLastTaskLocalChar = LocalPlayerCharacter->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation());
+						if (ODistanceLastTask < ODistanceLocalCharacter && ODistanceBetweenLastTaskLocalChar > 1500.0f)
+						{
 							LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->K2_GetActorRotation());
+							MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+							AutoTeleportStartTime = std::chrono::steady_clock::now();
+						}
+							
 					}
 				}
 			}
@@ -1511,7 +1729,7 @@ void MissionTaskTeleporterDebugger()
 
 void MissionTaskActortESP()
 {
-	if (!PlayerState || !PlayerState->MissionControlComponent)
+	if (!PlayerState || !PlayerState->MissionControlComponent || !LocalPlayerCharacter)
 		return;
 
 	TFD_SDK::UM1MissionControlComponent* MCC = PlayerState->MissionControlComponent;
@@ -1560,7 +1778,7 @@ void MissionTaskActortESP()
 			int i = 0;
 			if (MissionActor->ProgressInfo.ActivatedTaskIndex > 0)
 			{
-				ODistance = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation()) / 100.00f;
+				ODistance = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(LocalPlayerCharacter->K2_GetActorLocation());
 				std::string MissionTaskActorESPStr = MissionActor->ProgressInfo.LastTaskActor->MissionTask->TaskName.ToString();
 				std::string MissionName = MissionActor->MissionData->MissionDataRowName.ToString().c_str();
 				sprintf_s(buffer1, "MissionName: %s | LastTaskName: %s", MissionName.c_str(), MissionTaskActorESPStr.c_str());
@@ -1847,7 +2065,7 @@ void Aimbot()
 
 	if (cfg_EnableAimbotHold)
 	{
-		if (!cfg_AimbotController && !IsKeyHeld(cfg_AimbotHoldKey))
+		if (!cfg_AimbotController && !Input::IsKeyHeld(cfg_AimbotHoldKey))
 		{
 			currentTargetID = 0;
 			Aimbot_BoneIndex = -1;
@@ -2147,7 +2365,8 @@ void DrawMenu()
 			ZeroGUI::Text((char*)"(Hold Mode with Left Trigger Only)");
 			ZeroGUI::SliderFloat((char*)"Aimbot Screen Distance", &cfg_AimbotFOV, 1.0f, 1000.0f);
 			ZeroGUI::SliderFloat((char*)"Aimbot Speed", &cfg_AimbotSmoothing, 1.0f, 100.0f);
-			if (ZeroGUI::Checkbox((char*)"Enable No Spread", &cfg_AimbotNoSpread))
+			ZeroGUI::Checkbox((char*)"Enable No Spread", &cfg_AimbotNoSpread);
+			/*if (ZeroGUI::Checkbox((char*)"Enable No Spread", &cfg_AimbotNoSpread))
 			{
 				if (cfg_AimbotNoSpread)
 				{
@@ -2163,8 +2382,9 @@ void DrawMenu()
 					memcpy(NoSpreadAddress, &NoSpreadOriginal, sizeof(uint8_t) * 8);
 					VirtualProtect(NoSpreadAddress, sizeof(uint8_t) * 8, old, NULL);
 				}
-			}
-			if (ZeroGUI::Checkbox((char*)"Enable No Recoil", &cfg_AimbotNoRecoil))
+			}*/
+			ZeroGUI::Checkbox((char*)"Enable No Recoil", &cfg_AimbotNoRecoil);
+			/*if (ZeroGUI::Checkbox((char*)"Enable No Recoil", &cfg_AimbotNoRecoil))
 			{
 				if (cfg_AimbotNoRecoil)
 				{
@@ -2180,8 +2400,10 @@ void DrawMenu()
 					memcpy(NoRecoilAddress, &Recoil[0], sizeof(uint8_t));
 					VirtualProtect(NoRecoilAddress, sizeof(uint8_t), old, NULL);
 				}
-			}
-			if (ZeroGUI::Checkbox((char*)"Enable Rapidfire", &cfg_AimbotRapidFire))
+			}*/
+			ZeroGUI::Checkbox((char*)"Enable Rapidfire", &cfg_AimbotRapidFire);
+			ZeroGUI::SliderFloat((char*)"Rapid Fire Rate %", &cfg_FireRate, 1.0f, 90.0f);
+			/*if (ZeroGUI::Checkbox((char*)"Enable Rapidfire", &cfg_AimbotRapidFire))
 			{
 				if (cfg_AimbotRapidFire)
 				{
@@ -2197,7 +2419,7 @@ void DrawMenu()
 					memcpy(RapidFireAddress, &RapidFire[0], sizeof(uint8_t));
 					VirtualProtect(RapidFireAddress, sizeof(uint8_t), old, NULL);
 				}
-			}
+			}*/
 			ZeroGUI::Checkbox((char*)"Enable Auto-Reload", &cfg_NoReload);
 		}
 		if (tab == 3)
@@ -2690,17 +2912,26 @@ std::unordered_map<int, std::vector<int>> ReadEnemyBonesData()
 	return map;
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
+	{
 		DisableThreadLibraryCalls(hModule);
 		//CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Init, hModule, 0, 0);
 		HANDLE hThread = (HANDLE)_beginthreadex(nullptr, 0, reinterpret_cast<unsigned(__stdcall*)(void*)>(Init), hModule, 0, nullptr);
 		if (hThread)
 			CloseHandle(hThread);  // Close immediately unless you need to wait on it
 		return true;
+	}
+	case DLL_PROCESS_DETACH:
+		if (oWndProc)
+		{
+			HWND hWnd = FindGameWindow();
+			SetWindowLongPtr(hWnd, GWLP_WNDPROC, (LONG_PTR)oWndProc);
+		}
+		break;
 	}
 	return false;
 }
@@ -2788,40 +3019,40 @@ DWORD WINAPI Init(HMODULE Module)
 		}
 		//TFD_SDK::Offsets::GWorld = 0x0A339538;
 
-		uintptr_t SpreadPtr = FindSignature(procID, dwBase, dwSize, NoSpreadSig, NoSpreadMask);
-		if (!SpreadPtr)
-		{
-			throw std::runtime_error("Unable to find NoSpread.");
-			return 1;
-		}
-		SpreadPtr = GameModule.dwBase + SpreadPtr;
-		NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) - 0x8);// +0x16);
+		//uintptr_t SpreadPtr = FindSignature(procID, dwBase, dwSize, NoSpreadSig, NoSpreadMask);
+		//if (!SpreadPtr)
+		//{
+		//	throw std::runtime_error("Unable to find NoSpread.");
+		//	return 1;
+		//}
+		//SpreadPtr = GameModule.dwBase + SpreadPtr;
+		//NoSpreadAddress = (reinterpret_cast<uint8_t*>(SpreadPtr) - 0x8);// +0x16);
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found NoSpread at " << std::hex << SpreadPtr << std::dec << "\n";
 		Sleep(1000);
 #endif // IS_DEBUG
 
-		uintptr_t RecoilPtr = FindSignature(procID, dwBase, dwSize, NoRecoilSig, NoRecoilMask);
+		/*uintptr_t RecoilPtr = FindSignature(procID, dwBase, dwSize, NoRecoilSig, NoRecoilMask);
 		if (!RecoilPtr)
 		{
 			throw std::runtime_error("Unable to find NoRecoil.");
 			return 1;
 		}
 		RecoilPtr = GameModule.dwBase + RecoilPtr;
-		NoRecoilAddress = reinterpret_cast<uint8_t*>(RecoilPtr + 2);
+		NoRecoilAddress = reinterpret_cast<uint8_t*>(RecoilPtr + 2);*/
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found NoRecoil at " << std::hex << RecoilPtr << std::dec << "\n";
 		Sleep(1000);
 #endif // IS_DEBUG
 
-		uintptr_t RapidFirePtr = FindSignature(procID, dwBase, dwSize, RapidFireSig, RapidFireMask);
+		/*uintptr_t RapidFirePtr = FindSignature(procID, dwBase, dwSize, RapidFireSig, RapidFireMask);
 		if (!RapidFirePtr)
 		{
 			throw std::runtime_error("Unable to find Rapidfire.");
 			return 1;
 		}
 		RapidFirePtr = GameModule.dwBase + RapidFirePtr;
-		RapidFireAddress = (reinterpret_cast<uint8_t*>(RapidFirePtr));
+		RapidFireAddress = (reinterpret_cast<uint8_t*>(RapidFirePtr));*/
 #ifdef IS_DEBUG
 		std::cout << "DescentInternal - Found RapidFire at " << std::hex << RapidFirePtr << std::dec << "\n";
 		Sleep(1000);
@@ -2930,6 +3161,13 @@ DWORD WINAPI Init(HMODULE Module)
 #endif // IS_DEBUG
 	ini.SetUnicode();
 	LoadCFG();
+
+	HWND hWnd = FindGameWindow();
+	if (hWnd && !oWndProc)
+	{
+		oWndProc = (WNDPROC)SetWindowLongPtr(hWnd, GWLP_WNDPROC, (LONG_PTR)MyWndProc);
+	}
+
 	return 1;
 }
 

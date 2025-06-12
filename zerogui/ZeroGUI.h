@@ -3,6 +3,7 @@
 #include "../SDK/Basic.hpp"
 #include "../SDK/CoreUObject_classes.hpp"
 #include "../SDK/CoreUObject_structs.hpp"
+#include "Input.h"
 std::unique_ptr<wchar_t[]> s2wc(const char* c)
 {
 	const size_t cSize = strlen(c) + 1;
@@ -343,15 +344,15 @@ namespace ZeroGUI
 		if (!isOpen)
 			return false;
 
-		if (GetAsyncKeyState(0x1) & 1)
+		/*if (GetAsyncKeyState(0x1) & 1)
 			mouseDown = true;
-		else
-			mouseDown = false;
+		else*/
+		mouseDown = Input::IsMousePressed();
 
-		if (GetAsyncKeyState(0x1) & 0x8000)
+		/*if (GetAsyncKeyState(0x1) & 0x8000)
 			mouseHeld = true;
-		else
-			mouseHeld = false;
+		else*/
+		mouseHeld = Input::IsMouseHeld();
 
 		bool isHovered = MouseInZone(FVector2D{ pos->X, pos->Y }, size);
 
@@ -1074,10 +1075,13 @@ namespace ZeroGUI
 			{
 				for (int code = 0; code < 255; code++)
 				{
-					if (GetAsyncKeyState(code) & 1)
+					if (Input::IsKeyPressed(code))
 					{
+						if (code == VK_SHIFT || code == VK_CONTROL || code == VK_MENU)
+							continue;
 						*key = code;
 						active_hotkey = -1;
+						break;
 					}
 				}
 			}
@@ -1094,12 +1098,6 @@ namespace ZeroGUI
 				{
 					already_pressed = true;
 					active_hotkey = elements_count;
-					for (int code = 0; code < 255; code++)
-					{
-						if (GetAsyncKeyState(code))
-						{
-						}
-					}
 				}
 			}
 		}

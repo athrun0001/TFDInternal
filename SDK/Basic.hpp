@@ -804,7 +804,7 @@ namespace SDK
 			if constexpr (!bIsIntrusiveUnsetCheck)
 				return StoredValue.Value;
 
-			return StoredValue;
+			return StoredValue.Value;
 		}
 
 		inline const uint8* GetValueBytes() const
@@ -812,7 +812,7 @@ namespace SDK
 			if constexpr (!bIsIntrusiveUnsetCheck)
 				return StoredValue.Value;
 
-			return StoredValue;
+			return StoredValue.Value;
 		}
 	public:
 
@@ -831,7 +831,7 @@ namespace SDK
 			if constexpr (!bIsIntrusiveUnsetCheck)
 				return StoredValue.bIsSet;
 
-			constexpr char ZeroBytes[sizeof(OptionalType)];
+			constexpr char ZeroBytes[sizeof(OptionalType)] = {};
 
 			return memcmp(GetValueBytes(), &ZeroBytes, sizeof(OptionalType)) == 0;
 		}
