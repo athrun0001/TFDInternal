@@ -10,40 +10,96 @@
 
 WNDPROC oWndProc = nullptr;
 
-LRESULT CALLBACK MyWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-	switch (msg) {
-	case WM_KEYDOWN:
-	case WM_SYSKEYDOWN:
-		if (!g_KeyState[wParam])
-			g_KeyPressed[wParam] = true;
-		g_KeyState[wParam] = true;
-		break;
+LRESULT CALLBACK MyWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (msg)
+	{
+		// KEYBOARD: Handle modifier keys and others
+		case WM_KEYDOWN:
+		case WM_SYSKEYDOWN:
+		{
+			int vk = (int)wParam;
 
-	case WM_KEYUP:
-	case WM_SYSKEYUP:
-		g_KeyState[wParam] = false;
-		break;
+			// Distinguish left/right variants
+			if (vk == VK_CONTROL)
+				vk = (lParam & (1 << 24)) ? VK_RCONTROL : VK_LCONTROL;
+			else if (vk == VK_MENU)
+				vk = (lParam & (1 << 24)) ? VK_RMENU : VK_LMENU;
+			else if (vk == VK_SHIFT)
+				vk = MapVirtualKey((lParam >> 16) & 0xFF, MAPVK_VSC_TO_VK_EX);
 
-	case WM_LBUTTONDOWN:
-		if (!g_KeyState[VK_LBUTTON])
-			g_KeyPressed[VK_LBUTTON] = true;
-		g_KeyState[VK_LBUTTON] = true;
-		break;
+			if (!g_KeyState[vk])
+				g_KeyPressed[vk] = true;
+			g_KeyState[vk] = true;
+			break;
+		}
 
-	case WM_LBUTTONUP:
-		g_KeyState[VK_LBUTTON] = false;
-		break;
+		case WM_KEYUP:
+		case WM_SYSKEYUP:
+		{
+			int vk = (int)wParam;
 
-	case WM_RBUTTONDOWN:
-		if (!g_KeyState[VK_RBUTTON])
-			g_KeyPressed[VK_RBUTTON] = true;
-		g_KeyState[VK_RBUTTON] = true;
-		break;
+			if (vk == VK_CONTROL) // Distinguish left/right Ctrl keys
+				vk = (lParam & (1 << 24)) ? VK_RCONTROL : VK_LCONTROL;
+			else if (vk == VK_MENU) // Distinguish left/right Alt keys
+				vk = (lParam & (1 << 24)) ? VK_RMENU : VK_LMENU;
+			else if (vk == VK_SHIFT) // Distinguish left/right Shift keys
+				vk = MapVirtualKey((lParam >> 16) & 0xFF, MAPVK_VSC_TO_VK_EX);
 
-	case WM_RBUTTONUP:
-		g_KeyState[VK_RBUTTON] = false;
-		break;
+			g_KeyState[vk] = false;
+			break;
+		}
+
+		// MOUSE BUTTONS
+		case WM_LBUTTONDOWN:
+			if (!g_KeyState[VK_LBUTTON])
+				g_KeyPressed[VK_LBUTTON] = true;
+			g_KeyState[VK_LBUTTON] = true;
+			break;
+
+		case WM_LBUTTONUP:
+			g_KeyState[VK_LBUTTON] = false;
+			break;
+
+		case WM_RBUTTONDOWN:
+			if (!g_KeyState[VK_RBUTTON])
+				g_KeyPressed[VK_RBUTTON] = true;
+			g_KeyState[VK_RBUTTON] = true;
+			break;
+
+		case WM_RBUTTONUP:
+			g_KeyState[VK_RBUTTON] = false;
+			break;
+
+		case WM_MBUTTONDOWN:
+			if (!g_KeyState[VK_MBUTTON])
+				g_KeyPressed[VK_MBUTTON] = true;
+			g_KeyState[VK_MBUTTON] = true;
+			break;
+
+		case WM_MBUTTONUP:
+			g_KeyState[VK_MBUTTON] = false;
+			break;
+
+			// EXTRA MOUSE BUTTONS (XBUTTON1 = thumb back, XBUTTON2 = thumb forward)
+		case WM_XBUTTONDOWN:
+		{
+			int vk = (GET_XBUTTON_WPARAM(wParam) == XBUTTON1) ? VK_XBUTTON1 : VK_XBUTTON2;
+
+			if (!g_KeyState[vk])
+				g_KeyPressed[vk] = true;
+			g_KeyState[vk] = true;
+			break;
+		}
+
+		case WM_XBUTTONUP:
+		{
+			int vk = (GET_XBUTTON_WPARAM(wParam) == XBUTTON1) ? VK_XBUTTON1 : VK_XBUTTON2;
+			g_KeyState[vk] = false;
+			break;
+		}
 	}
+
 	return CallWindowProc(oWndProc, hWnd, msg, wParam, lParam);
 }
 

@@ -1077,8 +1077,11 @@ namespace ZeroGUI
 				{
 					if (Input::IsKeyPressed(code))
 					{
+						if (code == VK_SHIFT || code == VK_CONTROL || code == VK_MENU)
+							continue;
 						*key = code;
 						active_hotkey = -1;
+						break;
 					}
 				}
 			}

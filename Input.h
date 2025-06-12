@@ -8,15 +8,16 @@ bool g_KeyPressed[256] = {};
 namespace Input {
 
 	// Keyboard
-	inline bool IsKeyPressed(int vk) { return g_KeyPressed[vk]; }
-	inline bool IsKeyHeld(int vk) { return g_KeyState[vk]; }
+	inline bool IsKeyPressed(int key) { return g_KeyPressed[key]; }
+	inline bool IsKeyHeld(int key) { return g_KeyState[key]; }
 
 	// Mouse
 	inline bool IsMousePressed() { return g_KeyPressed[VK_LBUTTON]; }
 	inline bool IsMouseHeld() { return g_KeyState[VK_LBUTTON]; }
-	inline bool IsRightMousePressed() { return g_KeyPressed[VK_RBUTTON]; }
-	inline bool IsRightMouseHeld() { return g_KeyState[VK_RBUTTON]; }
 
 	// Utility
-	void ResetKeyPressed() { memset(g_KeyPressed, 0, sizeof(g_KeyPressed)); }
+	inline void ResetKeyPressed() 
+	{
+		memset(g_KeyPressed, 0, sizeof(g_KeyPressed));
+	}
 }
