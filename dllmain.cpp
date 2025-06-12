@@ -8,42 +8,43 @@
 // Uncomment the line below for console window + some debug prints
 //#define IS_DEBUG
 
-
-bool g_KeyState[256] = {};
-bool g_KeyPressed[256] = {};
 WNDPROC oWndProc = nullptr;
 
-LRESULT CALLBACK MyWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	switch (msg)
-	{
+LRESULT CALLBACK MyWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	switch (msg) {
 	case WM_KEYDOWN:
 	case WM_SYSKEYDOWN:
 		if (!g_KeyState[wParam])
 			g_KeyPressed[wParam] = true;
 		g_KeyState[wParam] = true;
 		break;
+
 	case WM_KEYUP:
 	case WM_SYSKEYUP:
 		g_KeyState[wParam] = false;
 		break;
+
+	case WM_LBUTTONDOWN:
+		if (!g_KeyState[VK_LBUTTON])
+			g_KeyPressed[VK_LBUTTON] = true;
+		g_KeyState[VK_LBUTTON] = true;
+		break;
+
+	case WM_LBUTTONUP:
+		g_KeyState[VK_LBUTTON] = false;
+		break;
+
 	case WM_RBUTTONDOWN:
 		if (!g_KeyState[VK_RBUTTON])
 			g_KeyPressed[VK_RBUTTON] = true;
 		g_KeyState[VK_RBUTTON] = true;
 		break;
+
 	case WM_RBUTTONUP:
 		g_KeyState[VK_RBUTTON] = false;
 		break;
 	}
-
 	return CallWindowProc(oWndProc, hWnd, msg, wParam, lParam);
-}
-
-void ResetKeyPressed()
-{
-	for (int i = 0; i < 256; ++i)
-		g_KeyPressed[i] = false;
 }
 
 HWND FindGameWindow()
@@ -352,7 +353,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			updateMiddle = false;
 		}
 
-		if (IsKeyPressed(VK_INSERT))
+		if (Input::IsKeyPressed(VK_INSERT))
 		{
 			cfg_DrawMenu = !cfg_DrawMenu;
 			if (!cfg_DrawMenu)
@@ -442,10 +443,10 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			//	}
 			//}
 
-			if (IsKeyPressed(cfg_LootVacuumKey))
+			if (Input::IsKeyPressed(cfg_LootVacuumKey))
 				cfg_LootVacuum = !cfg_LootVacuum;
 
-			if (cfg_EnableAimbotToggle && IsKeyPressed(cfg_AimbotToggleKey))
+			if (cfg_EnableAimbotToggle && Input::IsKeyPressed(cfg_AimbotToggleKey))
 				cfg_EnableAimbot = !cfg_EnableAimbot;
 
 			/*if (IsKeyPressed(cfg_HotSwapKey))
@@ -458,7 +459,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			}*/
 			static bool timeEnable = false;
 			static bool isTimeHeld = false;
-			if (!timeEnable && IsKeyHeld(cfg_TimeScaleHoldKey))
+			if (!timeEnable && Input::IsKeyHeld(cfg_TimeScaleHoldKey))
 			{
 				if (!isTimeHeld)
 				{
@@ -466,12 +467,12 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					isTimeHeld = true;
 				}
 			}
-			if (isTimeHeld && !IsKeyHeld(cfg_TimeScaleHoldKey))
+			if (isTimeHeld && !Input::IsKeyHeld(cfg_TimeScaleHoldKey))
 			{
 				GWorld->PersistentLevel->WorldSettings->TimeDilation = 1.0f;
 				isTimeHeld = false;
 			}
-			if (IsKeyPressed(cfg_TimeScaleKey))
+			if (Input::IsKeyPressed(cfg_TimeScaleKey))
 			{
 				timeEnable = !timeEnable;
 				if (timeEnable)
@@ -480,14 +481,14 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					GWorld->PersistentLevel->WorldSettings->TimeDilation = 1.0f;
 			}
 
-			if (IsKeyPressed(VK_DOWN))
+			if (Input::IsKeyPressed(VK_DOWN))
 			{
 				if (HotSwapIndex == 5)
 					HotSwapIndex = 0;
 				else
 					HotSwapIndex += 1;
 			}
-			if (IsKeyPressed(VK_UP))
+			if (Input::IsKeyPressed(VK_UP))
 			{
 				if (HotSwapIndex == 0)
 					HotSwapIndex = 5;
@@ -495,28 +496,28 @@ static __int64 YourHookProc(void* self, void* Canvas)
 					HotSwapIndex -= 1;
 			}
 
-			if (IsKeyPressed(cfg_InstantInfilKey))
+			if (Input::IsKeyPressed(cfg_InstantInfilKey))
 				cfg_EnableAutoInstantInfil = !cfg_EnableAutoInstantInfil;
 
 			if (cfg_EnableAutoInstantInfil)
 				InstantInfiltration();
 
-			if (IsKeyPressed(cfg_LeaveMissionKey))
+			if (Input::IsKeyPressed(cfg_LeaveMissionKey))
 			{
 				LeaveMission();
 				cfg_EnableAutoRestartMission = false;
 			}
 
-			if (IsKeyPressed(cfg_RestartMissionKey))
+			if (Input::IsKeyPressed(cfg_RestartMissionKey))
 				cfg_EnableAutoRestartMission = !cfg_EnableAutoRestartMission;
 
 			if (isRestartMission || cfg_EnableAutoRestartMission)
 				RestartLastMission();
 
-			if (IsKeyPressed(cfg_SwitchPreset))
+			if (Input::IsKeyPressed(cfg_SwitchPreset))
 				SwitchPreset();
 
-			if (IsKeyPressed(cfg_EncryptedVaultDropsKey))
+			if (Input::IsKeyPressed(cfg_EncryptedVaultDropsKey))
 				EncryptedVaultDrops();
 
 
@@ -627,13 +628,13 @@ static __int64 YourHookProc(void* self, void* Canvas)
 				}
 			}
 
-			if (IsKeyPressed(cfg_TPMissionKey))
+			if (Input::IsKeyPressed(cfg_TPMissionKey))
 				cfg_EnableMissionTaskTeleporter = !cfg_EnableMissionTaskTeleporter;
 
 			if (cfg_EnableMissionTaskTeleporter)
 				MissionTaskTeleporter();
 
-			if (IsKeyPressed(cfg_ContainerDropKey))
+			if (Input::IsKeyPressed(cfg_ContainerDropKey))
 				ContainerDrop();
 
 			/*if (IsKeyPressed(VK_LEFT))
@@ -649,8 +650,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 		}
 	}
-
-	ResetKeyPressed();
+	Input::ResetKeyPressed();
 	return M1org(self, Canvas);
 }
 
@@ -2009,7 +2009,7 @@ void Aimbot()
 
 	if (cfg_EnableAimbotHold)
 	{
-		if (!cfg_AimbotController && !IsKeyHeld(cfg_AimbotHoldKey))
+		if (!cfg_AimbotController && !Input::IsKeyHeld(cfg_AimbotHoldKey))
 		{
 			currentTargetID = 0;
 			Aimbot_BoneIndex = -1;

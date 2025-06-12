@@ -158,6 +158,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="includes.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="SimpleIni.h" />
     <ClInclude Include="TFD_SDK.h" />
     <ClInclude Include="zerogui\ZeroGUI.h" />
