@@ -180,7 +180,7 @@ namespace TFD_SDK
 		ForceCancel = 4,
 		EM1MiniGameResult_MAX = 5,
 	};
-	// NumValues: 0x00EE
+	// NumValues: 0x00EF
 	enum class EM1StatType : uint8
 	{
 		Stat_MaxHp = 0,
@@ -420,7 +420,8 @@ namespace TFD_SDK
 		Stat_MultiHitChance = 235,
 		Stat_AdvantageCoefficient = 236,
 		Stat_MultiHitDamageIncrease = 237,
-		MAX = 238,
+		Stat_TypeBreachSkillATKBonus = 238,
+		MAX = 239,
 	};
 	// NumValues: 0x0004
 	enum class EM1MissionActorState : uint8
@@ -760,13 +761,13 @@ namespace TFD_SDK
 		class AWorldSettings* WorldSettings; // 0x0270(0x0008)
 		uint8  Pad_ULevel_Class[0x78]; // 0x278
 	};
-	// 0x03B8 (0x03E0 - 0x0028)
+	// 0x03C0 (0x03E8 - 0x0028)
 	class UM1Account final : public UObject
 	{
 	public:
 		uint8                                         Pad_Preset[0x2D0];                                        // 0x0028
 		class UM1AccountPreset*						  Preset;													// 0x02F8(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_UM1Account[0xE0];                                     // 0x0300
+		uint8                                         Pad_UM1Account[0xE8];                                     // 0x0300
 
 	public:
 		static class UClass* StaticClass()
@@ -824,13 +825,13 @@ namespace TFD_SDK
 		bool                                          bIsReady;                                          // 0x0038(0x0001)(Net, ZeroConstructor, IsPlainOldData, RepNotify, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
-	// 0x0120 (0x0148 - 0x0028)
+	// 0x0118 (0x0140 - 0x0028)
 	class UM1ResearchSystem final : public UObject
 	{
 	public:
 		uint8                                         Pad_BookmarkResearchTids[0xA0];                    // 0x0028
 		TArray<struct FM1TemplateId>                  BookmarkResearchTids;                              // 0x00C8(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPrivate)
-		uint8                                         Pad_UM1ResearchSystem[0x70];                       // 0x00D8
+		uint8                                         Pad_UM1ResearchSystem[0x68];                       // 0x00D8
 
 	public:
 		static class UClass* StaticClass()
@@ -928,7 +929,7 @@ namespace TFD_SDK
 	// 0x0378 (0x03B0 - 0x0038)
 	class UGameViewportClient : public UScriptViewportClient
 	{
-		uint8 Pad_UGameViewportClient_Class[0x378]; // 0x0038 378
+		uint8 Pad_UGameViewportClient_Class[0x378]; // 0x0038
 	};
 	
 	// 0x0000 (0x0040 - 0x0040)
@@ -937,11 +938,11 @@ namespace TFD_SDK
 	public:
 		void ServerRequestMissionTargetBeginInteraction(class AM1MissionTargetInteraction* InActor, class AM1PlayerControllerInGame* InAcceptor);
 	};
-	// 0x0060 (0x00A0 - 0x0040)
+	// 0x0078 (0x00B8 - 0x0040)
 	class UM1PrivateOnlineServicePreset final : public UM1PrivateOnlineSubService
 	{
 	public:
-		uint8                                         Pad_UM1PrivateOnlineServicePreset[0x60];                                      // 0x0040(0x0060)(Fixing Struct Size After Last Property [ Dumper-7 ])
+		uint8                                         Pad_UM1PrivateOnlineServicePreset[0x78];                                      // 0x0040(0x0060)(Fixing Struct Size After Last Property [ Dumper-7 ])
 
 	public:
 		void ServerRequestApplyPreset(int32 InPresetIndex);
@@ -1011,10 +1012,10 @@ namespace TFD_SDK
 		uint8                                         Pad_UM1MissionControlComponent_Class[0x218];       // 0x05C0
 
 	public:
-		void ServerStartMissionByTemplateID(const struct FM1TemplateId& InTemplateId);
+		void ServerLeaveMission(EM1MissionEndReason InReason);
 		void ServerRestartLastPlayedMission();
 		void ServerRunTaskActor(class AM1MissionTaskActor* InActor);
-		void ServerLeaveMission(EM1MissionEndReason InReason);
+		void ServerStartMissionByTemplateID(const struct FM1TemplateId& InTemplateId);
 	};
 	// 0x0148 (0x01F0 - 0x00A8)
 	class alignas(0x10) USceneComponent : public UActorComponent
@@ -1059,7 +1060,6 @@ namespace TFD_SDK
 
 	public:
 		struct FM1ScaledInteger GetStatValue(const EM1StatType InStatType) const;
-
 	};
 	// 0x0010 (0x00D8 - 0x00C8)
 	class UM1WeaponComponent : public UM1ActorComponent
@@ -1086,12 +1086,6 @@ namespace TFD_SDK
 		TOptional<FM1WeaponFireParams>				  CurrFireParams;									 // 0x0124(0x001C)(Transient, NativeAccessSpecifierPrivate)
 		float										  ElapsedTimeAfterFire;							     // 0x0140(0x0004)
 		uint8                                         Pad_UM1WeaponFireLoopComponent[0x24];              // 0x0144
-
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"M1WeaponFireLoopComponent">();
-		}
 	};
 	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_110) == 0x00D8, "Bad alignment");
 	static_assert(offsetof(UM1WeaponFireLoopComponent, bAttacking) == 0x0120, "Bad alignment");
@@ -1206,13 +1200,13 @@ namespace TFD_SDK
 	class AController : public AActor
 	{
 	public:
-		uint8 Pad_PlaterState[0x8]; // 0x248
-		class APlayerState* PlayerState;                                       // 0x0250(0x0008)(BlueprintVisible, BlueprintReadOnly, Net, ZeroConstructor, RepNotify, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
-		uint8 Pad_Pawn[0x30]; // 0x258
-		class APawn* Pawn; // 0x0288(0x0008)
-		uint8 Pad_Character[0x8]; // 0x290
-		class ACharacter* Character; // 0x0298(0x0008)
-		uint8 Pad_AController_Class[0x30]; // 0x2A0
+		uint8 Pad_PlaterState[0x8];										// 0x248
+		class APlayerState* PlayerState;                                // 0x0250(0x0008)(BlueprintVisible, BlueprintReadOnly, Net, ZeroConstructor, RepNotify, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		uint8 Pad_Pawn[0x30];											// 0x258
+		class APawn* Pawn;												// 0x0288(0x0008)
+		uint8 Pad_Character[0x8];										// 0x290
+		class ACharacter* Character;									// 0x0298(0x0008)
+		uint8 Pad_AController_Class[0x30];								// 0x2A0
 	public:
 		void SetControlRotation(const struct FRotator& NewRotation);
 		bool LineOfSightTo(const class AActor* Other, const struct FVector& ViewPoint, bool bAlternateChecks) const;
@@ -1247,10 +1241,10 @@ namespace TFD_SDK
 		uint8										  Pad_AM1MiniGameActor[0x28];                        // 0x0250
 
 	public:
+		void ClientStopMiniGame();
 		void ServerDropItems(class AController* InInstigator);
 		void ServerOnMiniGameEnded(const struct FM1MiniGameResult& InResult);
-		void ClientStopMiniGame();
-
+		
 	public:
 		static class UClass* StaticClass()
 		{
@@ -1295,7 +1289,7 @@ namespace TFD_SDK
 	class APlayerCameraManager : public AActor
 	{
 	public:
-		uint8 Pad_APlayerCameraManager_Class[0x36E8]; // 0x0248 3808
+		uint8 Pad_APlayerCameraManager_Class[0x36E8]; // 0x0248
 
 	public:
 		struct FVector GetCameraLocation() const;
@@ -1316,11 +1310,11 @@ namespace TFD_SDK
 		uint8 Pad_AWorldSettings_Class[0xAC]; // 0x037C
 	};
 
-	// 0x04D0 (0x0720 - 0x0250)
+	// 0x04D8 (0x0728 - 0x0250)
 	class UM1UIWidget : public UUserWidget
 	{
 	public:
-		uint8 Pad_UM1UIWidget_Class[0x4D0];
+		uint8 Pad_UM1UIWidget_Class[0x4D8];
 	};
 
 	// 0x0248 (0x0500 - 0x02B8)
@@ -1388,12 +1382,12 @@ namespace TFD_SDK
 	class AM1Weapon : public AM1Actor
 	{
 	public:
-		uint8 Pad_FireLoopComponent[0x18];	// 0x0330
-		class UM1WeaponFireLoopComponent* FireLoopComponent;                                 // 0x0348(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
-		uint8 Pad_SprayPatternComponent[0x10];	// 0x0350
-		class UM1WeaponSprayPatternComponent* SprayPatternComponent;                             // 0x0360(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
-		class UM1WeaponRoundsComponent* RoundsComponent; // 0x0368(0x0008)
-		uint8 Pad_AM1Weapon_Class[0x120]; // 0x0370
+		uint8 Pad_FireLoopComponent[0x18];												// 0x0330
+		class UM1WeaponFireLoopComponent* FireLoopComponent;                            // 0x0348(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+		uint8 Pad_SprayPatternComponent[0x10];											// 0x0350
+		class UM1WeaponSprayPatternComponent* SprayPatternComponent;                    // 0x0360(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+		class UM1WeaponRoundsComponent* RoundsComponent;								// 0x0368(0x0008)
+		uint8 Pad_AM1Weapon_Class[0x120];												// 0x0370
 	};
 
 	// 0x0400 (0x0740 - 0x0340)
@@ -1498,15 +1492,15 @@ namespace TFD_SDK
 	class AM1Character : public ACharacter
 	{
 	public:
-		uint8 Pad_InfoWidget[0x340]; // 0x500
-		class UM1CharacterInfoWidgetComponent* InfoWidgetComponent; // 0x0840(0x0008) Need this
-		uint8 Pad_StatComponent[0x18]; // 0x0848
-		class UM1StatComponent* StatComponent;                                     // 0x0860(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
-		uint8 Pad_CharacterAttribute[0x20]; // 0x0868
-		class UM1CharacterAttribute* CharacterAttribute;// 0x0888(0x0008)
-		uint8 Pad_CharacterId[0x210]; // 0x0890
-		struct FM1TemplateId CharacterId; // 0x0AA0(0x0004) Need this
-		uint8 Pad_AM1CharClass[0x1BC]; // 0x0AA4
+		uint8 Pad_InfoWidget[0x340];												// 0x500
+		class UM1CharacterInfoWidgetComponent* InfoWidgetComponent;					// 0x0840(0x0008) Need this
+		uint8 Pad_StatComponent[0x18];												// 0x0848
+		class UM1StatComponent* StatComponent;										// 0x0860(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+		uint8 Pad_CharacterAttribute[0x20];											// 0x0868
+		class UM1CharacterAttribute* CharacterAttribute;							// 0x0888(0x0008)
+		uint8 Pad_CharacterId[0x210];												// 0x0890
+		struct FM1TemplateId CharacterId;											// 0x0AA0(0x0004) Need this
+		uint8 Pad_AM1CharClass[0x1BC];												// 0x0AA4
 
 	public:
 		bool IsDead() const;
@@ -1727,7 +1721,7 @@ namespace TFD_SDK
 		}
 	};
 	
-	// 0x0030 (0x0750 - 0x0720)
+	// 0x0030 (0x0758 - 0x0728)
 	class UM1UIActorWidget : public UM1UIWidget
 	{
 	public:
@@ -1741,13 +1735,13 @@ namespace TFD_SDK
 		uint8                                         Pad_AM1MissionTargetInteraction_Class[0x28];                                      // 0x0740
 	};
 
-	// 0x00C0 (0x0810 - 0x0750)
+	// 0x00C0 (0x0818 - 0x0758)
 	class UM1UICharacterInfoBase : public UM1UIActorWidget
 	{
 	public:
-		uint8 Pad_TB_Name[0x8]; // 0x0750
-		class UM1TextBlock* TB_Name; // 0x0758(0x0008)
-		uint8 Pad_UM1UICharacterInfoBase_Class[0xB0]; // 0x0760
+		uint8 Pad_TB_Name[0x8]; // 0x0758
+		class UM1TextBlock* TB_Name; // 0x0760(0x0008)
+		uint8 Pad_UM1UICharacterInfoBase_Class[0xB0]; // 0x0768
 
 	public:
 		static class UClass* StaticClass()
@@ -1826,13 +1820,13 @@ namespace TFD_SDK
 	{
 	public:
 
-		uint8 Pad_TeleportHandler[0x2B0]; // 0x0C60
-		class UM1TeleportHandlerComponent* TeleportHandler;  // 0x0F10(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		uint8 Pad_WeaponSlotControl[0x10]; // 0x0F18
-		class UM1WeaponSlotControlComponent* WeaponSlotControl;                                 // 0x0F28(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		uint8 Pad_PlayerName[0x88]; // 0x0F30
-		class FString PlayerName; // 0x0FB8(0x0010) Need this
-		uint8 Pad_AM1PlayerClass[0x408]; // 0x0FC8
+		uint8 Pad_TeleportHandler[0x2B0];												// 0x0C60
+		class UM1TeleportHandlerComponent* TeleportHandler;								// 0x0F10(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8 Pad_WeaponSlotControl[0x10];												// 0x0F18
+		class UM1WeaponSlotControlComponent* WeaponSlotControl;                         // 0x0F28(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8 Pad_PlayerName[0x88];														// 0x0F30
+		class FString PlayerName;														// 0x0FB8(0x0010) Need this
+		uint8 Pad_AM1PlayerClass[0x408];												// 0x0FC8
 
 	public:
 		static class UClass* StaticClass()

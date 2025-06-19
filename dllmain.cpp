@@ -21,11 +21,11 @@ LRESULT CALLBACK MyWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			int vk = (int)wParam;
 
 			// Distinguish left/right variants
-			if (vk == VK_CONTROL)
+			if (vk == VK_CONTROL) // Distinguish left/right Ctrl keys
 				vk = (lParam & (1 << 24)) ? VK_RCONTROL : VK_LCONTROL;
-			else if (vk == VK_MENU)
+			else if (vk == VK_MENU) // Distinguish left/right Alt keys
 				vk = (lParam & (1 << 24)) ? VK_RMENU : VK_LMENU;
-			else if (vk == VK_SHIFT)
+			else if (vk == VK_SHIFT) // Distinguish left/right Shift keys
 				vk = MapVirtualKey((lParam >> 16) & 0xFF, MAPVK_VSC_TO_VK_EX);
 
 			if (!g_KeyState[vk])
