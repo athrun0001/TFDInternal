@@ -2175,7 +2175,7 @@ void Aimbot()
 		{
 			currentTargetID = 0;
 			Aimbot_BoneIndex = -1;
-			//Aimbot_Target = nullptr;
+			Aimbot_Target = nullptr;
 			return;
 		}
 		if (cfg_AimbotController)
@@ -2195,7 +2195,7 @@ void Aimbot()
 			{
 				currentTargetID = 0;
 				Aimbot_BoneIndex = -1;
-				//Aimbot_Target = nullptr;
+				Aimbot_Target = nullptr;
 				return;
 			}
 		}
@@ -2204,7 +2204,7 @@ void Aimbot()
 	{
 		currentTargetID = 0;
 		Aimbot_BoneIndex = -1;
-		//Aimbot_Target = nullptr;
+		Aimbot_Target = nullptr;
 		return;
 	}
 
@@ -2289,7 +2289,7 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 								for (int c = 0; c < p->Children.Num(); c++)
 								{
 									if (p->Children[c]->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
-										if (p->Children[c]->Class->GetFullName().contains("Immunity") || p->Children[c]->Class->GetFullName().contains("JudgementEye"))
+										if (ToLower(p->Children[c]->Class->GetFullName()).contains("immun") || ToLower(p->Children[c]->Class->GetFullName()).contains("judgementeye"))
 											if (LocalPlayerController->LineOfSightTo(p->Children[c], TFD_SDK::FVector{ 0, 0, 0 }, false))
 												any = true;
 								}
@@ -2308,7 +2308,8 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 								{
 									if (p->Mesh->BoneArray.IsValidIndex(j))
 									{
-										if (p->Mesh->GetBoneName(j).ToString().contains("Weakness") || p->Mesh->GetBoneName(j).ToString().contains("-Head") || p->Mesh->GetBoneName(j).ToString().contains("_head") || p->Mesh->GetBoneName(j).ToString() == "Bn_Shape_Bip001_Spine2")
+										std::string bonename = ToLower(p->Mesh->GetBoneName(j).ToString());
+										if (bonename.contains("weak") || bonename.contains("head")) // || p->Mesh->GetBoneName(j).ToString() == "bn_shape_bip001_spine2")
 										{
 											bones.push_back(j);
 										}
@@ -2369,7 +2370,8 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 									}*/
 									if (p->Children[a]->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
 									{
-										if (!(p->Children[a]->Class->GetFullName().contains("Immun")) && !(p->Children[a]->Class->GetFullName().contains("JudgementEye")))
+										std::string childname = ToLower(p->Children[a]->Class->GetFullName());
+										if (!(childname.contains("immun")) && !(childname.contains("judgementeye")))
 											continue;
 										TFD_SDK::FVector2D ScreenPos = { -1, -1 };
 										if (WorldToScreen(p->Children[a]->K2_GetActorLocation(), &ScreenPos))
