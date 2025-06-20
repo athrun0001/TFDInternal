@@ -2138,7 +2138,6 @@ bool MaxSpareRounds(TFD_SDK::EM1RoundsType RoundsType)
 		i += 1;
 	}
 
-	int j = 0;
 	for (const auto& Capacities : LocalPlayerCharacter->RoundsComponent->CachedMaxCapacities)
 	{
 		if((int)Capacities.Key() == (int)RoundsType)
@@ -2146,7 +2145,6 @@ bool MaxSpareRounds(TFD_SDK::EM1RoundsType RoundsType)
 			MaxRounds = Capacities.Value().CachedCapacity;
 			break;
 		}
-		j += 1;
 	}
 	if (CurrentRounds == MaxRounds)
 		return true;
