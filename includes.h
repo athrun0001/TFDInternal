@@ -180,6 +180,7 @@ void ResearchBookmarkedItems();
 void NoSpread();
 void NoRecoil();
 void RapidFireOn();
+bool MaxSpareRounds(TFD_SDK::EM1RoundsType RoundsType);
 /*
 *  Aimbot
 */
@@ -249,6 +250,7 @@ std::chrono::steady_clock::time_point AutoRestartMissionStartTime = std::chrono:
 std::chrono::steady_clock::time_point AutoInstantInfilStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point HPLootStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point MPLootStartTime = std::chrono::steady_clock::now();
+std::chrono::steady_clock::time_point RoundsLootStartTime = std::chrono::steady_clock::now();
 
 void WriteEnemyNamesData();
 std::unordered_map<int, std::string> ReadEnemyNamesData();
@@ -263,6 +265,7 @@ float currentmana;
 float maxmana;
 bool hp_used = false;
 bool mp_used = false;
+bool rounds_used = false;
 
 std::unordered_map<int, std::vector<int>> IDBoneMap = { };
 bool BonesChanged = false;

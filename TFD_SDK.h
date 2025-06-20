@@ -455,6 +455,16 @@ namespace TFD_SDK
 		DestructionVulgusPost = 18,
 		EM1MissionSubType_MAX = 19,
 	};
+	// NumValues: 0x0006
+	enum class EM1RoundsType : uint8
+	{
+		None = 0,
+		GeneralRounds = 1,
+		EnhancedRounds = 2,
+		ImpactRounds = 3,
+		HighpowerRounds = 4,
+		EM1RoundsType_MAX = 5,
+	};
 
 
 	// 0x0004 (0x0004 - 0x0000)
@@ -637,6 +647,17 @@ namespace TFD_SDK
 		float                                         fireinterval;                                      // 0x0000(0x0004)(Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		struct FM1WeaponBurstFireParams               BurstFire;                                         // 0x0004(0x000C)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
 		struct FM1WeaponFireAnimParams                Anim;                                              // 0x0010(0x0008)(Edit, BlueprintVisible, NoDestructor, NativeAccessSpecifierPublic)
+	};
+	// 0x0008 (0x0008 - 0x0000)
+	struct FDelegateHandle
+	{
+		uint64 ID;
+	};
+	// 0x000C (0x000C - 0x0000)
+	struct FCachedMaxCapacity
+	{
+		int CachedCapacity;
+		FDelegateHandle StatChangedEventDelegateHandle;
 	};
 
 	
@@ -1068,6 +1089,19 @@ namespace TFD_SDK
 		uint8 Pad_UM1WeaponComp_Class[0x10];	// 0x00C8
 	};
 
+	// 0x0098 (0x0168 - 0x00D0)
+	class UM1PlayerRoundsComponent final : public UM1CharacterComponent
+	{
+	public:
+		uint8                                         Pad_CurrentSpareRounds[0x10];						 // 0x00D0(0x0008)(ZeroConstructor, Transient, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		TArray<int32>                                 CurrentSpareRounds;                                // 0x00E0(0x0010)(Net, ZeroConstructor, NativeAccessSpecifierPrivate)
+		TMap<EM1RoundsType, FCachedMaxCapacity>		  CachedMaxCapacities;								 // 0x00F0(0x0050)(Net, ZeroConstructor, Transient, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_UM1PlayerRoundsComponent[0x28];                // 0x0140(0x0078)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	};
+	static_assert(offsetof(UM1PlayerRoundsComponent, Pad_CurrentSpareRounds) == 0x00D0, "Bad alignment");
+	static_assert(offsetof(UM1PlayerRoundsComponent, CurrentSpareRounds) == 0x00E0, "Bad alignment");
+	static_assert(offsetof(UM1PlayerRoundsComponent, CachedMaxCapacities) == 0x00F0, "Bad alignment");
+	static_assert(offsetof(UM1PlayerRoundsComponent, Pad_UM1PlayerRoundsComponent) == 0x0140, "Bad alignment");
 	// 0x0130 (0x0200 - 0x00D0)
 	class alignas(0x10) UM1TeleportHandlerComponent final : public UM1CharacterComponent
 	{
@@ -1824,7 +1858,9 @@ namespace TFD_SDK
 		class UM1TeleportHandlerComponent* TeleportHandler;								// 0x0F10(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8 Pad_WeaponSlotControl[0x10];												// 0x0F18
 		class UM1WeaponSlotControlComponent* WeaponSlotControl;                         // 0x0F28(0x0008)(ExportObject, ZeroConstructor, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
-		uint8 Pad_PlayerName[0x88];														// 0x0F30
+		uint8 Pad_RoundsComponent[0x38];												// 0x0F30
+		class UM1PlayerRoundsComponent* RoundsComponent;                                // 0x0F68(0x0008)(ExportObject, ZeroConstructor, Transient, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8 Pad_PlayerName[0x48];														// 0x0F70
 		class FString PlayerName;														// 0x0FB8(0x0010) Need this
 		uint8 Pad_AM1PlayerClass[0x408];												// 0x0FC8
 

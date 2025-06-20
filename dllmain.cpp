@@ -1061,6 +1061,7 @@ void ItemESPVacuum()
 	maxmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxMp).Value / 10000.0f;
 	hp_used = false;
 	mp_used = false;
+	rounds_used = false;
 	if (cfg_DrawItemBoxes || cfg_DrawItemNames || cfg_DrawItemLines || cfg_LootVacuum || cfg_DrawVaults)
 	{
 		/*float hp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
@@ -1387,6 +1388,86 @@ void ItemESPVacuum()
 										{
 											mp_used = true;
 											MPLootStartTime = std::chrono::steady_clock::now();
+										}
+									}
+									else
+										continue;
+								}
+								else
+									continue;
+							}
+							if (Item->IsA(TFD_SDK::ABP_AmmoGeneralDroppedItem_C::StaticClass()))
+							{
+								if (MaxSpareRounds(TFD_SDK::EM1RoundsType::GeneralRounds) == false)
+								{
+									if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
+									{
+										if (rounds_used == true)
+											continue;
+										else
+										{
+											rounds_used = true;
+											RoundsLootStartTime = std::chrono::steady_clock::now();
+										}
+									}
+									else
+										continue;
+								}
+								else
+									continue;
+							}
+							if (Item->IsA(TFD_SDK::ABP_AmmoEnhancedDroppedItem_C::StaticClass()))
+							{
+								if (MaxSpareRounds(TFD_SDK::EM1RoundsType::EnhancedRounds) == false)
+								{
+									if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
+									{
+										if (rounds_used == true)
+											continue;
+										else
+										{
+											rounds_used = true;
+											RoundsLootStartTime = std::chrono::steady_clock::now();
+										}
+									}
+									else
+										continue;
+								}
+								else
+									continue;
+							}
+							if (Item->IsA(TFD_SDK::ABP_AmmoImpactDroppedItem_C::StaticClass()))
+							{
+								if (MaxSpareRounds(TFD_SDK::EM1RoundsType::ImpactRounds) == false)
+								{
+									if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
+									{
+										if (rounds_used == true)
+											continue;
+										else
+										{
+											rounds_used = true;
+											RoundsLootStartTime = std::chrono::steady_clock::now();
+										}
+									}
+									else
+										continue;
+								}
+								else
+									continue;
+							}
+							if (Item->IsA(TFD_SDK::ABP_AmmoHighpowerDroppedItem_C::StaticClass()))
+							{
+								if (MaxSpareRounds(TFD_SDK::EM1RoundsType::HighpowerRounds) == false)
+								{
+									if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
+									{
+										if (rounds_used == true)
+											continue;
+										else
+										{
+											rounds_used = true;
+											RoundsLootStartTime = std::chrono::steady_clock::now();
 										}
 									}
 									else
@@ -2038,6 +2119,40 @@ void ContainerDrop()
 			}
 		}
 	}
+}
+
+bool MaxSpareRounds(TFD_SDK::EM1RoundsType RoundsType)
+{
+	if(!LocalPlayerCharacter || !LocalPlayerCharacter->RoundsComponent)
+		return false;	
+	char buffer[300];
+	int i = 0;
+	int CurrentRounds = 0;
+	int MaxRounds = 0;
+	for(const auto& SpareRound : LocalPlayerCharacter->RoundsComponent->CurrentSpareRounds)
+	{
+		if (i == (int)RoundsType)
+		{
+			CurrentRounds = SpareRound;
+			break;
+		}
+		i += 1;
+	}
+
+	int j = 0;
+	for (const auto& Capacities : LocalPlayerCharacter->RoundsComponent->CachedMaxCapacities)
+	{
+		if((int)Capacities.Key() == (int)RoundsType)
+		{
+			MaxRounds = Capacities.Value().CachedCapacity;
+			break;
+		}
+		j += 1;
+	}
+	if (CurrentRounds == MaxRounds)
+		return true;
+	else
+		return false;
 }
 
 HRESULT UpdateControllerState()
