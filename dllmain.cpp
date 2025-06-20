@@ -810,10 +810,16 @@ void NoSpread()
 			{
 				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->bApplySpreadSize == true)
 					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->bApplySpreadSize = false;
-				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase > 1.0f)
-					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase = 1.0f;
-				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize > 1.0f)
-					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize = 1.0f;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase > 0.000001f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase = 0.000001f;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize > 0.000001f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize = 0.000001f;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrAccuracySizeInterp > 0.000001f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrAccuracySizeInterp = 0.000001f;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrBaseSizeInterp > 0.000001f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrBaseSizeInterp = 0.000001f;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoverRecoilStartDelayTime > 0.000001f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoverRecoilStartDelayTime = 0.000001f;
 			}
 		}
 	}
@@ -823,7 +829,6 @@ void NoRecoil()
 {
 	if (!LocalPlayerCharacter)
 		return;
-	char buffer[300];
 	if (LocalPlayerCharacter->WeaponSlotControl)
 	{
 		if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon)
@@ -834,16 +839,24 @@ void NoRecoil()
 				{
 					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilApplyInterpSpeed > 0.000001f)
 						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilApplyInterpSpeed = 0.000001f;
-					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverInterpSpeed > 0.000001f)
-						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverInterpSpeed = 0.000001f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverInterpSpeed < 9999.0f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverInterpSpeed = 9999.0f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverStartDelay > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverStartDelay = 0.000001f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilResetTimeAfterFire > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilResetTimeAfterFire = 0.000001f;
 				}
 
 				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData)
 				{
 					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilApplyInterpSpeed > 0.000001f)
 						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilApplyInterpSpeed = 0.000001f;
-					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed > 0.000001f)
-						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed = 0.000001f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed < 9999.0f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed = 9999.0f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverStartDelay > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverStartDelay = 0.000001f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilResetTimeAfterFire > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilResetTimeAfterFire = 0.000001f;
 				}
 			}
 		}

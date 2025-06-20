@@ -1144,18 +1144,24 @@ namespace TFD_SDK
 		struct FM1RangedWeaponRecoilData*			  RecoilData;									  // 0x00E8(0x0008)
 		struct FM1RangedWeaponRecoilData*			  ZoomRecoilData;								  // 0x00F0(0x0008)
 		bool										  bApplySpreadSize;								  // 0x00F8(0x0001)
-		uint8                                         Pad_CurrentSpreadSize[0xF];					  // 0x00F9
+		uint8                                         Pad_CurrAccuracySizeInterp[0x3];				  // 0x00F9
+		float										  CurrAccuracySizeInterp;						  // 0x00FC(0x0004)
+		float										  CurrBaseSizeInterp;							  // 0x0100(0x0004)
+		float										  FireModifierAccumulated;						  // 0x0104(0x0004)
 		float										  CurrentSpreadSize;						      // 0x0108(0x0004)                        
-		uint8                                         Pad_UM1WeaponSprayPatternComponent[0x4];        // 0x010C
+		float                                         RecoverRecoilStartDelayTime;					  // 0x010C
 	};
 	static_assert(offsetof(UM1WeaponSprayPatternComponent, Pad_CrosshairSizeBase) == 0x00D8, "Bad alignment");
 	static_assert(offsetof(UM1WeaponSprayPatternComponent, CrosshairSizeBase) == 0x00E4, "Bad alignment");
 	static_assert(offsetof(UM1WeaponSprayPatternComponent, RecoilData) == 0x00E8, "Bad alignment");
 	static_assert(offsetof(UM1WeaponSprayPatternComponent, ZoomRecoilData) == 0x00F0, "Bad alignment");
 	static_assert(offsetof(UM1WeaponSprayPatternComponent, bApplySpreadSize) == 0x00F8, "Bad alignment");
-	static_assert(offsetof(UM1WeaponSprayPatternComponent, Pad_CurrentSpreadSize) == 0x00F9, "Bad alignment");
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, Pad_CurrAccuracySizeInterp) == 0x00F9, "Bad alignment");
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, CurrAccuracySizeInterp) == 0x00FC, "Bad alignment");
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, CurrBaseSizeInterp) == 0x0100, "Bad alignment");
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, FireModifierAccumulated) == 0x0104, "Bad alignment");
 	static_assert(offsetof(UM1WeaponSprayPatternComponent, CurrentSpreadSize) == 0x0108, "Bad alignment");
-	static_assert(offsetof(UM1WeaponSprayPatternComponent, Pad_UM1WeaponSprayPatternComponent) == 0x010C, "Bad alignment");
+	static_assert(offsetof(UM1WeaponSprayPatternComponent, RecoverRecoilStartDelayTime) == 0x010C, "Bad alignment");
 	// 0x0028 (0x0100 - 0x00D8)
 	class UM1WeaponRoundsComponent final : public UM1WeaponComponent
 	{
