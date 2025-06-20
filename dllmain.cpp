@@ -2125,7 +2125,6 @@ bool MaxSpareRounds(TFD_SDK::EM1RoundsType RoundsType)
 {
 	if(!LocalPlayerCharacter || !LocalPlayerCharacter->RoundsComponent)
 		return false;	
-	char buffer[300];
 	int i = 0;
 	int CurrentRounds = 0;
 	int MaxRounds = 0;
