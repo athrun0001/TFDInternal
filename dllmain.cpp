@@ -1398,7 +1398,7 @@ void ItemESPVacuum()
 							}
 							if (Item->IsA(TFD_SDK::ABP_AmmoGeneralDroppedItem_C::StaticClass()))
 							{
-								if (MaxSpareRounds(TFD_SDK::EM1RoundsType::GeneralRounds) == false)
+								if (GetSpareRounds(TFD_SDK::EM1RoundsType::GeneralRounds,200) == true)
 								{
 									if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
 									{
@@ -1418,7 +1418,7 @@ void ItemESPVacuum()
 							}
 							if (Item->IsA(TFD_SDK::ABP_AmmoEnhancedDroppedItem_C::StaticClass()))
 							{
-								if (MaxSpareRounds(TFD_SDK::EM1RoundsType::EnhancedRounds) == false)
+								if (GetSpareRounds(TFD_SDK::EM1RoundsType::EnhancedRounds,120) == true)
 								{
 									if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
 									{
@@ -1438,7 +1438,7 @@ void ItemESPVacuum()
 							}
 							if (Item->IsA(TFD_SDK::ABP_AmmoImpactDroppedItem_C::StaticClass()))
 							{
-								if (MaxSpareRounds(TFD_SDK::EM1RoundsType::ImpactRounds) == false)
+								if (GetSpareRounds(TFD_SDK::EM1RoundsType::ImpactRounds,25) == true)
 								{
 									if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
 									{
@@ -1458,7 +1458,7 @@ void ItemESPVacuum()
 							}
 							if (Item->IsA(TFD_SDK::ABP_AmmoHighpowerDroppedItem_C::StaticClass()))
 							{
-								if (MaxSpareRounds(TFD_SDK::EM1RoundsType::HighpowerRounds) == false)
+								if (GetSpareRounds(TFD_SDK::EM1RoundsType::HighpowerRounds,2) == true)
 								{
 									if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
 									{
@@ -2121,7 +2121,7 @@ void ContainerDrop()
 	}
 }
 
-bool MaxSpareRounds(TFD_SDK::EM1RoundsType RoundsType)
+bool GetSpareRounds(TFD_SDK::EM1RoundsType RoundsType,int RoundsPerLoot)
 {
 	if(!LocalPlayerCharacter || !LocalPlayerCharacter->RoundsComponent)
 		return false;	
@@ -2139,7 +2139,8 @@ bool MaxSpareRounds(TFD_SDK::EM1RoundsType RoundsType)
 			break;
 		}
 	}
-	if (CurrentSpareRounds == MaxRoundCapacity)
+
+	if (CurrentSpareRounds <= (MaxRoundCapacity - RoundsPerLoot))
 		return true;
 	else
 		return false;

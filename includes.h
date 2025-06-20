@@ -180,7 +180,7 @@ void ResearchBookmarkedItems();
 void NoSpread();
 void NoRecoil();
 void RapidFireOn();
-bool MaxSpareRounds(TFD_SDK::EM1RoundsType RoundsType);
+bool GetSpareRounds(TFD_SDK::EM1RoundsType RoundsType, int RoundsPerLoot);
 /*
 *  Aimbot
 */
