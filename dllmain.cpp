@@ -2125,28 +2125,21 @@ bool MaxSpareRounds(TFD_SDK::EM1RoundsType RoundsType)
 {
 	if(!LocalPlayerCharacter || !LocalPlayerCharacter->RoundsComponent)
 		return false;	
-	int i = 0;
-	int CurrentRounds = 0;
-	int MaxRounds = 0;
-	for(const auto& SpareRound : LocalPlayerCharacter->RoundsComponent->CurrentSpareRounds)
-	{
-		if (i == (int)RoundsType)
-		{
-			CurrentRounds = SpareRound;
-			break;
-		}
-		i += 1;
-	}
+
+	int CurrentSpareRounds = 0;
+	int MaxRoundCapacity = 0;
+
+	CurrentSpareRounds = LocalPlayerCharacter->RoundsComponent->CurrentSpareRounds[(int)RoundsType];
 
 	for (const auto& Capacities : LocalPlayerCharacter->RoundsComponent->CachedMaxCapacities)
 	{
-		if((int)Capacities.Key() == (int)RoundsType)
+		if(Capacities.Key() == RoundsType)
 		{
-			MaxRounds = Capacities.Value().CachedCapacity;
+			MaxRoundCapacity = Capacities.Value().CachedCapacity;
 			break;
 		}
 	}
-	if (CurrentRounds == MaxRounds)
+	if (CurrentSpareRounds == MaxRoundCapacity)
 		return true;
 	else
 		return false;
