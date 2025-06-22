@@ -2322,7 +2322,7 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 									if (p->Mesh->BoneArray.IsValidIndex(j))
 									{
 										std::string bonename = ToLower(p->Mesh->GetBoneName(j).ToString());
-										if (bonename.contains("weak") || bonename.contains("head")) // || p->Mesh->GetBoneName(j).ToString() == "bn_shape_bip001_spine2")
+										if (bonename.contains("weak") || bonename.contains("head") || bonename == "bn_shape_bip001_spine2")
 										{
 											bones.push_back(j);
 										}
