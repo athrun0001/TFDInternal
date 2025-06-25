@@ -3583,7 +3583,8 @@ void ModifyGrapple()
 			TFD_SDK::UM1WireSkillAbility* WireAbility = static_cast<TFD_SDK::UM1WireSkillAbility*>(Ability);
 			if (WireAbility)
 			{
-				WireAbility->FireMaxDistance = cfg_AimbotGrappleRange;
+				if (WireAbility->FireMaxDistance != cfg_AimbotGrappleRange)
+					WireAbility->FireMaxDistance = cfg_AimbotGrappleRange;
 				break;
 			}
 		}
