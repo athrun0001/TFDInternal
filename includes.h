@@ -181,6 +181,7 @@ void NoSpread();
 void NoRecoil();
 void RapidFireOn();
 bool GetSpareRounds(TFD_SDK::EM1RoundsType RoundsType, int RoundsPerLoot);
+void ModifyGrapple();
 /*
 *  Aimbot
 */
@@ -201,7 +202,8 @@ bool cfg_AimbotNoRecoil = false;
 bool cfg_AimbotRapidFire = false;
 uint8_t Recoil[2] = { 0x74, 0x75 };
 uint8_t RapidFire[2] = { 0x72, 0x77 };
-
+float cfg_AimbotGrappleRange = 10000.0f;
+bool cfg_EnableModifyGrapple = false;
 /*
 * Tivmo Autism
 */

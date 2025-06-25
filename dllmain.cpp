@@ -693,6 +693,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (Input::IsKeyPressed(cfg_ContainerDropKey))
 				ContainerDrop();
 
+			if(cfg_EnableModifyGrapple)
+				ModifyGrapple();
+
 			/*if (IsKeyPressed(VK_LEFT))
 				MissionTaskTeleporterDebugger();*/
 
@@ -2542,6 +2545,8 @@ void DrawMenu()
 				}
 			}*/
 			ZeroGUI::Checkbox((char*)"Enable Auto-Reload", &cfg_NoReload);
+			ZeroGUI::Checkbox((char*)"Enable Modify Grapples (MidAir Grapples Only)", &cfg_EnableModifyGrapple);
+			ZeroGUI::SliderFloat((char*)"Grapple Range", &cfg_AimbotGrappleRange, 1000.0f, 20000.0f);
 		}
 		if (tab == 3)
 		{
@@ -2717,6 +2722,8 @@ void LoadCFG()
 		cfg_NoReload = ini.GetBoolValue("Extra", "EnableNoReload");
 		cfg_AimbotNoRecoil = ini.GetBoolValue("Aimbot", "EnableNoRecoil");
 		cfg_AimbotRapidFire = ini.GetBoolValue("Aimbot", "EnableRapidFire");
+		cfg_EnableModifyGrapple = ini.GetBoolValue("Aimbot", "EnableModifyGrapple");
+		cfg_AimbotGrappleRange = ini.GetDoubleValue("Aimbot", "GrappleRange");
 
 		cfg_CacheEnemyNames = ini.GetBoolValue("Extra", "CacheNames");
 		cfg_CacheEnemyBones = ini.GetBoolValue("Extra", "CacheBones");
@@ -2793,6 +2800,8 @@ void SaveCFG()
 	ini.SetBoolValue("Aimbot", "EnableNoSpread", cfg_AimbotNoSpread);
 	ini.SetBoolValue("Aimbot", "EnableNoRecoil", cfg_AimbotNoRecoil);
 	ini.SetBoolValue("Aimbot", "EnableRapidFire", cfg_AimbotRapidFire);
+	ini.SetBoolValue("Aimbot", "EnableModifyGrapple", cfg_EnableModifyGrapple);
+	ini.SetDoubleValue("Aimbot", "GrappleRange", cfg_AimbotGrappleRange);
 
 	ini.SetBoolValue("Extra", "EnableNoReload", cfg_NoReload);
 	ini.SetBoolValue("Extra", "EnableVacuum", cfg_LootVacuum);
@@ -3558,6 +3567,25 @@ void SearchForGWorld(uintptr_t base, uintptr_t size)
 				break;
 			}
 
+		}
+	}
+}
+
+void ModifyGrapple()
+{
+	if (!LocalPlayerCharacter->WeaponSlotControl->Ability_Component)
+		return;
+
+	for (auto* Ability : LocalPlayerCharacter->WeaponSlotControl->Ability_Component->RegisteredAbilities)
+	{
+		if (Ability && Ability->IsA(TFD_SDK::UM1WireSkillAbility::StaticClass()))
+		{
+			TFD_SDK::UM1WireSkillAbility* WireAbility = static_cast<TFD_SDK::UM1WireSkillAbility*>(Ability);
+			if (WireAbility)
+			{
+				WireAbility->FireMaxDistance = cfg_AimbotGrappleRange;
+				break;
+			}
 		}
 	}
 }

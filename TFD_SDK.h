@@ -846,6 +846,12 @@ namespace TFD_SDK
 		bool                                          bIsReady;                                          // 0x0038(0x0001)(Net, ZeroConstructor, IsPlainOldData, RepNotify, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_39[0x7];                                       // 0x0039(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
+	// 0x0020 (0x0048 - 0x0028)
+	class UM1RepSubObject : public UObject
+	{
+	public:
+		uint8                                         Pad_UM1RepSubObject[0x20];                                      // 0x0028(0x0014)(Fixing Size After Last Property [ Dumper-7 ])
+	};
 	// 0x0118 (0x0140 - 0x0028)
 	class UM1ResearchSystem final : public UObject
 	{
@@ -987,6 +993,12 @@ namespace TFD_SDK
 		}
 	};
 
+	// 0x0260 (0x02A8 - 0x0048)
+	class UM1Ability : public UM1RepSubObject
+	{
+	public:
+		uint8                                         Pad_UM1Ability[0x260];                                     // 0x0048(0x0108)(Fixing Size After Last Property [ Dumper-7 ])
+	};
 	// 0x0230 (0x0278 - 0x0048)
 	class ULocalPlayer : public UPlayer
 	{
@@ -1037,6 +1049,12 @@ namespace TFD_SDK
 		void ServerRestartLastPlayedMission();
 		void ServerRunTaskActor(class AM1MissionTaskActor* InActor);
 		void ServerStartMissionByTemplateID(const struct FM1TemplateId& InTemplateId);
+	};
+	// 0x0078 (0x0120 - 0x00A8)
+	class UGameplayTasksComponent : public UActorComponent
+	{
+	public:
+		uint8                                         Pad_UGameplayTasksComponent[0x78];                                      // 0x00A8(0x0014)(Fixing Size After Last Property [ Dumper-7 ])
 	};
 	// 0x0148 (0x01F0 - 0x00A8)
 	class alignas(0x10) USceneComponent : public UActorComponent
@@ -1131,9 +1149,11 @@ namespace TFD_SDK
 	class UM1WeaponSlotControlComponent final : public UM1CharacterComponent
 	{
 	public:
-		uint8 Pad_ActiveSlot[0x20]; // 0x00D0
-		struct FM1ActivatedWeaponSlot ActivatedWeaponSlot; // 0x00F0(0x0090)
-		uint8 Pad_UM1WeaponSlotControlComponent_Class[0xA8]; // 0x0180
+		uint8 Pad_ActiveSlot[0x20];													  // 0x00D0
+		struct FM1ActivatedWeaponSlot ActivatedWeaponSlot;							  // 0x00F0(0x0090)(Transient, NativeAccessSpecifierPrivate)
+		uint8 Pad_Ability_Component[0x38];											  // 0x0180
+		class UM1AbilityComponent* Ability_Component;                                 // 0x01B8(0x0008)(ExportObject, ZeroConstructor, Transient, InstancedReference, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8 Pad_UM1WeaponSlotControlComponent_Class[0x68];						  // 0x01C0
 	};
 	// 0x0038 (0x0110 - 0x00D8)
 	class UM1WeaponSprayPatternComponent final : public UM1WeaponComponent
@@ -1171,6 +1191,15 @@ namespace TFD_SDK
 		uint8 Pad_UM1WeaponRoundsComponent_Class[0x10]; // 0x00F0
 	public:
 		void ClientFillCurrentRoundByServer();
+	};
+
+	// 0x0100 (0x0220 - 0x0120)
+	class UM1AbilityComponent final : public UGameplayTasksComponent
+	{
+	public:
+		uint8                                         Pad_RegisteredAbilities[0x18];                     // 0x0120
+		TArray<class UM1Ability*>                     RegisteredAbilities;                               // 0x0138(0x0010)(ZeroConstructor, Transient, Protected, NativeAccessSpecifierProtected)
+		uint8                                         Pad_UM1AbilityComponent[0xD8];                     // 0x0148(0x0018)(Fixing Struct Size After Last Property [ Dumper-7 ])
 	};
 	
 	// 0x0020 (0x0150 - 0x0130)
@@ -1357,6 +1386,13 @@ namespace TFD_SDK
 		uint8 Pad_UM1UIWidget_Class[0x4D8];
 	};
 
+	// 0x0098 (0x0340 - 0x02A8)
+	class UM1SkillAbility : public UM1Ability
+	{
+	public:
+		uint8                                         Pad_UM1SkillAbility[0x98];                                     // 0x02A8(0x006C)(Fixing Struct Size After Last Property [ Dumper-7 ])
+	};
+
 	// 0x0248 (0x0500 - 0x02B8)
 #pragma pack(push, 0x1)
 	class alignas(0x10) ACharacter : public APawn
@@ -1437,6 +1473,19 @@ namespace TFD_SDK
 		uint8										  Pax_CurrentState[0x284];													// 0x0340					
 		EM1MissionTargetState                         CurrentState; 															// 0x05C4(0x0001)
 		uint8                                         Pad_AM1MissionTargetActor_Class[0x17B];                                   // 0x05C5
+	};
+	// 0x0010 (0x0350 - 0x0340)
+	class UM1WireSkillAbility final : public UM1SkillAbility
+	{
+	public:
+		float                                         FireMaxDistance;                                   // 0x0340(0x0004)(Edit, BlueprintVisible, BlueprintReadOnly, ZeroConstructor, IsPlainOldData, NoDestructor, Protected, HasGetValueTypeHash, NativeAccessSpecifierProtected)
+		uint8                                         Pad_UM1WireSkillAbility[0xC];                      // 0x0344(0x0007)(Fixing Struct Size After Last Property [ Dumper-7 ])
+
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1WireSkillAbility">();
+		}
 	};
 
 	// 0x0088 (0x03E8 - 0x0360)
