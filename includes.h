@@ -171,7 +171,7 @@ void InstantInfiltration();
 void RestartLastMission();
 void LeaveMission();
 void SwitchPreset();
-void RefreshPresetList();
+void RefreshPresetList(bool clearall);
 void EncryptedVaultDrops();
 void MissionTaskTeleporter();
 //void MissionTaskActortESP();

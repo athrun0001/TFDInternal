@@ -862,4 +862,25 @@ namespace TFD_SDK
 
 		Func->FunctionFlags = Flgs;
 	}
+
+	class UM1LocalGameInstanceSubsystem* UM1LocalGameInstanceSubsystem::Get(const class UObject* WorldContextObject)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = StaticClass()->GetFunction("M1LocalGameInstanceSubsystem", "Get");
+
+		M1LocalGameInstanceSubsystem_Get Parms{};
+
+		Parms.WorldContextObject = WorldContextObject;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		GetDefaultObj()->ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+
+		return Parms.ReturnValue;
+	}
 }

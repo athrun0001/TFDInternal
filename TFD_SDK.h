@@ -940,6 +940,26 @@ namespace TFD_SDK
 			return StaticClassImpl<"M1ActorManagerSubsystem">();
 		}
 	};
+	// 0x0118 (0x0148 - 0x0030)
+	class UM1LocalGameInstanceSubsystem final : public UGameInstanceSubsystem
+	{
+	public:
+		uint8                                         Pad_ResearchSystem[0x38];							 // 0x0030(0x0018)(Fixing Size After Last Property [ Dumper-7 ])
+		class UM1ResearchSystem*					  ResearchSystem;                                    // 0x0068(0x0008)(ZeroConstructor, Transient, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_UM1LocalGameInstanceSubsystem[0xD8];			 // 0x0070(0x0008)(ZeroConstructor, Transient, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+
+	public:
+		static class UM1LocalGameInstanceSubsystem* Get(const class UObject* WorldContextObject);
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1LocalGameInstanceSubsystem">();
+		}
+		static class UM1LocalGameInstanceSubsystem* GetDefaultObj()
+		{
+			return GetDefaultObjImpl<UM1LocalGameInstanceSubsystem>();
+		}
+	};
 	// 0x0008 (0x0038 - 0x0030)
 	class UM1WeaponInputContext : public UM1ActionInputContext
 	{
@@ -1082,8 +1102,10 @@ namespace TFD_SDK
 	class UM1PrivateOnlineServiceComponent final : public UM1ActorComponent
 	{
 	public:
-		TArray<class UM1PrivateOnlineSubService*>     SubServices;        // 0x00C8(0x0010)(ExportObject, ZeroConstructor, Transient, ContainsInstancedReference, NativeAccessSpecifierPrivate)
-		uint8 Pad_UM1PrivateOnlineServiceComponent_Class[0x9F8];	      // 0x00D8
+		TArray<class UM1PrivateOnlineSubService*>     SubServices;										 // 0x00C8(0x0010)(ExportObject, ZeroConstructor, Transient, ContainsInstancedReference, NativeAccessSpecifierPrivate)
+		uint8                                         Pad_CurrentSpareRounds[0x120];					 // 0x00D8
+		TWeakObjectPtr<class UM1Account>			  CachedAccount;									 // 0x01F0(0x0008)(ZeroConstructor, Transient, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		uint8										  Pad_UM1PrivateOnlineServiceComponent_Class[0x8D0]; // 0x0200
 
 	public:
 		static class UClass* StaticClass()
@@ -1091,6 +1113,10 @@ namespace TFD_SDK
 			return StaticClassImpl<"M1PrivateOnlineServiceComponent">();
 		}
 	};
+	static_assert(offsetof(UM1PrivateOnlineServiceComponent, SubServices) == 0x00C8, "Bad alignment");
+	static_assert(offsetof(UM1PrivateOnlineServiceComponent, Pad_CurrentSpareRounds) == 0x00D8, "Bad alignment");
+	static_assert(offsetof(UM1PrivateOnlineServiceComponent, CachedAccount) == 0x01F8, "Bad alignment");
+	static_assert(offsetof(UM1PrivateOnlineServiceComponent, Pad_UM1PrivateOnlineServiceComponent_Class) == 0x0200, "Bad alignment");
 	// 0x0458 (0x0520 - 0x00C8)
 	class UM1StatComponent : public UM1ActorComponent
 	{
@@ -2233,5 +2259,12 @@ namespace TFD_SDK
 	public:
 		struct FM1TemplateId                          InResearchTemplateId;                              // 0x0000(0x0004)(Parm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 		int32                                         InRepeatCount;                                     // 0x0004(0x0004)(Parm, ZeroConstructor, IsPlainOldData, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+	};
+	// 0x0010 (0x0010 - 0x0000)
+	struct M1LocalGameInstanceSubsystem_Get final
+	{
+	public:
+		const class UObject* WorldContextObject;                                // 0x0000(0x0008)(ConstParm, Parm, ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
+		class UM1LocalGameInstanceSubsystem* ReturnValue;                                       // 0x0008(0x0008)(Parm, OutParm, ZeroConstructor, ReturnParm, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPublic)
 	};
 }

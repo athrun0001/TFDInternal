@@ -365,11 +365,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			{
 				IDBoneMap = ReadEnemyBonesData();
 			}
-
-			if (PresetsMap.empty())
-			{
-				PresetsMap = ReadPresetsData();
-			}
 			
 			/*if (cfg_AimbotNoSpread)
 			{
@@ -498,6 +493,11 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			//		}
 			//	}
 			//}
+
+			if (PresetsMap.empty())
+			{
+				RefreshPresetList(false);
+			}
 
 			if (Input::IsKeyPressed(cfg_LootVacuumKey))
 				cfg_LootVacuum = !cfg_LootVacuum;
@@ -1957,90 +1957,63 @@ void SwitchPreset()
 	}
 }
 
-void RefreshPresetList()
+void RefreshPresetList(bool clearall)
 {
-	HotSwapPreset = { -1, -1, -1, -1, -1, -1 };
-	PresetsMap.clear();
+	if (!LocalPlayerController ||
+		!LocalPlayerController->PrivateOnlineServiceComponent ||
+		!LocalPlayerController->PrivateOnlineServiceComponent->CachedAccount.Get()
+		)
+		return;
 
-	for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
+	TFD_SDK::UM1Account* Account = LocalPlayerController->PrivateOnlineServiceComponent->CachedAccount.Get();
+
+	if (!Account)
+		return;
+
+	if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()))
 	{
-		TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
-		if (!Obj)
-			continue;
-
-		if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
-			Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
-			Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
-			Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
-			Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
-			continue;
-
-		if (Obj->IsA(TFD_SDK::UM1Account::StaticClass()))
+		if (clearall)
+			HotSwapPreset = { -1, -1, -1, -1, -1, -1 };
+		PresetsMap.clear();
+		for (const auto& Pair : static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset)->PresetSlotByIndex)
 		{
-			TFD_SDK::UM1Account* Account = static_cast<TFD_SDK::UM1Account*>(Obj);
-			if (!Account)
-				return;
-			if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()))
+			TFD_SDK::FM1PresetSlot Value = Pair.Value();
+			if (!Value.PresetName.ToString().empty())
 			{
-				for (const auto& Pair : static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset)->PresetSlotByIndex)
-				{
-					TFD_SDK::FM1PresetSlot Value = Pair.Value();
-					if (!Value.PresetName.ToString().empty())
-					{
-						PresetsMap.insert({ Value.PresetIndex,  Value.PresetName.ToString() });
-					}
-				}
-				break;
+				PresetsMap.insert({ Value.PresetIndex,  Value.PresetName.ToString() });
 			}
 		}
 	}
-
 }
 
 void ResearchBookmarkedItems()
 {
-	if (!LocalPlayerController || !LocalPlayerController->PrivateOnlineServiceComponent)
+	if (!GWorld ||
+		!LocalPlayerController || 
+		!LocalPlayerController->PrivateOnlineServiceComponent || 
+		!LocalPlayerController->PrivateOnlineServiceComponent->SubServices)
 		return;
 
+	TFD_SDK::UM1LocalGameInstanceSubsystem* LGIS = TFD_SDK::UM1LocalGameInstanceSubsystem::Get(GWorld);
+	if (!LGIS || !LGIS->ResearchSystem)
+		return;
 
-	for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
+	TFD_SDK::UM1ResearchSystem* RS = LGIS->ResearchSystem;
+	if (!RS)
+		return;
+
+	for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : LocalPlayerController->PrivateOnlineServiceComponent->SubServices)
 	{
-		TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
-		if (!Obj)
+		if (!Subserv)
 			continue;
-
-		if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
-			Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
-			Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
-			Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
-			Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
-			continue;
-
-		if (Obj->IsA(TFD_SDK::UM1ResearchSystem::StaticClass()))
+		if (Subserv->IsA(TFD_SDK::UM1PrivateOnlineServiceResearch::StaticClass()) && Subserv->bIsReady == true)
 		{
-			TFD_SDK::UM1ResearchSystem* RS = static_cast<TFD_SDK::UM1ResearchSystem*>(Obj);
-			if (!RS)
-				continue;
-			int i = 0;
-
-			if (LocalPlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
+			for (const auto& RDTID : RS->BookmarkResearchTids)
 			{
-				for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : LocalPlayerController->PrivateOnlineServiceComponent->SubServices)
-				{
-					if (!Subserv)
-						continue;
-					if (Subserv->IsA(TFD_SDK::UM1PrivateOnlineServiceResearch::StaticClass()) && Subserv->bIsReady == true)
-					{
-						for (const auto& RDTID : RS->BookmarkResearchTids)
-						{
-							static_cast<TFD_SDK::UM1PrivateOnlineServiceResearch*>(Subserv)->ServerRequestStartResearch(RDTID, cfg_ResearchQty);
-						}
-					}
-				}
+				static_cast<TFD_SDK::UM1PrivateOnlineServiceResearch*>(Subserv)->ServerRequestStartResearch(RDTID, cfg_ResearchQty);
 			}
 		}
 	}
-
 }
 
 void EncryptedVaultDrops()
@@ -2634,8 +2607,8 @@ void DrawMenu()
 			}
 			if (ZeroGUI::Button((char*)"Refresh Preset List", TFD_SDK::FVector2D{ 120, 30 }))
 			{
-				RefreshPresetList();
-				WritePresetsData();
+				RefreshPresetList(true);
+				//WritePresetsData();
 			}
 			ZeroGUI::Text((char*)"Switch Preset:");
 			ZeroGUI::SameLine();
