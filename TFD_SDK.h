@@ -789,12 +789,6 @@ namespace TFD_SDK
 		uint8                                         Pad_Preset[0x2D0];                                        // 0x0028
 		class UM1AccountPreset*						  Preset;													// 0x02F8(0x0008)(ZeroConstructor, NoDestructor, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_UM1Account[0xE8];                                     // 0x0300
-
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"M1Account">();
-		}
 	};
 	// 0x0050 (0x0078 - 0x0028)
 	class UM1AccountPreset final : public UObject
@@ -859,12 +853,6 @@ namespace TFD_SDK
 		uint8                                         Pad_BookmarkResearchTids[0xA0];                    // 0x0028
 		TArray<struct FM1TemplateId>                  BookmarkResearchTids;                              // 0x00C8(0x0010)(ZeroConstructor, Transient, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_UM1ResearchSystem[0x68];                       // 0x00D8
-
-	public:
-		static class UClass* StaticClass()
-		{
-			return StaticClassImpl<"M1ResearchSystem">();
-		}
 	};
 	// 0x0070 (0x0098 - 0x0028)
 	class UMissionGraphTaskNode : public UObject
@@ -1104,7 +1092,7 @@ namespace TFD_SDK
 	public:
 		TArray<class UM1PrivateOnlineSubService*>     SubServices;										 // 0x00C8(0x0010)(ExportObject, ZeroConstructor, Transient, ContainsInstancedReference, NativeAccessSpecifierPrivate)
 		uint8                                         Pad_CurrentSpareRounds[0x120];					 // 0x00D8
-		TWeakObjectPtr<class UM1Account>			  CachedAccount;									 // 0x01F0(0x0008)(ZeroConstructor, Transient, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
+		TWeakObjectPtr<class UM1Account>			  CachedAccount;									 // 0x01F8(0x0008)(ZeroConstructor, Transient, NoDestructor, UObjectWrapper, HasGetValueTypeHash, NativeAccessSpecifierPrivate)
 		uint8										  Pad_UM1PrivateOnlineServiceComponent_Class[0x8D0]; // 0x0200
 
 	public:
