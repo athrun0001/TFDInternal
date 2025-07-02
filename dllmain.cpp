@@ -365,11 +365,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			{
 				IDBoneMap = ReadEnemyBonesData();
 			}
-
-			if (PresetsMap.empty())
-			{
-				PresetsMap = ReadPresetsData();
-			}
 			
 			/*if (cfg_AimbotNoSpread)
 			{
@@ -498,6 +493,11 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			//		}
 			//	}
 			//}
+
+			if (PresetsMap.empty())
+			{
+				RefreshPresetList(false);
+			}
 
 			if (Input::IsKeyPressed(cfg_LootVacuumKey))
 				cfg_LootVacuum = !cfg_LootVacuum;
@@ -693,6 +693,9 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			if (Input::IsKeyPressed(cfg_ContainerDropKey))
 				ContainerDrop();
 
+			if(cfg_EnableModifyGrapple)
+				ModifyGrapple();
+
 			/*if (IsKeyPressed(VK_LEFT))
 				MissionTaskTeleporterDebugger();*/
 
@@ -810,10 +813,16 @@ void NoSpread()
 			{
 				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->bApplySpreadSize == true)
 					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->bApplySpreadSize = false;
-				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase > 1.0f)
-					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase = 1.0f;
-				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize > 1.0f)
-					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize = 1.0f;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase > 0.000001f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CrosshairSizeBase = 0.000001f;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize > 0.000001f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrentSpreadSize = 0.000001f;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrAccuracySizeInterp > 0.000001f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrAccuracySizeInterp = 0.000001f;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrBaseSizeInterp > 0.000001f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->CurrBaseSizeInterp = 0.000001f;
+				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoverRecoilStartDelayTime > 0.000001f)
+					LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoverRecoilStartDelayTime = 0.000001f;
 			}
 		}
 	}
@@ -823,7 +832,6 @@ void NoRecoil()
 {
 	if (!LocalPlayerCharacter)
 		return;
-	char buffer[300];
 	if (LocalPlayerCharacter->WeaponSlotControl)
 	{
 		if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon)
@@ -834,16 +842,24 @@ void NoRecoil()
 				{
 					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilApplyInterpSpeed > 0.000001f)
 						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilApplyInterpSpeed = 0.000001f;
-					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverInterpSpeed > 0.000001f)
-						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverInterpSpeed = 0.000001f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverInterpSpeed < 9999.0f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverInterpSpeed = 9999.0f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverStartDelay > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilRecoverStartDelay = 0.000001f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilResetTimeAfterFire > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->RecoilData->RecoilResetTimeAfterFire = 0.000001f;
 				}
 
 				if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData)
 				{
 					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilApplyInterpSpeed > 0.000001f)
 						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilApplyInterpSpeed = 0.000001f;
-					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed > 0.000001f)
-						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed = 0.000001f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed < 9999.0f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverInterpSpeed = 9999.0f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverStartDelay > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilRecoverStartDelay = 0.000001f;
+					if (LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilResetTimeAfterFire > 0.000001f)
+						LocalPlayerCharacter->WeaponSlotControl->ActivatedWeaponSlot.WeaponSlot.Weapon->SprayPatternComponent->ZoomRecoilData->RecoilResetTimeAfterFire = 0.000001f;
 				}
 			}
 		}
@@ -1061,6 +1077,7 @@ void ItemESPVacuum()
 	maxmana = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_MaxMp).Value / 10000.0f;
 	hp_used = false;
 	mp_used = false;
+	rounds_used = false;
 	if (cfg_DrawItemBoxes || cfg_DrawItemNames || cfg_DrawItemLines || cfg_LootVacuum || cfg_DrawVaults)
 	{
 		/*float hp = (float)LocalPlayerCharacter->StatComponent->GetStatValue(TFD_SDK::EM1StatType::Stat_CurrentHp).Value / 10000.0f;
@@ -1395,6 +1412,86 @@ void ItemESPVacuum()
 								else
 									continue;
 							}
+							if (Item->IsA(TFD_SDK::ABP_AmmoGeneralDroppedItem_C::StaticClass()))
+							{
+								if (GetSpareRounds(TFD_SDK::EM1RoundsType::GeneralRounds,200) == true)
+								{
+									if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
+									{
+										if (rounds_used == true)
+											continue;
+										else
+										{
+											rounds_used = true;
+											RoundsLootStartTime = std::chrono::steady_clock::now();
+										}
+									}
+									else
+										continue;
+								}
+								else
+									continue;
+							}
+							if (Item->IsA(TFD_SDK::ABP_AmmoEnhancedDroppedItem_C::StaticClass()))
+							{
+								if (GetSpareRounds(TFD_SDK::EM1RoundsType::EnhancedRounds,120) == true)
+								{
+									if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
+									{
+										if (rounds_used == true)
+											continue;
+										else
+										{
+											rounds_used = true;
+											RoundsLootStartTime = std::chrono::steady_clock::now();
+										}
+									}
+									else
+										continue;
+								}
+								else
+									continue;
+							}
+							if (Item->IsA(TFD_SDK::ABP_AmmoImpactDroppedItem_C::StaticClass()))
+							{
+								if (GetSpareRounds(TFD_SDK::EM1RoundsType::ImpactRounds,25) == true)
+								{
+									if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
+									{
+										if (rounds_used == true)
+											continue;
+										else
+										{
+											rounds_used = true;
+											RoundsLootStartTime = std::chrono::steady_clock::now();
+										}
+									}
+									else
+										continue;
+								}
+								else
+									continue;
+							}
+							if (Item->IsA(TFD_SDK::ABP_AmmoHighpowerDroppedItem_C::StaticClass()))
+							{
+								if (GetSpareRounds(TFD_SDK::EM1RoundsType::HighpowerRounds,2) == true)
+								{
+									if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
+									{
+										if (rounds_used == true)
+											continue;
+										else
+										{
+											rounds_used = true;
+											RoundsLootStartTime = std::chrono::steady_clock::now();
+										}
+									}
+									else
+										continue;
+								}
+								else
+									continue;
+							}
 							TFD_SDK::FVector player = LocalPlayerCharacter->K2_GetActorLocation();
 							float Distance = WorldPosition.GetDistanceTo(player);
 							if (Distance > 150 && Distance < cfg_LootVacuumRange)
@@ -1576,8 +1673,8 @@ void MissionTaskTeleporter()
 				|| activatedtaskname.contains("interact"))
 				&& MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
 			{
-				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
 				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
 				AutoTeleportStartTime = std::chrono::steady_clock::now();
 				std::string mtt = MissionActor->MissionData->MissionDataRowName.ToString() + "|" + MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
 				if (MoveMissionTaskExceptionSet.contains(mtt))
@@ -1607,6 +1704,7 @@ void MissionTaskTeleporter()
 			if (MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex
 				&& MissionActor->ProgressInfo.ActivatedTaskIndex > 1)
 			{
+				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
 				//AutoTeleportStartTime = std::chrono::steady_clock::now();
 				//MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
 				
@@ -1623,7 +1721,7 @@ void MissionTaskTeleporter()
 							if (MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->Index_0 == (WayPointCount - 1))
 							{
 								LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorRotation());
-								MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+								
 								AutoTeleportStartTime = std::chrono::steady_clock::now();
 								return;
 							}
@@ -1632,7 +1730,7 @@ void MissionTaskTeleporter()
 					else
 					{
 						LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorRotation());
-						MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+						//MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
 						AutoTeleportStartTime = std::chrono::steady_clock::now();
 						return;
 					}
@@ -1653,10 +1751,12 @@ void MissionTaskTeleporter()
 								ODistanceLocalCharacter = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(LocalPlayerCharacter->K2_GetActorLocation());
 								ODistanceLastTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation());
 								ODistanceBetweenLastTaskLocalChar = LocalPlayerCharacter->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation());
-								if (ODistanceLastTask < ODistanceLocalCharacter && ODistanceBetweenLastTaskLocalChar > 1500.0f)
+								if (ODistanceBetweenLastTaskLocalChar <= 1500.0f)
+									return;
+								if (ODistanceLastTask < ODistanceLocalCharacter)
 								{
 									LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorRotation());
-									MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+									//MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
 									AutoTeleportStartTime = std::chrono::steady_clock::now();
 								}
 									
@@ -1668,10 +1768,12 @@ void MissionTaskTeleporter()
 						ODistanceLocalCharacter = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(LocalPlayerCharacter->K2_GetActorLocation());
 						ODistanceLastTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation());
 						ODistanceBetweenLastTaskLocalChar = LocalPlayerCharacter->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation());
-						if (ODistanceLastTask < ODistanceLocalCharacter && ODistanceBetweenLastTaskLocalChar > 1500.0f)
+						if (ODistanceBetweenLastTaskLocalChar <= 1500.0f)
+							return;
+						if (ODistanceLastTask < ODistanceLocalCharacter)
 						{
 							LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->K2_GetActorRotation());
-							MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+							//MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
 							AutoTeleportStartTime = std::chrono::steady_clock::now();
 						}
 							
@@ -1860,90 +1962,63 @@ void SwitchPreset()
 	}
 }
 
-void RefreshPresetList()
+void RefreshPresetList(bool clearall)
 {
-	HotSwapPreset = { -1, -1, -1, -1, -1, -1 };
-	PresetsMap.clear();
+	if (!LocalPlayerController ||
+		!LocalPlayerController->PrivateOnlineServiceComponent ||
+		!LocalPlayerController->PrivateOnlineServiceComponent->CachedAccount.Get()
+		)
+		return;
 
-	for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
+	TFD_SDK::UM1Account* Account = LocalPlayerController->PrivateOnlineServiceComponent->CachedAccount.Get();
+
+	if (!Account)
+		return;
+
+	if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()))
 	{
-		TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
-		if (!Obj)
-			continue;
-
-		if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
-			Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
-			Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
-			Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
-			Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
-			continue;
-
-		if (Obj->IsA(TFD_SDK::UM1Account::StaticClass()))
+		if (clearall)
+			HotSwapPreset = { -1, -1, -1, -1, -1, -1 };
+		PresetsMap.clear();
+		for (const auto& Pair : static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset)->PresetSlotByIndex)
 		{
-			TFD_SDK::UM1Account* Account = static_cast<TFD_SDK::UM1Account*>(Obj);
-			if (!Account)
-				return;
-			if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()))
+			TFD_SDK::FM1PresetSlot Value = Pair.Value();
+			if (!Value.PresetName.ToString().empty())
 			{
-				for (const auto& Pair : static_cast<TFD_SDK::UM1AccountPreset*>(Account->Preset)->PresetSlotByIndex)
-				{
-					TFD_SDK::FM1PresetSlot Value = Pair.Value();
-					if (!Value.PresetName.ToString().empty())
-					{
-						PresetsMap.insert({ Value.PresetIndex,  Value.PresetName.ToString() });
-					}
-				}
-				break;
+				PresetsMap.insert({ Value.PresetIndex,  Value.PresetName.ToString() });
 			}
 		}
 	}
-
 }
 
 void ResearchBookmarkedItems()
 {
-	if (!LocalPlayerController || !LocalPlayerController->PrivateOnlineServiceComponent)
+	if (!GWorld ||
+		!LocalPlayerController || 
+		!LocalPlayerController->PrivateOnlineServiceComponent || 
+		!LocalPlayerController->PrivateOnlineServiceComponent->SubServices)
 		return;
 
+	TFD_SDK::UM1LocalGameInstanceSubsystem* LGIS = TFD_SDK::UM1LocalGameInstanceSubsystem::Get(GWorld);
+	if (!LGIS || !LGIS->ResearchSystem)
+		return;
 
-	for (int i = 0; i < TFD_SDK::UObject::GObjects->Num(); i++)
+	TFD_SDK::UM1ResearchSystem* RS = LGIS->ResearchSystem;
+	if (!RS)
+		return;
+
+	for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : LocalPlayerController->PrivateOnlineServiceComponent->SubServices)
 	{
-		TFD_SDK::UObject* Obj = TFD_SDK::UObject::GObjects->GetByIndex(i);
-		if (!Obj)
+		if (!Subserv)
 			continue;
-
-		if (Obj->Flags & TFD_SDK::EObjectFlags::BeginDestroyed ||
-			Obj->Flags & TFD_SDK::EObjectFlags::BeingRegenerated ||
-			Obj->Flags & TFD_SDK::EObjectFlags::FinishDestroyed ||
-			Obj->Flags & TFD_SDK::EObjectFlags::NeedInitialization ||
-			Obj->Flags & TFD_SDK::EObjectFlags::WillBeLoaded)
-			continue;
-
-		if (Obj->IsA(TFD_SDK::UM1ResearchSystem::StaticClass()))
+		if (Subserv->IsA(TFD_SDK::UM1PrivateOnlineServiceResearch::StaticClass()) && Subserv->bIsReady == true)
 		{
-			TFD_SDK::UM1ResearchSystem* RS = static_cast<TFD_SDK::UM1ResearchSystem*>(Obj);
-			if (!RS)
-				continue;
-			int i = 0;
-
-			if (LocalPlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
+			for (const auto& RDTID : RS->BookmarkResearchTids)
 			{
-				for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : LocalPlayerController->PrivateOnlineServiceComponent->SubServices)
-				{
-					if (!Subserv)
-						continue;
-					if (Subserv->IsA(TFD_SDK::UM1PrivateOnlineServiceResearch::StaticClass()) && Subserv->bIsReady == true)
-					{
-						for (const auto& RDTID : RS->BookmarkResearchTids)
-						{
-							static_cast<TFD_SDK::UM1PrivateOnlineServiceResearch*>(Subserv)->ServerRequestStartResearch(RDTID, cfg_ResearchQty);
-						}
-					}
-				}
+				static_cast<TFD_SDK::UM1PrivateOnlineServiceResearch*>(Subserv)->ServerRequestStartResearch(RDTID, cfg_ResearchQty);
 			}
 		}
 	}
-
 }
 
 void EncryptedVaultDrops()
@@ -2040,6 +2115,31 @@ void ContainerDrop()
 	}
 }
 
+bool GetSpareRounds(TFD_SDK::EM1RoundsType RoundsType,int RoundsPerLoot)
+{
+	if(!LocalPlayerCharacter || !LocalPlayerCharacter->RoundsComponent)
+		return false;	
+
+	int CurrentSpareRounds = 0;
+	int MaxRoundCapacity = 0;
+
+	CurrentSpareRounds = LocalPlayerCharacter->RoundsComponent->CurrentSpareRounds[(int)RoundsType];
+
+	for (const auto& Capacities : LocalPlayerCharacter->RoundsComponent->CachedMaxCapacities)
+	{
+		if(Capacities.Key() == RoundsType)
+		{
+			MaxRoundCapacity = Capacities.Value().CachedCapacity;
+			break;
+		}
+	}
+
+	if (CurrentSpareRounds <= (MaxRoundCapacity - RoundsPerLoot))
+		return true;
+	else
+		return false;
+}
+
 HRESULT UpdateControllerState()
 {
 	DWORD dwResult;
@@ -2069,7 +2169,7 @@ void Aimbot()
 		{
 			currentTargetID = 0;
 			Aimbot_BoneIndex = -1;
-			//Aimbot_Target = nullptr;
+			Aimbot_Target = nullptr;
 			return;
 		}
 		if (cfg_AimbotController)
@@ -2089,7 +2189,7 @@ void Aimbot()
 			{
 				currentTargetID = 0;
 				Aimbot_BoneIndex = -1;
-				//Aimbot_Target = nullptr;
+				Aimbot_Target = nullptr;
 				return;
 			}
 		}
@@ -2098,7 +2198,7 @@ void Aimbot()
 	{
 		currentTargetID = 0;
 		Aimbot_BoneIndex = -1;
-		//Aimbot_Target = nullptr;
+		Aimbot_Target = nullptr;
 		return;
 	}
 
@@ -2183,7 +2283,7 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 								for (int c = 0; c < p->Children.Num(); c++)
 								{
 									if (p->Children[c]->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
-										if (p->Children[c]->Class->GetFullName().contains("Immunity") || p->Children[c]->Class->GetFullName().contains("JudgementEye"))
+										if (ToLower(p->Children[c]->Class->GetFullName()).contains("immun") || ToLower(p->Children[c]->Class->GetFullName()).contains("judgementeye"))
 											if (LocalPlayerController->LineOfSightTo(p->Children[c], TFD_SDK::FVector{ 0, 0, 0 }, false))
 												any = true;
 								}
@@ -2202,7 +2302,8 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 								{
 									if (p->Mesh->BoneArray.IsValidIndex(j))
 									{
-										if (p->Mesh->GetBoneName(j).ToString().contains("Weakness") || p->Mesh->GetBoneName(j).ToString().contains("-Head") || p->Mesh->GetBoneName(j).ToString().contains("_head") || p->Mesh->GetBoneName(j).ToString() == "Bn_Shape_Bip001_Spine2")
+										std::string bonename = ToLower(p->Mesh->GetBoneName(j).ToString());
+										if (bonename.contains("weak") || bonename.contains("head") || bonename == "bn_shape_bip001_spine2")
 										{
 											bones.push_back(j);
 										}
@@ -2263,7 +2364,8 @@ TFD_SDK::AActor* GetClosestEnemy(int& ID)
 									}*/
 									if (p->Children[a]->IsA(TFD_SDK::AM1AbilityActor::StaticClass()))
 									{
-										if (!(p->Children[a]->Class->GetFullName().contains("Immun")) && !(p->Children[a]->Class->GetFullName().contains("JudgementEye")))
+										std::string childname = ToLower(p->Children[a]->Class->GetFullName());
+										if (!(childname.contains("immun")) && !(childname.contains("judgementeye")))
 											continue;
 										TFD_SDK::FVector2D ScreenPos = { -1, -1 };
 										if (WorldToScreen(p->Children[a]->K2_GetActorLocation(), &ScreenPos))
@@ -2421,6 +2523,8 @@ void DrawMenu()
 				}
 			}*/
 			ZeroGUI::Checkbox((char*)"Enable Auto-Reload", &cfg_NoReload);
+			ZeroGUI::Checkbox((char*)"Enable Modify Grapples (MidAir Grapples Only)", &cfg_EnableModifyGrapple);
+			ZeroGUI::SliderFloat((char*)"Grapple Range", &cfg_AimbotGrappleRange, 1000.0f, 20000.0f);
 		}
 		if (tab == 3)
 		{
@@ -2508,8 +2612,8 @@ void DrawMenu()
 			}
 			if (ZeroGUI::Button((char*)"Refresh Preset List", TFD_SDK::FVector2D{ 120, 30 }))
 			{
-				RefreshPresetList();
-				WritePresetsData();
+				RefreshPresetList(true);
+				//WritePresetsData();
 			}
 			ZeroGUI::Text((char*)"Switch Preset:");
 			ZeroGUI::SameLine();
@@ -2596,6 +2700,8 @@ void LoadCFG()
 		cfg_NoReload = ini.GetBoolValue("Extra", "EnableNoReload");
 		cfg_AimbotNoRecoil = ini.GetBoolValue("Aimbot", "EnableNoRecoil");
 		cfg_AimbotRapidFire = ini.GetBoolValue("Aimbot", "EnableRapidFire");
+		cfg_EnableModifyGrapple = ini.GetBoolValue("Aimbot", "EnableModifyGrapple");
+		cfg_AimbotGrappleRange = ini.GetDoubleValue("Aimbot", "GrappleRange");
 
 		cfg_CacheEnemyNames = ini.GetBoolValue("Extra", "CacheNames");
 		cfg_CacheEnemyBones = ini.GetBoolValue("Extra", "CacheBones");
@@ -2672,6 +2778,8 @@ void SaveCFG()
 	ini.SetBoolValue("Aimbot", "EnableNoSpread", cfg_AimbotNoSpread);
 	ini.SetBoolValue("Aimbot", "EnableNoRecoil", cfg_AimbotNoRecoil);
 	ini.SetBoolValue("Aimbot", "EnableRapidFire", cfg_AimbotRapidFire);
+	ini.SetBoolValue("Aimbot", "EnableModifyGrapple", cfg_EnableModifyGrapple);
+	ini.SetDoubleValue("Aimbot", "GrappleRange", cfg_AimbotGrappleRange);
 
 	ini.SetBoolValue("Extra", "EnableNoReload", cfg_NoReload);
 	ini.SetBoolValue("Extra", "EnableVacuum", cfg_LootVacuum);
@@ -3437,6 +3545,26 @@ void SearchForGWorld(uintptr_t base, uintptr_t size)
 				break;
 			}
 
+		}
+	}
+}
+
+void ModifyGrapple()
+{
+	if (!LocalPlayerCharacter->WeaponSlotControl->Ability_Component)
+		return;
+
+	for (auto* Ability : LocalPlayerCharacter->WeaponSlotControl->Ability_Component->RegisteredAbilities)
+	{
+		if (Ability && Ability->IsA(TFD_SDK::UM1WireSkillAbility::StaticClass()))
+		{
+			TFD_SDK::UM1WireSkillAbility* WireAbility = static_cast<TFD_SDK::UM1WireSkillAbility*>(Ability);
+			if (WireAbility)
+			{
+				if (WireAbility->FireMaxDistance != cfg_AimbotGrappleRange)
+					WireAbility->FireMaxDistance = cfg_AimbotGrappleRange;
+				break;
+			}
 		}
 	}
 }

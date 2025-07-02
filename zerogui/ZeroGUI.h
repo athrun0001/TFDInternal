@@ -4,14 +4,6 @@
 #include "../SDK/CoreUObject_classes.hpp"
 #include "../SDK/CoreUObject_structs.hpp"
 #include "Input.h"
-std::unique_ptr<wchar_t[]> s2wc(const char* c)
-{
-	const size_t cSize = strlen(c) + 1;
-	std::unique_ptr<wchar_t[]> wc(new wchar_t[cSize]);
-	size_t convertedChars = 0;
-	mbstowcs_s(&convertedChars, wc.get(), cSize, c, _TRUNCATE);
-	return wc;
-}
 
 namespace ZeroGUI
 {
@@ -128,6 +120,13 @@ namespace ZeroGUI
 	TFD_SDK::AM1PlayerController* controller;
 	TFD_SDK::UFont* CurrentFont;
 
+	std::unique_ptr<wchar_t[]> s2wc_utf8(const char* c)
+	{
+		int size_needed = MultiByteToWideChar(CP_UTF8, 0, c, -1, NULL, 0);
+		std::unique_ptr<wchar_t[]> wc(new wchar_t[size_needed]);
+		MultiByteToWideChar(CP_UTF8, 0, c, -1, wc.get(), size_needed);
+		return wc;
+	}
 
 	bool mouseDown = false;
 	bool mouseHeld = false;
@@ -237,19 +236,15 @@ namespace ZeroGUI
 		first_element_pos = FVector2D{ 0, 0 };
 	}
 
-	void TextLeft(char* name, FVector2D pos, FLinearColor color, bool outline)
+	void TextLeft(const char* name, FVector2D pos, FLinearColor color, bool outline)
 	{
-		int length = strlen(name) + 1;
-		std::unique_ptr<wchar_t[]> wcName = s2wc(name);
+		auto wcName = s2wc_utf8(name);
 		canvas->K2_DrawText(CurrentFont, FString(wcName.get()), pos, FVector2D{ 0.97f, 0.97f }, color, 0.0f, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, false, true, true, Colors::Text_Outline);
-		//delete[] wcName; // Free the allocated memory
 	}
-	void TextCenter(char* name, FVector2D pos, FLinearColor color, bool outline)
+	void TextCenter(const char* name, FVector2D pos, FLinearColor color, bool outline)
 	{
-		int length = strlen(name) + 1;
-		std::unique_ptr<wchar_t[]> wcName = s2wc(name);
+		auto wcName = s2wc_utf8(name);
 		canvas->K2_DrawText(CurrentFont, FString(wcName.get()), pos, FVector2D{ 0.97f, 0.97f }, color, 0.0f, Colors::Text_Shadow, FVector2D{ pos.X + 1, pos.Y + 1 }, true, true, true, Colors::Text_Outline);
-		//delete[] wcName; // Free the allocated memory
 	}
 
 	void GetColor(FLinearColor* color, float* r, float* g, float* b, float* a)

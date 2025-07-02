@@ -171,7 +171,7 @@ void InstantInfiltration();
 void RestartLastMission();
 void LeaveMission();
 void SwitchPreset();
-void RefreshPresetList();
+void RefreshPresetList(bool clearall);
 void EncryptedVaultDrops();
 void MissionTaskTeleporter();
 //void MissionTaskActortESP();
@@ -180,6 +180,8 @@ void ResearchBookmarkedItems();
 void NoSpread();
 void NoRecoil();
 void RapidFireOn();
+bool GetSpareRounds(TFD_SDK::EM1RoundsType RoundsType, int RoundsPerLoot);
+void ModifyGrapple();
 /*
 *  Aimbot
 */
@@ -200,7 +202,8 @@ bool cfg_AimbotNoRecoil = false;
 bool cfg_AimbotRapidFire = false;
 uint8_t Recoil[2] = { 0x74, 0x75 };
 uint8_t RapidFire[2] = { 0x72, 0x77 };
-
+float cfg_AimbotGrappleRange = 10000.0f;
+bool cfg_EnableModifyGrapple = false;
 /*
 * Tivmo Autism
 */
@@ -249,6 +252,7 @@ std::chrono::steady_clock::time_point AutoRestartMissionStartTime = std::chrono:
 std::chrono::steady_clock::time_point AutoInstantInfilStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point HPLootStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point MPLootStartTime = std::chrono::steady_clock::now();
+std::chrono::steady_clock::time_point RoundsLootStartTime = std::chrono::steady_clock::now();
 
 void WriteEnemyNamesData();
 std::unordered_map<int, std::string> ReadEnemyNamesData();
@@ -263,6 +267,7 @@ float currentmana;
 float maxmana;
 bool hp_used = false;
 bool mp_used = false;
+bool rounds_used = false;
 
 std::unordered_map<int, std::vector<int>> IDBoneMap = { };
 bool BonesChanged = false;
