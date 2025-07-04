@@ -857,7 +857,8 @@ namespace TFD_SDK
 		uint8                                         Pad_ActivatedMissions[0x130];                      // 0x00D8
 		TArray<class AM1MissionActor*>                AvailableMissions;                                 // 0x0208(0x0010)
 		TArray<class AM1MissionActor*>                ActivatedMissions;                                 // 0x0218(0x0010)
-		uint8                                         Pad_MissionResult[0x390];                          // 0x0228
+		TArray<class AM1MissionActor*>                LastActivatedMissions;                             // 0x0228(0x0010)
+		uint8                                         Pad_MissionResult[0x380];                          // 0x0238
 		class UM1MissionResult*						  MissionResult;                                     // 0x05B8(0x0008)
 		uint8                                         Pad_UM1MissionControlComponent[0x218];			 // 0x05C0
 	public:
@@ -865,6 +866,7 @@ namespace TFD_SDK
 		void ServerRestartLastPlayedMission();
 		void ServerRunTaskActor(class AM1MissionTaskActor* InActor);
 		void ServerStartMissionByTemplateID(const struct FM1TemplateId& InTemplateId);
+		void ServerStartMission(class AM1MissionActor* InMission, bool InForceStart);
 	};
 	// 0x0148 (0x01F0 - 0x00A8)
 	class alignas(0x10) USceneComponent : public UActorComponent
@@ -2037,5 +2039,13 @@ namespace TFD_SDK
 	public:
 		const class UObject*						  WorldContextObject;                                // 0x0000(0x0008)
 		class UM1LocalGameInstanceSubsystem*		  ReturnValue;                                       // 0x0008(0x0008)
+	};
+	// 0x0010 (0x0010 - 0x0000)
+	struct M1MissionControlComponent_ServerStartMission final
+	{
+	public:
+		class AM1MissionActor*						  InMission;                                         // 0x0000(0x0008)
+		bool                                          InForceStart;                                      // 0x0008(0x0001)
+		uint8                                         Pad_M1MissionControlComponent_ServerStartMission[0x7];// 0x0009
 	};
 }
