@@ -440,14 +440,6 @@ namespace TFD_SDK
 		int32                                         ActivatedTaskIndex;                                // 0x0014(0x0004)
 		uint8                                         Pad_FM1MissionProgressInfo[0x48];                  // 0x0018
 	};
-	// 0x0014 (0x0014 - 0x0000)
-	struct FM1CoolTimer final
-	{
-	public:
-		uint8                                         Pad_bActivated[0x8];								 // 0x0000
-		bool                                          bActivated;                                        // 0x0008(0x0001)
-		uint8                                         Pad_FM1CoolTimer[0xB];                             // 0x0009
-	};
 	// 0x0008 (0x0008 - 0x0000)
 	struct alignas(0x08) FTableRowBase
 	{
@@ -475,13 +467,13 @@ namespace TFD_SDK
 	// 0x0008 (0x0008 - 0x0000)
 	struct FDelegateHandle
 	{
-		uint64 ID;
+		uint64										  ID;												 // 0x0000(0x0008)
 	};
 	// 0x000C (0x000C - 0x0000)
 	struct FCachedMaxCapacity
 	{
-		int32 CachedCapacity;
-		FDelegateHandle StatChangedEventDelegateHandle;
+		int32										  CachedCapacity;									 // 0x0000(0x0004)
+		FDelegateHandle								  StatChangedEventDelegateHandle;					 // 0x0004(0x0008)
 	};
 	
 
@@ -809,7 +801,7 @@ namespace TFD_SDK
 	{
 	public:
 		uint8										  Pad_ViewportClient[0x30];							 // 0x0048
-		class UGameViewportClient* ViewportClient;									 // 0x0078(0x0008)
+		class UGameViewportClient*					  ViewportClient;									 // 0x0078(0x0008)
 		uint8										  Pad_ULocalPlayer[0x1F8];							 // 0x0080
 	};
 	// 0x0260 (0x02A8 - 0x0048)
@@ -882,13 +874,6 @@ namespace TFD_SDK
 	{
 	public:
 		uint8										  Pad_UM1CharacterComponent[0x8];					 // 0x00C8
-	};
-	// 0x00B0 (0x0178 - 0x00C8)
-	class UM1CoolTimeComponent final : public UM1ActorComponent
-	{
-	public:
-		TArray<struct FM1CoolTimer>                   CoolTimers;										 // 0x00C8(0x0010)
-		uint8                                         Pad_UM1CoolTimeComponent[0xA0];                    // 0x00D8
 	};
 	// 0x0A08 (0x0AD0 - 0x00C8)
 	class UM1PrivateOnlineServiceComponent final : public UM1ActorComponent
@@ -1100,7 +1085,7 @@ namespace TFD_SDK
 	class alignas(0x10) AM1DropContainer : public AActor
 	{
 	public:
-		uint8                                         Pad_bBeingPickedLocally[0x278];					 // 0x248
+		uint8                                         Pad_bBeingPickedLocally[0x278];					 // 0x0248
 		bool                                          bBeingPickedLocally;								 // 0x04C0(0x0001)
 		bool                                          bTriedSetToObtained;								 // 0x04C1(0x0001)
 		uint8                                         Pad_AM1DropContainer[0x11E];						 // 0x04C2
@@ -1134,9 +1119,7 @@ namespace TFD_SDK
 		TArray<struct FM1MissionTaskLink>             TaskLinks;                                         // 0x0290(0x0010)
 		uint8                                         Pad_ProgressInfo[0xC8];						     // 0x02A0
 		struct FM1MissionProgressInfo                 ProgressInfo;                                      // 0x0368(0x0060)
-		uint8                                         Pad_CoolTimeComponent[0x1C8];                      // 0x03C8
-		class UM1CoolTimeComponent*					  CoolTimeComponent;                                 // 0x0590(0x0008)
-		uint8                                         Pad_AM1MissionActor[0x40];						 // 0x0598
+		uint8                                         Pad_AM1MissionActor[0x210];						 // 0x03C8
 	};
 	// 0x0018 (0x0260 - 0x0248)
 	class AM1MissionTaskMoveWayPoint final : public AActor
@@ -1666,7 +1649,7 @@ namespace TFD_SDK
 	{
 	public:
 		uint8                                         Pad_MissionTargets[0x10];							 // 0x07E0
-		TArray<class AM1MissionTargetInteraction*>    MissionTargets;									 // 0x07F0(0x0010)(Edit, ZeroConstructor, EditConst, NativeAccessSpecifierPrivate)
+		TArray<class AM1MissionTargetInteraction*>    MissionTargets;									 // 0x07F0(0x0010)
 		uint8                                         Pad_AM1MissionTaskActorDestructionVulgusPost[0x40];// 0x0800
 	public:
 		static class UClass* StaticClass()

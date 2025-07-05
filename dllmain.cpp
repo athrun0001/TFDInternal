@@ -1584,8 +1584,7 @@ void RestartLastMission()
 	}
 
 	if (MCC->AvailableMissions.Num() == 0 
-		|| MCC->MissionResult->MissionSubType == TFD_SDK::EM1MissionSubType::VoidFragment
-		|| MCC->LastActivatedMissions.Num() == 0)
+		|| MCC->MissionResult->MissionSubType == TFD_SDK::EM1MissionSubType::VoidFragment)
 	{
 		isRestartMission = false;
 		return;
