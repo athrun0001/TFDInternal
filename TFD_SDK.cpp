@@ -883,4 +883,24 @@ namespace TFD_SDK
 
 		return Parms.ReturnValue;
 	}
+
+	void UM1MissionControlComponent::ServerStartMission(class AM1MissionActor* InMission, bool InForceStart)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1MissionControlComponent", "ServerStartMission");
+
+		M1MissionControlComponent_ServerStartMission Parms{};
+
+		Parms.InMission = InMission;
+		Parms.InForceStart = InForceStart;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
 }

@@ -103,6 +103,12 @@ LRESULT CALLBACK MyWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	return CallWindowProc(oWndProc, hWnd, msg, wParam, lParam);
 }
 
+std::string ToLower(const std::string& str) {
+	std::string lowerStr = str;
+	std::transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(), ::tolower);
+	return lowerStr;
+}
+
 HWND FindGameWindow()
 {
 	HWND hwnd = nullptr;
@@ -698,7 +704,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 
 			/*if (IsKeyPressed(VK_LEFT))
 				MissionTaskTeleporterDebugger();*/
-
+				
 			//MissionTaskActortESP();
 			
 			if (cfg_DrawMenu)
@@ -1576,12 +1582,14 @@ void RestartLastMission()
 		isRestartMission = false;
 		return;
 	}
-	if (MCC->AvailableMissions.Num() == 0 || MCC->MissionResult->MissionSubType == TFD_SDK::EM1MissionSubType::VoidFragment)
+
+	if (MCC->AvailableMissions.Num() == 0 
+		|| MCC->MissionResult->MissionSubType == TFD_SDK::EM1MissionSubType::VoidFragment)
 	{
 		isRestartMission = false;
 		return;
 	}
-	
+
 	if (MCC->ActivatedMissions.Num() > 0 && isRestartMission == false)
 		return;
 
@@ -1589,39 +1597,39 @@ void RestartLastMission()
 	{
 		if (MCC->MissionResult->MissionSubType == TFD_SDK::EM1MissionSubType::DestructionVulgusPost)
 		{
-			for (TFD_SDK::AM1MissionActor* AMA : MCC->AvailableMissions)
+			for (TFD_SDK::AM1MissionActor* LAMA : MCC->LastActivatedMissions)
 			{
-				if (AMA->MissionData->MissionSubType == TFD_SDK::EM1MissionSubType::DestructionVulgusPost && AMA->CoolTimeComponent->CoolTimers[0].bActivated)
+				if (LAMA->MissionData->MissionSubType == MCC->MissionResult->MissionSubType)
+				{
+					MCC->ServerStartMission(LAMA, true);
+					AutoRestartMissionStartTime = std::chrono::steady_clock::now();
+					isRestartMission = true;
 					return;
+				}
 			}
 		}
-		if (cfg_RestartType == 0 && MCC->MissionResult->MissionSubType != TFD_SDK::EM1MissionSubType::DestructionVulgusPost)
-			MCC->ServerRestartLastPlayedMission();
 		else
-			MCC->ServerStartMissionByTemplateID(MCC->MissionResult->MissionTemplateId);
-		AutoRestartMissionStartTime = std::chrono::steady_clock::now();
-		isRestartMission = true;
-		return;
+		{
+			if (cfg_RestartType == 0)
+				MCC->ServerRestartLastPlayedMission();
+			else
+				MCC->ServerStartMissionByTemplateID(MCC->MissionResult->MissionTemplateId);
+			AutoRestartMissionStartTime = std::chrono::steady_clock::now();
+			isRestartMission = true;
+			return;
+		}
 	}
 
 	for (TFD_SDK::AM1MissionActor* MissionActor : MCC->ActivatedMissions)
 	{
-		if (MissionActor
-			&& MissionActor->ProgressInfo.ActivatedTaskActor
-			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask
-			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString().contains("Move"))
+		if (MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask
+			&& ToLower(MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString()).contains("move"))
 			MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
 		else
 			isRestartMission = false;
 		break;
 	}
 
-}
-
-std::string ToLower(const std::string& str) {
-	std::string lowerStr = str;
-	std::transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(), ::tolower);
-	return lowerStr;
 }
 
 void MissionTaskTeleporter()
@@ -1898,7 +1906,7 @@ void MissionTaskActortESP()
 			}
 			std::string MissionTaskActorESPStr = MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
 			std::string MissionName = MissionActor->MissionData->MissionDataRowName.ToString().c_str();
-			sprintf_s(buffer1, "MissionName: %s | CurrentTaskName: %s | Status: %i | Task Index: %i |  Distance: %f", MissionName.c_str(), MissionTaskActorESPStr.c_str(), (int)MissionActor->ProgressInfo.MissionActorState, MissionActor->ProgressInfo.ActivatedTaskIndex, ODistance);
+			sprintf_s(buffer1, "MissionName: %s | CurrentTaskName: %s | Task Index: %i |  Distance: %f", MissionName.c_str(), MissionTaskActorESPStr.c_str(), MissionActor->ProgressInfo.ActivatedTaskIndex, ODistance);
 			ZeroGUI::TextLeft((char*)buffer1, TFD_SDK::FVector2D{ 250, 25.0f + (12.0f * i) }, ColorRed, false);
 			i += 1;
 			
@@ -1910,7 +1918,7 @@ void MissionTaskActortESP()
 				if (!MTMWP)
 					continue;
 				TFD_SDK::FVector2D ScreenPosWP = { -1, -1 };
-				sprintf_s(buffer1, "MissionName: %s | CurrentTaskName: %s | Status: %i | Task Index: %i |  WayPoint Index: %i", MissionName.c_str(), MissionTaskActorESPStr.c_str(), (int)MissionActor->ProgressInfo.MissionActorState, MissionActor->ProgressInfo.ActivatedTaskIndex, MTMWP->Index_0);
+				sprintf_s(buffer1, "MissionName: %s | CurrentTaskName: %s | Task Index: %i |  WayPoint Index: %i", MissionName.c_str(), MissionTaskActorESPStr.c_str(), MissionActor->ProgressInfo.ActivatedTaskIndex, MTMWP->Index_0);
 				ZeroGUI::TextLeft((char*)buffer1, TFD_SDK::FVector2D{ 350, 25.0f + (12.0f * i) }, ColorGold, false);
 				i += 1;
 				if (!MissionTaskActorESPStr.empty() && WorldToScreen(MTMWP->K2_GetActorLocation(), &ScreenPosWP))
@@ -1946,7 +1954,7 @@ void SwitchPreset()
 	if (HotSwapPreset[HotSwapIndex] != -1 && !PresetsMap.empty())
 	{
 		PresetIndex = HotSwapPreset[HotSwapIndex];
-		if (PresetIndex >= 0 && LocalPlayerController->PrivateOnlineServiceComponent->IsA(TFD_SDK::UM1PrivateOnlineServiceComponent::StaticClass()))
+		if (PresetIndex >= 0)
 		{
 			for (TFD_SDK::UM1PrivateOnlineSubService* Subserv : LocalPlayerController->PrivateOnlineServiceComponent->SubServices)
 			{
@@ -1972,10 +1980,7 @@ void RefreshPresetList(bool clearall)
 
 	TFD_SDK::UM1Account* Account = LocalPlayerController->PrivateOnlineServiceComponent->CachedAccount.Get();
 
-	if (!Account)
-		return;
-
-	if (Account->Preset && Account->Preset->IsA(TFD_SDK::UM1AccountPreset::StaticClass()))
+	if (Account->Preset)
 	{
 		if (clearall)
 			HotSwapPreset = { -1, -1, -1, -1, -1, -1 };
