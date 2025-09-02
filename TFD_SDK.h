@@ -23,7 +23,7 @@ namespace TFD_SDK
 		ReceivedPawnAndOkay = 10,
 		EM1OnlineServiceConnectionState_MAX = 11,
 	};
-	// NumValues: 0x000F
+	// NumValues: 0x0011
 	enum class EM1ItemType : uint8
 	{
 		None = 0,
@@ -40,7 +40,9 @@ namespace TFD_SDK
 		Fellow = 12,
 		Medal = 13,
 		TuningBoardJewel = 14,
-		Max = 15,
+		Collectible = 15,
+		Vehicle = 16,
+		Max = 17,
 	};
 	// NumValues: 0x000C
 	enum class EM1MissionEndReason : uint8
@@ -82,8 +84,8 @@ namespace TFD_SDK
 		ForceCancel = 4,
 		EM1MiniGameResult_MAX = 5,
 	};
-	// NumValues: 0x00EF
-	enum class EM1StatType : uint8
+	// NumValues: 0x0121
+	enum class EM1StatType : uint16
 	{
 		Stat_MaxHp = 0,
 		Stat_KnockbackSpeed = 1,
@@ -133,12 +135,12 @@ namespace TFD_SDK
 		Stat_WeaponProjHitRadiusCoefficient = 45,
 		Stat_EvadeTime = 46,
 		Stat_EvadeRecoveryTime = 47,
-		Stat_Domination = 48,
-		Stat_Manipulation = 49,
-		Stat_Fortitude = 50,
+		Stat_Domination_Deprecated = 48,
+		Stat_Manipulation_Deprecated = 49,
+		Stat_Fortitude_Deprecated = 50,
 		Stat_CrosshairSizeMin = 51,
 		Stat_ReloadSpeed = 52,
-		Stat_ReloadCompleteDelay = 53,
+		Stat_ReloadCompleteDelay_Deprecated = 53,
 		Stat_ReduceRangeStart = 54,
 		Stat_ReduceRangeEnd = 55,
 		Stat_ATKReductionByRange = 56,
@@ -169,7 +171,7 @@ namespace TFD_SDK
 		Stat_RangeMin_Deprecated = 81,
 		Stat_WireCooltimeCoefficient = 82,
 		Stat_WireChargingTimeCoefficient = 83,
-		Stat_KnockbackAttackRate = 84,
+		Stat_KnockbackAttackRate_Deprecated = 84,
 		Stat_KnockbackDefenceResistance = 85,
 		Stat_KnockbackTimeResistance = 86,
 		Stat_KnockbackSpeedResistance = 87,
@@ -293,7 +295,7 @@ namespace TFD_SDK
 		Stat_EciveSearchRemainTimeCoefficient = 206,
 		Stat_SubSkillATKPower = 207,
 		Stat_SubSkillATKCoefficient = 208,
-		Stat_TakeWeaknessDamageCoefficient_Deprecated = 209,
+		Stat_WeakenessDamageTakenIncrease = 209,
 		Stat_RWChargeRateCoefficient = 210,
 		Stat_RWDischargeRateCoefficient = 211,
 		Stat_TypeBossSkillATKBonus = 212,
@@ -323,7 +325,57 @@ namespace TFD_SDK
 		Stat_AdvantageCoefficient = 236,
 		Stat_MultiHitDamageIncrease = 237,
 		Stat_TypeBreachSkillATKBonus = 238,
-		MAX = 239,
+		Stat_VehicleSpeed = 239,
+		Stat_VehicleAcceleration = 240,
+		Stat_VehicleBoostSpeed = 241,
+		Stat_VehicleBoostAcceleration = 242,
+		Stat_VehicleBrakeDeceleration = 243,
+		Stat_VehicleBackwardSpeedFactor = 244,
+		Stat_VehicleLateralSpeedFactor = 245,
+		Stat_VehicleMaxTurnSpeed = 246,
+		Stat_VehicleBoostMaxTurnSpeed = 247,
+		Stat_VehicleMaxBoostGauge = 248,
+		Stat_VehicleBoostRecoveryTickTime = 249,
+		Stat_VehicleBoostRecoveryValue = 250,
+		Stat_VehicleBoostRecoverStartTime = 251,
+		Stat_VehicleBoostConsumeCoefficient = 252,
+		Stat_VehicleBoostRecoverCoefficient = 253,
+		Stat_MeleeATK = 254,
+		Stat_MeleeATKBlazer = 255,
+		Stat_MeleeATKGlacier = 256,
+		Stat_MeleeATKDemonic = 257,
+		Stat_MeleeATKElectricity = 258,
+		Stat_MeleeATKCoefficient = 259,
+		Stat_MeleeCriticalChance = 260,
+		Stat_MeleeCriticalATKIncrease = 261,
+		Stat_MeleeMultiHitChance = 262,
+		Stat_MeleeMultiHitATKIncrease = 263,
+		Stat_MeleeAttackDamageReductionRate = 264,
+		Stat_MeleeAttackDamageReductionRateMin = 265,
+		Stat_DEFMeleeDamageReductionRate = 266,
+		Stat_MeleeATKSpeed = 267,
+		Stat_MeleeAttackScaleCoefficient = 268,
+		Stat_MeleeAttackScaleCoefficientMax = 269,
+		Stat_MaxMeleeBlockGauge = 270,
+		Stat_CurrentMeleeBlockGauge = 271,
+		Stat_MeleeBlockGaugeCost = 272,
+		Stat_MeleeBlockGaugeCostRate = 273,
+		Stat_MeleeBlockGaugeRecoveryDelay = 274,
+		Stat_MeleeBlockGaugeRecoveryRate = 275,
+		Stat_MeleeBlockEfficiency = 276,
+		Stat_MeleeBlockEfficiencyCoefficient = 277,
+		Stat_MaxMeleeCommonGauge = 278,
+		Stat_CurrentMeleeCommonGauge = 279,
+		Stat_MeleeCommonGaugeRecoveryDelay = 280,
+		Stat_MeleeCommonGaugeRecoveryRate = 281,
+		Stat_WeaponDEFBlazer = 282,
+		Stat_WeaponDEFGlacier = 283,
+		Stat_WeaponDEFElectricity = 284,
+		Stat_WeaponDEFDemonic = 285,
+		Stat_VehicleCurrentBoostGauge = 286,
+		Stat_VehicleBoostStartCost = 287,
+		Stat_VehicleJumpZVelocity = 288,
+		MAX = 289,
 	};
 	// NumValues: 0x0014
 	enum class EM1MissionSubType : uint8
@@ -359,6 +411,38 @@ namespace TFD_SDK
 		HighpowerRounds = 4,
 		EM1RoundsType_MAX = 5,
 	};
+	// NumValues: 0x0013
+	enum class EM1MissionCategory : uint8
+	{
+		None = 0,
+		Prologue = 1,
+		BaseMission = 2,
+		DungeonField = 3,
+		RouteMission = 4,
+		BlockWorld = 5,
+		DefenseWorld = 6,
+		ResearchWorld = 7,
+		VoidFragmentField = 8,
+		VoidFusionField = 9,
+		RepeatMission6 = 10,
+		VulgusPostField = 11,
+		Invasion = 12,
+		VoidVessel = 13,
+		VoidErosion = 14,
+		ExploreRegion = 15,
+		Decontamin = 16,
+		VoidExium = 17,
+		EM1MissionCategory_MAX = 18,
+	};
+	// NumValues: 0x0005
+	enum class EM1MiniGameDifficulty : uint8
+	{
+		None = 0,
+		Normal = 1,
+		Hard = 2,
+		VeryHard = 3,
+		EM1MiniGameDifficulty_MAX = 4,
+	};
 
 
 
@@ -390,13 +474,13 @@ namespace TFD_SDK
 		EM1ItemType                                   Type;                                              // 0x0000(0x0001)
 		uint8                                         Pad_FM1ItemTidBox[0x7];                            // 0x0001
 	};
-	// 0x0030 (0x0030 - 0x0000)
+	// 0x0038 (0x0038 - 0x0000)
 	struct FM1DropItemInfo final
 	{
 	public:
-		uint8                                         Pad_ItemBox[0x14];								 // 0x0000
-		struct FM1ItemTidBox                          ItemBox;                                           // 0x0014(0x0008)
-		uint8                                         Pad_FM1DropItemInfo[0x14];                         // 0x001C
+		uint8                                         Pad_ItemBox[0x18];								 // 0x0000
+		struct FM1ItemTidBox                          ItemBox;                                           // 0x0018(0x0008)
+		uint8                                         Pad_FM1DropItemInfo[0x18];                         // 0x0020
 	};
 	// 0x0020 (0x0020 - 0x0000)
 	struct FM1MissionTaskLink final
@@ -474,6 +558,22 @@ namespace TFD_SDK
 	{
 		int32										  CachedCapacity;									 // 0x0000(0x0004)
 		FDelegateHandle								  StatChangedEventDelegateHandle;					 // 0x0004(0x0008)
+	};
+	// 0x0004 (0x0004 - 0x0000)
+	struct FM1StatType final
+	{
+	public:
+		int32                                         StatType;                                          // 0x0000(0x0004)
+	};
+	// 0x00C0 (0x00C0 - 0x0000)
+	struct FM1VehicleMovementData final
+	{
+	public:
+		float                                         MaxAcceleration;                                   // 0x0000(0x0004)
+		float                                         MaxSpeed;                                          // 0x0004(0x0004)
+		uint8                                         Pad_MaxTurnSpeed[0xC];							 // 0x0008
+		float                                         MaxTurnSpeed;                                      // 0x0014(0x0004)
+		uint8                                         Pad_FM1WeaponFireParams[0xA8];                     // 0x0018
 	};
 	
 
@@ -598,13 +698,13 @@ namespace TFD_SDK
 		class AWorldSettings*						  WorldSettings;									 // 0x0270(0x0008)
 		uint8										  Pad_ULevel[0x78];									 // 0x0278
 	};
-	// 0x03C0 (0x03E8 - 0x0028)
+	// 0x03C8 (0x03F0 - 0x0028)
 	class UM1Account final : public UObject
 	{
 	public:
 		uint8                                         Pad_Preset[0x2D0];                                 // 0x0028
 		class UM1AccountPreset*						  Preset;											 // 0x02F8(0x0008)
-		uint8                                         Pad_UM1Account[0xE8];                              // 0x0300
+		uint8                                         Pad_UM1Account[0xF0];                              // 0x0300
 	};
 	// 0x0050 (0x0078 - 0x0028)
 	class UM1AccountPreset final : public UObject
@@ -618,15 +718,18 @@ namespace TFD_SDK
 	public:
 		uint8										  Pad_UM1CharacterAttribute[0x118];					 // 0x0028
 	};
-	// 0x0330 (0x0358 - 0x0028)
+	// 0x0320 (0x0348 - 0x0028)
 	class UM1MissionResult final : public UObject
 	{
 	public:
-		uint8                                         Pad_MissionTemplateId[0x10];                       // 0x0028
+		uint8                                         Pad_WeakActivatedMissionActor[0x4];                // 0x0028
+		TWeakObjectPtr<class AM1MissionActor>         WeakActivatedMissionActor;                         // 0x002C(0x0008)
+		uint8                                         Pad_MissionTemplateId[0x4];                        // 0x0034
 		struct FM1TemplateId                          MissionTemplateId;                                 // 0x0038(0x0004)
 		uint8                                         Pad_MissionSubType[0x2D];                          // 0x003C
-		EM1MissionSubType                             MissionSubType;                                    // 0x0069(0x0001)
-		uint8                                         Pad_UM1MissionResult[0x2EE];                       // 0x006A
+		EM1MissionCategory                            MissionCategory;                                   // 0x0069(0x0001)
+		EM1MissionSubType                             MissionSubType;                                    // 0x006A(0x0001)
+		uint8                                         Pad_UM1MissionResult[0x2DD];                       // 0x006B
 	};
 	// 0x0018 (0x0040 - 0x0028)
 	class UM1MissionTaskService : public UObject
@@ -719,25 +822,25 @@ namespace TFD_SDK
 	class UGameInstanceSubsystem : public USubsystem
 	{
 	};
-	// 0x0150 (0x0180 - 0x0030)
+	// 0x01A0 (0x01D0 - 0x0030)
 	class UM1ActorManagerSubsystem final : public UGameInstanceSubsystem
 	{
 	public:
 		TArray<class AM1Character*>					  Characters;										 // 0x0030(0x0010)
-		uint8										  Pad_UM1ActorManagerSubsystem[0x140];				 // 0x0040
+		uint8										  Pad_UM1ActorManagerSubsystem[0x190];				 // 0x0040
 	public:
 		static class UClass* StaticClass()
 		{
 			return StaticClassImpl<"M1ActorManagerSubsystem">();
 		}
 	};
-	// 0x0118 (0x0148 - 0x0030)
+	// 0x0120 (0x0150 - 0x0030)
 	class UM1LocalGameInstanceSubsystem final : public UGameInstanceSubsystem
 	{
 	public:
 		uint8                                         Pad_ResearchSystem[0x38];							 // 0x0030
 		class UM1ResearchSystem*					  ResearchSystem;                                    // 0x0068(0x0008)
-		uint8                                         Pad_UM1LocalGameInstanceSubsystem[0xD8];			 // 0x0070
+		uint8                                         Pad_UM1LocalGameInstanceSubsystem[0xE0];			 // 0x0070
 	public:
 		static class UM1LocalGameInstanceSubsystem* Get(const class UObject* WorldContextObject);
 	public:
@@ -768,6 +871,11 @@ namespace TFD_SDK
 	{
 	public:
 		void ServerRequestMissionTargetBeginInteraction(class AM1MissionTargetInteraction* InActor, class AM1PlayerControllerInGame* InAcceptor);
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionTaskServiceInteraction">();
+		}
 	};
 	// 0x0078 (0x00B8 - 0x0040)
 	class UM1PrivateOnlineServicePreset final : public UM1PrivateOnlineSubService
@@ -811,14 +919,14 @@ namespace TFD_SDK
 		uint8                                         Pad_UM1Ability[0x260];                             // 0x0048
 	};
 	
-	// 0x0150 (0x01E8 - 0x0098)
+	// 0x0168 (0x0200 - 0x0098)
 	class UM1DataMission final : public UMissionGraph
 	{
 	public:
 		uint8                                         Pad_MissionDataRowName[0x20];                       // 0x0098
 		class FName                                   MissionDataRowName;                                 // 0x00B8(0x0008)
 		EM1MissionSubType                             MissionSubType;                                     // 0x00C0(0x0001)
-		uint8                                         Pad_UM1DataMission[0x127];                          // 0x00C1
+		uint8                                         Pad_UM1DataMission[0x13F];                          // 0x00C1
 	};
 	// 0x0238 (0x02D0 - 0x0098)
 	class UM1MissionTask final : public UMissionGraphTaskNode
@@ -840,7 +948,7 @@ namespace TFD_SDK
 	public:
 		uint8										  Pad_UM1ActorComponent[0x20];						 // 0x00A8
 	};
-	// 0x0730 (0x07D8 - 0x00A8)
+	// 0x0740 (0x07E8 - 0x00A8)
 	class UM1MissionControlComponent final : public UActorComponent
 	{
 	public:
@@ -849,10 +957,9 @@ namespace TFD_SDK
 		uint8                                         Pad_ActivatedMissions[0x130];                      // 0x00D8
 		TArray<class AM1MissionActor*>                AvailableMissions;                                 // 0x0208(0x0010)
 		TArray<class AM1MissionActor*>                ActivatedMissions;                                 // 0x0218(0x0010)
-		TArray<class AM1MissionActor*>                LastActivatedMissions;                             // 0x0228(0x0010)
-		uint8                                         Pad_MissionResult[0x380];                          // 0x0238
-		class UM1MissionResult*						  MissionResult;                                     // 0x05B8(0x0008)
-		uint8                                         Pad_UM1MissionControlComponent[0x218];			 // 0x05C0
+		uint8                                         Pad_MissionResult[0x3A0];                          // 0x0228
+		class UM1MissionResult*						  MissionResult;                                     // 0x05C8(0x0008)
+		uint8                                         Pad_UM1MissionControlComponent[0x218];			 // 0x05D0
 	public:
 		void ServerLeaveMission(EM1MissionEndReason InReason);
 		void ServerRestartLastPlayedMission();
@@ -875,32 +982,40 @@ namespace TFD_SDK
 	public:
 		uint8										  Pad_UM1CharacterComponent[0x8];					 // 0x00C8
 	};
-	// 0x0A08 (0x0AD0 - 0x00C8)
+	// 0x0028 (0x00F0 - 0x00C8)
+	class UM1MultiSuppliierObtainComponent final : public UM1ActorComponent
+	{
+	public:
+		uint8                                         Pad_UM1MultiSuppliierObtainComponent[0x28];        // 0x00C8
+	public:
+		void ServerRequestProcessInteraction(const struct FM1TemplateId& InTemplateId, uint32 InObjectUniqueID, const class AActor* InNpcRelative);
+	};
+	// 0x0B48 (0x0C10 - 0x00C8)
 	class UM1PrivateOnlineServiceComponent final : public UM1ActorComponent
 	{
 	public:
 		TArray<class UM1PrivateOnlineSubService*>     SubServices;										 // 0x00C8(0x0010)
-		uint8                                         Pad_CurrentSpareRounds[0x120];					 // 0x00D8
-		TWeakObjectPtr<class UM1Account>			  CachedAccount;									 // 0x01F8(0x0008)
-		uint8										  Pad_UM1PrivateOnlineServiceComponent[0x8D0];		 // 0x0200
+		uint8                                         Pad_CurrentSpareRounds[0x140];					 // 0x00D8
+		TWeakObjectPtr<class UM1Account>			  CachedAccount;									 // 0x0218(0x0008)
+		uint8										  Pad_UM1PrivateOnlineServiceComponent[0x9F0];		 // 0x0220
 	};
 	static_assert(offsetof(UM1PrivateOnlineServiceComponent, SubServices) == 0x00C8, "Bad alignment");
 	static_assert(offsetof(UM1PrivateOnlineServiceComponent, Pad_CurrentSpareRounds) == 0x00D8, "Bad alignment");
-	static_assert(offsetof(UM1PrivateOnlineServiceComponent, CachedAccount) == 0x01F8, "Bad alignment");
-	static_assert(offsetof(UM1PrivateOnlineServiceComponent, Pad_UM1PrivateOnlineServiceComponent) == 0x0200, "Bad alignment");
+	static_assert(offsetof(UM1PrivateOnlineServiceComponent, CachedAccount) == 0x0218, "Bad alignment");
+	static_assert(offsetof(UM1PrivateOnlineServiceComponent, Pad_UM1PrivateOnlineServiceComponent) == 0x0220, "Bad alignment");
 	// 0x0458 (0x0520 - 0x00C8)
 	class UM1StatComponent : public UM1ActorComponent
 	{
 	public:
 		uint8                                         Pad_UM1StatComponent[0x458];                       // 0x00C8
 	public:
-		struct FM1ScaledInteger GetStatValue(const EM1StatType InStatType) const;
+		struct FM1ScaledInteger GetStatValue(const struct FM1StatType& InStatType) const;
 	};
-	// 0x0010 (0x00D8 - 0x00C8)
+	// 0x0008 (0x00D0 - 0x00C8)
 	class UM1WeaponComponent : public UM1ActorComponent
 	{
 	public:
-		uint8										  Pad_UM1WeaponComponent[0x10];						 // 0x00C8
+		uint8										  Pad_UM1WeaponComponent[0x8];						 // 0x00C8
 	};
 
 	// 0x0098 (0x0168 - 0x00D0)
@@ -916,6 +1031,20 @@ namespace TFD_SDK
 	static_assert(offsetof(UM1PlayerRoundsComponent, CurrentSpareRounds) == 0x00E0, "Bad alignment");
 	static_assert(offsetof(UM1PlayerRoundsComponent, CachedMaxCapacities) == 0x00F0, "Bad alignment");
 	static_assert(offsetof(UM1PlayerRoundsComponent, Pad_UM1PlayerRoundsComponent) == 0x0140, "Bad alignment");
+	// 0x01D0 (0x02A0 - 0x00D0)
+	class alignas(0x10) UM1PlayerVehicleHandlerComponent final : public UM1CharacterComponent
+	{
+	public:
+		uint8                                         Pad_MountedVehicle[0x20];                          // 0x00D0
+		class AM1Vehicle*							  MountedVehicle;                                    // 0x00F0(0x0008)
+		uint8                                         Pad_UM1PlayerVehicleHandlerComponent[0x1A8];       // 0x00F8
+	};
+	// 0x0008 (0x00D8 - 0x00D0)
+	class UM1RangedWeaponComponent : public UM1WeaponComponent
+	{
+	public:
+		uint8                                         Pad_UM1RangedWeaponComponent[0x8];                 // 0x00D0
+	};
 	// 0x0130 (0x0200 - 0x00D0)
 	class alignas(0x10) UM1TeleportHandlerComponent final : public UM1CharacterComponent
 	{
@@ -923,33 +1052,44 @@ namespace TFD_SDK
 		uint8                                         Pad_UM1TeleportHandlerComponent[0x130];            // 0x00D0
 	public:
 		void ServerMoveToTeleportToLocation(const struct FVector& InLocation, const struct FRotator& InRotation);
+		void ServerFinishTeleportProcess();
 	};
-	// 0x0158 (0x0228 - 0x00D0)
+	// 0x0168 (0x0238 - 0x00D0)
 	class UM1WeaponSlotControlComponent final : public UM1CharacterComponent
 	{
 	public:
 		uint8										  Pad_ActivatedWeaponSlot[0x20];					 // 0x00D0
 		struct FM1ActivatedWeaponSlot				  ActivatedWeaponSlot;							     // 0x00F0(0x0090)
-		uint8										  Pad_Ability_Component[0x38];						 // 0x0180
-		class UM1AbilityComponent*					  Ability_Component;                                 // 0x01B8(0x0008)
-		uint8										  Pad_UM1WeaponSlotControlComponent[0x68];			 // 0x01C0
+		uint8										  Pad_Ability_Component[0x48];						 // 0x0180
+		class UM1AbilityComponent*					  Ability_Component;                                 // 0x01C8(0x0008)
+		uint8										  Pad_UM1WeaponSlotControlComponent[0x68];			 // 0x01D0
 	};
 
 	// 0x0090 (0x0168 - 0x00D8)
-	class UM1WeaponFireLoopComponent : public UM1WeaponComponent
+	class UM1WeaponFireLoopComponent : public UM1RangedWeaponComponent
 	{
 	public:
-		uint8                                         Pad_CurrFireParams[0x4C];                          // 0x00D8
-		TOptional<FM1WeaponFireParams>				  CurrFireParams;									 // 0x0124(0x001C)
-		float										  ElapsedTimeAfterFire;							     // 0x0140(0x0004)
-		uint8                                         Pad_UM1WeaponFireLoopComponent[0x24];              // 0x0144
+		uint8                                         Pad_CurrFireParams[0x48];                          // 0x00D8
+		TOptional<FM1WeaponFireParams>				  CurrFireParams;									 // 0x0120(0x001C)
+		float										  ElapsedTimeAfterFire;							     // 0x013C(0x0004)
+		uint8                                         Pad_UM1WeaponFireLoopComponent[0x28];              // 0x0140
 	};
 	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_CurrFireParams) == 0x00D8, "Bad alignment");
-	static_assert(offsetof(UM1WeaponFireLoopComponent, CurrFireParams) == 0x0124, "Bad alignment");
-	static_assert(offsetof(UM1WeaponFireLoopComponent, ElapsedTimeAfterFire) == 0x0140, "Bad alignment");
-	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_UM1WeaponFireLoopComponent) == 0x0144, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, CurrFireParams) == 0x0120, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, ElapsedTimeAfterFire) == 0x013C, "Bad alignment");
+	static_assert(offsetof(UM1WeaponFireLoopComponent, Pad_UM1WeaponFireLoopComponent) == 0x0140, "Bad alignment");
+	// 0x0030 (0x0108 - 0x00D8)
+	class UM1WeaponRoundsComponent final : public UM1RangedWeaponComponent
+	{
+	public:
+		uint8										  Pad_CurrentRounds[0x14];							 // 0x00D8
+		int32										  CurrentRounds;									 // 0x00EC(0x0004)
+		uint8										  Pad_UM1WeaponRoundsComponent[0x18];				 // 0x00F0
+	public:
+		void ClientFillCurrentRoundByServer();
+	};
 	// 0x0038 (0x0110 - 0x00D8)
-	class UM1WeaponSprayPatternComponent final : public UM1WeaponComponent
+	class UM1WeaponSprayPatternComponent final : public UM1RangedWeaponComponent
 	{
 	public:
 		uint8                                         Pad_CrosshairSizeBase[0xC];					     // 0x00D8
@@ -975,16 +1115,7 @@ namespace TFD_SDK
 	static_assert(offsetof(UM1WeaponSprayPatternComponent, Pad_CurrentSpreadSize) == 0x0104, "Bad alignment");
 	static_assert(offsetof(UM1WeaponSprayPatternComponent, CurrentSpreadSize) == 0x0108, "Bad alignment");
 	static_assert(offsetof(UM1WeaponSprayPatternComponent, RecoverRecoilStartDelayTime) == 0x010C, "Bad alignment");
-	// 0x0028 (0x0100 - 0x00D8)
-	class UM1WeaponRoundsComponent final : public UM1WeaponComponent
-	{
-	public:
-		uint8										  Pad_CurrentRounds[0x14];							 // 0x00D8
-		int32										  CurrentRounds;									 // 0x00EC(0x0004)
-		uint8										  Pad_UM1WeaponRoundsComponent[0x10];				 // 0x00F0
-	public:
-		void ClientFillCurrentRoundByServer();
-	};
+	
 
 	// 0x0100 (0x0220 - 0x0120)
 	class UM1AbilityComponent final : public UGameplayTasksComponent
@@ -1008,11 +1139,11 @@ namespace TFD_SDK
 		uint8										  Pad_UUserWidget[0x120];							 // 0x0130
 	};
 
-	// 0x00E8 (0x0228 - 0x0140)
+	// 0x00F8 (0x0238 - 0x0140)
 	class UM1MonsterAttribute : public UM1CharacterAttribute
 	{
 	public:
-		uint8										  Pad_UM1MonsterAttribute[0xE8];					 // 0x0140
+		uint8										  Pad_UM1MonsterAttribute[0xF8];					 // 0x0140
 	public:
 		static class UClass* StaticClass()
 		{
@@ -1075,11 +1206,11 @@ namespace TFD_SDK
 	class AInfo : public AActor
 	{
 	};
-	// 0x00E8 (0x0330 - 0x0248)
+	// 0x00F0 (0x0338 - 0x0248)
 	class AM1Actor : public AActor
 	{
 	public:
-		uint8										  Pad_AM1Actor[0xE8];								 // 0x0248
+		uint8										  Pad_AM1Actor[0xF0];								 // 0x0248
 	};
 	// 0x0398 (0x05E0 - 0x0248)
 	class alignas(0x10) AM1DropContainer : public AActor
@@ -1100,6 +1231,7 @@ namespace TFD_SDK
 		struct FM1TemplateId                          FieldDifficultyTid;                                // 0x024C(0x0004)
 		uint8										  Pad_AM1MiniGameActor[0x28];                        // 0x0250
 	public:
+		void ClientStartMiniGame(const struct FM1TemplateId& InMiniGameTid, const struct FM1TemplateId& InPlayerTid, const struct FM1TemplateId& InFieldDifficultyTid, const EM1MiniGameDifficulty InDifficulty);
 		void ClientStopMiniGame();
 		void ServerDropItems(class AController* InInstigator);
 		void ServerOnMiniGameEnded(const struct FM1MiniGameResult& InResult);
@@ -1109,17 +1241,17 @@ namespace TFD_SDK
 			return StaticClassImpl<"M1MiniGameActor">();
 		}
 	};
-	// 0x0390 (0x05D8 - 0x0248)
+	// 0x0428 (0x0670 - 0x0248)
 	class AM1MissionActor final : public AActor
 	{
 	public:
-		uint8                                         Pad_MissionData[0x30];						     // 0x0248
-		class UM1DataMission*						  MissionData;                                       // 0x0278(0x0008)
-		uint8                                         Pad_TaskLinks[0x10];								 // 0x0280
-		TArray<struct FM1MissionTaskLink>             TaskLinks;                                         // 0x0290(0x0010)
-		uint8                                         Pad_ProgressInfo[0xC8];						     // 0x02A0
-		struct FM1MissionProgressInfo                 ProgressInfo;                                      // 0x0368(0x0060)
-		uint8                                         Pad_AM1MissionActor[0x210];						 // 0x03C8
+		uint8                                         Pad_MissionData[0x38];						     // 0x0248
+		class UM1DataMission*						  MissionData;                                       // 0x0280(0x0008)
+		uint8                                         Pad_TaskLinks[0x10];								 // 0x0288
+		TArray<struct FM1MissionTaskLink>             TaskLinks;                                         // 0x0298(0x0010)
+		uint8                                         Pad_ProgressInfo[0xD0];						     // 0x02A8
+		struct FM1MissionProgressInfo                 ProgressInfo;                                      // 0x0378(0x0060)
+		uint8                                         Pad_AM1MissionActor[0x298];						 // 0x03D8
 	};
 	// 0x0018 (0x0260 - 0x0248)
 	class AM1MissionTaskMoveWayPoint final : public AActor
@@ -1129,11 +1261,11 @@ namespace TFD_SDK
 		int32                                         Index_0;                                           // 0x0258(0x0004)
 		uint8                                         Pad_AM1MissionTaskMoveWayPoint[0x4];               // 0x025C
 	};
-	// 0x0210 (0x0458 - 0x0248)
+	// 0x0290 (0x04D8 - 0x0248)
 	class AM1TaskEventActor : public AActor
 	{
 	public:
-		uint8                                         Pad_AM1TaskEventActor[0x210];						 // 0x0248
+		uint8                                         Pad_AM1TaskEventActor[0x290];						 // 0x0248
 	};
 	// 0x0070 (0x02B8 - 0x0248)
 	class APawn : public AActor
@@ -1211,54 +1343,50 @@ namespace TFD_SDK
 	};
 #pragma pack(pop)
 
-	// 0x0448 (0x0778 - 0x0330)
+	// 0x0448 (0x0780 - 0x0338)
 	class AM1AbilityActor : public AM1Actor
 	{
 	public:
-		uint8										  Pad_AM1AbilityActor[0x448];						 // 0x0330	
+		uint8										  Pad_AM1AbilityActor[0x448];						 // 0x0338	
 	public:
 		static class UClass* StaticClass()
 		{
 			return StaticClassImpl<"M1AbilityActor">();
 		}
 	};
-	// 0x0108 (0x0438 - 0x0330)
+	// 0x0108 (0x0440 - 0x0338)
 	class AM1FieldInteractableActor : public AM1Actor
 	{
 	public:
-		uint8										  Pad_AM1FieldInteractableActor[0x108];				 // 0x0330
+		uint8										  Pad_AM1FieldInteractableActor[0x108];				 // 0x0338
 	public:
 		static class UClass* StaticClass()
 		{
 			return StaticClassImpl<"M1FieldInteractableActor">();
 		}
 	};
-	// 0x0010 (0x0340 - 0x0330)
+	// 0x0010 (0x0348 - 0x0338)
 	class AM1StatBasedActor : public AM1Actor
 	{
 	public:
-		uint8                                         Pad_AM1StatBasedActor[0x10];						 // 0x0330
+		uint8                                         Pad_AM1StatBasedActor[0x10];						 // 0x0338
 	};
-	// 0x0160 (0x0490 - 0x0330)
+	// 0x04F0 (0x0828 - 0x0338)
+	class AM1Vehicle : public AM1Actor
+	{
+	public:
+
+		uint8                                         Pad_CurrentMovementData[0x3E8];                    // 0x0338
+		struct FM1VehicleMovementData                 CurrentMovementData;                               // 0x0720(0x00C0)
+		uint8                                         Pad_808[0x48];                                     // 0x07E0
+	};
+	// 0x0118 (0x0450 - 0x0338)
 	class AM1Weapon : public AM1Actor
 	{
 	public:
-		uint8										  Pad_FireLoopComponent[0x18];						 // 0x0330
-		class UM1WeaponFireLoopComponent*			  FireLoopComponent;								 // 0x0348(0x0008)
-		uint8										  Pad_SprayPatternComponent[0x10];					 // 0x0350
-		class UM1WeaponSprayPatternComponent*		  SprayPatternComponent;							 // 0x0360(0x0008)
-		class UM1WeaponRoundsComponent*				  RoundsComponent;									 // 0x0368(0x0008)
-		uint8										  Pad_AM1Weapon[0x120];								 // 0x0370
+		uint8										  Pad_AM1Weapon[0x118];								 // 0x0338
 	};
 
-	// 0x0400 (0x0740 - 0x0340)
-	class AM1MissionTargetActor : public AM1StatBasedActor
-	{
-	public:
-		uint8										  Pax_CurrentState[0x284];							 // 0x0340					
-		EM1MissionTargetState                         CurrentState; 									 // 0x05C4(0x0001)
-		uint8                                         Pad_AM1MissionTargetActor[0x17B];                  // 0x05C5
-	};
 	// 0x0010 (0x0350 - 0x0340)
 	class UM1WireSkillAbility final : public UM1SkillAbility
 	{
@@ -1270,6 +1398,15 @@ namespace TFD_SDK
 		{
 			return StaticClassImpl<"M1WireSkillAbility">();
 		}
+	};
+
+	// 0x0420 (0x0768 - 0x0348)
+	class AM1MissionTargetActor : public AM1StatBasedActor
+	{
+	public:
+		uint8										  Pax_CurrentState[0x29C];							 // 0x0348					
+		EM1MissionTargetState                         CurrentState; 									 // 0x05E4(0x0001)
+		uint8                                         Pad_AM1MissionTargetActor[0x183];                  // 0x05E5
 	};
 
 	// 0x0088 (0x03E8 - 0x0360)
@@ -1292,22 +1429,22 @@ namespace TFD_SDK
 		uint8										  Pad_UM1CharacterInfoWidgetComponent[0x30];		 // 0x0420
 	};
 
-	// 0x0020 (0x0458 - 0x0438)
+	// 0x0028 (0x0468 - 0x0440)
 	class AM1FieldInteractableActor_Hit final : public AM1FieldInteractableActor
 	{
 	public:
-		uint8										  Pad_AM1FieldInteractableActor_Hit[0x20];			 // 0x0438
+		uint8										  Pad_AM1FieldInteractableActor_Hit[0x28];			 // 0x0440
 	public:
 		static class UClass* StaticClass()
 		{
 			return StaticClassImpl<"M1FieldInteractableActor_Hit">();
 		}
 	};
-	// 0x0018 (0x0450 - 0x0438)
+	// 0x0010 (0x0450 - 0x0440)
 	class AM1FieldInteractableActor_Interaction : public AM1FieldInteractableActor
 	{
 	public:
-		uint8										  Pad_AM1FieldInteractableActor_Interaction[0x18];	 // 0x0438
+		uint8										  Pad_AM1FieldInteractableActor_Interaction[0x10];	 // 0x0440
 
 	public:
 		static class UClass* StaticClass()
@@ -1327,20 +1464,22 @@ namespace TFD_SDK
 			return StaticClassImpl<"M1FieldInteractableActorMiniGame">();
 		}
 	};
-
-	// 0x0388 (0x07E0 - 0x0458)
-#pragma pack(push, 0x1)
-	class alignas(0x10) AM1MissionTaskActor : public AM1TaskEventActor
+	// 0x0090 (0x04E0 - 0x0450)
+	class AM1RangedWeapon final : public AM1Weapon
 	{
 	public:
-		uint8                                         Pad_MissionTask[0x108];							 // 0x0458
-		class UM1MissionTask*						  MissionTask;                                       // 0x0560(0x0008)
-		int32                                         TaskIndex;                                         // 0x0568(0x0004)
-		uint8                                         Pad_WayPoints[0x7C];								 // 0x056C
-		TArray<class AM1MissionTaskMoveWayPoint*>     WayPoints;                                         // 0x05E8(0x0010)
-		uint8                                         Pad_AM1MissionTaskActor[0x1E8];				     // 0x05F8
+		uint8										  Pad_FireLoopComponent[0x10];						 // 0x0450
+		class UM1WeaponFireLoopComponent*			  FireLoopComponent;								 // 0x0460(0x0008)
+		uint8										  Pad_SprayPatternComponent[0x10];					 // 0x0468
+		class UM1WeaponSprayPatternComponent*		  SprayPatternComponent;                             // 0x0478(0x0008)
+		class UM1WeaponRoundsComponent*				  RoundsComponent;                                   // 0x0480(0x0008)
+		uint8										  Pad_AM1RangedWeapon[0x58];						 // 0x0488
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1RangedWeapon">();
+		}
 	};
-#pragma pack(pop)
 
 	// 0x0040 (0x04B0 - 0x0470)
 #pragma pack(push, 0x1)
@@ -1363,19 +1502,33 @@ namespace TFD_SDK
 	};
 	static_assert(offsetof(USkinnedMeshComponent, BoneArray) == 0x0518, "Bad alignment");
 
-	// 0x0760 (0x0C60 - 0x0500)
+	// 0x0398 (0x0870 - 0x04D8)
+#pragma pack(push, 0x1)
+	class alignas(0x10) AM1MissionTaskActor : public AM1TaskEventActor
+	{
+	public:
+		uint8                                         Pad_MissionTask[0x108];							 // 0x04D8
+		class UM1MissionTask*						  MissionTask;                                       // 0x05E0(0x0008)
+		int32                                         TaskIndex;                                         // 0x05E8(0x0004)
+		uint8                                         Pad_WayPoints[0x7C];								 // 0x05EC
+		TArray<class AM1MissionTaskMoveWayPoint*>     WayPoints;                                         // 0x0668(0x0010)
+		uint8                                         Pad_AM1MissionTaskActor[0x1F8];				     // 0x0678
+	};
+#pragma pack(pop)
+
+	// 0x0770 (0x0C70 - 0x0500)
 	class AM1Character : public ACharacter
 	{
 	public:
-		uint8										  Pad_InfoWidgetComponent[0x340];					 // 0x0500
-		class UM1CharacterInfoWidgetComponent*		  InfoWidgetComponent;								 // 0x0840(0x0008)
-		uint8										  Pad_StatComponent[0x18];							 // 0x0848
-		class UM1StatComponent*						  StatComponent;									 // 0x0860(0x0008)
-		uint8										  Pad_CharacterAttribute[0x20];						 // 0x0868
-		class UM1CharacterAttribute*				  CharacterAttribute;								 // 0x0888(0x0008)
-		uint8										  Pad_CharacterId[0x210];							 // 0x0890
-		struct FM1TemplateId						  CharacterId;									     // 0x0AA0(0x0004)
-		uint8										  Pad_AM1Character[0x1BC];							 // 0x0AA4
+		uint8										  Pad_InfoWidgetComponent[0x348];					 // 0x0500
+		class UM1CharacterInfoWidgetComponent*		  InfoWidgetComponent;								 // 0x0848(0x0008)
+		uint8										  Pad_StatComponent[0x18];							 // 0x0850
+		class UM1StatComponent*						  StatComponent;									 // 0x0868(0x0008)
+		uint8										  Pad_CharacterAttribute[0x20];						 // 0x0870
+		class UM1CharacterAttribute*				  CharacterAttribute;								 // 0x0890(0x0008)
+		uint8										  Pad_CharacterId[0x210];							 // 0x0898
+		struct FM1TemplateId						  CharacterId;									     // 0x0AA8(0x0004)
+		uint8										  Pad_AM1Character[0x1C4];							 // 0x0AAC
 	public:
 		bool IsDead() const;
 	public:
@@ -1384,32 +1537,61 @@ namespace TFD_SDK
 			return StaticClassImpl<"M1Character">();
 		}
 	};
-	static_assert(offsetof(AM1Character, InfoWidgetComponent) == 0x0840, "Bad alignment");
-	static_assert(offsetof(AM1Character, StatComponent) == 0x0860, "Bad alignment");
-	static_assert(offsetof(AM1Character, CharacterAttribute) == 0x0888, "Bad alignment");
-	static_assert(offsetof(AM1Character, CharacterId) == 0xAA0, "Bad alignment");
+	static_assert(offsetof(AM1Character, InfoWidgetComponent) == 0x0848, "Bad alignment");
+	static_assert(offsetof(AM1Character, StatComponent) == 0x0868, "Bad alignment");
+	static_assert(offsetof(AM1Character, CharacterAttribute) == 0x0890, "Bad alignment");
+	static_assert(offsetof(AM1Character, CharacterId) == 0x0AA8, "Bad alignment");
 
-	// 0x00A0 (0x0680 - 0x05E0)
+	// 0x0040 (0x0620 - 0x05E0)
+	class AM1DropContainerByMission : public AM1DropContainer
+	{
+	public:
+		uint8                                         Pad_AM1DropContainerByMission[0x40];                // 0x05E0
+	};
+	// 0x00C0 (0x06A0 - 0x05E0)
 	class AM1DroppedItem : public AM1DropContainer
 	{
 	public:
-		uint8                                         Pad_DropItemInfo[0x40];							 // 0x05E0
-		struct FM1DropItemInfo                        DropItemInfo;										 // 0x0620(0x0030)
-		uint8                                         Pad_bObtainRequestedOnClient[0x20];				 // 0x0650
-		bool                                          bObtainRequestedOnClient;							 // 0x0670(0x0001)
-		uint8                                         Pad_AM1DroppedItem[0xF];							 // 0x0671
+		uint8                                         Pad_DropItemInfo[0x48];							 // 0x05E0
+		struct FM1DropItemInfo                        DropItemInfo;										 // 0x0628(0x0038)
+		uint8                                         Pad_bObtainRequestedOnClient[0x28];				 // 0x0660
+		bool                                          bObtainRequestedOnClient;							 // 0x0688(0x0001)
+		uint8                                         Pad_AM1DroppedItem[0x17];							 // 0x0689
 	public:
 		static class UClass* StaticClass()
 		{
 			return StaticClassImpl<"M1DroppedItem">();
 		}
 	};
+
+	// 0x0010 (0x0630 - 0x0620)
+	class AM1DropMissionCollectibles : public AM1DropContainerByMission
+	{
+	public:
+		uint8                                         Pad_AM1DropMissionCollectibles[0x10];               // 0x0620
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1DropMissionCollectibles">();
+		}
+	};
+	// 0x0040 (0x0660 - 0x0620)
+	class AM1DropMissionSupplies : public AM1DropContainerByMission
+	{
+	public:
+		uint8                                         Pad_AM1DropMissionSupplies[0x40];                  // 0x0620
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1DropMissionSupplies">();
+		}
+	};
 	
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_DroppedItemBase_C : public AM1DroppedItem
 	{
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_AmmoEnhancedDroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1418,7 +1600,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_AmmoEnhancedDroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_AmmoGeneralDroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1427,7 +1609,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_AmmoGeneralDroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_AmmoHighpowerDroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1436,7 +1618,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_AmmoHighpowerDroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_AmmoImpactDroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1445,7 +1627,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_AmmoImpactDroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_BuffOrbDroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1454,18 +1636,18 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_BuffOrbDroppedItem_C">();
 		}
 	};
-	// 0x0020 (0x06A0 - 0x0680)
+	// 0x0020 (0x06C0 - 0x06A0)
 	class ABP_EmberDroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
-		uint8                                         Pad_ABP_EmberDroppedItem_C[0x20];					 // 0x0680
+		uint8                                         Pad_ABP_EmberDroppedItem_C[0x20];					 // 0x06A0
 	public:
 		static class UClass* StaticClass()
 		{
 			return StaticBPGeneratedClassImpl<"BP_EmberDroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_EquipTier01DroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1474,7 +1656,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_EquipTier01DroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_EquipTier02DroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1483,18 +1665,18 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_EquipTier02DroppedItem_C">();
 		}
 	};
-	// 0x0010 (0x0690 - 0x0680)
+	// 0x0010 (0x06B0 - 0x06A0)
 	class ABP_EquipTier03DroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
-		uint8                                         Pad_ABP_EquipTier03DroppedItem_C[0x10];			 // 0x0680
+		uint8                                         Pad_ABP_EquipTier03DroppedItem_C[0x10];			 // 0x06A0
 	public:
 		static class UClass* StaticClass()
 		{
 			return StaticBPGeneratedClassImpl<"BP_EquipTier03DroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_GoldDroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1503,7 +1685,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_GoldDroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_HealthOrbDroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1512,7 +1694,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_HealthOrbDroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_KuiperShardDroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1521,7 +1703,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_KuiperShardDroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_ManaOrbDroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1530,7 +1712,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_ManaOrbDroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_ResourceTier01DroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1539,7 +1721,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_ResourceTier01DroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_ResourceTier02DroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1548,7 +1730,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_ResourceTier02DroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_ResourceTier03DroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1557,7 +1739,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_ResourceTier03DroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_RuneTier01DroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1566,7 +1748,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_RuneTier01DroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_RuneTier02DroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1575,7 +1757,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_RuneTier02DroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_RuneTier03DroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1584,7 +1766,7 @@ namespace TFD_SDK
 			return StaticBPGeneratedClassImpl<"BP_RuneTier03DroppedItem_C">();
 		}
 	};
-	// 0x0000 (0x0680 - 0x0680)
+	// 0x0000 (0x06A0 - 0x06A0)
 	class ABP_RuneTier04DroppedItem_C final : public ABP_DroppedItemBase_C
 	{
 	public:
@@ -1601,13 +1783,6 @@ namespace TFD_SDK
 		uint8										  Pad_UM1UIActorWidget[0x30];						 // 0x0728
 	};
 	
-	// 0x0028 (0x0768 - 0x0740)
-	class AM1MissionTargetInteraction final : public AM1MissionTargetActor
-	{
-	public:
-		uint8                                         Pad_AM1MissionTargetInteraction[0x28];			 // 0x0740
-	};
-
 	// 0x00C0 (0x0818 - 0x0758)
 	class UM1UICharacterInfoBase : public UM1UIActorWidget
 	{
@@ -1620,6 +1795,13 @@ namespace TFD_SDK
 		{
 			return StaticClassImpl<"M1UICharacterInfoBase">();
 		}
+	};
+
+	// 0x0028 (0x0790 - 0x0768)
+	class AM1MissionTargetInteraction final : public AM1MissionTargetActor
+	{
+	public:
+		uint8                                         Pad_AM1MissionTargetInteraction[0x28];			 // 0x0768
 	};
 
 	// 0x0188 (0x0910 - 0x0788)
@@ -1638,32 +1820,34 @@ namespace TFD_SDK
 		}
 	};
 
-	// 0x0690 (0x0E20 - 0x0790)
+	// 0x06B0 (0x0E40 - 0x0790)
 	class USkeletalMeshComponent : public USkinnedMeshComponent
 	{
-		uint8										  Pad_USkeletalMeshComponent[0x690];				 // 0x0790
+		uint8										  Pad_USkeletalMeshComponent[0x6B0];				 // 0x0790
 	};
 
-	// 0x0060 (0x0840 - 0x07E0)
+	// 0x0060 (0x08D0 - 0x0870)
 	class AM1MissionTaskActorDestructionVulgusPost : public AM1MissionTaskActor
 	{
 	public:
-		uint8                                         Pad_MissionTargets[0x10];							 // 0x07E0
-		TArray<class AM1MissionTargetInteraction*>    MissionTargets;									 // 0x07F0(0x0010)
-		uint8                                         Pad_AM1MissionTaskActorDestructionVulgusPost[0x40];// 0x0800
+		uint8                                         Pad_MissionTargets[0x10];							 // 0x0870
+		TArray<class AM1MissionTargetInteraction*>    MissionTargets;									 // 0x0880(0x0010)
+		uint8                                         Pad_AM1MissionTaskActorDestructionVulgusPost[0x40];// 0x0890
 	public:
 		static class UClass* StaticClass()
 		{
 			return StaticClassImpl<"M1MissionTaskActorDestructionVulgusPost">();
 		}
 	};
-	static_assert(offsetof(AM1MissionTaskActorDestructionVulgusPost, MissionTargets) == 0x07F0, "Bad alignment");
+	static_assert(offsetof(AM1MissionTaskActorDestructionVulgusPost, MissionTargets) == 0x0880, "Bad alignment");
 
-	// 0x04A8 (0x0DB8 - 0x0910)
+	// 0x04E0 (0x0DF0 - 0x0910)
 	class AM1PlayerControllerInGame : public AM1PlayerController
 	{
 	public:
-		uint8										  Pad_AM1PlayerControllerInGame[0x4A8];				 // 0x0910
+		uint8										  Pad_MultiSupplierObtainComponent[0x88];			 // 0x0910
+		class UM1MultiSuppliierObtainComponent*		  MultiSupplierObtainComponent;                      // 0x0998(0x0008)
+		uint8										  Pad_AM1PlayerControllerInGame[0x450];				 // 0x09A0
 	public:
 		void ServerRequestFieldObjectDropItems(class AM1FieldInteractableActor* InActor);
 	public:
@@ -1673,32 +1857,32 @@ namespace TFD_SDK
 		}
 	};
 
-	// 0x0220 (0x0E80 - 0x0C60)
-#pragma pack(push, 0x1)
-	class alignas(0x10) AM1Monster : public AM1Character
+	// 0x0260 (0x0ED0 - 0x0C70)
+	class AM1Monster : public AM1Character
 	{
 	public:
-		uint8										  Pad_AM1Monster[0x220];							 // 0x0C60
+		uint8										  Pad_AM1Monster[0x260];							 // 0x0C70
 	public:
 		static class UClass* StaticClass()
 		{
 			return StaticClassImpl<"M1Monster">();
 		}
 	};
-#pragma pack(pop)
-	// 0x0770 (0x13D0 - 0x0C60)
+	// 0x0790 (0x1400 - 0x0C70)
 	class AM1Player final : public AM1Character
 	{
 	public:
-		uint8										  Pad_TeleportHandler[0x2B0];						 // 0x0C60
-		class UM1TeleportHandlerComponent*			  TeleportHandler;									 // 0x0F10(0x0008)
-		uint8										  Pad_WeaponSlotControl[0x10];						 // 0x0F18
-		class UM1WeaponSlotControlComponent*		  WeaponSlotControl;								 // 0x0F28(0x0008)
-		uint8										  Pad_RoundsComponent[0x38];						 // 0x0F30
-		class UM1PlayerRoundsComponent*				  RoundsComponent;									 // 0x0F68(0x0008)
-		uint8										  Pad_PlayerName[0x48];								 // 0x0F70
-		class FString								  PlayerName;										 // 0x0FB8(0x0010)
-		uint8										  Pad_AM1Player[0x408];								 // 0x0FC8
+		uint8										  Pad_TeleportHandler[0x2B0];						 // 0x0C70
+		class UM1TeleportHandlerComponent*			  TeleportHandler;									 // 0x0F20(0x0008)
+		uint8										  Pad_WeaponSlotControl[0x10];						 // 0x0F28
+		class UM1WeaponSlotControlComponent*		  WeaponSlotControl;								 // 0x0F38(0x0008)
+		uint8										  Pad_RoundsComponent[0x30];						 // 0x0F40
+		class UM1PlayerRoundsComponent*				  RoundsComponent;									 // 0x0F70(0x0008)
+		uint8										  Pad_VehicleHandlerComponent[0x38];				 // 0x0F78
+		class UM1PlayerVehicleHandlerComponent*		  VehicleHandlerComponent;                           // 0x0FB0(0x0008)
+		uint8										  Pad_PlayerName[0x8];								 // 0x0FB8
+		class FString								  PlayerName;										 // 0x0FC0(0x0010)
+		uint8										  Pad_AM1Player[0x430];								 // 0x0FD0
 	public:
 		static class UClass* StaticClass()
 		{
@@ -1748,7 +1932,7 @@ namespace TFD_SDK
 		uint8                                         ElementIndex;                                      // 0x0060(0x0001)
 		uint8                                         bBlockingHit : 1;                                  // 0x0061(0x0001)
 		uint8                                         bStartPenetrating : 1;                             // 0x0061(0x0001)
-		uint8                                         Pad_62[0x2];                                       // 0x0062(0x0002)
+		uint8                                         Pad_PhysMaterial[0x2];                             // 0x0062(0x0002)
 		TWeakObjectPtr<class UPhysicalMaterial>       PhysMaterial;                                      // 0x0064(0x0008)
 		struct FActorInstanceHandle                   HitObjectHandle;                                   // 0x006C(0x0018)
 		TWeakObjectPtr<class UPrimitiveComponent>     Component;                                         // 0x0084(0x0008)
@@ -1986,8 +2170,8 @@ namespace TFD_SDK
 	struct M1StatComponent_GetStatValue final
 	{
 	public:
-		EM1StatType                                   InStatType;                                        // 0x0000(0x0001)
-		uint8                                         Pad_ReturnValue[0x7];                              // 0x0001
+		struct FM1StatType                            InStatType;                                        // 0x0000(0x0001)
+		uint8                                         Pad_ReturnValue[0x4];                              // 0x0001
 		struct FM1ScaledInteger                       ReturnValue;                                       // 0x0008(0x0008)
 	};
 	// 0x000C (0x000C - 0x0000)
@@ -2030,5 +2214,23 @@ namespace TFD_SDK
 		class AM1MissionActor*						  InMission;                                         // 0x0000(0x0008)
 		bool                                          InForceStart;                                      // 0x0008(0x0001)
 		uint8                                         Pad_M1MissionControlComponent_ServerStartMission[0x7];// 0x0009
+	};
+	// 0x0008 (0x0008 - 0x0000)
+	struct M1MultiSuppliierObtainComponent_ServerRequestProcessInteraction final
+	{
+	public:
+		struct FM1TemplateId                          InTemplateId;                                      // 0x0000(0x0004)
+		uint32                                        InObjectUniqueID;                                  // 0x0004(0x0004)
+		const class AActor*							  InNpcRelative;                                     // 0x0008(0x0008)
+	};
+	// 0x0010 (0x0010 - 0x0000)
+	struct M1MiniGameActor_ClientStartMiniGame final
+	{
+	public:
+		struct FM1TemplateId                          InMiniGameTid;                                     // 0x0000(0x0004)
+		struct FM1TemplateId                          InPlayerTid;                                       // 0x0004(0x0004)
+		struct FM1TemplateId                          InFieldDifficultyTid;                              // 0x0008(0x0004)
+		EM1MiniGameDifficulty                         InDifficulty;                                      // 0x000C(0x0001)
+		uint8                                         Pad_M1MiniGameActor_ClientStartMiniGame[0x3];      // 0x000D
 	};
 }
