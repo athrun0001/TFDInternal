@@ -749,7 +749,7 @@ namespace TFD_SDK
 		Func->FunctionFlags = Flgs;
 	}
 
-	struct FM1ScaledInteger UM1StatComponent::GetStatValue(const EM1StatType InStatType) const
+	struct FM1ScaledInteger UM1StatComponent::GetStatValue(const struct FM1StatType& InStatType) const
 	{
 		static class UFunction* Func = nullptr;
 
@@ -758,7 +758,7 @@ namespace TFD_SDK
 
 		M1StatComponent_GetStatValue Parms{};
 
-		Parms.InStatType = InStatType;
+		Parms.InStatType = std::move(InStatType);
 
 		auto Flgs = Func->FunctionFlags;
 		Func->FunctionFlags |= 0x400;
@@ -895,6 +895,64 @@ namespace TFD_SDK
 
 		Parms.InMission = InMission;
 		Parms.InForceStart = InForceStart;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
+
+	void UM1MultiSuppliierObtainComponent::ServerRequestProcessInteraction(const struct FM1TemplateId& InTemplateId, uint32 InObjectUniqueID, const class AActor* InNpcRelative)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1MultiSuppliierObtainComponent", "ServerRequestProcessInteraction");
+
+		M1MultiSuppliierObtainComponent_ServerRequestProcessInteraction Parms{};
+
+		Parms.InTemplateId = std::move(InTemplateId);
+		Parms.InObjectUniqueID = InObjectUniqueID;
+		Parms.InNpcRelative = InNpcRelative;
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, &Parms);
+
+		Func->FunctionFlags = Flgs;
+	}
+
+	void UM1TeleportHandlerComponent::ServerFinishTeleportProcess()
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1TeleportHandlerComponent", "ServerFinishTeleportProcess");
+
+		auto Flgs = Func->FunctionFlags;
+		Func->FunctionFlags |= 0x400;
+
+		UObject::ProcessEvent(Func, nullptr);
+
+		Func->FunctionFlags = Flgs;
+	}
+
+	void AM1MiniGameActor::ClientStartMiniGame(const struct FM1TemplateId& InMiniGameTid, const struct FM1TemplateId& InPlayerTid, const struct FM1TemplateId& InFieldDifficultyTid, const EM1MiniGameDifficulty InDifficulty)
+	{
+		static class UFunction* Func = nullptr;
+
+		if (Func == nullptr)
+			Func = Class->GetFunction("M1MiniGameActor", "ClientStartMiniGame");
+
+		M1MiniGameActor_ClientStartMiniGame Parms{};
+
+		Parms.InMiniGameTid = std::move(InMiniGameTid);
+		Parms.InPlayerTid = std::move(InPlayerTid);
+		Parms.InFieldDifficultyTid = std::move(InFieldDifficultyTid);
+		Parms.InDifficulty = InDifficulty;
 
 		auto Flgs = Func->FunctionFlags;
 		Func->FunctionFlags |= 0x400;

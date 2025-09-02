@@ -95,6 +95,7 @@ TFD_SDK::AM1Player* LocalPlayerCharacter;
 TFD_SDK::UGameViewportClient* LocalView;
 TFD_SDK::UM1ActorManagerSubsystem* Actors;
 TFD_SDK::AM1PlayerState* PlayerState;
+TFD_SDK::AM1MissionActor* LastMissionActor = nullptr;
 bool isGUIInit = false;
 void LoadCFG();
 void SaveCFG();
@@ -104,6 +105,7 @@ bool updateMiddle = true;
 TFD_SDK::FVector2D ScreenMiddle = { 0, 0 };
 TFD_SDK::UCanvas* myCanvas;
 TFD_SDK::UM1WeaponSlotControlComponent* WeaponSlot = nullptr;
+UC::uint32 ObjectUniqueID;
 /*
 *  Overlay
 */
@@ -166,6 +168,9 @@ float cfg_HPThreshold = 50.0f;
 float cfg_MPThreshold = 50.0f;
 int cfg_ResearchQty = 1;
 float cfg_FireRate = 1.0f;
+float cfg_VehicleMaxSpeed = 1700.0f;
+float cfg_VehicleMaxAcceleration = 1800.0f;
+float cfg_VehicleMaxTurnSpeed = 190.0f;
 
 void InstantInfiltration();
 void RestartLastMission();
@@ -182,6 +187,8 @@ void NoRecoil();
 void RapidFireOn();
 bool GetSpareRounds(TFD_SDK::EM1RoundsType RoundsType, int RoundsPerLoot);
 void ModifyGrapple();
+void InfiniteAmmoAndSkills();
+void ChangeVehicleMovementStat();
 /*
 *  Aimbot
 */
@@ -204,6 +211,7 @@ uint8_t Recoil[2] = { 0x74, 0x75 };
 uint8_t RapidFire[2] = { 0x72, 0x77 };
 float cfg_AimbotGrappleRange = 10000.0f;
 bool cfg_EnableModifyGrapple = false;
+//bool cfg_InfiniteAmmoAndSkills = false;
 /*
 * Tivmo Autism
 */
@@ -244,7 +252,6 @@ bool isRestartMission = false;
 int cfg_RestartType = 0;
 int cfg_TPMissionKey = 0x50;
 
-
 UC::int32 MissionTaskIndex = 0;
 
 std::chrono::steady_clock::time_point AutoTeleportStartTime = std::chrono::steady_clock::now();
@@ -258,8 +265,6 @@ void WriteEnemyNamesData();
 std::unordered_map<int, std::string> ReadEnemyNamesData();
 void WriteEnemyBonesData();
 std::unordered_map<int, std::vector<int>> ReadEnemyBonesData();
-void WritePresetsData();
-std::unordered_map<int, std::string> ReadPresetsData();
 
 float currenthp;
 float maxhp;
@@ -272,105 +277,7 @@ bool rounds_used = false;
 std::unordered_map<int, std::vector<int>> IDBoneMap = { };
 bool BonesChanged = false;
 std::unordered_map<int, std::string> PresetsMap = { };
-std::unordered_map<int, std::string> IDNameMap =
-{
-{ 510500032, "Cryo Soldier" },
-{ 510200103, "Fortress Guard" },
-{ 510100020, "Storm Warrior" },
-{ 510500024, "Mass Soldier" },
-{ 530100026, "Elite Tracker" },
-{ 510500005, "Follower Assault Soldier" },
-{ 510100019, "Farseer" },
-{ 510500003, "Vulgus Follower" },
-{ 510500002, "The Soulless" },
-{ 510100023, "Destroyer" },
-{ 510500031, "Bomber" },
-{ 510100025, "Warden" },
-{ 510500009, "Follower Panzer" },
-{ 510500020, "Storm Warrior" },
-{ 510100048, "Spiker" },
-{ 510500004, "Fire Spitter" },
-{ 510100031, "Bomber" },
-{ 510500007, "Follower Grenadier" },
-{ 510100005, "Follower Assault Soldier" },
-{ 510100030, "Sentinel" },
-{ 510100003, "Vulgus Follower" },
-{ 510121001, "Interrupter Slaughterer" },
-{ 510100002, "The Soulless" },
-{ 510100001, "Vulgus War-Slave" },
-{ 510100008, "Follower Shield Bearer" },
-{ 510100007, "Follower Grenadier" },
-{ 510100006, "Follower Sniper" },
-{ 510100024, "Mass Soldier" },
-{ 530100007, "Elite Vulgus Grenadier" },
-{ 510100004, "Fire Spitter" },
-{ 520130003, "Greg the Star-Crossed" },
-{ 520120022, "Split Cell Dmigor" },
-{ 510100034, "Slayer" },
-{ 510121005, "Punisher" },
-{ 510100026, "Tracker" },
-{ 510100016, "Executor" },
-{ 510100029, "Ripper" },
-{ 510100043, "Wasp" },
-{ 510100021, "Reaper" },
-{ 530100018, "Elite Slaughterer" },
-{ 510500043, "Wasp" },
-{ 510100036, "Evangelist" },
-{ 510500016, "Executor" },
-{ 510100037, "Piercer" },
-{ 510100039, "Fortress Guard" },
-{ 510500033, "Creature" },
-{ 510100017, "Third Eye" },
-{ 510100041, "Vanguard" },
-{ 510100018, "Slaughterer" },
-{ 510100015, "Marauder" },
-{ 510100022, "Trapball" },
-{ 520130012, "Eterllick the Tracker" },
-{ 510500012, "Gazer" },
-{ 510100011, "Blazer" },
-{ 510100042, "Bug Spreader" },
-{ 510121004, "Cutlasser" },
-{ 510100010, "Devotee" },
-{ 510500040, "Raider" },
-{ 510100028, "Acolyte" },
-{ 530100027, "Elite Predator" },
-{ 510500010, "Devotee" },
-{ 510100027, "Predator" },
-{ 510500011, "Blazer" },
-{ 510100038, "Abomination" },
-{ 510100012, "Gazer" },
-{ 510100009, "Follower Panzer" },
-{ 530100038, "Elite Abomination" },
-{ 510100047, "Bulgebrute" },
-{ 510100033, "Creature" },
-{ 510100013, "Zealot" },
-{ 510100014, "Annihilator" },
-{ 530100025, "Elite Warden" },
-{ 520130005, "Narzas the Consuming Flame" },
-{ 510200064, "Warden" },
-{ 510100032, "Cryo Soldier" },
-{ 530100020, "Elite Storm Warrior" },
-{ 510121003, "Ember Maw" },
-{ 520120003, "Genetically Enhanced Greg Clone" },
-{ 510500030, "Sentinel" },
-{ 510100040, "Raider" },
-{ 510121000, "Interrupter Storm Warrior" },
-{ 520130013, "Seudo the Dreamer" },
-{ 510110001, "Seudo's Assault Turret" },
-{ 510110002, "Seudo's Medical Turret" },
-{ 510500035, "Tintail" },
-{ 510100050, "Machine Mother" },
-{ 510110003, "Marauder" },
-{ 510100035, "Tintail" },
-{ 530100041, "Elite Vanguard" },
-{ 510100051, "Miscreant" },
-{ 530100034, "Elite Slayer" },
-{ 510500015, "Marauder" },
-{ 510500049, "Illusionist" },
-{ 530100019, "Elite Farseer" },
-{ 520130009, "Gruncah the Undying" },
-{ 510000302, "KingFisher" }
-};
+std::unordered_map<int, std::string> IDNameMap = { };
 bool NamesChanged = false;
 
 std::unordered_map<std::string, bool> MoveMissionTaskExceptionSet =
@@ -379,7 +286,9 @@ std::unordered_map<std::string, bool> MoveMissionTaskExceptionSet =
 	{"TheFortress_F_Hard_D1|MoveD1_Hard_10",true},
 	{"CorrodedLand_Invasion_D1|Move-2",false},
 	{"TheFortress_Invasion_D2|Move_4a",true},
-	{"ForestDead_Invasion_D2|Move1a",false}
+	{"ForestDead_Invasion_D2|Move1a",false},
+	{"Whitenight_Invasion_D1|MoveD1_I2a",false}
+
 };
 
 std::unordered_map<std::string, bool> MissionTaskExceptionSet =
