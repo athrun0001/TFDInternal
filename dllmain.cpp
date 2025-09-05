@@ -710,7 +710,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			//if (Input::IsKeyPressed(VK_LEFT))
 				
 			//MissionTaskActortESP();
-			ChangeVehicleMovementStat();
 			
 			if (cfg_DrawMenu)
 				DrawMenu();
@@ -722,22 +721,6 @@ static __int64 YourHookProc(void* self, void* Canvas)
 	}
 	Input::ResetKeyPressed();
 	return M1org(self, Canvas);
-}
-
-void ChangeVehicleMovementStat()
-{
-	if (!LocalPlayerCharacter)
-		return;
-	if (!LocalPlayerCharacter->VehicleHandlerComponent)
-		return;
-	if (!LocalPlayerCharacter->VehicleHandlerComponent->MountedVehicle)
-		return;
-	if (LocalPlayerCharacter->VehicleHandlerComponent->MountedVehicle->CurrentMovementData.MaxAcceleration != cfg_VehicleMaxAcceleration)
-		LocalPlayerCharacter->VehicleHandlerComponent->MountedVehicle->CurrentMovementData.MaxAcceleration = cfg_VehicleMaxAcceleration;
-	if (LocalPlayerCharacter->VehicleHandlerComponent->MountedVehicle->CurrentMovementData.MaxSpeed != cfg_VehicleMaxSpeed)
-		LocalPlayerCharacter->VehicleHandlerComponent->MountedVehicle->CurrentMovementData.MaxSpeed = cfg_VehicleMaxSpeed;
-	if (LocalPlayerCharacter->VehicleHandlerComponent->MountedVehicle->CurrentMovementData.MaxTurnSpeed != cfg_VehicleMaxTurnSpeed)
-		LocalPlayerCharacter->VehicleHandlerComponent->MountedVehicle->CurrentMovementData.MaxTurnSpeed = cfg_VehicleMaxTurnSpeed;
 }
 
 void InstantReload()
@@ -2695,9 +2678,6 @@ void DrawMenu()
 			{
 				ResearchBookmarkedItems();
 			}
-			ZeroGUI::SliderFloat((char*)"Vehicle Max Acceleration:", &cfg_VehicleMaxAcceleration, 2000.0f, 10000.0f);
-			ZeroGUI::SliderFloat((char*)"Vehicle Max Speed:", &cfg_VehicleMaxSpeed, 2000.0f, 10000.0f);
-			ZeroGUI::SliderFloat((char*)"Vehicle Max Turn Speed:", &cfg_VehicleMaxTurnSpeed, 200.0f, 1000.0f);
 		}
 		if (tab == 4)
 		{
@@ -2857,9 +2837,6 @@ void LoadCFG()
 		cfg_TimeScale = ini.GetDoubleValue("Extra", "Timescale");
 		cfg_TimeScaleKey = (int)ini.GetDoubleValue("Extra", "TimescaleKey");
 		cfg_TimeScaleHoldKey = (int)ini.GetDoubleValue("Extra", "TimescaleHoldKey");
-		cfg_VehicleMaxAcceleration = ini.GetDoubleValue("Extra", "VehicleMaxAcceleration");
-		cfg_VehicleMaxSpeed = ini.GetDoubleValue("Extra", "VehicleMaxSpeed");
-		cfg_VehicleMaxTurnSpeed = ini.GetDoubleValue("Extra", "VehicleMaxTurnSpeed");
 
 		cfg_InstantInfilKey = (int)ini.GetDoubleValue("Mission", "InstantInfilKey");
 		cfg_RestartMissionKey = (int)ini.GetDoubleValue("Mission", "RestartMissionKey");
@@ -2921,9 +2898,6 @@ void SaveCFG()
 	ini.SetBoolValue("Extra", "EnableVacuum", cfg_LootVacuum);
 	ini.SetDoubleValue("Extra", "VacuumRange", cfg_LootVacuumRange);
 	ini.SetDoubleValue("Extra", "VacuumKey", cfg_LootVacuumKey);
-	ini.SetDoubleValue("Extra", "VehicleMaxAcceleration", cfg_VehicleMaxAcceleration);
-	ini.SetDoubleValue("Extra", "VehicleMaxSpeed", cfg_VehicleMaxSpeed);
-	ini.SetDoubleValue("Extra", "VehicleMaxTurnSpeed", cfg_VehicleMaxTurnSpeed);
 
 	ini.SetBoolValue("Extra", "CacheNames", cfg_CacheEnemyNames);
 	ini.SetBoolValue("Extra", "CacheBones", cfg_CacheEnemyBones);
