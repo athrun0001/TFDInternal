@@ -565,16 +565,6 @@ namespace TFD_SDK
 	public:
 		int32                                         StatType;                                          // 0x0000(0x0004)
 	};
-	// 0x00C0 (0x00C0 - 0x0000)
-	struct FM1VehicleMovementData final
-	{
-	public:
-		float                                         MaxAcceleration;                                   // 0x0000(0x0004)
-		float                                         MaxSpeed;                                          // 0x0004(0x0004)
-		uint8                                         Pad_MaxTurnSpeed[0xC];							 // 0x0008
-		float                                         MaxTurnSpeed;                                      // 0x0014(0x0004)
-		uint8                                         Pad_FM1WeaponFireParams[0xA8];                     // 0x0018
-	};
 	
 
 
@@ -1031,14 +1021,6 @@ namespace TFD_SDK
 	static_assert(offsetof(UM1PlayerRoundsComponent, CurrentSpareRounds) == 0x00E0, "Bad alignment");
 	static_assert(offsetof(UM1PlayerRoundsComponent, CachedMaxCapacities) == 0x00F0, "Bad alignment");
 	static_assert(offsetof(UM1PlayerRoundsComponent, Pad_UM1PlayerRoundsComponent) == 0x0140, "Bad alignment");
-	// 0x01D0 (0x02A0 - 0x00D0)
-	class alignas(0x10) UM1PlayerVehicleHandlerComponent final : public UM1CharacterComponent
-	{
-	public:
-		uint8                                         Pad_MountedVehicle[0x20];                          // 0x00D0
-		class AM1Vehicle*							  MountedVehicle;                                    // 0x00F0(0x0008)
-		uint8                                         Pad_UM1PlayerVehicleHandlerComponent[0x1A8];       // 0x00F8
-	};
 	// 0x0008 (0x00D8 - 0x00D0)
 	class UM1RangedWeaponComponent : public UM1WeaponComponent
 	{
@@ -1370,15 +1352,6 @@ namespace TFD_SDK
 	{
 	public:
 		uint8                                         Pad_AM1StatBasedActor[0x10];						 // 0x0338
-	};
-	// 0x04F0 (0x0828 - 0x0338)
-	class AM1Vehicle : public AM1Actor
-	{
-	public:
-
-		uint8                                         Pad_CurrentMovementData[0x3E8];                    // 0x0338
-		struct FM1VehicleMovementData                 CurrentMovementData;                               // 0x0720(0x00C0)
-		uint8                                         Pad_808[0x48];                                     // 0x07E0
 	};
 	// 0x0120 (0x0458 - 0x0338)
 	class AM1Weapon : public AM1Actor
@@ -1878,9 +1851,7 @@ namespace TFD_SDK
 		class UM1WeaponSlotControlComponent*		  WeaponSlotControl;								 // 0x0FF0(0x0008)
 		uint8										  Pad_RoundsComponent[0x30];						 // 0x0FF8
 		class UM1PlayerRoundsComponent*				  RoundsComponent;									 // 0x1028(0x0008)
-		uint8										  Pad_VehicleHandlerComponent[0x38];				 // 0x1030
-		class UM1PlayerVehicleHandlerComponent*		  VehicleHandlerComponent;                           // 0x1068(0x0008)
-		uint8										  Pad_PlayerName[0x8];								 // 0x1070
+		uint8										  Pad_PlayerName[0x48];								 // 0x1030
 		class FString								  PlayerName;										 // 0x1078(0x0010)
 		uint8										  Pad_AM1Player[0x438];								 // 0x1088
 	public:

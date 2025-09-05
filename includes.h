@@ -168,9 +168,6 @@ float cfg_HPThreshold = 50.0f;
 float cfg_MPThreshold = 50.0f;
 int cfg_ResearchQty = 1;
 float cfg_FireRate = 1.0f;
-float cfg_VehicleMaxSpeed = 1700.0f;
-float cfg_VehicleMaxAcceleration = 1800.0f;
-float cfg_VehicleMaxTurnSpeed = 190.0f;
 
 void InstantInfiltration();
 void RestartLastMission();
@@ -188,7 +185,6 @@ void RapidFireOn();
 bool GetSpareRounds(TFD_SDK::EM1RoundsType RoundsType, int RoundsPerLoot);
 void ModifyGrapple();
 void InfiniteAmmoAndSkills();
-void ChangeVehicleMovementStat();
 /*
 *  Aimbot
 */
