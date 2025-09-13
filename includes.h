@@ -249,6 +249,7 @@ int cfg_RestartType = 0;
 int cfg_TPMissionKey = 0x50;
 
 UC::int32 MissionTaskIndex = 0;
+UC::int32 VoidMissionNodeIndex = 0;
 
 std::chrono::steady_clock::time_point AutoTeleportStartTime = std::chrono::steady_clock::now();
 std::chrono::steady_clock::time_point AutoRestartMissionStartTime = std::chrono::steady_clock::now();

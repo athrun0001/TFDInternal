@@ -565,6 +565,13 @@ namespace TFD_SDK
 	public:
 		int32                                         StatType;                                          // 0x0000(0x0004)
 	};
+	// 0x0038 (0x0038 - 0x0000)
+	struct FM1MissionVoidErosionNodeLink final
+	{
+	public:
+		class AM1MissionVoidErosionNodeActor*		  NodeActor;                                         // 0x0000(0x0008)
+		uint8                                         Pad_FM1MissionVoidErosionNodeLink[0x30];           // 0x0008
+	};
 	
 
 
@@ -954,8 +961,8 @@ namespace TFD_SDK
 		void ServerLeaveMission(EM1MissionEndReason InReason);
 		void ServerRestartLastPlayedMission();
 		void ServerRunTaskActor(class AM1MissionTaskActor* InActor);
-		void ServerStartMissionByTemplateID(const struct FM1TemplateId& InTemplateId);
 		void ServerStartMission(class AM1MissionActor* InMission, bool InForceStart);
+		void ServerStartMissionByTemplateID(const struct FM1TemplateId& InTemplateId);
 	};
 	// 0x0148 (0x01F0 - 0x00A8)
 	class alignas(0x10) USceneComponent : public UActorComponent
@@ -1243,6 +1250,12 @@ namespace TFD_SDK
 		int32                                         Index_0;                                           // 0x0260(0x0004)
 		uint8                                         Pad_AM1MissionTaskMoveWayPoint[0x4];               // 0x0264
 	};
+	// 0x0050 (0x0298 - 0x0248)
+	class AM1MissionVoidErosionNodeActor final : public AActor
+	{
+	public:
+		uint8                                         Pad_AM1MissionVoidErosionNodeActor[0x50];          // 0x0248
+	};
 	// 0x0290 (0x04D8 - 0x0248)
 	class AM1TaskEventActor : public AActor
 	{
@@ -1437,8 +1450,9 @@ namespace TFD_SDK
 			return StaticClassImpl<"M1FieldInteractableActorMiniGame">();
 		}
 	};
+
 	// 0x0090 (0x04E8 - 0x0458)
-	class AM1RangedWeapon final : public AM1Weapon
+	class AM1RangedWeapon : public AM1Weapon
 	{
 	public:
 		uint8										  Pad_FireLoopComponent[0x10];						 // 0x0458
@@ -1485,7 +1499,7 @@ namespace TFD_SDK
 		int32                                         TaskIndex;                                         // 0x05E8(0x0004)
 		uint8                                         Pad_WayPoints[0x7C];								 // 0x05EC
 		TArray<class AM1MissionTaskMoveWayPoint*>     WayPoints;                                         // 0x0668(0x0010)
-		uint8                                         Pad_AM1MissionTaskActor[0x1F8];				     // 0x0678
+		uint8                                         Pad_AM1MissionTaskActor[0x1F0];				     // 0x0678
 	};
 #pragma pack(pop)
 
@@ -1803,7 +1817,7 @@ namespace TFD_SDK
 	class AM1MissionTaskActorDestructionVulgusPost : public AM1MissionTaskActor
 	{
 	public:
-		uint8                                         Pad_MissionTargets[0x10];							 // 0x0870
+		uint8                                         Pad_MissionTargets[0x18];							 // 0x0868
 		TArray<class AM1MissionTargetInteraction*>    MissionTargets;									 // 0x0880(0x0010)
 		uint8                                         Pad_AM1MissionTaskActorDestructionVulgusPost[0x40];// 0x0890
 	public:
@@ -1813,6 +1827,21 @@ namespace TFD_SDK
 		}
 	};
 	static_assert(offsetof(AM1MissionTaskActorDestructionVulgusPost, MissionTargets) == 0x0880, "Bad alignment");
+	// 0x0030 (0x08A0 - 0x0870)
+	class AM1MissionTaskActorVoidErosion : public AM1MissionTaskActor
+	{
+	public:
+		TArray<struct FM1MissionVoidErosionNodeLink>  NodeLinks;                                         // 0x0868(0x0010)
+		int32                                         CurrentNodeIndex;                                  // 0x0878(0x0004)
+		uint8                                         Pad_898[0x24];                                     // 0x087C
+	public:
+		static class UClass* StaticClass()
+		{
+			return StaticClassImpl<"M1MissionTaskActorVoidErosion">();
+		}
+	};
+	static_assert(offsetof(AM1MissionTaskActorVoidErosion, NodeLinks) == 0x0868, "Bad alignment");
+	static_assert(offsetof(AM1MissionTaskActorVoidErosion, CurrentNodeIndex) == 0x0878, "Bad alignment");
 
 	// 0x04E0 (0x0E30 - 0x0950)
 	class AM1PlayerControllerInGame : public AM1PlayerController
