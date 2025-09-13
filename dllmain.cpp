@@ -1747,7 +1747,7 @@ void MissionTaskTeleporter()
 				if (!TAVE)
 					return;
 
-				if (VoidMissionNodeIndex != TAVE->CurrentNodeIndex && TAVE->NodeLinks.Num() > 0)
+				if (VoidMissionNodeIndex != TAVE->CurrentNodeIndex && TAVE->NodeLinks.Num() > 0 && TAVE->CurrentNodeIndex > 0)
 				{
 					if (!TAVE->NodeLinks[TAVE->CurrentNodeIndex].NodeActor)
 						return;
