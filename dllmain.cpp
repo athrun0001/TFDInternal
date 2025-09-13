@@ -710,7 +710,7 @@ static __int64 YourHookProc(void* self, void* Canvas)
 			//if (Input::IsKeyPressed(VK_LEFT))
 				
 			//MissionTaskActortESP();
-			
+
 			if (cfg_DrawMenu)
 				DrawMenu();
 
@@ -1729,6 +1729,7 @@ void MissionTaskTeleporter()
 	if (MCC->ActivatedMissions.Num() == 0)
 	{
 		MissionTaskIndex = 0;
+		VoidMissionNodeIndex = 0;
 		return;
 	}
 		
@@ -1739,6 +1740,25 @@ void MissionTaskTeleporter()
 			&& MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask
 			&& MissionActor->MissionData)
 		{
+			
+			if (MissionActor->ProgressInfo.ActivatedTaskActor->IsA(TFD_SDK::AM1MissionTaskActorVoidErosion::StaticClass()))
+			{
+				TFD_SDK::AM1MissionTaskActorVoidErosion* TAVE = static_cast<TFD_SDK::AM1MissionTaskActorVoidErosion*>(MissionActor->ProgressInfo.ActivatedTaskActor);
+				if (!TAVE)
+					return;
+
+				if (VoidMissionNodeIndex != TAVE->CurrentNodeIndex && TAVE->NodeLinks.Num() > 0)
+				{
+					if (!TAVE->NodeLinks[TAVE->CurrentNodeIndex].NodeActor)
+						return;
+					VoidMissionNodeIndex = TAVE->CurrentNodeIndex;
+					AutoTeleportStartTime = std::chrono::steady_clock::now();
+					LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(TAVE->NodeLinks[TAVE->CurrentNodeIndex].NodeActor->K2_GetActorLocation(), TAVE->NodeLinks[TAVE->CurrentNodeIndex].NodeActor->K2_GetActorRotation());
+					LocalPlayerCharacter->TeleportHandler->ServerFinishTeleportProcess();
+				}
+				return;
+			}
+			
 			std::string activatedtaskname = ToLower(MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString());
 			std::string lasttaskname = "";
 			
@@ -1845,16 +1865,14 @@ void MissionTaskTeleporter()
 								ODistanceLocalCharacter = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(LocalPlayerCharacter->K2_GetActorLocation());
 								ODistanceLastTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation());
 								ODistanceBetweenLastTaskLocalChar = LocalPlayerCharacter->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation());
-								if (ODistanceBetweenLastTaskLocalChar <= 1500.0f)
-									return;
-								if (ODistanceLastTask < ODistanceLocalCharacter)
+								if (ODistanceLastTask < ODistanceLocalCharacter && ODistanceBetweenLastTaskLocalChar > 1500.0f)
 								{
 									LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->WayPoints[wpi]->K2_GetActorRotation());
 									LocalPlayerCharacter->TeleportHandler->ServerFinishTeleportProcess();
-									MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
 									AutoTeleportStartTime = std::chrono::steady_clock::now();
 								}
-									
+								MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+								return;
 							}
 						}
 					}
@@ -1863,16 +1881,14 @@ void MissionTaskTeleporter()
 						ODistanceLocalCharacter = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(LocalPlayerCharacter->K2_GetActorLocation());
 						ODistanceLastTask = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation());
 						ODistanceBetweenLastTaskLocalChar = LocalPlayerCharacter->K2_GetActorLocation().GetDistanceTo(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation());
-						if (ODistanceBetweenLastTaskLocalChar <= 1500.0f)
-							return;
-						if (ODistanceLastTask < ODistanceLocalCharacter)
+						if (ODistanceLastTask < ODistanceLocalCharacter && ODistanceBetweenLastTaskLocalChar > 1500.0f)
 						{
 							LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.LastTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.LastTaskActor->K2_GetActorRotation());
 							LocalPlayerCharacter->TeleportHandler->ServerFinishTeleportProcess();
-							MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
 							AutoTeleportStartTime = std::chrono::steady_clock::now();
 						}
-							
+						MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+						return;
 					}
 				}
 			}
