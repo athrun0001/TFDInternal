@@ -207,6 +207,7 @@ uint8_t Recoil[2] = { 0x74, 0x75 };
 uint8_t RapidFire[2] = { 0x72, 0x77 };
 float cfg_AimbotGrappleRange = 10000.0f;
 bool cfg_EnableModifyGrapple = false;
+int cfg_MoveTaskDelay = 1000;
 //bool cfg_InfiniteAmmoAndSkills = false;
 /*
 * Tivmo Autism
@@ -277,29 +278,37 @@ std::unordered_map<int, std::string> PresetsMap = { };
 std::unordered_map<int, std::string> IDNameMap = { };
 bool NamesChanged = false;
 
-std::unordered_map<std::string, bool> MoveMissionTaskExceptionSet =
+std::unordered_map<std::string, bool> ForceTeleportMoveTaskExceptionSet =
 {
 	{"Kingston_F_Hard_D2|MoveD2-10a",true},
 	{"TheFortress_F_Hard_D1|MoveD1_Hard_10",true},
 	{"CorrodedLand_Invasion_D1|Move-2",false},
 	{"TheFortress_Invasion_D2|Move_4a",true},
 	{"ForestDead_Invasion_D2|Move1a",false},
-	{"Whitenight_Invasion_D1|MoveD1_I2a",false}
-
+	{"Whitenight_Invasion_D1|MoveD1_I2a",false},
+	{"TheFortress_Invasion_D1|Move1",false},
+	{"VoidVessel_Hard_D2|Move_14",true}
 };
 
-std::unordered_map<std::string, bool> MissionTaskExceptionSet =
+std::unordered_map<std::string, bool> SkipTaskExceptionSet =
 {
 };
 
-std::unordered_map<std::string, bool> ForceTeleportMissionTaskExceptionSet =
+std::unordered_map<std::string, int> MissionTaskDelaySet =
 {
-	{"Kingston_Invasion_D2|Assassination_4",true},
-	{"SterileLand_Invasion_D2|CollectionReturnD2-I3",true},
-	{"SterileLand_Invasion_D2|CollectionReturnD2-I5",true},
-	{"Kingston_Invasion_D1|CollectionReturn_3",true},
-	{"VoidVessel_Normal_D1|Explosion01",true},
-	{"VoidVessel_Normal_D1|Extermination02",true}
+	{"Whitenight_Invasion_D1|MoveD1_I2_a",2000},
+};
+
+std::unordered_map<std::string, float> ForceTeleportMissionTaskExceptionSet =
+{
+	{"Kingston_Invasion_D2|Assassination_4",0.0f},
+	{"SterileLand_Invasion_D2|CollectionReturnD2-I3",0.0f},
+	{"SterileLand_Invasion_D2|CollectionReturnD2-I5",0.0f},
+	{"Kingston_Invasion_D1|CollectionReturn_3",0.0f},
+	{"VoidVessel_Normal_D1|Explosion01",0.0f},
+	{"VoidVessel_Normal_D1|Extermination02",0.0f},
+	{"TheFortress_Invasion_D1|CompetitiveOccupation0",0.0f},
+	{"VoidVessel_Hard_D2|Assassination_17",500.0f}
 };
 
 uintptr_t dwBase = 0x0;

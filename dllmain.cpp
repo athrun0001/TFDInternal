@@ -1461,7 +1461,7 @@ void ItemESPVacuum()
 								{
 									if (currenthp < (maxhp * (cfg_HPThreshold / 100.0f)))
 									{
-										if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - HPLootStartTime).count() >= 1000)
+										if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - HPLootStartTime).count() >= 500)
 										{
 											if (hp_used == true)
 												continue;
@@ -1481,7 +1481,7 @@ void ItemESPVacuum()
 								{
 									if (currentmana < (maxmana * (cfg_MPThreshold / 100.0f)))
 									{
-										if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - MPLootStartTime).count() >= 1000)
+										if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - MPLootStartTime).count() >= 500)
 										{
 											if (mp_used == true)
 												continue;
@@ -1501,7 +1501,7 @@ void ItemESPVacuum()
 								{
 									if (GetSpareRounds(TFD_SDK::EM1RoundsType::GeneralRounds, 200) == true)
 									{
-										if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
+										if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 500)
 										{
 											if (rounds_used == true)
 												continue;
@@ -1521,7 +1521,7 @@ void ItemESPVacuum()
 								{
 									if (GetSpareRounds(TFD_SDK::EM1RoundsType::EnhancedRounds, 120) == true)
 									{
-										if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
+										if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 500)
 										{
 											if (rounds_used == true)
 												continue;
@@ -1541,7 +1541,7 @@ void ItemESPVacuum()
 								{
 									if (GetSpareRounds(TFD_SDK::EM1RoundsType::ImpactRounds, 25) == true)
 									{
-										if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
+										if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 500)
 										{
 											if (rounds_used == true)
 												continue;
@@ -1561,7 +1561,7 @@ void ItemESPVacuum()
 								{
 									if (GetSpareRounds(TFD_SDK::EM1RoundsType::HighpowerRounds, 2) == true)
 									{
-										if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 1000)
+										if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - RoundsLootStartTime).count() >= 500)
 										{
 											if (rounds_used == true)
 												continue;
@@ -1716,7 +1716,7 @@ void RestartLastMission()
 
 void MissionTaskTeleporter()
 {
-	if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoTeleportStartTime).count() <= 1000)
+	if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - AutoTeleportStartTime).count() <= cfg_MoveTaskDelay)
 		return;
 
 	if (!PlayerState || !PlayerState->MissionControlComponent || !LocalPlayerCharacter)
@@ -1758,10 +1758,10 @@ void MissionTaskTeleporter()
 				}
 				return;
 			}
-			
-			std::string activatedtaskname = ToLower(MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString());
+			std::string amtt = MissionActor->MissionData->MissionDataRowName.ToString() + "|" + MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
+			std::string activatedtasknameL = ToLower(amtt);
 			std::string lasttaskname = "";
-			
+
 			if (MissionActor->ProgressInfo.ActivatedTaskIndex > 0)
 			{
 				//AutoTeleportStartTime = std::chrono::steady_clock::now();
@@ -1769,27 +1769,38 @@ void MissionTaskTeleporter()
 
 				if (MissionActor->MissionData->MissionDataRowName.ToString().contains("400"))
 					return;
-				if (!activatedtaskname.contains("move")
-					&& !activatedtaskname.contains("interact")
+				if (!activatedtasknameL.contains("move")
+					&& !activatedtasknameL.contains("interact")
 					&& !lasttaskname.contains("move")
 					&& !lasttaskname.contains("interact"))
 					return;
-				if (activatedtaskname.contains("playerset")
-					|| activatedtaskname.contains("fadein"))
+				if (activatedtasknameL.contains("playerset")
+					|| activatedtasknameL.contains("fadein"))
+					return;
+				if (SkipTaskExceptionSet.contains(amtt))
 					return;
 			}
 			
-			if ((activatedtaskname.contains("move")
-				|| activatedtaskname.contains("interact"))
+			if ((activatedtasknameL.contains("move")
+				|| activatedtasknameL.contains("interact"))
 				&& MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex)
 			{
 				MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
 				MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
 				AutoTeleportStartTime = std::chrono::steady_clock::now();
-				std::string mtt = MissionActor->MissionData->MissionDataRowName.ToString() + "|" + MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
-				if (MoveMissionTaskExceptionSet.contains(mtt))
+				
+
+				if (MissionTaskDelaySet.contains(amtt))
 				{
-					bool UseWayPoint = MoveMissionTaskExceptionSet[mtt];	
+					cfg_MoveTaskDelay = MissionTaskDelaySet[amtt];
+					return;
+				}
+				else
+					cfg_MoveTaskDelay = 1000;
+
+				if (ForceTeleportMoveTaskExceptionSet.contains(amtt))
+				{
+					bool UseWayPoint = ForceTeleportMoveTaskExceptionSet[amtt];
 					if (MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints.Num() > 0 && UseWayPoint)
 					{
 						int WayPointCount = MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints.Num();
@@ -1814,43 +1825,27 @@ void MissionTaskTeleporter()
 			}
 
 			if (MissionTaskIndex != MissionActor->ProgressInfo.ActivatedTaskIndex
-				&& MissionActor->ProgressInfo.ActivatedTaskIndex > 1)
+				&& MissionActor->ProgressInfo.ActivatedTaskIndex > 0)
 			{
 				
 				//AutoTeleportStartTime = std::chrono::steady_clock::now();
 				//MCC->ServerRunTaskActor(MissionActor->ProgressInfo.ActivatedTaskActor);
 				
-				std::string mtt = MissionActor->MissionData->MissionDataRowName.ToString() + "|" + MissionActor->ProgressInfo.ActivatedTaskActor->MissionTask->TaskName.ToString();
+				
 
-				if (ForceTeleportMissionTaskExceptionSet.contains(mtt))
+				if (ForceTeleportMissionTaskExceptionSet.contains(amtt))
 				{
-					bool UseWayPoint = ForceTeleportMissionTaskExceptionSet[mtt];
-					if (MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints.Num() > 0 && UseWayPoint)
-					{
-						int WayPointCount = MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints.Num();
-						for (int wpi = 0; wpi < WayPointCount; wpi++)
-						{
-							if (MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->Index_0 == (WayPointCount - 1))
-							{
-								LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->WayPoints[wpi]->K2_GetActorRotation());
-								LocalPlayerCharacter->TeleportHandler->ServerFinishTeleportProcess();
-								MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
-								AutoTeleportStartTime = std::chrono::steady_clock::now();
-								return;
-							}
-						}
-					}
-					else
-					{
-						LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation(), MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorRotation());
-						LocalPlayerCharacter->TeleportHandler->ServerFinishTeleportProcess();
-						MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
-						AutoTeleportStartTime = std::chrono::steady_clock::now();
-						return;
-					}
+					float ZCoord = ForceTeleportMissionTaskExceptionSet[amtt];
+					SDK::FVector TeleportLocation = MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorLocation();
+					TeleportLocation.Z += ZCoord;
+					LocalPlayerCharacter->TeleportHandler->ServerMoveToTeleportToLocation(TeleportLocation, MissionActor->ProgressInfo.ActivatedTaskActor->K2_GetActorRotation());
+					LocalPlayerCharacter->TeleportHandler->ServerFinishTeleportProcess();
+					MissionTaskIndex = MissionActor->ProgressInfo.ActivatedTaskIndex;
+					AutoTeleportStartTime = std::chrono::steady_clock::now();
+					return;
 				}
 
-				if (!MissionTaskExceptionSet.contains(mtt) && !lasttaskname.contains("interact"))
+				if (!lasttaskname.contains("interact"))
 				{
 					float ODistanceLocalCharacter = 0.0f;
 					float ODistanceLastTask = 0.0f;
